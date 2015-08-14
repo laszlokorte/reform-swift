@@ -1,0 +1,889 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
+		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
+		F26D45F21B7D09CA00266096 /* ReformCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D45F11B7D09CA00266096 /* ReformCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F26D45F91B7D09CA00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D45EE1B7D09CA00266096 /* ReformCore.framework */; };
+		F26D45FE1B7D09CA00266096 /* ReformCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45FD1B7D09CA00266096 /* ReformCoreTests.swift */; };
+		F26D46991B7D0C0900266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46981B7D0C0900266096 /* ReformMath.framework */; };
+		F26D46AB1B7D0D4200266096 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46AA1B7D0D4200266096 /* Form.swift */; };
+		F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46AD1B7D0D5A00266096 /* Runtime.swift */; };
+		F26D46B11B7D0F8600266096 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B01B7D0F8600266096 /* Instruction.swift */; };
+		F26D46B61B7D101700266096 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B51B7D101700266096 /* Direction.swift */; };
+		F26D46B81B7D106E00266096 /* InitialDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B71B7D106E00266096 /* InitialDestination.swift */; };
+		F26D46BC1B7D10FB00266096 /* Length.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46BB1B7D10FB00266096 /* Length.swift */; };
+		F26D46BE1B7D112400266096 /* ReferencePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46BD1B7D112400266096 /* ReferencePoint.swift */; };
+		F26D46C01B7D116100266096 /* RotationAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46BF1B7D116100266096 /* RotationAngle.swift */; };
+		F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46C11B7D129300266096 /* Degeneratable.swift */; };
+		F26D46C41B7D12D100266096 /* ScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46C31B7D12D100266096 /* ScaleFactor.swift */; };
+		F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46C51B7D130D00266096 /* TranslationDistance.swift */; };
+		F26D46C91B7D136600266096 /* Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46C81B7D136600266096 /* Analyzer.swift */; };
+		F26D46CB1B7D13A000266096 /* Analyzable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46CA1B7D13A000266096 /* Analyzable.swift */; };
+		F26D46CE1B7D140700266096 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46CD1B7D140700266096 /* Project.swift */; };
+		F26D46D01B7D141C00266096 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46CF1B7D141C00266096 /* Picture.swift */; };
+		F26D46D21B7D142C00266096 /* Procedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46D11B7D142C00266096 /* Procedure.swift */; };
+		F26D46D51B7D145C00266096 /* Scaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46D41B7D145C00266096 /* Scaler.swift */; };
+		F26D46D71B7D146600266096 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46D61B7D146600266096 /* Translator.swift */; };
+		F26D46D91B7D147200266096 /* Rotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46D81B7D147200266096 /* Rotator.swift */; };
+		F26D46DC1B7D14B600266096 /* Outline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46DB1B7D14B600266096 /* Outline.swift */; };
+		F26D46DE1B7D157A00266096 /* Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46DD1B7D157A00266096 /* Anchor.swift */; };
+		F26D46E21B7D169D00266096 /* DrawingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46E11B7D169D00266096 /* DrawingMode.swift */; };
+		F26D46E51B7D172800266096 /* Paper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46E41B7D172800266096 /* Paper.swift */; };
+		F26D46E71B7D174B00266096 /* FormIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46E61B7D174B00266096 /* FormIdentifier.swift */; };
+		F26D46E91B7D17FD00266096 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46E81B7D17FD00266096 /* Path.swift */; };
+		F26D46EB1B7D183300266096 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46EA1B7D183300266096 /* Shape.swift */; };
+		F26D46ED1B7D189000266096 /* ExposedPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46EC1B7D189000266096 /* ExposedPoint.swift */; };
+		F26D46F21B7D1FC600266096 /* RuntimeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46F11B7D1FC600266096 /* RuntimeError.swift */; };
+		F26D46F51B7D213900266096 /* LineForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46F41B7D213900266096 /* LineForm.swift */; };
+		F26D46FA1B7D229100266096 /* BasicPointTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46F91B7D229100266096 /* BasicPointTranslator.swift */; };
+		F26D46FD1B7D240500266096 /* StaticPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46FC1B7D240500266096 /* StaticPoint.swift */; };
+		F26D46FF1B7D26F900266096 /* BasicPointScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46FE1B7D26F900266096 /* BasicPointScaler.swift */; };
+		F26D47011B7D273B00266096 /* BasicPointRotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47001B7D273B00266096 /* BasicPointRotator.swift */; };
+		F26D47041B7D288E00266096 /* LineOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47031B7D288E00266096 /* LineOutline.swift */; };
+		F26D47061B7D2D5C00266096 /* DefaultRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47051B7D2D5C00266096 /* DefaultRuntime.swift */; };
+		F26D47091B7D321B00266096 /* StaticPointAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47081B7D321B00266096 /* StaticPointAnchor.swift */; };
+		F26D470C1B7D342D00266096 /* CenterPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D470B1B7D342D00266096 /* CenterPoint.swift */; };
+		F26D47101B7D379900266096 /* RectangleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D470F1B7D379900266096 /* RectangleForm.swift */; };
+		F26D47121B7D37B300266096 /* CircleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47111B7D37B300266096 /* CircleForm.swift */; };
+		F26D47141B7D37C100266096 /* PieForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47131B7D37C100266096 /* PieForm.swift */; };
+		F26D47161B7D37C800266096 /* ArcForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47151B7D37C800266096 /* ArcForm.swift */; };
+		F26D47181B7D37D500266096 /* TextForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47171B7D37D500266096 /* TextForm.swift */; };
+		F26D471A1B7D37DF00266096 /* PictureForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47191B7D37DF00266096 /* PictureForm.swift */; };
+		F26D471C1B7D392200266096 /* StaticLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D471B1B7D392200266096 /* StaticLength.swift */; };
+		F26D471E1B7D392A00266096 /* StaticAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D471D1B7D392A00266096 /* StaticAngle.swift */; };
+		F26D47201B7D3A8700266096 /* BasicLengthScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D471F1B7D3A8700266096 /* BasicLengthScaler.swift */; };
+		F26D47221B7D3B0A00266096 /* CompositeScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47211B7D3B0A00266096 /* CompositeScaler.swift */; };
+		F26D47241B7D3C0300266096 /* BasicAngleRotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47231B7D3C0300266096 /* BasicAngleRotator.swift */; };
+		F26D47261B7D3D3C00266096 /* CompositeRotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47251B7D3D3C00266096 /* CompositeRotator.swift */; };
+		F26D47291B7D3DBF00266096 /* CompositeOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47281B7D3DBF00266096 /* CompositeOutline.swift */; };
+		F26D47351B7D415B00266096 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47341B7D415B00266096 /* Operators.swift */; };
+		F26D47381B7D43E000266096 /* ConstantLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47371B7D43E000266096 /* ConstantLength.swift */; };
+		F26D473A1B7D477700266096 /* AnchorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47391B7D477700266096 /* AnchorPoint.swift */; };
+		F26D473E1B7D541600266096 /* CircleOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D473D1B7D541600266096 /* CircleOutline.swift */; };
+		F26D47401B7D577E00266096 /* NullOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D473F1B7D577E00266096 /* NullOutline.swift */; };
+		F26D47421B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47411B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift */; };
+		F26D47451B7D626500266096 /* NullInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47441B7D626500266096 /* NullInstruction.swift */; };
+		F26D47481B7D64D400266096 /* InstructionGroupBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47471B7D64D400266096 /* InstructionGroupBase.swift */; };
+		F26D474A1B7D693900266096 /* IfConditionInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47491B7D693900266096 /* IfConditionInstruction.swift */; };
+		F26D474C1B7D696700266096 /* ForLoopInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D474B1B7D696700266096 /* ForLoopInstruction.swift */; };
+		F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D474E1B7D6A3600266096 /* CreateFormInstruction.swift */; };
+		F26D47531B7D6C0D00266096 /* MorphInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47521B7D6C0D00266096 /* MorphInstruction.swift */; };
+		F26D47551B7D6D8300266096 /* RotateInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47541B7D6D8300266096 /* RotateInstruction.swift */; };
+		F26D47571B7D6EDF00266096 /* ScaleInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47561B7D6EDF00266096 /* ScaleInstruction.swift */; };
+		F26D47591B7D6F5100266096 /* TranslateInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47581B7D6F5100266096 /* TranslateInstruction.swift */; };
+		F26D475C1B7D868B00266096 /* RuntimeStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D475B1B7D868B00266096 /* RuntimeStack.swift */; };
+		F26D475E1B7D965900266096 /* Describable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D475D1B7D965900266096 /* Describable.swift */; };
+		F26D47611B7DA05A00266096 /* ForeignFormPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F26D45FA1B7D09CA00266096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F26D45E51B7D09CA00266096 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F26D45ED1B7D09CA00266096;
+			remoteInfo = ReformCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
+		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		F26D45EE1B7D09CA00266096 /* ReformCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26D45F11B7D09CA00266096 /* ReformCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformCore.h; sourceTree = "<group>"; };
+		F26D45F31B7D09CA00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F26D45F81B7D09CA00266096 /* ReformCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReformCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26D45FD1B7D09CA00266096 /* ReformCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformCoreTests.swift; sourceTree = "<group>"; };
+		F26D45FF1B7D09CA00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F26D46981B7D0C0900266096 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
+		F26D46AA1B7D0D4200266096 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		F26D46AD1B7D0D5A00266096 /* Runtime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
+		F26D46B01B7D0F8600266096 /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		F26D46B51B7D101700266096 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		F26D46B71B7D106E00266096 /* InitialDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialDestination.swift; sourceTree = "<group>"; };
+		F26D46BB1B7D10FB00266096 /* Length.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Length.swift; sourceTree = "<group>"; };
+		F26D46BD1B7D112400266096 /* ReferencePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencePoint.swift; sourceTree = "<group>"; };
+		F26D46BF1B7D116100266096 /* RotationAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationAngle.swift; sourceTree = "<group>"; };
+		F26D46C11B7D129300266096 /* Degeneratable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Degeneratable.swift; sourceTree = "<group>"; };
+		F26D46C31B7D12D100266096 /* ScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleFactor.swift; sourceTree = "<group>"; };
+		F26D46C51B7D130D00266096 /* TranslationDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationDistance.swift; sourceTree = "<group>"; };
+		F26D46C81B7D136600266096 /* Analyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analyzer.swift; sourceTree = "<group>"; };
+		F26D46CA1B7D13A000266096 /* Analyzable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analyzable.swift; sourceTree = "<group>"; };
+		F26D46CD1B7D140700266096 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		F26D46CF1B7D141C00266096 /* Picture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
+		F26D46D11B7D142C00266096 /* Procedure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Procedure.swift; sourceTree = "<group>"; };
+		F26D46D41B7D145C00266096 /* Scaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scaler.swift; sourceTree = "<group>"; };
+		F26D46D61B7D146600266096 /* Translator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
+		F26D46D81B7D147200266096 /* Rotator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotator.swift; sourceTree = "<group>"; };
+		F26D46DB1B7D14B600266096 /* Outline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outline.swift; sourceTree = "<group>"; };
+		F26D46DD1B7D157A00266096 /* Anchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchor.swift; sourceTree = "<group>"; };
+		F26D46E11B7D169D00266096 /* DrawingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingMode.swift; sourceTree = "<group>"; };
+		F26D46E41B7D172800266096 /* Paper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paper.swift; sourceTree = "<group>"; };
+		F26D46E61B7D174B00266096 /* FormIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormIdentifier.swift; sourceTree = "<group>"; };
+		F26D46E81B7D17FD00266096 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		F26D46EA1B7D183300266096 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
+		F26D46EC1B7D189000266096 /* ExposedPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposedPoint.swift; sourceTree = "<group>"; };
+		F26D46F11B7D1FC600266096 /* RuntimeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeError.swift; sourceTree = "<group>"; };
+		F26D46F41B7D213900266096 /* LineForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineForm.swift; sourceTree = "<group>"; };
+		F26D46F91B7D229100266096 /* BasicPointTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicPointTranslator.swift; sourceTree = "<group>"; };
+		F26D46FC1B7D240500266096 /* StaticPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticPoint.swift; sourceTree = "<group>"; };
+		F26D46FE1B7D26F900266096 /* BasicPointScaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicPointScaler.swift; sourceTree = "<group>"; };
+		F26D47001B7D273B00266096 /* BasicPointRotator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicPointRotator.swift; sourceTree = "<group>"; };
+		F26D47031B7D288E00266096 /* LineOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineOutline.swift; sourceTree = "<group>"; };
+		F26D47051B7D2D5C00266096 /* DefaultRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRuntime.swift; sourceTree = "<group>"; };
+		F26D47081B7D321B00266096 /* StaticPointAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticPointAnchor.swift; sourceTree = "<group>"; };
+		F26D470B1B7D342D00266096 /* CenterPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterPoint.swift; sourceTree = "<group>"; };
+		F26D470F1B7D379900266096 /* RectangleForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleForm.swift; sourceTree = "<group>"; };
+		F26D47111B7D37B300266096 /* CircleForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleForm.swift; sourceTree = "<group>"; };
+		F26D47131B7D37C100266096 /* PieForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieForm.swift; sourceTree = "<group>"; };
+		F26D47151B7D37C800266096 /* ArcForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcForm.swift; sourceTree = "<group>"; };
+		F26D47171B7D37D500266096 /* TextForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextForm.swift; sourceTree = "<group>"; };
+		F26D47191B7D37DF00266096 /* PictureForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureForm.swift; sourceTree = "<group>"; };
+		F26D471B1B7D392200266096 /* StaticLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticLength.swift; sourceTree = "<group>"; };
+		F26D471D1B7D392A00266096 /* StaticAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticAngle.swift; sourceTree = "<group>"; };
+		F26D471F1B7D3A8700266096 /* BasicLengthScaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicLengthScaler.swift; sourceTree = "<group>"; };
+		F26D47211B7D3B0A00266096 /* CompositeScaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeScaler.swift; sourceTree = "<group>"; };
+		F26D47231B7D3C0300266096 /* BasicAngleRotator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAngleRotator.swift; sourceTree = "<group>"; };
+		F26D47251B7D3D3C00266096 /* CompositeRotator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeRotator.swift; sourceTree = "<group>"; };
+		F26D47281B7D3DBF00266096 /* CompositeOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeOutline.swift; sourceTree = "<group>"; };
+		F26D47341B7D415B00266096 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		F26D47371B7D43E000266096 /* ConstantLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantLength.swift; sourceTree = "<group>"; };
+		F26D47391B7D477700266096 /* AnchorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnchorPoint.swift; sourceTree = "<group>"; };
+		F26D473D1B7D541600266096 /* CircleOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleOutline.swift; sourceTree = "<group>"; };
+		F26D473F1B7D577E00266096 /* NullOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullOutline.swift; sourceTree = "<group>"; };
+		F26D47411B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrhtogonalOffsetAnchor.swift; sourceTree = "<group>"; };
+		F26D47441B7D626500266096 /* NullInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullInstruction.swift; sourceTree = "<group>"; };
+		F26D47471B7D64D400266096 /* InstructionGroupBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionGroupBase.swift; sourceTree = "<group>"; };
+		F26D47491B7D693900266096 /* IfConditionInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IfConditionInstruction.swift; sourceTree = "<group>"; };
+		F26D474B1B7D696700266096 /* ForLoopInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForLoopInstruction.swift; sourceTree = "<group>"; };
+		F26D474E1B7D6A3600266096 /* CreateFormInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateFormInstruction.swift; sourceTree = "<group>"; };
+		F26D47521B7D6C0D00266096 /* MorphInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphInstruction.swift; sourceTree = "<group>"; };
+		F26D47541B7D6D8300266096 /* RotateInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateInstruction.swift; sourceTree = "<group>"; };
+		F26D47561B7D6EDF00266096 /* ScaleInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleInstruction.swift; sourceTree = "<group>"; };
+		F26D47581B7D6F5100266096 /* TranslateInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateInstruction.swift; sourceTree = "<group>"; };
+		F26D475B1B7D868B00266096 /* RuntimeStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeStack.swift; sourceTree = "<group>"; };
+		F26D475D1B7D965900266096 /* Describable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Describable.swift; sourceTree = "<group>"; };
+		F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForeignFormPoint.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F26D45EA1B7D09CA00266096 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D46991B7D0C0900266096 /* ReformMath.framework in Frameworks */,
+				F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45F51B7D09CA00266096 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D45F91B7D09CA00266096 /* ReformCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F23F12961B7E0AE400A2D73E /* Attributes */ = {
+			isa = PBXGroup;
+			children = (
+				F23F12971B7E0B0D00A2D73E /* Attribute.swift */,
+			);
+			name = Attributes;
+			sourceTree = "<group>";
+		};
+		F26D45E41B7D09CA00266096 = {
+			isa = PBXGroup;
+			children = (
+				F26D46981B7D0C0900266096 /* ReformMath.framework */,
+				F23F12941B7E0AD900A2D73E /* ReformExpression.framework */,
+				F26D45F01B7D09CA00266096 /* ReformCore */,
+				F26D45FC1B7D09CA00266096 /* ReformCoreTests */,
+				F26D45EF1B7D09CA00266096 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F26D45EF1B7D09CA00266096 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F26D45EE1B7D09CA00266096 /* ReformCore.framework */,
+				F26D45F81B7D09CA00266096 /* ReformCoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F26D45F01B7D09CA00266096 /* ReformCore */ = {
+			isa = PBXGroup;
+			children = (
+				F23F12961B7E0AE400A2D73E /* Attributes */,
+				F26D46E01B7D169000266096 /* Drawing */,
+				F26D46DA1B7D14A800266096 /* Outline */,
+				F26D46D31B7D144D00266096 /* Transformations */,
+				F26D46CC1B7D13FE00266096 /* Project */,
+				F26D46E31B7D16F900266096 /* Procedure */,
+				F26D46C71B7D134F00266096 /* Analyzer */,
+				F26D46B21B7D0FB700266096 /* Validation */,
+				F26D46AF1B7D0F5600266096 /* Relations */,
+				F26D46AC1B7D0D4D00266096 /* Runtime */,
+				F26D46A91B7D0D3900266096 /* Form */,
+				F26D45F11B7D09CA00266096 /* ReformCore.h */,
+				F26D45F31B7D09CA00266096 /* Info.plist */,
+			);
+			path = ReformCore;
+			sourceTree = "<group>";
+		};
+		F26D45FC1B7D09CA00266096 /* ReformCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				F26D45FD1B7D09CA00266096 /* ReformCoreTests.swift */,
+				F26D45FF1B7D09CA00266096 /* Info.plist */,
+			);
+			path = ReformCoreTests;
+			sourceTree = "<group>";
+		};
+		F26D46A91B7D0D3900266096 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46F31B7D213000266096 /* Forms */,
+				F26D46AA1B7D0D4200266096 /* Form.swift */,
+				F26D46E61B7D174B00266096 /* FormIdentifier.swift */,
+				F26D46EC1B7D189000266096 /* ExposedPoint.swift */,
+			);
+			name = Form;
+			sourceTree = "<group>";
+		};
+		F26D46AC1B7D0D4D00266096 /* Runtime */ = {
+			isa = PBXGroup;
+			children = (
+				F26D475A1B7D867700266096 /* Stack */,
+				F26D46AD1B7D0D5A00266096 /* Runtime.swift */,
+				F26D46B01B7D0F8600266096 /* Instruction.swift */,
+				F26D46F11B7D1FC600266096 /* RuntimeError.swift */,
+				F26D47051B7D2D5C00266096 /* DefaultRuntime.swift */,
+			);
+			name = Runtime;
+			sourceTree = "<group>";
+		};
+		F26D46AF1B7D0F5600266096 /* Relations */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47341B7D415B00266096 /* Operators.swift */,
+				F26D475F1B7DA04A00266096 /* Foreign */,
+				F26D470A1B7D342300266096 /* Composed */,
+				F26D46FB1B7D23F800266096 /* Static */,
+				F26D47361B7D43D200266096 /* Constant */,
+				F26D46B51B7D101700266096 /* Direction.swift */,
+				F26D46B71B7D106E00266096 /* InitialDestination.swift */,
+				F26D46BB1B7D10FB00266096 /* Length.swift */,
+				F26D46BD1B7D112400266096 /* ReferencePoint.swift */,
+				F26D46BF1B7D116100266096 /* RotationAngle.swift */,
+				F26D46C31B7D12D100266096 /* ScaleFactor.swift */,
+				F26D46C51B7D130D00266096 /* TranslationDistance.swift */,
+			);
+			name = Relations;
+			sourceTree = "<group>";
+		};
+		F26D46B21B7D0FB700266096 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46C11B7D129300266096 /* Degeneratable.swift */,
+			);
+			name = Validation;
+			sourceTree = "<group>";
+		};
+		F26D46C71B7D134F00266096 /* Analyzer */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46C81B7D136600266096 /* Analyzer.swift */,
+				F26D46CA1B7D13A000266096 /* Analyzable.swift */,
+				F26D475D1B7D965900266096 /* Describable.swift */,
+			);
+			name = Analyzer;
+			sourceTree = "<group>";
+		};
+		F26D46CC1B7D13FE00266096 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46CD1B7D140700266096 /* Project.swift */,
+				F26D46CF1B7D141C00266096 /* Picture.swift */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		F26D46D31B7D144D00266096 /* Transformations */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47071B7D320100266096 /* Anchors */,
+				F26D46F81B7D226C00266096 /* Translators */,
+				F26D46F71B7D226500266096 /* Scalers */,
+				F26D46F61B7D225F00266096 /* Rotators */,
+				F26D46D41B7D145C00266096 /* Scaler.swift */,
+				F26D46D61B7D146600266096 /* Translator.swift */,
+				F26D46D81B7D147200266096 /* Rotator.swift */,
+				F26D46DD1B7D157A00266096 /* Anchor.swift */,
+			);
+			name = Transformations;
+			sourceTree = "<group>";
+		};
+		F26D46DA1B7D14A800266096 /* Outline */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47271B7D3DB500266096 /* Composite */,
+				F26D47021B7D288300266096 /* Static */,
+				F26D46DB1B7D14B600266096 /* Outline.swift */,
+			);
+			name = Outline;
+			sourceTree = "<group>";
+		};
+		F26D46E01B7D169000266096 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46E11B7D169D00266096 /* DrawingMode.swift */,
+				F26D46E81B7D17FD00266096 /* Path.swift */,
+				F26D46EA1B7D183300266096 /* Shape.swift */,
+			);
+			name = Drawing;
+			sourceTree = "<group>";
+		};
+		F26D46E31B7D16F900266096 /* Procedure */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47431B7D624800266096 /* Instructions */,
+				F26D46D11B7D142C00266096 /* Procedure.swift */,
+				F26D46E41B7D172800266096 /* Paper.swift */,
+			);
+			name = Procedure;
+			sourceTree = "<group>";
+		};
+		F26D46F31B7D213000266096 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46F41B7D213900266096 /* LineForm.swift */,
+				F26D470F1B7D379900266096 /* RectangleForm.swift */,
+				F26D47111B7D37B300266096 /* CircleForm.swift */,
+				F26D47131B7D37C100266096 /* PieForm.swift */,
+				F26D47151B7D37C800266096 /* ArcForm.swift */,
+				F26D47171B7D37D500266096 /* TextForm.swift */,
+				F26D47191B7D37DF00266096 /* PictureForm.swift */,
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
+		F26D46F61B7D225F00266096 /* Rotators */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47001B7D273B00266096 /* BasicPointRotator.swift */,
+				F26D47231B7D3C0300266096 /* BasicAngleRotator.swift */,
+				F26D47251B7D3D3C00266096 /* CompositeRotator.swift */,
+			);
+			name = Rotators;
+			sourceTree = "<group>";
+		};
+		F26D46F71B7D226500266096 /* Scalers */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46FE1B7D26F900266096 /* BasicPointScaler.swift */,
+				F26D471F1B7D3A8700266096 /* BasicLengthScaler.swift */,
+				F26D47211B7D3B0A00266096 /* CompositeScaler.swift */,
+			);
+			name = Scalers;
+			sourceTree = "<group>";
+		};
+		F26D46F81B7D226C00266096 /* Translators */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46F91B7D229100266096 /* BasicPointTranslator.swift */,
+			);
+			name = Translators;
+			sourceTree = "<group>";
+		};
+		F26D46FB1B7D23F800266096 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				F26D46FC1B7D240500266096 /* StaticPoint.swift */,
+				F26D471B1B7D392200266096 /* StaticLength.swift */,
+				F26D471D1B7D392A00266096 /* StaticAngle.swift */,
+			);
+			name = Static;
+			sourceTree = "<group>";
+		};
+		F26D47021B7D288300266096 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47031B7D288E00266096 /* LineOutline.swift */,
+				F26D473D1B7D541600266096 /* CircleOutline.swift */,
+				F26D473F1B7D577E00266096 /* NullOutline.swift */,
+			);
+			name = Static;
+			sourceTree = "<group>";
+		};
+		F26D47071B7D320100266096 /* Anchors */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47081B7D321B00266096 /* StaticPointAnchor.swift */,
+				F26D47411B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift */,
+			);
+			name = Anchors;
+			sourceTree = "<group>";
+		};
+		F26D470A1B7D342300266096 /* Composed */ = {
+			isa = PBXGroup;
+			children = (
+				F26D470B1B7D342D00266096 /* CenterPoint.swift */,
+				F26D47391B7D477700266096 /* AnchorPoint.swift */,
+			);
+			name = Composed;
+			sourceTree = "<group>";
+		};
+		F26D47271B7D3DB500266096 /* Composite */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47281B7D3DBF00266096 /* CompositeOutline.swift */,
+			);
+			name = Composite;
+			sourceTree = "<group>";
+		};
+		F26D47361B7D43D200266096 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47371B7D43E000266096 /* ConstantLength.swift */,
+			);
+			name = Constant;
+			sourceTree = "<group>";
+		};
+		F26D47431B7D624800266096 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				F26D474D1B7D6A2500266096 /* SingleInstructions */,
+				F26D47461B7D64C500266096 /* InstructionGroups */,
+				F26D47441B7D626500266096 /* NullInstruction.swift */,
+			);
+			name = Instructions;
+			sourceTree = "<group>";
+		};
+		F26D47461B7D64C500266096 /* InstructionGroups */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47471B7D64D400266096 /* InstructionGroupBase.swift */,
+				F26D47491B7D693900266096 /* IfConditionInstruction.swift */,
+				F26D474B1B7D696700266096 /* ForLoopInstruction.swift */,
+			);
+			name = InstructionGroups;
+			sourceTree = "<group>";
+		};
+		F26D474D1B7D6A2500266096 /* SingleInstructions */ = {
+			isa = PBXGroup;
+			children = (
+				F26D474E1B7D6A3600266096 /* CreateFormInstruction.swift */,
+				F26D47521B7D6C0D00266096 /* MorphInstruction.swift */,
+				F26D47541B7D6D8300266096 /* RotateInstruction.swift */,
+				F26D47561B7D6EDF00266096 /* ScaleInstruction.swift */,
+				F26D47581B7D6F5100266096 /* TranslateInstruction.swift */,
+			);
+			name = SingleInstructions;
+			sourceTree = "<group>";
+		};
+		F26D475A1B7D867700266096 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				F26D475B1B7D868B00266096 /* RuntimeStack.swift */,
+			);
+			name = Stack;
+			sourceTree = "<group>";
+		};
+		F26D475F1B7DA04A00266096 /* Foreign */ = {
+			isa = PBXGroup;
+			children = (
+				F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */,
+			);
+			name = Foreign;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F26D45EB1B7D09CA00266096 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D45F21B7D09CA00266096 /* ReformCore.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F26D45ED1B7D09CA00266096 /* ReformCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F26D46021B7D09CA00266096 /* Build configuration list for PBXNativeTarget "ReformCore" */;
+			buildPhases = (
+				F26D45E91B7D09CA00266096 /* Sources */,
+				F26D45EA1B7D09CA00266096 /* Frameworks */,
+				F26D45EB1B7D09CA00266096 /* Headers */,
+				F26D45EC1B7D09CA00266096 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReformCore;
+			productName = ReformCore;
+			productReference = F26D45EE1B7D09CA00266096 /* ReformCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F26D45F71B7D09CA00266096 /* ReformCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F26D46051B7D09CA00266096 /* Build configuration list for PBXNativeTarget "ReformCoreTests" */;
+			buildPhases = (
+				F26D45F41B7D09CA00266096 /* Sources */,
+				F26D45F51B7D09CA00266096 /* Frameworks */,
+				F26D45F61B7D09CA00266096 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F26D45FB1B7D09CA00266096 /* PBXTargetDependency */,
+			);
+			name = ReformCoreTests;
+			productName = ReformCoreTests;
+			productReference = F26D45F81B7D09CA00266096 /* ReformCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F26D45E51B7D09CA00266096 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Laszlo Korte";
+				TargetAttributes = {
+					F26D45ED1B7D09CA00266096 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					F26D45F71B7D09CA00266096 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = F26D45E81B7D09CA00266096 /* Build configuration list for PBXProject "ReformCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F26D45E41B7D09CA00266096;
+			productRefGroup = F26D45EF1B7D09CA00266096 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F26D45ED1B7D09CA00266096 /* ReformCore */,
+				F26D45F71B7D09CA00266096 /* ReformCoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F26D45EC1B7D09CA00266096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45F61B7D09CA00266096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F26D45E91B7D09CA00266096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D47291B7D3DBF00266096 /* CompositeOutline.swift in Sources */,
+				F26D46BE1B7D112400266096 /* ReferencePoint.swift in Sources */,
+				F26D47201B7D3A8700266096 /* BasicLengthScaler.swift in Sources */,
+				F26D47551B7D6D8300266096 /* RotateInstruction.swift in Sources */,
+				F26D46B11B7D0F8600266096 /* Instruction.swift in Sources */,
+				F26D47241B7D3C0300266096 /* BasicAngleRotator.swift in Sources */,
+				F26D47041B7D288E00266096 /* LineOutline.swift in Sources */,
+				F26D471C1B7D392200266096 /* StaticLength.swift in Sources */,
+				F26D473E1B7D541600266096 /* CircleOutline.swift in Sources */,
+				F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */,
+				F26D47571B7D6EDF00266096 /* ScaleInstruction.swift in Sources */,
+				F26D47351B7D415B00266096 /* Operators.swift in Sources */,
+				F26D46D01B7D141C00266096 /* Picture.swift in Sources */,
+				F26D47531B7D6C0D00266096 /* MorphInstruction.swift in Sources */,
+				F26D47481B7D64D400266096 /* InstructionGroupBase.swift in Sources */,
+				F26D475E1B7D965900266096 /* Describable.swift in Sources */,
+				F26D46E71B7D174B00266096 /* FormIdentifier.swift in Sources */,
+				F26D46B81B7D106E00266096 /* InitialDestination.swift in Sources */,
+				F26D46B61B7D101700266096 /* Direction.swift in Sources */,
+				F26D46E21B7D169D00266096 /* DrawingMode.swift in Sources */,
+				F26D47161B7D37C800266096 /* ArcForm.swift in Sources */,
+				F26D474C1B7D696700266096 /* ForLoopInstruction.swift in Sources */,
+				F26D46D71B7D146600266096 /* Translator.swift in Sources */,
+				F26D471E1B7D392A00266096 /* StaticAngle.swift in Sources */,
+				F26D47091B7D321B00266096 /* StaticPointAnchor.swift in Sources */,
+				F26D46E91B7D17FD00266096 /* Path.swift in Sources */,
+				F26D46AB1B7D0D4200266096 /* Form.swift in Sources */,
+				F26D46C91B7D136600266096 /* Analyzer.swift in Sources */,
+				F26D46DE1B7D157A00266096 /* Anchor.swift in Sources */,
+				F26D46F21B7D1FC600266096 /* RuntimeError.swift in Sources */,
+				F26D470C1B7D342D00266096 /* CenterPoint.swift in Sources */,
+				F26D46CE1B7D140700266096 /* Project.swift in Sources */,
+				F26D475C1B7D868B00266096 /* RuntimeStack.swift in Sources */,
+				F26D46DC1B7D14B600266096 /* Outline.swift in Sources */,
+				F26D46E51B7D172800266096 /* Paper.swift in Sources */,
+				F26D46C41B7D12D100266096 /* ScaleFactor.swift in Sources */,
+				F26D47381B7D43E000266096 /* ConstantLength.swift in Sources */,
+				F26D46F51B7D213900266096 /* LineForm.swift in Sources */,
+				F26D47591B7D6F5100266096 /* TranslateInstruction.swift in Sources */,
+				F26D46FA1B7D229100266096 /* BasicPointTranslator.swift in Sources */,
+				F26D46D21B7D142C00266096 /* Procedure.swift in Sources */,
+				F26D47221B7D3B0A00266096 /* CompositeScaler.swift in Sources */,
+				F26D47261B7D3D3C00266096 /* CompositeRotator.swift in Sources */,
+				F26D47121B7D37B300266096 /* CircleForm.swift in Sources */,
+				F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */,
+				F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */,
+				F26D47061B7D2D5C00266096 /* DefaultRuntime.swift in Sources */,
+				F26D46BC1B7D10FB00266096 /* Length.swift in Sources */,
+				F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */,
+				F26D46EB1B7D183300266096 /* Shape.swift in Sources */,
+				F26D473A1B7D477700266096 /* AnchorPoint.swift in Sources */,
+				F26D47451B7D626500266096 /* NullInstruction.swift in Sources */,
+				F26D471A1B7D37DF00266096 /* PictureForm.swift in Sources */,
+				F26D46ED1B7D189000266096 /* ExposedPoint.swift in Sources */,
+				F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */,
+				F26D46FF1B7D26F900266096 /* BasicPointScaler.swift in Sources */,
+				F26D47181B7D37D500266096 /* TextForm.swift in Sources */,
+				F26D46D51B7D145C00266096 /* Scaler.swift in Sources */,
+				F26D47611B7DA05A00266096 /* ForeignFormPoint.swift in Sources */,
+				F26D47101B7D379900266096 /* RectangleForm.swift in Sources */,
+				F26D47011B7D273B00266096 /* BasicPointRotator.swift in Sources */,
+				F26D46CB1B7D13A000266096 /* Analyzable.swift in Sources */,
+				F26D47141B7D37C100266096 /* PieForm.swift in Sources */,
+				F26D46C01B7D116100266096 /* RotationAngle.swift in Sources */,
+				F26D474A1B7D693900266096 /* IfConditionInstruction.swift in Sources */,
+				F26D46FD1B7D240500266096 /* StaticPoint.swift in Sources */,
+				F26D46D91B7D147200266096 /* Rotator.swift in Sources */,
+				F26D47421B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift in Sources */,
+				F26D47401B7D577E00266096 /* NullOutline.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45F41B7D09CA00266096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D45FE1B7D09CA00266096 /* ReformCoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F26D45FB1B7D09CA00266096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F26D45ED1B7D09CA00266096 /* ReformCore */;
+			targetProxy = F26D45FA1B7D09CA00266096 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F26D46001B7D09CA00266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F26D46011B7D09CA00266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F26D46031B7D09CA00266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ReformCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F26D46041B7D09CA00266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ReformCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F26D46061B7D09CA00266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F26D46071B7D09CA00266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformCoreTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F26D45E81B7D09CA00266096 /* Build configuration list for PBXProject "ReformCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D46001B7D09CA00266096 /* Debug */,
+				F26D46011B7D09CA00266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F26D46021B7D09CA00266096 /* Build configuration list for PBXNativeTarget "ReformCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D46031B7D09CA00266096 /* Debug */,
+				F26D46041B7D09CA00266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F26D46051B7D09CA00266096 /* Build configuration list for PBXNativeTarget "ReformCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D46061B7D09CA00266096 /* Debug */,
+				F26D46071B7D09CA00266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F26D45E51B7D09CA00266096 /* Project object */;
+}

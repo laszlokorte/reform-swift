@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F211927B1B7E57130011AA0F /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927A1B7E57130011AA0F /* SheetController.swift */; };
+		F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927C1B7E57340011AA0F /* MeasurementController.swift */; };
+		F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7711B7E275800B29E2D /* ProcedureController.swift */; };
+		F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7731B7E412800B29E2D /* CanvasView.swift */; };
+		F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45B91B7D090000266096 /* AppDelegate.swift */; };
+		F26D45BC1B7D090000266096 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45BB1B7D090000266096 /* ViewController.swift */; };
+		F26D45BE1B7D090000266096 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F26D45BD1B7D090000266096 /* Assets.xcassets */; };
+		F26D45C11B7D090000266096 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F26D45BF1B7D090000266096 /* Main.storyboard */; };
+		F26D45CC1B7D090000266096 /* ReformApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45CB1B7D090000266096 /* ReformApplicationTests.swift */; };
+		F26D45D71B7D090000266096 /* ReformApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45D61B7D090000266096 /* ReformApplicationUITests.swift */; };
+		F26D469B1B7D0C3600266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D469A1B7D0C3600266096 /* ReformCore.framework */; };
+		F26D46A11B7D0C7A00266096 /* ReformSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F26D45C81B7D090000266096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F26D45AE1B7D090000266096 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F26D45B51B7D090000266096;
+			remoteInfo = ReformApplication;
+		};
+		F26D45D31B7D090000266096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F26D45AE1B7D090000266096 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F26D45B51B7D090000266096;
+			remoteInfo = ReformApplication;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F211927A1B7E57130011AA0F /* SheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
+		F211927C1B7E57340011AA0F /* MeasurementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementController.swift; sourceTree = "<group>"; };
+		F262B7711B7E275800B29E2D /* ProcedureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureController.swift; sourceTree = "<group>"; };
+		F262B7731B7E412800B29E2D /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		F26D45B61B7D090000266096 /* ReformApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReformApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26D45B91B7D090000266096 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F26D45BB1B7D090000266096 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F26D45BD1B7D090000266096 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F26D45C01B7D090000266096 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F26D45C21B7D090000266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F26D45C71B7D090000266096 /* ReformApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReformApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26D45CB1B7D090000266096 /* ReformApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformApplicationTests.swift; sourceTree = "<group>"; };
+		F26D45CD1B7D090000266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F26D45D21B7D090000266096 /* ReformApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReformApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F26D45D61B7D090000266096 /* ReformApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformApplicationUITests.swift; sourceTree = "<group>"; };
+		F26D45D81B7D090000266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F26D469A1B7D0C3600266096 /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
+		F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformSerializer.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformSerializer.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F26D45B31B7D090000266096 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D469B1B7D0C3600266096 /* ReformCore.framework in Frameworks */,
+				F26D46A11B7D0C7A00266096 /* ReformSerializer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45C41B7D090000266096 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45CF1B7D090000266096 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F26D45AD1B7D090000266096 = {
+			isa = PBXGroup;
+			children = (
+				F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */,
+				F26D469A1B7D0C3600266096 /* ReformCore.framework */,
+				F26D45B81B7D090000266096 /* ReformApplication */,
+				F26D45CA1B7D090000266096 /* ReformApplicationTests */,
+				F26D45D51B7D090000266096 /* ReformApplicationUITests */,
+				F26D45B71B7D090000266096 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F26D45B71B7D090000266096 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F26D45B61B7D090000266096 /* ReformApplication.app */,
+				F26D45C71B7D090000266096 /* ReformApplicationTests.xctest */,
+				F26D45D21B7D090000266096 /* ReformApplicationUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F26D45B81B7D090000266096 /* ReformApplication */ = {
+			isa = PBXGroup;
+			children = (
+				F26D45B91B7D090000266096 /* AppDelegate.swift */,
+				F26D45BB1B7D090000266096 /* ViewController.swift */,
+				F26D45BD1B7D090000266096 /* Assets.xcassets */,
+				F26D45BF1B7D090000266096 /* Main.storyboard */,
+				F26D45C21B7D090000266096 /* Info.plist */,
+				F262B7711B7E275800B29E2D /* ProcedureController.swift */,
+				F262B7731B7E412800B29E2D /* CanvasView.swift */,
+				F211927A1B7E57130011AA0F /* SheetController.swift */,
+				F211927C1B7E57340011AA0F /* MeasurementController.swift */,
+			);
+			path = ReformApplication;
+			sourceTree = "<group>";
+		};
+		F26D45CA1B7D090000266096 /* ReformApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				F26D45CB1B7D090000266096 /* ReformApplicationTests.swift */,
+				F26D45CD1B7D090000266096 /* Info.plist */,
+			);
+			path = ReformApplicationTests;
+			sourceTree = "<group>";
+		};
+		F26D45D51B7D090000266096 /* ReformApplicationUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F26D45D61B7D090000266096 /* ReformApplicationUITests.swift */,
+				F26D45D81B7D090000266096 /* Info.plist */,
+			);
+			path = ReformApplicationUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F26D45B51B7D090000266096 /* ReformApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F26D45DB1B7D090000266096 /* Build configuration list for PBXNativeTarget "ReformApplication" */;
+			buildPhases = (
+				F26D45B21B7D090000266096 /* Sources */,
+				F26D45B31B7D090000266096 /* Frameworks */,
+				F26D45B41B7D090000266096 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReformApplication;
+			productName = ReformApplication;
+			productReference = F26D45B61B7D090000266096 /* ReformApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F26D45C61B7D090000266096 /* ReformApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F26D45DE1B7D090000266096 /* Build configuration list for PBXNativeTarget "ReformApplicationTests" */;
+			buildPhases = (
+				F26D45C31B7D090000266096 /* Sources */,
+				F26D45C41B7D090000266096 /* Frameworks */,
+				F26D45C51B7D090000266096 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F26D45C91B7D090000266096 /* PBXTargetDependency */,
+			);
+			name = ReformApplicationTests;
+			productName = ReformApplicationTests;
+			productReference = F26D45C71B7D090000266096 /* ReformApplicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F26D45D11B7D090000266096 /* ReformApplicationUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F26D45E11B7D090000266096 /* Build configuration list for PBXNativeTarget "ReformApplicationUITests" */;
+			buildPhases = (
+				F26D45CE1B7D090000266096 /* Sources */,
+				F26D45CF1B7D090000266096 /* Frameworks */,
+				F26D45D01B7D090000266096 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F26D45D41B7D090000266096 /* PBXTargetDependency */,
+			);
+			name = ReformApplicationUITests;
+			productName = ReformApplicationUITests;
+			productReference = F26D45D21B7D090000266096 /* ReformApplicationUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F26D45AE1B7D090000266096 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Laszlo Korte";
+				TargetAttributes = {
+					F26D45B51B7D090000266096 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					F26D45C61B7D090000266096 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = F26D45B51B7D090000266096;
+					};
+					F26D45D11B7D090000266096 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = F26D45B51B7D090000266096;
+					};
+				};
+			};
+			buildConfigurationList = F26D45B11B7D090000266096 /* Build configuration list for PBXProject "ReformApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F26D45AD1B7D090000266096;
+			productRefGroup = F26D45B71B7D090000266096 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F26D45B51B7D090000266096 /* ReformApplication */,
+				F26D45C61B7D090000266096 /* ReformApplicationTests */,
+				F26D45D11B7D090000266096 /* ReformApplicationUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F26D45B41B7D090000266096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D45BE1B7D090000266096 /* Assets.xcassets in Resources */,
+				F26D45C11B7D090000266096 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45C51B7D090000266096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45D01B7D090000266096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F26D45B21B7D090000266096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
+				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
+				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
+				F26D45BC1B7D090000266096 /* ViewController.swift in Sources */,
+				F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */,
+				F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45C31B7D090000266096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D45CC1B7D090000266096 /* ReformApplicationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F26D45CE1B7D090000266096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F26D45D71B7D090000266096 /* ReformApplicationUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F26D45C91B7D090000266096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F26D45B51B7D090000266096 /* ReformApplication */;
+			targetProxy = F26D45C81B7D090000266096 /* PBXContainerItemProxy */;
+		};
+		F26D45D41B7D090000266096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F26D45B51B7D090000266096 /* ReformApplication */;
+			targetProxy = F26D45D31B7D090000266096 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F26D45BF1B7D090000266096 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F26D45C01B7D090000266096 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F26D45D91B7D090000266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F26D45DA1B7D090000266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F26D45DC1B7D090000266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformApplication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformApplication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F26D45DD1B7D090000266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformApplication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformApplication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F26D45DF1B7D090000266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformApplicationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformApplicationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReformApplication.app/Contents/MacOS/ReformApplication";
+			};
+			name = Debug;
+		};
+		F26D45E01B7D090000266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformApplicationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformApplicationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReformApplication.app/Contents/MacOS/ReformApplication";
+			};
+			name = Release;
+		};
+		F26D45E21B7D090000266096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformApplicationUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformApplicationUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ReformApplication;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		F26D45E31B7D090000266096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ReformApplicationUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformApplicationUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ReformApplication;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F26D45B11B7D090000266096 /* Build configuration list for PBXProject "ReformApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D45D91B7D090000266096 /* Debug */,
+				F26D45DA1B7D090000266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F26D45DB1B7D090000266096 /* Build configuration list for PBXNativeTarget "ReformApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D45DC1B7D090000266096 /* Debug */,
+				F26D45DD1B7D090000266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F26D45DE1B7D090000266096 /* Build configuration list for PBXNativeTarget "ReformApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D45DF1B7D090000266096 /* Debug */,
+				F26D45E01B7D090000266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F26D45E11B7D090000266096 /* Build configuration list for PBXNativeTarget "ReformApplicationUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F26D45E21B7D090000266096 /* Debug */,
+				F26D45E31B7D090000266096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F26D45AE1B7D090000266096 /* Project object */;
+}

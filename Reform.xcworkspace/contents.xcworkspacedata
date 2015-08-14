@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:ReformExpression/ReformExpression.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReformSerializer/ReformSerializer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReformTools/ReformTools.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReformStage/ReformStage.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReformMath/ReformMath.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReformCore/ReformCore.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ReformApplication/ReformApplication.xcodeproj">
+   </FileRef>
+</Workspace>
