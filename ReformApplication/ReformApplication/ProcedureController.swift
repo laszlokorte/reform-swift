@@ -21,7 +21,7 @@ extension ProcedureController : NSTableViewDataSource {
 
 extension ProcedureController : NSOutlineViewDataSource {
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return row % 3 == 0 ? 25 : 80
+        return row % 3 == 0 ? 25 : 70
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -35,7 +35,7 @@ extension ProcedureController : NSOutlineViewDataSource {
         }.first
         
         if let ind = indent {
-            ind.constant = row % 2 == 0 ? 30 : 60
+            ind.constant = row % 2 == 0 ? 15 : 30
         }
         
         return cellView
