@@ -20,6 +20,6 @@ extension SheetController : NSTableViewDataSource {
     }
 }
 
-extension SheetController : NSOutlineViewDataSource {
+extension SheetController : NSTableViewDelegate {
 
 }

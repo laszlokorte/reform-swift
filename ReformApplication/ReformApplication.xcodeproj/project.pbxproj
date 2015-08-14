@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F211927B1B7E57130011AA0F /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927A1B7E57130011AA0F /* SheetController.swift */; };
 		F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927C1B7E57340011AA0F /* MeasurementController.swift */; };
+		F211927F1B7E6B550011AA0F /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927E1B7E6B550011AA0F /* WindowController.swift */; };
 		F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7711B7E275800B29E2D /* ProcedureController.swift */; };
 		F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7731B7E412800B29E2D /* CanvasView.swift */; };
 		F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45B91B7D090000266096 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		F211927A1B7E57130011AA0F /* SheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		F211927C1B7E57340011AA0F /* MeasurementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementController.swift; sourceTree = "<group>"; };
+		F211927E1B7E6B550011AA0F /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		F262B7711B7E275800B29E2D /* ProcedureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureController.swift; sourceTree = "<group>"; };
 		F262B7731B7E412800B29E2D /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		F26D45B61B7D090000266096 /* ReformApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReformApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				F262B7731B7E412800B29E2D /* CanvasView.swift */,
 				F211927A1B7E57130011AA0F /* SheetController.swift */,
 				F211927C1B7E57340011AA0F /* MeasurementController.swift */,
+				F211927E1B7E6B550011AA0F /* WindowController.swift */,
 			);
 			path = ReformApplication;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
+				F211927F1B7E6B550011AA0F /* WindowController.swift in Sources */,
 				F26D45BC1B7D090000266096 /* ViewController.swift in Sources */,
 				F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */,
 				F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */,

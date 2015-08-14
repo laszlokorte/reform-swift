@@ -19,6 +19,6 @@ extension MeasurementController : NSTableViewDataSource {
     }
 }
 
-extension MeasurementController : NSOutlineViewDataSource {
+extension MeasurementController : NSTableViewDelegate {
     
 }
