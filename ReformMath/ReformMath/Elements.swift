@@ -16,6 +16,12 @@ public struct LineSegment2d {
     }
 }
 
+extension LineSegment2d {
+    var length : Double {
+        return (to-from).length
+    }
+}
+
 
 public struct Arc2d {
     let from: Vec2d
@@ -27,7 +33,9 @@ public struct Arc2d {
         self.to = to
         self.radius = radius
     }
-    
+}
+
+extension Arc2d {
     var center : Vec2d {
         return (to+from)/2
     }

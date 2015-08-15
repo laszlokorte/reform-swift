@@ -9,13 +9,30 @@
 import ReformMath
 
 public struct ExposedPointIdentifier : Hashable {
+    public typealias IntegerLiteralType = Int8
+    
     private let id : Int
     
     init(_ id : Int) {
         self.id = id
     }
-    
     public var hashValue : Int { return Int(id) }
+}
+
+extension ExposedPointIdentifier : IntegerLiteralConvertible, RawRepresentable {
+    
+    public init?(rawValue: Int) {
+        self.id = rawValue
+    }
+    
+    public var rawValue: Int {
+        return id
+    }
+    
+    public init(integerLiteral value: Int8) {
+        self.id = Int(value)
+    }
+
 }
 
 public func ==(lhs: ExposedPointIdentifier, rhs: ExposedPointIdentifier) -> Bool {

@@ -8,10 +8,10 @@
 
 import ReformMath
 
-protocol RuntimeLength {
+public protocol RuntimeLength {
     func getLengthFor(runtime: Runtime) -> Double?
 }
 
-protocol WriteableRuntimeLength : RuntimeLength {
+public protocol WriteableRuntimeLength : RuntimeLength {
     func setLengthFor(runtime: Runtime, length: Double)
 }

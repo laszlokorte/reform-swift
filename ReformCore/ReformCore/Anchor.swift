@@ -29,3 +29,19 @@ public struct AnchorIdentifier : Hashable {
 public func ==(lhs: AnchorIdentifier, rhs: AnchorIdentifier) -> Bool {
     return lhs.id == rhs.id
 }
+
+extension AnchorIdentifier : IntegerLiteralConvertible, RawRepresentable {
+    
+    public init?(rawValue: Int) {
+        self.id = rawValue
+    }
+    
+    public var rawValue: Int {
+        return id
+    }
+    
+    public init(integerLiteral value: Int8) {
+        self.id = Int(value)
+    }
+    
+}

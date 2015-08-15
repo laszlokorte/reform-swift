@@ -8,6 +8,7 @@
 
 
 import ReformMath
+import ReformGraphics
 
 extension PictureForm : Rotatable {
     
@@ -102,4 +103,34 @@ public class PictureForm : Form {
         return rectangle.outline
     }
     
+}
+
+extension PictureForm {
+    public typealias AnchorId = RectangleForm.AnchorId
+    public typealias PointId = RectangleForm.PointId
+    
+    public var topLeftAnchor : Anchor {
+        return rectangle.topLeftAnchor
+    }
+    public var topRightAnchor : Anchor {
+        return rectangle.topRightAnchor
+    }
+    public var bottomLeftAnchor : Anchor {
+        return rectangle.bottomLeftAnchor
+    }
+    public var bottomRightAnchor : Anchor {
+        return rectangle.bottomRightAnchor
+    }
+    public var topAnchor : Anchor {
+        return rectangle.topAnchor
+    }
+    public var leftAnchor : Anchor {
+        return rectangle.leftAnchor
+    }
+    public var rightAnchor : Anchor {
+        return rectangle.rightAnchor
+    }
+    public var bottomAnchor : Anchor {
+        return rectangle.bottomAnchor
+    }
 }

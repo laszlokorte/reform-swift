@@ -8,7 +8,17 @@
 
 
 import ReformMath
+import ReformGraphics
 
+
+extension PieForm {
+    
+    public enum PointId : ExposedPointIdentifier {
+        case Start = 0
+        case End = 1
+        case Center = 2
+    }
+}
 
 public class PieForm : Form {
     public static var stackSize : Int = 5
@@ -23,18 +33,19 @@ public class PieForm : Form {
         self.name = name
     }
     
-    var centerPoint : WriteableRuntimePoint {
+    public var centerPoint : WriteableRuntimePoint {
         return StaticPoint(formId: identifier, offset: 0)
     }
     
-    var radius : WriteableRuntimeLength {
+    public var radius : WriteableRuntimeLength {
         return StaticLength(formId: identifier, offset: 2)
     }
     
-    var angleUpperBound : WriteableRuntimeRotationAngle {
+    public var angleUpperBound : WriteableRuntimeRotationAngle {
         return StaticAngle(formId: identifier, offset: 3)
     }
-    var angleLowerBound : WriteableRuntimeRotationAngle {
+    
+    public var angleLowerBound : WriteableRuntimeRotationAngle {
         return StaticAngle(formId: identifier, offset: 4)
     }
     
@@ -51,9 +62,9 @@ public class PieForm : Form {
     
     public func getPoints() -> [ExposedPointIdentifier:protocol<RuntimePoint,Labeled>] {
         return [
-            ExposedPointIdentifier(0):AnchorPoint(anchor: lowerAnchor),
-            ExposedPointIdentifier(1):AnchorPoint(anchor: upperAnchor),
-            ExposedPointIdentifier(2):ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.Start.rawValue:AnchorPoint(anchor: lowerAnchor),
+            PointId.End.rawValue:AnchorPoint(anchor: upperAnchor),
+            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
@@ -144,10 +155,16 @@ extension PieForm : Scalable {
 }
 
 extension PieForm : Morphable {
+    
+    public enum AnchorId : AnchorIdentifier {
+        case Start = 0
+        case End = 1
+    }
+    
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorIdentifier(0):lowerAnchor,
-            AnchorIdentifier(1):upperAnchor
+            AnchorId.Start.rawValue:lowerAnchor,
+            AnchorId.End.rawValue:upperAnchor
         ]
     }
 }

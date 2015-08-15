@@ -8,6 +8,18 @@
 
 
 import ReformMath
+import ReformGraphics
+
+extension CircleForm {
+    
+    public enum PointId : ExposedPointIdentifier {
+        case Top = 0
+        case Left = 1
+        case Bottom = 2
+        case Right = 3
+        case Center = 4
+    }
+}
 
 public class CircleForm : Form {
     public static var stackSize : Int = 5
@@ -22,15 +34,15 @@ public class CircleForm : Form {
         self.name = name
     }
     
-    var centerPoint : WriteableRuntimePoint {
+    public var centerPoint : WriteableRuntimePoint {
         return StaticPoint(formId: identifier, offset: 0)
     }
     
-    var radius : WriteableRuntimeLength {
+    public var radius : WriteableRuntimeLength {
         return StaticLength(formId: identifier, offset: 2)
     }
     
-    var angle : WriteableRuntimeRotationAngle {
+    public var angle : WriteableRuntimeRotationAngle {
         return StaticAngle(formId: identifier, offset: 3)
     }
     
@@ -50,20 +62,13 @@ public class CircleForm : Form {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            ExposedPointIdentifier(0):AnchorPoint(anchor: topAnchor),
-            ExposedPointIdentifier(1):AnchorPoint(anchor: bottomAnchor),
-            ExposedPointIdentifier(2):AnchorPoint(anchor: rightAnchor),
-            ExposedPointIdentifier(3):AnchorPoint(anchor: leftAnchor),
-            ExposedPointIdentifier(4):ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.Top.rawValue:AnchorPoint(anchor: topAnchor),
+            PointId.Bottom.rawValue:AnchorPoint(anchor: bottomAnchor),
+            PointId.Right.rawValue:AnchorPoint(anchor: rightAnchor),
+            PointId.Left.rawValue:AnchorPoint(anchor: leftAnchor),
+            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
-    
-    
-    
-    
-    
-    
-    
     
     public var outline : Outline {
         return CircleOutline(center: centerPoint, radius: radius, angle: angle)
@@ -187,12 +192,19 @@ extension CircleForm : Scalable {
 }
 
 extension CircleForm : Morphable {
+    public enum AnchorId : AnchorIdentifier {
+        case Top = 0
+        case Left = 1
+        case Bottom = 2
+        case Right = 3
+    }
+    
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorIdentifier(0):topAnchor,
-            AnchorIdentifier(1):leftAnchor,
-            AnchorIdentifier(2):rightAnchor,
-            AnchorIdentifier(3):bottomAnchor,
+            AnchorId.Top.rawValue:topAnchor,
+            AnchorId.Left.rawValue:leftAnchor,
+            AnchorId.Right.rawValue:rightAnchor,
+            AnchorId.Bottom.rawValue:bottomAnchor,
         ]
     }
 }

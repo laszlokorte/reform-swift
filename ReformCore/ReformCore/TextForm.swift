@@ -7,6 +7,16 @@
 //
 
 import ReformMath
+import ReformGraphics
+
+extension TextForm {
+    
+    public enum PointId : ExposedPointIdentifier {
+        case Start = 0
+        case End = 1
+        case Center = 2
+    }
+}
 
 public class TextForm : Form {
     public static var stackSize : Int = 5
@@ -21,15 +31,15 @@ public class TextForm : Form {
         self.name = name
     }
     
-    var startPoint : WriteableRuntimePoint {
+    public var startPoint : WriteableRuntimePoint {
         return StaticPoint(formId: identifier, offset: 0)
     }
     
-    var endPoint : WriteableRuntimePoint {
+    public var endPoint : WriteableRuntimePoint {
         return StaticPoint(formId: identifier, offset: 2)
     }
     
-    var offset : WriteableRuntimeLength {
+    public var offset : WriteableRuntimeLength {
         return StaticLength(formId: identifier, offset: 4)
     }
     
@@ -56,17 +66,6 @@ public class TextForm : Form {
 
 
 extension TextForm {
-    var controlPointAnchor : Anchor {
-        return OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset)
-    }
-    
-    var startAnchor : Anchor {
-        return StaticPointAnchor(point: startPoint, name: "Start")
-    }
-    
-    var endAnchor : Anchor {
-        return StaticPointAnchor(point: endPoint, name: "End")
-    }
     
     var centerPoint : LabeledPoint {
         return ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center")
@@ -97,12 +96,30 @@ extension TextForm : Scalable {
 
 extension TextForm : Morphable {
     
+    public enum AnchorId : AnchorIdentifier {
+        case Start = 0
+        case End = 1
+        case Offset = 2
+    }
+    
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorIdentifier(0):startAnchor,
-            AnchorIdentifier(1):endAnchor,
-            AnchorIdentifier(2):controlPointAnchor,
+            AnchorId.Start.rawValue:startAnchor,
+            AnchorId.End.rawValue:endAnchor,
+            AnchorId.Offset.rawValue:controlPointAnchor,
         ]
+    }
+    
+    var controlPointAnchor : Anchor {
+        return OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset)
+    }
+    
+    var startAnchor : Anchor {
+        return StaticPointAnchor(point: startPoint, name: "Start")
+    }
+    
+    var endAnchor : Anchor {
+        return StaticPointAnchor(point: endPoint, name: "End")
     }
 }
 

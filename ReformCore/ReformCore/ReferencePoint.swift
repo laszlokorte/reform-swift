@@ -13,6 +13,6 @@ public protocol RuntimePoint {
     func getPositionFor(runtime: Runtime) -> Vec2d?
 }
 
-protocol WriteableRuntimePoint : RuntimePoint {
+public protocol WriteableRuntimePoint : RuntimePoint {
     func setPositionFor(runtime: Runtime, position: Vec2d)
 }

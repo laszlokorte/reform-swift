@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ReformGraphics/ReformGraphics.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ReformExpression/ReformExpression.xcodeproj">
    </FileRef>
    <FileRef

@@ -7,6 +7,17 @@
 //
 
 import ReformMath
+import ReformGraphics
+
+
+extension ArcForm {
+    
+    public enum PointId : ExposedPointIdentifier {
+        case Start = 0
+        case End = 1
+        case Center = 2
+    }
+}
 
 public class ArcForm : Form {
     public static var stackSize : Int = 5
@@ -21,15 +32,15 @@ public class ArcForm : Form {
         self.name = name
     }
     
-    var startPoint : WriteableRuntimePoint {
+    public var startPoint : WriteableRuntimePoint {
         return StaticPoint(formId: identifier, offset: 0)
     }
     
-    var endPoint : WriteableRuntimePoint {
+    public var endPoint : WriteableRuntimePoint {
         return StaticPoint(formId: identifier, offset: 2)
     }
     
-    var offset : WriteableRuntimeLength {
+    public var offset : WriteableRuntimeLength {
         return StaticLength(formId: identifier, offset: 4)
     }
     
@@ -41,9 +52,9 @@ public class ArcForm : Form {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
-            ExposedPointIdentifier(1):ExposedPoint(point: startPoint, name: "End"),
-            ExposedPointIdentifier(2):ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center"),
+            PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
+            PointId.End.rawValue:ExposedPoint(point: startPoint, name: "End"),
+            PointId.Center.rawValue:ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center"),
         ]
     }
     
@@ -77,11 +88,17 @@ extension ArcForm : Scalable {
 
 extension ArcForm : Morphable {
     
+    public enum AnchorId : AnchorIdentifier {
+        case Start = 0
+        case End = 1
+        case Offset = 2
+    }
+    
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorIdentifier(0):StaticPointAnchor(point: startPoint, name: "Start"),
-            AnchorIdentifier(1):StaticPointAnchor(point: endPoint, name: "End"),
-            AnchorIdentifier(2):OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset),
+            AnchorId.Start.rawValue:StaticPointAnchor(point: startPoint, name: "Start"),
+            AnchorId.End.rawValue:StaticPointAnchor(point: endPoint, name: "End"),
+            AnchorId.Offset.rawValue:OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset),
         ]
     }
     

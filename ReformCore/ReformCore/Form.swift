@@ -7,6 +7,7 @@
 //
 
 import ReformMath
+import ReformGraphics
 
 public protocol Rotatable {
     var rotator : Rotator { get }

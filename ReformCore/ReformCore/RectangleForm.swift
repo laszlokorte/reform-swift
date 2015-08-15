@@ -7,6 +7,22 @@
 //
 
 import ReformMath
+import ReformGraphics
+
+extension RectangleForm {
+    
+    public enum PointId : ExposedPointIdentifier {
+        case TopLeft = 0
+        case BottomLeft = 1
+        case TopRight = 2
+        case BottomRight = 3
+        case Top = 4
+        case Bottom = 5
+        case Left = 6
+        case Right = 7
+        case Center = 8
+    }
+}
 
 public class RectangleForm : Form {
     public static var stackSize : Int = 5
@@ -51,19 +67,19 @@ public class RectangleForm : Form {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            ExposedPointIdentifier(0):AnchorPoint(anchor: topLeftAnchor),
+            PointId.TopLeft.rawValue:AnchorPoint(anchor: topLeftAnchor),
             
-            ExposedPointIdentifier(1):AnchorPoint(anchor: topRightAnchor),
+            PointId.BottomRight.rawValue:AnchorPoint(anchor: topRightAnchor),
             
-            ExposedPointIdentifier(2):AnchorPoint(anchor: bottomLeftAnchor),
+            PointId.BottomLeft.rawValue:AnchorPoint(anchor: bottomLeftAnchor),
             
-            ExposedPointIdentifier(3):AnchorPoint(anchor: bottomRightAnchor),
+            PointId.BottomRight.rawValue:AnchorPoint(anchor: bottomRightAnchor),
             
-            ExposedPointIdentifier(4):AnchorPoint(anchor: topAnchor),
-            ExposedPointIdentifier(5):AnchorPoint(anchor: bottomAnchor),
-            ExposedPointIdentifier(6):AnchorPoint(anchor: rightAnchor),
-            ExposedPointIdentifier(7):AnchorPoint(anchor: leftAnchor),
-            ExposedPointIdentifier(8):ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.Top.rawValue:AnchorPoint(anchor: topAnchor),
+            PointId.Bottom.rawValue:AnchorPoint(anchor: bottomAnchor),
+            PointId.Right.rawValue:AnchorPoint(anchor: rightAnchor),
+            PointId.Left.rawValue:AnchorPoint(anchor: leftAnchor),
+            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
@@ -83,35 +99,35 @@ public class RectangleForm : Form {
 
 extension RectangleForm {
 
-    var topLeftAnchor : Anchor {
+    public var topLeftAnchor : Anchor {
         return RectangleAnchor(side: .TopLeft, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var topRightAnchor : Anchor {
+    public var topRightAnchor : Anchor {
         return RectangleAnchor(side: .TopRight, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var bottomLeftAnchor : Anchor {
+    public var bottomLeftAnchor : Anchor {
         return RectangleAnchor(side: .BottomLeft, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var bottomRightAnchor : Anchor {
+    public var bottomRightAnchor : Anchor {
         return RectangleAnchor(side: .BottomRight, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var topAnchor : Anchor {
+    public var topAnchor : Anchor {
         return RectangleAnchor(side: .Top, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var rightAnchor : Anchor {
+    public var rightAnchor : Anchor {
         return RectangleAnchor(side: .Right, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var leftAnchor : Anchor {
+    public var leftAnchor : Anchor {
         return RectangleAnchor(side: .Left, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
-    var bottomAnchor : Anchor {
+    public var bottomAnchor : Anchor {
         return RectangleAnchor(side: .Bottom, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
@@ -260,18 +276,29 @@ extension RectangleForm : Scalable {
 }
 
 extension RectangleForm : Morphable {
+
+    public enum AnchorId : AnchorIdentifier {
+        case TopLeft = 0
+        case BottomLeft = 1
+        case TopRight = 2
+        case BottomRight = 3
+        case Top = 4
+        case Bottom = 5
+        case Left = 6
+        case Right = 7
+    }
     
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorIdentifier(0):topLeftAnchor,
-            AnchorIdentifier(1):topRightAnchor,
-            AnchorIdentifier(2):bottomLeftAnchor,
-            AnchorIdentifier(3):bottomRightAnchor,
+            AnchorId.TopLeft.rawValue:topLeftAnchor,
+            AnchorId.TopRight.rawValue:topRightAnchor,
+            AnchorId.BottomLeft.rawValue:bottomLeftAnchor,
+            AnchorId.BottomRight.rawValue:bottomRightAnchor,
             
-            AnchorIdentifier(4):topAnchor,
-            AnchorIdentifier(5):bottomAnchor,
-            AnchorIdentifier(6):leftAnchor,
-            AnchorIdentifier(7):rightAnchor,
+            AnchorId.Top.rawValue:topAnchor,
+            AnchorId.Bottom.rawValue:bottomAnchor,
+            AnchorId.Left.rawValue:leftAnchor,
+            AnchorId.Right.rawValue:rightAnchor,
         ]
     }
 }

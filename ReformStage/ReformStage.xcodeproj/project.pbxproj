@@ -20,6 +20,7 @@
 		F27391161B7F92B200100F2F /* Pivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391151B7F92B200100F2F /* Pivot.swift */; };
 		F27391181B7F92FA00100F2F /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391171B7F92FA00100F2F /* Intersection.swift */; };
 		F273911A1B7F934500100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391191B7F934500100F2F /* Glomp.swift */; };
+		F2ABC7511B7FD6D5001AD41F /* HitArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ABC7501B7FD6D5001AD41F /* HitArea.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F27391151B7F92B200100F2F /* Pivot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pivot.swift; sourceTree = "<group>"; };
 		F27391171B7F92FA00100F2F /* Intersection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
 		F27391191B7F934500100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
+		F2ABC7501B7FD6D5001AD41F /* HitArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitArea.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		F26D46381B7D0B7800266096 /* ReformStage */ = {
 			isa = PBXGroup;
 			children = (
+				F2ABC74F1B7FD6C9001AD41F /* HitTest */,
 				F273910A1B7F915B00100F2F /* Stage */,
 				F27391091B7F914400100F2F /* Elements */,
 				F26D46391B7D0B7800266096 /* ReformStage.h */,
@@ -132,6 +135,14 @@
 				F273910B1B7F916600100F2F /* Stage.swift */,
 			);
 			name = Stage;
+			sourceTree = "<group>";
+		};
+		F2ABC74F1B7FD6C9001AD41F /* HitTest */ = {
+			isa = PBXGroup;
+			children = (
+				F2ABC7501B7FD6D5001AD41F /* HitArea.swift */,
+			);
+			name = HitTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 				F27391161B7F92B200100F2F /* Pivot.swift in Sources */,
 				F27391141B7F927900100F2F /* Handle.swift in Sources */,
 				F27391181B7F92FA00100F2F /* Intersection.swift in Sources */,
+				F2ABC7511B7FD6D5001AD41F /* HitArea.swift in Sources */,
 				F273911A1B7F934500100F2F /* Glomp.swift in Sources */,
 				F27391121B7F924900100F2F /* SnapPoint.swift in Sources */,
 				F273910C1B7F916600100F2F /* Stage.swift in Sources */,

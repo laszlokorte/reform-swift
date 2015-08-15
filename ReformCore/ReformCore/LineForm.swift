@@ -7,6 +7,15 @@
 //
 
 import ReformMath
+import ReformGraphics
+
+extension LineForm {
+    public enum PointId : ExposedPointIdentifier {
+        case Start = 0
+        case End = 1
+        case Center = 2
+    }
+}
 
 public class LineForm : Form{
     public static var stackSize : Int = 4
@@ -36,9 +45,9 @@ public class LineForm : Form{
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
-            ExposedPointIdentifier(1):ExposedPoint(point: startPoint, name: "End"),
-            ExposedPointIdentifier(2):ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center"),
+            PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
+            PointId.End.rawValue:ExposedPoint(point: startPoint, name: "End"),
+            PointId.Center.rawValue:ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center"),
         ]
     }
     
@@ -49,6 +58,15 @@ public class LineForm : Form{
     }
 }
 
+extension LineForm {
+    public var startAnchor : Anchor {
+        return StaticPointAnchor(point: startPoint, name: "Start")
+    }
+    
+    public var endAnchor : Anchor {
+        return StaticPointAnchor(point: endPoint, name: "End")
+    }
+}
 
 extension LineForm : Rotatable {
     public var rotator : Rotator {
@@ -77,10 +95,15 @@ extension LineForm : Scalable {
 }
 
 extension LineForm : Morphable {
+    public enum AnchorId : AnchorIdentifier {
+        case Start = 0
+        case End = 1
+    }
+    
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorIdentifier(0):StaticPointAnchor(point: startPoint, name: "Start"),
-            AnchorIdentifier(1):StaticPointAnchor(point: endPoint, name: "End"),
+            AnchorId.Start.rawValue:startAnchor,
+            AnchorId.End.rawValue:endAnchor,
         ]
     }
 }

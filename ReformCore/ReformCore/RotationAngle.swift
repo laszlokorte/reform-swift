@@ -12,6 +12,6 @@ public protocol RuntimeRotationAngle : Degeneratable {
     func getAngleFor(runtime: Runtime) -> Angle?
 }
 
-protocol WriteableRuntimeRotationAngle : RuntimeRotationAngle {
+public protocol WriteableRuntimeRotationAngle : RuntimeRotationAngle {
     func setAngleFor(runtime: Runtime, angle: Angle)
 }
