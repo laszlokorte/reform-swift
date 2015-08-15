@@ -21,6 +21,8 @@
 		F26D45D71B7D090000266096 /* ReformApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45D61B7D090000266096 /* ReformApplicationUITests.swift */; };
 		F26D469B1B7D0C3600266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D469A1B7D0C3600266096 /* ReformCore.framework */; };
 		F26D46A11B7D0C7A00266096 /* ReformSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */; };
+		F27391201B7FA80E00100F2F /* PictureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273911F1B7FA80E00100F2F /* PictureController.swift */; };
+		F27391221B7FAA7800100F2F /* StageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391211B7FAA7800100F2F /* StageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		F26D45D81B7D090000266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F26D469A1B7D0C3600266096 /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
 		F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformSerializer.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformSerializer.framework"; sourceTree = "<group>"; };
+		F273911F1B7FA80E00100F2F /* PictureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureController.swift; sourceTree = "<group>"; };
+		F27391211B7FAA7800100F2F /* StageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,8 @@
 				F211927C1B7E57340011AA0F /* MeasurementController.swift */,
 				F211927E1B7E6B550011AA0F /* ProjectWindowController.swift */,
 				F2042A281B7EC865009144E9 /* Document.swift */,
+				F273911F1B7FA80E00100F2F /* PictureController.swift */,
+				F27391211B7FAA7800100F2F /* StageController.swift */,
 			);
 			path = ReformApplication;
 			sourceTree = "<group>";
@@ -281,8 +287,10 @@
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
+				F27391221B7FAA7800100F2F /* StageController.swift in Sources */,
 				F211927F1B7E6B550011AA0F /* ProjectWindowController.swift in Sources */,
 				F26D45BC1B7D090000266096 /* ViewController.swift in Sources */,
+				F27391201B7FA80E00100F2F /* PictureController.swift in Sources */,
 				F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */,
 				F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */,
 			);

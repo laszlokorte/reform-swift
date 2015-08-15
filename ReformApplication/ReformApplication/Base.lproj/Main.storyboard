@@ -5,10 +5,10 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Picture Gallery-->
         <scene sceneID="ABT-CC-rg5">
             <objects>
-                <viewController id="RHB-od-FHM" sceneMemberID="viewController">
+                <viewController id="RHB-od-FHM" userLabel="Picture Gallery" sceneMemberID="viewController">
                     <view key="view" id="qqM-RU-3J6">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -16,12 +16,12 @@
                 </viewController>
                 <customObject id="cbp-HT-e9a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-772" y="103"/>
+            <point key="canvasLocation" x="-587" y="388"/>
         </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
-                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                <application id="hnw-xV-0zn" userLabel="Application" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
                             <menuItem title="ReformApplication" id="1Xt-HY-uBw">
@@ -660,10 +660,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--ProjectWindowController-->
+        <!--Project Window-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" userLabel="ProjectWindowController" customClass="ProjectWindowController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" userLabel="Project Window" customClass="ProjectWindowController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Reform - Untitled Project" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
@@ -783,41 +783,53 @@
                         </toolbar>
                     </window>
                     <connections>
-                        <segue destination="MIN-p8-h1C" kind="relationship" relationship="window.shadowedContentViewController" id="7Fv-XJ-ivo"/>
+                        <segue destination="hFx-Lk-q3W" kind="relationship" relationship="window.shadowedContentViewController" id="vNh-Tt-v1p"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="63" y="388"/>
         </scene>
-        <!--Picture Editor-->
-        <scene sceneID="ZOu-h4-x2v">
+        <!--Picture-->
+        <scene sceneID="xds-Qn-cFh">
             <objects>
-                <splitViewController id="MIN-p8-h1C" userLabel="Picture Editor" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem holdingPriority="260" id="ZEh-tn-lO9"/>
-                        <splitViewItem holdingPriority="200" id="9wG-va-E57"/>
-                    </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="MD5-J5-z0o">
+                <viewController id="hFx-Lk-q3W" userLabel="Picture" customClass="PictureController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <splitView key="view" dividerStyle="thin" vertical="YES" id="Ndr-xT-mGE">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <containerView fixedFrame="YES" id="w6J-Ne-ItX">
+                                <rect key="frame" x="0.0" y="0.0" width="129" height="300"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <segue destination="bCj-B8-Ve5" kind="embed" id="mHN-Qr-fTh"/>
+                                </connections>
+                            </containerView>
+                            <containerView fixedFrame="YES" id="QlB-Sb-enK">
+                                <rect key="frame" x="130" y="0.0" width="320" height="300"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <segue destination="DG2-kz-iLd" kind="embed" id="12m-Wr-pKR"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <holdingPriorities>
+                            <real value="250"/>
+                            <real value="250"/>
+                        </holdingPriorities>
                         <connections>
-                            <outlet property="delegate" destination="MIN-p8-h1C" id="WwB-Q6-2I1"/>
+                            <outlet property="delegate" destination="hFx-Lk-q3W" id="j6l-T5-m0D"/>
                         </connections>
                     </splitView>
-                    <connections>
-                        <segue destination="bCj-B8-Ve5" kind="relationship" relationship="splitItems" id="nYx-3D-D9D"/>
-                        <segue destination="DG2-kz-iLd" kind="relationship" relationship="splitItems" id="O90-M6-iSK"/>
-                    </connections>
-                </splitViewController>
-                <customObject id="ZGU-B8-OXV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <customObject id="aPK-8P-8m9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="229" y="1142"/>
+            <point key="canvasLocation" x="101" y="1081"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Sidebar-->
         <scene sceneID="Ajg-ej-Kqv">
             <objects>
-                <splitViewController id="bCj-B8-Ve5" sceneMemberID="viewController">
+                <splitViewController id="bCj-B8-Ve5" userLabel="Sidebar" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem holdingPriority="260" id="zBh-vR-3TR"/>
                         <splitViewItem id="QM1-g7-2po"/>
@@ -838,12 +850,12 @@
                 </splitViewController>
                 <customObject id="DGs-aA-00P" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="491" y="1794"/>
+            <point key="canvasLocation" x="375" y="1691"/>
         </scene>
-        <!--Sheet Controller-->
+        <!--Data Editor-->
         <scene sceneID="DwK-Ed-G7g">
             <objects>
-                <viewController id="Jdn-j4-Nab" customClass="SheetController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Jdn-j4-Nab" userLabel="Data Editor" customClass="SheetController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Rky-QQ-RPS">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -894,7 +906,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="175.99055651797292" minWidth="40" maxWidth="1000" id="YJe-Jp-9nV">
+                                                <tableColumn width="175.60203790779084" minWidth="40" maxWidth="1000" id="YJe-Jp-9nV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -939,8 +951,8 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="7ak-ac-fNM"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="e8b-V0-DQA"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="LCb-fr-rgN">
-                                    <rect key="frame" x="1" y="107" width="298" height="15"/>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.49999999999993988" horizontal="YES" id="LCb-fr-rgN">
+                                    <rect key="frame" x="1" y="105" width="298" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="F9x-sW-BB8">
@@ -1004,10 +1016,10 @@
             </objects>
             <point key="canvasLocation" x="-154" y="1496"/>
         </scene>
-        <!--Procedure Controller-->
+        <!--Procedure Editor-->
         <scene sceneID="hGK-1Z-Jg7">
             <objects>
-                <viewController id="tWe-V1-zXv" customClass="ProcedureController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tWe-V1-zXv" userLabel="Procedure Editor" customClass="ProcedureController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5Kc-tT-P7P">
                         <rect key="frame" x="0.0" y="0.0" width="491" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1110,7 +1122,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="RBf-wy-C4M"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="gKU-Vt-hj1">
-                                    <rect key="frame" x="1" y="284" width="489" height="15"/>
+                                    <rect key="frame" x="1" y="263" width="489" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="uIs-9N-kVJ">
@@ -1156,10 +1168,10 @@
             </objects>
             <point key="canvasLocation" x="-249.5" y="1882"/>
         </scene>
-        <!--Measurement Controller-->
+        <!--Mesurement Editor-->
         <scene sceneID="axU-8C-Fue">
             <objects>
-                <viewController id="Dng-iQ-bPn" customClass="MeasurementController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Dng-iQ-bPn" userLabel="Mesurement Editor" customClass="MeasurementController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="TFA-up-4Mr">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="154"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1192,7 +1204,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="AQT-OX-Fbo">
-                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="117" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QFn-sU-QDU">
@@ -1210,7 +1222,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="176.31450718880086" minWidth="40" maxWidth="1000" id="RCu-Zm-GHw">
+                                                <tableColumn width="174.83417389359886" minWidth="40" maxWidth="1000" id="RCu-Zm-GHw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1224,7 +1236,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="JS5-Cj-uGG">
-                                                            <rect key="frame" x="120" y="1" width="176" height="17"/>
+                                                            <rect key="frame" x="120" y="1" width="175" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pK2-7Y-EHB">
@@ -1256,7 +1268,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="dDA-wO-GEs"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="mTN-DM-3zo">
-                                    <rect key="frame" x="1" y="84" width="298" height="15"/>
+                                    <rect key="frame" x="1" y="116" width="298" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="qGu-Nv-zuN">
@@ -1303,10 +1315,10 @@
             </objects>
             <point key="canvasLocation" x="-120" y="2321"/>
         </scene>
-        <!--Picture Canvas-->
+        <!--Stage-->
         <scene sceneID="FT0-WQ-uXX">
             <objects>
-                <viewController id="DG2-kz-iLd" userLabel="Picture Canvas" sceneMemberID="viewController">
+                <viewController id="DG2-kz-iLd" userLabel="Stage" customClass="StageController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <customView key="view" id="IjJ-iQ-isN">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1327,11 +1339,11 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="58L-Eb-ieO"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="IHc-n2-JkS"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="0.11764705882353307" horizontal="YES" id="hnn-4r-jtF">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="0.23529411764705596" horizontal="YES" id="hnn-4r-jtF">
                                     <rect key="frame" x="1" y="284" width="433" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="NO" id="F3w-72-j3g">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="0.10526315789473684" horizontal="NO" id="F3w-72-j3g">
                                     <rect key="frame" x="434" y="1" width="15" height="283"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1347,7 +1359,7 @@
                 </viewController>
                 <customObject id="mpJ-EO-JWn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1224" y="1832"/>
+            <point key="canvasLocation" x="936" y="1366"/>
         </scene>
     </scenes>
     <resources>
