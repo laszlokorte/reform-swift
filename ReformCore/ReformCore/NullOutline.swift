@@ -16,4 +16,8 @@ struct NullOutline : Outline {
     func getLengthFor(runtime: Runtime) -> Double? {
         return nil
     }
+    
+    func getSegmentsFor(runtime: Runtime) -> [Segment] {
+        return []
+    }
 }

@@ -34,4 +34,13 @@ struct LineOutline : Outline {
         
         return (b-a).length
     }
+    
+    func getSegmentsFor(runtime: Runtime) -> [Segment] {
+        guard let from = start.getPositionFor(runtime),
+            let to = start.getPositionFor(runtime) else {
+                return []
+        }
+        
+        return [.Line(LineSegment2d(from: from, to: to))]
+    }
 }

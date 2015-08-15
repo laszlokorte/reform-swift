@@ -5,6 +5,19 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="ABT-CC-rg5">
+            <objects>
+                <viewController id="RHB-od-FHM" sceneMemberID="viewController">
+                    <view key="view" id="qqM-RU-3J6">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="cbp-HT-e9a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-772" y="103"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
@@ -647,10 +660,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller-->
+        <!--ProjectWindowController-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="ProjectWindowController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" userLabel="ProjectWindowController" customClass="ProjectWindowController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Reform - Untitled Project" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
@@ -659,30 +672,93 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <toolbar key="toolbar" implicitIdentifier="84D84DEA-64EB-4629-9057-64E206D4EE00" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Ndm-BD-lG0">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="88FF6E6B-233A-495D-ABA1-B33AD7FB8903" label="Pictures" paletteLabel="Picture Selector" tag="-1" image="picture-list" id="3UZ-1U-DCe"/>
+                                <toolbarItem implicitItemIdentifier="88FF6E6B-233A-495D-ABA1-B33AD7FB8903" label="Pictures" paletteLabel="Picture Selector" tag="-1" image="gallery" id="3UZ-1U-DCe">
+                                    <connections>
+                                        <segue destination="RHB-od-FHM" kind="popover" popoverAnchorView="3UZ-1U-DCe" popoverBehavior="t" preferredEdge="maxY" id="A2v-8L-rKa"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="C5U-9k-uqQ"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="hFi-IR-xDT"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="hpM-K0-Ndm"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Aw8-TL-07W"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Nit-gD-vzh"/>
-                                <toolbarItem implicitItemIdentifier="1322AA77-28F6-4CCC-9B6A-E402C723F3AF" label="Line" paletteLabel="Draw Line" tag="-1" id="65U-vF-hDk"/>
-                                <toolbarItem implicitItemIdentifier="AE3640CF-BBDA-4D3C-846C-8D60B9A92F45" label="Rectangle" paletteLabel="Draw Rectangle" tag="-1" id="Vg0-94-OBF"/>
-                                <toolbarItem implicitItemIdentifier="C3E67C07-8337-4718-9B4B-7B47DED0144E" label="Circle" paletteLabel="Draw Circle" tag="-1" id="hTQ-Cw-1Gh"/>
-                                <toolbarItem implicitItemIdentifier="398CEE34-4B8B-48CA-9B82-9A173CE1C93C" label="Pie" paletteLabel="Draw Pie" tag="-1" id="7Vw-3G-OOA"/>
-                                <toolbarItem implicitItemIdentifier="5CF46872-9C12-4255-8398-798E50814F48" label="Arc" paletteLabel="Draw Arc" tag="-1" id="kTZ-2q-E9U"/>
-                                <toolbarItem implicitItemIdentifier="70F341DB-CC04-45D4-84C4-F6CA6434E40C" label="Text" paletteLabel="Draw Text" tag="-1" id="zIl-ka-KKn"/>
-                                <toolbarItem implicitItemIdentifier="D359E598-7B36-4D6B-B3FB-CB0416C73750" label="Picture" paletteLabel="Draw Picture" tag="-1" id="w42-Wf-VOx"/>
-                                <toolbarItem implicitItemIdentifier="1CF814B6-18B8-49AE-AD89-BED61017BB60" label="Select" paletteLabel="Selection Tool" tag="-1" id="n5b-Nv-PnN"/>
-                                <toolbarItem implicitItemIdentifier="31BA3348-3AA5-413A-9E82-993901DF0C2C" label="Move" paletteLabel="Move Tool" tag="-1" id="6gl-vn-jm5"/>
-                                <toolbarItem implicitItemIdentifier="1B302077-491A-486E-B8F3-2E6BD2273D37" label="Rotate" paletteLabel="Rotation Tool" tag="-1" id="fXG-6r-lpF"/>
-                                <toolbarItem implicitItemIdentifier="E17CBF33-1B99-4A7D-B65C-ACFE594593EF" label="Scale" paletteLabel="Scale Tool" tag="-1" id="zoX-OX-RXR"/>
-                                <toolbarItem implicitItemIdentifier="4CCFD131-B41E-41BE-A085-95A92EB45CDB" label="Morph" paletteLabel="Morph Tool" tag="-1" id="9NG-yI-lkR"/>
-                                <toolbarItem implicitItemIdentifier="5BC26FF1-8008-4234-BB74-5523FB2D2E38" label="Crop" paletteLabel="Crop Tool" tag="-1" id="oeh-R9-CaW"/>
-                                <toolbarItem implicitItemIdentifier="06290CF1-1431-4849-AA30-D18FC9379912" label="Preview" paletteLabel="Preview Tool" tag="-1" id="q1q-pG-kup"/>
-                                <toolbarItem implicitItemIdentifier="603596DC-BFFF-4C37-8144-EA63B03B4698" label="Export" paletteLabel="Export Tool" tag="-1" id="Thp-1b-cjQ"/>
+                                <toolbarItem implicitItemIdentifier="1322AA77-28F6-4CCC-9B6A-E402C723F3AF" label="Line" paletteLabel="Draw Line" tag="-1" image="line" id="65U-vF-hDk">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="CDd-Fk-CzC"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="AE3640CF-BBDA-4D3C-846C-8D60B9A92F45" label="Rectangle" paletteLabel="Draw Rectangle" tag="-1" image="rect" id="Vg0-94-OBF">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="3ga-MI-BIs"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="C3E67C07-8337-4718-9B4B-7B47DED0144E" label="Circle" paletteLabel="Draw Circle" tag="-1" image="circle" id="hTQ-Cw-1Gh">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="hfk-S0-QeW"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="398CEE34-4B8B-48CA-9B82-9A173CE1C93C" label="Pie" paletteLabel="Draw Pie" tag="-1" image="pie" id="7Vw-3G-OOA">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="r6S-AB-wDN"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5CF46872-9C12-4255-8398-798E50814F48" label="Arc" paletteLabel="Draw Arc" tag="-1" image="arc" id="kTZ-2q-E9U">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="yqT-ZO-gEJ"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="70F341DB-CC04-45D4-84C4-F6CA6434E40C" label="Text" paletteLabel="Draw Text" tag="-1" image="text" id="zIl-ka-KKn">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="viN-fl-sU2"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D359E598-7B36-4D6B-B3FB-CB0416C73750" label="Picture" paletteLabel="Draw Picture" tag="-1" image="picture" id="w42-Wf-VOx">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="dJn-5A-78C"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1CF814B6-18B8-49AE-AD89-BED61017BB60" label="Select" paletteLabel="Selection Tool" tag="-1" image="cursor" id="n5b-Nv-PnN">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="4Fx-VF-nd6"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="31BA3348-3AA5-413A-9E82-993901DF0C2C" label="Move" paletteLabel="Move Tool" tag="-1" image="move" id="6gl-vn-jm5">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="x6X-Fd-jDY"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1B302077-491A-486E-B8F3-2E6BD2273D37" label="Rotate" paletteLabel="Rotation Tool" tag="-1" image="rotate" id="fXG-6r-lpF">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="MkI-ka-1zp"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="E17CBF33-1B99-4A7D-B65C-ACFE594593EF" label="Scale" paletteLabel="Scale Tool" tag="-1" image="scale" id="zoX-OX-RXR">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="9mA-Rg-ikZ"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="4CCFD131-B41E-41BE-A085-95A92EB45CDB" label="Morph" paletteLabel="Morph Tool" tag="-1" image="morph" id="9NG-yI-lkR">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="bw5-34-zMc"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5BC26FF1-8008-4234-BB74-5523FB2D2E38" label="Crop" paletteLabel="Crop Tool" tag="-1" image="crop" id="oeh-R9-CaW">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="gKn-sM-34W"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="06290CF1-1431-4849-AA30-D18FC9379912" label="Preview" paletteLabel="Preview Tool" tag="-1" image="preview" id="q1q-pG-kup">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="clX-P5-8fB"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="603596DC-BFFF-4C37-8144-EA63B03B4698" label="Export" paletteLabel="Export Tool" tag="-1" image="export" id="Thp-1b-cjQ">
+                                    <connections>
+                                        <action selector="toolbarButton:" target="B8D-0N-5wS" id="ax5-2B-eIM"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="3UZ-1U-DCe"/>
                                 <toolbarItem reference="65U-vF-hDk"/>
                                 <toolbarItem reference="Vg0-94-OBF"/>
                                 <toolbarItem reference="hTQ-Cw-1Gh"/>
@@ -698,13 +774,11 @@
                                 <toolbarItem reference="9NG-yI-lkR"/>
                                 <toolbarItem reference="Nit-gD-vzh"/>
                                 <toolbarItem reference="oeh-R9-CaW"/>
+                                <toolbarItem reference="Aw8-TL-07W"/>
                                 <toolbarItem reference="q1q-pG-kup"/>
                                 <toolbarItem reference="Thp-1b-cjQ"/>
                                 <toolbarItem reference="Nit-gD-vzh"/>
-                                <toolbarItem reference="hFi-IR-xDT"/>
-                                <toolbarItem reference="C5U-9k-uqQ"/>
-                                <toolbarItem reference="Aw8-TL-07W"/>
-                                <toolbarItem reference="hpM-K0-Ndm"/>
+                                <toolbarItem reference="3UZ-1U-DCe"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -771,17 +845,17 @@
             <objects>
                 <viewController id="Jdn-j4-Nab" customClass="SheetController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Rky-QQ-RPS">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ux6-Up-ZI4">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="121"/>
                                 <clipView key="contentView" drawsBackground="NO" id="4WY-tB-Buw">
-                                    <rect key="frame" x="1" y="17" width="298" height="82"/>
+                                    <rect key="frame" x="1" y="1" width="298" height="119"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" headerView="k7F-gu-BrV" viewBased="YES" floatsGroupRows="NO" id="mGn-fM-UZA">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="82"/>
+                                        <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" viewBased="YES" floatsGroupRows="NO" id="mGn-fM-UZA">
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -820,7 +894,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="176" minWidth="40" maxWidth="1000" id="YJe-Jp-9nV">
+                                                <tableColumn width="175.99055651797292" minWidth="40" maxWidth="1000" id="YJe-Jp-9nV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -866,26 +940,65 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="e8b-V0-DQA"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="LCb-fr-rgN">
-                                    <rect key="frame" x="1" y="84" width="298" height="15"/>
+                                    <rect key="frame" x="1" y="107" width="298" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="F9x-sW-BB8">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="k7F-gu-BrV">
-                                    <rect key="frame" x="0.0" y="0.0" width="298" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableHeaderView>
                             </scrollView>
+                            <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vg6-MD-Au2">
+                                <rect key="frame" x="5" y="126" width="290" height="19"/>
+                                <beginningViews>
+                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnz-AF-Ylt">
+                                        <rect key="frame" x="-2" y="1" width="273" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Data" id="2x2-w4-fkB">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </beginningViews>
+                                <endViews>
+                                    <button horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ddH-ix-zIK">
+                                        <rect key="frame" x="0.0" y="-1" width="13" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="c6v-xk-WaB"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="trp-9v-AoV">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </endViews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ddH-ix-zIK" secondAttribute="trailing" id="5ie-d7-eLU"/>
+                                    <constraint firstItem="ddH-ix-zIK" firstAttribute="baseline" secondItem="gnz-AF-Ylt" secondAttribute="baseline" id="ffS-xI-RR6"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vg6-MD-Au2" secondAttribute="trailing" constant="5" id="199-sd-89R"/>
+                            <constraint firstItem="vg6-MD-Au2" firstAttribute="top" secondItem="Rky-QQ-RPS" secondAttribute="top" constant="5" id="3Od-eJ-7eD"/>
+                            <constraint firstItem="vg6-MD-Au2" firstAttribute="leading" secondItem="Rky-QQ-RPS" secondAttribute="leading" constant="5" id="D7h-Sa-dS0"/>
                             <constraint firstAttribute="trailing" secondItem="ux6-Up-ZI4" secondAttribute="trailing" id="IAo-hD-Ed5"/>
+                            <constraint firstItem="ux6-Up-ZI4" firstAttribute="top" secondItem="vg6-MD-Au2" secondAttribute="bottom" constant="5" id="Qzg-7o-qH1"/>
                             <constraint firstItem="ux6-Up-ZI4" firstAttribute="leading" secondItem="Rky-QQ-RPS" secondAttribute="leading" id="VpP-bg-AdN"/>
                             <constraint firstAttribute="bottom" secondItem="ux6-Up-ZI4" secondAttribute="bottom" id="n88-K7-seQ"/>
-                            <constraint firstItem="ux6-Up-ZI4" firstAttribute="top" secondItem="Rky-QQ-RPS" secondAttribute="top" id="s3d-mh-Ce5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="mGn-fM-UZA" id="u21-8X-GeT"/>
+                    </connections>
                 </viewController>
                 <customObject id="OXg-cc-hel" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -899,20 +1012,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="491" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="153" horizontalPageScroll="10" verticalLineScroll="153" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3o-xa-Lmc">
-                                <rect key="frame" x="0.0" y="0.0" width="491" height="300"/>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="79" horizontalPageScroll="10" verticalLineScroll="79" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3o-xa-Lmc">
+                                <rect key="frame" x="0.0" y="0.0" width="491" height="279"/>
                                 <clipView key="contentView" id="SZ4-IH-Cf7">
-                                    <rect key="frame" x="1" y="1" width="489" height="298"/>
+                                    <rect key="frame" x="1" y="1" width="489" height="277"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="151" rowSizeStyle="automatic" viewBased="YES" id="Usf-Zm-XQS">
-                                            <rect key="frame" x="0.0" y="0.0" width="489" height="298"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="77" rowSizeStyle="automatic" viewBased="YES" id="Usf-Zm-XQS">
+                                            <rect key="frame" x="0.0" y="0.0" width="489" height="277"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="485.99670435392545" minWidth="40" maxWidth="1000" id="9jU-5R-dsb">
+                                                <tableColumn width="486.04412768210375" minWidth="40" maxWidth="1000" id="9jU-5R-dsb">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -997,7 +1110,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="RBf-wy-C4M"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="gKU-Vt-hj1">
-                                    <rect key="frame" x="1" y="284" width="298" height="15"/>
+                                    <rect key="frame" x="1" y="284" width="489" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="uIs-9N-kVJ">
@@ -1005,12 +1118,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="adD-YK-5bJ">
+                                <rect key="frame" x="5" y="283" width="481" height="17"/>
+                                <beginningViews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xiz-Ta-woF">
+                                        <rect key="frame" x="-2" y="0.0" width="68" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Procedure" id="pNZ-j4-T2b">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </beginningViews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="r3o-xa-Lmc" secondAttribute="bottom" id="2EP-v2-FMV"/>
                             <constraint firstItem="r3o-xa-Lmc" firstAttribute="leading" secondItem="5Kc-tT-P7P" secondAttribute="leading" id="33B-3G-5Fl"/>
-                            <constraint firstItem="r3o-xa-Lmc" firstAttribute="top" secondItem="5Kc-tT-P7P" secondAttribute="top" id="5uQ-zf-chj"/>
                             <constraint firstAttribute="trailing" secondItem="r3o-xa-Lmc" secondAttribute="trailing" id="8xY-gd-zfl"/>
+                            <constraint firstItem="adD-YK-5bJ" firstAttribute="leading" secondItem="5Kc-tT-P7P" secondAttribute="leading" constant="5" id="TaC-v5-TvW"/>
+                            <constraint firstItem="Usf-Zm-XQS" firstAttribute="top" secondItem="adD-YK-5bJ" secondAttribute="bottom" constant="5" id="X6E-ZQ-6Ib"/>
+                            <constraint firstAttribute="trailing" secondItem="adD-YK-5bJ" secondAttribute="trailing" constant="5" id="ir0-aF-9Sq"/>
+                            <constraint firstItem="adD-YK-5bJ" firstAttribute="top" secondItem="5Kc-tT-P7P" secondAttribute="top" id="zUD-b0-Ynv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1026,17 +1161,17 @@
             <objects>
                 <viewController id="Dng-iQ-bPn" customClass="MeasurementController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="TFA-up-4Mr">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="154"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX2-gc-WFB">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="132"/>
                                 <clipView key="contentView" id="Xae-fa-2nf">
-                                    <rect key="frame" x="1" y="17" width="298" height="82"/>
+                                    <rect key="frame" x="1" y="17" width="298" height="114"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" headerView="6Pv-le-48b" viewBased="YES" id="hi6-1L-2Ua">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="82"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1075,7 +1210,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="175.88119125262168" minWidth="40" maxWidth="1000" id="RCu-Zm-GHw">
+                                                <tableColumn width="176.31450718880086" minWidth="40" maxWidth="1000" id="RCu-Zm-GHw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1120,7 +1255,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="9yS-UB-S5a"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="dDA-wO-GEs"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.5" horizontal="YES" id="mTN-DM-3zo">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="mTN-DM-3zo">
                                     <rect key="frame" x="1" y="84" width="298" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1133,10 +1268,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2iI-hy-zgD">
+                                <rect key="frame" x="5" y="137" width="290" height="17"/>
+                                <beginningViews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwv-KV-Jzr">
+                                        <rect key="frame" x="-2" y="0.0" width="95" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Measurements" id="DiS-Io-C98">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </beginningViews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2iI-hy-zgD" secondAttribute="trailing" constant="5" id="79L-PP-LFO"/>
+                            <constraint firstItem="2iI-hy-zgD" firstAttribute="leading" secondItem="TFA-up-4Mr" secondAttribute="leading" constant="5" id="Hjl-Ml-ION"/>
                             <constraint firstAttribute="trailing" secondItem="lX2-gc-WFB" secondAttribute="trailing" id="J8P-S2-MV8"/>
-                            <constraint firstItem="lX2-gc-WFB" firstAttribute="top" secondItem="TFA-up-4Mr" secondAttribute="top" id="UGy-xl-PMS"/>
+                            <constraint firstItem="2iI-hy-zgD" firstAttribute="top" secondItem="TFA-up-4Mr" secondAttribute="top" id="fOJ-NQ-lcZ"/>
+                            <constraint firstItem="lX2-gc-WFB" firstAttribute="top" secondItem="2iI-hy-zgD" secondAttribute="bottom" constant="5" id="fi2-dg-vzG"/>
                             <constraint firstItem="lX2-gc-WFB" firstAttribute="leading" secondItem="TFA-up-4Mr" secondAttribute="leading" id="n18-gB-to3"/>
                             <constraint firstAttribute="bottom" secondItem="lX2-gc-WFB" secondAttribute="bottom" id="yfp-pH-pHH"/>
                         </constraints>
@@ -1144,7 +1301,7 @@
                 </viewController>
                 <customObject id="vUc-Es-XTs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-120" y="2294"/>
+            <point key="canvasLocation" x="-120" y="2321"/>
         </scene>
         <!--Picture Canvas-->
         <scene sceneID="FT0-WQ-uXX">
@@ -1170,11 +1327,11 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="58L-Eb-ieO"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="IHc-n2-JkS"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="0.11764705882352941" horizontal="YES" id="hnn-4r-jtF">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="0.11764705882353307" horizontal="YES" id="hnn-4r-jtF">
                                     <rect key="frame" x="1" y="284" width="433" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="0.10526315789473684" horizontal="NO" id="F3w-72-j3g">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="NO" id="F3w-72-j3g">
                                     <rect key="frame" x="434" y="1" width="15" height="283"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1194,7 +1351,23 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="arc" width="256" height="256"/>
+        <image name="circle" width="256" height="256"/>
+        <image name="crop" width="256" height="256"/>
+        <image name="cursor" width="256" height="256"/>
         <image name="example-thumbnail" width="100" height="56"/>
-        <image name="picture-list" width="341" height="350"/>
+        <image name="export" width="256" height="256"/>
+        <image name="gallery" width="256" height="256"/>
+        <image name="line" width="256" height="256"/>
+        <image name="morph" width="256" height="256"/>
+        <image name="move" width="256" height="256"/>
+        <image name="picture" width="256" height="256"/>
+        <image name="pie" width="256" height="256"/>
+        <image name="preview" width="256" height="256"/>
+        <image name="rect" width="256" height="256"/>
+        <image name="rotate" width="256" height="256"/>
+        <image name="scale" width="256" height="256"/>
+        <image name="text" width="256" height="256"/>
     </resources>
 </document>

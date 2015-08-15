@@ -81,6 +81,7 @@
 		F26D475C1B7D868B00266096 /* RuntimeStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D475B1B7D868B00266096 /* RuntimeStack.swift */; };
 		F26D475E1B7D965900266096 /* Describable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D475D1B7D965900266096 /* Describable.swift */; };
 		F26D47611B7DA05A00266096 /* ForeignFormPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */; };
+		F27390FF1B7F817800100F2F /* OutlineIntersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27390FE1B7F817800100F2F /* OutlineIntersection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		F26D475B1B7D868B00266096 /* RuntimeStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeStack.swift; sourceTree = "<group>"; };
 		F26D475D1B7D965900266096 /* Describable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Describable.swift; sourceTree = "<group>"; };
 		F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForeignFormPoint.swift; sourceTree = "<group>"; };
+		F27390FE1B7F817800100F2F /* OutlineIntersection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineIntersection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +340,7 @@
 		F26D46DA1B7D14A800266096 /* Outline */ = {
 			isa = PBXGroup;
 			children = (
+				F27390FD1B7F815F00100F2F /* Intersection */,
 				F26D47271B7D3DB500266096 /* Composite */,
 				F26D47021B7D288300266096 /* Static */,
 				F26D46DB1B7D14B600266096 /* Outline.swift */,
@@ -509,6 +512,14 @@
 			name = Foreign;
 			sourceTree = "<group>";
 		};
+		F27390FD1B7F815F00100F2F /* Intersection */ = {
+			isa = PBXGroup;
+			children = (
+				F27390FE1B7F817800100F2F /* OutlineIntersection.swift */,
+			);
+			name = Intersection;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -660,6 +671,7 @@
 				F26D46D21B7D142C00266096 /* Procedure.swift in Sources */,
 				F26D47221B7D3B0A00266096 /* CompositeScaler.swift in Sources */,
 				F26D47261B7D3D3C00266096 /* CompositeRotator.swift in Sources */,
+				F27390FF1B7F817800100F2F /* OutlineIntersection.swift in Sources */,
 				F26D47121B7D37B300266096 /* CircleForm.swift in Sources */,
 				F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */,
 				F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */,

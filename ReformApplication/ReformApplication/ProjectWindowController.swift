@@ -1,5 +1,5 @@
 //
-//  WindowController.swift
+//  ProjectWindowController.swift
 //  ReformApplication
 //
 //  Created by Laszlo Korte on 14.08.15.
@@ -20,6 +20,8 @@ class ProjectWindowController : NSWindowController {
             
     }
     
+    @IBAction func toolbarButton(sender: NSToolbarItem) {
     
+    }
     
 }

@@ -12,4 +12,21 @@ public protocol Outline {
     func getPositionFor(runtime: Runtime, t: Double) -> Vec2d?
     
     func getLengthFor(runtime: Runtime) -> Double?
+    
+    func getSegmentsFor(runtime: Runtime) -> [Segment]
+}
+
+
+func intersectionsForRuntime(runtime: Runtime, a: Outline, b: Outline) -> [Vec2d] {
+    var result : [Vec2d] = []
+    
+    for segmentA in a.getSegmentsFor(runtime) {
+        for segmentB in b.getSegmentsFor(runtime) {
+            for intersection in intersect(segment: segmentA, and: segmentB) {
+                result.append(intersection)
+            }
+        }
+    }
+    
+    return result
 }

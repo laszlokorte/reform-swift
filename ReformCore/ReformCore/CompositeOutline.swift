@@ -48,4 +48,16 @@ struct CompositeOutline : Outline {
         
         return length
     }
+    
+    func getSegmentsFor(runtime: Runtime) -> [Segment] {
+        var result = [Segment]()
+        
+        for part in parts {
+            for segment in part.getSegmentsFor(runtime) {
+                result.append(segment)
+            }
+        }
+        
+        return result
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 class SheetController : NSViewController {
-
+    @IBOutlet var tableView : NSTableView?
 }
 
 
@@ -21,5 +21,5 @@ extension SheetController : NSTableViewDataSource {
 }
 
 extension SheetController : NSTableViewDelegate {
-
+   
 }

@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2042A291B7EC865009144E9 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2042A281B7EC865009144E9 /* Document.swift */; };
 		F211927B1B7E57130011AA0F /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927A1B7E57130011AA0F /* SheetController.swift */; };
 		F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927C1B7E57340011AA0F /* MeasurementController.swift */; };
-		F211927F1B7E6B550011AA0F /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927E1B7E6B550011AA0F /* WindowController.swift */; };
+		F211927F1B7E6B550011AA0F /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927E1B7E6B550011AA0F /* ProjectWindowController.swift */; };
 		F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7711B7E275800B29E2D /* ProcedureController.swift */; };
 		F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7731B7E412800B29E2D /* CanvasView.swift */; };
 		F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45B91B7D090000266096 /* AppDelegate.swift */; };
@@ -40,9 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F2042A281B7EC865009144E9 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		F211927A1B7E57130011AA0F /* SheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		F211927C1B7E57340011AA0F /* MeasurementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementController.swift; sourceTree = "<group>"; };
-		F211927E1B7E6B550011AA0F /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		F211927E1B7E6B550011AA0F /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
 		F262B7711B7E275800B29E2D /* ProcedureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureController.swift; sourceTree = "<group>"; };
 		F262B7731B7E412800B29E2D /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		F26D45B61B7D090000266096 /* ReformApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReformApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +124,8 @@
 				F262B7731B7E412800B29E2D /* CanvasView.swift */,
 				F211927A1B7E57130011AA0F /* SheetController.swift */,
 				F211927C1B7E57340011AA0F /* MeasurementController.swift */,
-				F211927E1B7E6B550011AA0F /* WindowController.swift */,
+				F211927E1B7E6B550011AA0F /* ProjectWindowController.swift */,
+				F2042A281B7EC865009144E9 /* Document.swift */,
 			);
 			path = ReformApplication;
 			sourceTree = "<group>";
@@ -274,10 +277,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2042A291B7EC865009144E9 /* Document.swift in Sources */,
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
-				F211927F1B7E6B550011AA0F /* WindowController.swift in Sources */,
+				F211927F1B7E6B550011AA0F /* ProjectWindowController.swift in Sources */,
 				F26D45BC1B7D090000266096 /* ViewController.swift in Sources */,
 				F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */,
 				F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */,

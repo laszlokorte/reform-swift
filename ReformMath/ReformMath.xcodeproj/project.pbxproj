@@ -14,6 +14,7 @@
 		F26D46F01B7D1AAA00266096 /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46EF1B7D1AAA00266096 /* Angle.swift */; };
 		F26D470E1B7D34B700266096 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D470D1B7D34B700266096 /* Operators.swift */; };
 		F26D47311B7D3F7F00266096 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47301B7D3F7F00266096 /* Functions.swift */; };
+		F27391011B7F854B00100F2F /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391001B7F854B00100F2F /* Elements.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		F26D46EF1B7D1AAA00266096 /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		F26D470D1B7D34B700266096 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		F26D47301B7D3F7F00266096 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		F27391001B7F854B00100F2F /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				F26D46EF1B7D1AAA00266096 /* Angle.swift */,
+				F27391001B7F854B00100F2F /* Elements.swift */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				F26D46A81B7D0CF400266096 /* Vec2d.swift in Sources */,
 				F26D470E1B7D34B700266096 /* Operators.swift in Sources */,
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,
+				F27391011B7F854B00100F2F /* Elements.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
