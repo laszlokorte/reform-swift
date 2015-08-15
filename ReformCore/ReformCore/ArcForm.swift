@@ -8,12 +8,12 @@
 
 import ReformMath
 
-class ArcForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = 5
+public class ArcForm : Form {
+    public static var stackSize : Int = 5
     
-    let identifier : FormIdentifier
-    var drawingMode : DrawingMode = DrawingMode.Draw
-    var name : String
+    public let identifier : FormIdentifier
+    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var name : String
     
     
     init(formId: FormIdentifier, name : String) {
@@ -33,21 +33,13 @@ class ArcForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         return StaticLength(formId: identifier, offset: 4)
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
         offset.setLengthFor(runtime, length: 50)
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
-    
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
+    public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
             ExposedPointIdentifier(1):ExposedPoint(point: startPoint, name: "End"),
@@ -55,19 +47,37 @@ class ArcForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         ]
     }
     
-    var rotator : Rotator {
+    public var outline : Outline {
+        return NullOutline()
+    }
+}
+
+extension ArcForm : Rotatable {
+    
+    public var rotator : Rotator {
         return BasicPointRotator(points: startPoint, endPoint)
     }
-    var scaler : Scaler {
+    
+}
+
+extension ArcForm : Translatable {
+    
+    public var translator : Translator {
+        return BasicPointTranslator(points: startPoint, endPoint)
+    }
+}
+
+extension ArcForm : Scalable {
+    
+    public var scaler : Scaler {
         return BasicPointScaler(points: startPoint, endPoint)
     }
     
-    var translator : Translator {
-        return BasicPointTranslator(points: startPoint, endPoint)
-    }
+}
+
+extension ArcForm : Morphable {
     
-    
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
             AnchorIdentifier(0):StaticPointAnchor(point: startPoint, name: "Start"),
             AnchorIdentifier(1):StaticPointAnchor(point: endPoint, name: "End"),
@@ -75,7 +85,15 @@ class ArcForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         ]
     }
     
-    var outline : Outline {
-        return NullOutline()
+}
+
+extension ArcForm : Drawable {
+    
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
+    
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
     }
 }

@@ -8,12 +8,12 @@
 
 import ReformMath
 
-class RectangleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = 5
+public class RectangleForm : Form {
+    public static var stackSize : Int = 5
     
-    let identifier : FormIdentifier
-    var drawingMode : DrawingMode = DrawingMode.Draw
-    var name : String
+    public let identifier : FormIdentifier
+    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var name : String
     
     
     init(formId: FormIdentifier, name : String) {
@@ -37,7 +37,7 @@ class RectangleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawab
         return StaticAngle(formId: identifier, offset: 4)
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         let w = max.x - min.x
         let h = max.y - min.y
         let c = (min+max) / 2
@@ -48,15 +48,8 @@ class RectangleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawab
         angle.setAngleFor(runtime, angle: Angle(radians: 0))
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
     
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
+    public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             ExposedPointIdentifier(0):AnchorPoint(anchor: topLeftAnchor),
             
@@ -74,40 +67,7 @@ class RectangleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawab
         ]
     }
     
-    var rotator : Rotator {
-        return CompositeRotator(rotators:
-                BasicPointRotator(points: centerPoint),
-                BasicAngleRotator(angles: angle)
-            )
-    }
-    var scaler : Scaler {
-        return CompositeScaler(scalers:
-                BasicPointScaler(points: centerPoint),
-                BasicLengthScaler(length: width, angle: angle),
-                BasicLengthScaler(length: width, angle: angle, offset: Angle(degree: 90))
-            )
-    }
-    
-    var translator : Translator {
-        return BasicPointTranslator(points: centerPoint)
-    }
-    
-    
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
-        return [
-            AnchorIdentifier(0):topLeftAnchor,
-            AnchorIdentifier(1):topRightAnchor,
-            AnchorIdentifier(2):bottomLeftAnchor,
-            AnchorIdentifier(3):bottomRightAnchor,
-
-            AnchorIdentifier(4):topAnchor,
-            AnchorIdentifier(5):bottomAnchor,
-            AnchorIdentifier(6):leftAnchor,
-            AnchorIdentifier(7):rightAnchor,
-        ]
-    }
-    
-    var outline : Outline {
+    public var outline : Outline {
         return CompositeOutline(parts:
             LineOutline(start: AnchorPoint(anchor: topLeftAnchor), end: AnchorPoint(anchor: topRightAnchor)),
             
@@ -268,5 +228,61 @@ private struct RectangleAnchor : Anchor {
                 height.setLengthFor(runtime, length: newHeight)
                 width.setLengthFor(runtime, length: newWidth)
         }
+    }
+}
+
+extension RectangleForm : Rotatable {
+    
+    public var rotator : Rotator {
+        return CompositeRotator(rotators:
+            BasicPointRotator(points: centerPoint),
+            BasicAngleRotator(angles: angle)
+        )
+    }
+}
+
+extension RectangleForm : Translatable {
+    
+    public var translator : Translator {
+        return BasicPointTranslator(points: centerPoint)
+    }
+}
+
+extension RectangleForm : Scalable {
+    
+    public var scaler : Scaler {
+        return CompositeScaler(scalers:
+            BasicPointScaler(points: centerPoint),
+            BasicLengthScaler(length: width, angle: angle),
+            BasicLengthScaler(length: width, angle: angle, offset: Angle(degree: 90))
+        )
+    }
+}
+
+extension RectangleForm : Morphable {
+    
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
+        return [
+            AnchorIdentifier(0):topLeftAnchor,
+            AnchorIdentifier(1):topRightAnchor,
+            AnchorIdentifier(2):bottomLeftAnchor,
+            AnchorIdentifier(3):bottomRightAnchor,
+            
+            AnchorIdentifier(4):topAnchor,
+            AnchorIdentifier(5):bottomAnchor,
+            AnchorIdentifier(6):leftAnchor,
+            AnchorIdentifier(7):rightAnchor,
+        ]
+    }
+}
+
+extension RectangleForm : Drawable {
+    
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
+    
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
     }
 }

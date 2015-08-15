@@ -8,12 +8,12 @@
 
 import ReformMath
 
-class LineForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = 4
+public class LineForm : Form{
+    public static var stackSize : Int = 4
     
-    let identifier : FormIdentifier
-    var drawingMode : DrawingMode = DrawingMode.Draw
-    var name : String
+    public let identifier : FormIdentifier
+    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var name : String
 
     
     init(formId: FormIdentifier, name : String) {
@@ -29,20 +29,12 @@ class LineForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         get { return StaticPoint(formId: identifier, offset: 2) }
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
-    
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
+    public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
             ExposedPointIdentifier(1):ExposedPoint(point: startPoint, name: "End"),
@@ -50,34 +42,55 @@ class LineForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         ]
     }
     
-    var rotator : Rotator {
+    public var outline : Outline {
+        get {
+            return LineOutline(start: startPoint, end: endPoint)
+        }
+    }
+}
+
+
+extension LineForm : Rotatable {
+    public var rotator : Rotator {
         get {
             return BasicPointRotator(points: startPoint, endPoint)
         }
     }
-    var scaler : Scaler {
-        get {
-            return BasicPointScaler(points: startPoint, endPoint)
-        }
-    }
-    
-    var translator : Translator {
+}
+
+
+extension LineForm : Translatable {
+    public var translator : Translator {
         get {
             return BasicPointTranslator(points: startPoint, endPoint)
         }
     }
+}
 
-    
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
+
+extension LineForm : Scalable {
+    public var scaler : Scaler {
+        get {
+            return BasicPointScaler(points: startPoint, endPoint)
+        }
+    }
+}
+
+extension LineForm : Morphable {
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
             AnchorIdentifier(0):StaticPointAnchor(point: startPoint, name: "Start"),
             AnchorIdentifier(1):StaticPointAnchor(point: endPoint, name: "End"),
         ]
     }
+}
+
+extension LineForm : Drawable {
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
     
-    var outline : Outline {
-        get {
-            return LineOutline(start: startPoint, end: endPoint)
-        }
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
     }
 }

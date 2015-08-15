@@ -9,12 +9,13 @@
 
 import ReformMath
 
-class PieForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = 5
+
+public class PieForm : Form {
+    public static var stackSize : Int = 5
     
-    let identifier : FormIdentifier
-    var drawingMode : DrawingMode = DrawingMode.Draw
-    var name : String
+    public let identifier : FormIdentifier
+    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var name : String
     
     
     init(formId: FormIdentifier, name : String) {
@@ -37,7 +38,7 @@ class PieForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         return StaticAngle(formId: identifier, offset: 4)
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         let c = (min+max) / 2
         let delta = max - min
         centerPoint.setPositionFor(runtime, position: c)
@@ -48,15 +49,7 @@ class PieForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         angleLowerBound.setAngleFor(runtime, angle: ReformMath.angle(delta) - Angle.PI)
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
-    
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:protocol<RuntimePoint,Labeled>] {
+    public func getPoints() -> [ExposedPointIdentifier:protocol<RuntimePoint,Labeled>] {
         return [
             ExposedPointIdentifier(0):AnchorPoint(anchor: lowerAnchor),
             ExposedPointIdentifier(1):AnchorPoint(anchor: upperAnchor),
@@ -64,33 +57,7 @@ class PieForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         ]
     }
     
-    var rotator : Rotator {
-        return CompositeRotator(rotators:
-            BasicPointRotator(points: centerPoint),
-            BasicAngleRotator(angles: angleUpperBound),
-            BasicAngleRotator(angles: angleLowerBound)
-        )
-    }
-    var scaler : Scaler {
-        return CompositeScaler(scalers:
-            BasicPointScaler(points: centerPoint),
-            BasicLengthScaler(length: radius, angle: angleUpperBound)
-        )
-    }
-    
-    var translator : Translator {
-        return BasicPointTranslator(points: centerPoint)
-    }
-    
-    
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
-        return [
-            AnchorIdentifier(0):lowerAnchor,
-            AnchorIdentifier(1):upperAnchor
-        ]
-    }
-    
-    var outline : Outline {
+    public var outline : Outline {
         return NullOutline()
     }
     
@@ -147,5 +114,50 @@ private struct PieCornerAnchor : Anchor {
             rotation.setAngleFor(runtime, angle: newAngle)
             radius.setLengthFor(runtime, length: newRadius)
         }
+    }
+}
+
+
+extension PieForm : Rotatable {
+    public var rotator : Rotator {
+        return CompositeRotator(rotators:
+            BasicPointRotator(points: centerPoint),
+            BasicAngleRotator(angles: angleUpperBound),
+            BasicAngleRotator(angles: angleLowerBound)
+        )
+    }
+}
+
+extension PieForm : Translatable {
+    public var translator : Translator {
+        return BasicPointTranslator(points: centerPoint)
+    }
+}
+
+extension PieForm : Scalable {
+    public var scaler : Scaler {
+        return CompositeScaler(scalers:
+            BasicPointScaler(points: centerPoint),
+            BasicLengthScaler(length: radius, angle: angleUpperBound)
+        )
+    }
+}
+
+extension PieForm : Morphable {
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
+        return [
+            AnchorIdentifier(0):lowerAnchor,
+            AnchorIdentifier(1):upperAnchor
+        ]
+    }
+}
+
+extension PieForm : Drawable {
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
+    
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
     }
 }

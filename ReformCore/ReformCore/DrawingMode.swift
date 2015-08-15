@@ -10,5 +10,4 @@ public enum DrawingMode {
     case Draw
     case Mask
     case Guide
-    case None
 }

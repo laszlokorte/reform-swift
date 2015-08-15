@@ -8,23 +8,23 @@
 
 import ReformMath
 
-protocol Rotatable {
+public protocol Rotatable {
     var rotator : Rotator { get }
 }
 
-protocol Scalable {
+public protocol Scalable {
     var scaler : Scaler { get }
 }
 
-protocol Translatable {
+public protocol Translatable {
     var translator : Translator { get }
 }
 
-protocol Morphable {
+public protocol Morphable {
     func getAnchors() -> [AnchorIdentifier:Anchor]
 }
 
-protocol Drawable {
+public protocol Drawable {
     func getPathFor(runtime: Runtime) -> Path
     
     func getShapeFor(runtime: Runtime) -> Shape

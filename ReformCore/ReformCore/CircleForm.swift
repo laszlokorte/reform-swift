@@ -9,12 +9,12 @@
 
 import ReformMath
 
-class CircleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = 5
+public class CircleForm : Form {
+    public static var stackSize : Int = 5
     
-    let identifier : FormIdentifier
-    var drawingMode : DrawingMode = DrawingMode.Draw
-    var name : String
+    public let identifier : FormIdentifier
+    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var name : String
     
     
     init(formId: FormIdentifier, name : String) {
@@ -34,7 +34,7 @@ class CircleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable 
         return StaticAngle(formId: identifier, offset: 3)
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         let c = (min+max) / 2
         let delta = max - min
         
@@ -47,15 +47,8 @@ class CircleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable 
         
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
     
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
+    public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             ExposedPointIdentifier(0):AnchorPoint(anchor: topAnchor),
             ExposedPointIdentifier(1):AnchorPoint(anchor: bottomAnchor),
@@ -65,34 +58,14 @@ class CircleForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable 
         ]
     }
     
-    var rotator : Rotator {
-        return CompositeRotator(rotators:
-            BasicPointRotator(points: centerPoint),
-            BasicAngleRotator(angles: angle)
-        )
-    }
-    var scaler : Scaler {
-        return CompositeScaler(scalers:
-            BasicPointScaler(points: centerPoint),
-            BasicLengthScaler(length: radius, angle: angle)
-        )
-    }
-    
-    var translator : Translator {
-        return BasicPointTranslator(points: centerPoint)
-    }
     
     
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
-        return [
-            AnchorIdentifier(0):topAnchor,
-            AnchorIdentifier(1):leftAnchor,
-            AnchorIdentifier(2):rightAnchor,
-            AnchorIdentifier(3):bottomAnchor,
-        ]
-    }
     
-    var outline : Outline {
+    
+    
+    
+    
+    public var outline : Outline {
         return CircleOutline(center: centerPoint, radius: radius, angle: angle)
     }
     
@@ -184,5 +157,53 @@ private struct CircleAnchor : Anchor {
             rotation.setAngleFor(runtime, angle: newAngle)
             radius.setLengthFor(runtime, length: newRadius)
         }
+    }
+}
+
+
+extension CircleForm : Rotatable {
+    
+    public var rotator : Rotator {
+        return CompositeRotator(rotators:
+            BasicPointRotator(points: centerPoint),
+            BasicAngleRotator(angles: angle)
+        )
+    }
+}
+
+extension CircleForm : Translatable {
+    public var translator : Translator {
+        return BasicPointTranslator(points: centerPoint)
+    }
+}
+
+extension CircleForm : Scalable {
+    public var scaler : Scaler {
+        return CompositeScaler(scalers:
+            BasicPointScaler(points: centerPoint),
+            BasicLengthScaler(length: radius, angle: angle)
+        )
+    }
+}
+
+extension CircleForm : Morphable {
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
+        return [
+            AnchorIdentifier(0):topAnchor,
+            AnchorIdentifier(1):leftAnchor,
+            AnchorIdentifier(2):rightAnchor,
+            AnchorIdentifier(3):bottomAnchor,
+        ]
+    }
+}
+
+extension CircleForm : Drawable {
+    
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
+    
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
     }
 }

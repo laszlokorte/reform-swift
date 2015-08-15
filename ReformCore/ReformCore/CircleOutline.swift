@@ -37,7 +37,7 @@ struct CircleOutline : Outline {
         return 2 * M_PI * rad
     }
     
-    func getSegmentsFor(runtime: Runtime) -> [Segment] {
+    func getSegmentsFor(runtime: Runtime) -> SegmentPath {
         guard let r = radius.getLengthFor(runtime),
         let c = center.getPositionFor(runtime),
         let a = angle.getAngleFor(runtime) else {

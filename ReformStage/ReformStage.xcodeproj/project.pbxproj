@@ -12,6 +12,14 @@
 		F26D46461B7D0B7800266096 /* ReformStageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46451B7D0B7800266096 /* ReformStageTests.swift */; };
 		F26D46A31B7D0CB600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A21B7D0CB600266096 /* ReformTools.framework */; };
 		F26D46A51B7D0CBE00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A41B7D0CBE00266096 /* ReformCore.framework */; };
+		F273910C1B7F916600100F2F /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910B1B7F916600100F2F /* Stage.swift */; };
+		F273910E1B7F91DD00100F2F /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910D1B7F91DD00100F2F /* Entity.swift */; };
+		F27391101B7F920600100F2F /* CropPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910F1B7F920600100F2F /* CropPoint.swift */; };
+		F27391121B7F924900100F2F /* SnapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391111B7F924900100F2F /* SnapPoint.swift */; };
+		F27391141B7F927900100F2F /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391131B7F927900100F2F /* Handle.swift */; };
+		F27391161B7F92B200100F2F /* Pivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391151B7F92B200100F2F /* Pivot.swift */; };
+		F27391181B7F92FA00100F2F /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391171B7F92FA00100F2F /* Intersection.swift */; };
+		F273911A1B7F934500100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391191B7F934500100F2F /* Glomp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +41,14 @@
 		F26D46471B7D0B7800266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F26D46A21B7D0CB600266096 /* ReformTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformTools.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformTools.framework"; sourceTree = "<group>"; };
 		F26D46A41B7D0CBE00266096 /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
+		F273910B1B7F916600100F2F /* Stage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
+		F273910D1B7F91DD00100F2F /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		F273910F1B7F920600100F2F /* CropPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropPoint.swift; sourceTree = "<group>"; };
+		F27391111B7F924900100F2F /* SnapPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapPoint.swift; sourceTree = "<group>"; };
+		F27391131B7F927900100F2F /* Handle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
+		F27391151B7F92B200100F2F /* Pivot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pivot.swift; sourceTree = "<group>"; };
+		F27391171B7F92FA00100F2F /* Intersection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
+		F27391191B7F934500100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +95,8 @@
 		F26D46381B7D0B7800266096 /* ReformStage */ = {
 			isa = PBXGroup;
 			children = (
+				F273910A1B7F915B00100F2F /* Stage */,
+				F27391091B7F914400100F2F /* Elements */,
 				F26D46391B7D0B7800266096 /* ReformStage.h */,
 				F26D463B1B7D0B7800266096 /* Info.plist */,
 			);
@@ -92,6 +110,28 @@
 				F26D46471B7D0B7800266096 /* Info.plist */,
 			);
 			path = ReformStageTests;
+			sourceTree = "<group>";
+		};
+		F27391091B7F914400100F2F /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				F273910D1B7F91DD00100F2F /* Entity.swift */,
+				F273910F1B7F920600100F2F /* CropPoint.swift */,
+				F27391111B7F924900100F2F /* SnapPoint.swift */,
+				F27391131B7F927900100F2F /* Handle.swift */,
+				F27391151B7F92B200100F2F /* Pivot.swift */,
+				F27391171B7F92FA00100F2F /* Intersection.swift */,
+				F27391191B7F934500100F2F /* Glomp.swift */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
+		F273910A1B7F915B00100F2F /* Stage */ = {
+			isa = PBXGroup;
+			children = (
+				F273910B1B7F916600100F2F /* Stage.swift */,
+			);
+			name = Stage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +190,7 @@
 		F26D462D1B7D0B7800266096 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Laszlo Korte";
 				TargetAttributes = {
@@ -201,6 +242,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F27391101B7F920600100F2F /* CropPoint.swift in Sources */,
+				F273910E1B7F91DD00100F2F /* Entity.swift in Sources */,
+				F27391161B7F92B200100F2F /* Pivot.swift in Sources */,
+				F27391141B7F927900100F2F /* Handle.swift in Sources */,
+				F27391181B7F92FA00100F2F /* Intersection.swift in Sources */,
+				F273911A1B7F934500100F2F /* Glomp.swift in Sources */,
+				F27391121B7F924900100F2F /* SnapPoint.swift in Sources */,
+				F273910C1B7F916600100F2F /* Stage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +359,7 @@
 		F26D464B1B7D0B7800266096 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -322,12 +372,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformStage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F26D464C1B7D0B7800266096 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -384,6 +436,7 @@
 				F26D464C1B7D0B7800266096 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F26D464D1B7D0B7800266096 /* Build configuration list for PBXNativeTarget "ReformStageTests" */ = {
 			isa = XCConfigurationList;
@@ -392,6 +445,7 @@
 				F26D464F1B7D0B7800266096 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -27,20 +27,8 @@ public struct Arc2d {
         self.to = to
         self.radius = radius
     }
-}
-
-
-public func intersect(line lineA: LineSegment2d, line lineB: LineSegment2d) -> Vec2d? {
-    return nil
     
-}
-
-public func intersect(arc arcA: Arc2d, arc arcB: Arc2d) -> [Vec2d] {
-    return []
-    
-}
-
-public func intersect(line line: LineSegment2d, arc: Arc2d) -> [Vec2d] {
-    return []
-    
+    var center : Vec2d {
+        return (to+from)/2
+    }
 }

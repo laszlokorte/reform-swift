@@ -8,12 +8,12 @@
 
 import ReformMath
 
-class TextForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = 5
+public class TextForm : Form {
+    public static var stackSize : Int = 5
     
-    let identifier : FormIdentifier
-    var drawingMode : DrawingMode = DrawingMode.Draw
-    var name : String
+    public let identifier : FormIdentifier
+    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var name : String
     
     
     init(formId: FormIdentifier, name : String) {
@@ -33,21 +33,14 @@ class TextForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         return StaticLength(formId: identifier, offset: 4)
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
         offset.setLengthFor(runtime, length: 16)
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
     
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
+    public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
             ExposedPointIdentifier(1):ExposedPoint(point: startPoint, name: "End"),
@@ -56,27 +49,7 @@ class TextForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
         ]
     }
     
-    var rotator : Rotator {
-        return BasicPointRotator(points: startPoint, endPoint)
-    }
-    var scaler : Scaler {
-        return BasicPointScaler(points: startPoint, endPoint)
-    }
-    
-    var translator : Translator {
-        return BasicPointTranslator(points: startPoint, endPoint)
-    }
-    
-    
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
-        return [
-            AnchorIdentifier(0):startAnchor,
-            AnchorIdentifier(1):endAnchor,
-            AnchorIdentifier(2):controlPointAnchor,
-        ]
-    }
-    
-    var outline : Outline {
+    public var outline : Outline {
         return NullOutline()
     }
 }
@@ -97,5 +70,49 @@ extension TextForm {
     
     var centerPoint : LabeledPoint {
         return ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center")
+    }
+}
+
+
+extension TextForm : Rotatable {
+    
+    public var rotator : Rotator {
+        return BasicPointRotator(points: startPoint, endPoint)
+    }
+}
+
+extension TextForm : Translatable {
+    
+    public var translator : Translator {
+        return BasicPointTranslator(points: startPoint, endPoint)
+    }
+}
+
+extension TextForm : Scalable {
+    
+    public var scaler : Scaler {
+        return BasicPointScaler(points: startPoint, endPoint)
+    }
+}
+
+extension TextForm : Morphable {
+    
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
+        return [
+            AnchorIdentifier(0):startAnchor,
+            AnchorIdentifier(1):endAnchor,
+            AnchorIdentifier(2):controlPointAnchor,
+        ]
+    }
+}
+
+extension TextForm : Drawable {
+    
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
+    
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
     }
 }

@@ -15,6 +15,8 @@
 		F26D470E1B7D34B700266096 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D470D1B7D34B700266096 /* Operators.swift */; };
 		F26D47311B7D3F7F00266096 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47301B7D3F7F00266096 /* Functions.swift */; };
 		F27391011B7F854B00100F2F /* Elements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391001B7F854B00100F2F /* Elements.swift */; };
+		F27391071B7F8ACE00100F2F /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391061B7F8ACE00100F2F /* Relations.swift */; };
+		F273911C1B7F94F800100F2F /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273911B1B7F94F800100F2F /* Path.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,8 @@
 		F26D470D1B7D34B700266096 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		F26D47301B7D3F7F00266096 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		F27391001B7F854B00100F2F /* Elements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elements.swift; sourceTree = "<group>"; };
+		F27391061B7F8ACE00100F2F /* Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relations.swift; sourceTree = "<group>"; };
+		F273911B1B7F94F800100F2F /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 			children = (
 				F26D46EF1B7D1AAA00266096 /* Angle.swift */,
 				F27391001B7F854B00100F2F /* Elements.swift */,
+				F27391061B7F8ACE00100F2F /* Relations.swift */,
+				F273911B1B7F94F800100F2F /* Path.swift */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -226,6 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F26D46F01B7D1AAA00266096 /* Angle.swift in Sources */,
+				F273911C1B7F94F800100F2F /* Path.swift in Sources */,
+				F27391071B7F8ACE00100F2F /* Relations.swift in Sources */,
 				F26D46A81B7D0CF400266096 /* Vec2d.swift in Sources */,
 				F26D470E1B7D34B700266096 /* Operators.swift in Sources */,
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,

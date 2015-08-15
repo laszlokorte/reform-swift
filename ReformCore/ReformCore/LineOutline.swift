@@ -35,7 +35,7 @@ struct LineOutline : Outline {
         return (b-a).length
     }
     
-    func getSegmentsFor(runtime: Runtime) -> [Segment] {
+    func getSegmentsFor(runtime: Runtime) -> SegmentPath {
         guard let from = start.getPositionFor(runtime),
             let to = start.getPositionFor(runtime) else {
                 return []

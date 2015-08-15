@@ -13,7 +13,7 @@ public protocol Outline {
     
     func getLengthFor(runtime: Runtime) -> Double?
     
-    func getSegmentsFor(runtime: Runtime) -> [Segment]
+    func getSegmentsFor(runtime: Runtime) -> SegmentPath
 }
 
 

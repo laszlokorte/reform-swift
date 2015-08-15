@@ -9,21 +9,61 @@
 
 import ReformMath
 
-class PictureForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable {
-    static var stackSize : Int = RectangleForm.stackSize
+extension PictureForm : Rotatable {
     
-    private let rectangle : RectangleForm
-    
-    var identifier : FormIdentifier {
-        return rectangle.identifier
+    public var rotator : Rotator {
+        return rectangle.rotator
     }
+}
+
+extension PictureForm : Translatable {
     
-    var drawingMode : DrawingMode {
+    public var translator : Translator {
+        return rectangle.translator
+    }
+}
+
+extension PictureForm : Scalable {
+    public var scaler : Scaler {
+        return rectangle.scaler
+    }
+}
+
+extension PictureForm : Morphable {
+    
+    public func getAnchors() -> [AnchorIdentifier:Anchor] {
+        return rectangle.getAnchors()
+    }
+}
+
+extension PictureForm : Drawable {
+    
+    public var drawingMode : DrawingMode {
         get { return rectangle.drawingMode }
         set { rectangle.drawingMode = newValue }
     }
     
-    var name : String {
+    public func getPathFor(runtime: Runtime) -> Path {
+        return Path()
+    }
+    
+    public func getShapeFor(runtime: Runtime) -> Shape {
+        return Shape()
+    }
+}
+
+
+public class PictureForm : Form {
+    public static var stackSize : Int = RectangleForm.stackSize
+    
+    private let rectangle : RectangleForm
+    
+    public var identifier : FormIdentifier {
+        return rectangle.identifier
+    }
+    
+    
+    public var name : String {
         get { return rectangle.name }
         set { rectangle.name = newValue }
     }
@@ -50,39 +90,15 @@ class PictureForm : Form, Rotatable, Translatable, Scalable, Morphable, Drawable
         return rectangle.angle
     }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
         rectangle.initWithRuntime(runtime, min: min, max: max)
     }
     
-    func getPathFor(runtime: Runtime) -> Path {
-        return Path()
-    }
-    
-    func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
-    }
-    
-    func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
+    public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return rectangle.getPoints()
     }
     
-    var rotator : Rotator {
-        return rectangle.rotator
-    }
-    var scaler : Scaler {
-        return rectangle.scaler
-    }
-    
-    var translator : Translator {
-        return rectangle.translator
-    }
-    
-    
-    func getAnchors() -> [AnchorIdentifier:Anchor] {
-        return rectangle.getAnchors()
-    }
-    
-    var outline : Outline {
+    public var outline : Outline {
         return rectangle.outline
     }
     

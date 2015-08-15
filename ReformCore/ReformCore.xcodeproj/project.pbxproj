@@ -81,7 +81,8 @@
 		F26D475C1B7D868B00266096 /* RuntimeStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D475B1B7D868B00266096 /* RuntimeStack.swift */; };
 		F26D475E1B7D965900266096 /* Describable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D475D1B7D965900266096 /* Describable.swift */; };
 		F26D47611B7DA05A00266096 /* ForeignFormPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */; };
-		F27390FF1B7F817800100F2F /* OutlineIntersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27390FE1B7F817800100F2F /* OutlineIntersection.swift */; };
+		F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391041B7F88B400100F2F /* IntersectionPoint.swift */; };
+		F273911E1B7FA24000100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273911D1B7FA24000100F2F /* Glomp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,7 +173,8 @@
 		F26D475B1B7D868B00266096 /* RuntimeStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeStack.swift; sourceTree = "<group>"; };
 		F26D475D1B7D965900266096 /* Describable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Describable.swift; sourceTree = "<group>"; };
 		F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForeignFormPoint.swift; sourceTree = "<group>"; };
-		F27390FE1B7F817800100F2F /* OutlineIntersection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineIntersection.swift; sourceTree = "<group>"; };
+		F27391041B7F88B400100F2F /* IntersectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntersectionPoint.swift; sourceTree = "<group>"; };
+		F273911D1B7FA24000100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				F26D47341B7D415B00266096 /* Operators.swift */,
+				F27391031B7F889F00100F2F /* Glomp */,
+				F27391021B7F889300100F2F /* Intersection */,
 				F26D475F1B7DA04A00266096 /* Foreign */,
 				F26D470A1B7D342300266096 /* Composed */,
 				F26D46FB1B7D23F800266096 /* Static */,
@@ -340,7 +344,6 @@
 		F26D46DA1B7D14A800266096 /* Outline */ = {
 			isa = PBXGroup;
 			children = (
-				F27390FD1B7F815F00100F2F /* Intersection */,
 				F26D47271B7D3DB500266096 /* Composite */,
 				F26D47021B7D288300266096 /* Static */,
 				F26D46DB1B7D14B600266096 /* Outline.swift */,
@@ -512,12 +515,20 @@
 			name = Foreign;
 			sourceTree = "<group>";
 		};
-		F27390FD1B7F815F00100F2F /* Intersection */ = {
+		F27391021B7F889300100F2F /* Intersection */ = {
 			isa = PBXGroup;
 			children = (
-				F27390FE1B7F817800100F2F /* OutlineIntersection.swift */,
+				F27391041B7F88B400100F2F /* IntersectionPoint.swift */,
 			);
 			name = Intersection;
+			sourceTree = "<group>";
+		};
+		F27391031B7F889F00100F2F /* Glomp */ = {
+			isa = PBXGroup;
+			children = (
+				F273911D1B7FA24000100F2F /* Glomp.swift */,
+			);
+			name = Glomp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -650,6 +661,7 @@
 				F26D46E21B7D169D00266096 /* DrawingMode.swift in Sources */,
 				F26D47161B7D37C800266096 /* ArcForm.swift in Sources */,
 				F26D474C1B7D696700266096 /* ForLoopInstruction.swift in Sources */,
+				F273911E1B7FA24000100F2F /* Glomp.swift in Sources */,
 				F26D46D71B7D146600266096 /* Translator.swift in Sources */,
 				F26D471E1B7D392A00266096 /* StaticAngle.swift in Sources */,
 				F26D47091B7D321B00266096 /* StaticPointAnchor.swift in Sources */,
@@ -671,10 +683,10 @@
 				F26D46D21B7D142C00266096 /* Procedure.swift in Sources */,
 				F26D47221B7D3B0A00266096 /* CompositeScaler.swift in Sources */,
 				F26D47261B7D3D3C00266096 /* CompositeRotator.swift in Sources */,
-				F27390FF1B7F817800100F2F /* OutlineIntersection.swift in Sources */,
 				F26D47121B7D37B300266096 /* CircleForm.swift in Sources */,
 				F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */,
 				F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */,
+				F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */,
 				F26D47061B7D2D5C00266096 /* DefaultRuntime.swift in Sources */,
 				F26D46BC1B7D10FB00266096 /* Length.swift in Sources */,
 				F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */,
