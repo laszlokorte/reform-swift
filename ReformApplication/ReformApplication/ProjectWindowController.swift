@@ -11,13 +11,13 @@ import Cocoa
 
 
 class ProjectWindowController : NSWindowController {
-
+    
     override func windowDidLoad() {
         if let screenFrame = window?.screen?.frame {
             window?.setFrame(NSRect(x:25, y:100, width: screenFrame.width-50, height: screenFrame.height-120), display: true)
             window?.center()
         }
-            
+        
     }
     
     @IBAction func toolbarButton(sender: NSToolbarItem) {
