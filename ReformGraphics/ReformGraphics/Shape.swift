@@ -6,16 +6,29 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformMath
+
 public struct Shape {
     let background: Background
     let stroke: Stroke
-    let path : Path
+    let area : FillArea
     
     public init() {
         background = .None
         stroke = .None
-        path = Path()
+        area = .PathArea(Path())
     }
+    
+    public init(area : FillArea, background : Background = .None, stroke: Stroke = .None) {
+        self.area = area
+        self.stroke = stroke
+        self.background = background
+    }
+}
+
+public enum FillArea {
+    case PathArea(Path)
+    case TextArea(Vec2d, text: String, size: Double)
 }
 
 public enum Background {
@@ -24,6 +37,6 @@ public enum Background {
 }
 
 public enum Stroke {
-    case Solid(widht: Double, color: Color)
+    case Solid(width: Double, color: Color)
     case None
 }

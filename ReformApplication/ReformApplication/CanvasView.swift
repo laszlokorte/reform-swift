@@ -9,11 +9,25 @@
 import Foundation
 import Cocoa
 
+import ReformGraphics
+import ReformMath
+
 @IBDesignable
 class CanvasView : NSView {
     let paperColor = NSColor.whiteColor()
     
     let canvasSize = (300,300)
+    
+    let shape : Shape = Shape(area: .PathArea(Path(segments:
+        Path.Segment.LineTo(Vec2d(x: 30, y: 80)),
+        Path.Segment.LineTo(Vec2d(x: 100, y: 100)),
+        Path.Segment.QuadraticTo(Vec2d(x: 200, y: 100), control: Vec2d(x: 200, y: 200))
+        
+        
+        
+        )), background: .Fill(Color(r:0,g:100,b:100,a:
+            255)), stroke: .Solid(width: 3, color: Color(r:100,g:0,b:50,a:
+                255)))
     
     private var currentContext : CGContext? {
         get {
@@ -60,6 +74,8 @@ class CanvasView : NSView {
                     CGContextStrokeEllipseInRect(context, rect)
                 }
             }
+            
+            shape.render(context)
 
         }
     }

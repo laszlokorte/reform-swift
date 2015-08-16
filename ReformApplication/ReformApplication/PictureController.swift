@@ -11,6 +11,7 @@ import Cocoa
 
 class PictureController : NSViewController {
 
+
 }
 
 extension PictureController : NSSplitViewDelegate {

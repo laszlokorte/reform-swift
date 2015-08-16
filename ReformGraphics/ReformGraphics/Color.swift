@@ -7,12 +7,12 @@
 //
 
 public struct Color {
-    let red : Int8
-    let green : Int8
-    let blue: Int8
-    let alpha : Int8
+    let red : UInt8
+    let green : UInt8
+    let blue: UInt8
+    let alpha : UInt8
     
-    init(r:Int8, g:Int8, b:Int8, a:Int8) {
+    public init(r:UInt8, g:UInt8, b:UInt8, a:UInt8) {
         self.red = r
         self.green = g
         self.blue = b
