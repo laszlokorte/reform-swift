@@ -14,8 +14,6 @@ import ReformMath
 
 @IBDesignable
 class CanvasView : NSView {
-    let paperColor = NSColor.whiteColor()
-    
     let canvasSize = (300,300)
     
     let shape : Shape = Shape(area: .PathArea(Path(segments:
@@ -49,15 +47,17 @@ class CanvasView : NSView {
     }
     
     override func drawRect(dirtyRect: NSRect) {
-        let ownBounds = bounds
-        let paperRect = NSRect(x:(ownBounds.width-CGFloat(canvasSize.0))/2.0,y:(ownBounds.height-CGFloat(canvasSize.1))/2.0, width: CGFloat(canvasSize.0), height: CGFloat(canvasSize.1))
-        
-        paperColor.set()
-        NSBezierPath.fillRect(paperRect)
-        
         if let context = currentContext {
             
-            CGContextTranslateCTM(context, 25, 25)
+            let offsetX = (bounds.width-CGFloat(canvasSize.0))/2.0
+            let offsetY = (bounds.height-CGFloat(canvasSize.1))/2.0
+            CGContextTranslateCTM(context, offsetX, offsetY)
+
+            CGContextSetRGBFillColor(context, 1, 1, 1, 1)
+            CGContextFillRect(context, CGRect(x:0,y:0, width: CGFloat(canvasSize.0), height: CGFloat(canvasSize.1)))
+            
+            shape.render(context)
+            
             CGContextSetRGBFillColor(context, 0.23, 0.85, 0.3, 1)
             CGContextSetRGBStrokeColor(context, 0.18, 0.5, 0.24, 1)
             CGContextSetLineWidth(context, 2)
@@ -75,7 +75,6 @@ class CanvasView : NSView {
                 }
             }
             
-            shape.render(context)
 
         }
     }
