@@ -8,7 +8,7 @@
 
 import ReformExpression
 
-public class DefaultAnalyzer : Analyzer {
+final public class DefaultAnalyzer : Analyzer {
     private var forms = [FormIdentifier:Form]()
     private let expressionPrinter : ExpressionPrinter
     

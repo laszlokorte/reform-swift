@@ -6,14 +6,14 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class Solver {
+final public class Solver {
     let dataSet : WritableDataSet
     
-    init(dataSet: WritableDataSet) {
+    public init(dataSet: WritableDataSet) {
         self.dataSet = dataSet
     }
     
-    func evaluate(sheet : Sheet)
+    public func evaluate(sheet : Sheet)
     {
     
         dataSet.clear();
@@ -49,7 +49,7 @@ class Solver {
     }
 }
 
-public class WritableDataSet : DataSet {
+final public class WritableDataSet : DataSet {
     var data : [ReferenceId:Value] = [ReferenceId:Value]()
     var errors: [ReferenceId:EvaluationError] = [ReferenceId:EvaluationError]()
     

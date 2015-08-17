@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class Node<I,T where I : Hashable> : Hashable {
+final class Node<I,T where I : Hashable> : Hashable {
     let id : I
     let data : T
     var outgoing = Set<Node<I,T>>()

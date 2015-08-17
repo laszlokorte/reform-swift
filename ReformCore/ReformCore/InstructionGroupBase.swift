@@ -6,12 +6,12 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class InstructionGroupBase : InstructionGroup {
+public class InstructionGroupBase : InstructionGroup {
     var children : [Instruction]
-    var target : FormIdentifier? {
+    public var target : FormIdentifier? {
         return nil
     }
-    var parent : InstructionGroup? = nil
+    public var parent : InstructionGroup? = nil
     
     init() {
         let null = NullInstruction()
@@ -19,21 +19,21 @@ class InstructionGroupBase : InstructionGroup {
         null.parent = self
     }
     
-    var count : Int { return children.count }
+    public var count : Int { return children.count }
     
-    subscript(index : Int) -> Instruction {
+    public subscript(index : Int) -> Instruction {
         get {
              return children[index]
         }
     }
     
-    func indexOf(instruction : Instruction) -> Int? {
+    public func indexOf(instruction : Instruction) -> Int? {
         return children.indexOf {
             $0 == instruction
         }
     }
     
-    func insert(instruction : Instruction, relative : Instruction, pos: InstructionPosition) {
+    public func insert(instruction : Instruction, relative : Instruction, pos: InstructionPosition) {
         if let index = indexOf(instruction) {
             let newIndex = index + pos.offset
             children.insert(instruction, atIndex: newIndex)
@@ -41,17 +41,17 @@ class InstructionGroupBase : InstructionGroup {
         }
     }
     
-    func append(instruction : Instruction) {
+    public func append(instruction : Instruction) {
         children.append(instruction)
     }
     
-    func remove(instruction: Instruction) {
+    public func remove(instruction: Instruction) {
         if let index = indexOf(instruction) {
             children.removeAtIndex(index)
         }
     }
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         runtime.scoped() {
             for instruction in self.children {
                 if runtime.shouldStop { break }
@@ -63,7 +63,7 @@ class InstructionGroupBase : InstructionGroup {
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         for child in children {
             child.analyze(analyzer)
         }

@@ -24,7 +24,7 @@ extension RectangleForm {
     }
 }
 
-public class RectangleForm : Form {
+final public class RectangleForm : Form {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier

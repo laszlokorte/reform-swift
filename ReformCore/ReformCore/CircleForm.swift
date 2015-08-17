@@ -21,7 +21,7 @@ extension CircleForm {
     }
 }
 
-public class CircleForm : Form {
+final public class CircleForm : Form {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier

@@ -6,18 +6,18 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class NullInstruction : Instruction {
+final public class NullInstruction : Instruction {
 
-    var parent : InstructionGroup? = nil
-    let target : FormIdentifier? = nil
+    public var parent : InstructionGroup? = nil
+    public let target : FormIdentifier? = nil
     
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         analyzer.publish(self, label: "Null")
     }
     

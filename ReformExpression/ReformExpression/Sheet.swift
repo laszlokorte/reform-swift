@@ -79,7 +79,7 @@ extension Expression {
 }
 
 
-public class Definition {
+final public class Definition {
     let id: ReferenceId
     var name: String
     var value : DefinitionValue

@@ -10,7 +10,7 @@ import ReformMath
 import ReformCore
 
 
-public class StageCollector : RuntimeListener {
+final public class StageCollector : RuntimeListener {
     
     private let stage : Stage
     private let analyzer : Analyzer

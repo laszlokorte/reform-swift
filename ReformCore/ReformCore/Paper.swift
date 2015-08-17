@@ -23,7 +23,7 @@ extension Paper {
     }
 }
 
-public class Paper : Form {
+final public class Paper : Form {
     public static var stackSize : Int = 2
     
     public let identifier = FormIdentifier(0)

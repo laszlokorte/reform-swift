@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public class CreateFormInstruction : Instruction {
+final public class CreateFormInstruction : Instruction {
     public typealias DestinationType = protocol<RuntimeInitialDestination, Labeled>
     
     public var parent : InstructionGroup?

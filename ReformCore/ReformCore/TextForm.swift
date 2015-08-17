@@ -18,7 +18,7 @@ extension TextForm {
     }
 }
 
-public class TextForm : Form {
+final public class TextForm : Form {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier

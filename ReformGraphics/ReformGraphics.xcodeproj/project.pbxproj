@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F24AAFD51B81753C008DF952 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD41B81753C008DF952 /* ReformMath.framework */; };
 		F2ABC7331B7FD391001AD41F /* ReformGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = F2ABC7321B7FD391001AD41F /* ReformGraphics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2ABC73A1B7FD391001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC72F1B7FD391001AD41F /* ReformGraphics.framework */; };
 		F2ABC73F1B7FD391001AD41F /* ReformGraphicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ABC73E1B7FD391001AD41F /* ReformGraphicsTests.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F24AAFD41B81753C008DF952 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F2ABC72F1B7FD391001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformGraphics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2ABC7321B7FD391001AD41F /* ReformGraphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformGraphics.h; sourceTree = "<group>"; };
 		F2ABC7341B7FD391001AD41F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F24AAFD51B81753C008DF952 /* ReformMath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +64,7 @@
 		F2ABC7251B7FD391001AD41F = {
 			isa = PBXGroup;
 			children = (
+				F24AAFD41B81753C008DF952 /* ReformMath.framework */,
 				F2ABC7311B7FD391001AD41F /* ReformGraphics */,
 				F2ABC73D1B7FD391001AD41F /* ReformGraphicsTests */,
 				F2ABC7301B7FD391001AD41F /* Products */,
@@ -348,6 +352,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformGraphics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -392,6 +397,7 @@
 				F2ABC7451B7FD391001AD41F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F2ABC7461B7FD391001AD41F /* Build configuration list for PBXNativeTarget "ReformGraphicsTests" */ = {
 			isa = XCConfigurationList;
@@ -400,6 +406,7 @@
 				F2ABC7481B7FD391001AD41F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

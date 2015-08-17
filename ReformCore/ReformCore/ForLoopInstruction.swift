@@ -8,14 +8,14 @@
 
 import ReformExpression
 
-class ForLoopInstruction : InstructionGroupBase {
+final public class ForLoopInstruction : InstructionGroupBase {
     var expression : Expression
     
     init(expression : Expression) {
         self.expression = expression
     }
     
-    override func evaluate(runtime: Runtime) {
+    override public func evaluate(runtime: Runtime) {
         guard case .Success(.IntValue(let count)) = expression.eval(runtime.getDataSet()) else {
             runtime.reportError(self, error: .InvalidExpression)
             return
@@ -26,7 +26,7 @@ class ForLoopInstruction : InstructionGroupBase {
         }
     }
     
-    override func analyze(analyzer: Analyzer) {
+    override public func analyze(analyzer: Analyzer) {
         let expressionString = analyzer.getExpressionPrinter().toString(expression) ?? "???"
         
         analyzer.publish(self, label: "Repeat \(expressionString) times:") {

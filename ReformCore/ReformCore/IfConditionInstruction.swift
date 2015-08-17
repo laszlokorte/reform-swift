@@ -8,14 +8,14 @@
 
 import ReformExpression
 
-class IfConditionInstruction : InstructionGroupBase {
+final public class IfConditionInstruction : InstructionGroupBase {
     var expression : Expression
 
     init(expression : Expression) {
         self.expression = expression
     }
     
-    override func evaluate(runtime: Runtime) {
+    override public func evaluate(runtime: Runtime) {
         guard case .Success(.BoolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
             runtime.reportError(self, error: .InvalidExpression)
             return
@@ -27,7 +27,7 @@ class IfConditionInstruction : InstructionGroupBase {
     }
     
     
-    override func analyze(analyzer: Analyzer) {
+    override public func analyze(analyzer: Analyzer) {
         let expressionString = analyzer.getExpressionPrinter().toString(expression) ?? "???"
         
         analyzer.publish(self, label: "if \(expressionString):") {

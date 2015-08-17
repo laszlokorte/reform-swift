@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public class ExpressionPrinter {
+final public class ExpressionPrinter {
     
     let binaryOperators : [String : BinaryOperatorDefinition] = [
         "^" : BinaryOperatorDefinition(BinaryExponentiation.self, Precedence(50), .Right),

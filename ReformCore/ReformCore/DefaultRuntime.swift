@@ -8,7 +8,7 @@
 
 import ReformExpression
 
-public class DefaultRuntime : Runtime {
+final public class DefaultRuntime : Runtime {
     public var listeners = [RuntimeListener]()
     
     public static let maxDepth : Int = 3

@@ -21,7 +21,7 @@ public func ==(lhs: PictureIdentifier, rhs: PictureIdentifier) -> Bool {
     return lhs.id == rhs.id
 }
 
-public class Picture {
+final public class Picture {
     let identifier : PictureIdentifier
     var name : String
     var size : (Int, Int)

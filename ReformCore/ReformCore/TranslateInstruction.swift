@@ -7,7 +7,7 @@
 //
 
 
-public class TranslateInstruction : Instruction {
+final public class TranslateInstruction : Instruction {
     public typealias DistanceType = protocol<RuntimeDistance, Labeled>
     
     public var parent : InstructionGroup?

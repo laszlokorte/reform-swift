@@ -8,7 +8,7 @@
 
 import ReformMath
 
-public class RotateInstruction : Instruction {
+final public class RotateInstruction : Instruction {
     public typealias PointType = LabeledPoint
     public typealias AngleType = protocol<RuntimeRotationAngle, Labeled>
     

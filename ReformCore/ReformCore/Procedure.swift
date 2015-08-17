@@ -8,7 +8,7 @@
 
 import ReformMath
 
-public class Procedure {
+final public class Procedure {
     public let root : InstructionGroup = InstructionGroupBase()
     public let paper = Paper()
     

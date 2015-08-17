@@ -19,7 +19,7 @@ extension ArcForm {
     }
 }
 
-public class ArcForm : Form {
+final public class ArcForm : Form {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier

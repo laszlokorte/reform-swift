@@ -10,7 +10,7 @@ import ReformMath
 import ReformCore
 import ReformGraphics
 
-public class Stage {
+final public class Stage {
     public internal(set) var entities : [Entity] = []
     public internal(set) var size : Vec2d = Vec2d()
     

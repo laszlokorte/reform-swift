@@ -9,7 +9,7 @@
 
 import ReformMath
 
-public class ScaleInstruction : Instruction {
+final public class ScaleInstruction : Instruction {
     public typealias PointType = LabeledPoint
     public typealias FactorType = protocol<RuntimeScaleFactor, Labeled>
 

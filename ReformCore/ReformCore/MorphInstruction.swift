@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public class MorphInstruction : Instruction {
+final public class MorphInstruction : Instruction {
     public typealias DistanceType = protocol<RuntimeDistance, Labeled>
     
     public var parent : InstructionGroup?

@@ -32,7 +32,7 @@ struct UnaryOperatorDefinition {
     }
 }
 
-public class ExpressionParserDelegate : ShuntingYardDelegate {
+final public class ExpressionParserDelegate : ShuntingYardDelegate {
     public typealias NodeType = Expression
     
     private let sheet : Sheet

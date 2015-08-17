@@ -20,7 +20,7 @@ extension PieForm {
     }
 }
 
-public class PieForm : Form {
+final public class PieForm : Form {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier

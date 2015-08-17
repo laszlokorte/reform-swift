@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public class Project {
+final public class Project {
     var pictures : [Picture]
     
     public init(pictures: Picture...) {

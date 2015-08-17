@@ -54,7 +54,7 @@ extension PictureForm : Drawable {
 }
 
 
-public class PictureForm : Form {
+final public class PictureForm : Form {
     public static var stackSize : Int = RectangleForm.stackSize
     
     private let rectangle : RectangleForm

@@ -416,6 +416,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformStage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
