@@ -32,4 +32,5 @@ public enum Input {
     case Release
     case Cycle
     case Toggle
+    case ModifierChange
 }

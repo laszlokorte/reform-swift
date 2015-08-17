@@ -10,13 +10,16 @@ import ReformMath
 
 public struct RelativeDestination : RuntimeInitialDestination, Labeled {
     public typealias PointType = protocol<RuntimePoint, Labeled>
+    public typealias DirectionType = protocol<RuntimeDirection, Labeled>
     
     let from: PointType
     let to: PointType
+    let direction : DirectionType
     
-    public init(from: PointType, to: PointType) {
+    public init(from: PointType, to: PointType, direction : DirectionType = FreeDirection()) {
         self.from = from
         self.to = to
+        self.direction = direction
     }
     
     public func getMinMaxFor(runtime: Runtime) -> (Vec2d,Vec2d)? {

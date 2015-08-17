@@ -11,7 +11,6 @@
 		F26D463A1B7D0B7800266096 /* ReformStage.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46391B7D0B7800266096 /* ReformStage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46411B7D0B7800266096 /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46361B7D0B7800266096 /* ReformStage.framework */; };
 		F26D46461B7D0B7800266096 /* ReformStageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46451B7D0B7800266096 /* ReformStageTests.swift */; };
-		F26D46A31B7D0CB600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A21B7D0CB600266096 /* ReformTools.framework */; };
 		F26D46A51B7D0CBE00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A41B7D0CBE00266096 /* ReformCore.framework */; };
 		F273910C1B7F916600100F2F /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910B1B7F916600100F2F /* Stage.swift */; };
 		F273910E1B7F91DD00100F2F /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910D1B7F91DD00100F2F /* Entity.swift */; };
@@ -62,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F26D46A31B7D0CB600266096 /* ReformTools.framework in Frameworks */,
 				F26D46A51B7D0CBE00266096 /* ReformCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
