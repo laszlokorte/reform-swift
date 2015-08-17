@@ -27,7 +27,7 @@ final public class StageCollector : RuntimeListener {
     public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Int, Int)) {
         collected = false
         buffer.clear()
-        buffer.size = Vec2d(x: Double(size.0), y: Double(size.0))
+        buffer.size = Vec2d(x: Double(size.0), y: Double(size.1))
     }
     
     public func runtimeFinishEvaluation(runtime: Runtime) {
@@ -102,6 +102,7 @@ private class StageBuffer {
     }
     
     func flush(stage: Stage) {
+        stage.size = size
         stage.entities = entities
         stage.currentShapes = currentShapes
         stage.finalShapes = finalShapes

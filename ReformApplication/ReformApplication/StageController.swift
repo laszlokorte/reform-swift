@@ -67,6 +67,8 @@ class StageController : NSViewController {
         
     }
     
+    @IBOutlet var canvas : CanvasView?
+    
     override func viewDidLoad() {
         let procedure = Procedure()
         let picture = ReformCore.Picture(identifier : PictureIdentifier(0), name: "Untiled", size: (580,330), procedure: procedure)
@@ -96,7 +98,7 @@ class StageController : NSViewController {
         //runtime.listeners.append(DebugRuntimeListener())
         
         procedure.analyzeWith(analyzer)
-        procedure.evaluateWith(runtime)
+        procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
         
         print("Entities:")
         for e in stage.entities {
@@ -106,6 +108,11 @@ class StageController : NSViewController {
         print("Final Shapes:")
         for s in stage.finalShapes {
             print(s)
+        }
+        
+        if let c = canvas {
+            c.shapes = stage.finalShapes
+            c.canvasSize = stage.size
         }
     }
     

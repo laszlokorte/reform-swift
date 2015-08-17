@@ -11,21 +11,13 @@ import Cocoa
 
 import ReformGraphics
 import ReformMath
+import ReformStage
 
 @IBDesignable
 class CanvasView : NSView {
-    let canvasSize = (300,300)
+    var canvasSize = Vec2d(x: 300, y: 300)
     
-    let shape : Shape = Shape(area: .PathArea(Path(segments:
-        Path.Segment.LineTo(Vec2d(x: 30, y: 80)),
-        Path.Segment.LineTo(Vec2d(x: 100, y: 100)),
-        Path.Segment.QuadraticTo(Vec2d(x: 200, y: 100), control: Vec2d(x: 200, y: 200))
-        
-        
-        
-        )), background: .Fill(Color(r:0,g:100,b:100,a:
-            255)), stroke: .Solid(width: 3, color: Color(r:100,g:0,b:50,a:
-                255)))
+    var shapes : [IdentifiedShape] = []
     
     private var currentContext : CGContext? {
         get {
@@ -49,25 +41,27 @@ class CanvasView : NSView {
     override func drawRect(dirtyRect: NSRect) {
         if let context = currentContext {
             
-            let offsetX = (bounds.width-CGFloat(canvasSize.0))/2.0
-            let offsetY = (bounds.height-CGFloat(canvasSize.1))/2.0
+            let offsetX = (bounds.width-CGFloat(canvasSize.x))/2.0
+            let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
             CGContextTranslateCTM(context, offsetX, offsetY)
 
             CGContextSetRGBFillColor(context, 1, 1, 1, 1)
-            CGContextFillRect(context, CGRect(x:0,y:0, width: CGFloat(canvasSize.0), height: CGFloat(canvasSize.1)))
+            CGContextFillRect(context, CGRect(x:0,y:0, width: CGFloat(canvasSize.x), height: CGFloat(canvasSize.y)))
             
-            shape.render(context)
+            for shape in shapes {
+                shape.shape.render(context)
+            }
             
             CGContextSetRGBFillColor(context, 0.23, 0.85, 0.3, 1)
             CGContextSetRGBStrokeColor(context, 0.18, 0.5, 0.24, 1)
             CGContextSetLineWidth(context, 2)
             
-            let dotSize = 12
+            let dotSize : Double = 12
             for x in [-1,0,1] {
                 for y in [-1,0,1] {
                     guard x != 0 || y != 0 else { continue }
                     
-                    let center = ( (1+x) * canvasSize.0/2, (1+y) * canvasSize.1/2 )
+                    let center = ( Double(1+x) * canvasSize.x/2, Double(1+y) * canvasSize.y/2 )
                     
                     let rect = CGRect(x:center.0-dotSize/2, y:center.1-dotSize/2, width: dotSize, height: dotSize)
                     CGContextFillEllipseInRect(context, rect)
@@ -80,7 +74,7 @@ class CanvasView : NSView {
     }
     
     override var intrinsicContentSize : NSSize {
-        return NSSize(width: canvasSize.0 + 50, height: canvasSize.1 + 50)
+        return NSSize(width: canvasSize.x + 50, height: canvasSize.y + 50)
     }
 }
 

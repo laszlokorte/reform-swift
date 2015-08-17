@@ -24,6 +24,6 @@ final public class Stage {
 
 
 public struct IdentifiedShape {
-    let id : FormIdentifier
-    let shape : Shape
+    public let id : FormIdentifier
+    public let shape : Shape
 }

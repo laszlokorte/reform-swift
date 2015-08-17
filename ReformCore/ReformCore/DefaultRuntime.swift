@@ -30,11 +30,11 @@ final public class DefaultRuntime : Runtime {
         
     }
     
-    public func run(block: (width: Int, height: Int) -> ()) {
+    public func run(width width: Int, height: Int, block: () -> ()) {
         stack.clear()
         
         listeners.forEach() {
-            $0.runtimeBeginEvaluation(self, withSize: (100,100))
+            $0.runtimeBeginEvaluation(self, withSize: (width,height))
         }
         defer {
             listeners.forEach() {
@@ -47,7 +47,7 @@ final public class DefaultRuntime : Runtime {
             _stopped = true
         }
         
-        block(width: 100, height: 100)
+        block()
         
     }
     

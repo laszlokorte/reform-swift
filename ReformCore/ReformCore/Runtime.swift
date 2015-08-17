@@ -27,7 +27,7 @@ public protocol Runtime : class {
     
     func subCall<T:SubCallId>(id: T, width: Int, height: Int, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ())
     
-    func run(block: (width: Int, height: Int) -> ())
+    func run(width width: Int, height: Int, block: () -> ())
     
     func eval(instruction : Evaluatable, block: () -> ())
 

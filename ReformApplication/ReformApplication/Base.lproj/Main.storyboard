@@ -1376,6 +1376,9 @@
                             <constraint firstAttribute="trailing" secondItem="vDA-zV-cBj" secondAttribute="trailing" id="c3t-Na-8X9"/>
                         </constraints>
                     </customView>
+                    <connections>
+                        <outlet property="canvas" destination="1jR-MF-2gx" id="K0j-tL-ejA"/>
+                    </connections>
                 </viewController>
                 <customObject id="mpJ-EO-JWn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

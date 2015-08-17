@@ -37,8 +37,8 @@ final public class Procedure {
 }
 
 extension Procedure {
-    public func evaluateWith(runtime: Runtime) {
-        runtime.run() { width, height in
+    public func evaluateWith(width width: Int, height: Int, runtime: Runtime) {
+        runtime.run(width: width, height: height) {
             runtime.scoped() {
                 runtime.declare(self.paper)
                 self.paper.initWithRuntime(runtime, min: Vec2d(), max: Vec2d(x:Double(width), y: Double(height)))

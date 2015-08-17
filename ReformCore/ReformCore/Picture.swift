@@ -22,10 +22,10 @@ public func ==(lhs: PictureIdentifier, rhs: PictureIdentifier) -> Bool {
 }
 
 final public class Picture {
-    let identifier : PictureIdentifier
-    var name : String
-    var size : (Int, Int)
-    let procedure  : Procedure
+    public let identifier : PictureIdentifier
+    public var name : String
+    public var size : (Int, Int)
+    public let procedure  : Procedure
     
     public init(identifier : PictureIdentifier, name: String, size: (Int, Int), procedure : Procedure) {
         self.identifier = identifier
