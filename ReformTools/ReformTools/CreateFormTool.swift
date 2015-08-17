@@ -25,7 +25,11 @@ class CreateFormTool : Tool {
         case Pressed(startPoint: SnapPoint, creating: Form, instruction: InstructionNode, target: Target)
     }
     
-    var state : State = .Idle
+    var state : State = .Idle {
+        didSet {
+            update(state)
+        }
+    }
     let stage : Stage
     let snapUI : SnapUI
     
@@ -177,13 +181,15 @@ class CreateFormTool : Tool {
             break
             
         }
-        
-        update(state)
     }
     
     func update(state: State) {
         switch state {
-        case .Idle, .Delegating, .Snapped:
+        case .Idle, .Delegating:
+            snapUI.state = .Show(stage.getSnapPoints())
+            break
+        case .Snapped(_, let start,_):
+            snapUI.state = .Active(start, stage.getSnapPoints())
             break
         case .Pressed(let start, let form, let node, let target):
             let destination : protocol<RuntimeInitialDestination, Labeled>
@@ -193,8 +199,12 @@ class CreateFormTool : Tool {
                 let offset = start.position - targetPosition
                 let delta = targetPosition - start.position
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta)
+                snapUI.state = .Show(stage.getSnapPoints())
+
             case .Snap(_, let snapPoint, _):
                 destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint)
+                
+                snapUI.state = .Active(snapPoint, stage.getSnapPoints())
             }
             
             node.replaceWith(CreateFormInstruction(form: form, destination: destination))
