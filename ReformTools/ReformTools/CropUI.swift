@@ -16,5 +16,5 @@ class CropUI {
         case Active(CropPoint, [CropPoint])
     }
     
-    var stage : State = .Hide
+    var state : State = .Hide
 }

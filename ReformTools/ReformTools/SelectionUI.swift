@@ -14,5 +14,5 @@ class SelectionUI {
         case Show(FormIdentifier?)
     }
     
-    var stage : State = .Hide
+    var state : State = .Hide
 }

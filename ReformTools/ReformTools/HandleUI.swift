@@ -16,5 +16,5 @@ class HandleUI {
         case Active(Handle, [Handle])
     }
     
-    var stage : State = .Hide
+    var state : State = .Hide
 }

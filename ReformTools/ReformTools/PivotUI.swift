@@ -15,5 +15,5 @@ class PivotUI {
         case Show(SnapPoint)
     }
     
-    var stage : State = .Hide
+    var state : State = .Hide
 }

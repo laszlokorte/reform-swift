@@ -16,5 +16,5 @@ class SnapUI {
         case Active(SnapPoint, [SnapPoint])
     }
     
-    var stage : State = .Hide
+    var state : State = .Hide
 }

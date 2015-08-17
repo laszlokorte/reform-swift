@@ -16,5 +16,5 @@ class GrabUI {
         case Active(EntityPoint, [EntityPoint])
     }
     
-    var stage : State = .Hide
+    var state : State = .Hide
 }
