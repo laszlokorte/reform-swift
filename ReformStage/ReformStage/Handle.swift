@@ -11,7 +11,7 @@ import ReformMath
 
 typealias PivotPair = (EntityPoint, EntityPoint)
 
-struct Handle {
+public struct Handle {
     let formId : FormIdentifier
     let anchorId : AnchorIdentifier
     
@@ -23,10 +23,10 @@ struct Handle {
 
 
 extension Handle : Hashable {
-    var hashValue : Int { return formId.hashValue * 13 + anchorId.hashValue }
+    public var hashValue : Int { return formId.hashValue * 13 + anchorId.hashValue }
 }
 
-func ==(lhs: Handle, rhs: Handle) -> Bool {
+public func ==(lhs: Handle, rhs: Handle) -> Bool {
     return lhs.formId == rhs.formId && lhs.anchorId == rhs.anchorId
 }
 

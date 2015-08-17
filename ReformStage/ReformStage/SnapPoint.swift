@@ -9,7 +9,7 @@
 import ReformMath
 import ReformCore
 
-protocol SnapPoint {
+public protocol SnapPoint {
     var position :  Vec2d { get }
     var label : String { get }
     

@@ -10,6 +10,29 @@
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
+		F2A104A01B82140300E97C6B /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049F1B82140300E97C6B /* Tool.swift */; };
+		F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A21B82143800E97C6B /* FormSelection.swift */; };
+		F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A41B82144C00E97C6B /* InstructionFocus.swift */; };
+		F2A104A81B82149A00E97C6B /* ToolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A71B82149A00E97C6B /* ToolController.swift */; };
+		F2A104AA1B8214C900E97C6B /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A91B8214C900E97C6B /* Input.swift */; };
+		F2A104AC1B8219BD00E97C6B /* CreateFormTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */; };
+		F2A104AE1B821A2100E97C6B /* CropTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104AD1B821A2100E97C6B /* CropTool.swift */; };
+		F2A104B01B821A4600E97C6B /* MorphTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104AF1B821A4600E97C6B /* MorphTool.swift */; };
+		F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104B11B821A6700E97C6B /* MoveTool.swift */; };
+		F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104B31B821A7900E97C6B /* NullTool.swift */; };
+		F2A104B61B821A8C00E97C6B /* PreviewTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104B51B821A8C00E97C6B /* PreviewTool.swift */; };
+		F2A104B81B821ABD00E97C6B /* RotateTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104B71B821ABD00E97C6B /* RotateTool.swift */; };
+		F2A104BA1B821AD900E97C6B /* ScaleTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104B91B821AD900E97C6B /* ScaleTool.swift */; };
+		F2A104BC1B821AE900E97C6B /* SelectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104BB1B821AE900E97C6B /* SelectionTool.swift */; };
+		F2A104BF1B821BCF00E97C6B /* SelectionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104BE1B821BCF00E97C6B /* SelectionUI.swift */; };
+		F2A104C11B821C3B00E97C6B /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A104C01B821C3B00E97C6B /* ReformCore.framework */; };
+		F2A104C31B821C4100E97C6B /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A104C21B821C4100E97C6B /* ReformMath.framework */; };
+		F2A104C51B821C7000E97C6B /* CropUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104C41B821C7000E97C6B /* CropUI.swift */; };
+		F2A104C71B821C8B00E97C6B /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2A104C61B821C8B00E97C6B /* ReformStage.framework */; };
+		F2A104C91B821D0100E97C6B /* PivotUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104C81B821D0100E97C6B /* PivotUI.swift */; };
+		F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CA1B821DD200E97C6B /* HandleUI.swift */; };
+		F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CC1B821E5700E97C6B /* SnapUI.swift */; };
+		F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CE1B821F0200E97C6B /* GrabUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +52,29 @@
 		F26D46641B7D0B9600266096 /* ReformToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReformToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46691B7D0B9600266096 /* ReformToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformToolsTests.swift; sourceTree = "<group>"; };
 		F26D466B1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2A1049F1B82140300E97C6B /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		F2A104A21B82143800E97C6B /* FormSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelection.swift; sourceTree = "<group>"; };
+		F2A104A41B82144C00E97C6B /* InstructionFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionFocus.swift; sourceTree = "<group>"; };
+		F2A104A71B82149A00E97C6B /* ToolController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolController.swift; sourceTree = "<group>"; };
+		F2A104A91B8214C900E97C6B /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateFormTool.swift; sourceTree = "<group>"; };
+		F2A104AD1B821A2100E97C6B /* CropTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropTool.swift; sourceTree = "<group>"; };
+		F2A104AF1B821A4600E97C6B /* MorphTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphTool.swift; sourceTree = "<group>"; };
+		F2A104B11B821A6700E97C6B /* MoveTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveTool.swift; sourceTree = "<group>"; };
+		F2A104B31B821A7900E97C6B /* NullTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullTool.swift; sourceTree = "<group>"; };
+		F2A104B51B821A8C00E97C6B /* PreviewTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewTool.swift; sourceTree = "<group>"; };
+		F2A104B71B821ABD00E97C6B /* RotateTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateTool.swift; sourceTree = "<group>"; };
+		F2A104B91B821AD900E97C6B /* ScaleTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleTool.swift; sourceTree = "<group>"; };
+		F2A104BB1B821AE900E97C6B /* SelectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTool.swift; sourceTree = "<group>"; };
+		F2A104BE1B821BCF00E97C6B /* SelectionUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionUI.swift; sourceTree = "<group>"; };
+		F2A104C01B821C3B00E97C6B /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
+		F2A104C21B821C4100E97C6B /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
+		F2A104C41B821C7000E97C6B /* CropUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropUI.swift; sourceTree = "<group>"; };
+		F2A104C61B821C8B00E97C6B /* ReformStage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformStage.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformStage.framework"; sourceTree = "<group>"; };
+		F2A104C81B821D0100E97C6B /* PivotUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PivotUI.swift; sourceTree = "<group>"; };
+		F2A104CA1B821DD200E97C6B /* HandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleUI.swift; sourceTree = "<group>"; };
+		F2A104CC1B821E5700E97C6B /* SnapUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapUI.swift; sourceTree = "<group>"; };
+		F2A104CE1B821F0200E97C6B /* GrabUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2A104C71B821C8B00E97C6B /* ReformStage.framework in Frameworks */,
+				F2A104C31B821C4100E97C6B /* ReformMath.framework in Frameworks */,
+				F2A104C11B821C3B00E97C6B /* ReformCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +102,9 @@
 		F26D46501B7D0B9500266096 = {
 			isa = PBXGroup;
 			children = (
+				F2A104C61B821C8B00E97C6B /* ReformStage.framework */,
+				F2A104C21B821C4100E97C6B /* ReformMath.framework */,
+				F2A104C01B821C3B00E97C6B /* ReformCore.framework */,
 				F26D465C1B7D0B9600266096 /* ReformTools */,
 				F26D46681B7D0B9600266096 /* ReformToolsTests */,
 				F26D465B1B7D0B9600266096 /* Products */,
@@ -71,6 +123,10 @@
 		F26D465C1B7D0B9600266096 /* ReformTools */ = {
 			isa = PBXGroup;
 			children = (
+				F2A104BD1B821B9800E97C6B /* UI */,
+				F2A104A61B82148800E97C6B /* Controller */,
+				F2A104A11B82142900E97C6B /* Selection */,
+				F2A1049E1B8213F900E97C6B /* Tools */,
 				F26D465D1B7D0B9600266096 /* ReformTools.h */,
 				F26D465F1B7D0B9600266096 /* Info.plist */,
 			);
@@ -84,6 +140,54 @@
 				F26D466B1B7D0B9600266096 /* Info.plist */,
 			);
 			path = ReformToolsTests;
+			sourceTree = "<group>";
+		};
+		F2A1049E1B8213F900E97C6B /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */,
+				F2A104AD1B821A2100E97C6B /* CropTool.swift */,
+				F2A104AF1B821A4600E97C6B /* MorphTool.swift */,
+				F2A104B11B821A6700E97C6B /* MoveTool.swift */,
+				F2A104B31B821A7900E97C6B /* NullTool.swift */,
+				F2A104B51B821A8C00E97C6B /* PreviewTool.swift */,
+				F2A104B71B821ABD00E97C6B /* RotateTool.swift */,
+				F2A104B91B821AD900E97C6B /* ScaleTool.swift */,
+				F2A104BB1B821AE900E97C6B /* SelectionTool.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		F2A104A11B82142900E97C6B /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				F2A104A21B82143800E97C6B /* FormSelection.swift */,
+				F2A104A41B82144C00E97C6B /* InstructionFocus.swift */,
+			);
+			name = Selection;
+			sourceTree = "<group>";
+		};
+		F2A104A61B82148800E97C6B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F2A104A71B82149A00E97C6B /* ToolController.swift */,
+				F2A104A91B8214C900E97C6B /* Input.swift */,
+				F2A1049F1B82140300E97C6B /* Tool.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F2A104BD1B821B9800E97C6B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F2A104BE1B821BCF00E97C6B /* SelectionUI.swift */,
+				F2A104C41B821C7000E97C6B /* CropUI.swift */,
+				F2A104C81B821D0100E97C6B /* PivotUI.swift */,
+				F2A104CA1B821DD200E97C6B /* HandleUI.swift */,
+				F2A104CC1B821E5700E97C6B /* SnapUI.swift */,
+				F2A104CE1B821F0200E97C6B /* GrabUI.swift */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +246,7 @@
 		F26D46511B7D0B9500266096 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Laszlo Korte";
 				TargetAttributes = {
@@ -193,6 +298,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2A104B81B821ABD00E97C6B /* RotateTool.swift in Sources */,
+				F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */,
+				F2A104AA1B8214C900E97C6B /* Input.swift in Sources */,
+				F2A104AC1B8219BD00E97C6B /* CreateFormTool.swift in Sources */,
+				F2A104BF1B821BCF00E97C6B /* SelectionUI.swift in Sources */,
+				F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */,
+				F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */,
+				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
+				F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */,
+				F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */,
+				F2A104A01B82140300E97C6B /* Tool.swift in Sources */,
+				F2A104C51B821C7000E97C6B /* CropUI.swift in Sources */,
+				F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */,
+				F2A104C91B821D0100E97C6B /* PivotUI.swift in Sources */,
+				F2A104BC1B821AE900E97C6B /* SelectionTool.swift in Sources */,
+				F2A104AE1B821A2100E97C6B /* CropTool.swift in Sources */,
+				F2A104B01B821A4600E97C6B /* MorphTool.swift in Sources */,
+				F2A104B61B821A8C00E97C6B /* PreviewTool.swift in Sources */,
+				F2A104A81B82149A00E97C6B /* ToolController.swift in Sources */,
+				F2A104BA1B821AD900E97C6B /* ScaleTool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +427,7 @@
 		F26D466F1B7D0B9600266096 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -314,12 +440,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformTools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F26D46701B7D0B9600266096 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -376,6 +504,7 @@
 				F26D46701B7D0B9600266096 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F26D46711B7D0B9600266096 /* Build configuration list for PBXNativeTarget "ReformToolsTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +513,7 @@
 				F26D46731B7D0B9600266096 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
