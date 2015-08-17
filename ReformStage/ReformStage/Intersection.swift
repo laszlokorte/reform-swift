@@ -9,12 +9,13 @@
 import ReformCore
 import ReformMath
 
-struct IntersectionPoint : SnapPoint {
+public struct IntersectionSnapPoint : SnapPoint {
     let position : Vec2d
     let label : String
-    let point : ReformCore.IntersectionPoint
+    let point : RuntimeIntersectionPoint
     
     var runtimePoint : LabeledPoint {
         return point
     }
+    
 }

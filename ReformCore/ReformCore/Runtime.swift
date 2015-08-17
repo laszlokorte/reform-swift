@@ -13,7 +13,7 @@ public protocol SubCallId {
 }
 
 public protocol RuntimeListener {
-    func runtimeBeginEvaluation(runtime: Runtime)
+    func runtimeBeginEvaluation(runtime: Runtime, withSize: (Int, Int))
     func runtimeFinishEvaluation(runtime: Runtime)
     func runtime(runtime: Runtime, didEval: Instruction)
     func runtime(runtime: Runtime, exitScopeWithForms: [FormIdentifier])

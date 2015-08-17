@@ -69,7 +69,7 @@ public class RectangleForm : Form {
         return [
             PointId.TopLeft.rawValue:AnchorPoint(anchor: topLeftAnchor),
             
-            PointId.BottomRight.rawValue:AnchorPoint(anchor: topRightAnchor),
+            PointId.TopRight.rawValue:AnchorPoint(anchor: topRightAnchor),
             
             PointId.BottomLeft.rawValue:AnchorPoint(anchor: bottomLeftAnchor),
             

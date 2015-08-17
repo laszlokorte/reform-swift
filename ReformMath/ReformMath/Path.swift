@@ -25,3 +25,16 @@ public func intersect(segment segmentA: Segment, and segmentB: Segment) -> [Vec2
         return intersections(line: b, arc: a)
     }
 }
+
+public func intersect(segmentPath pathA: SegmentPath, and pathB: SegmentPath) -> [Vec2d] {
+    
+    var result = [Vec2d]()
+    
+    for segmentA in pathA {
+        for segmentB in pathB {
+            result += intersect(segment: segmentA, and: segmentB)
+        }
+    }
+    
+    return result
+}

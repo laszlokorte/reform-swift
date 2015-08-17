@@ -9,7 +9,8 @@
 import ReformCore
 import ReformMath
 
-struct Entity {
+public struct Entity {
+    let formType : Form.Type
     let id : FormIdentifier
     let label : String
     let type : EntityType
@@ -20,11 +21,18 @@ struct Entity {
     let outline: SegmentPath
 }
 
-extension Entity : Hashable {
-    var hashValue : Int { return id.hashValue }
+extension Entity : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return "Entity(\(formType), \(id), \(label))"
+    }
 }
 
-func ==(lhs: Entity, rhs: Entity) -> Bool {
+
+extension Entity : Hashable {
+    public var hashValue : Int { return id.hashValue }
+}
+
+public func ==(lhs: Entity, rhs: Entity) -> Bool {
     return lhs.id == rhs.id
 }
 
@@ -138,7 +146,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, line form: LineF
     
     let hit = HitArea.Line(a: start, b: end)
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, rectangle form: RectangleForm) -> Entity? {
@@ -187,7 +195,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, rectangle form: 
     )
 
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: CircleForm) -> Entity? {
@@ -215,7 +223,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: Cir
     
     let hit = HitArea.Circle(center: center, radius: radius)
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieForm) -> Entity? {
@@ -246,7 +254,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieFor
         )
     )
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }
 
 
@@ -277,7 +285,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, arc form: ArcFor
         HitArea.LeftOf(a: start, b: end)
     )
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }
 
 
@@ -302,7 +310,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, text form: TextF
     
     let hit = HitArea.Line(a: start, b: end)
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }
 
 
@@ -353,5 +361,5 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, picture form: Pi
         HitArea.Triangle(a: topLeft, b: bottomRight, c: bottomLeft)
     )
     
-    return Entity(id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
 }

@@ -8,12 +8,12 @@
 
 import ReformMath
 
-public struct IntersectionPoint : RuntimePoint, Labeled {
+public struct RuntimeIntersectionPoint : RuntimePoint, Labeled {
     let index : Int
     let formA : FormIdentifier
     let formB : FormIdentifier
     
-    init(formA: FormIdentifier, formB: FormIdentifier, index: Int) {
+    public init(formA: FormIdentifier, formB: FormIdentifier, index: Int) {
         self.index = index
         self.formA = formA
         self.formB = formB

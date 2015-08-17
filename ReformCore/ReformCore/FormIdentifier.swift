@@ -19,3 +19,9 @@ public struct FormIdentifier : Hashable {
 public func ==(lhs: FormIdentifier, rhs: FormIdentifier) -> Bool {
     return lhs.id == rhs.id
 }
+
+extension FormIdentifier : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return "FormId(\(id))"
+    }
+}

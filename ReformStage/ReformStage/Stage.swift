@@ -10,18 +10,20 @@ import ReformMath
 import ReformCore
 import ReformGraphics
 
-class Stage {
-    var entities : [Entity] = []
-    var site : Vec2d = Vec2d()
+public class Stage {
+    public internal(set) var entities : [Entity] = []
+    public internal(set) var size : Vec2d = Vec2d()
     
-    var currentShapes : [IdentifiedShape] = []
-    var finalShapes : [IdentifiedShape] = []
+    public internal(set) var currentShapes : [IdentifiedShape] = []
+    public internal(set) var finalShapes : [IdentifiedShape] = []
     
-    var intersections : [IntersectionPoint] = []
+    public internal(set) var intersections : [IntersectionSnapPoint] = []
+    
+    public init() {}
 }
 
 
-struct IdentifiedShape {
+public struct IdentifiedShape {
     let id : FormIdentifier
     let shape : Shape
 }

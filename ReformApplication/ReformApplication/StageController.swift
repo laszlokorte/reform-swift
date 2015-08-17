@@ -11,12 +11,29 @@ import Cocoa
 
 import ReformCore
 import ReformExpression
+import ReformStage
 
 class StageController : NSViewController {
+    
+    let sheet = BaseSheet()
+    lazy var expressionPrinter : ExpressionPrinter = ExpressionPrinter(sheet: self.sheet)
+    
+    
+    lazy var analyzer : DefaultAnalyzer = DefaultAnalyzer(expressionPrinter : self.expressionPrinter)
+    let runtime = DefaultRuntime()
+
+    
+    var currentInstruction : Instruction? = nil
+    let stage = Stage()
+    
+    lazy var stageCollector : StageCollector = StageCollector(stage: self.stage, analyzer: self.analyzer) {
+        guard let c = self.currentInstruction else { return false }
+        return c == $0
+    }
 
     class DebugRuntimeListener : RuntimeListener {
         
-        func runtimeBeginEvaluation(runtime: Runtime) {
+        func runtimeBeginEvaluation(runtime: Runtime, withSize: (Int, Int)) {
             print("begin evaluation")
         }
         
@@ -69,18 +86,25 @@ class StageController : NSViewController {
             to: to
         )
         
-        procedure.root.append(CreateFormInstruction(form: rectangleForm, destination: rectangleDestination))
+        let createInstruction = CreateFormInstruction(form: rectangleForm, destination: rectangleDestination)
+        procedure.root.append(createInstruction)
         
-        let sheet = BaseSheet()
-        let expressionPrinter = ExpressionPrinter(sheet: sheet)
-        let analyzer = DefaultAnalyzer(expressionPrinter : expressionPrinter)
+        currentInstruction = createInstruction
         
-        let runtime = DefaultRuntime()
-        
-        runtime.listeners.append(DebugRuntimeListener())
+        runtime.listeners.append(stageCollector)
         
         procedure.analyzeWith(analyzer)
         procedure.evaluateWith(runtime)
+        
+        print("Entities:")
+        for e in stage.entities {
+            print(e)
+        }
+        
+        print("Final Shapes:")
+        for s in stage.finalShapes {
+            print(s)
+        }
     }
     
 }

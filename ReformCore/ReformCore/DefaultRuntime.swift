@@ -32,7 +32,7 @@ public class DefaultRuntime : Runtime {
         stack.clear()
         
         listeners.forEach() {
-            $0.runtimeBeginEvaluation(self)
+            $0.runtimeBeginEvaluation(self, withSize: (100,100))
         }
         defer {
             listeners.forEach() {

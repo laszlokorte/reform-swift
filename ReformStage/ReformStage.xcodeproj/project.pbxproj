@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F24AAFD11B8160D0008DF952 /* RuntimeStageCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */; };
 		F26D463A1B7D0B7800266096 /* ReformStage.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46391B7D0B7800266096 /* ReformStage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46411B7D0B7800266096 /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46361B7D0B7800266096 /* ReformStage.framework */; };
 		F26D46461B7D0B7800266096 /* ReformStageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46451B7D0B7800266096 /* ReformStageTests.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeStageCollector.swift; sourceTree = "<group>"; };
 		F26D46361B7D0B7800266096 /* ReformStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformStage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46391B7D0B7800266096 /* ReformStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformStage.h; sourceTree = "<group>"; };
 		F26D463B1B7D0B7800266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F24AAFCF1B8160C0008DF952 /* Collector */ = {
+			isa = PBXGroup;
+			children = (
+				F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */,
+			);
+			name = Collector;
+			sourceTree = "<group>";
+		};
 		F26D462C1B7D0B7800266096 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		F26D46381B7D0B7800266096 /* ReformStage */ = {
 			isa = PBXGroup;
 			children = (
+				F24AAFCF1B8160C0008DF952 /* Collector */,
 				F2ABC74F1B7FD6C9001AD41F /* HitTest */,
 				F273910A1B7F915B00100F2F /* Stage */,
 				F27391091B7F914400100F2F /* Elements */,
@@ -260,6 +271,7 @@
 				F27391181B7F92FA00100F2F /* Intersection.swift in Sources */,
 				F2ABC7511B7FD6D5001AD41F /* HitArea.swift in Sources */,
 				F273911A1B7F934500100F2F /* Glomp.swift in Sources */,
+				F24AAFD11B8160D0008DF952 /* RuntimeStageCollector.swift in Sources */,
 				F27391121B7F924900100F2F /* SnapPoint.swift in Sources */,
 				F273910C1B7F916600100F2F /* Stage.swift in Sources */,
 			);
