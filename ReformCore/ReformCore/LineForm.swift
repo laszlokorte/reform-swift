@@ -109,11 +109,20 @@ extension LineForm : Morphable {
 }
 
 extension LineForm : Drawable {
-    public func getPathFor(runtime: Runtime) -> Path {
-        return Path()
+    public func getPathFor(runtime: Runtime) -> Path? {
+        guard
+            let start = startAnchor.getPositionFor(runtime),
+            let end = endAnchor.getPositionFor(runtime)
+            else {
+                return nil
+        }
+        
+        return Path(segments: .MoveTo(start), .LineTo(end))
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
+    public func getShapeFor(runtime: Runtime) -> Shape? {
+        guard let path = getPathFor(runtime) else { return nil }
+        
+        return Shape(area: .PathArea(path), background: .None, stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
     }
 }

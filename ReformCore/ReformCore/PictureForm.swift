@@ -44,11 +44,11 @@ extension PictureForm : Drawable {
         set { rectangle.drawingMode = newValue }
     }
     
-    public func getPathFor(runtime: Runtime) -> Path {
+    public func getPathFor(runtime: Runtime) -> Path? {
         return Path()
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape {
+    public func getShapeFor(runtime: Runtime) -> Shape? {
         return Shape()
     }
 }

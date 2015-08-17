@@ -170,11 +170,13 @@ extension PieForm : Morphable {
 }
 
 extension PieForm : Drawable {
-    public func getPathFor(runtime: Runtime) -> Path {
-        return Path()
+    public func getPathFor(runtime: Runtime) -> Path? {
+        return nil
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
+    public func getShapeFor(runtime: Runtime) -> Shape? {
+        guard let path = getPathFor(runtime) else { return nil }
+        
+        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
     }
 }

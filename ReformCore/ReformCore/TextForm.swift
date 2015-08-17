@@ -125,11 +125,13 @@ extension TextForm : Morphable {
 
 extension TextForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path {
-        return Path()
+    public func getPathFor(runtime: Runtime) -> Path? {
+        return nil
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
+    public func getShapeFor(runtime: Runtime) -> Shape? {
+        guard let path = getPathFor(runtime) else { return nil }
+        
+        return Shape(area: .PathArea(path), background: .Fill(Color(r: 40, g: 40, b: 40, a: 255)), stroke: .None)
     }
 }

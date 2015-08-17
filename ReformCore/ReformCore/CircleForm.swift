@@ -211,11 +211,36 @@ extension CircleForm : Morphable {
 
 extension CircleForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path {
-        return Path()
+    public func getPathFor(runtime: Runtime) -> Path? {
+        guard
+            let c = centerPoint.getPositionFor(runtime),
+            let r = radius.getLengthFor(runtime)
+            else {
+                return nil
+        }
+        
+        let left = c - Vec2d(x:r, y: 0)
+        let right = c + Vec2d(x:r, y: 0)
+        let top = c - Vec2d(x:0, y: r)
+        let bottom = c + Vec2d(x:0, y: r)
+        
+        let topLeft = c + Vec2d(x:-r, y: -r)
+        let topRight = c + Vec2d(x:r, y: -r)
+        let bottomLeft = c + Vec2d(x:-r, y: -r)
+        let bottomRight = c + Vec2d(x:r, y: -r)
+        
+        return Path(segments: .MoveTo(left),
+            .ArcTo(tangent: topLeft, tangent: top, radius: r),
+            .ArcTo(tangent: topRight, tangent: right, radius: r),
+            .ArcTo(tangent: bottomRight, tangent: bottom, radius: r),
+            .ArcTo(tangent: bottomLeft, tangent: left, radius: r)
+        )
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
+    public func getShapeFor(runtime: Runtime) -> Shape? {
+        guard let path = getPathFor(runtime) else { return nil }
+        
+        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
+
     }
 }

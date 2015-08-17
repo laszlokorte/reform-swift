@@ -57,7 +57,7 @@ final public class RectangleForm : Form {
         let w = max.x - min.x
         let h = max.y - min.y
         let c = (min+max) / 2
-        
+                
         centerPoint.setPositionFor(runtime, position: c)
         width.setLengthFor(runtime, length: abs(w))
         height.setLengthFor(runtime, length: abs(h))
@@ -305,11 +305,22 @@ extension RectangleForm : Morphable {
 
 extension RectangleForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path {
-        return Path()
+    public func getPathFor(runtime: Runtime) -> Path? {
+        guard
+            let topLeft = topLeftAnchor.getPositionFor(runtime),
+            let topRight = topRightAnchor.getPositionFor(runtime),
+            let bottomRight = bottomRightAnchor.getPositionFor(runtime),
+            let bottomLeft = bottomLeftAnchor.getPositionFor(runtime)
+        else {
+                return nil
+        }
+        
+        return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft))
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape {
-        return Shape()
+    public func getShapeFor(runtime: Runtime) -> Shape? {
+        guard let path = getPathFor(runtime) else { return nil }
+        
+        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
     }
 }

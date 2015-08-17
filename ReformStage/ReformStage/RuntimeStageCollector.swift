@@ -49,8 +49,12 @@ final public class StageCollector : RuntimeListener {
                 continue
             }
             
-            let shape = IdentifiedShape(id: id, shape: drawable.getShapeFor(runtime))
-            buffer.currentShapes.append(shape)
+            guard let shape = drawable.getShapeFor(runtime) else {
+                continue
+            }
+            
+            let idShape = IdentifiedShape(id: id, shape: shape)
+            buffer.currentShapes.append(idShape)
         }
     }
 
@@ -60,13 +64,17 @@ final public class StageCollector : RuntimeListener {
                 continue
             }
             
-            let shape = IdentifiedShape(id: id, shape: form.getShapeFor(runtime))
-            
-            if !collected {
-                buffer.currentShapes.append(shape)
+            guard let shape = form.getShapeFor(runtime) else {
+                continue
             }
             
-            buffer.finalShapes.append(shape)
+            let idShape = IdentifiedShape(id: id, shape: shape)
+            
+            if !collected {
+                buffer.currentShapes.append(idShape)
+            }
+            
+            buffer.finalShapes.append(idShape)
         }
     }
 

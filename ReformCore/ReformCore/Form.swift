@@ -26,9 +26,9 @@ public protocol Morphable {
 }
 
 public protocol Drawable {
-    func getPathFor(runtime: Runtime) -> Path
+    func getPathFor(runtime: Runtime) -> Path?
     
-    func getShapeFor(runtime: Runtime) -> Shape
+    func getShapeFor(runtime: Runtime) -> Shape?
     
     var drawingMode : DrawingMode { get set }
 }
