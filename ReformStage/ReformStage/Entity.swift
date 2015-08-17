@@ -10,15 +10,15 @@ import ReformCore
 import ReformMath
 
 public struct Entity {
-    let formType : Form.Type
-    let id : FormIdentifier
-    let label : String
-    let type : EntityType
-    let hitArea : HitArea
+    public let formType : Form.Type
+    public let id : FormIdentifier
+    public let label : String
+    public let type : EntityType
+    public let hitArea : HitArea
     
-    let handles : [Handle]
-    let points : [EntityPoint]
-    let outline: SegmentPath
+    public let handles : [Handle]
+    public let points : [EntityPoint]
+    public let outline: SegmentPath
 }
 
 extension Entity : CustomDebugStringConvertible {
@@ -36,7 +36,7 @@ public func ==(lhs: Entity, rhs: Entity) -> Bool {
     return lhs.id == rhs.id
 }
 
-enum EntityType {
+public enum EntityType {
     case Draw
     case Mask
     case Guide

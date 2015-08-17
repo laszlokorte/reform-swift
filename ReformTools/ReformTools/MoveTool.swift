@@ -6,6 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformStage
+
 class MoveTool : Tool {
     enum State
     {
@@ -16,10 +18,23 @@ class MoveTool : Tool {
         case PressedSnapped
     }
     
+    var state : State = .Idle
+    let stage : Stage
+    let grabUI : GrabUI
+    let snapUI : SnapUI
+    
+    init(stage: Stage, grabUI: GrabUI, snapUI: SnapUI) {
+        self.stage = stage
+        self.grabUI = grabUI
+        self.snapUI = snapUI
+    }
+    
     func setUp() {
     }
     
     func tearDown() {
+        grabUI.state = .Hide
+        snapUI.state = .Hide
     }
     
     func refresh() {
@@ -28,6 +43,6 @@ class MoveTool : Tool {
     func focusChange() {
     }
     
-    func process(input: Input) {
+    func process(input: Input, withModifiers: [Modifier]) {
     }
 }

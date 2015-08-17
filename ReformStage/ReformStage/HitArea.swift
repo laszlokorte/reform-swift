@@ -8,7 +8,7 @@
 
 import ReformMath
 
-enum HitArea {
+public enum HitArea {
     case Line(a: Vec2d, b: Vec2d)
     case Triangle(a: Vec2d, b: Vec2d, c: Vec2d)
     case Circle(center: Vec2d, radius: Double)
@@ -19,7 +19,7 @@ enum HitArea {
 }
 
 extension HitArea {
-    func contains(point: Vec2d) -> Bool {
+    public func contains(point: Vec2d) -> Bool {
         switch self {
         case .Line(let a, let b):
             return onLineSegment(point, lineSegment: LineSegment2d(from: a, to:b), epsilon: 2)

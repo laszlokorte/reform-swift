@@ -8,6 +8,10 @@
 
 let EPSILON = 0.000001
 
+public func distance(point pointA: Vec2d, point pointB: Vec2d) -> Double {
+    return (pointB - pointA).length
+}
+
 public func intersection(line lineA: LineSegment2d, line lineB: LineSegment2d) -> Vec2d? {
     // ref http://paulbourke.net/geometry/pointlineplane/
     

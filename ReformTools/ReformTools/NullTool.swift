@@ -6,6 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformStage
+
 class NullTool : Tool {
     
     func setUp() {
@@ -20,6 +22,6 @@ class NullTool : Tool {
     func focusChange() {
     }
     
-    func process(input: Input) {
+    func process(input: Input, withModifiers: [Modifier]) {
     }
 }

@@ -6,6 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformStage
+
 class CropTool : Tool {
     enum State
     {
@@ -14,10 +16,21 @@ class CropTool : Tool {
         case Pressed
     }
     
+    var state : State = .Idle
+    let stage : Stage
+    let cropUI : CropUI
+    
+    init(stage: Stage, cropUI: CropUI) {
+        self.stage = stage
+        self.cropUI = cropUI
+    }
+
+    
     func setUp() {
     }
     
     func tearDown() {
+        cropUI.state = .Hide
     }
     
     func refresh() {
@@ -26,6 +39,6 @@ class CropTool : Tool {
     func focusChange() {
     }
     
-    func process(input: Input) {
+    func process(input: Input, withModifiers: [Modifier]) {
     }
 }
