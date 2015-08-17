@@ -8,7 +8,7 @@
 
 public class InstructionNode {
     private var content : InstructionContent
-    var parent : InstructionNode?
+    public private(set) var parent : InstructionNode?
     
     public init() {
         content = .Null
@@ -21,6 +21,7 @@ public class InstructionNode {
     public init(group: GroupInstruction, children: [InstructionNode] = []) {
         content = .Group(group, children)
     }
+    
 }
 
 extension InstructionNode {
@@ -36,6 +37,27 @@ extension InstructionNode {
             content = .Group(group, children)
             return true
         }
+    }
+}
+
+extension InstructionNode {
+    
+    public func removeFromParent() -> Bool {
+        guard let parent = self.parent,
+            case .Group(let node, var children) = parent.content else {
+                return false
+        }
+        
+        parent.content = .Group(node, children.filter({ $0 !== self }))
+        
+        return true
+    }
+}
+
+extension InstructionNode {
+    
+    public func replaceWith(instruction: Instruction) {
+        content = InstructionContent.Single(instruction)
     }
 }
 

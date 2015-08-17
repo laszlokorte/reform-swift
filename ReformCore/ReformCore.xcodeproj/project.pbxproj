@@ -83,6 +83,7 @@
 		F273911E1B7FA24000100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273911D1B7FA24000100F2F /* Glomp.swift */; };
 		F2A1049B1B82062D00E97C6B /* RelativeDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */; };
 		F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */; };
+		F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104D21B82387700E97C6B /* FixSizeDestination.swift */; };
 		F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 /* End PBXBuildFile section */
@@ -177,6 +178,7 @@
 		F273911D1B7FA24000100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
 		F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDistance.swift; sourceTree = "<group>"; };
 		F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantAngel.swift; sourceTree = "<group>"; };
+		F2A104D21B82387700E97C6B /* FixSizeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixSizeDestination.swift; sourceTree = "<group>"; };
 		F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
 		F2DC43C01B81E247006748E0 /* InstructionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -454,6 +456,7 @@
 				F26D47391B7D477700266096 /* AnchorPoint.swift */,
 				F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */,
 				F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */,
+				F2A104D21B82387700E97C6B /* FixSizeDestination.swift */,
 			);
 			name = Composed;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				F26D46B81B7D106E00266096 /* InitialDestination.swift in Sources */,
 				F26D46B61B7D101700266096 /* Direction.swift in Sources */,
 				F26D46E21B7D169D00266096 /* DrawingMode.swift in Sources */,
+				F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */,
 				F26D47161B7D37C800266096 /* ArcForm.swift in Sources */,
 				F26D474C1B7D696700266096 /* ForLoopInstruction.swift in Sources */,
 				F273911E1B7FA24000100F2F /* Glomp.swift in Sources */,

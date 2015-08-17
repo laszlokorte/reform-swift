@@ -11,9 +11,10 @@ import ReformMath
 import ReformStage
 
 class CreateFormTool : Tool {
-    enum Streight {
-        case No
-        case Yes(inversed: Bool)
+
+    enum Target {
+        case Free(position: Vec2d, streight: Bool)
+        case Snap(position: Vec2d, point: SnapPoint, cycle : Int)
     }
     
     enum State
@@ -21,8 +22,7 @@ class CreateFormTool : Tool {
         case Idle
         case Delegating
         case Snapped(pos: Vec2d, startPoint: SnapPoint, cycle: Int)
-        case Pressed(creating: Form)
-        case PressedSnapped(creating: Form, streight: Streight, pos: Vec2d, endPoint: SnapPoint, cycle: Int)
+        case Pressed(startPoint: SnapPoint, creating: Form, instruction: InstructionNode, target: Target)
     }
     
     var state : State = .Idle
@@ -64,14 +64,14 @@ class CreateFormTool : Tool {
         case .Cancel:
             switch self.state {
             case .Delegating:
+                state = .Idle
                 selectionTool.process(input, withModifiers: modifiers)
                 break
-            case .Pressed(let form):
+            case .Pressed(_, _, let instruction, _):
+                state = .Idle;
                 
-                break
-                
-            case .PressedSnapped(let form):
-                
+                instruction.removeFromParent()
+                snapUI.state = .Show(stage.getSnapPoints())
                 break
                 
             case .Idle, .Snapped:
@@ -91,8 +91,14 @@ class CreateFormTool : Tool {
                 }
                 
                 break
-            case .PressedSnapped(_):
+            case .Pressed(let start, let form, let instruction, .Snap(let pos, _, let cycle)):
+                if let snapPoint = snapPointNear(pos, index: cycle+1) {
+                    state = .Pressed(startPoint: start, creating: form, instruction: instruction, target: .Snap(position: pos, point: snapPoint, cycle: cycle+1))
+                } else {
+                    state = .Pressed(startPoint: start, creating: form, instruction: instruction, target: .Free(position: pos, streight: modifiers.contains(Modifier.Shift)))
+                }
                 break
+                
             case .Idle, .Pressed(_):
                 break
             }
@@ -111,9 +117,19 @@ class CreateFormTool : Tool {
                     state = .Idle
                 }
                 break
-            case .Pressed(_):
+            case .Pressed(let start, let form, let instruction, .Snap(let pos, _, let cycle)):
+                if let snapPoint = snapPointNear(pos, index: cycle) {
+                    state = .Pressed(startPoint: start, creating: form, instruction: instruction, target: .Snap(position: pos, point: snapPoint, cycle: cycle))
+                } else {
+                    state = .Pressed(startPoint: start, creating: form, instruction: instruction, target: .Free(position: position, streight: modifiers.contains(Modifier.Shift)))
+                }
                 break
-            case .PressedSnapped(_):
+            case .Pressed(let start, let form, let instruction, .Free(_,_)):
+                if let snapPoint = snapPointNear(position) {
+                    state = .Pressed(startPoint: start, creating: form, instruction: instruction, target: .Snap(position: position, point: snapPoint, cycle: 0))
+                } else {
+                    state = .Pressed(startPoint: start, creating: form, instruction: instruction, target: .Free(position: position, streight: modifiers.contains(Modifier.Shift)))
+                }
                 break
             case .Delegating:
                 selectionTool.process(input, withModifiers: modifiers)
@@ -122,19 +138,24 @@ class CreateFormTool : Tool {
             break
         case .Press:
             switch self.state {
-            case .Snapped:
+            case .Snapped(let pos, let startPoint,_):
+                let form = LineForm(id: FormIdentifier(999), name: "Line 42")
+                let destination = FixSizeDestination(from: startPoint.runtimePoint, delta: Vec2d())
+                let instruction = CreateFormInstruction(form: form, destination: destination)
+                let node = InstructionNode(instruction: instruction)
+                state = .Pressed(startPoint: startPoint, creating: form, instruction: node, target: .Free(position: pos, streight: modifiers.contains(Modifier.Shift)))
                 break
-            case .Pressed(_), .PressedSnapped(_), .Idle, .Delegating:
+            case .Idle, .Delegating:
                 state = .Delegating
                 selectionTool.process(input, withModifiers: modifiers)
+                break
+            case .Pressed(_):
                 break
             }
             break
         case .Release:
             switch self.state {
             case .Pressed(_):
-                break
-            case .PressedSnapped(_):
                 break
             case .Delegating:
                 state = .Idle
@@ -148,7 +169,7 @@ class CreateFormTool : Tool {
             break
         case .Toggle:
             switch self.state {
-            case .PressedSnapped(_):
+            case .Pressed(_, _, _, .Snap(_)):
                 break
             case .Idle, .Snapped, .Pressed(_), .Delegating:
                 break
@@ -156,13 +177,34 @@ class CreateFormTool : Tool {
             break
             
         }
+        
+        update(state)
+    }
+    
+    func update(state: State) {
+        switch state {
+        case .Idle, .Delegating, .Snapped:
+            break
+        case .Pressed(let start, let form, let node, let target):
+            let destination : protocol<RuntimeInitialDestination, Labeled>
+            
+            switch target {
+            case .Free(let targetPosition, let streight):
+                let offset = start.position - targetPosition
+                let delta = targetPosition - start.position
+                destination = FixSizeDestination(from: start.runtimePoint, delta: delta)
+            case .Snap(_, let snapPoint, _):
+                destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint)
+            }
+            
+            node.replaceWith(CreateFormInstruction(form: form, destination: destination))
+            break
+        }
     }
     
     func excludeEntity(entity: Entity) -> Bool {
         switch state {
-        case .Pressed(let form):
-            return form.identifier == entity.id
-        case .PressedSnapped(let form, _, _, _, _):
+        case .Pressed(_, let form, _, _):
             return form.identifier == entity.id
         default:
             return false
