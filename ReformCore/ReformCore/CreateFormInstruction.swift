@@ -6,10 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-final public class CreateFormInstruction : Instruction {
+public struct CreateFormInstruction : Instruction {
     public typealias DestinationType = protocol<RuntimeInitialDestination, Labeled>
-    
-    public var parent : InstructionGroup?
     
     public var target : FormIdentifier? {
         return form.identifier
@@ -25,7 +23,7 @@ final public class CreateFormInstruction : Instruction {
     
     public func evaluate(runtime: Runtime) {
         guard let (min, max) = destination.getMinMaxFor(runtime) else {
-            runtime.reportError(self, error: .InvalidDestination)
+            runtime.reportError(.InvalidDestination)
             return
         }
         runtime.declare(form)
@@ -33,12 +31,15 @@ final public class CreateFormInstruction : Instruction {
     }
     
     
+    public func getDescription(analyzer: Analyzer) -> String {
+        return "Create \(form.name) \(destination.getDescription(analyzer))"
+    }
+    
     public func analyze(analyzer: Analyzer) {
         analyzer.announceForm(form)
-        analyzer.publish(self, label: "Create \(form.name) \(destination.getDescription(analyzer))")
+        
         if let picture = form as? PictureForm, let id = picture.pictureIdentifier {
             analyzer.announceDepencency(id)
         }
     }
-    
 }

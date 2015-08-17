@@ -7,10 +7,8 @@
 //
 
 
-final public class TranslateInstruction : Instruction {
+public struct TranslateInstruction : Instruction {
     public typealias DistanceType = protocol<RuntimeDistance, Labeled>
-    
-    public var parent : InstructionGroup?
     
     public var target : FormIdentifier? {
         return formId
@@ -26,11 +24,11 @@ final public class TranslateInstruction : Instruction {
     
     public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Translatable else {
-            runtime.reportError(self, error: .UnknownForm)
+            runtime.reportError(.UnknownForm)
             return
         }
         guard let delta = distance.getDeltaFor(runtime) else {
-            runtime.reportError(self, error: .InvalidDistance)
+            runtime.reportError(.InvalidDistance)
             return
         }
         
@@ -38,10 +36,12 @@ final public class TranslateInstruction : Instruction {
     }
     
     
-    public func analyze(analyzer: Analyzer) {
-        let formName = analyzer.get(formId)?.name ?? "???"
+    public func getDescription(analyzer: Analyzer) -> String {        let formName = analyzer.get(formId)?.name ?? "???"
         
-        analyzer.publish(self, label: "Move \(formName) \(distance.getDescription(analyzer))")
+        return "Move \(formName) \(distance.getDescription(analyzer))"
     }
     
+    
+    public func analyze(analyzer: Analyzer) {
+    }
 }

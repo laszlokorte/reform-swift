@@ -14,11 +14,11 @@ final public class StageCollector : RuntimeListener {
     
     private let stage : Stage
     private let analyzer : Analyzer
-    private let focusFilter : (Instruction) -> Bool
+    private let focusFilter : (Evaluatable) -> Bool
     private var collected : Bool = false
     private let buffer = StageBuffer()
     
-    public init(stage: Stage, analyzer: Analyzer, focusFilter: (Instruction) -> Bool) {
+    public init(stage: Stage, analyzer: Analyzer, focusFilter: (Evaluatable) -> Bool) {
         self.stage = stage
         self.analyzer = analyzer
         self.focusFilter = focusFilter
@@ -34,7 +34,7 @@ final public class StageCollector : RuntimeListener {
         buffer.flush(stage)
     }
 
-    public func runtime(runtime: Runtime, didEval instruction: Instruction) {
+    public func runtime(runtime: Runtime, didEval instruction: Evaluatable) {
         guard !collected else { return }
         guard focusFilter(instruction) else { return }
         
@@ -70,7 +70,7 @@ final public class StageCollector : RuntimeListener {
         }
     }
 
-    public func runtime(runtime: Runtime, triggeredError: RuntimeError, onInstruction: Instruction) {
+    public func runtime(runtime: Runtime, triggeredError: RuntimeError, on: Evaluatable) {
         
     }
 

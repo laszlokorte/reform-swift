@@ -8,29 +8,34 @@
 
 import ReformExpression
 
-final public class ForLoopInstruction : InstructionGroupBase {
+public struct ForLoopInstruction : GroupInstruction {
     var expression : Expression
+    
+    public var target : FormIdentifier? { return nil }
     
     init(expression : Expression) {
         self.expression = expression
     }
     
-    override public func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime, withChildren children: [InstructionNode]) {
         guard case .Success(.IntValue(let count)) = expression.eval(runtime.getDataSet()) else {
-            runtime.reportError(self, error: .InvalidExpression)
+            runtime.reportError(.InvalidExpression)
             return
         }
         
         for var i=0; i<count;i++ {
-            super.evaluate(runtime)
+            for c in children {
+                c.evaluate(runtime)
+            }
         }
     }
     
-    override public func analyze(analyzer: Analyzer) {
+    public func getDescription(analyzer: Analyzer) -> String {
         let expressionString = analyzer.getExpressionPrinter().toString(expression) ?? "???"
         
-        analyzer.publish(self, label: "Repeat \(expressionString) times:") {
-            super.analyze(analyzer)
-        }
+        return "Repeat \(expressionString) times:"
+    }
+    
+    public func analyze(analyzer: Analyzer) {
     }
 }

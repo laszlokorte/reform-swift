@@ -8,31 +8,34 @@
 
 import ReformExpression
 
-final public class IfConditionInstruction : InstructionGroupBase {
+public struct IfConditionInstruction : GroupInstruction {
     var expression : Expression
+    
+    public var target : FormIdentifier? { return nil }
 
     init(expression : Expression) {
         self.expression = expression
     }
     
-    override public func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime, withChildren children: [InstructionNode]) {
         guard case .Success(.BoolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
-            runtime.reportError(self, error: .InvalidExpression)
+            runtime.reportError(.InvalidExpression)
             return
         }
         
         if bool {
-            super.evaluate(runtime)
+            for c in children {
+                c.evaluate(runtime)
+            }
         }
     }
     
     
-    override public func analyze(analyzer: Analyzer) {
-        let expressionString = analyzer.getExpressionPrinter().toString(expression) ?? "???"
+    public func getDescription(analyzer: Analyzer) -> String {        let expressionString = analyzer.getExpressionPrinter().toString(expression) ?? "???"
         
-        analyzer.publish(self, label: "if \(expressionString):") {
-            super.analyze(analyzer)
-        }
+        return "if \(expressionString):"
     }
 
+    public func analyze(analyzer: Analyzer) {
+    }
 }

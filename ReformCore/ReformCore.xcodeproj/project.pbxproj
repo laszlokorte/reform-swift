@@ -17,7 +17,7 @@
 		F26D46991B7D0C0900266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46981B7D0C0900266096 /* ReformMath.framework */; };
 		F26D46AB1B7D0D4200266096 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46AA1B7D0D4200266096 /* Form.swift */; };
 		F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46AD1B7D0D5A00266096 /* Runtime.swift */; };
-		F26D46B11B7D0F8600266096 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B01B7D0F8600266096 /* Instruction.swift */; };
+		F26D46B11B7D0F8600266096 /* Evaluatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B01B7D0F8600266096 /* Evaluatable.swift */; };
 		F26D46B61B7D101700266096 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B51B7D101700266096 /* Direction.swift */; };
 		F26D46B81B7D106E00266096 /* InitialDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B71B7D106E00266096 /* InitialDestination.swift */; };
 		F26D46BC1B7D10FB00266096 /* Length.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46BB1B7D10FB00266096 /* Length.swift */; };
@@ -69,8 +69,6 @@
 		F26D473E1B7D541600266096 /* CircleOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D473D1B7D541600266096 /* CircleOutline.swift */; };
 		F26D47401B7D577E00266096 /* NullOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D473F1B7D577E00266096 /* NullOutline.swift */; };
 		F26D47421B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47411B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift */; };
-		F26D47451B7D626500266096 /* NullInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47441B7D626500266096 /* NullInstruction.swift */; };
-		F26D47481B7D64D400266096 /* InstructionGroupBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47471B7D64D400266096 /* InstructionGroupBase.swift */; };
 		F26D474A1B7D693900266096 /* IfConditionInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47491B7D693900266096 /* IfConditionInstruction.swift */; };
 		F26D474C1B7D696700266096 /* ForLoopInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D474B1B7D696700266096 /* ForLoopInstruction.swift */; };
 		F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D474E1B7D6A3600266096 /* CreateFormInstruction.swift */; };
@@ -84,6 +82,7 @@
 		F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391041B7F88B400100F2F /* IntersectionPoint.swift */; };
 		F273911E1B7FA24000100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273911D1B7FA24000100F2F /* Glomp.swift */; };
 		F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
+		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +109,7 @@
 		F26D46981B7D0C0900266096 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F26D46AA1B7D0D4200266096 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		F26D46AD1B7D0D5A00266096 /* Runtime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runtime.swift; sourceTree = "<group>"; };
-		F26D46B01B7D0F8600266096 /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		F26D46B01B7D0F8600266096 /* Evaluatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluatable.swift; sourceTree = "<group>"; };
 		F26D46B51B7D101700266096 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		F26D46B71B7D106E00266096 /* InitialDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialDestination.swift; sourceTree = "<group>"; };
 		F26D46BB1B7D10FB00266096 /* Length.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Length.swift; sourceTree = "<group>"; };
@@ -162,8 +161,6 @@
 		F26D473D1B7D541600266096 /* CircleOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleOutline.swift; sourceTree = "<group>"; };
 		F26D473F1B7D577E00266096 /* NullOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullOutline.swift; sourceTree = "<group>"; };
 		F26D47411B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrhtogonalOffsetAnchor.swift; sourceTree = "<group>"; };
-		F26D47441B7D626500266096 /* NullInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullInstruction.swift; sourceTree = "<group>"; };
-		F26D47471B7D64D400266096 /* InstructionGroupBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionGroupBase.swift; sourceTree = "<group>"; };
 		F26D47491B7D693900266096 /* IfConditionInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IfConditionInstruction.swift; sourceTree = "<group>"; };
 		F26D474B1B7D696700266096 /* ForLoopInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForLoopInstruction.swift; sourceTree = "<group>"; };
 		F26D474E1B7D6A3600266096 /* CreateFormInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateFormInstruction.swift; sourceTree = "<group>"; };
@@ -177,6 +174,7 @@
 		F27391041B7F88B400100F2F /* IntersectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntersectionPoint.swift; sourceTree = "<group>"; };
 		F273911D1B7FA24000100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
 		F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
+		F2DC43C01B81E247006748E0 /* InstructionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,7 +273,7 @@
 			children = (
 				F26D475A1B7D867700266096 /* Stack */,
 				F26D46AD1B7D0D5A00266096 /* Runtime.swift */,
-				F26D46B01B7D0F8600266096 /* Instruction.swift */,
+				F26D46B01B7D0F8600266096 /* Evaluatable.swift */,
 				F26D46F11B7D1FC600266096 /* RuntimeError.swift */,
 				F26D47051B7D2D5C00266096 /* DefaultRuntime.swift */,
 			);
@@ -474,21 +472,20 @@
 		F26D47431B7D624800266096 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
+				F2DC43BD1B81E1EE006748E0 /* Nodes */,
 				F26D474D1B7D6A2500266096 /* SingleInstructions */,
-				F26D47461B7D64C500266096 /* InstructionGroups */,
-				F26D47441B7D626500266096 /* NullInstruction.swift */,
+				F26D47461B7D64C500266096 /* GroupInstructions */,
 			);
 			name = Instructions;
 			sourceTree = "<group>";
 		};
-		F26D47461B7D64C500266096 /* InstructionGroups */ = {
+		F26D47461B7D64C500266096 /* GroupInstructions */ = {
 			isa = PBXGroup;
 			children = (
-				F26D47471B7D64D400266096 /* InstructionGroupBase.swift */,
 				F26D47491B7D693900266096 /* IfConditionInstruction.swift */,
 				F26D474B1B7D696700266096 /* ForLoopInstruction.swift */,
 			);
-			name = InstructionGroups;
+			name = GroupInstructions;
 			sourceTree = "<group>";
 		};
 		F26D474D1B7D6A2500266096 /* SingleInstructions */ = {
@@ -533,6 +530,14 @@
 				F273911D1B7FA24000100F2F /* Glomp.swift */,
 			);
 			name = Glomp;
+			sourceTree = "<group>";
+		};
+		F2DC43BD1B81E1EE006748E0 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				F2DC43C01B81E247006748E0 /* InstructionNode.swift */,
+			);
+			name = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -648,7 +653,7 @@
 				F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */,
 				F26D47201B7D3A8700266096 /* BasicLengthScaler.swift in Sources */,
 				F26D47551B7D6D8300266096 /* RotateInstruction.swift in Sources */,
-				F26D46B11B7D0F8600266096 /* Instruction.swift in Sources */,
+				F26D46B11B7D0F8600266096 /* Evaluatable.swift in Sources */,
 				F26D47241B7D3C0300266096 /* BasicAngleRotator.swift in Sources */,
 				F26D47041B7D288E00266096 /* LineOutline.swift in Sources */,
 				F26D471C1B7D392200266096 /* StaticLength.swift in Sources */,
@@ -657,8 +662,8 @@
 				F26D47571B7D6EDF00266096 /* ScaleInstruction.swift in Sources */,
 				F26D47351B7D415B00266096 /* Operators.swift in Sources */,
 				F26D46D01B7D141C00266096 /* Picture.swift in Sources */,
+				F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */,
 				F26D47531B7D6C0D00266096 /* MorphInstruction.swift in Sources */,
-				F26D47481B7D64D400266096 /* InstructionGroupBase.swift in Sources */,
 				F26D475E1B7D965900266096 /* Describable.swift in Sources */,
 				F26D46E71B7D174B00266096 /* FormIdentifier.swift in Sources */,
 				F26D46B81B7D106E00266096 /* InitialDestination.swift in Sources */,
@@ -695,7 +700,6 @@
 				F26D46BC1B7D10FB00266096 /* Length.swift in Sources */,
 				F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */,
 				F26D473A1B7D477700266096 /* AnchorPoint.swift in Sources */,
-				F26D47451B7D626500266096 /* NullInstruction.swift in Sources */,
 				F26D471A1B7D37DF00266096 /* PictureForm.swift in Sources */,
 				F26D46ED1B7D189000266096 /* ExposedPoint.swift in Sources */,
 				F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */,

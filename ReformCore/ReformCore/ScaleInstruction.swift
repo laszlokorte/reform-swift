@@ -9,11 +9,9 @@
 
 import ReformMath
 
-final public class ScaleInstruction : Instruction {
+public struct ScaleInstruction : Instruction {
     public typealias PointType = LabeledPoint
     public typealias FactorType = protocol<RuntimeScaleFactor, Labeled>
-
-    public var parent : InstructionGroup?
     
     public var target : FormIdentifier? {
         return formId
@@ -31,15 +29,15 @@ final public class ScaleInstruction : Instruction {
     
     public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Scalable else {
-            runtime.reportError(self, error: .UnknownForm)
+            runtime.reportError(.UnknownForm)
             return
         }
         guard let fix : Vec2d = fixPoint.getPositionFor(runtime) else {
-            runtime.reportError(self, error: .InvalidFixPoint)
+            runtime.reportError(.InvalidFixPoint)
             return
         }
         guard let f : Double = factor.getFactorFor(runtime) else {
-            runtime.reportError(self, error: .InvalidFactor)
+            runtime.reportError(.InvalidFactor)
             return
         }
         
@@ -47,10 +45,13 @@ final public class ScaleInstruction : Instruction {
     }
     
     
-    public func analyze(analyzer: Analyzer) {
+    public func getDescription(analyzer: Analyzer) -> String {
         let formName = analyzer.get(formId)?.name ?? "???"
         
-        analyzer.publish(self, label: "Scale \(formName) around \(fixPoint.getDescription(analyzer)) by \(factor)")
+        return  "Scale \(formName) around \(fixPoint.getDescription(analyzer)) by \(factor)"
+    }
+    
+    public func analyze(analyzer: Analyzer) {
     }
     
 }

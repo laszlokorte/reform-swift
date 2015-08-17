@@ -6,12 +6,10 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-final public class MorphInstruction : Instruction {
+public struct MorphInstruction : Instruction {
     public typealias DistanceType = protocol<RuntimeDistance, Labeled>
     
-    public var parent : InstructionGroup?
-    public
-    var target : FormIdentifier? {
+    public var target : FormIdentifier? {
         return formId
     }
     
@@ -27,15 +25,15 @@ final public class MorphInstruction : Instruction {
     
     public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Morphable else {
-            runtime.reportError(self, error: .UnknownForm)
+            runtime.reportError(.UnknownForm)
             return
         }
         guard let anchor = form.getAnchors()[anchorId] else {
-            runtime.reportError(self, error: .UnknownAnchor)
+            runtime.reportError(.UnknownAnchor)
             return
         }
         guard let delta = distance.getDeltaFor(runtime) else {
-            runtime.reportError(self, error: .InvalidDistance)
+            runtime.reportError(.InvalidDistance)
             return
         }
         
@@ -43,12 +41,13 @@ final public class MorphInstruction : Instruction {
     }
     
     
-    public func analyze(analyzer: Analyzer) {
-        let form = analyzer.get(formId)
+    public func getDescription(analyzer: Analyzer) -> String {        let form = analyzer.get(formId)
         let formName = form?.name ?? "???"
         let anchorName = (form as? Morphable)?.getAnchors()[anchorId]?.name ?? "??"
         
-        analyzer.publish(self, label: "Move \(formName)'s \(anchorName) \(distance.getDescription(analyzer))")
+        return "Move \(formName)'s \(anchorName) \(distance.getDescription(analyzer))"
     }
     
+    public func analyze(analyzer: Analyzer) {
+    }
 }

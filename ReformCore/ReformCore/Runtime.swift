@@ -15,9 +15,9 @@ public protocol SubCallId {
 public protocol RuntimeListener {
     func runtimeBeginEvaluation(runtime: Runtime, withSize: (Int, Int))
     func runtimeFinishEvaluation(runtime: Runtime)
-    func runtime(runtime: Runtime, didEval: Instruction)
+    func runtime(runtime: Runtime, didEval: Evaluatable)
     func runtime(runtime: Runtime, exitScopeWithForms: [FormIdentifier])
-    func runtime(runtime: Runtime, triggeredError: RuntimeError, onInstruction: Instruction)
+    func runtime(runtime: Runtime, triggeredError: RuntimeError, on: Evaluatable)
 }
 
 public protocol Runtime : class {
@@ -29,7 +29,7 @@ public protocol Runtime : class {
     
     func run(block: (width: Int, height: Int) -> ())
     
-    func eval(instruction : Instruction, block: () -> ())
+    func eval(instruction : Evaluatable, block: () -> ())
 
     func scoped(block: () -> ())
 
@@ -43,7 +43,7 @@ public protocol Runtime : class {
 
     func getForms() ->[FormIdentifier]
     
-    func reportError(instruction : Instruction, error : RuntimeError)
+    func reportError(error : RuntimeError)
     
     var shouldStop : Bool { get }
     

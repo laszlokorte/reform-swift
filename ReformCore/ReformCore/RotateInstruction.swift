@@ -8,12 +8,9 @@
 
 import ReformMath
 
-final public class RotateInstruction : Instruction {
+public struct RotateInstruction : Instruction {
     public typealias PointType = LabeledPoint
     public typealias AngleType = protocol<RuntimeRotationAngle, Labeled>
-    
-    
-    public var parent : InstructionGroup?
     
     public var target : FormIdentifier? {
         return formId
@@ -31,15 +28,15 @@ final public class RotateInstruction : Instruction {
     
     public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Rotatable else {
-            runtime.reportError(self, error: .UnknownForm)
+            runtime.reportError(.UnknownForm)
             return
         }
         guard let fix : Vec2d = fixPoint.getPositionFor(runtime) else {
-            runtime.reportError(self, error: .InvalidFixPoint)
+            runtime.reportError(.InvalidFixPoint)
             return
         }
         guard let a : Angle = angle.getAngleFor(runtime) else {
-            runtime.reportError(self, error: .InvalidAngle)
+            runtime.reportError(.InvalidAngle)
             return
         }
         
@@ -47,10 +44,14 @@ final public class RotateInstruction : Instruction {
     }
     
     
-    public func analyze(analyzer: Analyzer) {
-        let formName = analyzer.get(formId)?.name ?? "???"
+    public func getDescription(analyzer: Analyzer) -> String {        let formName = analyzer.get(formId)?.name ?? "???"
         
-        analyzer.publish(self, label: "Rotate \(formName) around \(fixPoint.getDescription(analyzer)) by \(angle.getDescription(analyzer))")
+        return "Rotate \(formName) around \(fixPoint.getDescription(analyzer)) by \(angle.getDescription(analyzer))"
+    }
+    
+    
+    
+    public func analyze(analyzer: Analyzer) {
     }
     
 }

@@ -15,6 +15,8 @@ final public class DefaultRuntime : Runtime {
     private var _stopped : Bool
     private var stack = RuntimeStack()
     private var dataSet : DataSet
+    
+    private var currentInstructions = [Evaluatable]()
 
     public var shouldStop : Bool { get { return _stopped } }
     
@@ -49,12 +51,17 @@ final public class DefaultRuntime : Runtime {
         
     }
     
-    public func eval(instruction : Instruction, block: () -> ()) {
-        block()
-        
-        listeners.forEach() {
-            $0.runtime(self, didEval: instruction)
+    public func eval(instruction : Evaluatable, block: () -> ()) {
+        defer {
+            listeners.forEach() {
+                $0.runtime(self, didEval: instruction)
+            }
         }
+        
+        currentInstructions.append(instruction)
+        defer { currentInstructions.removeLast() }
+        
+        block()
     }
     
     public func scoped(block: () -> ()) {
@@ -95,9 +102,9 @@ final public class DefaultRuntime : Runtime {
         return dataSet
     }
     
-    public func reportError(instruction : Instruction, error : RuntimeError) {
+    public func reportError(error : RuntimeError) {
         listeners.forEach() {
-            $0.runtime(self, triggeredError: error, onInstruction: instruction)
+            $0.runtime(self, triggeredError: error, on: currentInstructions.last!)
         }
     }
 }

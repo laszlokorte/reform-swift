@@ -23,12 +23,11 @@ class StageController : NSViewController {
     let runtime = DefaultRuntime()
 
     
-    var currentInstruction : Instruction? = nil
+    var currentInstruction : InstructionNode? = nil
     let stage = Stage()
     
     lazy var stageCollector : StageCollector = StageCollector(stage: self.stage, analyzer: self.analyzer) {
-        guard let c = self.currentInstruction else { return false }
-        return c == $0
+        return self.currentInstruction === $0 as? InstructionNode
     }
 
     class DebugRuntimeListener : RuntimeListener {
@@ -43,7 +42,7 @@ class StageController : NSViewController {
         }
         
         
-        func runtime(runtime: Runtime, didEval: Instruction) {
+        func runtime(runtime: Runtime, didEval: Evaluatable) {
             print("eval instruction")
 
         }
@@ -60,7 +59,7 @@ class StageController : NSViewController {
         }
         
         
-        func runtime(runtime: Runtime, triggeredError: RuntimeError, onInstruction: Instruction) {
+        func runtime(runtime: Runtime, triggeredError: RuntimeError, on onInstruction: Evaluatable) {
             print("Error \(triggeredError)")
 
         }
@@ -87,11 +86,14 @@ class StageController : NSViewController {
         )
         
         let createInstruction = CreateFormInstruction(form: rectangleForm, destination: rectangleDestination)
-        procedure.root.append(createInstruction)
+        let node = InstructionNode(instruction: createInstruction)
         
-        currentInstruction = createInstruction
+        procedure.root.append(node)
+        
+        currentInstruction = node
         
         runtime.listeners.append(stageCollector)
+        //runtime.listeners.append(DebugRuntimeListener())
         
         procedure.analyzeWith(analyzer)
         procedure.evaluateWith(runtime)
