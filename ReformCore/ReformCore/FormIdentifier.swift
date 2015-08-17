@@ -9,7 +9,7 @@
 public struct FormIdentifier : Hashable {
     private let id : Int64
     
-    init(_ id : Int64) {
+    public init(_ id : Int64) {
         self.id = id
     }
     

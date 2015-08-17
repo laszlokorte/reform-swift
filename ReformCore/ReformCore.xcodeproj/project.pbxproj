@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
+		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
+		F24AAFCE1B8150CA008DF952 /* DefaultAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCD1B8150CA008DF952 /* DefaultAnalyzer.swift */; };
 		F26D45F21B7D09CA00266096 /* ReformCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D45F11B7D09CA00266096 /* ReformCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D45F91B7D09CA00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D45EE1B7D09CA00266096 /* ReformCore.framework */; };
 		F26D45FE1B7D09CA00266096 /* ReformCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45FD1B7D09CA00266096 /* ReformCoreTests.swift */; };
@@ -97,6 +99,8 @@
 /* Begin PBXFileReference section */
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
+		F24AAFCD1B8150CA008DF952 /* DefaultAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAnalyzer.swift; sourceTree = "<group>"; };
 		F26D45EE1B7D09CA00266096 /* ReformCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D45F11B7D09CA00266096 /* ReformCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformCore.h; sourceTree = "<group>"; };
 		F26D45F31B7D09CA00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 				F26D46C81B7D136600266096 /* Analyzer.swift */,
 				F26D46CA1B7D13A000266096 /* Analyzable.swift */,
 				F26D475D1B7D965900266096 /* Describable.swift */,
+				F24AAFCD1B8150CA008DF952 /* DefaultAnalyzer.swift */,
 			);
 			name = Analyzer;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 			children = (
 				F26D470B1B7D342D00266096 /* CenterPoint.swift */,
 				F26D47391B7D477700266096 /* AnchorPoint.swift */,
+				F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */,
 			);
 			name = Composed;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 			files = (
 				F26D47291B7D3DBF00266096 /* CompositeOutline.swift in Sources */,
 				F26D46BE1B7D112400266096 /* ReferencePoint.swift in Sources */,
+				F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */,
 				F26D47201B7D3A8700266096 /* BasicLengthScaler.swift in Sources */,
 				F26D47551B7D6D8300266096 /* RotateInstruction.swift in Sources */,
 				F26D46B11B7D0F8600266096 /* Instruction.swift in Sources */,
@@ -698,6 +705,7 @@
 				F26D47611B7DA05A00266096 /* ForeignFormPoint.swift in Sources */,
 				F26D47101B7D379900266096 /* RectangleForm.swift in Sources */,
 				F26D47011B7D273B00266096 /* BasicPointRotator.swift in Sources */,
+				F24AAFCE1B8150CA008DF952 /* DefaultAnalyzer.swift in Sources */,
 				F26D46CB1B7D13A000266096 /* Analyzable.swift in Sources */,
 				F26D47141B7D37C100266096 /* PieForm.swift in Sources */,
 				F26D46C01B7D116100266096 /* RotationAngle.swift in Sources */,

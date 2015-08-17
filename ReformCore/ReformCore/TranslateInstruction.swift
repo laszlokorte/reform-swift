@@ -7,24 +7,24 @@
 //
 
 
-class TranslateInstruction : Instruction {
-    typealias DistanceType = protocol<RuntimeDistance, Labeled>
+public class TranslateInstruction : Instruction {
+    public typealias DistanceType = protocol<RuntimeDistance, Labeled>
     
-    var parent : InstructionGroup?
+    public var parent : InstructionGroup?
     
-    var target : FormIdentifier? {
+    public var target : FormIdentifier? {
         return formId
     }
     
     let formId : FormIdentifier
     let distance : DistanceType
     
-    init(formId: FormIdentifier, distance: DistanceType) {
+    public init(formId: FormIdentifier, distance: DistanceType) {
         self.formId = formId
         self.distance = distance
     }
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Translatable else {
             runtime.reportError(self, error: .UnknownForm)
             return
@@ -38,7 +38,7 @@ class TranslateInstruction : Instruction {
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         let formName = analyzer.get(formId)?.name ?? "???"
         
         analyzer.publish(self, label: "Move \(formName) \(distance.getDescription(analyzer))")

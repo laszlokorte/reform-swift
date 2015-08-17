@@ -71,8 +71,8 @@ public class PictureForm : Form {
     
     var pictureIdentifier : PictureIdentifier? = nil
     
-    init(formId: FormIdentifier, name : String) {
-        self.rectangle = RectangleForm(formId: formId, name: name)
+    public init(id: FormIdentifier, name : String) {
+        self.rectangle = RectangleForm(id: id, name: name)
     }
     
     var centerPoint : WriteableRuntimePoint {

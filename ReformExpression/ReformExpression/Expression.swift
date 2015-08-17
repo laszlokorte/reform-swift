@@ -11,6 +11,7 @@ public enum EvaluationError : ErrorType {
     case ArithmeticError(message: String)
     case TypeMismatch(message: String)
     case ParameterCountMismatch(message: String)
+    case DuplicateDefinition(referenceId: ReferenceId)
 }
 
 public protocol UnaryOperator {

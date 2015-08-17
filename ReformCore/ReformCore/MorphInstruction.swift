@@ -6,11 +6,11 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class MorphInstruction : Instruction {
-    typealias DistanceType = protocol<RuntimeDistance, Labeled>
+public class MorphInstruction : Instruction {
+    public typealias DistanceType = protocol<RuntimeDistance, Labeled>
     
-    var parent : InstructionGroup?
-    
+    public var parent : InstructionGroup?
+    public
     var target : FormIdentifier? {
         return formId
     }
@@ -19,13 +19,13 @@ class MorphInstruction : Instruction {
     let anchorId : AnchorIdentifier
     var distance : DistanceType
     
-    init(formId : FormIdentifier, anchorId: AnchorIdentifier, distance : DistanceType) {
+    public init(formId : FormIdentifier, anchorId: AnchorIdentifier, distance : DistanceType) {
         self.formId = formId
         self.anchorId = anchorId
         self.distance = distance
     }
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Morphable else {
             runtime.reportError(self, error: .UnknownForm)
             return
@@ -43,7 +43,7 @@ class MorphInstruction : Instruction {
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         let form = analyzer.get(formId)
         let formName = form?.name ?? "???"
         let anchorName = (form as? Morphable)?.getAnchors()[anchorId]?.name ?? "??"

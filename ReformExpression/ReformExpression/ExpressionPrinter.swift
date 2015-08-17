@@ -75,7 +75,7 @@ public class ExpressionPrinter {
     
     let sheet : Sheet
     
-    init(sheet: Sheet) {
+    public init(sheet: Sheet) {
         self.sheet = sheet
     }
     
@@ -201,6 +201,8 @@ public class ExpressionPrinter {
             return "Type mismatch: \(message)"
         case .ParameterCountMismatch(let message):
             return "Parameter count mismatch: \(message)"
+        case .DuplicateDefinition(referenceId: _):
+            return "Duplicate definition for reference"
         }
     }
 }

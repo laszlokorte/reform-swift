@@ -32,8 +32,8 @@ public class RectangleForm : Form {
     public var name : String
     
     
-    init(formId: FormIdentifier, name : String) {
-        self.identifier = formId
+    public init(id: FormIdentifier, name : String) {
+        self.identifier = id
         self.name = name
     }
     

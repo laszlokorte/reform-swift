@@ -8,7 +8,7 @@
 
 import ReformExpression
 
-public protocol Analyzer {
+public protocol Analyzer : class {
     func analyze(block: () -> ())
     
     func publish(instruction: Analyzable, label: String)

@@ -18,7 +18,9 @@ class Solver {
     
         dataSet.clear();
 
-        for defValue in sheet.sortedDefinitions {
+        let (duplicates, definitions) = sheet.sortedDefinitions
+        
+        for defValue in definitions {
             let id = defValue.id
             
             switch defValue.value {
@@ -38,6 +40,10 @@ class Solver {
             default:
                 break
             }
+        }
+        
+        for d in duplicates {
+            dataSet.markError(d, error: EvaluationError.DuplicateDefinition(referenceId: d))
         }
     
     }

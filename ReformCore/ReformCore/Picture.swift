@@ -10,7 +10,7 @@ public struct PictureIdentifier : Hashable, SubCallId {
     public typealias CallType = Picture
     private let id : Int64
     
-    init(_ id : Int64) {
+    public init(_ id : Int64) {
         self.id = id
     }
     
@@ -27,7 +27,7 @@ public class Picture {
     var size : (Int, Int)
     let procedure  : Procedure
     
-    init(identifier : PictureIdentifier, name: String, size: (Int, Int), procedure : Procedure) {
+    public init(identifier : PictureIdentifier, name: String, size: (Int, Int), procedure : Procedure) {
         self.identifier = identifier
         self.name = name
         self.procedure = procedure

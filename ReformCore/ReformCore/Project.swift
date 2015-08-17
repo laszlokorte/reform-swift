@@ -7,5 +7,9 @@
 //
 
 public class Project {
-    var pictures : [Picture] = []
+    var pictures : [Picture]
+    
+    public init(pictures: Picture...) {
+        self.pictures = pictures
+    }
 }

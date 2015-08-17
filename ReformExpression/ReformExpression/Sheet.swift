@@ -97,17 +97,45 @@ extension Definition {
     }
 }
 
-public class Sheet {
-    var definitions: [Definition] = []
-    var _sortedDefinitions: [Definition] = []
+protocol DefinitionSheet {
+    var sortedDefinitions : [Definition] { get }
     
-    var sortedDefinitions : [Definition] {
-        prepareForSolving()
-        return _sortedDefinitions
+    func definitionWithName(name: String) -> Definition?
+    
+    func definitionWithId(id: ReferenceId) -> Definition?
+}
+
+public protocol Sheet : class {
+    var sortedDefinitions : (Set<ReferenceId>, [Definition]) { get }
+    var referenceIds : Set<ReferenceId> { get }
+    
+    func definitionWithName(name:String) -> Definition?
+    
+    func definitionWithId(id:ReferenceId) -> Definition?
+    
+    func replaceOccurencesOf(reference: ReferenceId, with: Value)
+}
+
+public protocol EditableSheet : Sheet {
+    func addDefinition(definition: Definition)
+    
+    func removeDefinition(definition: ReferenceId)
+}
+
+public class BaseSheet : EditableSheet {
+    private var definitions: [Definition] = []
+    
+    public init() {
+    
     }
     
-    private var _duplicates = Set<ReferenceId>()
-    private var _unresolved = Set<ReferenceId>()
+    public var referenceIds : Set<ReferenceId> {
+        return Set(definitions.map { $0.id })
+    }
+    
+    public var sortedDefinitions : (Set<ReferenceId>, [Definition]) {
+        return sortDefinitions(definitions)
+    }
     
     public func definitionWithName(name:String) -> Definition? {
         for def in definitions {
@@ -129,33 +157,99 @@ public class Sheet {
         return nil
     }
     
-    func replaceOccurencesOf(reference: ReferenceId, with: Value) {
+    public func replaceOccurencesOf(reference: ReferenceId, with: Value) {
         for def in definitions {
             def.replaceOccurencesOf(reference, with: with)
         }
     }
     
-    func prepareForSolving() {
-
-        var nodes = [ReferenceId:Node<ReferenceId, Definition>]()
-        
-        for d in definitions {
-            if nodes.keys.contains(d.id) {
-                _duplicates.insert(d.id)
-            } else {
-                nodes[d.id] = Node(id: d.id, data: d)
-            }
-        }
-        
-        for (_, node) in nodes {
-            let dependencies = node.data.value.collectedDependencies().flatMap({ nodes[$0] })
-            for d in dependencies {
-                d.outgoing.insert(node)
-            }
-        }
-        
-        _sortedDefinitions = topologicallySorted(nodes.values.array).map { node -> Definition in
-            return node.data
+    public func addDefinition(definition: Definition) {
+        definitions.append(definition)
+    }
+    
+    public func removeDefinition(id: ReferenceId) {
+        if let index = definitions.indexOf({ $0.id == id }) {
+            definitions.removeAtIndex(index)
         }
     }
+}
+
+public class DerivedSheet : EditableSheet {
+    private var definitions: [Definition] = []
+    private let baseSheet : Sheet
+    
+    init(base: Sheet) {
+        self.baseSheet = base
+    }
+    
+    public var referenceIds : Set<ReferenceId> {
+        return Set(definitions.map { $0.id }).union(baseSheet.referenceIds)
+    }
+    
+    public var sortedDefinitions : (Set<ReferenceId>, [Definition]) {
+        return sortDefinitions(referenceIds.flatMap({ definitionWithId($0) }))
+    }
+    
+    public func definitionWithName(name:String) -> Definition? {
+        for def in definitions {
+            if def.name == name {
+                return def
+            }
+        }
+        
+        return baseSheet.definitionWithName(name)
+    }
+    
+    public func definitionWithId(id:ReferenceId) -> Definition? {
+        for def in definitions {
+            if def.id == id {
+                return def
+            }
+        }
+        
+        return baseSheet.definitionWithId(id)
+    }
+    
+    public func replaceOccurencesOf(reference: ReferenceId, with: Value) {
+        for def in definitions {
+            def.replaceOccurencesOf(reference, with: with)
+        }
+    }
+    
+    public func addDefinition(definition: Definition) {
+        definitions.append(definition)
+    }
+    
+    public func removeDefinition(id: ReferenceId) {
+        if let index = definitions.indexOf({ $0.id == id }) {
+            definitions.removeAtIndex(index)
+        }
+    }
+}
+
+
+
+func sortDefinitions(definitions: [Definition]) -> (Set<ReferenceId>, [Definition]) {
+    
+    var nodes = [ReferenceId:Node<ReferenceId, Definition>]()
+    var duplicates = Set<ReferenceId>()
+    
+    for d in definitions {
+        if nodes.keys.contains(d.id) {
+            duplicates.insert(d.id)
+        } else {
+            nodes[d.id] = Node(id: d.id, data: d)
+        }
+    }
+    
+    for (_, node) in nodes {
+        let dependencies = node.data.value.collectedDependencies().flatMap({ nodes[$0] })
+        for d in dependencies {
+            d.outgoing.insert(node)
+        }
+    }
+    
+    return (duplicates, topologicallySorted(nodes.values.array).map { node -> Definition in
+        return node.data
+    })
 }

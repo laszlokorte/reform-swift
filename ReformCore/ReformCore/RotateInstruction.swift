@@ -8,14 +8,14 @@
 
 import ReformMath
 
-class RotateInstruction : Instruction {
-    typealias PointType = LabeledPoint
-    typealias AngleType = protocol<RuntimeRotationAngle, Labeled>
+public class RotateInstruction : Instruction {
+    public typealias PointType = LabeledPoint
+    public typealias AngleType = protocol<RuntimeRotationAngle, Labeled>
     
     
-    var parent : InstructionGroup?
+    public var parent : InstructionGroup?
     
-    var target : FormIdentifier? {
+    public var target : FormIdentifier? {
         return formId
     }
     
@@ -23,13 +23,13 @@ class RotateInstruction : Instruction {
     let angle : AngleType
     var fixPoint : PointType
     
-    init(formId: FormIdentifier, angle: AngleType, fixPoint: PointType) {
+    public init(formId: FormIdentifier, angle: AngleType, fixPoint: PointType) {
         self.formId = formId
         self.angle = angle
         self.fixPoint = fixPoint
     }
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Rotatable else {
             runtime.reportError(self, error: .UnknownForm)
             return
@@ -47,7 +47,7 @@ class RotateInstruction : Instruction {
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         let formName = analyzer.get(formId)?.name ?? "???"
         
         analyzer.publish(self, label: "Rotate \(formName) around \(fixPoint.getDescription(analyzer)) by \(angle.getDescription(analyzer))")

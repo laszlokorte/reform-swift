@@ -12,8 +12,18 @@ public protocol SubCallId {
     typealias CallType
 }
 
-public protocol Runtime {
+public protocol RuntimeListener {
+    func runtimeBeginEvaluation(runtime: Runtime)
+    func runtimeFinishEvaluation(runtime: Runtime)
+    func runtime(runtime: Runtime, didEval: Instruction)
+    func runtime(runtime: Runtime, exitScopeWithForms: [FormIdentifier])
+    func runtime(runtime: Runtime, triggeredError: RuntimeError, onInstruction: Instruction)
+}
+
+public protocol Runtime : class {
     static var maxDepth : Int { get }
+    
+    var listeners : [RuntimeListener] { get set }
     
     func subCall<T:SubCallId>(id: T, width: Int, height: Int, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ())
     

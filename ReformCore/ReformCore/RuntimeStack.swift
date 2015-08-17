@@ -29,9 +29,17 @@ class RuntimeStack {
     func declare(form : Form) {
         if let topFrame = frames.last {
             topFrame.forms.append(form.identifier)
+            formMap[form.identifier] = form
             offsets[form.identifier] = dataSize
             dataSize += form.dynamicType.stackSize
+            growIfNeeded()
             forms.append(form.identifier)
+        }
+    }
+    
+    func growIfNeeded() {
+        while data.count < dataSize {
+            data.append(0)
         }
     }
     

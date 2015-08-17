@@ -6,24 +6,24 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class CreateFormInstruction : Instruction {
-    typealias DestinationType = protocol<RuntimeInitialDestination, Labeled>
+public class CreateFormInstruction : Instruction {
+    public typealias DestinationType = protocol<RuntimeInitialDestination, Labeled>
     
-    var parent : InstructionGroup?
+    public var parent : InstructionGroup?
     
-    var target : FormIdentifier? {
+    public var target : FormIdentifier? {
         return form.identifier
     }
     
     let form : Form
     var destination : DestinationType
     
-    init(form : Form, destination: DestinationType) {
+    public init(form : Form, destination: DestinationType) {
         self.form = form
         self.destination = destination
     }
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         guard let (min, max) = destination.getMinMaxFor(runtime) else {
             runtime.reportError(self, error: .InvalidDestination)
             return
@@ -33,7 +33,7 @@ class CreateFormInstruction : Instruction {
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         analyzer.announceForm(form)
         analyzer.publish(self, label: "Create \(form.name) \(destination.getDescription(analyzer))")
         if let picture = form as? PictureForm, let id = picture.pictureIdentifier {

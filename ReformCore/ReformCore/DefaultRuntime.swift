@@ -8,67 +8,96 @@
 
 import ReformExpression
 
-class DefaultRuntime : Runtime {
-    static let maxDepth : Int = 3
+public class DefaultRuntime : Runtime {
+    public var listeners = [RuntimeListener]()
+    
+    public static let maxDepth : Int = 3
     private var _stopped : Bool
     private var stack = RuntimeStack()
     private var dataSet : DataSet
 
-    var shouldStop : Bool { get { return _stopped } }
+    public var shouldStop : Bool { get { return _stopped } }
     
-    init() {
+    public init() {
         dataSet = WritableDataSet()
         _stopped = false
     }
     
-    func subCall<T:SubCallId>(id: T, width: Int, height: Int, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ()) {
+    public func subCall<T:SubCallId>(id: T, width: Int, height: Int, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ()) {
         self.dataSet = dataSet
         
     }
     
-    func run(block: (width: Int, height: Int) -> ()) {
-        _stopped = false
-        defer { _stopped = true }
+    public func run(block: (width: Int, height: Int) -> ()) {
         stack.clear()
         
+        listeners.forEach() {
+            $0.runtimeBeginEvaluation(self)
+        }
+        defer {
+            listeners.forEach() {
+                $0.runtimeFinishEvaluation(self)
+            }
+        }
+        
+        _stopped = false
+        defer {
+            _stopped = true
+        }
+        
         block(width: 100, height: 100)
+        
     }
     
-    func eval(instruction : Instruction, block: () -> ()) {
+    public func eval(instruction : Instruction, block: () -> ()) {
         block()
+        
+        listeners.forEach() {
+            $0.runtime(self, didEval: instruction)
+        }
     }
     
-    func scoped(block: () -> ()) {
+    public func scoped(block: () -> ()) {
         stack.pushFrame()
-        defer { stack.popFrame() }
+        defer {
+            guard let forms = stack.frames.last?.forms else {
+                fatalError()
+            }
+            listeners.forEach() {
+                $0.runtime(self, exitScopeWithForms: forms)
+            }
+            stack.popFrame()
+        }
         block()
     }
     
-    func declare(form : Form) {
+    public func declare(form : Form) {
         stack.declare(form)
     }
     
-    func get(id: FormIdentifier) -> Form? {
+    public func get(id: FormIdentifier) -> Form? {
         return stack.getForm(id)
     }
     
-    func read(id: FormIdentifier, offset: Int) -> UInt64? {
+    public func read(id: FormIdentifier, offset: Int) -> UInt64? {
         return stack.getData(id, offset: offset)
     }
     
-    func write(id: FormIdentifier, offset: Int, value: UInt64) {
+    public func write(id: FormIdentifier, offset: Int, value: UInt64) {
         stack.setData(id, offset: offset, newValue: value)
     }
     
-    func getForms() -> [FormIdentifier] {
+    public func getForms() -> [FormIdentifier] {
         return stack.forms
     }
     
-    func getDataSet() -> DataSet {
+    public func getDataSet() -> DataSet {
         return dataSet
     }
     
-    func reportError(instruction : Instruction, error : RuntimeError) {
-    
+    public func reportError(instruction : Instruction, error : RuntimeError) {
+        listeners.forEach() {
+            $0.runtime(self, triggeredError: error, onInstruction: instruction)
+        }
     }
 }

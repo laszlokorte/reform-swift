@@ -7,6 +7,6 @@
 //
 
 
-protocol RuntimeScaleFactor : Degeneratable {
+public protocol RuntimeScaleFactor : Degeneratable {
     func getFactorFor(runtime: Runtime) -> Double?
 }

@@ -29,7 +29,7 @@ public class CircleForm : Form {
     public var name : String
     
     
-    init(formId: FormIdentifier, name : String) {
+    public init(formId: FormIdentifier, name : String) {
         self.identifier = formId
         self.name = name
     }

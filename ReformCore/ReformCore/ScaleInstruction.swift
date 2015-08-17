@@ -9,13 +9,13 @@
 
 import ReformMath
 
-class ScaleInstruction : Instruction {
-    typealias PointType = LabeledPoint
-    typealias FactorType = protocol<RuntimeScaleFactor, Labeled>
+public class ScaleInstruction : Instruction {
+    public typealias PointType = LabeledPoint
+    public typealias FactorType = protocol<RuntimeScaleFactor, Labeled>
 
-    var parent : InstructionGroup?
+    public var parent : InstructionGroup?
     
-    var target : FormIdentifier? {
+    public var target : FormIdentifier? {
         return formId
     }
     
@@ -23,13 +23,13 @@ class ScaleInstruction : Instruction {
     let factor : FactorType
     var fixPoint : PointType
     
-    init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType) {
+    public init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType) {
         self.formId = formId
         self.factor = factor
         self.fixPoint = fixPoint
     }
     
-    func evaluate(runtime: Runtime) {
+    public func evaluate(runtime: Runtime) {
         guard let form = runtime.get(formId) as? Scalable else {
             runtime.reportError(self, error: .UnknownForm)
             return
@@ -47,7 +47,7 @@ class ScaleInstruction : Instruction {
     }
     
     
-    func analyze(analyzer: Analyzer) {
+    public func analyze(analyzer: Analyzer) {
         let formName = analyzer.get(formId)?.name ?? "???"
         
         analyzer.publish(self, label: "Scale \(formName) around \(fixPoint.getDescription(analyzer)) by \(factor)")
