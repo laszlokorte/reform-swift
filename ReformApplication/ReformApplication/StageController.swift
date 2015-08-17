@@ -12,6 +12,7 @@ import Cocoa
 import ReformCore
 import ReformExpression
 import ReformStage
+import ReformMath
 
 class StageController : NSViewController {
     
@@ -79,20 +80,49 @@ class StageController : NSViewController {
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         
-        let from = ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue)
-        let to = ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)
-        
+        let lineForm = LineForm(id: FormIdentifier(200), name: "Line 1")
+
         let rectangleDestination = RelativeDestination(
-            from: from,
-            to: to
+            from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue),
+            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)
+        )
+        
+        let lineDestination = RelativeDestination(
+            from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue),
+            to: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.BottomLeft.rawValue)
         )
         
         let createInstruction = CreateFormInstruction(form: rectangleForm, destination: rectangleDestination)
-        let node = InstructionNode(instruction: createInstruction)
         
-        procedure.root.append(node)
+        let node1 = InstructionNode(instruction: createInstruction)
         
-        currentInstruction = node
+        procedure.root.append(node1)
+        
+        let moveInstruction = TranslateInstruction(formId: rectangleForm.identifier, distance: RelativeDistance(
+            from: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.Center.rawValue),
+            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)))
+        
+        let node2 = InstructionNode(instruction: moveInstruction)
+        
+        procedure.root.append(node2)
+        
+        let rotateInstruction = RotateInstruction(
+            formId: rectangleForm.identifier,
+            angle: ConstantAngle(angle: Angle(percent: 20)),
+            fixPoint: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)
+        )
+        
+        let node3 = InstructionNode(instruction: rotateInstruction)
+        
+        procedure.root.append(node3)
+        
+        let createLineInstruction = CreateFormInstruction(form: lineForm, destination: lineDestination)
+        let node4 = InstructionNode(instruction: createLineInstruction)
+
+        procedure.root.append(node4)
+
+        
+        currentInstruction = node4
         
         runtime.listeners.append(stageCollector)
         //runtime.listeners.append(DebugRuntimeListener())
@@ -105,13 +135,13 @@ class StageController : NSViewController {
             print(e)
         }
         
-        print("Final Shapes:")
-        for s in stage.finalShapes {
-            print(s)
-        }
+//        print("Final Shapes:")
+//        for s in stage.currentShapes {
+//            print(s)
+//        }
         
         if let c = canvas {
-            c.shapes = stage.finalShapes
+            c.shapes = stage.currentShapes
             c.canvasSize = stage.size
         }
     }

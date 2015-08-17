@@ -315,7 +315,7 @@ extension RectangleForm : Drawable {
                 return nil
         }
         
-        return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft))
+        return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft), .Close)
     }
     
     public func getShapeFor(runtime: Runtime) -> Shape? {

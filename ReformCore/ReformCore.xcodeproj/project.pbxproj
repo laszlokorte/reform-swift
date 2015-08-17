@@ -81,6 +81,8 @@
 		F26D47611B7DA05A00266096 /* ForeignFormPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */; };
 		F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391041B7F88B400100F2F /* IntersectionPoint.swift */; };
 		F273911E1B7FA24000100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273911D1B7FA24000100F2F /* Glomp.swift */; };
+		F2A1049B1B82062D00E97C6B /* RelativeDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */; };
+		F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */; };
 		F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 /* End PBXBuildFile section */
@@ -173,6 +175,8 @@
 		F26D47601B7DA05A00266096 /* ForeignFormPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForeignFormPoint.swift; sourceTree = "<group>"; };
 		F27391041B7F88B400100F2F /* IntersectionPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntersectionPoint.swift; sourceTree = "<group>"; };
 		F273911D1B7FA24000100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
+		F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDistance.swift; sourceTree = "<group>"; };
+		F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantAngel.swift; sourceTree = "<group>"; };
 		F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
 		F2DC43C01B81E247006748E0 /* InstructionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -449,6 +453,7 @@
 				F26D470B1B7D342D00266096 /* CenterPoint.swift */,
 				F26D47391B7D477700266096 /* AnchorPoint.swift */,
 				F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */,
+				F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */,
 			);
 			name = Composed;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				F26D47371B7D43E000266096 /* ConstantLength.swift */,
+				F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */,
 			);
 			name = Constant;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				F26D46C91B7D136600266096 /* Analyzer.swift in Sources */,
 				F26D46DE1B7D157A00266096 /* Anchor.swift in Sources */,
 				F26D46F21B7D1FC600266096 /* RuntimeError.swift in Sources */,
+				F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */,
 				F26D470C1B7D342D00266096 /* CenterPoint.swift in Sources */,
 				F26D46CE1B7D140700266096 /* Project.swift in Sources */,
 				F26D475C1B7D868B00266096 /* RuntimeStack.swift in Sources */,
@@ -696,6 +703,7 @@
 				F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */,
 				F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */,
 				F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */,
+				F2A1049B1B82062D00E97C6B /* RelativeDistance.swift in Sources */,
 				F26D47061B7D2D5C00266096 /* DefaultRuntime.swift in Sources */,
 				F26D46BC1B7D10FB00266096 /* Length.swift in Sources */,
 				F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */,

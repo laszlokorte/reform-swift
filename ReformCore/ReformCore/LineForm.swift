@@ -25,8 +25,8 @@ final public class LineForm : Form{
     public var name : String
 
     
-    public init(formId: FormIdentifier, name : String) {
-        self.identifier = formId
+    public init(id: FormIdentifier, name : String) {
+        self.identifier = id
         self.name = name
     }
     

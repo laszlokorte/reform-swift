@@ -39,7 +39,7 @@ final public class StageCollector : RuntimeListener {
         guard focusFilter(instruction) else { return }
         
         defer { collected = true }
-        
+                
         for id in runtime.getForms() {
             guard let entity = entityForRuntimeForm(analyzer, runtime: runtime, formId: id) else { continue }
             
