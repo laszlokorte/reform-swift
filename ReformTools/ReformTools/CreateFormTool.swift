@@ -289,12 +289,23 @@ public class CreateFormTool : Tool {
             break
         case .Release:
             switch self.state {
-            case .Started(_):
-                state = .Idle
-                break
             case .Delegating:
-                state = .Idle
                 selectionTool.process(input, withModifier: modifier)
+                state = .Idle
+
+                break
+            case .Started(_,_,_, let target, _):
+                let position : Vec2d
+                switch target {
+                case .Free(let pos,_):
+                    position = pos
+                    break
+                case .Snap(let pos,_,_,_):
+                    position = pos
+                    break
+                }
+                state = .Idle
+                process(.Move(position: position), withModifier: modifier)
                 break
             case .Idle:
                 break
