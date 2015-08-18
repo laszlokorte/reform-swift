@@ -86,8 +86,6 @@ extension CanvasView {
         toolController?.currentTool.process(.Move(position: Vec2d(x: Double(pos.x-25), y: Double(pos.y-25))), withModifier: Modifier.fromEvent(theEvent))
         
         self.needsDisplay = true
-        
-        Swift.print("move")
     }
     
     override func mouseDragged(theEvent: NSEvent) {

@@ -15,15 +15,15 @@ extension Modifier {
         
 
         if event.modifierFlags.contains(.ShiftKeyMask) {
-            result.unionInPlace(Modifier.Shift)
+            result.unionInPlace(Modifier.Streight)
         }
         
         if event.modifierFlags.contains(.AlternateKeyMask) {
-            result.unionInPlace(Modifier.Alt)
+            result.unionInPlace(Modifier.AlternativeAlignment)
         }
         
         if event.modifierFlags.contains(.ControlKeyMask) {
-            result.unionInPlace(Modifier.Ctrl)
+            result.unionInPlace(Modifier.Glomp)
         }
 
         

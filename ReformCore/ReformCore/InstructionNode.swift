@@ -26,7 +26,7 @@ public class InstructionNode {
 
 extension InstructionNode {
     
-    public func append(node: InstructionNode) -> Bool {
+    public func append(child node: InstructionNode) -> Bool {
         switch content {
         case .Null:
             return false
@@ -38,13 +38,33 @@ extension InstructionNode {
             return true
         }
     }
+    
+    public func append(sibling node: InstructionNode) -> Bool {
+        guard let parent = parent else {
+            return false
+        }
+        
+        switch parent.content {
+        case .Null:
+            return false
+        case .Single(_):
+            return false
+        case .Group(let group, var children):
+            guard let index = children.indexOf({$0===self}) else {
+                return false
+            }
+            children.insert(node, atIndex: index)
+            content = .Group(group, children)
+            return true
+        }
+    }
 }
 
 extension InstructionNode {
     
     public func removeFromParent() -> Bool {
         guard let parent = self.parent,
-            case .Group(let node, var children) = parent.content else {
+            case .Group(let node, let children) = parent.content else {
                 return false
         }
         

@@ -6,6 +6,14 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class InstructionFocus {
+import ReformCore
 
+public class InstructionFocus {
+    public var current : InstructionNode? {
+        didSet {
+            print(current)
+        }
+    }
+    
+    public init() {}
 }

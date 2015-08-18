@@ -25,7 +25,7 @@ class StageController : NSViewController {
     let runtime = DefaultRuntime()
 
     
-    var currentInstruction : InstructionNode? = nil
+    let instructionFocus = InstructionFocus()
     let stage = Stage()
     
     let selectionUI = SelectionUI()
@@ -36,12 +36,12 @@ class StageController : NSViewController {
     let cropUI = CropUI()
     
     lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selectionUI: self.selectionUI)
-    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, snapUI: self.snapUI, selectionTool: self.selectionTool)
+    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, snapUI: self.snapUI, selectionTool: self.selectionTool)
     
     let toolController = ToolController()
     
     lazy var stageCollector : StageCollector = StageCollector(stage: self.stage, analyzer: self.analyzer) {
-        return self.currentInstruction === $0 as? InstructionNode
+        return self.instructionFocus.current === $0 as? InstructionNode
     }
 
     class DebugRuntimeListener : RuntimeListener {
@@ -109,7 +109,7 @@ class StageController : NSViewController {
         
         let node1 = InstructionNode(instruction: createInstruction)
         
-        procedure.root.append(node1)
+        procedure.root.append(child: node1)
         
         let moveInstruction = TranslateInstruction(formId: rectangleForm.identifier, distance: RelativeDistance(
             from: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.Center.rawValue),
@@ -117,7 +117,7 @@ class StageController : NSViewController {
         
         let node2 = InstructionNode(instruction: moveInstruction)
         
-        procedure.root.append(node2)
+        procedure.root.append(child: node2)
         
         let rotateInstruction = RotateInstruction(
             formId: rectangleForm.identifier,
@@ -127,15 +127,15 @@ class StageController : NSViewController {
         
         let node3 = InstructionNode(instruction: rotateInstruction)
         
-        procedure.root.append(node3)
+        procedure.root.append(child: node3)
         
         let createLineInstruction = CreateFormInstruction(form: lineForm, destination: lineDestination)
         let node4 = InstructionNode(instruction: createLineInstruction)
 
-        procedure.root.append(node4)
+        procedure.root.append(child: node4)
 
         
-        currentInstruction = node4
+        instructionFocus.current = node4
         
         runtime.listeners.append(stageCollector)
         //runtime.listeners.append(DebugRuntimeListener())

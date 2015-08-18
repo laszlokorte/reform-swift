@@ -16,13 +16,24 @@ public struct Modifier : OptionSetType {
         self.rawValue = rawValue
     }
     
-    public static let Shift = Modifier(rawValue: 1)
-    public static let Alt = Modifier(rawValue: 2)
-    public static let Ctrl = Modifier(rawValue: 4)
+    public static let Streight = Modifier(rawValue: 1)
+    public static let AlternativeAlignment = Modifier(rawValue: 2)
+    public static let Glomp = Modifier(rawValue: 4)
 }
 
 public func ==(lhs: Modifier, rhs: Modifier) -> Bool {
     return lhs.rawValue == rhs.rawValue
+}
+
+extension Modifier {
+    
+    var isStreight : Bool {
+        return contains(Modifier.Streight)
+    }
+    
+    var altAlign : Bool {
+        return contains(Modifier.AlternativeAlignment)
+    }
 }
 
 public enum Input {
