@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F222AF201B83B68D005F71A1 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1F1B83B68D005F71A1 /* PointType.swift */; };
+		F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF211B83B6A9005F71A1 /* PointFinder.swift */; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F222AF1F1B83B68D005F71A1 /* PointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
+		F222AF211B83B6A9005F71A1 /* PointFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointFinder.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F222AF1E1B83B65B005F71A1 /* PointFinder */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF1F1B83B68D005F71A1 /* PointType.swift */,
+				F222AF211B83B6A9005F71A1 /* PointFinder.swift */,
+			);
+			name = PointFinder;
+			sourceTree = "<group>";
+		};
 		F26D46501B7D0B9500266096 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +136,7 @@
 		F26D465C1B7D0B9600266096 /* ReformTools */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF1E1B83B65B005F71A1 /* PointFinder */,
 				F2A104BD1B821B9800E97C6B /* UI */,
 				F2A104A61B82148800E97C6B /* Controller */,
 				F2A104A11B82142900E97C6B /* Selection */,
@@ -316,7 +330,9 @@
 				F2A104AE1B821A2100E97C6B /* CropTool.swift in Sources */,
 				F2A104B01B821A4600E97C6B /* MorphTool.swift in Sources */,
 				F2A104B61B821A8C00E97C6B /* PreviewTool.swift in Sources */,
+				F222AF201B83B68D005F71A1 /* PointType.swift in Sources */,
 				F2A104A81B82149A00E97C6B /* ToolController.swift in Sources */,
+				F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */,
 				F2A104BA1B821AD900E97C6B /* ScaleTool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

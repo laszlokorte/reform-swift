@@ -72,7 +72,10 @@ public class CreateFormTool : Tool {
             update(state)
         }
     }
-    let stage : Stage
+    
+    var snapType : PointType = [.Form, .Intersection, .Glomp]
+    
+    let pointFinder : PointFinder
     let focus : InstructionFocus
     let snapUI : SnapUI
     let notifier : ChangeNotifier
@@ -82,7 +85,7 @@ public class CreateFormTool : Tool {
     var idSequence : Int64 = 199
     
     public init(stage: Stage, focus: InstructionFocus, snapUI: SnapUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
-        self.stage = stage
+        self.pointFinder = PointFinder(stage: stage)
         self.focus = focus
         self.snapUI = snapUI
         self.selectionTool = selectionTool
@@ -92,7 +95,7 @@ public class CreateFormTool : Tool {
     public func setUp() {
         selectionTool.setUp()
         state = .Idle
-        snapUI.state = .Show(stage.getSnapPoints(excludeCurrent))
+        snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
     }
     
     public func tearDown() {
@@ -112,6 +115,7 @@ public class CreateFormTool : Tool {
     }
     
     public func process(input: Input, withModifier modifier: Modifier) {
+        snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
         switch input {
         case .Cancel:
             switch self.state {
@@ -380,10 +384,10 @@ public class CreateFormTool : Tool {
     func update(state: State) {
         switch state {
         case .Idle, .Delegating:
-            snapUI.state = .Show(stage.getSnapPoints(excludeCurrent))
+            snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
             break
         case .Snapped(_, let start,_):
-            snapUI.state = .Active(start, stage.getSnapPoints(excludeCurrent))
+            snapUI.state = .Active(start, pointFinder.getSnapPoints(pointQuery()))
             break
         case .Started(let start, let form, let node, let target, let alignment):
             let destination : protocol<RuntimeInitialDestination, Labeled>
@@ -393,12 +397,12 @@ public class CreateFormTool : Tool {
                 let delta = adjust(targetPosition - start.position, streighten: streight)
                 
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta, alignment: alignment.runtimeAlignment)
-                snapUI.state = .Show(stage.getSnapPoints(excludeCurrent))
+                snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
 
             case .Snap(_, let snapPoint, _, let streighteningMode):
                 destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint, direction: direction(streighteningMode, delta: snapPoint.position - start.position), alignment: alignment.runtimeAlignment)
                 
-                snapUI.state = .Active(snapPoint, stage.getSnapPoints(excludeCurrent))
+                snapUI.state = .Active(snapPoint, pointFinder.getSnapPoints(pointQuery()))
             }
             
             node.replaceWith(CreateFormInstruction(form: form, destination: destination))
@@ -409,20 +413,35 @@ public class CreateFormTool : Tool {
         }
     }
     
-    private func excludeCurrent(id: FormIdentifier) -> Bool {
+    private func pointQuery() -> PointQuery {
+        let filter : FormFilter
+        
         switch state {
         case .Started(_, let form, _, _, _):
-            return form.identifier == id
+            filter = .Except(form.identifier)
         default:
-            return false
+            filter = .Any
         }
+        
+        return PointQuery(filter: filter, pointType: snapType, location: .Any)
+    }
+    
+    private func pointQuery(near: Vec2d) -> PointQuery {
+        let filter : FormFilter
+        
+        switch state {
+        case .Started(_, let form, _, _, _):
+            filter = .Except(form.identifier)
+        default:
+            filter = .Any
+        }
+        
+        return PointQuery(filter: filter, pointType: snapType, location: .Near(near, distance: 10))
     }
     
     private func snapPointNear(position: Vec2d, index: Int = 0) -> SnapPoint? {
-        let points = stage.getSnapPoints(excludeCurrent, excludePoint: { p in
-            return distance(point: p.position, point: position) > 10
-        })
-        
+        let points = pointFinder.getSnapPoints(pointQuery( position))
+            
         return points.count < 1 ? nil : points[index % points.count]
     }
     

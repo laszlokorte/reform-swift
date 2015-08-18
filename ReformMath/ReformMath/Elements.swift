@@ -38,4 +38,8 @@ extension Arc2d {
     var center : Vec2d {
         return (to+from)/2
     }
+    
+    var length : Double {
+        return M_PI * radius
+    }
 }

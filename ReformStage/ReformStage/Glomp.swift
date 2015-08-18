@@ -9,12 +9,18 @@
 import ReformMath
 import ReformCore
 
-struct GlompPoint : SnapPoint {
-    let position : Vec2d
-    let label : String
+public struct GlompPoint : SnapPoint {
+    public let position : Vec2d
+    public let label : String
     let point : ReformCore.GlompPoint
     
-    var runtimePoint : LabeledPoint {
+    public init(position: Vec2d, label: String, point: ReformCore.GlompPoint) {
+        self.position = position
+        self.label = label
+        self.point = point
+    }
+    
+    public var runtimePoint : LabeledPoint {
         return point
     }
 }

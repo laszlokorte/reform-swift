@@ -107,13 +107,19 @@ extension CanvasView {
         if theEvent.keyCode == 13 {
             toolController?.currentTool.process(.Toggle, withModifier: Modifier.fromEvent(theEvent))
             
-            Swift.print("Toggle")
+            
+        }
+        
+        if !theEvent.modifierFlags.isEmpty {
+            toolController?.currentTool.process(.ModifierChange, withModifier: Modifier.fromEvent(theEvent))
         }
         
     }
     
     override func keyUp(theEvent: NSEvent) {
-    
+        if !theEvent.modifierFlags.isEmpty {
+            toolController?.currentTool.process(.ModifierChange, withModifier: Modifier.fromEvent(theEvent))
+        }
     
     }
 }

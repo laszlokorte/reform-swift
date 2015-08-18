@@ -13,7 +13,7 @@ public struct GlompPoint : RuntimePoint, Labeled {
     let lerp : Expression
     let form : FormIdentifier
     
-    init(form: FormIdentifier, lerp: Expression) {
+    public init(form: FormIdentifier, lerp: Expression) {
         self.form = form
         self.lerp = lerp
     }
