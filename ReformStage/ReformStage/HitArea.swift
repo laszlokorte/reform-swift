@@ -20,7 +20,7 @@ public enum HitArea {
 }
 
 extension HitArea {
-    public func contains(point: Vec2d) -> Bool {
+    public func contains(point: Vec2d, margin: Double = 0) -> Bool {
         switch self {
         case None:
             return false

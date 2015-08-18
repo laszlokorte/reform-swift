@@ -6,6 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformMath
 import ReformStage
 
 public class CropTool : Tool {
@@ -39,6 +40,6 @@ public class CropTool : Tool {
     public func focusChange() {
     }
     
-    public func process(input: Input, withModifier: Modifier) {
+    public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
     }
 }

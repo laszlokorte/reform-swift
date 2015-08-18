@@ -38,7 +38,7 @@ extension Modifier {
 
 public enum Input {
     case Cancel
-    case Move(position: Vec2d)
+    case Move
     case Press
     case Release
     case Cycle

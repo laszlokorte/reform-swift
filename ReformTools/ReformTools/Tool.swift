@@ -6,6 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformMath
+
 public protocol Tool {
     func setUp()
     
@@ -15,5 +17,5 @@ public protocol Tool {
     
     func focusChange()
     
-    func process(input: Input, withModifier: Modifier)
+    func process(input: Input, atPosition: Vec2d, withModifier: Modifier)
 }

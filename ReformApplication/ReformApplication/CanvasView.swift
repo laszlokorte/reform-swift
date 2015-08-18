@@ -69,34 +69,47 @@ class CanvasView : NSView {
 }
 
 extension CanvasView {
+    private func fromEvent(event: NSEvent) -> Vec2d {
+        return fromPoint(event.locationInWindow)
+    }
+    
+    private func fromPoint(point: NSPoint) -> Vec2d {
+        let pos = convertPoint(point, fromView: nil)
+        
+        return Vec2d(x: Double(pos.x-25), y: Double(pos.y-25))
+    }
+    
     override func mouseDown(theEvent: NSEvent) {
-        toolController?.currentTool.process(.Press, withModifier: Modifier.fromEvent(theEvent))
+        toolController?.process(.Press, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
         
         self.needsDisplay = true
     }
     
     override func mouseUp(theEvent: NSEvent) {
-        toolController?.currentTool.process(.Release, withModifier: Modifier.fromEvent(theEvent))
+        toolController?.process(.Release, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
         
         self.needsDisplay = true
     }
     
     override func mouseMoved(theEvent: NSEvent) {
-        let pos = convertPoint(theEvent.locationInWindow, fromView: nil)
-        toolController?.currentTool.process(.Move(position: Vec2d(x: Double(pos.x-25), y: Double(pos.y-25))), withModifier: Modifier.fromEvent(theEvent))
+        
+        toolController?.process(.Move, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
         
         self.needsDisplay = true
     }
     
     override func mouseDragged(theEvent: NSEvent) {
-        let pos = convertPoint(theEvent.locationInWindow, fromView: nil)
-        toolController?.currentTool.process(.Move(position: Vec2d(x: Double(pos.x-25), y: Double(pos.y-25))), withModifier: Modifier.fromEvent(theEvent))
+        toolController?.process(.Move, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
         
         self.needsDisplay = true
     }
     
     override func flagsChanged(theEvent: NSEvent) {
-        toolController?.currentTool.process(.ModifierChange, withModifier: Modifier.fromEvent(theEvent))
+        guard let mousePostion = window?.mouseLocationOutsideOfEventStream else {
+            return
+        }
+        
+        toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         
         self.needsDisplay = true
     }
@@ -104,21 +117,29 @@ extension CanvasView {
     override var acceptsFirstResponder : Bool { return true }
     
     override func keyDown(theEvent: NSEvent) {
+        guard let mousePostion = window?.mouseLocationOutsideOfEventStream else {
+            return
+        }
+        
         if theEvent.keyCode == 13 {
-            toolController?.currentTool.process(.Toggle, withModifier: Modifier.fromEvent(theEvent))
+            toolController?.process(.Toggle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
             
             
         }
         
         if !theEvent.modifierFlags.isEmpty {
-            toolController?.currentTool.process(.ModifierChange, withModifier: Modifier.fromEvent(theEvent))
+            toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         }
         
     }
     
     override func keyUp(theEvent: NSEvent) {
+        guard let mousePostion = window?.mouseLocationOutsideOfEventStream else {
+            return
+        }
+        
         if !theEvent.modifierFlags.isEmpty {
-            toolController?.currentTool.process(.ModifierChange, withModifier: Modifier.fromEvent(theEvent))
+            toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         }
     
     }

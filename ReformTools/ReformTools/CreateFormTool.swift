@@ -18,8 +18,8 @@ extension CreateFormTool.State : CustomDebugStringConvertible {
         case .Snapped: return "Snapped"
         case .Started(_,_,_,.Free(_, true), _): return "Started Free Streight"
         case .Started(_,_,_,.Free(_, false), _): return "Started Free"
-        case .Started(_,_,_,.Snap(_,_,_,.Orthogonal), _): return "Started Snapped Orthogonal"
-        case .Started(_,_,_,.Snap(_,_,_,.None), _): return "Started Snapped"
+        case .Started(_,_,_,.Snap(_,_,.Orthogonal), _): return "Started Snapped Orthogonal"
+        case .Started(_,_,_,.Snap(_,_,.None), _): return "Started Snapped"
         case .Delegating: return "Delegating"
         }
     }
@@ -55,13 +55,13 @@ public class CreateFormTool : Tool {
     
     enum Target {
         case Free(position: Vec2d, streight: Bool)
-        case Snap(position: Vec2d, point: SnapPoint, cycle: Int, streightening: StreighteningMode)
+        case Snap(point: SnapPoint, cycle: Int, streightening: StreighteningMode)
     }
     
     enum State
     {
         case Idle
-        case Snapped(pos: Vec2d, startPoint: SnapPoint, cycle: Int)
+        case Snapped(startPoint: SnapPoint, cycle: Int)
         case Started(startPoint: SnapPoint, form: Form, node: InstructionNode, target: Target, alignment: AlignmentMode)
         case Delegating
 
@@ -73,21 +73,33 @@ public class CreateFormTool : Tool {
         }
     }
     
-    var snapType : PointType = [.Form, .Intersection, .Glomp]
+    var snapType : PointType = [.Form, .Intersection, .Glomp]{
+        didSet {
+            if oldValue != snapType {
+                update(state)
+            }
+        }
+    }
+    
+    var cursorPoint = Vec2d()
     
     let pointFinder : PointFinder
+    let entityFinder : EntityFinder
     let focus : InstructionFocus
     let snapUI : SnapUI
+    let grabUI : GrabUI
     let notifier : ChangeNotifier
     
     let selectionTool : SelectionTool
     
     var idSequence : Int64 = 199
     
-    public init(stage: Stage, focus: InstructionFocus, snapUI: SnapUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
+    public init(stage: Stage, focus: InstructionFocus, snapUI: SnapUI, grabUI: GrabUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
         self.pointFinder = PointFinder(stage: stage)
+        self.entityFinder = EntityFinder(stage: stage)
         self.focus = focus
         self.snapUI = snapUI
+        self.grabUI = grabUI
         self.selectionTool = selectionTool
         self.notifier = notifier
     }
@@ -96,10 +108,12 @@ public class CreateFormTool : Tool {
         selectionTool.setUp()
         state = .Idle
         snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
+        grabUI.state = .Hide
     }
     
     public func tearDown() {
         snapUI.state = .Hide
+        grabUI.state = .Hide
         selectionTool.tearDown()
     }
     
@@ -114,14 +128,15 @@ public class CreateFormTool : Tool {
         selectionTool.focusChange()
     }
     
-    public func process(input: Input, withModifier modifier: Modifier) {
+    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
+        cursorPoint = pos
         switch input {
         case .Cancel:
             switch self.state {
             case .Delegating:
                 state = .Idle
-                selectionTool.process(input, withModifier: modifier)
+                selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 break
             case .Started(_, _, let instruction, _, _):
                 state = .Idle;
@@ -136,12 +151,11 @@ public class CreateFormTool : Tool {
         case .Cycle:
             switch self.state {
             case .Delegating:
-                selectionTool.process(input, withModifier: modifier)
+                selectionTool.process(input, atPosition: pos,  withModifier: modifier)
                 break
-            case .Snapped(let pos, _, let cycle):
+            case .Snapped(_, let cycle):
                 if let snapPoint = snapPointNear(pos, index: cycle+1) {
                     state = .Snapped(
-                        pos: pos,
                         startPoint:
                         snapPoint, cycle: cycle + 1
                     )
@@ -150,14 +164,13 @@ public class CreateFormTool : Tool {
                 }
                 
                 break
-            case .Started(let start, let form, let node, .Snap(let pos, _, let cycle, let streight), _):
+            case .Started(let start, let form, let node, .Snap(_, let cycle, let streight), _):
                 if let snapPoint = snapPointNear(pos, index: cycle+1) {
                     state = .Started(
                         startPoint: start,
                         form: form,
                         node: node,
                         target: .Snap(
-                            position: pos,
                             point: snapPoint,
                             cycle: cycle+1,
                             streightening: streight
@@ -180,21 +193,19 @@ public class CreateFormTool : Tool {
                 break
             }
             break
-        case .Move(let position):
+        case .Move, .ModifierChange:
             switch self.state {
             case .Idle:
-                if let snapPoint = snapPointNear(position) {
+                if let snapPoint = snapPointNear(pos) {
                     state = .Snapped(
-                        pos: position,
                         startPoint: snapPoint,
                         cycle: 0
                     )
                 }
                 break
-            case .Snapped(_, _, let cycle):
-                if let snapPoint = snapPointNear(position, index: cycle) {
+            case .Snapped(_, let cycle):
+                if let snapPoint = snapPointNear(pos, index: cycle) {
                     state = .Snapped(
-                        pos: position,
                         startPoint: snapPoint,
                         cycle: cycle
                     )
@@ -202,13 +213,12 @@ public class CreateFormTool : Tool {
                     state = .Idle
                 }
                 break
-            case .Started(let start, let form, let node, .Snap(_, _, let cycle, let streightening), _):
-                if let snapPoint = snapPointNear(position, index: cycle) {
+            case .Started(let start, let form, let node, .Snap(_, let cycle, let streightening), _):
+                if let snapPoint = snapPointNear(pos, index: cycle) {
                     state = .Started(
                         startPoint: start,
                         form: form, node: node,
                         target: .Snap(
-                            position: position,
                             point: snapPoint,
                             cycle: cycle,
                             streightening: modifier.isStreight ?
@@ -220,20 +230,19 @@ public class CreateFormTool : Tool {
                         startPoint: start,
                         form: form, node: node,
                         target: .Free(
-                            position: position,
+                            position: pos,
                             streight: modifier.isStreight
                         ),
                         alignment: modifier.altAlign ? .Centered : .Aligned)
                 }
                 break
             case .Started(let start, let form, let node, .Free(_,_), _):
-                if let snapPoint = snapPointNear(position) {
+                if let snapPoint = snapPointNear(pos) {
                     state = .Started(
                         startPoint: start,
                         form: form,
                         node: node,
                         target: .Snap(
-                            position: position,
                             point: snapPoint,
                             cycle: 0,
                             streightening: modifier.isStreight ? .Orthogonal(inverted: false) : .None),
@@ -244,19 +253,19 @@ public class CreateFormTool : Tool {
                         form: form,
                         node: node,
                         target: .Free(
-                            position: position,
+                            position: pos,
                             streight: modifier.isStreight),
                         alignment: modifier.altAlign ? .Centered : .Aligned)
                 }
                 break
             case .Delegating:
-                selectionTool.process(input, withModifier: modifier)
+                selectionTool.process(input, atPosition: pos,  withModifier: modifier)
                 break
             }
             break
         case .Press:
             switch self.state {
-            case .Snapped(let pos, let startPoint,_):
+            case .Snapped(let startPoint,_):
                 guard let currentInstruction = self.focus.current else {
                     break
                 }
@@ -272,7 +281,6 @@ public class CreateFormTool : Tool {
                         form: form,
                         node: node,
                         target: .Snap(
-                            position: pos,
                             point: startPoint,
                             cycle: 0,
                             streightening: modifier.isStreight ? .Orthogonal(inverted: false) : .None),
@@ -285,7 +293,7 @@ public class CreateFormTool : Tool {
                 break
             case .Idle, .Delegating:
                 self.state = .Delegating
-                selectionTool.process(input, withModifier: modifier)
+                selectionTool.process(input, atPosition: pos,  withModifier: modifier)
                 break
             case .Started(_):
                 break
@@ -294,22 +302,13 @@ public class CreateFormTool : Tool {
         case .Release:
             switch self.state {
             case .Delegating:
-                selectionTool.process(input, withModifier: modifier)
+                selectionTool.process(input, atPosition: pos,  withModifier: modifier)
                 state = .Idle
 
                 break
-            case .Started(_,_,_, let target, _):
-                let position : Vec2d
-                switch target {
-                case .Free(let pos,_):
-                    position = pos
-                    break
-                case .Snap(let pos,_,_,_):
-                    position = pos
-                    break
-                }
+            case .Started:
                 state = .Idle
-                process(.Move(position: position), withModifier: modifier)
+                process(input, atPosition: pos, withModifier: modifier)
                 break
             case .Idle:
                 break
@@ -319,13 +318,12 @@ public class CreateFormTool : Tool {
             break
         case .Toggle:
             switch self.state {
-            case .Started(let p, let f, let n, .Snap(let pos, let tp, let cycle, .Orthogonal(let inverted)), _):
+            case .Started(let p, let f, let n, .Snap(let tp, let cycle, .Orthogonal(let inverted)), _):
                 self.state = .Started(
                     startPoint: p,
                     form: f,
                     node: n,
                     target: .Snap(
-                        position: pos,
                         point: tp,
                         cycle: cycle,
                         streightening: modifier.isStreight ?
@@ -338,44 +336,6 @@ public class CreateFormTool : Tool {
                 break
             }
             break
-            
-            
-        case .ModifierChange:
-            switch self.state {
-            case .Delegating:
-                selectionTool.process(input, withModifier: modifier)
-                break
-            case .Started(let startpoint, let form, let node, let oldTarget, _):
-                
-                let newTarget : Target
-                
-                switch oldTarget {
-                case .Free(let pos, _):
-                    newTarget = .Free(position: pos, streight: modifier.isStreight)
-                    break
-                case .Snap(let pos, let point, let cycle, let streightMode):
-                    newTarget = .Snap(
-                        position: pos,
-                        point: point,
-                        cycle: cycle,
-                        streightening: modifier.isStreight ? .Orthogonal(inverted: streightMode.isInverted) : .None)
-                    break
-                }
-                
-                state = .Started(
-                    startPoint: startpoint,
-                    form: form,
-                    node: node,
-                    target: newTarget,
-                    alignment: modifier.altAlign ? .Centered : .Aligned)
-                
-                break
-                
-            case .Idle, .Snapped:
-                break
-            }
-
-            break
         }
         
 
@@ -385,9 +345,13 @@ public class CreateFormTool : Tool {
         switch state {
         case .Idle, .Delegating:
             snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
+            grabUI.state = .Hide
+
             break
-        case .Snapped(_, let start,_):
+        case .Snapped(let start,_):
             snapUI.state = .Active(start, pointFinder.getSnapPoints(pointQuery()))
+            grabUI.state = .Hide
+
             break
         case .Started(let start, let form, let node, let target, let alignment):
             let destination : protocol<RuntimeInitialDestination, Labeled>
@@ -399,7 +363,7 @@ public class CreateFormTool : Tool {
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta, alignment: alignment.runtimeAlignment)
                 snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
 
-            case .Snap(_, let snapPoint, _, let streighteningMode):
+            case .Snap(let snapPoint, _, let streighteningMode):
                 destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint, direction: direction(streighteningMode, delta: snapPoint.position - start.position), alignment: alignment.runtimeAlignment)
                 
                 snapUI.state = .Active(snapPoint, pointFinder.getSnapPoints(pointQuery()))
@@ -409,6 +373,12 @@ public class CreateFormTool : Tool {
             
             notifier()
 
+            if let entity = entityFinder.getEntity(form.identifier) {
+                grabUI.state = .Show(entity.points)
+            } else {
+                grabUI.state = .Hide
+            }
+            
             break
         }
     }
@@ -424,6 +394,19 @@ public class CreateFormTool : Tool {
         }
         
         return PointQuery(filter: filter, pointType: snapType, location: .Any)
+    }
+    
+    private func handleQuery() -> PointQuery {
+        let filter : FormFilter
+        
+        switch state {
+        case .Started(_, let form, _, _, _):
+            filter = .Only(form.identifier)
+        default:
+            filter = .None
+        }
+        
+        return PointQuery(filter: filter, pointType: .Form, location: .Any)
     }
     
     private func pointQuery(near: Vec2d) -> PointQuery {

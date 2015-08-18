@@ -14,8 +14,8 @@ struct GrabUIRenderer : Renderer {
     let grabUI : GrabUI
     
     func renderInContext(context: CGContext) {
-        CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
-        CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
+        CGContextSetRGBFillColor(context, 0.2, 0.7, 1, 1)
+        CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 1)
         CGContextSetLineWidth(context, 1)
         let dotSize : Double = 8
         

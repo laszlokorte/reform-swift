@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F222AF201B83B68D005F71A1 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1F1B83B68D005F71A1 /* PointType.swift */; };
 		F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF211B83B6A9005F71A1 /* PointFinder.swift */; };
+		F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF261B83EF6D005F71A1 /* EntityFinder.swift */; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		F222AF1F1B83B68D005F71A1 /* PointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		F222AF211B83B6A9005F71A1 /* PointFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointFinder.swift; sourceTree = "<group>"; };
+		F222AF261B83EF6D005F71A1 /* EntityFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityFinder.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 			name = PointFinder;
 			sourceTree = "<group>";
 		};
+		F222AF251B83EF5F005F71A1 /* EntityFinder */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF261B83EF6D005F71A1 /* EntityFinder.swift */,
+			);
+			name = EntityFinder;
+			sourceTree = "<group>";
+		};
 		F26D46501B7D0B9500266096 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		F26D465C1B7D0B9600266096 /* ReformTools */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF251B83EF5F005F71A1 /* EntityFinder */,
 				F222AF1E1B83B65B005F71A1 /* PointFinder */,
 				F2A104BD1B821B9800E97C6B /* UI */,
 				F2A104A61B82148800E97C6B /* Controller */,
@@ -320,6 +331,7 @@
 				F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */,
 				F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */,
 				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
+				F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */,
 				F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */,
 				F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */,
 				F2A104A01B82140300E97C6B /* Tool.swift in Sources */,

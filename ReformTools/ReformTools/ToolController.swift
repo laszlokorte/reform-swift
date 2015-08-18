@@ -6,12 +6,14 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformMath
+
 public typealias ChangeNotifier = () -> ()
 
 public class ToolController {
     public var currentTool : Tool = NullTool() {
         willSet {
-            currentTool.process(.Cancel, withModifier: [])
+            currentTool.process(.Cancel, atPosition: Vec2d(), withModifier: [])
             currentTool.tearDown()
         }
         
@@ -24,7 +26,8 @@ public class ToolController {
     
     }
     
-    func process(input: Input, withModifier modifier: Modifier) {
-        currentTool.process(input, withModifier: modifier)
+    
+    public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
+        currentTool.process(input, atPosition: atPosition, withModifier: withModifier)
     }
 }

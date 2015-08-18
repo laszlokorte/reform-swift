@@ -22,7 +22,7 @@ extension Modifier {
             result.unionInPlace(Modifier.AlternativeAlignment)
         }
         
-        if event.modifierFlags.contains(.ControlKeyMask) {
+        if event.modifierFlags.contains(.CommandKeyMask) {
             result.unionInPlace(Modifier.Glomp)
         }
 

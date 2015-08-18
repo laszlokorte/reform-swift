@@ -11,12 +11,13 @@ import ReformCore
 import ReformStage
 import ReformExpression
 
-enum PointLocation {
+enum LocationFilter {
     case Any
     case Near(Vec2d, distance: Double)
 }
 
 enum FormFilter {
+    case None
     case Any
     case Only(FormIdentifier)
     case Except(FormIdentifier)
@@ -25,7 +26,7 @@ enum FormFilter {
 struct PointQuery {
     let filter: FormFilter
     let pointType: PointType
-    let location : PointLocation
+    let location : LocationFilter
 }
 
 struct PointFinder {
@@ -34,7 +35,11 @@ struct PointFinder {
     func getSnapPoints(query: PointQuery) -> [SnapPoint] {
         var result = [SnapPoint]()
         
-        if query.pointType.contains(.Form) || query.pointType.contains(.Glomp) {
+        if case FormFilter.None = query.filter {
+            return result
+        }
+        
+        if (query.pointType.contains(.Form) || query.pointType.contains(.Glomp))  {
             for entity in stage.entities {
                 if case .Except(entity.id) = query.filter {
                     continue
