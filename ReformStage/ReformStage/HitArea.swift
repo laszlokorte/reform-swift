@@ -9,6 +9,7 @@
 import ReformMath
 
 public enum HitArea {
+    case None
     case Line(a: Vec2d, b: Vec2d)
     case Triangle(a: Vec2d, b: Vec2d, c: Vec2d)
     case Circle(center: Vec2d, radius: Double)
@@ -21,6 +22,8 @@ public enum HitArea {
 extension HitArea {
     public func contains(point: Vec2d) -> Bool {
         switch self {
+        case None:
+            return false
         case .Line(let a, let b):
             return onLineSegment(point, lineSegment: LineSegment2d(from: a, to:b), epsilon: 2)
         case .Circle(let center, let radius):

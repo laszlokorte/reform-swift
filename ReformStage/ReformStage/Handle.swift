@@ -9,16 +9,16 @@
 import ReformCore
 import ReformMath
 
-typealias PivotPair = (EntityPoint, EntityPoint)
+public typealias PivotPair = (EntityPoint, EntityPoint)
 
 public struct Handle {
-    let formId : FormIdentifier
-    let anchorId : AnchorIdentifier
+    public let formId : FormIdentifier
+    public let anchorId : AnchorIdentifier
     
-    let label : String
-    let position : Vec2d
+    public let label : String
+    public let position : Vec2d
     
-    let defaultPivot : PivotPair
+    public let defaultPivot : PivotPair
 }
 
 

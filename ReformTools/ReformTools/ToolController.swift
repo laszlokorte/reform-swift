@@ -9,7 +9,7 @@
 public class ToolController {
     public var currentTool : Tool = NullTool() {
         willSet {
-            currentTool.process(.Cancel, withModifiers: [])
+            currentTool.process(.Cancel, withModifier: [])
             currentTool.tearDown()
         }
         
@@ -22,7 +22,7 @@ public class ToolController {
     
     }
     
-    func process(input: Input, withModifiers modifiers: [Modifier]) {
-        currentTool.process(input, withModifiers: modifiers)
+    func process(input: Input, withModifier modifier: Modifier) {
+        currentTool.process(input, withModifier: modifier)
     }
 }

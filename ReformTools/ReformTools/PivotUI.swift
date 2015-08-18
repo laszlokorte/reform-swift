@@ -10,12 +10,12 @@ import ReformCore
 import ReformStage
 
 public class PivotUI {
-    enum State {
+    public enum State {
         case Hide
         case Show(SnapPoint)
     }
     
-    var state : State = .Hide
+    public var state : State = .Hide
     
     public init() {}
 }

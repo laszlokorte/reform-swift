@@ -15,5 +15,5 @@ public protocol Tool {
     
     func focusChange()
     
-    func process(input: Input, withModifiers: [Modifier])
+    func process(input: Input, withModifier: Modifier)
 }

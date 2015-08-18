@@ -11,6 +11,14 @@
 		F211927B1B7E57130011AA0F /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927A1B7E57130011AA0F /* SheetController.swift */; };
 		F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927C1B7E57340011AA0F /* MeasurementController.swift */; };
 		F211927F1B7E6B550011AA0F /* ProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211927E1B7E6B550011AA0F /* ProjectWindowController.swift */; };
+		F222AF0A1B835CD8005F71A1 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF091B835CD8005F71A1 /* Renderer.swift */; };
+		F222AF0C1B835D1F005F71A1 /* CropUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF0B1B835D1F005F71A1 /* CropUI.swift */; };
+		F222AF0E1B835D48005F71A1 /* SnapUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF0D1B835D48005F71A1 /* SnapUI.swift */; };
+		F222AF101B835E49005F71A1 /* PivotUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF0F1B835E49005F71A1 /* PivotUI.swift */; };
+		F222AF121B835E50005F71A1 /* GrabUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF111B835E50005F71A1 /* GrabUI.swift */; };
+		F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF131B835E58005F71A1 /* HandleUI.swift */; };
+		F222AF161B835E60005F71A1 /* SelectionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF151B835E60005F71A1 /* SelectionUI.swift */; };
+		F222AF191B836232005F71A1 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF181B836232005F71A1 /* Modifier.swift */; };
 		F24AAFE21B8177AF008DF952 /* ReformStage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD61B817576008DF952 /* ReformStage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F24AAFE41B8177AF008DF952 /* ReformMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD21B817520008DF952 /* ReformMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F24AAFE61B8177AF008DF952 /* ReformSerializer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -79,6 +87,14 @@
 		F211927A1B7E57130011AA0F /* SheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		F211927C1B7E57340011AA0F /* MeasurementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementController.swift; sourceTree = "<group>"; };
 		F211927E1B7E6B550011AA0F /* ProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectWindowController.swift; sourceTree = "<group>"; };
+		F222AF091B835CD8005F71A1 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		F222AF0B1B835D1F005F71A1 /* CropUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropUI.swift; sourceTree = "<group>"; };
+		F222AF0D1B835D48005F71A1 /* SnapUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapUI.swift; sourceTree = "<group>"; };
+		F222AF0F1B835E49005F71A1 /* PivotUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PivotUI.swift; sourceTree = "<group>"; };
+		F222AF111B835E50005F71A1 /* GrabUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabUI.swift; sourceTree = "<group>"; };
+		F222AF131B835E58005F71A1 /* HandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleUI.swift; sourceTree = "<group>"; };
+		F222AF151B835E60005F71A1 /* SelectionUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionUI.swift; sourceTree = "<group>"; };
+		F222AF181B836232005F71A1 /* Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F24AAFD21B817520008DF952 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F24AAFD61B817576008DF952 /* ReformStage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformStage.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformStage.framework"; sourceTree = "<group>"; };
@@ -136,6 +152,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F222AF081B835CB6005F71A1 /* UIRendering */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF091B835CD8005F71A1 /* Renderer.swift */,
+				F222AF0B1B835D1F005F71A1 /* CropUI.swift */,
+				F222AF0D1B835D48005F71A1 /* SnapUI.swift */,
+				F222AF0F1B835E49005F71A1 /* PivotUI.swift */,
+				F222AF111B835E50005F71A1 /* GrabUI.swift */,
+				F222AF131B835E58005F71A1 /* HandleUI.swift */,
+				F222AF151B835E60005F71A1 /* SelectionUI.swift */,
+			);
+			name = UIRendering;
+			sourceTree = "<group>";
+		};
+		F222AF171B836225005F71A1 /* EventHandling */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF181B836232005F71A1 /* Modifier.swift */,
+			);
+			name = EventHandling;
+			sourceTree = "<group>";
+		};
 		F26D45AD1B7D090000266096 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +202,8 @@
 		F26D45B81B7D090000266096 /* ReformApplication */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF171B836225005F71A1 /* EventHandling */,
+				F222AF081B835CB6005F71A1 /* UIRendering */,
 				F26D45B91B7D090000266096 /* AppDelegate.swift */,
 				F26D45BB1B7D090000266096 /* ViewController.swift */,
 				F26D45BD1B7D090000266096 /* Assets.xcassets */,
@@ -330,14 +370,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2042A291B7EC865009144E9 /* Document.swift in Sources */,
+				F222AF121B835E50005F71A1 /* GrabUI.swift in Sources */,
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
+				F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
+				F222AF0A1B835CD8005F71A1 /* Renderer.swift in Sources */,
+				F222AF0E1B835D48005F71A1 /* SnapUI.swift in Sources */,
+				F222AF191B836232005F71A1 /* Modifier.swift in Sources */,
+				F222AF0C1B835D1F005F71A1 /* CropUI.swift in Sources */,
 				F27391221B7FAA7800100F2F /* StageController.swift in Sources */,
+				F222AF101B835E49005F71A1 /* PivotUI.swift in Sources */,
 				F211927F1B7E6B550011AA0F /* ProjectWindowController.swift in Sources */,
 				F26D45BC1B7D090000266096 /* ViewController.swift in Sources */,
 				F27391201B7FA80E00100F2F /* PictureController.swift in Sources */,
 				F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */,
+				F222AF161B835E60005F71A1 /* SelectionUI.swift in Sources */,
 				F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

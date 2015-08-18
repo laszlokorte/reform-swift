@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F222AF1B1B836A37005F71A1 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1A1B836A37005F71A1 /* Alignment.swift */; };
 		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
@@ -99,6 +100,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F222AF1A1B836A37005F71A1 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				F26D46BF1B7D116100266096 /* RotationAngle.swift */,
 				F26D46C31B7D12D100266096 /* ScaleFactor.swift */,
 				F26D46C51B7D130D00266096 /* TranslationDistance.swift */,
+				F222AF1A1B836A37005F71A1 /* Alignment.swift */,
 			);
 			name = Relations;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				F26D47351B7D415B00266096 /* Operators.swift in Sources */,
 				F26D46D01B7D141C00266096 /* Picture.swift in Sources */,
 				F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */,
+				F222AF1B1B836A37005F71A1 /* Alignment.swift in Sources */,
 				F26D47531B7D6C0D00266096 /* MorphInstruction.swift in Sources */,
 				F26D475E1B7D965900266096 /* Describable.swift in Sources */,
 				F26D46E71B7D174B00266096 /* FormIdentifier.swift in Sources */,

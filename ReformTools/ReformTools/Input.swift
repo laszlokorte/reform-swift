@@ -16,9 +16,9 @@ public struct Modifier : OptionSetType {
         self.rawValue = rawValue
     }
     
-    static let Shift = Modifier(rawValue: 0)
-    static let Alt = Modifier(rawValue: 1)
-    static let Ctrl = Modifier(rawValue: 2)
+    public static let Shift = Modifier(rawValue: 1)
+    public static let Alt = Modifier(rawValue: 2)
+    public static let Ctrl = Modifier(rawValue: 4)
 }
 
 public func ==(lhs: Modifier, rhs: Modifier) -> Bool {

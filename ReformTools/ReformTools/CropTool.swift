@@ -39,6 +39,6 @@ public class CropTool : Tool {
     public func focusChange() {
     }
     
-    public func process(input: Input, withModifiers: [Modifier]) {
+    public func process(input: Input, withModifier: Modifier) {
     }
 }

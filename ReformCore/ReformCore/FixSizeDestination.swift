@@ -13,10 +13,12 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
     
     let from: PointType
     let delta: Vec2d
+    let alignment: RuntimeAlignment
     
-    public init(from: PointType, delta: Vec2d) {
+    public init(from: PointType, delta: Vec2d, alignment: RuntimeAlignment = .Leading) {
         self.from = from
         self.delta = delta
+        self.alignment = alignment
     }
     
     public func getMinMaxFor(runtime: Runtime) -> (Vec2d,Vec2d)? {
@@ -24,7 +26,7 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
             return nil
         }
         
-        return (min, min + delta)
+        return alignment.getMinMax(from: min, to: min + delta)
     }
     
     public func getDescription(analyzer: Analyzer) -> String {

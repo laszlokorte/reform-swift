@@ -10,13 +10,13 @@ import ReformCore
 import ReformStage
 
 public class HandleUI {
-    enum State {
+    public enum State {
         case Hide
         case Show([Handle])
         case Active(Handle, [Handle])
     }
     
-    var state : State = .Hide
+    public var state : State = .Hide
     
     public init() {}
 }

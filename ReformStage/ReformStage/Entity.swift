@@ -40,6 +40,7 @@ public enum EntityType {
     case Draw
     case Mask
     case Guide
+    case Canvas
 }
 
 extension EntityType {
@@ -97,6 +98,8 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, formId: FormIden
         return entityForRuntimeForm(analyzer, runtime: runtime, text: form)
     case let form as PictureForm:
         return entityForRuntimeForm(analyzer, runtime: runtime, picture: form)
+    case let form as Paper:
+        return entityForRuntimeForm(analyzer, runtime: runtime, paper: form)
     default:
         return nil
     }
@@ -362,4 +365,18 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, picture form: Pi
     )
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)
+}
+
+
+func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, paper form: Paper) -> Entity? {
+    
+    let type = EntityType.Canvas
+    
+    let points = collectPoints(analyzer, runtime: runtime, form: form)
+    
+    let outline = form.outline.getSegmentsFor(runtime)
+    
+    
+    let hit = HitArea.None
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [], points: points, outline: outline)
 }

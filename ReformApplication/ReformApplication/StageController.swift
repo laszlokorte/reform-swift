@@ -159,7 +159,20 @@ class StageController : NSViewController {
         }
         
         canvas?.toolController = toolController
-        canvas?.renderers.append(snapUI)
+        
+        canvas?.renderers.append(SelectionUIRenderer(selectionUI: selectionUI))
+
+        
+        canvas?.renderers.append(SnapUIRenderer(snapUI: snapUI))
+        
+        canvas?.renderers.append(CropUIRenderer(cropUI: cropUI))
+        
+        
+        canvas?.renderers.append(GrabUIRenderer(grabUI: grabUI))
+        canvas?.renderers.append(HandleUIRenderer(handleUI: handleUI))
+        
+        canvas?.renderers.append(PivotUIRenderer(pivotUI: pivotUI))
+
         
         toolController.currentTool.refresh()
         
@@ -170,6 +183,7 @@ class StageController : NSViewController {
             let trackingArea = NSTrackingArea(rect: canvas.bounds, options: trackingOptions, owner: canvas, userInfo: nil)
             
             canvas.addTrackingArea(trackingArea)
+            canvas.becomeFirstResponder()
 
         }
         

@@ -15,19 +15,21 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
     let from: PointType
     let to: PointType
     let direction : DirectionType
+    let alignment : RuntimeAlignment
     
-    public init(from: PointType, to: PointType, direction : DirectionType = FreeDirection()) {
+    public init(from: PointType, to: PointType, direction : DirectionType = FreeDirection(), alignment: RuntimeAlignment = .Leading) {
         self.from = from
         self.to = to
         self.direction = direction
+        self.alignment = alignment
     }
     
     public func getMinMaxFor(runtime: Runtime) -> (Vec2d,Vec2d)? {
-        guard let min = from.getPositionFor(runtime), let max = to.getPositionFor(runtime) else {
+        guard let fromPos = from.getPositionFor(runtime), let toPos = to.getPositionFor(runtime) else {
             return nil
         }
         
-        return (min, max)
+        return alignment.getMinMax(from: fromPos, to: toPos)
     }
     
     public func getDescription(analyzer: Analyzer) -> String {

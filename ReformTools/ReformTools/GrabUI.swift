@@ -10,13 +10,13 @@ import ReformCore
 import ReformStage
 
 public class GrabUI {
-    enum State {
+    public enum State {
         case Hide
         case Show([EntityPoint])
         case Active(EntityPoint, [EntityPoint])
     }
     
-    var state : State = .Hide
+    public var state : State = .Hide
     
     public init() {}
 }

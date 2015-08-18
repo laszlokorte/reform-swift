@@ -66,33 +66,33 @@ final public class Paper : Form {
 }
 
 extension Paper {
-    var top : LabeledPoint {
+    public var top : LabeledPoint {
         return PaperPoint(side: .Top, width: width, height: height)
     }
-    var left : LabeledPoint {
+    public var left : LabeledPoint {
         return PaperPoint(side: .Left, width: width, height: height)
     }
-    var right : LabeledPoint {
+    public var right : LabeledPoint {
         return PaperPoint(side: .Right, width: width, height: height)
     }
-    var bottom : LabeledPoint {
+    public var bottom : LabeledPoint {
         return PaperPoint(side: .Bottom, width: width, height: height)
     }
     
     
-    var topLeft : LabeledPoint {
+    public var topLeft : LabeledPoint {
         return PaperPoint(side: .TopLeft, width: width, height: height)
     }
-    var bottomLeft : LabeledPoint {
+    public var bottomLeft : LabeledPoint {
         return PaperPoint(side: .BottomLeft, width: width, height: height)
     }
-    var topRight : LabeledPoint {
+    public var topRight : LabeledPoint {
         return PaperPoint(side: .TopRight, width: width, height: height)
     }
-    var bottomRight : LabeledPoint {
+    public var bottomRight : LabeledPoint {
         return PaperPoint(side: .BottomRight, width: width, height: height)
     }
-    var center : LabeledPoint {
+    public var center : LabeledPoint {
         return PaperPoint(side: .Center, width: width, height: height)
     }
 }
