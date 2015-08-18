@@ -29,7 +29,7 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
             return nil
         }
         
-        return alignment.getMinMax(from: fromPos, to: toPos)
+        return alignment.getMinMax(from: fromPos, to: direction.getAdjustedFor(runtime, anchor: fromPos, position: toPos))
     }
     
     public func getDescription(analyzer: Analyzer) -> String {

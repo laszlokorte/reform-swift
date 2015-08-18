@@ -22,7 +22,6 @@ extension LineSegment2d {
     }
 }
 
-
 public struct Arc2d {
     let from: Vec2d
     let to: Vec2d

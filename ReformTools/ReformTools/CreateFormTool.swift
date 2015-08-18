@@ -75,20 +75,24 @@ public class CreateFormTool : Tool {
     let stage : Stage
     let focus : InstructionFocus
     let snapUI : SnapUI
+    let notifier : ChangeNotifier
     
     let selectionTool : SelectionTool
     
-    public init(stage: Stage, focus: InstructionFocus, snapUI: SnapUI, selectionTool: SelectionTool) {
+    var idSequence : Int64 = 199
+    
+    public init(stage: Stage, focus: InstructionFocus, snapUI: SnapUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
         self.stage = stage
         self.focus = focus
         self.snapUI = snapUI
         self.selectionTool = selectionTool
+        self.notifier = notifier
     }
     
     public func setUp() {
         selectionTool.setUp()
         state = .Idle
-        snapUI.state = .Show(stage.getSnapPoints())
+        snapUI.state = .Show(stage.getSnapPoints(excludeCurrent))
     }
     
     public func tearDown() {
@@ -252,22 +256,27 @@ public class CreateFormTool : Tool {
                 guard let currentInstruction = self.focus.current else {
                     break
                 }
-                let form = LineForm(id: FormIdentifier(999), name: "Line 42")
+                let form = LineForm(id: FormIdentifier(idSequence++), name: "Line \(idSequence)")
                 let destination = FixSizeDestination(from: startPoint.runtimePoint, delta: Vec2d())
                 let instruction = CreateFormInstruction(form: form, destination: destination)
                 let node = InstructionNode(instruction: instruction)
-                currentInstruction.append(sibling: node)
-                state = .Started(
-                    startPoint: startPoint,
-                    form: form,
-                    node: node,
-                    target: .Snap(
-                        position: pos,
-                        point: startPoint,
-                        cycle: 0,
-                        streightening: modifier.isStreight ? .Orthogonal(inverted: false) : .None),
-                    alignment: modifier.altAlign ? .Centered : .Aligned)
+                if currentInstruction.append(sibling: node) {
+                    focus.current = node
+
+                    state = .Started(
+                        startPoint: startPoint,
+                        form: form,
+                        node: node,
+                        target: .Snap(
+                            position: pos,
+                            point: startPoint,
+                            cycle: 0,
+                            streightening: modifier.isStreight ? .Orthogonal(inverted: false) : .None),
+                        alignment: modifier.altAlign ? .Centered : .Aligned)
+                    
+                }
                 
+
 //                .Free(position: pos, streight: modifiers.contains(Modifier.Shift))
                 break
             case .Idle, .Delegating:
@@ -287,9 +296,9 @@ public class CreateFormTool : Tool {
                 state = .Idle
                 selectionTool.process(input, withModifier: modifier)
                 break
-            case .Idle, .Snapped:
-                state = .Delegating
-                selectionTool.process(input, withModifier: modifier)
+            case .Idle:
+                break
+            case .Snapped:
                 break
             }
             break
@@ -354,17 +363,16 @@ public class CreateFormTool : Tool {
             break
         }
         
-        print(self.state)
 
     }
     
     func update(state: State) {
         switch state {
         case .Idle, .Delegating:
-            snapUI.state = .Show(stage.getSnapPoints())
+            snapUI.state = .Show(stage.getSnapPoints(excludeCurrent))
             break
         case .Snapped(_, let start,_):
-            snapUI.state = .Active(start, stage.getSnapPoints())
+            snapUI.state = .Active(start, stage.getSnapPoints(excludeCurrent))
             break
         case .Started(let start, let form, let node, let target, let alignment):
             let destination : protocol<RuntimeInitialDestination, Labeled>
@@ -374,33 +382,33 @@ public class CreateFormTool : Tool {
                 let delta = adjust(targetPosition - start.position, streighten: streight)
                 
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta, alignment: alignment.runtimeAlignment)
-                snapUI.state = .Show(stage.getSnapPoints())
+                snapUI.state = .Show(stage.getSnapPoints(excludeCurrent))
 
             case .Snap(_, let snapPoint, _, let streighteningMode):
                 destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint, direction: direction(streighteningMode, delta: snapPoint.position - start.position), alignment: alignment.runtimeAlignment)
                 
-                snapUI.state = .Active(snapPoint, stage.getSnapPoints())
+                snapUI.state = .Active(snapPoint, stage.getSnapPoints(excludeCurrent))
             }
             
             node.replaceWith(CreateFormInstruction(form: form, destination: destination))
             
-            focus.current = node
+            notifier()
 
             break
         }
     }
     
-    private func excludeEntity(entity: Entity) -> Bool {
+    private func excludeCurrent(id: FormIdentifier) -> Bool {
         switch state {
         case .Started(_, let form, _, _, _):
-            return form.identifier == entity.id
+            return form.identifier == id
         default:
             return false
         }
     }
     
     private func snapPointNear(position: Vec2d, index: Int = 0) -> SnapPoint? {
-        let points = stage.getSnapPoints({_ in false}, excludePoint: { p in
+        let points = stage.getSnapPoints(excludeCurrent, excludePoint: { p in
             return distance(point: p.position, point: position) > 10
         })
         
@@ -412,7 +420,7 @@ public class CreateFormTool : Tool {
             return delta
         }
         
-        return delta
+        return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta), size: Angle(percent: 25))))
     }
     
     private func direction(mode : StreighteningMode, delta: Vec2d) -> protocol<RuntimeDirection, Labeled> {

@@ -6,6 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+public typealias ChangeNotifier = () -> ()
+
 public class ToolController {
     public var currentTool : Tool = NullTool() {
         willSet {

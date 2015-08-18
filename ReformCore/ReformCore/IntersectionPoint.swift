@@ -9,9 +9,9 @@
 import ReformMath
 
 public struct RuntimeIntersectionPoint : RuntimePoint, Labeled {
-    let index : Int
-    let formA : FormIdentifier
-    let formB : FormIdentifier
+    public let index : Int
+    public let formA : FormIdentifier
+    public let formB : FormIdentifier
     
     public init(formA: FormIdentifier, formB: FormIdentifier, index: Int) {
         self.index = index

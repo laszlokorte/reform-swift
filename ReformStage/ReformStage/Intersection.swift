@@ -19,3 +19,13 @@ public struct IntersectionSnapPoint : SnapPoint {
     }
     
 }
+
+extension IntersectionSnapPoint {
+    public var formIdA : FormIdentifier {
+        return point.formA
+    }
+    
+    public var formIdB : FormIdentifier {
+        return point.formB
+    }
+}

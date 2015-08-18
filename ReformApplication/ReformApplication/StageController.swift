@@ -36,7 +36,7 @@ class StageController : NSViewController {
     let cropUI = CropUI()
     
     lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selectionUI: self.selectionUI)
-    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, snapUI: self.snapUI, selectionTool: self.selectionTool)
+    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, snapUI: self.snapUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
     
     let toolController = ToolController()
     
@@ -81,19 +81,21 @@ class StageController : NSViewController {
         
     }
     
+    var procedure = Procedure()
+    lazy var picture : ReformCore.Picture = ReformCore.Picture(identifier : PictureIdentifier(0), name: "Untiled", size: (580,330), procedure: self.procedure)
+    
+    lazy var project : Project = Project(pictures: self.picture)
+    
     @IBOutlet var canvas : CanvasView?
     
     override func viewDidLoad() {
-        let procedure = Procedure()
-        let picture = ReformCore.Picture(identifier : PictureIdentifier(0), name: "Untiled", size: (580,330), procedure: procedure)
         
-        let project = Project(pictures: picture)
         
         toolController.currentTool = createFormTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         
-        let lineForm = LineForm(id: FormIdentifier(200), name: "Line 1")
+        let lineForm = LineForm(id: FormIdentifier(101), name: "Line 1")
 
         let rectangleDestination = RelativeDestination(
             from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue),
@@ -140,23 +142,7 @@ class StageController : NSViewController {
         runtime.listeners.append(stageCollector)
         //runtime.listeners.append(DebugRuntimeListener())
         
-        procedure.analyzeWith(analyzer)
-        procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
         
-        print("Entities:")
-        for e in stage.entities {
-            print(e)
-        }
-        
-//        print("Final Shapes:")
-//        for s in stage.currentShapes {
-//            print(s)
-//        }
-        
-        if let c = canvas {
-            c.shapes = stage.currentShapes
-            c.canvasSize = stage.size
-        }
         
         canvas?.toolController = toolController
         
@@ -173,9 +159,6 @@ class StageController : NSViewController {
         
         canvas?.renderers.append(PivotUIRenderer(pivotUI: pivotUI))
 
-        
-        toolController.currentTool.refresh()
-        
         if let canvas = canvas {
         
         let trackingOptions : NSTrackingAreaOptions = [.MouseMoved, .EnabledDuringMouseDrag, .ActiveInKeyWindow, .InVisibleRect]
@@ -187,6 +170,34 @@ class StageController : NSViewController {
 
         }
         
+        print(instructionFocus.current)
+        
+        procedureChanged()
+        toolController.currentTool.refresh()
+
+    }
+    
+    func procedureChanged() {
+        procedure.analyzeWith(analyzer)
+        procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
+        
+        print("Entities:")
+        for e in stage.entities {
+            print(e)
+        }
+        
+        //        print("Final Shapes:")
+        //        for s in stage.currentShapes {
+        //            print(s)
+        //        }
+        
+        print(instructionFocus.current)
+        
+        if let c = canvas {
+            c.shapes = stage.currentShapes
+            c.canvasSize = stage.size
+            c.needsDisplay = true
+        }
     }
     
 }

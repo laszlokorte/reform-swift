@@ -117,6 +117,8 @@ func intersectionsOf(entities: [Entity]) -> [IntersectionSnapPoint] {
         for b in entities {
             guard a.id != b.id else { continue }
             
+
+            
             for (index, pos) in intersect(segmentPath: a.outline, and: b.outline).enumerate() {
                 result.append(IntersectionSnapPoint(position: pos, label: "Intersection", point: RuntimeIntersectionPoint(formA: a.id, formB: b.id, index: index)))
             }

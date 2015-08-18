@@ -8,6 +8,9 @@
 
 
 public struct Vec2d {
+    public static let XAxis = Vec2d(x:1, y:0)
+    public static let YAxis = Vec2d(x:0, y:1)
+    
     public let x : Double
     public let y : Double
     

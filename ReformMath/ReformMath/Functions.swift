@@ -56,3 +56,28 @@ public func proportioned(vector: Vec2d, proportion: Double) -> Vec2d {
     return Vec2d(x: minimum * signum(vector.x), y: minimum * signum(vector.x) * proportion)
 
 }
+
+public func signum(vector: Vec2d) -> Vec2d {
+    return Vec2d(x: signum(vector.x), y: signum(vector.y))
+}
+
+public func abs(vector: Vec2d) -> Vec2d {
+    return Vec2d(x: abs(vector.x), y: abs(vector.y))
+}
+
+public func min(vector: Vec2d) -> Double {
+    return min(vector.x, vector.y)
+}
+
+public func max(vector: Vec2d) -> Double {
+    return max(vector.x, vector.y)
+}
+
+public func stepped(angle: Angle, size: Angle) -> Angle {
+    return Angle(radians: stepped(angle.radians, size: size.radians))
+}
+
+
+public func stepped(value: Double, size: Double) -> Double {
+    return round(value / size) * size
+}

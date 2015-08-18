@@ -19,19 +19,20 @@ public func intersection(line lineA: LineSegment2d, line lineB: LineSegment2d) -
     
     let na = (lineB.to.x - lineB.from.x) * (lineA.from.y - lineB.from.y) - (lineB.to.y - lineB.from.y) * (lineA.from.x - lineB.from.x);
     let nb = (lineA.to.x - lineA.from.x) * (lineA.from.y - lineB.from.y) - (lineA.to.y - lineA.from.y) * (lineA.from.x - lineB.from.x);
-    
+
     // lines are coincident
-    guard (na != 0 || nb != 0 || d != 0) else {
+    if na == 0 && nb == 0 {
         return nil;
     }
     
     // lines are parallel
-    guard (d != 0) else {
+    if d == 0 {
         return nil;
     }
     
     let ua = na / d;
     let ub = nb / d;
+    
     
     // "intersection is beyond end of segment"
     guard (ua >= EPSILON && ua <= 1 - EPSILON && ub >= EPSILON && ub < 1 - EPSILON) else {

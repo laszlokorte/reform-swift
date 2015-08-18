@@ -144,9 +144,9 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, line form: LineF
     ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)
-    
+        
     let outline = form.outline.getSegmentsFor(runtime)
-    
+        
     let hit = HitArea.Line(a: start, b: end)
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)

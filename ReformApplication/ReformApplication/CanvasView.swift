@@ -102,6 +102,20 @@ extension CanvasView {
     }
     
     override var acceptsFirstResponder : Bool { return true }
+    
+    override func keyDown(theEvent: NSEvent) {
+        if theEvent.keyCode == 13 {
+            toolController?.currentTool.process(.Toggle, withModifier: Modifier.fromEvent(theEvent))
+            
+            Swift.print("Toggle")
+        }
+        
+    }
+    
+    override func keyUp(theEvent: NSEvent) {
+    
+    
+    }
 }
 
 

@@ -46,7 +46,7 @@ final public class LineForm : Form{
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
-            PointId.End.rawValue:ExposedPoint(point: startPoint, name: "End"),
+            PointId.End.rawValue:ExposedPoint(point: endPoint, name: "End"),
             PointId.Center.rawValue:ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center"),
         ]
     }

@@ -8,7 +8,7 @@
 
 public class InstructionNode {
     private var content : InstructionContent
-    public private(set) var parent : InstructionNode?
+    public private(set) weak var parent : InstructionNode?
     
     public init() {
         content = .Null
@@ -34,6 +34,7 @@ extension InstructionNode {
             return false
         case .Group(let group, var children):
             children.append(node)
+            node.parent = self
             content = .Group(group, children)
             return true
         }
@@ -53,8 +54,9 @@ extension InstructionNode {
             guard let index = children.indexOf({$0===self}) else {
                 return false
             }
-            children.insert(node, atIndex: index)
-            content = .Group(group, children)
+            node.parent = parent
+            children.insert(node, atIndex: index+1)
+            parent.content = .Group(group, children)
             return true
         }
     }
@@ -68,6 +70,7 @@ extension InstructionNode {
                 return false
         }
         
+        self.parent = nil
         parent.content = .Group(node, children.filter({ $0 !== self }))
         
         return true
