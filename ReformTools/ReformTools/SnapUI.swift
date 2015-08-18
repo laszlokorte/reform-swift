@@ -9,12 +9,14 @@
 import ReformCore
 import ReformStage
 
-class SnapUI {
-    enum State {
+public class SnapUI {
+    public enum State {
         case Hide
         case Show([SnapPoint])
         case Active(SnapPoint, [SnapPoint])
     }
     
-    var state : State = .Hide
+    public var state : State = .Hide
+    
+    public init() {}
 }

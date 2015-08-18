@@ -6,6 +6,23 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class ToolController {
-
+public class ToolController {
+    public var currentTool : Tool = NullTool() {
+        willSet {
+            currentTool.process(.Cancel, withModifiers: [])
+            currentTool.tearDown()
+        }
+        
+        didSet {
+            currentTool.setUp()
+        }
+    }
+    
+    public init() {
+    
+    }
+    
+    func process(input: Input, withModifiers modifiers: [Modifier]) {
+        currentTool.process(input, withModifiers: modifiers)
+    }
 }

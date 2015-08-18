@@ -8,7 +8,7 @@
 
 import ReformStage
 
-class MoveTool : Tool {
+public class MoveTool : Tool {
     enum State
     {
         case Idle
@@ -23,26 +23,26 @@ class MoveTool : Tool {
     let grabUI : GrabUI
     let snapUI : SnapUI
     
-    init(stage: Stage, grabUI: GrabUI, snapUI: SnapUI) {
+    public init(stage: Stage, grabUI: GrabUI, snapUI: SnapUI) {
         self.stage = stage
         self.grabUI = grabUI
         self.snapUI = snapUI
     }
     
-    func setUp() {
+    public func setUp() {
     }
     
-    func tearDown() {
+    public func tearDown() {
         grabUI.state = .Hide
         snapUI.state = .Hide
     }
     
-    func refresh() {
+    public func refresh() {
     }
     
-    func focusChange() {
+    public func focusChange() {
     }
     
-    func process(input: Input, withModifiers: [Modifier]) {
+    public func process(input: Input, withModifiers: [Modifier]) {
     }
 }

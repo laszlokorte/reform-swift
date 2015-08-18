@@ -8,11 +8,13 @@
 
 import ReformCore
 
-class SelectionUI {
+public class SelectionUI {
     enum State {
         case Hide
         case Show(FormIdentifier?)
     }
     
     var state : State = .Hide
+    
+    public init() {}
 }

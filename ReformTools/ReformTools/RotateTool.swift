@@ -8,7 +8,7 @@
 
 import ReformStage
 
-class RotateTool : Tool {
+public class RotateTool : Tool {
     enum State
     {
         case Idle
@@ -22,26 +22,26 @@ class RotateTool : Tool {
     let handleUI : HandleUI
     let pivotUI : PivotUI
     
-    init(stage: Stage, handleUI: HandleUI, pivotUI: PivotUI) {
+    public init(stage: Stage, handleUI: HandleUI, pivotUI: PivotUI) {
         self.stage = stage
         self.handleUI = handleUI
         self.pivotUI = pivotUI
     }
     
-    func setUp() {
+    public func setUp() {
     }
     
-    func tearDown() {
+    public func tearDown() {
         handleUI.state = .Hide
         pivotUI.state = .Hide
     }
     
-    func refresh() {
+    public func refresh() {
     }
     
-    func focusChange() {
+    public func focusChange() {
     }
     
-    func process(input: Input, withModifiers: [Modifier]) {
+    public func process(input: Input, withModifiers: [Modifier]) {
     }
 }

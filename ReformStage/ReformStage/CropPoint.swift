@@ -9,8 +9,8 @@
 import ReformMath
 
 public struct CropPoint {
-    let position : Vec2d
-    let offset : CropSide
+    public let position : Vec2d
+    public let offset : CropSide
 }
 
 public enum CropSide : Hashable {

@@ -8,20 +8,23 @@
 
 import ReformStage
 
-class PreviewTool : Tool {
+public class PreviewTool : Tool {
     
-    func setUp() {
+    public init() {
     }
     
-    func tearDown() {
+    public func setUp() {
     }
     
-    func refresh() {
+    public func tearDown() {
     }
     
-    func focusChange() {
+    public func refresh() {
     }
     
-    func process(input: Input, withModifiers: [Modifier]) {
+    public func focusChange() {
+    }
+    
+    public func process(input: Input, withModifiers: [Modifier]) {
     }
 }

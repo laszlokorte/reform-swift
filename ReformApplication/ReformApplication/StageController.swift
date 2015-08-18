@@ -13,6 +13,7 @@ import ReformCore
 import ReformExpression
 import ReformStage
 import ReformMath
+import ReformTools
 
 class StageController : NSViewController {
     
@@ -26,6 +27,18 @@ class StageController : NSViewController {
     
     var currentInstruction : InstructionNode? = nil
     let stage = Stage()
+    
+    let selectionUI = SelectionUI()
+    let snapUI = SnapUI()
+    let grabUI = GrabUI()
+    let pivotUI = PivotUI()
+    let handleUI = HandleUI()
+    let cropUI = CropUI()
+    
+    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selectionUI: self.selectionUI)
+    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, snapUI: self.snapUI, selectionTool: self.selectionTool)
+    
+    let toolController = ToolController()
     
     lazy var stageCollector : StageCollector = StageCollector(stage: self.stage, analyzer: self.analyzer) {
         return self.currentInstruction === $0 as? InstructionNode
@@ -76,7 +89,7 @@ class StageController : NSViewController {
         
         let project = Project(pictures: picture)
         
-        
+        toolController.currentTool = createFormTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         
@@ -144,6 +157,22 @@ class StageController : NSViewController {
             c.shapes = stage.currentShapes
             c.canvasSize = stage.size
         }
+        
+        canvas?.toolController = toolController
+        canvas?.renderers.append(snapUI)
+        
+        toolController.currentTool.refresh()
+        
+        if let canvas = canvas {
+        
+        let trackingOptions : NSTrackingAreaOptions = [.MouseMoved, .EnabledDuringMouseDrag, .ActiveInKeyWindow, .InVisibleRect]
+            
+            let trackingArea = NSTrackingArea(rect: canvas.bounds, options: trackingOptions, owner: canvas, userInfo: nil)
+            
+            canvas.addTrackingArea(trackingArea)
+
+        }
+        
     }
     
 }

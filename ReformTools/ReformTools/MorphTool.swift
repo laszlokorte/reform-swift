@@ -8,7 +8,7 @@
 
 import ReformStage
 
-class MorphTool : Tool {
+public class MorphTool : Tool {
     enum State
     {
         case Idle
@@ -23,26 +23,26 @@ class MorphTool : Tool {
     let handleUI : HandleUI
     let snapUI : SnapUI
     
-    init(stage: Stage, handleUI: HandleUI, snapUI: SnapUI) {
+    public init(stage: Stage, handleUI: HandleUI, snapUI: SnapUI) {
         self.stage = stage
         self.handleUI = handleUI
         self.snapUI = snapUI
     }
     
-    func setUp() {
+    public func setUp() {
     }
     
-    func tearDown() {
+    public func tearDown() {
         handleUI.state = .Hide
         snapUI.state = .Hide
     }
     
-    func refresh() {
+    public func refresh() {
     }
     
-    func focusChange() {
+    public func focusChange() {
     }
     
-    func process(input: Input, withModifiers: [Modifier]) {
+    public func process(input: Input, withModifiers: [Modifier]) {
     }
 }

@@ -8,7 +8,7 @@
 
 import ReformStage
 
-class CropTool : Tool {
+public class CropTool : Tool {
     enum State
     {
         case Idle
@@ -20,25 +20,25 @@ class CropTool : Tool {
     let stage : Stage
     let cropUI : CropUI
     
-    init(stage: Stage, cropUI: CropUI) {
+    public init(stage: Stage, cropUI: CropUI) {
         self.stage = stage
         self.cropUI = cropUI
     }
 
     
-    func setUp() {
+    public func setUp() {
     }
     
-    func tearDown() {
+    public func tearDown() {
         cropUI.state = .Hide
     }
     
-    func refresh() {
+    public func refresh() {
     }
     
-    func focusChange() {
+    public func focusChange() {
     }
     
-    func process(input: Input, withModifiers: [Modifier]) {
+    public func process(input: Input, withModifiers: [Modifier]) {
     }
 }

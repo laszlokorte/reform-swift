@@ -58,8 +58,8 @@ extension EntityType {
 public struct EntityPoint : SnapPoint {
     public let position : Vec2d
     public let label : String
-    let formId : FormIdentifier
-    let pointId : ExposedPointIdentifier
+    public let formId : FormIdentifier
+    public let pointId : ExposedPointIdentifier
     
     public var runtimePoint : LabeledPoint {
         return ForeignFormPoint(formId: formId, pointId: pointId)

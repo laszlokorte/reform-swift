@@ -8,7 +8,7 @@
 
 import ReformStage
 
-class SelectionTool : Tool {
+public class SelectionTool : Tool {
     enum State
     {
         case Idle
@@ -19,24 +19,24 @@ class SelectionTool : Tool {
     let stage : Stage
     let selectionUI : SelectionUI
     
-    init(stage: Stage, selectionUI: SelectionUI) {
+    public init(stage: Stage, selectionUI: SelectionUI) {
         self.stage = stage
         self.selectionUI = selectionUI
     }
     
-    func setUp() {
+    public func setUp() {
     }
     
-    func tearDown() {
+    public func tearDown() {
         selectionUI.state = .Hide
     }
     
-    func refresh() {
+    public func refresh() {
     }
     
-    func focusChange() {
+    public func focusChange() {
     }
     
-    func process(input: Input, withModifiers: [Modifier]) {
+    public func process(input: Input, withModifiers: [Modifier]) {
     }
 }

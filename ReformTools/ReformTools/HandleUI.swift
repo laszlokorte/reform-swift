@@ -9,7 +9,7 @@
 import ReformCore
 import ReformStage
 
-class HandleUI {
+public class HandleUI {
     enum State {
         case Hide
         case Show([Handle])
@@ -17,4 +17,6 @@ class HandleUI {
     }
     
     var state : State = .Hide
+    
+    public init() {}
 }
