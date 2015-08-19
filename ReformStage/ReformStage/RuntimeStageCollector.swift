@@ -113,11 +113,9 @@ private class StageBuffer {
 
 func intersectionsOf(entities: [Entity]) -> [IntersectionSnapPoint] {
     var result = [IntersectionSnapPoint]()
-    for a in entities {
-        for b in entities {
+    for (ai, a) in entities.enumerate() {
+        for (bi, b) in entities.enumerate() where bi>ai {
             guard a.id != b.id else { continue }
-            
-
             
             for (index, pos) in intersect(segmentPath: a.outline, and: b.outline).enumerate() {
                 result.append(IntersectionSnapPoint(position: pos, label: "Intersection", point: RuntimeIntersectionPoint(formA: a.id, formB: b.id, index: index)))

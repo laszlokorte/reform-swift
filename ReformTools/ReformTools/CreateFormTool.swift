@@ -313,12 +313,10 @@ public class CreateFormTool : Tool {
             switch self.state {
             case .Delegating:
                 selectionTool.process(input, atPosition: pos,  withModifier: modifier)
-                state = .Idle
-
-                break
+                fallthrough
             case .Started:
                 state = .Idle
-                process(input, atPosition: pos, withModifier: modifier)
+                process(.Move, atPosition: pos, withModifier: modifier)
                 break
             case .Idle:
                 break

@@ -9,11 +9,7 @@
 import ReformCore
 
 public class InstructionFocus {
-    public var current : InstructionNode? {
-        didSet {
-            print(current)
-        }
-    }
+    public var current : InstructionNode?
     
     public init() {}
 }

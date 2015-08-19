@@ -61,7 +61,12 @@ final public class Paper : Form {
     public var name : String { get{ return "Canvas" } set{} }
     
     public var outline : Outline {
-        return NullOutline()
+        return CompositeOutline(parts:
+            LineOutline(start: topLeft, end: topRight),
+            LineOutline(start: topRight, end: bottomRight),
+            LineOutline(start: bottomRight, end: bottomLeft),
+            LineOutline(start: bottomLeft, end: topLeft)
+        )
     }
 }
 

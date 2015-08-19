@@ -488,6 +488,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformTools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
