@@ -13,7 +13,7 @@ public typealias ChangeNotifier = () -> ()
 public class ToolController {
     public var currentTool : Tool = NullTool() {
         willSet {
-            currentTool.process(.Cancel, atPosition: Vec2d(), withModifier: [])
+            currentTool.cancel()
             currentTool.tearDown()
         }
         
@@ -29,5 +29,9 @@ public class ToolController {
     
     public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
         currentTool.process(input, atPosition: atPosition, withModifier: withModifier)
+    }
+    
+    public func cancel() {
+        currentTool.cancel()
     }
 }

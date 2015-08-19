@@ -86,6 +86,7 @@ public class CreateFormTool : Tool {
     let pointFinder : PointFinder
     let entityFinder : EntityFinder
     let focus : InstructionFocus
+    let selection : EntitySelection
     let snapUI : SnapUI
     let grabUI : GrabUI
     let notifier : ChangeNotifier
@@ -94,10 +95,11 @@ public class CreateFormTool : Tool {
     
     var idSequence : Int64 = 199
     
-    public init(stage: Stage, focus: InstructionFocus, snapUI: SnapUI, grabUI: GrabUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
+    public init(stage: Stage, focus: InstructionFocus, selection: EntitySelection, snapUI: SnapUI, grabUI: GrabUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
         self.pointFinder = PointFinder(stage: stage)
         self.entityFinder = EntityFinder(stage: stage)
         self.focus = focus
+        self.selection = selection
         self.snapUI = snapUI
         self.grabUI = grabUI
         self.selectionTool = selectionTool
@@ -128,26 +130,32 @@ public class CreateFormTool : Tool {
         selectionTool.focusChange()
     }
     
+    public func cancel() {
+        switch self.state {
+        case .Delegating:
+            state = .Idle
+            selectionTool.cancel()
+            break
+        case .Started(_, _, let instruction, _, _):
+            focus.current = instruction.previous
+            instruction.removeFromParent()
+            notifier()
+            
+            grabUI.state = .Hide
+            
+            state = .Idle;
+
+            break
+            
+        case .Idle, .Snapped:
+            break
+        }
+    }
+    
     public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
         cursorPoint = pos
         switch input {
-        case .Cancel:
-            switch self.state {
-            case .Delegating:
-                state = .Idle
-                selectionTool.process(input, atPosition: pos, withModifier: modifier)
-                break
-            case .Started(_, _, let instruction, _, _):
-                state = .Idle;
-                
-                instruction.removeFromParent()
-                break
-                
-            case .Idle, .Snapped:
-                break
-            }
-            break
         case .Cycle:
             switch self.state {
             case .Delegating:
@@ -157,7 +165,7 @@ public class CreateFormTool : Tool {
                 if let snapPoint = snapPointNear(pos, index: cycle+1) {
                     state = .Snapped(
                         startPoint:
-                        snapPoint, cycle: cycle + 1
+                        snapPoint, cycle: cycle+1
                     )
                 } else {
                     state = .Idle
@@ -374,9 +382,17 @@ public class CreateFormTool : Tool {
             notifier()
 
             if let entity = entityFinder.getEntity(form.identifier) {
+                selection.selected = entity
                 grabUI.state = .Show(entity.points)
             } else {
                 grabUI.state = .Hide
+            }
+            
+            switch target {
+            case .Free:
+                snapUI.state = .Show(pointFinder.getSnapPoints(pointQuery()))
+            case .Snap(let snapPoint,_,_):
+                snapUI.state = .Active(snapPoint, pointFinder.getSnapPoints(pointQuery()))
             }
             
             break

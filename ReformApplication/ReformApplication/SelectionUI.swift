@@ -14,16 +14,22 @@ struct SelectionUIRenderer : Renderer {
     let selectionUI : SelectionUI
     
     func renderInContext(context: CGContext) {
-        CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
-        CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
-        CGContextSetLineWidth(context, 1)
-        let dotSize : Double = 8
-        
+        CGContextSetRGBFillColor(context, 0.2, 0.7, 1, 0.6)
+        CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 0.6)
+        CGContextSetLineWidth(context, 5)
         
         switch selectionUI.state {
-        case .Hide, .Show(.None):
+        case .Hide:
             return
-        case .Show(.Some(let formId)):
+        case .Show(let selection):
+            if let entity = selection.selected {
+                for case .Line(let line) in entity.outline {
+                    CGContextMoveToPoint(context, CGFloat(line.from.x), CGFloat(line.from.y))
+                    CGContextAddLineToPoint(context, CGFloat(line.to.x), CGFloat(line.to.y))
+                }
+                
+                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+            }
            
             break
             

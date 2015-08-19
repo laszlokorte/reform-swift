@@ -26,6 +26,7 @@ class StageController : NSViewController {
 
     
     let instructionFocus = InstructionFocus()
+    let entitySelection = EntitySelection()
     let stage = Stage()
     
     let selectionUI = SelectionUI()
@@ -35,8 +36,8 @@ class StageController : NSViewController {
     let handleUI = HandleUI()
     let cropUI = CropUI()
     
-    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selectionUI: self.selectionUI)
-    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, snapUI: self.snapUI, grabUI: self.grabUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
+    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.entitySelection, selectionUI: self.selectionUI)
+    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, selection: self.entitySelection, snapUI: self.snapUI, grabUI: self.grabUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
     
     let toolController = ToolController()
     

@@ -121,16 +121,20 @@ extension CanvasView {
             return
         }
         
-        if theEvent.keyCode == 13 {
+        if theEvent.keyCode == 13 /*W*/ {
             toolController?.process(.Toggle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
-            
-            
+        } else if theEvent.keyCode == 53 /*ESC*/ {
+            toolController?.cancel()
+        }else if theEvent.keyCode == 48 /*TAB*/ {
+            toolController?.process(.Cycle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         }
+        
         
         if !theEvent.modifierFlags.isEmpty {
             toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         }
-        
+        self.needsDisplay = true
+
     }
     
     override func keyUp(theEvent: NSEvent) {

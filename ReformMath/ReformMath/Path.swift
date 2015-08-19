@@ -53,8 +53,6 @@ public func intersect(segmentPath pathA: SegmentPath, and pathB: SegmentPath) ->
 func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double, Vec2d)? {
     switch segment {
     case .Line(let line):
-        print(closestTo)
-
         let end = line.to - line.from
         let p = closestTo - line.from
         

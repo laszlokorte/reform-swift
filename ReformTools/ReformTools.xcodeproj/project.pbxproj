@@ -14,7 +14,7 @@
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
 		F2A104A01B82140300E97C6B /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049F1B82140300E97C6B /* Tool.swift */; };
-		F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A21B82143800E97C6B /* FormSelection.swift */; };
+		F2A104A31B82143800E97C6B /* EntitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A21B82143800E97C6B /* EntitySelection.swift */; };
 		F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A41B82144C00E97C6B /* InstructionFocus.swift */; };
 		F2A104A81B82149A00E97C6B /* ToolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A71B82149A00E97C6B /* ToolController.swift */; };
 		F2A104AA1B8214C900E97C6B /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A91B8214C900E97C6B /* Input.swift */; };
@@ -59,7 +59,7 @@
 		F26D46691B7D0B9600266096 /* ReformToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformToolsTests.swift; sourceTree = "<group>"; };
 		F26D466B1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2A1049F1B82140300E97C6B /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
-		F2A104A21B82143800E97C6B /* FormSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelection.swift; sourceTree = "<group>"; };
+		F2A104A21B82143800E97C6B /* EntitySelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitySelection.swift; sourceTree = "<group>"; };
 		F2A104A41B82144C00E97C6B /* InstructionFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionFocus.swift; sourceTree = "<group>"; };
 		F2A104A71B82149A00E97C6B /* ToolController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolController.swift; sourceTree = "<group>"; };
 		F2A104A91B8214C900E97C6B /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		F2A104A11B82142900E97C6B /* Selection */ = {
 			isa = PBXGroup;
 			children = (
-				F2A104A21B82143800E97C6B /* FormSelection.swift */,
+				F2A104A21B82143800E97C6B /* EntitySelection.swift */,
 				F2A104A41B82144C00E97C6B /* InstructionFocus.swift */,
 			);
 			name = Selection;
@@ -333,7 +333,7 @@
 				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
 				F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */,
 				F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */,
-				F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */,
+				F2A104A31B82143800E97C6B /* EntitySelection.swift in Sources */,
 				F2A104A01B82140300E97C6B /* Tool.swift in Sources */,
 				F2A104C51B821C7000E97C6B /* CropUI.swift in Sources */,
 				F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */,

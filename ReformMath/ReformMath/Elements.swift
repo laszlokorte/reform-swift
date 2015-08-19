@@ -7,8 +7,8 @@
 //
 
 public struct LineSegment2d {
-    let from: Vec2d
-    let to: Vec2d
+    public let from: Vec2d
+    public let to: Vec2d
     
     public init(from: Vec2d, to: Vec2d) {
         self.from = from

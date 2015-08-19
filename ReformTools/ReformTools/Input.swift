@@ -37,7 +37,6 @@ extension Modifier {
 }
 
 public enum Input {
-    case Cancel
     case Move
     case Press
     case Release

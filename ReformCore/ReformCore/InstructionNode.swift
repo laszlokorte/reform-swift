@@ -25,19 +25,34 @@ public class InstructionNode {
 }
 
 extension InstructionNode {
+    public var previous : InstructionNode? {
+        guard let parent = parent else {
+            return nil
+        }
+        
+        guard case .Group(_, let children) = parent.content else {
+            return nil
+        }
+        
+        guard let index = children.indexOf({$0===self}) where index > 0 else {
+            return nil
+        }
+        
+        return children[index-1]
+    }
+}
+
+extension InstructionNode {
     
     public func append(child node: InstructionNode) -> Bool {
-        switch content {
-        case .Null:
+        guard case .Group(let group, var children) = content else {
             return false
-        case .Single(_):
-            return false
-        case .Group(let group, var children):
-            children.append(node)
-            node.parent = self
-            content = .Group(group, children)
-            return true
         }
+        children.append(node)
+        node.parent = self
+        content = .Group(group, children)
+        return true
+        
     }
     
     public func append(sibling node: InstructionNode) -> Bool {
@@ -45,28 +60,29 @@ extension InstructionNode {
             return false
         }
         
-        switch parent.content {
-        case .Null:
+        guard case .Group(let group, var children) = parent.content else {
             return false
-        case .Single(_):
-            return false
-        case .Group(let group, var children):
-            guard let index = children.indexOf({$0===self}) else {
-                return false
-            }
-            node.parent = parent
-            children.insert(node, atIndex: index+1)
-            parent.content = .Group(group, children)
-            return true
         }
+        
+        guard let index = children.indexOf({$0===self}) else {
+            return false
+        }
+        node.parent = parent
+        children.insert(node, atIndex: index+1)
+        parent.content = .Group(group, children)
+        return true
+        
     }
 }
 
 extension InstructionNode {
     
     public func removeFromParent() -> Bool {
-        guard let parent = self.parent,
-            case .Group(let node, let children) = parent.content else {
+        guard let parent = parent else {
+            return false
+        }
+        
+        guard case .Group(let node, let children) = parent.content else {
                 return false
         }
         

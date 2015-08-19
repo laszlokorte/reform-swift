@@ -25,7 +25,7 @@ extension HitArea {
         case None:
             return false
         case .Line(let a, let b):
-            return onLineSegment(point, lineSegment: LineSegment2d(from: a, to:b), epsilon: 2)
+            return onLineSegment(point, lineSegment: LineSegment2d(from: a, to:b), epsilon: 0.5)
         case .Circle(let center, let radius):
             return (point-center).length < radius
         case Triangle(let a, let b, let c):

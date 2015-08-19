@@ -40,6 +40,9 @@ public class CropTool : Tool {
     public func focusChange() {
     }
     
+    public func cancel() {
+    }
+    
     public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
     }
 }
