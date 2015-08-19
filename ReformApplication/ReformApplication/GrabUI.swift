@@ -17,7 +17,7 @@ struct GrabUIRenderer : Renderer {
         CGContextSetRGBFillColor(context, 0.2, 0.7, 1, 1)
         CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 1)
         CGContextSetLineWidth(context, 1)
-        let dotSize : Double = 8
+        let dotSize : Double = 7
         
         
         switch grabUI.state {
@@ -27,14 +27,19 @@ struct GrabUIRenderer : Renderer {
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            
+            CGContextDrawPath(context, .FillStroke)
+
             break
         case .Active(let active, let points):
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            
+            CGContextDrawPath(context, .FillStroke)
+
             drawDotAt(context, position: active.position, size: dotSize*1.5)
+            
+            CGContextDrawPath(context, .FillStroke)
+
             break
             
         }

@@ -103,7 +103,7 @@ private class StageBuffer {
     
     func flush(stage: Stage) {
         stage.size = size
-        stage.entities = entities
+        stage.entities = entities.reverse()
         stage.currentShapes = currentShapes
         stage.finalShapes = finalShapes
         

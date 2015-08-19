@@ -16,7 +16,7 @@ struct SnapUIRenderer : Renderer {
     let stage : Stage
     
     func renderInContext(context: CGContext) {
-        let dotSize : Double = 8
+        let dotSize : Double = 7
         
         
         switch snapUI.state {
@@ -51,7 +51,7 @@ struct SnapUIRenderer : Renderer {
             }
             CGContextDrawPath(context, .FillStroke)
 
-            drawDotAt(context, position: active.position, size: dotSize*1.5)
+            drawDotAt(context, position: active.position, size: dotSize*1.3)
             CGContextDrawPath(context, .FillStroke)
 
             break

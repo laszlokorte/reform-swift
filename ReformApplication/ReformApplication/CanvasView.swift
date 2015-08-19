@@ -125,11 +125,10 @@ extension CanvasView {
             toolController?.process(.Toggle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         } else if theEvent.keyCode == 53 /*ESC*/ {
             toolController?.cancel()
-        }else if theEvent.keyCode == 48 /*TAB*/ {
+        }else if theEvent.keyCode == 48 || theEvent.keyCode == 50 /*TAB*/ {
             toolController?.process(.Cycle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         }
-        
-        
+                
         if !theEvent.modifierFlags.isEmpty {
             toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
         }
