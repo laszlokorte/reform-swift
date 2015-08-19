@@ -157,9 +157,7 @@ public class CreateFormTool : Tool {
     public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
         cursorPoint = pos
-        
-        print(state)
-        
+            
         switch state {
         case .Delegating:
             selectionTool.process(input, atPosition: pos,  withModifier: modifier)
@@ -206,7 +204,7 @@ public class CreateFormTool : Tool {
             }
             break
             
-        case .Started(let startPoint, let form, let node, .Free(let position, let streight), let alignment):
+        case .Started(let startPoint, let form, let node, .Free, _):
             switch input {
             case .Move, .ModifierChange:
                 if let snapPoint = snapPointNear(pos) {
@@ -243,7 +241,7 @@ public class CreateFormTool : Tool {
                 break
             }
             break
-        case .Started(let startPoint, let form, let node, .Snap(let targetPoint, let cycle, let streightening), let alignment):
+        case .Started(let startPoint, let form, let node, .Snap(let targetPoint, let cycle, let streightening), _):
             switch input {
             case .Move, .ModifierChange:
                 if let snapPoint = snapPointNear(pos, index: cycle) {
@@ -365,8 +363,6 @@ public class CreateFormTool : Tool {
 
                 break
             case .Toggle:
-                break
-            case .ModifierChange:
                 break
             }
             break
