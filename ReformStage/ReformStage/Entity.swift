@@ -203,8 +203,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, rectangle form: 
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: CircleForm) -> Entity? {
     guard let center = form.centerPoint.getPositionFor(runtime),
-        let radius = form.radius.getLengthFor(runtime),
-        let angle = form.angle.getAngleFor(runtime) else {
+        let radius = form.radius.getLengthFor(runtime) else {
             return nil
     }
     

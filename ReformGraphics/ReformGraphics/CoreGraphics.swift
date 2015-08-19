@@ -48,27 +48,27 @@ public extension Shape {
             }
             
             break
-        case .TextArea(let position, let text, let size):
+        case .TextArea:
             // TODO: not working
             
             fatalError("Font rendering not implemented")
-            CGContextSetTextPosition(context, CGFloat(position.x), CGFloat(position.y))
-            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
-                let attr = [NSFontAttributeName:font]
-                let attributedString = CFAttributedStringCreate(nil, text, attr)
-                let line = CTLineCreateWithAttributedString(attributedString)
-                let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
-                
-                let xn = CGFloat(position.x) - bounds.width/2
-                let yn = CGFloat(position.y) // - bounds.midY
-                CGContextSetTextPosition(context, xn, yn)
-                
-                CGContextSetFontSize(context, CGFloat(size))
-                CTLineDraw(line, context)
-                CGContextFlush(context)
-
-                
-            }
+//            CGContextSetTextPosition(context, CGFloat(position.x), CGFloat(position.y))
+//            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
+//                let attr = [NSFontAttributeName:font]
+//                let attributedString = CFAttributedStringCreate(nil, text, attr)
+//                let line = CTLineCreateWithAttributedString(attributedString)
+//                let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+//                
+//                let xn = CGFloat(position.x) - bounds.width/2
+//                let yn = CGFloat(position.y) // - bounds.midY
+//                CGContextSetTextPosition(context, xn, yn)
+//                
+//                CGContextSetFontSize(context, CGFloat(size))
+//                CTLineDraw(line, context)
+//                CGContextFlush(context)
+//
+//                
+//            }
             break
         }
     }
