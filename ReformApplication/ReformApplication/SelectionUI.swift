@@ -23,10 +23,7 @@ struct SelectionUIRenderer : Renderer {
             return
         case .Show(let selection):
             if let entity = selection.selected {
-                for case .Line(let line) in entity.outline {
-                    CGContextMoveToPoint(context, CGFloat(line.from.x), CGFloat(line.from.y))
-                    CGContextAddLineToPoint(context, CGFloat(line.to.x), CGFloat(line.to.y))
-                }
+                drawSegmentPath(context, path:entity.outline)
                 
                 CGContextDrawPath(context, CGPathDrawingMode.Stroke)
             }

@@ -13,11 +13,9 @@ import ReformStage
 
 struct SnapUIRenderer : Renderer {
     let snapUI : SnapUI
+    let stage : Stage
     
     func renderInContext(context: CGContext) {
-        CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
-        CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
-        CGContextSetLineWidth(context, 1)
         let dotSize : Double = 8
         
         
@@ -25,17 +23,37 @@ struct SnapUIRenderer : Renderer {
         case .Hide:
             return
         case .Show(let points):
+            
+            CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
+            CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
+            CGContextSetLineWidth(context, 1)
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            
+            CGContextDrawPath(context, .FillStroke)
+
             break
         case .Active(let active, let points):
+            CGContextSetLineWidth(context, 3)
+            CGContextSetRGBStrokeColor(context, 0.9, 0.7, 0.2, 1)
+
+            for entity in stage.entities where active.belongsTo(entity.id) {
+                drawSegmentPath(context, path:entity.outline)
+            }
+            CGContextDrawPath(context, .Stroke)
+            
+            
+            CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
+            CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
+            CGContextSetLineWidth(context, 1)
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            
+            CGContextDrawPath(context, .FillStroke)
+
             drawDotAt(context, position: active.position, size: dotSize*1.5)
+            CGContextDrawPath(context, .FillStroke)
+
             break
             
         }

@@ -65,6 +65,10 @@ public struct EntityPoint : SnapPoint {
     public var runtimePoint : LabeledPoint {
         return ForeignFormPoint(formId: formId, pointId: pointId)
     }
+    
+    public func belongsTo(formId: FormIdentifier) -> Bool {
+        return formId == self.formId
+    }
 }
 
 func createEntityPoint(analyzer: Analyzer, runtime: Runtime, formId: FormIdentifier, pointId: ExposedPointIdentifier) -> EntityPoint? {

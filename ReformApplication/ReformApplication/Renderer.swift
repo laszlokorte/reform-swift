@@ -15,6 +15,13 @@ protocol Renderer {
 
 func drawDotAt(context: CGContext, position: Vec2d, size: Double) {
     let rect = CGRect(x:position.x-size/2, y:position.y-size/2, width: size, height: size)
-    CGContextFillEllipseInRect(context, rect)
-    CGContextStrokeEllipseInRect(context, rect)
+    CGContextAddEllipseInRect(context, rect)
+}
+
+
+func drawSegmentPath(context: CGContext, path: SegmentPath) {
+    for case .Line(let line) in path {
+        CGContextMoveToPoint(context, CGFloat(line.from.x), CGFloat(line.from.y))
+        CGContextAddLineToPoint(context, CGFloat(line.to.x), CGFloat(line.to.y))
+    }
 }

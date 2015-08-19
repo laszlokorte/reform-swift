@@ -60,7 +60,7 @@ struct PointFinder {
                 if case .Near(let loc, let d) = query.location where query.pointType.contains(.Glomp) {
                     if let (u, pos) = pointOn(segmentPath: entity.outline, closestTo: loc, maxDistance: d) {
 
-                        result.append(GlompPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(form: entity.id, lerp: Expression.Constant(.DoubleValue(value: u)))))
+                        result.append(GlompSnapPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(formId: entity.id, lerp: Expression.Constant(.DoubleValue(value: u)))))
                     }
                 }
             }

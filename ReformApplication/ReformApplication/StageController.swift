@@ -150,7 +150,7 @@ class StageController : NSViewController {
         canvas?.renderers.append(SelectionUIRenderer(selectionUI: selectionUI))
 
         
-        canvas?.renderers.append(SnapUIRenderer(snapUI: snapUI))
+        canvas?.renderers.append(SnapUIRenderer(snapUI: snapUI, stage: self.stage))
         
         canvas?.renderers.append(CropUIRenderer(cropUI: cropUI))
         

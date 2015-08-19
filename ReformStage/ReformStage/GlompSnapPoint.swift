@@ -1,5 +1,5 @@
 //
-//  Glomp.swift
+//  GlompSnapPoint.swift
 //  ReformStage
 //
 //  Created by Laszlo Korte on 15.08.15.
@@ -9,10 +9,10 @@
 import ReformMath
 import ReformCore
 
-public struct GlompPoint : SnapPoint {
+public struct GlompSnapPoint : SnapPoint {
     public let position : Vec2d
     public let label : String
-    let point : ReformCore.GlompPoint
+    let point : GlompPoint
     
     public init(position: Vec2d, label: String, point: ReformCore.GlompPoint) {
         self.position = position
@@ -22,5 +22,9 @@ public struct GlompPoint : SnapPoint {
     
     public var runtimePoint : LabeledPoint {
         return point
+    }
+    
+    public func belongsTo(formId: FormIdentifier) -> Bool {
+        return formId == point.formId
     }
 }

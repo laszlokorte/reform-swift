@@ -14,4 +14,6 @@ public protocol SnapPoint {
     var label : String { get }
     
     var runtimePoint : LabeledPoint { get }
+    
+    func belongsTo(formId: FormIdentifier) -> Bool
 }

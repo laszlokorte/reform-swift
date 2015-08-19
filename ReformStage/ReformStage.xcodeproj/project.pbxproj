@@ -18,8 +18,8 @@
 		F27391121B7F924900100F2F /* SnapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391111B7F924900100F2F /* SnapPoint.swift */; };
 		F27391141B7F927900100F2F /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391131B7F927900100F2F /* Handle.swift */; };
 		F27391161B7F92B200100F2F /* Pivot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391151B7F92B200100F2F /* Pivot.swift */; };
-		F27391181B7F92FA00100F2F /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391171B7F92FA00100F2F /* Intersection.swift */; };
-		F273911A1B7F934500100F2F /* Glomp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391191B7F934500100F2F /* Glomp.swift */; };
+		F27391181B7F92FA00100F2F /* IntersectionSnapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391171B7F92FA00100F2F /* IntersectionSnapPoint.swift */; };
+		F273911A1B7F934500100F2F /* GlompSnapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391191B7F934500100F2F /* GlompSnapPoint.swift */; };
 		F2ABC7511B7FD6D5001AD41F /* HitArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ABC7501B7FD6D5001AD41F /* HitArea.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +49,8 @@
 		F27391111B7F924900100F2F /* SnapPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapPoint.swift; sourceTree = "<group>"; };
 		F27391131B7F927900100F2F /* Handle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		F27391151B7F92B200100F2F /* Pivot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pivot.swift; sourceTree = "<group>"; };
-		F27391171B7F92FA00100F2F /* Intersection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
-		F27391191B7F934500100F2F /* Glomp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Glomp.swift; sourceTree = "<group>"; };
+		F27391171B7F92FA00100F2F /* IntersectionSnapPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntersectionSnapPoint.swift; sourceTree = "<group>"; };
+		F27391191B7F934500100F2F /* GlompSnapPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlompSnapPoint.swift; sourceTree = "<group>"; };
 		F2ABC7501B7FD6D5001AD41F /* HitArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitArea.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,8 +132,8 @@
 				F27391111B7F924900100F2F /* SnapPoint.swift */,
 				F27391131B7F927900100F2F /* Handle.swift */,
 				F27391151B7F92B200100F2F /* Pivot.swift */,
-				F27391171B7F92FA00100F2F /* Intersection.swift */,
-				F27391191B7F934500100F2F /* Glomp.swift */,
+				F27391171B7F92FA00100F2F /* IntersectionSnapPoint.swift */,
+				F27391191B7F934500100F2F /* GlompSnapPoint.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -266,9 +266,9 @@
 				F273910E1B7F91DD00100F2F /* Entity.swift in Sources */,
 				F27391161B7F92B200100F2F /* Pivot.swift in Sources */,
 				F27391141B7F927900100F2F /* Handle.swift in Sources */,
-				F27391181B7F92FA00100F2F /* Intersection.swift in Sources */,
+				F27391181B7F92FA00100F2F /* IntersectionSnapPoint.swift in Sources */,
 				F2ABC7511B7FD6D5001AD41F /* HitArea.swift in Sources */,
-				F273911A1B7F934500100F2F /* Glomp.swift in Sources */,
+				F273911A1B7F934500100F2F /* GlompSnapPoint.swift in Sources */,
 				F24AAFD11B8160D0008DF952 /* RuntimeStageCollector.swift in Sources */,
 				F27391121B7F924900100F2F /* SnapPoint.swift in Sources */,
 				F273910C1B7F916600100F2F /* Stage.swift in Sources */,
