@@ -132,9 +132,8 @@ public class CreateFormTool : Tool {
     
     public func cancel() {
         switch self.state {
-        case .Delegating:
+        case .Delegating, .Idle:
             state = .Idle
-            selectionTool.cancel()
             break
         case .Started(_, _, let instruction, _, _):
             focus.current = instruction.previous
@@ -147,9 +146,12 @@ public class CreateFormTool : Tool {
 
             break
             
-        case .Idle, .Snapped:
+        case .Snapped:
             break
         }
+        
+        selectionTool.cancel()
+
     }
     
     public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {

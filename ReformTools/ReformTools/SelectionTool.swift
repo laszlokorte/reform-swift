@@ -13,7 +13,7 @@ public class SelectionTool : Tool {
     enum State
     {
         case Idle
-        case Pressed(entity: Entity?, cycle: Int)
+        case Selecting(entity: Entity?, cycle: Int)
     }
     
     var state : State = .Idle {
@@ -51,12 +51,8 @@ public class SelectionTool : Tool {
     }
     
     public func cancel() {
-        switch state {
-        case .Idle:
-            selection.selected = nil
-        case .Pressed:
-            state = .Idle
-        }
+        selection.selected = nil
+        state = .Idle
     }
     
     public func process(input: Input, atPosition position: Vec2d, withModifier: Modifier) {
@@ -67,9 +63,9 @@ public class SelectionTool : Tool {
             let entities = entitiesNear(position)
 
             if let previous = selection.selected where previous.hitArea.contains(position), let index = entities.indexOf(previous) {
-                state = .Pressed(entity: previous, cycle: index)
+                state = .Selecting(entity: previous, cycle: index)
             } else {
-                state = .Pressed(entity: entities.first, cycle: 0)
+                state = .Selecting(entity: entities.first, cycle: 0)
             }
             break
         case .Release:
@@ -77,10 +73,10 @@ public class SelectionTool : Tool {
             break
         case .Cycle:
             switch state {
-            case .Pressed(_, let cycle):
+            case .Selecting(_, let cycle):
                 let entities = entitiesNear(position)
                 if entities.count > 0 {
-                    state = .Pressed(entity: entities[(cycle+1)%entities.count], cycle: cycle+1)
+                    state = .Selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1)
                 }
                 break
             case .Idle:
@@ -100,7 +96,7 @@ public class SelectionTool : Tool {
     
     private func update(state: State) {
         switch state {
-        case .Pressed(let entity, _):
+        case .Selecting(let entity, _):
             selection.selected = entity
 
             break
