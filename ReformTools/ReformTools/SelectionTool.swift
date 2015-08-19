@@ -37,11 +37,13 @@ public class SelectionTool : Tool {
     }
     
     public func setUp() {
+        state = .Idle
         selectionUI.state = .Show(selection)
     }
     
     public func tearDown() {
         selectionUI.state = .Hide
+        state = .Idle
     }
     
     public func refresh() {
@@ -56,36 +58,45 @@ public class SelectionTool : Tool {
     }
     
     public func process(input: Input, atPosition position: Vec2d, withModifier: Modifier) {
-        switch input {
-        case .Move:
-            break
-        case .Press:
-            let entities = entitiesNear(position)
-
-            if let previous = selection.selected where previous.hitArea.contains(position), let index = entities.indexOf(previous) {
-                state = .Selecting(entity: previous, cycle: index)
-            } else {
-                state = .Selecting(entity: entities.first, cycle: 0)
-            }
-            break
-        case .Release:
-            state = .Idle
-            break
-        case .Cycle:
-            switch state {
-            case .Selecting(_, let cycle):
+        
+        switch state {
+        case .Selecting(_, let cycle):
+            switch input {
+            case .Cycle:
                 let entities = entitiesNear(position)
                 if entities.count > 0 {
                     state = .Selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1)
                 }
                 break
-            case .Idle:
+                
+            case .Release:
+                state = .Idle
                 break
+            case .Press, .Toggle, .ModifierChange, .Move:
+                break
+                
+                
             }
             break
-        case .Toggle, .ModifierChange:
+        case .Idle:
+            switch input {
+            case .Move:
+                break
+            case .Press:
+                let entities = entitiesNear(position)
+                if let previous = selection.selected where previous.hitArea.contains(position), let index = entities.indexOf(previous) {
+                    state = .Selecting(entity: previous, cycle: index)
+                    
+                } else {
+                    
+                    state = .Selecting(entity: entities.first, cycle: 0)
+                }
+                break
+            case .Release, .Cycle, .Toggle, .ModifierChange:
+                break
+                
+            }
             break
-
         }
     }
     

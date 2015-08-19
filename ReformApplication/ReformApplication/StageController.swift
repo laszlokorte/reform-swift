@@ -39,6 +39,8 @@ class StageController : NSViewController {
     lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.entitySelection, selectionUI: self.selectionUI)
     lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, selection: self.entitySelection, snapUI: self.snapUI, grabUI: self.grabUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
     
+    lazy var moveTool : MoveTool = MoveTool(stage: self.stage, grabUI: self.grabUI, snapUI: self.snapUI, selectionTool: self.selectionTool)
+    
     let toolController = ToolController()
     
     lazy var stageCollector : StageCollector = StageCollector(stage: self.stage, analyzer: self.analyzer) {
@@ -91,7 +93,7 @@ class StageController : NSViewController {
     
     override func viewDidLoad() {
         
-        
+
         toolController.currentTool = createFormTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
