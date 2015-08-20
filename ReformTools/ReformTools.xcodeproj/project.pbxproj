@@ -15,6 +15,7 @@
 		F222AF301B85174F005F71A1 /* Streightening.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2F1B85174F005F71A1 /* Streightening.swift */; };
 		F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF311B851833005F71A1 /* PointSnapper.swift */; };
 		F222AF341B854536005F71A1 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF331B854536005F71A1 /* Creator.swift */; };
+		F222AF371B85FCBE005F71A1 /* PointGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF361B85FCBE005F71A1 /* PointGrabber.swift */; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
@@ -62,6 +63,7 @@
 		F222AF2F1B85174F005F71A1 /* Streightening.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streightening.swift; sourceTree = "<group>"; };
 		F222AF311B851833005F71A1 /* PointSnapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSnapper.swift; sourceTree = "<group>"; };
 		F222AF331B854536005F71A1 /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
+		F222AF361B85FCBE005F71A1 /* PointGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointGrabber.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,10 +140,18 @@
 				F222AF2B1B851728005F71A1 /* Target.swift */,
 				F222AF2D1B851741005F71A1 /* Alignment.swift */,
 				F222AF2F1B85174F005F71A1 /* Streightening.swift */,
-				F222AF311B851833005F71A1 /* PointSnapper.swift */,
 				F222AF331B854536005F71A1 /* Creator.swift */,
 			);
 			name = States;
+			sourceTree = "<group>";
+		};
+		F222AF351B85FC9A005F71A1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF311B851833005F71A1 /* PointSnapper.swift */,
+				F222AF361B85FCBE005F71A1 /* PointGrabber.swift */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		F26D46501B7D0B9500266096 = {
@@ -192,6 +202,7 @@
 		F2A1049E1B8213F900E97C6B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF351B85FC9A005F71A1 /* Helper */,
 				F222AF2A1B85171C005F71A1 /* States */,
 				F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */,
 				F2A104AD1B821A2100E97C6B /* CropTool.swift */,
@@ -358,6 +369,7 @@
 				F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */,
 				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
 				F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */,
+				F222AF371B85FCBE005F71A1 /* PointGrabber.swift in Sources */,
 				F222AF301B85174F005F71A1 /* Streightening.swift in Sources */,
 				F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */,
 				F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */,

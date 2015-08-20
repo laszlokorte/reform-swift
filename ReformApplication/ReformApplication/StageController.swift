@@ -94,7 +94,7 @@ class StageController : NSViewController {
     override func viewDidLoad() {
         
 
-        toolController.currentTool = createFormTool
+        toolController.currentTool = moveTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         

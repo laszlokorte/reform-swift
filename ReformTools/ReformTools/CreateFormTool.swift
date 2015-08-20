@@ -23,7 +23,7 @@ public class CreateFormTool : Tool {
     
     var state : State = .Idle
     
-    var snapType : PointType = []
+    var snapType : PointType = [.Form, .Intersection]
     
     var cursorPoint = Vec2d()
     
@@ -68,6 +68,7 @@ public class CreateFormTool : Tool {
     public func refresh() {
         update()
 
+        pointSnapper.refresh()
         selectionTool.refresh()
     }
     
@@ -111,7 +112,7 @@ public class CreateFormTool : Tool {
             switch input {
             case .ModifierChange:
                 pointSnapper.enable(.Any, pointType: snapType)
-                break
+                fallthrough
             case .Move:
                 break
             case .Press:
@@ -339,11 +340,11 @@ public class CreateFormTool : Tool {
             grabUI.state = .Hide
 
             break
-        case .Snapped(let start):
+        case .Snapped:
             grabUI.state = .Hide
 
             break
-        case .Started(_, let form, _, let target, _):
+        case .Started(_, let form, _, _, _):
 
             if let entity = entityFinder.getEntity(form.identifier) {
                 selection.selected = entity.id
