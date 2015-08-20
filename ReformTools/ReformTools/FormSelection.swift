@@ -6,16 +6,17 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformCore
 import ReformStage
 
-public class EntitySelection {
-    public var selected : Entity?
+public class FormSelection {
+    public var selected : FormIdentifier?
     
     public init() {}
 }
 
 
-extension EntitySelection {
+extension FormSelection {
     public func isSelected(entity: Entity) -> Bool {
         return false
     }

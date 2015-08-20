@@ -10,11 +10,16 @@
 		F222AF201B83B68D005F71A1 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1F1B83B68D005F71A1 /* PointType.swift */; };
 		F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF211B83B6A9005F71A1 /* PointFinder.swift */; };
 		F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF261B83EF6D005F71A1 /* EntityFinder.swift */; };
+		F222AF2C1B851728005F71A1 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2B1B851728005F71A1 /* Target.swift */; };
+		F222AF2E1B851741005F71A1 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2D1B851741005F71A1 /* Alignment.swift */; };
+		F222AF301B85174F005F71A1 /* Streightening.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2F1B85174F005F71A1 /* Streightening.swift */; };
+		F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF311B851833005F71A1 /* PointSnapper.swift */; };
+		F222AF341B854536005F71A1 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF331B854536005F71A1 /* Creator.swift */; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
 		F2A104A01B82140300E97C6B /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049F1B82140300E97C6B /* Tool.swift */; };
-		F2A104A31B82143800E97C6B /* EntitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A21B82143800E97C6B /* EntitySelection.swift */; };
+		F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A21B82143800E97C6B /* FormSelection.swift */; };
 		F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A41B82144C00E97C6B /* InstructionFocus.swift */; };
 		F2A104A81B82149A00E97C6B /* ToolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A71B82149A00E97C6B /* ToolController.swift */; };
 		F2A104AA1B8214C900E97C6B /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104A91B8214C900E97C6B /* Input.swift */; };
@@ -52,6 +57,11 @@
 		F222AF1F1B83B68D005F71A1 /* PointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		F222AF211B83B6A9005F71A1 /* PointFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointFinder.swift; sourceTree = "<group>"; };
 		F222AF261B83EF6D005F71A1 /* EntityFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityFinder.swift; sourceTree = "<group>"; };
+		F222AF2B1B851728005F71A1 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		F222AF2D1B851741005F71A1 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
+		F222AF2F1B85174F005F71A1 /* Streightening.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streightening.swift; sourceTree = "<group>"; };
+		F222AF311B851833005F71A1 /* PointSnapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSnapper.swift; sourceTree = "<group>"; };
+		F222AF331B854536005F71A1 /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,7 +69,7 @@
 		F26D46691B7D0B9600266096 /* ReformToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformToolsTests.swift; sourceTree = "<group>"; };
 		F26D466B1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2A1049F1B82140300E97C6B /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
-		F2A104A21B82143800E97C6B /* EntitySelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitySelection.swift; sourceTree = "<group>"; };
+		F2A104A21B82143800E97C6B /* FormSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSelection.swift; sourceTree = "<group>"; };
 		F2A104A41B82144C00E97C6B /* InstructionFocus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionFocus.swift; sourceTree = "<group>"; };
 		F2A104A71B82149A00E97C6B /* ToolController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolController.swift; sourceTree = "<group>"; };
 		F2A104A91B8214C900E97C6B /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
@@ -122,6 +132,18 @@
 			name = EntityFinder;
 			sourceTree = "<group>";
 		};
+		F222AF2A1B85171C005F71A1 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF2B1B851728005F71A1 /* Target.swift */,
+				F222AF2D1B851741005F71A1 /* Alignment.swift */,
+				F222AF2F1B85174F005F71A1 /* Streightening.swift */,
+				F222AF311B851833005F71A1 /* PointSnapper.swift */,
+				F222AF331B854536005F71A1 /* Creator.swift */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
 		F26D46501B7D0B9500266096 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +192,7 @@
 		F2A1049E1B8213F900E97C6B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF2A1B85171C005F71A1 /* States */,
 				F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */,
 				F2A104AD1B821A2100E97C6B /* CropTool.swift */,
 				F2A104AF1B821A4600E97C6B /* MorphTool.swift */,
@@ -186,7 +209,7 @@
 		F2A104A11B82142900E97C6B /* Selection */ = {
 			isa = PBXGroup;
 			children = (
-				F2A104A21B82143800E97C6B /* EntitySelection.swift */,
+				F2A104A21B82143800E97C6B /* FormSelection.swift */,
 				F2A104A41B82144C00E97C6B /* InstructionFocus.swift */,
 			);
 			name = Selection;
@@ -323,19 +346,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F222AF2E1B851741005F71A1 /* Alignment.swift in Sources */,
 				F2A104B81B821ABD00E97C6B /* RotateTool.swift in Sources */,
 				F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */,
+				F222AF341B854536005F71A1 /* Creator.swift in Sources */,
 				F2A104AA1B8214C900E97C6B /* Input.swift in Sources */,
 				F2A104AC1B8219BD00E97C6B /* CreateFormTool.swift in Sources */,
 				F2A104BF1B821BCF00E97C6B /* SelectionUI.swift in Sources */,
 				F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */,
+				F222AF2C1B851728005F71A1 /* Target.swift in Sources */,
 				F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */,
 				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
 				F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */,
+				F222AF301B85174F005F71A1 /* Streightening.swift in Sources */,
 				F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */,
-				F2A104A31B82143800E97C6B /* EntitySelection.swift in Sources */,
+				F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */,
 				F2A104A01B82140300E97C6B /* Tool.swift in Sources */,
 				F2A104C51B821C7000E97C6B /* CropUI.swift in Sources */,
+				F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */,
 				F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */,
 				F2A104C91B821D0100E97C6B /* PivotUI.swift in Sources */,
 				F2A104BC1B821AE900E97C6B /* SelectionTool.swift in Sources */,

@@ -13,10 +13,12 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
     
     let from: PointType
     let to: PointType
+    let direction : RuntimeDirection
     
-    public init(from: PointType, to: PointType) {
+    public init(from: PointType, to: PointType, direction: RuntimeDirection) {
         self.from = from
         self.to = to
+        self.direction = direction
     }
     
     public func getDeltaFor(runtime: Runtime) -> Vec2d? {
@@ -24,7 +26,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
             return nil
         }
         
-        return target - source
+        return direction.getAdjustedFor(runtime, anchor: source, position: target) - source
     }
     
     public func getDescription(analyzer: Analyzer) -> String {

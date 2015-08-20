@@ -32,6 +32,27 @@ struct PointQuery {
 struct PointFinder {
     let stage : Stage
     
+    func getUpdatedPoint(oldPoint: EntityPoint) -> EntityPoint? {
+        for entity in stage.entities
+            where entity.id == oldPoint.formId {
+                for point in entity.points
+                    where point.pointId == oldPoint.pointId {
+                        return point
+                }
+        }
+        
+        return nil
+    }
+    
+    func getUpdatedPoint(oldPoint: IntersectionSnapPoint) -> IntersectionSnapPoint? {
+        for intersection in stage.intersections
+            where intersection.point == oldPoint.point {
+                return intersection
+        }
+        
+        return nil
+    }
+    
     func getSnapPoints(query: PointQuery) -> [SnapPoint] {
         var result = [SnapPoint]()
         

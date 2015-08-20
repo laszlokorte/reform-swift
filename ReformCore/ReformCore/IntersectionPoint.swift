@@ -37,3 +37,10 @@ public struct RuntimeIntersectionPoint : RuntimePoint, Labeled {
         return intersections.count > index ? intersections[index] : nil
     }
 }
+
+extension RuntimeIntersectionPoint : Equatable {
+}
+
+public func ==(lhs: RuntimeIntersectionPoint, rhs: RuntimeIntersectionPoint) -> Bool {
+    return lhs.formA == rhs.formA && lhs.formB == rhs.formB && lhs.index == rhs.index
+}

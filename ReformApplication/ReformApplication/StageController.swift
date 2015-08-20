@@ -26,7 +26,7 @@ class StageController : NSViewController {
 
     
     let instructionFocus = InstructionFocus()
-    let entitySelection = EntitySelection()
+    let formSelection = FormSelection()
     let stage = Stage()
     
     let selectionUI = SelectionUI()
@@ -36,10 +36,10 @@ class StageController : NSViewController {
     let handleUI = HandleUI()
     let cropUI = CropUI()
     
-    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.entitySelection, selectionUI: self.selectionUI)
-    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, selection: self.entitySelection, snapUI: self.snapUI, grabUI: self.grabUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
+    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.selectionUI)
+    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, selection: self.formSelection, snapUI: self.snapUI, grabUI: self.grabUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
     
-    lazy var moveTool : MoveTool = MoveTool(stage: self.stage, grabUI: self.grabUI, snapUI: self.snapUI, selectionTool: self.selectionTool)
+    lazy var moveTool : MoveTool = MoveTool(stage: self.stage,  selection:self.formSelection, focus: self.instructionFocus, grabUI: self.grabUI, snapUI: self.snapUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
     
     let toolController = ToolController()
     
@@ -94,7 +94,7 @@ class StageController : NSViewController {
     override func viewDidLoad() {
         
 
-        toolController.currentTool = moveTool
+        toolController.currentTool = createFormTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         
@@ -118,7 +118,8 @@ class StageController : NSViewController {
         
         let moveInstruction = TranslateInstruction(formId: rectangleForm.identifier, distance: RelativeDistance(
             from: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.Center.rawValue),
-            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)))
+            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue),
+            direction: FreeDirection()))
         
         let node2 = InstructionNode(instruction: moveInstruction)
         
@@ -149,7 +150,7 @@ class StageController : NSViewController {
         
         canvas?.toolController = toolController
         
-        canvas?.renderers.append(SelectionUIRenderer(selectionUI: selectionUI))
+        canvas?.renderers.append(SelectionUIRenderer(selectionUI: selectionUI, stage: stage))
 
         
         canvas?.renderers.append(SnapUIRenderer(snapUI: snapUI, stage: self.stage))
@@ -195,7 +196,8 @@ class StageController : NSViewController {
         //        }
         
         print(instructionFocus.current)
-        
+        toolController.currentTool.refresh()
+
         if let c = canvas {
             c.shapes = stage.currentShapes
             c.canvasSize = stage.size

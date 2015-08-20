@@ -23,12 +23,12 @@ public class SelectionTool : Tool {
     }
     
     let stage : Stage
-    let selection : EntitySelection
+    let selection : FormSelection
     let selectionUI : SelectionUI
     
     let entityFinder : EntityFinder
         
-    public init(stage: Stage, selection: EntitySelection, selectionUI: SelectionUI) {
+    public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI) {
         self.stage = stage
         self.selection = selection
         self.selectionUI = selectionUI
@@ -47,6 +47,7 @@ public class SelectionTool : Tool {
     }
     
     public func refresh() {
+        
     }
     
     public func focusChange() {
@@ -84,8 +85,9 @@ public class SelectionTool : Tool {
                 break
             case .Press:
                 let entities = entitiesNear(position)
-                if let previous = selection.selected where previous.hitArea.contains(position), let index = entities.indexOf(previous) {
-                    state = .Selecting(entity: previous, cycle: index)
+                if let previous = selection.selected,
+                    let index = entities.indexOf({$0.id == previous}) {
+                    state = .Selecting(entity: entities[index], cycle: index)
                     
                 } else {
                     
@@ -108,7 +110,7 @@ public class SelectionTool : Tool {
     private func update(state: State) {
         switch state {
         case .Selecting(let entity, _):
-            selection.selected = entity
+            selection.selected = entity?.id
 
             break
         case .Idle:

@@ -12,7 +12,7 @@ import ReformMath
 public struct IntersectionSnapPoint : SnapPoint {
     public let position : Vec2d
     public let label : String
-    let point : RuntimeIntersectionPoint
+    public let point : RuntimeIntersectionPoint
     
     public var runtimePoint : LabeledPoint {
         return point

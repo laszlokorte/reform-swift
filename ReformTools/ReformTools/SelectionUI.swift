@@ -11,7 +11,7 @@ import ReformCore
 public class SelectionUI {
     public enum State {
         case Hide
-        case Show(EntitySelection)
+        case Show(FormSelection)
     }
     
     public var state : State = .Hide
