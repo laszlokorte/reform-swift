@@ -12,6 +12,10 @@ import ReformStage
 
 public class MoveTool : Tool {
 
+    enum Target {
+        case Free(position: Vec2d, streight: Bool)
+        case Snap(point: SnapPoint, cycle: Int, streightening: StreighteningMode)
+    }
     
     enum State
     {

@@ -68,6 +68,8 @@ class PointSnapper {
                 state = .Searching(filter, type, resultFor(filter, pointType: type, position: position, cycle: 0))
             }
         }
+        
+        refresh()
     }
     
     func cycle() {

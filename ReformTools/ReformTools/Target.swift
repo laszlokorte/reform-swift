@@ -11,5 +11,5 @@ import ReformStage
 
 enum Target {
     case Free(position: Vec2d, streight: Bool)
-    case Snap(point: SnapPoint, cycle: Int, streightening: StreighteningMode)
+    case Snap(point: SnapPoint, streightening: StreighteningMode)
 }
