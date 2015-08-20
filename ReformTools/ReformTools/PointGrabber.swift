@@ -49,13 +49,17 @@ class PointGrabber {
             }
             
         } else {
-            state = .Idle
             grabUI.state = .Hide
         }
     }
     
     func enable(formId: FormIdentifier) {
-        state = .Searching(formId, .None)
+        if case .Searching(formId, _) = state {
+        
+        } else {
+            state = .Searching(formId, .None)
+        }
+        print("aasda")
         refresh()
     }
     

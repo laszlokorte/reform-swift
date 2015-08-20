@@ -11,22 +11,44 @@ import ReformCore
 import ReformStage
 import ReformExpression
 
-enum LocationFilter {
+enum LocationFilter : Equatable {
     case Any
     case Near(Vec2d, distance: Double)
 }
 
-enum FormFilter {
+func ==(lhs: LocationFilter, rhs: LocationFilter) -> Bool {
+    switch (lhs, rhs) {
+    case (.Any, .Any): return true
+    case (.Near(let p1, let d1), .Near(let p2, let d2)): return p1==p2 && d1 == d2
+    default: return false
+    }
+}
+
+enum FormFilter : Equatable {
     case None
     case Any
     case Only(FormIdentifier)
     case Except(FormIdentifier)
 }
 
-struct PointQuery {
+func ==(lhs: FormFilter, rhs: FormFilter) -> Bool {
+    switch (lhs, rhs) {
+    case (.None, .None): return true
+    case (.Any, .Any): return true
+    case (.Only(let l), .Only(let r)): return l==r
+    case (.Except(let l), .Except(let r)): return l==r
+    default: return false
+    }
+}
+
+struct PointQuery : Equatable {
     let filter: FormFilter
     let pointType: PointType
     let location : LocationFilter
+}
+
+func ==(lhs: PointQuery, rhs: PointQuery) -> Bool {
+    return lhs.filter == rhs.filter && lhs.pointType == rhs.pointType && lhs.location == rhs.location
 }
 
 struct PointFinder {

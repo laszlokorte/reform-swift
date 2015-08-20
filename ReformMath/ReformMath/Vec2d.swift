@@ -7,7 +7,7 @@
 //
 
 
-public struct Vec2d {
+public struct Vec2d :Equatable {
     public static let XAxis = Vec2d(x:1, y:0)
     public static let YAxis = Vec2d(x:0, y:1)
     
@@ -23,6 +23,10 @@ public struct Vec2d {
         self.x = x
         self.y = y
     }
+}
+
+public func ==(lhs: Vec2d, rhs: Vec2d) -> Bool {
+    return lhs.x == rhs.x && lhs.y == rhs.y
 }
 
 extension Vec2d {

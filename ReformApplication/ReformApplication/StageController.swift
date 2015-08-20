@@ -92,9 +92,7 @@ class StageController : NSViewController {
     @IBOutlet var canvas : CanvasView?
     
     override func viewDidLoad() {
-        
-
-        toolController.currentTool = moveTool
+        toolController.currentTool = createFormTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         

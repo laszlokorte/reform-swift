@@ -59,7 +59,6 @@ public class MoveTool : Tool {
     }
     
     public func refresh() {
-        update()
         pointSnapper.refresh()
         pointGrabber.refresh()
         selectionTool.refresh()
@@ -113,9 +112,6 @@ public class MoveTool : Tool {
                 break
             case .Toggle:
                 break
-            }
-            if let entity = selection.selected {
-                pointGrabber.enable(entity)
             }
             break
         case .Idle:
@@ -181,7 +177,7 @@ public class MoveTool : Tool {
                 break
             }
             break
-        case .Moving(let grabPoint, let node, .Snap(let snapPoint, let streightening), let offset):
+        case .Moving(let grabPoint, let node, let target, let offset):
             switch input {
                 
             case .ModifierChange:
@@ -191,7 +187,7 @@ public class MoveTool : Tool {
                 pointSnapper.searchAt(pos)
 
                 if let snap = pointSnapper.current {
-                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap, streightening: modifier.isStreight ? .Orthogonal(inverted: streightening.isInverted) : .None), offset: offset)
+                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap, streightening: modifier.isStreight ? .Orthogonal(inverted: target.isStreighteningInverted) : .None), offset: offset)
                 } else {
                     state = .Moving(point: grabPoint, node: node, target: .Free(position: pos, streight: modifier.isStreight), offset: offset)
                 }
@@ -206,43 +202,25 @@ public class MoveTool : Tool {
             case .Cycle:
                 pointSnapper.cycle()
                 if let snap = pointSnapper.current {
-                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap,  streightening: modifier.isStreight ? .Orthogonal(inverted: streightening.isInverted) : .None), offset: offset)
+                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap,  streightening: modifier.isStreight ? .Orthogonal(inverted: target.isStreighteningInverted) : .None), offset: offset)
                 } else {
                     state = .Moving(point: grabPoint, node: node, target: .Free(position: pos, streight: modifier.isStreight), offset: offset)
                 }
                 break
             case .Toggle:
-                state = .Moving(point: grabPoint, node: node, target: .Snap(point: snapPoint,streightening: .Orthogonal(inverted: !streightening.isInverted)), offset: offset)
+                if case .Snap(let snapPoint, let streightening) = target {
+                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snapPoint,streightening: .Orthogonal(inverted: !streightening.isInverted)), offset: offset)
+                }
                 
                 break
             }
             break
-        case .Moving(let grabPoint, let node, .Free, let offset):
-            switch input {
-            case .ModifierChange:
-                pointSnapper.enable(.Except(grabPoint.formId), pointType: snapType)
-                fallthrough
-            case .Move:
-                pointSnapper.searchAt(pos)
-                if let snap = pointSnapper.current {
-                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap,streightening: modifier.isStreight ? .Orthogonal(inverted: false) : .None), offset: offset)
-                } else {
-                    state = .Moving(point: grabPoint, node: node, target: .Free(position: pos, streight: modifier.isStreight), offset: offset)
-                }
-                break
-            case .Press:
-                break
-            case .Release:
-                state = .Idle
-                pointSnapper.disable()
-                process(.Move, atPosition: pos, withModifier: modifier)
-                break
-            case .Cycle:
-                break
-            case .Toggle:
-                break
-            }
-            break
+        }
+        
+        if let entity = selection.selected {
+            pointGrabber.enable(entity)
+        } else {
+            pointGrabber.disable()
         }
         
         publish()
@@ -262,16 +240,7 @@ public class MoveTool : Tool {
             
             node.replaceWith(TranslateInstruction(formId: activePoint.formId, distance: distance))
             notifier()
-        } else {
-            update()
         }
     }
-    
-    private func update() {
-       
-    }
-
-    
-    
     
 }

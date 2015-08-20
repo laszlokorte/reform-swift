@@ -49,7 +49,11 @@ class PointSnapper {
     }
     
     func enable(filter: FormFilter, pointType: PointType) {
-        state = .Searching(filter, pointType, .None)
+        if case .Searching(let oldFilter, let oldType, _) = state where filter==oldFilter && pointType == oldType {
+            
+        } else {
+            state = .Searching(filter, pointType, .None)
+        }
         refresh()
     }
     
@@ -75,7 +79,7 @@ class PointSnapper {
     func cycle() {
         if case .Searching(let filter, let type, .Found(let pos, _, let cycle)) = state {
             
-            state =  .Searching(filter, type, resultFor(filter, pointType: type, position: pos, cycle: cycle+1))
+            state = .Searching(filter, type, resultFor(filter, pointType: type, position: pos, cycle: cycle+1))
         }
 
     }
@@ -85,6 +89,7 @@ class PointSnapper {
         let points = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: pointType, location: .Near(position, distance: distance)))
         
         if points.count > 0 {
+            print(cycle)
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
         } else {
             return .None
