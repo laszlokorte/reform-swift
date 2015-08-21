@@ -69,4 +69,13 @@ public class Streightener {
             return (abs(delta.x) > abs(delta.y)) != inverted ? Cartesian.Horizontal : Cartesian.Vertical
         }
     }
+    
+    func axisFor(axis: RuntimeAxis) -> RuntimeAxis {
+        switch state {
+        case .Disabled:
+            return axis
+        case .Enabled:
+            return .None
+        }
+    }
 }

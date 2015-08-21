@@ -15,4 +15,5 @@ public enum RuntimeError {
     case InvalidAngle
     case InvalidFactor
     case InvalidExpression
+    case InvalidAxis
 }

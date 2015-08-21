@@ -10,6 +10,7 @@
 		F222AF1B1B836A37005F71A1 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1A1B836A37005F71A1 /* Alignment.swift */; };
 		F222AF291B84EFED005F71A1 /* ConstantDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF281B84EFED005F71A1 /* ConstantDistance.swift */; };
 		F222AF421B878349005F71A1 /* ConstantScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */; };
+		F222AF441B878D16005F71A1 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF431B878D16005F71A1 /* Axis.swift */; };
 		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
@@ -105,6 +106,7 @@
 		F222AF1A1B836A37005F71A1 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		F222AF281B84EFED005F71A1 /* ConstantDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantDistance.swift; sourceTree = "<group>"; };
 		F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantScaleFactor.swift; sourceTree = "<group>"; };
+		F222AF431B878D16005F71A1 /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				F26D46C31B7D12D100266096 /* ScaleFactor.swift */,
 				F26D46C51B7D130D00266096 /* TranslationDistance.swift */,
 				F222AF1A1B836A37005F71A1 /* Alignment.swift */,
+				F222AF431B878D16005F71A1 /* Axis.swift */,
 			);
 			name = Relations;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				F26D47261B7D3D3C00266096 /* CompositeRotator.swift in Sources */,
 				F26D47121B7D37B300266096 /* CircleForm.swift in Sources */,
 				F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */,
+				F222AF441B878D16005F71A1 /* Axis.swift in Sources */,
 				F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */,
 				F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */,
 				F2A1049B1B82062D00E97C6B /* RelativeDistance.swift in Sources */,

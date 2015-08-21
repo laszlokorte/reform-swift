@@ -81,3 +81,12 @@ public func stepped(angle: Angle, size: Angle) -> Angle {
 public func stepped(value: Double, size: Double) -> Double {
     return round(value / size) * size
 }
+
+public func normalize(vector: Vec2d) -> Vec2d? {
+    let length = vector.length
+    guard length != 0 else {
+        return nil
+    }
+    
+    return vector / length
+}

@@ -19,12 +19,14 @@ public struct ScaleInstruction : Instruction {
     
     let formId : FormIdentifier
     let factor : FactorType
+    let axis : RuntimeAxis
     var fixPoint : PointType
     
-    public init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType) {
+    public init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType, axis: RuntimeAxis = .None) {
         self.formId = formId
         self.factor = factor
         self.fixPoint = fixPoint
+        self.axis = axis
     }
     
     public func evaluate(runtime: Runtime) {
@@ -40,15 +42,27 @@ public struct ScaleInstruction : Instruction {
             runtime.reportError(.InvalidFactor)
             return
         }
+
+        guard let a = axis.getVectorFor(runtime) else {
+            runtime.reportError(.InvalidAxis)
+            return
+        }
         
-        form.scaler.scale(runtime, factor: f, fix: fix, axis: Vec2d())
+        form.scaler.scale(runtime, factor: f, fix: fix, axis: a)
     }
     
     
     public func getDescription(analyzer: Analyzer) -> String {
         let formName = analyzer.get(formId)?.name ?? "???"
+        let targetName : String
+        switch axis {
+        case .None:
+            targetName = formName
+        case .Named(let axisName):
+            targetName = "\(formName)'s \(axisName)"
+        }
         
-        return  "Scale \(formName) around \(fixPoint.getDescription(analyzer)) by \(factor)"
+        return  "Scale \(targetName) around \(fixPoint.getDescription(analyzer)) by \(factor)"
     }
     
     public func analyze(analyzer: Analyzer) {

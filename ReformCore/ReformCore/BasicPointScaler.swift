@@ -17,6 +17,7 @@ struct BasicPointScaler : Scaler {
     
     
     func scale(runtime : Runtime, factor: Double, fix: Vec2d, axis: Vec2d) {
+
         for point in points {
             if let pos = point.getPositionFor(runtime) {
                 let delta = pos - fix

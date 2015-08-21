@@ -52,7 +52,7 @@ struct ExposedPoint : RuntimePoint, Labeled {
         return point.getPositionFor(runtime)
     }
     
-    func getDescription(analyzer: Analyzer) -> String {        
+    func getDescription(analyzer: Analyzer) -> String {
         return name
     }
 }

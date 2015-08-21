@@ -114,7 +114,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, formId: FormIden
     }
 }
 
-func collectHandles<F:Form where F:Morphable>(analyzer: Analyzer, runtime: Runtime, form: F, pivots: [AnchorIdentifier:(ExposedPointIdentifier, ExposedPointIdentifier,ExposedPointIdentifier)]) -> [Handle] {
+func collectHandles<F:Form where F:Morphable>(analyzer: Analyzer, runtime: Runtime, form: F, pivots: [AnchorIdentifier:(ExposedPointIdentifier, ExposedPointIdentifier,ExposedPointIdentifier, axisName: String?)]) -> [Handle] {
     return form.getAnchors().flatMap() { (anchorId, anchor) -> Handle? in
         guard let pivot = pivots[anchorId],
             let primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1),
@@ -123,7 +123,15 @@ func collectHandles<F:Form where F:Morphable>(analyzer: Analyzer, runtime: Runti
                 return nil
         }
         
-        return Handle(formId: form.identifier, anchorId: anchorId, pointId: pivot.0, label: anchor.name, position: position, defaultPivot: (primary, secondary)
+        let axis : ScaleAxis
+        
+        if let axisname = pivot.axisName {
+            axis = .Named(axisname, formId: form.identifier, pivot.0, pivot.1)
+        } else {
+            axis = .None
+        }
+        
+        return Handle(formId: form.identifier, anchorId: anchorId, pointId: pivot.0, label: anchor.name, position: position, defaultPivot: (primary, secondary), scaleAxis: axis
         )
     }
 }
@@ -148,8 +156,8 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, line form: LineF
     let type = EntityType(drawingMode: form.drawingMode)
     
     let handles = collectHandles(analyzer, runtime: runtime, form: form, pivots: [
-        LineForm.AnchorId.Start.rawValue : (LineForm.PointId.Start.rawValue, LineForm.PointId.End.rawValue, LineForm.PointId.Center.rawValue),
-        LineForm.AnchorId.End.rawValue : (LineForm.PointId.End.rawValue, LineForm.PointId.Start.rawValue, LineForm.PointId.Center.rawValue),
+        LineForm.AnchorId.Start.rawValue : (LineForm.PointId.Start.rawValue, LineForm.PointId.End.rawValue, LineForm.PointId.Center.rawValue, nil),
+        LineForm.AnchorId.End.rawValue : (LineForm.PointId.End.rawValue, LineForm.PointId.Start.rawValue, LineForm.PointId.Center.rawValue, nil),
     ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)
@@ -174,37 +182,37 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, rectangle form: 
     let handles = collectHandles(analyzer, runtime: runtime, form: form, pivots: [
         RectangleForm.AnchorId.TopLeft.rawValue :
             (RectangleForm.PointId.TopLeft.rawValue,
-                RectangleForm.PointId.BottomRight.rawValue, RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.BottomRight.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
         RectangleForm.AnchorId.TopRight.rawValue :
             (RectangleForm.PointId.TopRight.rawValue,
-                RectangleForm.PointId.BottomLeft.rawValue, RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.BottomLeft.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
         RectangleForm.AnchorId.BottomLeft.rawValue :
             (RectangleForm.PointId.BottomLeft.rawValue,
-                RectangleForm.PointId.TopRight.rawValue, RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.TopRight.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
         RectangleForm.AnchorId.BottomRight.rawValue :
             (RectangleForm.PointId.BottomRight.rawValue,
-                RectangleForm.PointId.TopLeft.rawValue, RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.TopLeft.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
         RectangleForm.AnchorId.Top.rawValue :
             (RectangleForm.PointId.Top.rawValue,
-                RectangleForm.PointId.Bottom.rawValue, RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.Bottom.rawValue, RectangleForm.PointId.Center.rawValue, "Height"),
         
         RectangleForm.AnchorId.Bottom.rawValue :
             (RectangleForm.PointId.Bottom.rawValue,
                 RectangleForm.PointId.Top.rawValue,
-                RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.Center.rawValue, "Height"),
         
         RectangleForm.AnchorId.Left.rawValue :
             (RectangleForm.PointId.Left.rawValue,
-                RectangleForm.PointId.Right.rawValue, RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.Right.rawValue, RectangleForm.PointId.Center.rawValue, "Width"),
         
         RectangleForm.AnchorId.Right.rawValue :
             (RectangleForm.PointId.Right.rawValue,
                 RectangleForm.PointId.Left.rawValue,
-                RectangleForm.PointId.Center.rawValue),
+                RectangleForm.PointId.Center.rawValue, "Width"),
     ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)
@@ -232,22 +240,22 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: Cir
         CircleForm.AnchorId.Top.rawValue : (
             CircleForm.PointId.Top.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Bottom.rawValue),
+            CircleForm.PointId.Bottom.rawValue, "Height"),
         
         CircleForm.AnchorId.Bottom.rawValue : (
             CircleForm.PointId.Bottom.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Top.rawValue),
+            CircleForm.PointId.Top.rawValue, "Height"),
         
         CircleForm.AnchorId.Left.rawValue : (
             CircleForm.PointId.Left.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Right.rawValue),
+            CircleForm.PointId.Right.rawValue, "Width"),
         
         CircleForm.AnchorId.Right.rawValue : (
             CircleForm.PointId.Right.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Left.rawValue),
+            CircleForm.PointId.Left.rawValue, "Width"),
         ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)
@@ -273,12 +281,12 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieFor
         PieForm.AnchorId.Start.rawValue : (
             PieForm.PointId.Start.rawValue,
             PieForm.PointId.Center.rawValue,
-            PieForm.PointId.End.rawValue),
+            PieForm.PointId.End.rawValue, nil),
         
         PieForm.AnchorId.End.rawValue : (
             PieForm.PointId.End.rawValue,
             PieForm.PointId.Center.rawValue,
-            PieForm.PointId.Start.rawValue),
+            PieForm.PointId.Start.rawValue, nil),
         
         ])
     
@@ -310,12 +318,12 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, arc form: ArcFor
         ArcForm.AnchorId.Start.rawValue : (
             ArcForm.PointId.Start.rawValue,
             ArcForm.PointId.End.rawValue,
-            ArcForm.PointId.Center.rawValue),
+            ArcForm.PointId.Center.rawValue, nil),
         
         ArcForm.AnchorId.End.rawValue : (
             ArcForm.PointId.End.rawValue,
             ArcForm.PointId.Start.rawValue,
-            ArcForm.PointId.Center.rawValue),
+            ArcForm.PointId.Center.rawValue, nil),
         
         ])
     
@@ -347,12 +355,12 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, text form: TextF
         TextForm.AnchorId.Start.rawValue : (
             TextForm.PointId.Start.rawValue,
             TextForm.PointId.End.rawValue,
-            TextForm.PointId.Center.rawValue),
+            TextForm.PointId.Center.rawValue, nil),
         
         TextForm.AnchorId.End.rawValue : (
             TextForm.PointId.End.rawValue,
             TextForm.PointId.Start.rawValue,
-            TextForm.PointId.Center.rawValue),
+            TextForm.PointId.Center.rawValue, nil),
         ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)
@@ -380,42 +388,42 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, picture form: Pi
         PictureForm.AnchorId.TopLeft.rawValue : (
                 PictureForm.PointId.TopLeft.rawValue,
                 PictureForm.PointId.BottomRight.rawValue,
-                PictureForm.PointId.Center.rawValue),
+                PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.TopRight.rawValue : (
             PictureForm.PointId.TopRight.rawValue,
             PictureForm.PointId.BottomLeft.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.BottomLeft.rawValue : (
             PictureForm.PointId.BottomLeft.rawValue,
             PictureForm.PointId.TopRight.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.BottomRight.rawValue : (
             PictureForm.PointId.BottomRight.rawValue,
             PictureForm.PointId.TopLeft.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.Top.rawValue : (
             PictureForm.PointId.Top.rawValue,
             PictureForm.PointId.Bottom.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.Bottom.rawValue : (
             PictureForm.PointId.Bottom.rawValue,
             PictureForm.PointId.Top.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.Left.rawValue : (
             PictureForm.PointId.Left.rawValue,
             PictureForm.PointId.Right.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         
         PictureForm.AnchorId.Right.rawValue : (
             PictureForm.PointId.Right.rawValue,
             PictureForm.PointId.Left.rawValue,
-            PictureForm.PointId.Center.rawValue),
+            PictureForm.PointId.Center.rawValue, nil),
         ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)

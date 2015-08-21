@@ -25,16 +25,18 @@ public class ScaleTool : Tool {
     let stage : Stage
     let handleGrabber : HandleGrabber
     let streightener : Streightener
+    var pivot : PivotChoice = .Primary
     let instructionCreator : InstructionCreator
     
     let selectionTool : SelectionTool
     let selection : FormSelection
+    let pivotUI : PivotUI
     
-    public init(stage: Stage, selection: FormSelection, handleGrabber: HandleGrabber, streightener: Streightener, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
+    public init(stage: Stage, selection: FormSelection, handleGrabber: HandleGrabber, streightener: Streightener, instructionCreator: InstructionCreator, selectionTool: SelectionTool, pivotUI : PivotUI) {
         self.stage = stage
         self.selection = selection
         self.selectionTool = selectionTool
-        
+        self.pivotUI = pivotUI
         
         self.handleGrabber = handleGrabber
         self.streightener = streightener
@@ -80,6 +82,12 @@ public class ScaleTool : Tool {
             streightener.disable()
         }
         
+        if modifier.isAlignOption {
+            pivot = .Secondary
+        } else {
+            pivot = .Primary
+        }
+        
         
         switch state {
         case .Delegating:
@@ -95,11 +103,16 @@ public class ScaleTool : Tool {
             switch input {
             case .Move, .ModifierChange:
                 handleGrabber.searchAt(pos)
+                if let handle = handleGrabber.current {
+                    pivotUI.state = .Show(pivot.pointFor(handle))
+                } else {
+                    pivotUI.state = .Hide
+                }
             case .Press:
                 if let grabbedHandle = handleGrabber.current {
                     
                     instructionCreator
-                        .beginCreation(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: 0), fixPoint: grabbedHandle.defaultPivot.0.runtimePoint))
+                        .beginCreation(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: 0), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis:  streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
                     
                     state = .Scaling(handle: grabbedHandle, factor: 1.0, offset: pos - grabbedHandle.position)
                     
@@ -117,9 +130,13 @@ public class ScaleTool : Tool {
             switch input {
                 
             case .ModifierChange:
+                pivotUI.state = .Show(pivot.pointFor(grabbedHandle))
                 fallthrough
             case .Move:
-                state = .Scaling(handle: grabbedHandle, factor: (pos - grabbedHandle.defaultPivot.0.position - offset).length / (grabbedHandle.position - grabbedHandle.defaultPivot.0.position).length, offset: offset)
+                let piv = pivot.pointFor(grabbedHandle)
+                let axis = (grabbedHandle.position - piv.position)
+                let distance = pos - piv.position - offset
+                state = .Scaling(handle: grabbedHandle, factor: dot(distance, axis)/axis.length2, offset: offset)
                 
             case .Press:
                 break
@@ -146,7 +163,7 @@ public class ScaleTool : Tool {
     private func publish() {
         if case .Scaling(let grabbedHandle, let factor, _) = state {
             
-            instructionCreator.update(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: factor), fixPoint: grabbedHandle.defaultPivot.0.runtimePoint))
+            instructionCreator.update(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: factor), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis: streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
         }
     }
 }

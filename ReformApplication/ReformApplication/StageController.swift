@@ -55,7 +55,7 @@ class StageController : NSViewController {
     lazy var rotationTool : RotateTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
 
     
-    lazy var scalingTool : ScaleTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
+    lazy var scalingTool : ScaleTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.pivotUI)
 
     let toolController = ToolController()
     

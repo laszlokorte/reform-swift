@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F222AF461B878F33005F71A1 /* ScaleAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF451B878F33005F71A1 /* ScaleAxis.swift */; };
 		F24AAFD11B8160D0008DF952 /* RuntimeStageCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */; };
 		F26D463A1B7D0B7800266096 /* ReformStage.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46391B7D0B7800266096 /* ReformStage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46411B7D0B7800266096 /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46361B7D0B7800266096 /* ReformStage.framework */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F222AF451B878F33005F71A1 /* ScaleAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAxis.swift; sourceTree = "<group>"; };
 		F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeStageCollector.swift; sourceTree = "<group>"; };
 		F26D46361B7D0B7800266096 /* ReformStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformStage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46391B7D0B7800266096 /* ReformStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformStage.h; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				F27391151B7F92B200100F2F /* Pivot.swift */,
 				F27391171B7F92FA00100F2F /* IntersectionSnapPoint.swift */,
 				F27391191B7F934500100F2F /* GlompSnapPoint.swift */,
+				F222AF451B878F33005F71A1 /* ScaleAxis.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				F27391181B7F92FA00100F2F /* IntersectionSnapPoint.swift in Sources */,
 				F2ABC7511B7FD6D5001AD41F /* HitArea.swift in Sources */,
 				F273911A1B7F934500100F2F /* GlompSnapPoint.swift in Sources */,
+				F222AF461B878F33005F71A1 /* ScaleAxis.swift in Sources */,
 				F24AAFD11B8160D0008DF952 /* RuntimeStageCollector.swift in Sources */,
 				F27391121B7F924900100F2F /* SnapPoint.swift in Sources */,
 				F273910C1B7F916600100F2F /* Stage.swift in Sources */,

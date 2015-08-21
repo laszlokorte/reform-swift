@@ -20,6 +20,7 @@ public struct Handle {
     public let position : Vec2d
     
     public let defaultPivot : PivotPair
+    public let scaleAxis : ScaleAxis
 }
 
 extension Handle {
