@@ -59,7 +59,6 @@ class PointGrabber {
         } else {
             state = .Searching(formId, .None)
         }
-        print("aasda")
         refresh()
     }
     

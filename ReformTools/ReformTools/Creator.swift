@@ -26,6 +26,7 @@ class InstructionCreator {
         if case .Idle = state, let focused = focus.current {
             let node = InstructionNode(instruction: instruction)
             focused.append(sibling: node)
+            focus.current = node
             state = .Creating(node)
         }
     }
@@ -34,6 +35,7 @@ class InstructionCreator {
         if case .Creating(let node) = state {
             focus.current = node.previous
             node.removeFromParent()
+            state = .Idle
         }
     }
     

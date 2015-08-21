@@ -11,9 +11,19 @@ import ReformCore
 enum AlignmentMode {
     case Centered
     case Aligned
+
+}
+
+
+class Aligner {
+    var state : AlignmentMode = .Aligned
     
-    var runtimeAlignment : RuntimeAlignment {
-        switch self {
+    func setMode(alignment: AlignmentMode) {
+        state = alignment
+    }
+    
+    func getAlignment() -> RuntimeAlignment {
+        switch state {
         case .Centered: return .Centered
         case .Aligned: return .Leading
         }

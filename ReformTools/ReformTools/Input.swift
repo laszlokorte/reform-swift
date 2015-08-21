@@ -31,7 +31,7 @@ extension Modifier {
         return contains(Modifier.Streight)
     }
     
-    var altAlign : Bool {
+    var isAlignOption : Bool {
         return contains(Modifier.AlternativeAlignment)
     }
 }

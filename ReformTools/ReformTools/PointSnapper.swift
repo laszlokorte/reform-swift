@@ -104,6 +104,14 @@ class PointSnapper {
             return nil
         }
     }
+    
+    func getTarget(position: Vec2d) -> Target {
+        if let point = current {
+            return .Snap(point: point)
+        } else {
+            return .Free(position: position)
+        }
+    }
 
     
 }

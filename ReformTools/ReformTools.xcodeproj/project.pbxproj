@@ -12,7 +12,7 @@
 		F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF261B83EF6D005F71A1 /* EntityFinder.swift */; };
 		F222AF2C1B851728005F71A1 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2B1B851728005F71A1 /* Target.swift */; };
 		F222AF2E1B851741005F71A1 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2D1B851741005F71A1 /* Alignment.swift */; };
-		F222AF301B85174F005F71A1 /* Streightening.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2F1B85174F005F71A1 /* Streightening.swift */; };
+		F222AF301B85174F005F71A1 /* Streightener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2F1B85174F005F71A1 /* Streightener.swift */; };
 		F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF311B851833005F71A1 /* PointSnapper.swift */; };
 		F222AF341B854536005F71A1 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF331B854536005F71A1 /* Creator.swift */; };
 		F222AF371B85FCBE005F71A1 /* PointGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF361B85FCBE005F71A1 /* PointGrabber.swift */; };
@@ -60,7 +60,7 @@
 		F222AF261B83EF6D005F71A1 /* EntityFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityFinder.swift; sourceTree = "<group>"; };
 		F222AF2B1B851728005F71A1 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		F222AF2D1B851741005F71A1 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
-		F222AF2F1B85174F005F71A1 /* Streightening.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streightening.swift; sourceTree = "<group>"; };
+		F222AF2F1B85174F005F71A1 /* Streightener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streightener.swift; sourceTree = "<group>"; };
 		F222AF311B851833005F71A1 /* PointSnapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSnapper.swift; sourceTree = "<group>"; };
 		F222AF331B854536005F71A1 /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		F222AF361B85FCBE005F71A1 /* PointGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointGrabber.swift; sourceTree = "<group>"; };
@@ -139,19 +139,19 @@
 			children = (
 				F222AF2B1B851728005F71A1 /* Target.swift */,
 				F222AF2D1B851741005F71A1 /* Alignment.swift */,
-				F222AF2F1B85174F005F71A1 /* Streightening.swift */,
-				F222AF331B854536005F71A1 /* Creator.swift */,
 			);
 			name = States;
 			sourceTree = "<group>";
 		};
-		F222AF351B85FC9A005F71A1 /* Helper */ = {
+		F222AF351B85FC9A005F71A1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF2F1B85174F005F71A1 /* Streightener.swift */,
+				F222AF331B854536005F71A1 /* Creator.swift */,
 				F222AF311B851833005F71A1 /* PointSnapper.swift */,
 				F222AF361B85FCBE005F71A1 /* PointGrabber.swift */,
 			);
-			name = Helper;
+			name = Components;
 			sourceTree = "<group>";
 		};
 		F26D46501B7D0B9500266096 = {
@@ -202,7 +202,7 @@
 		F2A1049E1B8213F900E97C6B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				F222AF351B85FC9A005F71A1 /* Helper */,
+				F222AF351B85FC9A005F71A1 /* Components */,
 				F222AF2A1B85171C005F71A1 /* States */,
 				F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */,
 				F2A104AD1B821A2100E97C6B /* CropTool.swift */,
@@ -370,7 +370,7 @@
 				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
 				F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */,
 				F222AF371B85FCBE005F71A1 /* PointGrabber.swift in Sources */,
-				F222AF301B85174F005F71A1 /* Streightening.swift in Sources */,
+				F222AF301B85174F005F71A1 /* Streightener.swift in Sources */,
 				F2A104A51B82144C00E97C6B /* InstructionFocus.swift in Sources */,
 				F2A104A31B82143800E97C6B /* FormSelection.swift in Sources */,
 				F2A104A01B82140300E97C6B /* Tool.swift in Sources */,

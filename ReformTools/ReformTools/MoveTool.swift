@@ -16,18 +16,16 @@ public class MoveTool : Tool {
     {
         case Idle
         case Delegating
-        case Snapped(point: EntityPoint)
         case Moving(point: EntityPoint, node: InstructionNode, target: Target, offset: Vec2d)
     }
     
     var state : State = .Idle
     var snapType : PointType = []
     
-    var cursorPoint = Vec2d()
-    
     let stage : Stage
     let pointGrabber : PointGrabber
     let pointSnapper : PointSnapper
+    let streightener : Streightener
     let selectionTool : SelectionTool
     let selection : FormSelection
     let focus : InstructionFocus
@@ -44,6 +42,7 @@ public class MoveTool : Tool {
         
         self.pointSnapper = PointSnapper(stage: stage, snapUI: snapUI, radius: 10)
         self.pointGrabber = PointGrabber(stage: stage, grabUI: grabUI, radius: 10)
+        self.streightener = Streightener()
     }
     
     public func setUp() {
@@ -72,112 +71,68 @@ public class MoveTool : Tool {
         case .Delegating, .Idle:
             state = .Idle
             selectionTool.cancel()
-
-            break
         case .Moving(_, let node, _, _):
             focus.current = node.previous
             node.removeFromParent()
             state = .Idle;
 
             notifier()
-            break
-            
-        case .Snapped:
-            selectionTool.cancel()
-
-            break
         }
         
     }
     
     public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
-        cursorPoint = pos
+        
+        if modifier.isStreight {
+            streightener.enable()
+        } else {
+            streightener.disable()
+        }
         
         
         switch state {
         case .Delegating:
             selectionTool.process(input, atPosition: pos, withModifier: modifier)
             switch input {
-            case .ModifierChange:
-                fallthrough
-            case .Move:
-                break
-            case .Press:
+            case .ModifierChange, .Press,
+            .Move, .Cycle, .Toggle:
                 break
             case .Release:
                 state = .Idle
-                break
-            case .Cycle:
-                break
-            case .Toggle:
-                break
             }
-            break
         case .Idle:
             switch input {
             case .Move, .ModifierChange:
                 pointGrabber.searchAt(pos)
-                if let grab = pointGrabber.current {
-                    state = .Snapped(point: grab)
-                } else {
-                    state = .Idle
-                }
-                break
             case .Press:
-                state = .Delegating
-                selectionTool.process(input, atPosition: pos, withModifier: modifier)
-                break
-            case .Release:
-                break
-            case .Cycle:
-                break
-            case .Toggle:
-                break
-            }
-            break
-        case .Snapped(let snappedPoint):
-            switch input {
-            case .Move, .ModifierChange:
-                pointGrabber.searchAt(pos)
-                if let grab = pointGrabber.current {
-                    state = .Snapped(point: grab)
-                } else {
-                    state = .Idle
-                }
-                break
-            case .Press:
-                guard let currentInstruction = self.focus.current else {
-                    break
-                }
-                let distance = ConstantDistance(delta: Vec2d())
-                let instruction = TranslateInstruction(formId: snappedPoint.formId, distance: distance)
-                let node = InstructionNode(instruction: instruction)
+                if let grabbedPoint = pointGrabber.current {
                 
-                if currentInstruction.append(sibling: node) {
-                    focus.current = node
+                    guard let currentInstruction = self.focus.current else {
+                        break
+                    }
+                    let distance = ConstantDistance(delta: Vec2d())
+                    let instruction = TranslateInstruction(formId: grabbedPoint.formId, distance: distance)
+                    let node = InstructionNode(instruction: instruction)
                     
-                    state = .Moving(point: snappedPoint, node: node, target: .Free(position: pos, streight: modifier.isStreight), offset: pos - snappedPoint.position)
+                    if currentInstruction.append(sibling: node) {
+                        focus.current = node
+                        
+                        state = .Moving(point: grabbedPoint, node: node, target: .Free(position: pos), offset: pos - grabbedPoint.position)
+                        
+                        pointSnapper.enable(.Except(grabbedPoint.formId), pointType: snapType)
+                    }
+                } else {
                     
-                    pointSnapper.enable(.Except(snappedPoint.formId), pointType: snapType)
+                    state = .Delegating
+                    selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-                break
-            case .Release:
-                break
             case .Cycle:
                 pointGrabber.cycle()
-                
-                if let grab = pointGrabber.current {
-                    state = .Snapped(point: grab)
-                } else {
-                    state = .Idle
-                }
-                break
-            case .Toggle:
+            case .Toggle, .Release:
                 break
             }
-            break
-        case .Moving(let grabPoint, let node, let target, let offset):
+        case .Moving(let grabPoint, let node, _, let offset):
             switch input {
                 
             case .ModifierChange:
@@ -185,36 +140,23 @@ public class MoveTool : Tool {
                 fallthrough
             case .Move:
                 pointSnapper.searchAt(pos)
-
-                if let snap = pointSnapper.current {
-                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap, streightening: modifier.isStreight ? .Orthogonal(inverted: target.isStreighteningInverted) : .None), offset: offset)
-                } else {
-                    state = .Moving(point: grabPoint, node: node, target: .Free(position: pos, streight: modifier.isStreight), offset: offset)
+                if pointSnapper.current == nil {
+                    streightener.reset()
                 }
-                break
+                
+                state = .Moving(point: grabPoint, node: node, target: pointSnapper.getTarget(pos), offset: offset)
             case .Press:
                 break
             case .Release:
                 state = .Idle
                 pointSnapper.disable()
                 process(.Move, atPosition: pos, withModifier: modifier)
-                break
             case .Cycle:
                 pointSnapper.cycle()
-                if let snap = pointSnapper.current {
-                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snap,  streightening: modifier.isStreight ? .Orthogonal(inverted: target.isStreighteningInverted) : .None), offset: offset)
-                } else {
-                    state = .Moving(point: grabPoint, node: node, target: .Free(position: pos, streight: modifier.isStreight), offset: offset)
-                }
-                break
+                state = .Moving(point: grabPoint, node: node, target: pointSnapper.getTarget(pos), offset: offset)
             case .Toggle:
-                if case .Snap(let snapPoint, let streightening) = target {
-                    state = .Moving(point: grabPoint, node: node, target: .Snap(point: snapPoint,streightening: .Orthogonal(inverted: !streightening.isInverted)), offset: offset)
-                }
-                
-                break
+                streightener.invert()
             }
-            break
         }
         
         if let entity = selection.selected {
@@ -230,12 +172,10 @@ public class MoveTool : Tool {
         if case .Moving(let activePoint, let node, let target, let offset) = state {
             let distance : protocol<RuntimeDistance, Labeled>
             switch target {
-            case .Free(let position, let streight):
-                distance = ConstantDistance(delta: adjust(position - activePoint.position - offset, streighten: streight))
-                break
-            case .Snap(let snap,let streightening):
-                distance = RelativeDistance(from: activePoint.runtimePoint, to: snap.runtimePoint, direction: streightening.directionFor(snap.position - activePoint.position))
-                break
+            case .Free(let position):
+                distance = ConstantDistance(delta: streightener.adjust(position - activePoint.position - offset))
+            case .Snap(let snap):
+                distance = RelativeDistance(from: activePoint.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - activePoint.position))
             }
             
             node.replaceWith(TranslateInstruction(formId: activePoint.formId, distance: distance))
