@@ -16,6 +16,8 @@
 		F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF311B851833005F71A1 /* PointSnapper.swift */; };
 		F222AF341B854536005F71A1 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF331B854536005F71A1 /* Creator.swift */; };
 		F222AF371B85FCBE005F71A1 /* PointGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF361B85FCBE005F71A1 /* PointGrabber.swift */; };
+		F222AF391B8768BA005F71A1 /* HandleGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF381B8768BA005F71A1 /* HandleGrabber.swift */; };
+		F222AF3D1B876941005F71A1 /* HandleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3C1B876941005F71A1 /* HandleFinder.swift */; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
@@ -64,6 +66,8 @@
 		F222AF311B851833005F71A1 /* PointSnapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSnapper.swift; sourceTree = "<group>"; };
 		F222AF331B854536005F71A1 /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		F222AF361B85FCBE005F71A1 /* PointGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointGrabber.swift; sourceTree = "<group>"; };
+		F222AF381B8768BA005F71A1 /* HandleGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleGrabber.swift; sourceTree = "<group>"; };
+		F222AF3C1B876941005F71A1 /* HandleFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleFinder.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -150,8 +154,17 @@
 				F222AF2F1B85174F005F71A1 /* Streightener.swift */,
 				F222AF311B851833005F71A1 /* PointSnapper.swift */,
 				F222AF361B85FCBE005F71A1 /* PointGrabber.swift */,
+				F222AF381B8768BA005F71A1 /* HandleGrabber.swift */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		F222AF3A1B876921005F71A1 /* HandleFinder */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF3C1B876941005F71A1 /* HandleFinder.swift */,
+			);
+			name = HandleFinder;
 			sourceTree = "<group>";
 		};
 		F26D46501B7D0B9500266096 = {
@@ -178,6 +191,7 @@
 		F26D465C1B7D0B9600266096 /* ReformTools */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF3A1B876921005F71A1 /* HandleFinder */,
 				F222AF251B83EF5F005F71A1 /* EntityFinder */,
 				F222AF1E1B83B65B005F71A1 /* PointFinder */,
 				F2A104BD1B821B9800E97C6B /* UI */,
@@ -376,7 +390,9 @@
 				F2A104A01B82140300E97C6B /* Tool.swift in Sources */,
 				F2A104C51B821C7000E97C6B /* CropUI.swift in Sources */,
 				F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */,
+				F222AF391B8768BA005F71A1 /* HandleGrabber.swift in Sources */,
 				F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */,
+				F222AF3D1B876941005F71A1 /* HandleFinder.swift in Sources */,
 				F2A104C91B821D0100E97C6B /* PivotUI.swift in Sources */,
 				F2A104BC1B821AE900E97C6B /* SelectionTool.swift in Sources */,
 				F2A104AE1B821A2100E97C6B /* CropTool.swift in Sources */,
