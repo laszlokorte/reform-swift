@@ -9,17 +9,17 @@
 import ReformMath
 import ReformStage
 
-private enum State {
-    case Idle
-    case Searching(FormFilter, PointType, SearchingResult)
-}
-
-private enum SearchingResult {
-    case None
-    case Found(position: Vec2d, point: SnapPoint, cycle: Int)
-}
-
 public class PointSnapper {
+    
+    private enum State {
+        case Idle
+        case Searching(FormFilter, PointType, SearchingResult)
+    }
+    
+    private enum SearchingResult {
+        case None
+        case Found(position: Vec2d, point: SnapPoint, cycle: Int)
+    }
     
     private var state : State = .Idle
     let snapUI : SnapUI

@@ -178,9 +178,7 @@ public class DragTool<Delegate: DragToolProtocol> {
     }
     
     private func publish() {
-        if case .Dragging(let activePoint, let target, let offset) = state {
-            let distance : protocol<RuntimeDistance, Labeled>
-            
+        if case .Dragging(let activePoint, let target, let offset) = state {            
             instructionCreator.update(delegate.instructionForDrag(activePoint, to: target, offset: offset))
         }
     }

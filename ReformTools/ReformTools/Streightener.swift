@@ -9,12 +9,14 @@
 import ReformCore
 import ReformMath
 
-private enum State {
-    case Disabled
-    case Enabled(inverted: Bool)
-}
 
 public class Streightener {
+    private enum State {
+        case Disabled
+        case Enabled(inverted: Bool)
+    }
+
+    
     private var state : State = .Disabled
     
     public init() {}
@@ -47,6 +49,15 @@ public class Streightener {
             return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta), size: Angle(percent: 25))))
         case .Disabled:
             return delta
+        }
+    }
+    
+    func adjust(angle: Angle) -> Angle {
+        switch state {
+        case .Enabled:
+            return stepped(angle, size: Angle(percent: 1))
+        case .Disabled:
+            return angle
         }
     }
     

@@ -270,7 +270,7 @@ extension RectangleForm : Scalable {
         return CompositeScaler(scalers:
             BasicPointScaler(points: centerPoint),
             BasicLengthScaler(length: width, angle: angle),
-            BasicLengthScaler(length: width, angle: angle, offset: Angle(degree: 90))
+            BasicLengthScaler(length: height, angle: angle, offset: Angle(degree: 90))
         )
     }
 }

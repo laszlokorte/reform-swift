@@ -10,17 +10,19 @@ import ReformMath
 import ReformCore
 import ReformStage
 
-private enum State {
-    case Idle
-    case Searching(FormIdentifier, SearchingResult)
-}
-
-private enum SearchingResult {
-    case None
-    case Found(position: Vec2d, point: EntityPoint, cycle: Int)
-}
 
 public class PointGrabber {
+    
+    private enum State {
+        case Idle
+        case Searching(FormIdentifier, SearchingResult)
+    }
+    
+    private enum SearchingResult {
+        case None
+        case Found(position: Vec2d, point: EntityPoint, cycle: Int)
+    }
+
     
     private var state : State = .Idle
     let grabUI : GrabUI

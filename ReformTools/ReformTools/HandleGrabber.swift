@@ -10,17 +10,17 @@ import ReformMath
 import ReformCore
 import ReformStage
 
-private enum State {
-    case Idle
-    case Searching(FormIdentifier, SearchingResult)
-}
-
-private enum SearchingResult {
-    case None
-    case Found(position: Vec2d, point: Handle, cycle: Int)
-}
-
 public class HandleGrabber {
+    
+    private enum State {
+        case Idle
+        case Searching(FormIdentifier, SearchingResult)
+    }
+    
+    private enum SearchingResult {
+        case None
+        case Found(position: Vec2d, point: Handle, cycle: Int)
+    }
     
     private var state : State = .Idle
     let handleUI : HandleUI

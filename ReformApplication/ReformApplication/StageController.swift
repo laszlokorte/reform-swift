@@ -52,6 +52,11 @@ class StageController : NSViewController {
     
     lazy var morphTool : MorphTool = MorphTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
     
+    lazy var rotationTool : RotateTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
+
+    
+    lazy var scalingTool : ScaleTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
+
     let toolController = ToolController()
     
     lazy var stageCollector : StageCollector = StageCollector(stage: self.stage, analyzer: self.analyzer) {
@@ -103,7 +108,7 @@ class StageController : NSViewController {
     @IBOutlet var canvas : CanvasView?
     
     override func viewDidLoad() {
-        toolController.currentTool = moveTool
+        toolController.currentTool = scalingTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         
