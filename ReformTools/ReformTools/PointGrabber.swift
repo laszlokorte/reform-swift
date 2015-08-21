@@ -20,7 +20,7 @@ private enum SearchingResult {
     case Found(position: Vec2d, point: EntityPoint, cycle: Int)
 }
 
-class PointGrabber {
+public class PointGrabber {
     
     private var state : State = .Idle
     let grabUI : GrabUI
@@ -28,7 +28,7 @@ class PointGrabber {
     let pointFinder : PointFinder
     let radius : Double
     
-    init(stage : Stage, grabUI : GrabUI, radius: Double) {
+    public init(stage : Stage, grabUI : GrabUI, radius: Double) {
         self.grabUI = grabUI
         self.entityFinder = EntityFinder(stage: stage)
         self.pointFinder = PointFinder(stage: stage)

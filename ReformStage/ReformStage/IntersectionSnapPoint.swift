@@ -9,7 +9,7 @@
 import ReformCore
 import ReformMath
 
-public struct IntersectionSnapPoint : SnapPoint {
+public struct IntersectionSnapPoint : SnapPoint, Equatable {
     public let position : Vec2d
     public let label : String
     public let point : RuntimeIntersectionPoint
@@ -21,6 +21,10 @@ public struct IntersectionSnapPoint : SnapPoint {
     public func belongsTo(formId: FormIdentifier) -> Bool {
         return formId == self.point.formA || formId == self.point.formB
     }
+}
+
+public func ==(lhs: IntersectionSnapPoint, rhs: IntersectionSnapPoint) -> Bool {
+    return lhs.position == rhs.position && lhs.label == rhs.label && lhs.point == rhs.point
 }
 
 extension IntersectionSnapPoint {

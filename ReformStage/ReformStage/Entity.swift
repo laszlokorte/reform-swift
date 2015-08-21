@@ -56,7 +56,7 @@ extension EntityType {
     }
 }
 
-public struct EntityPoint : SnapPoint {
+public struct EntityPoint : SnapPoint, Equatable {
     public let position : Vec2d
     public let label : String
     public let formId : FormIdentifier
@@ -69,6 +69,11 @@ public struct EntityPoint : SnapPoint {
     public func belongsTo(formId: FormIdentifier) -> Bool {
         return formId == self.formId
     }
+}
+
+
+public func ==(lhs: EntityPoint, rhs: EntityPoint) -> Bool {
+    return lhs.position == rhs.position && lhs.label == rhs.label && lhs.formId == rhs.formId && lhs.pointId == rhs.pointId
 }
 
 func createEntityPoint(analyzer: Analyzer, runtime: Runtime, formId: FormIdentifier, pointId: ExposedPointIdentifier) -> EntityPoint? {

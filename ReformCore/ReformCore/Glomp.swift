@@ -9,7 +9,7 @@
 import ReformMath
 import ReformExpression
 
-public struct GlompPoint : RuntimePoint, Labeled {
+public struct GlompPoint : RuntimePoint, Labeled, Equatable {
     public let lerp : Expression
     public let formId : FormIdentifier
     
@@ -36,4 +36,9 @@ public struct GlompPoint : RuntimePoint, Labeled {
         
         return formOutline.getPositionFor(runtime, t: l)
     }
+}
+
+
+public func ==(lhs: GlompPoint, rhs: GlompPoint) -> Bool {
+    return lhs.formId == rhs.formId && lhs.lerp == rhs.lerp
 }

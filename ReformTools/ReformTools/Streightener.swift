@@ -14,8 +14,10 @@ private enum State {
     case Enabled(inverted: Bool)
 }
 
-class Streightener {
+public class Streightener {
     private var state : State = .Disabled
+    
+    public init() {}
     
     func enable() {
         if case .Disabled = state  {

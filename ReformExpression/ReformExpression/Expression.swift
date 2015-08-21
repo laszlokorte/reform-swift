@@ -50,13 +50,33 @@ public func ==(left: ReferenceId, right: ReferenceId) -> Bool {
     return left.id == right.id
 }
 
-public enum Expression {
+public enum Expression : Equatable {
     case Constant(Value)
     case NamedConstant(String, Value)
     case Reference(id: ReferenceId)
     indirect case Unary(UnaryOperator, Expression)
     indirect case Binary(BinaryOperator, Expression, Expression)
     indirect case Call(Function, [Expression])
+}
+
+public func ==(lhs: Expression, rhs: Expression) -> Bool {
+    switch (lhs, rhs) {
+    case (.Constant(let l), .Constant(let r)):
+        return l == r
+    case (.NamedConstant(let l), .NamedConstant(let r)):
+        return l.0 == r.0 && l.1 == r.1
+    case (.Reference(let l), .Reference(let r)):
+        return l == r
+    case (.Unary(let opl,let l), .Unary(let opr, let r)):
+        return opl.dynamicType == opr.dynamicType && l == r
+    case (.Binary(let opl,let l1, let l2), .Binary(let opr, let r1, let r2)):
+        return opl.dynamicType == opr.dynamicType && l1 == r1 && l2 == r2
+    case (.Call(let fl, let argl), .Call(let fr, let argr)):
+        return fl.dynamicType == fr.dynamicType && argl == argr
+        
+    default:
+        return false
+    }
 }
 
 extension Expression {

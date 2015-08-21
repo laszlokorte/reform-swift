@@ -15,8 +15,10 @@ enum AlignmentMode {
 }
 
 
-class Aligner {
+public class Aligner {
     var state : AlignmentMode = .Aligned
+    
+    public init() {}
     
     func setMode(alignment: AlignmentMode) {
         state = alignment

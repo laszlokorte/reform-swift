@@ -23,9 +23,7 @@ public class CreateFormTool : Tool {
     
     var snapType : PointType = [.Form, .Intersection]
     
-    let entityFinder : EntityFinder
     let selection : FormSelection
-    let notifier : ChangeNotifier
     
     let selectionTool : SelectionTool
     
@@ -33,24 +31,21 @@ public class CreateFormTool : Tool {
     let pointGrabber : PointGrabber
     let streightener : Streightener
     let aligner : Aligner
-    
     let instructionCreator : InstructionCreator
     
     var idSequence : Int64 = 199
     
-    public init(stage: Stage, focus: InstructionFocus, selection: FormSelection, snapUI: SnapUI, grabUI: GrabUI, selectionTool: SelectionTool, notifier: ChangeNotifier) {
-        self.entityFinder = EntityFinder(stage: stage)
+    public init(stage: Stage, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
         self.selection = selection
         self.selectionTool = selectionTool
-        self.notifier = notifier
         
-        self.pointSnapper = PointSnapper(stage: stage, snapUI: snapUI, radius: 10)
-        self.pointGrabber = PointGrabber(stage: stage, grabUI: grabUI, radius: 10)
+        self.pointSnapper = pointSnapper
+        self.pointGrabber = pointGrabber
         
-        self.streightener = Streightener()
-        self.aligner = Aligner()
+        self.streightener = streightener
+        self.aligner = aligner
         
-        self.instructionCreator = InstructionCreator(focus: focus)
+        self.instructionCreator = instructionCreator
     }
     
     public func setUp() {
@@ -82,7 +77,6 @@ public class CreateFormTool : Tool {
             state = .Idle
         case .Started:
             instructionCreator.cancel()
-            notifier()
             pointGrabber.disable()
                         
             state = .Idle;
@@ -205,9 +199,8 @@ public class CreateFormTool : Tool {
 
             }
             
-            instructionCreator.update(CreateFormInstruction(form: form, destination: destination))
-            
-            notifier()
+            instructionCreator
+                .update(CreateFormInstruction(form: form, destination: destination))
         }
         
         print(state)

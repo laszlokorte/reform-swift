@@ -9,7 +9,7 @@
 import ReformMath
 import ReformCore
 
-public struct GlompSnapPoint : SnapPoint {
+public struct GlompSnapPoint : SnapPoint, Equatable {
     public let position : Vec2d
     public let label : String
     let point : GlompPoint
@@ -27,4 +27,8 @@ public struct GlompSnapPoint : SnapPoint {
     public func belongsTo(formId: FormIdentifier) -> Bool {
         return formId == point.formId
     }
+}
+
+public func ==(lhs: GlompSnapPoint, rhs: GlompSnapPoint) -> Bool {
+    return lhs.position == rhs.position && lhs.label == rhs.label && lhs.point == rhs.point
 }

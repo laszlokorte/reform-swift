@@ -19,14 +19,14 @@ private enum SearchingResult {
     case Found(position: Vec2d, point: SnapPoint, cycle: Int)
 }
 
-class PointSnapper {
+public class PointSnapper {
     
     private var state : State = .Idle
     let snapUI : SnapUI
     let pointFinder : PointFinder
     let distance : Double
     
-    init(stage : Stage, snapUI : SnapUI, radius: Double) {
+    public init(stage : Stage, snapUI : SnapUI, radius: Double) {
         self.snapUI = snapUI
         self.pointFinder = PointFinder(stage: stage)
         self.distance = radius

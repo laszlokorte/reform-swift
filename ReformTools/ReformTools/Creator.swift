@@ -13,13 +13,15 @@ private enum CreationState {
     case Idle
 }
 
-class InstructionCreator {
+public class InstructionCreator {
     private var state : CreationState = .Idle
     
     let focus : InstructionFocus
+    let notifier : ChangeNotifier
     
-    init(focus: InstructionFocus) {
+    public init(focus: InstructionFocus, notifier: ChangeNotifier) {
         self.focus = focus
+        self.notifier = notifier
     }
     
     func beginCreation(instruction : Instruction) {
@@ -28,6 +30,7 @@ class InstructionCreator {
             focused.append(sibling: node)
             focus.current = node
             state = .Creating(node)
+            notifier()
         }
     }
     
@@ -36,12 +39,14 @@ class InstructionCreator {
             focus.current = node.previous
             node.removeFromParent()
             state = .Idle
+            notifier()
         }
     }
     
     func update(instruction: Instruction) {
         if case .Creating(let node) = state {
             node.replaceWith(instruction)
+            notifier()
         }
     }
     

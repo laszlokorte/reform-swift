@@ -11,7 +11,7 @@
 		F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF211B83B6A9005F71A1 /* PointFinder.swift */; };
 		F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF261B83EF6D005F71A1 /* EntityFinder.swift */; };
 		F222AF2C1B851728005F71A1 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2B1B851728005F71A1 /* Target.swift */; };
-		F222AF2E1B851741005F71A1 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2D1B851741005F71A1 /* Alignment.swift */; };
+		F222AF2E1B851741005F71A1 /* Aligner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2D1B851741005F71A1 /* Aligner.swift */; };
 		F222AF301B85174F005F71A1 /* Streightener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF2F1B85174F005F71A1 /* Streightener.swift */; };
 		F222AF321B851833005F71A1 /* PointSnapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF311B851833005F71A1 /* PointSnapper.swift */; };
 		F222AF341B854536005F71A1 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF331B854536005F71A1 /* Creator.swift */; };
@@ -59,7 +59,7 @@
 		F222AF211B83B6A9005F71A1 /* PointFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointFinder.swift; sourceTree = "<group>"; };
 		F222AF261B83EF6D005F71A1 /* EntityFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityFinder.swift; sourceTree = "<group>"; };
 		F222AF2B1B851728005F71A1 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
-		F222AF2D1B851741005F71A1 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
+		F222AF2D1B851741005F71A1 /* Aligner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aligner.swift; sourceTree = "<group>"; };
 		F222AF2F1B85174F005F71A1 /* Streightener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Streightener.swift; sourceTree = "<group>"; };
 		F222AF311B851833005F71A1 /* PointSnapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSnapper.swift; sourceTree = "<group>"; };
 		F222AF331B854536005F71A1 /* Creator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
@@ -138,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				F222AF2B1B851728005F71A1 /* Target.swift */,
-				F222AF2D1B851741005F71A1 /* Alignment.swift */,
 			);
 			name = States;
 			sourceTree = "<group>";
@@ -146,8 +145,9 @@
 		F222AF351B85FC9A005F71A1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				F222AF2F1B85174F005F71A1 /* Streightener.swift */,
+				F222AF2D1B851741005F71A1 /* Aligner.swift */,
 				F222AF331B854536005F71A1 /* Creator.swift */,
+				F222AF2F1B85174F005F71A1 /* Streightener.swift */,
 				F222AF311B851833005F71A1 /* PointSnapper.swift */,
 				F222AF361B85FCBE005F71A1 /* PointGrabber.swift */,
 			);
@@ -357,7 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F222AF2E1B851741005F71A1 /* Alignment.swift in Sources */,
+				F222AF2E1B851741005F71A1 /* Aligner.swift in Sources */,
 				F2A104B81B821ABD00E97C6B /* RotateTool.swift in Sources */,
 				F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */,
 				F222AF341B854536005F71A1 /* Creator.swift in Sources */,

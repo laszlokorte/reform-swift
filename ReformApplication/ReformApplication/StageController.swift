@@ -36,10 +36,18 @@ class StageController : NSViewController {
     let handleUI = HandleUI()
     let cropUI = CropUI()
     
-    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.selectionUI)
-    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, focus: self.instructionFocus, selection: self.formSelection, snapUI: self.snapUI, grabUI: self.grabUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
+    lazy var pointSnapper : PointSnapper = PointSnapper(stage: self.stage, snapUI: self.snapUI, radius: 10)
+    lazy var pointGrabber : PointGrabber = PointGrabber(stage: self.stage, grabUI: self.grabUI, radius: 10)
     
-    lazy var moveTool : MoveTool = MoveTool(stage: self.stage,  selection:self.formSelection, focus: self.instructionFocus, grabUI: self.grabUI, snapUI: self.snapUI, selectionTool: self.selectionTool, notifier: self.procedureChanged)
+    lazy var streightener : Streightener = Streightener()
+    lazy var aligner : Aligner = Aligner()
+    
+    lazy var instructionCreator : InstructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureChanged)
+    
+    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.selectionUI)
+    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+    
+    lazy var moveTool : MoveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
     
     let toolController = ToolController()
     
