@@ -43,10 +43,10 @@ public class Streightener {
         }
     }
     
-    func adjust(delta: Vec2d) -> Vec2d {
+    func adjust(delta: Vec2d, step: Angle) -> Vec2d {
         switch state {
         case .Enabled:
-            return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta), size: Angle(percent: 25))))
+            return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta), size: step)))
         case .Disabled:
             return delta
         }

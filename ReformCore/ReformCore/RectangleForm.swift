@@ -24,7 +24,7 @@ extension RectangleForm {
     }
 }
 
-final public class RectangleForm : Form {
+final public class RectangleForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
@@ -222,23 +222,22 @@ private struct RectangleAnchor : Anchor {
             let oldWidth = width.getLengthFor(runtime),
             let oldHeight = height.getLengthFor(runtime),
             let oldCenter = center.getPositionFor(runtime) {
-            
+                
                 let oldSize = Vec2d(x: oldWidth, y: oldHeight)
-                let oldDelta = rotate(oldSize / 2, angle: oldAngle)
+                let oldDelta = rotate(Vec2d(x: Double(side.x)*oldSize.x, y: Double(side.y)*oldSize.y) / 2, angle: oldAngle)
                 
                 let old = oldCenter + oldDelta
                 let opposite = oldCenter - oldDelta
                 
                 let new = old + project(delta, onto: oldDelta * (side.corner ? 0 : 1))
                 
+                
                 let newCenter = (opposite + new) / 2
                 let newHalfSize = rotate(new - newCenter, angle: -oldAngle)
+
+                let newWidth = oldWidth + Double(side.x) * (2*newHalfSize.x - Double(side.x) * (oldSize.x))
+                let newHeight = oldHeight + Double(side.y) * (2*newHalfSize.y - Double(side.y) * (oldSize.y))
                 
-                let newWidth = 2 * (oldWidth/2 + Double(side.x) * (newHalfSize.x - Double(side
-                    .x) * oldSize.x))
-                
-                let newHeight = 2 * (oldHeight/2 + Double(side.y) * (newHalfSize.y - Double(side
-                    .y) * oldSize.y))
                 
                 center.setPositionFor(runtime, position: newCenter)
                 height.setLengthFor(runtime, length: newHeight)

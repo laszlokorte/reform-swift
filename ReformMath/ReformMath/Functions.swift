@@ -43,7 +43,7 @@ public func orthogonal(vector: Vec2d) -> Vec2d {
     return Vec2d(x:-vector.y, y: vector.x)
 }
 
-func signum(num: Double) -> Double {
+public func signum(num: Double) -> Double {
     if num > 0  { return 1 }
     else if num < 0 { return -1 }
     else { return 0 }

@@ -18,7 +18,7 @@ extension TextForm {
     }
 }
 
-final public class TextForm : Form {
+final public class TextForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
@@ -26,7 +26,7 @@ final public class TextForm : Form {
     public var name : String
     
     
-    public init(formId: FormIdentifier, name : String) {
+    public init(id formId: FormIdentifier, name : String) {
         self.identifier = formId
         self.name = name
     }

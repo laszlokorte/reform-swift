@@ -15,7 +15,7 @@ public struct Angle {
     public var percent : Double { get { return radians * 100 / (2*M_PI) } }
     
     public init(percent: Double) {
-        self.init(radians: M_PI * percent / 100.0)
+        self.init(radians: 2*M_PI * percent / 100.0)
     }
     
     public init(radians: Double) {

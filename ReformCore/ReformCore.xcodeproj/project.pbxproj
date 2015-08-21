@@ -11,6 +11,7 @@
 		F222AF291B84EFED005F71A1 /* ConstantDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF281B84EFED005F71A1 /* ConstantDistance.swift */; };
 		F222AF421B878349005F71A1 /* ConstantScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */; };
 		F222AF441B878D16005F71A1 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF431B878D16005F71A1 /* Axis.swift */; };
+		F222AF4C1B87D589005F71A1 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4B1B87D589005F71A1 /* Sequence.swift */; };
 		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
@@ -107,6 +108,7 @@
 		F222AF281B84EFED005F71A1 /* ConstantDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantDistance.swift; sourceTree = "<group>"; };
 		F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantScaleFactor.swift; sourceTree = "<group>"; };
 		F222AF431B878D16005F71A1 /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
+		F222AF4B1B87D589005F71A1 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
@@ -213,6 +215,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F222AF4A1B87D56E005F71A1 /* Identifers */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF4B1B87D589005F71A1 /* Sequence.swift */,
+			);
+			name = Identifers;
+			sourceTree = "<group>";
+		};
 		F23F12961B7E0AE400A2D73E /* Attributes */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 		F26D45F01B7D09CA00266096 /* ReformCore */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF4A1B87D56E005F71A1 /* Identifers */,
 				F23F12961B7E0AE400A2D73E /* Attributes */,
 				F26D46E01B7D169000266096 /* Drawing */,
 				F26D46DA1B7D14A800266096 /* Outline */,
@@ -743,6 +754,7 @@
 				F26D46C01B7D116100266096 /* RotationAngle.swift in Sources */,
 				F26D474A1B7D693900266096 /* IfConditionInstruction.swift in Sources */,
 				F26D46FD1B7D240500266096 /* StaticPoint.swift in Sources */,
+				F222AF4C1B87D589005F71A1 /* Sequence.swift in Sources */,
 				F26D46D91B7D147200266096 /* Rotator.swift in Sources */,
 				F26D47421B7D5B0C00266096 /* OrhtogonalOffsetAnchor.swift in Sources */,
 				F26D47401B7D577E00266096 /* NullOutline.swift in Sources */,

@@ -25,6 +25,8 @@ class StageController : NSViewController {
     let runtime = DefaultRuntime()
 
     
+    let formIdSequence = IdentifierSequence(type: FormIdentifier.self, initialValue: 100)
+    
     let instructionFocus = InstructionFocus()
     let formSelection = FormSelection()
     let stage = Stage()
@@ -46,13 +48,23 @@ class StageController : NSViewController {
     lazy var instructionCreator : InstructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureChanged)
     
     lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.selectionUI)
-    lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+    
+    
+    lazy var createLineTool : CreateFormTool = CreateFormTool(formType: LineForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+    
+    lazy var createRectTool : CreateFormTool = CreateFormTool(formType: RectangleForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+    
+    lazy var createCircleTool : CreateFormTool = CreateFormTool(formType: CircleForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+    
+    lazy var createPieTool : CreateFormTool = CreateFormTool(formType: PieForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+    
+    lazy var createArcTool : CreateFormTool = CreateFormTool(formType: ArcForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
     
     lazy var moveTool : MoveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
     
     lazy var morphTool : MorphTool = MorphTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
     
-    lazy var rotationTool : RotateTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
+    lazy var rotationTool : RotateTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.pivotUI)
 
     
     lazy var scalingTool : ScaleTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.pivotUI)
@@ -108,7 +120,7 @@ class StageController : NSViewController {
     @IBOutlet var canvas : CanvasView?
     
     override func viewDidLoad() {
-        toolController.currentTool = scalingTool
+        toolController.currentTool = rotationTool
         
         let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
         
@@ -155,7 +167,7 @@ class StageController : NSViewController {
         procedure.root.append(child: node4)
 
         
-        instructionFocus.current = node4
+        instructionFocus.current = node2
         
         runtime.listeners.append(stageCollector)
         //runtime.listeners.append(DebugRuntimeListener())
@@ -216,6 +228,58 @@ class StageController : NSViewController {
             c.canvasSize = stage.size
             c.needsDisplay = true
         }
+    }
+    
+    @IBAction func selectToolCreateLine(sender: AnyObject) {
+        toolController.currentTool = createLineTool
+        canvas?.needsDisplay = true
+    }
+    
+    @IBAction func selectToolCreateRectangle(sender: AnyObject) {
+        toolController.currentTool = createRectTool
+        canvas?.needsDisplay = true
+    }
+    
+    @IBAction func selectToolCreateCircle(sender: AnyObject) {
+        toolController.currentTool = createCircleTool
+        canvas?.needsDisplay = true
+    }
+    
+    @IBAction func selectToolCreatePie(sender: AnyObject) {
+        toolController.currentTool = createPieTool
+        canvas?.needsDisplay = true
+    }
+    
+    @IBAction func selectToolCreateArc(sender: AnyObject) {
+        toolController.currentTool = createArcTool
+        canvas?.needsDisplay = true
+    }
+    
+    @IBAction func selectToolMove(sender: AnyObject) {
+        toolController.currentTool = moveTool
+        canvas?.needsDisplay = true
+    }
+    
+    
+    @IBAction func selectToolMorph(sender: AnyObject) {
+        toolController.currentTool = morphTool
+        canvas?.needsDisplay = true
+    }
+    
+    
+    @IBAction func selectToolRotate(sender: AnyObject) {
+        toolController.currentTool = rotationTool
+        canvas?.needsDisplay = true
+    }
+    
+    
+    @IBAction func selectToolScale(sender: AnyObject) {
+        toolController.currentTool = scalingTool
+        canvas?.needsDisplay = true
+    }
+    
+    override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
+        return true
     }
     
 }

@@ -35,6 +35,10 @@ public protocol Drawable {
 
 public typealias LabeledPoint = protocol<RuntimePoint, Labeled>
 
+public protocol Creatable {
+    init(id: FormIdentifier, name: String)
+}
+
 public protocol Form {
     static var stackSize : Int { get }
     

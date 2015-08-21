@@ -19,7 +19,7 @@ extension ArcForm {
     }
 }
 
-final public class ArcForm : Form {
+final public class ArcForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
@@ -27,7 +27,7 @@ final public class ArcForm : Form {
     public var name : String
     
     
-    public init(formId: FormIdentifier, name : String) {
+    public init(id formId: FormIdentifier, name : String) {
         self.identifier = formId
         self.name = name
     }
@@ -53,8 +53,8 @@ final public class ArcForm : Form {
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
-            PointId.End.rawValue:ExposedPoint(point: startPoint, name: "End"),
-            PointId.Center.rawValue:ExposedPoint(point: CenterPoint(pointA: startPoint, pointB: endPoint), name: "Center"),
+            PointId.End.rawValue:ExposedPoint(point: endPoint, name: "End"),
+            PointId.Center.rawValue:ExposedPoint(point: AnchorPoint(anchor: controlAnchor), name: "Center"),
         ]
     }
     
@@ -86,6 +86,12 @@ extension ArcForm : Scalable {
     
 }
 
+extension ArcForm {
+    var controlAnchor : Anchor {
+        return OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset)
+    }
+}
+
 extension ArcForm : Morphable {
     
     public enum AnchorId : AnchorIdentifier {
@@ -98,7 +104,7 @@ extension ArcForm : Morphable {
         return [
             AnchorId.Start.rawValue:StaticPointAnchor(point: startPoint, name: "Start"),
             AnchorId.End.rawValue:StaticPointAnchor(point: endPoint, name: "End"),
-            AnchorId.Offset.rawValue:OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset),
+            AnchorId.Offset.rawValue:controlAnchor,
         ]
     }
     

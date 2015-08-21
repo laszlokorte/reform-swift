@@ -21,7 +21,7 @@ extension CircleForm {
     }
 }
 
-final public class CircleForm : Form {
+final public class CircleForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
@@ -29,7 +29,7 @@ final public class CircleForm : Form {
     public var name : String
     
     
-    public init(formId: FormIdentifier, name : String) {
+    public init(id formId: FormIdentifier, name : String) {
         self.identifier = formId
         self.name = name
     }
@@ -52,7 +52,7 @@ final public class CircleForm : Form {
         
         let r = delta.length / 2
         let a = ReformMath.angle(delta)
-        
+                
         centerPoint.setPositionFor(runtime, position: c)
         radius.setLengthFor(runtime, length: r)
         angle.setAngleFor(runtime, angle: a)
@@ -106,10 +106,10 @@ private struct CircleAnchor : Anchor {
         
         var angle : Angle {
             switch self {
-            case .North: return Angle(radians: -M_PI / 2)
+            case .North: return Angle(degree: 90)
             case .East: return Angle(radians: 0)
-            case .South: return Angle(radians: -3*M_PI / 2)
-            case .West: return  Angle(radians: M_PI)
+            case .South: return Angle(degree: -90)
+            case .West: return  Angle(degree: 180)
             }
         }
         
@@ -146,7 +146,7 @@ private struct CircleAnchor : Anchor {
                 return nil
         }
         
-        return c + rotate(Vec2d(x:r, y:r), angle: angle + quater.angle)
+        return c + rotate(Vec2d.XAxis * r, angle: angle + quater.angle)
     }
     
     func translate(runtime: Runtime, delta: Vec2d) {
@@ -226,14 +226,15 @@ extension CircleForm : Drawable {
         
         let topLeft = c + Vec2d(x:-r, y: -r)
         let topRight = c + Vec2d(x:r, y: -r)
-        let bottomLeft = c + Vec2d(x:-r, y: -r)
-        let bottomRight = c + Vec2d(x:r, y: -r)
+        let bottomLeft = c + Vec2d(x:-r, y: r)
+        let bottomRight = c + Vec2d(x:r, y: r)
         
         return Path(segments: .MoveTo(left),
             .ArcTo(tangent: topLeft, tangent: top, radius: r),
             .ArcTo(tangent: topRight, tangent: right, radius: r),
             .ArcTo(tangent: bottomRight, tangent: bottom, radius: r),
-            .ArcTo(tangent: bottomLeft, tangent: left, radius: r)
+            .ArcTo(tangent: bottomLeft, tangent: left, radius: r),
+            .Close
         )
     }
     

@@ -46,13 +46,19 @@ public class MoveTool : Tool {
     public func setUp() {
         state = .Idle
         selectionTool.setUp()
+        
+        if let selected = selection.selected {
+            pointGrabber.enable(selected)
+        }
     }
     
     public func tearDown() {
-        state = .Idle
+        instructionCreator.cancel()
         pointSnapper.disable()
         pointGrabber.disable()
         selectionTool.tearDown()
+        state = .Idle
+
     }
     
     public func refresh() {
@@ -164,7 +170,7 @@ public class MoveTool : Tool {
             let distance : protocol<RuntimeDistance, Labeled>
             switch target {
             case .Free(let position):
-                distance = ConstantDistance(delta: streightener.adjust(position - activePoint.position - offset))
+                distance = ConstantDistance(delta: streightener.adjust(position - activePoint.position - offset,step: Angle(degree: 45)))
             case .Snap(let snap):
                 distance = RelativeDistance(from: activePoint.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - activePoint.position))
             }

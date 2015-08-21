@@ -23,6 +23,8 @@ public class CreateFormTool : Tool {
     
     var snapType : PointType = [.Form, .Intersection]
     
+    let formType : protocol<Form, Creatable>.Type
+    
     let selection : FormSelection
     
     let selectionTool : SelectionTool
@@ -33,9 +35,11 @@ public class CreateFormTool : Tool {
     let aligner : Aligner
     let instructionCreator : InstructionCreator
     
-    var idSequence : Int64 = 199
+    var idSequence : IdentifierSequence<FormIdentifier>
     
-    public init(stage: Stage, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
+    public init(formType : protocol<Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
+        self.formType = formType
+        self.idSequence = idSequence
         self.selection = selection
         self.selectionTool = selectionTool
         
@@ -56,9 +60,11 @@ public class CreateFormTool : Tool {
     }
     
     public func tearDown() {
+        instructionCreator.cancel()        
         pointSnapper.disable()
         pointGrabber.disable()
         selectionTool.tearDown()
+        state = .Idle
     }
     
     public func refresh() {
@@ -151,7 +157,7 @@ public class CreateFormTool : Tool {
                 pointSnapper.searchAt(pos)
             case .Press:
                 if let startPoint = pointSnapper.current {
-                    let form = LineForm(id: FormIdentifier(idSequence++), name: "Line \(idSequence)")
+                    let form = formType.init(id: idSequence.emitId(), name: "Line 1")
                     let destination = RelativeDestination(from: startPoint.runtimePoint, to: startPoint.runtimePoint)
                     let instruction = CreateFormInstruction(form: form, destination: destination)
                     
@@ -190,7 +196,7 @@ public class CreateFormTool : Tool {
             
             switch target {
             case .Free(let targetPosition):
-                let delta = streightener.adjust(targetPosition - start.position)
+                let delta = streightener.adjust(targetPosition - start.position, step: Angle(degree: 45))
                 
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta, alignment: aligner.getAlignment())
                 
@@ -202,8 +208,6 @@ public class CreateFormTool : Tool {
             instructionCreator
                 .update(CreateFormInstruction(form: form, destination: destination))
         }
-        
-        print(state)
     }
     
 }

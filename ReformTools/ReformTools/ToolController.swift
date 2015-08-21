@@ -13,7 +13,6 @@ public typealias ChangeNotifier = () -> ()
 public class ToolController {
     public var currentTool : Tool = NullTool() {
         willSet {
-            currentTool.cancel()
             currentTool.tearDown()
         }
         

@@ -36,7 +36,7 @@ struct OrthogonalOffsetAnchor : Anchor {
             return a
         }
         
-        return a + delta - orthogonal(delta) / distance * o
+        return a + delta/2 - orthogonal(delta) / distance * o
     }
     
     func translate(runtime: Runtime, delta: Vec2d) {

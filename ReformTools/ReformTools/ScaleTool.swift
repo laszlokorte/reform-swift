@@ -46,12 +46,17 @@ public class ScaleTool : Tool {
     public func setUp() {
         state = .Idle
         selectionTool.setUp()
+        
+        if let selected = selection.selected {
+            handleGrabber.enable(selected)
+        }
     }
     
     public func tearDown() {
-        state = .Idle
+        instructionCreator.cancel()
         handleGrabber.disable()
         selectionTool.tearDown()
+        state = .Idle
     }
     
     public func refresh() {
@@ -67,6 +72,8 @@ public class ScaleTool : Tool {
         case .Delegating, .Idle:
             state = .Idle
             selectionTool.cancel()
+            handleGrabber.disable()
+            pivotUI.state = .Hide
         case .Scaling:
             instructionCreator.cancel()
             state = .Idle;

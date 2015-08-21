@@ -73,7 +73,7 @@ func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double
 
         return (u, line.from+projected)
     case .Arc:
-        fatalError("Not implement")
+        return nil
     }
 }
 

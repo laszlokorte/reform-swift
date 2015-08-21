@@ -25,3 +25,9 @@ extension FormIdentifier : CustomDebugStringConvertible {
         return "FormId(\(id))"
     }
 }
+
+extension FormIdentifier : SequenceGeneratable {
+    public init(id : Int64) {
+        self.init(id)
+    }
+}

@@ -89,7 +89,6 @@ public class PointSnapper {
         let points = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: pointType, location: .Near(position, distance: distance)))
         
         if points.count > 0 {
-            print(cycle)
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
         } else {
             return .None

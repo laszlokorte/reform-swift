@@ -45,13 +45,17 @@ public class MorphTool : Tool {
     public func setUp() {
         state = .Idle
         selectionTool.setUp()
+        if let selected = selection.selected {
+            handleGrabber.enable(selected)
+        }
     }
     
     public func tearDown() {
-        state = .Idle
+        instructionCreator.cancel()
         pointSnapper.disable()
         handleGrabber.disable()
         selectionTool.tearDown()
+        state = .Idle
     }
     
     public func refresh() {
@@ -163,9 +167,8 @@ public class MorphTool : Tool {
             let distance : protocol<RuntimeDistance, Labeled>
             switch target {
             case .Free(let position):
-                distance = ConstantDistance(delta: streightener.adjust(position - grabbedHandle.position - offset))
+                distance = ConstantDistance(delta: streightener.adjust(position - grabbedHandle.position - offset, step: Angle(degree: 90)))
             case .Snap(let snap):
-                print(grabbedHandle.runtimePoint)
                 distance = RelativeDistance(from: grabbedHandle.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - grabbedHandle.position))
             }
             

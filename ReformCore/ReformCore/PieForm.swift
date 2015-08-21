@@ -20,7 +20,7 @@ extension PieForm {
     }
 }
 
-final public class PieForm : Form {
+final public class PieForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
@@ -28,7 +28,7 @@ final public class PieForm : Form {
     public var name : String
     
     
-    public init(formId: FormIdentifier, name : String) {
+    public init(id formId: FormIdentifier, name : String) {
         self.identifier = formId
         self.name = name
     }
@@ -109,7 +109,7 @@ private struct PieCornerAnchor : Anchor {
                 return nil
         }
         
-        return c + rotate(Vec2d(x:r, y:r), angle: angle)
+        return c + rotate(Vec2d.XAxis * r, angle: angle)
     }
     
     func translate(runtime: Runtime, delta: Vec2d) {

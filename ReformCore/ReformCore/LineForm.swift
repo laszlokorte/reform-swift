@@ -17,7 +17,7 @@ extension LineForm {
     }
 }
 
-final public class LineForm : Form{
+final public class LineForm : Form, Creatable {
     public static var stackSize : Int = 4
     
     public let identifier : FormIdentifier
