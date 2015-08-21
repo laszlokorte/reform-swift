@@ -14,8 +14,9 @@ struct HandleUIRenderer : Renderer {
     let handleUI : HandleUI
     
     func renderInContext(context: CGContext) {
-        CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
-        CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
+        
+        CGContextSetRGBFillColor(context, 0.1, 0.9, 0.6, 1)
+        CGContextSetRGBStrokeColor(context, 0, 0.6, 0.4, 1)
         CGContextSetLineWidth(context, 1)
         let dotSize : Double = 8
         
@@ -28,13 +29,21 @@ struct HandleUIRenderer : Renderer {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
             
+            CGContextDrawPath(context, .FillStroke)
+
+            
             break
         case .Active(let active, let points):
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
+            CGContextDrawPath(context, .FillStroke)
+
             
             drawDotAt(context, position: active.position, size: dotSize*1.5)
+            
+            CGContextDrawPath(context, .FillStroke)
+
             break
             
         }

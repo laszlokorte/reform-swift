@@ -38,6 +38,7 @@ class StageController : NSViewController {
     
     lazy var pointSnapper : PointSnapper = PointSnapper(stage: self.stage, snapUI: self.snapUI, radius: 10)
     lazy var pointGrabber : PointGrabber = PointGrabber(stage: self.stage, grabUI: self.grabUI, radius: 10)
+    lazy var handleGrabber : HandleGrabber = HandleGrabber(stage: self.stage, handleUI: self.handleUI, radius: 10)
     
     lazy var streightener : Streightener = Streightener()
     lazy var aligner : Aligner = Aligner()
@@ -48,6 +49,8 @@ class StageController : NSViewController {
     lazy var createFormTool : CreateFormTool = CreateFormTool(stage: self.stage, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
     
     lazy var moveTool : MoveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
+    
+    lazy var morphTool : MorphTool = MorphTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
     
     let toolController = ToolController()
     
@@ -191,17 +194,16 @@ class StageController : NSViewController {
         procedure.analyzeWith(analyzer)
         procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
         
-        print("Entities:")
-        for e in stage.entities {
-            print(e)
-        }
+//        print("Entities:")
+//        for e in stage.entities {
+//            print(e)
+//        }
         
         //        print("Final Shapes:")
         //        for s in stage.currentShapes {
         //            print(s)
         //        }
         
-        print(instructionFocus.current)
         toolController.currentTool.refresh()
 
         if let c = canvas {

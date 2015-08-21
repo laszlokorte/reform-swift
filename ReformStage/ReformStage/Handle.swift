@@ -14,11 +14,18 @@ public typealias PivotPair = (EntityPoint, EntityPoint)
 public struct Handle {
     public let formId : FormIdentifier
     public let anchorId : AnchorIdentifier
+    public let pointId : ExposedPointIdentifier
     
     public let label : String
     public let position : Vec2d
     
     public let defaultPivot : PivotPair
+}
+
+extension Handle {
+    public var runtimePoint : LabeledPoint {
+        return ForeignFormPoint(formId: formId, pointId: pointId)
+    }
 }
 
 

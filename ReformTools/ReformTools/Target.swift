@@ -9,7 +9,7 @@
 import ReformMath
 import ReformStage
 
-enum Target {
+public enum Target {
     case Free(position: Vec2d)
     case Snap(point: SnapPoint)
 }

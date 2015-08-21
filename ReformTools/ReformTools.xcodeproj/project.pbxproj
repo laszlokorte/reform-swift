@@ -18,6 +18,7 @@
 		F222AF371B85FCBE005F71A1 /* PointGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF361B85FCBE005F71A1 /* PointGrabber.swift */; };
 		F222AF391B8768BA005F71A1 /* HandleGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF381B8768BA005F71A1 /* HandleGrabber.swift */; };
 		F222AF3D1B876941005F71A1 /* HandleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3C1B876941005F71A1 /* HandleFinder.swift */; };
+		F222AF401B8776B8005F71A1 /* DragToolTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
@@ -68,6 +69,7 @@
 		F222AF361B85FCBE005F71A1 /* PointGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointGrabber.swift; sourceTree = "<group>"; };
 		F222AF381B8768BA005F71A1 /* HandleGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleGrabber.swift; sourceTree = "<group>"; };
 		F222AF3C1B876941005F71A1 /* HandleFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleFinder.swift; sourceTree = "<group>"; };
+		F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragToolTemplate.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			name = HandleFinder;
 			sourceTree = "<group>";
 		};
+		F222AF3E1B8776A0005F71A1 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */,
+			);
+			name = Templates;
+			sourceTree = "<group>";
+		};
 		F26D46501B7D0B9500266096 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +226,7 @@
 		F2A1049E1B8213F900E97C6B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				F222AF3E1B8776A0005F71A1 /* Templates */,
 				F222AF351B85FC9A005F71A1 /* Components */,
 				F222AF2A1B85171C005F71A1 /* States */,
 				F2A104AB1B8219BD00E97C6B /* CreateFormTool.swift */,
@@ -380,6 +391,7 @@
 				F2A104BF1B821BCF00E97C6B /* SelectionUI.swift in Sources */,
 				F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */,
 				F222AF2C1B851728005F71A1 /* Target.swift in Sources */,
+				F222AF401B8776B8005F71A1 /* DragToolTemplate.swift in Sources */,
 				F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */,
 				F2A104B21B821A6700E97C6B /* MoveTool.swift in Sources */,
 				F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */,

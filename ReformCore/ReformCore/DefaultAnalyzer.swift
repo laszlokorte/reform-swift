@@ -22,12 +22,9 @@ final public class DefaultAnalyzer : Analyzer {
     }
     
     public func publish(instruction: Analyzable, label: String) {
-        print("node: \(label)")
     }
     
     public func publish(instruction: Analyzable, label: String, block: () -> ()) {
-        print("node: \(label)")
-
     }
     
     public func announceForm(form: Form) {
