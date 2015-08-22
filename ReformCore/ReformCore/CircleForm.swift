@@ -152,7 +152,7 @@ private struct CircleAnchor : Anchor {
     func translate(runtime: Runtime, delta: Vec2d) {
         if let oldAngle = rotation.getAngleFor(runtime),
             let oldRadius = radius.getLengthFor(runtime) {
-            let oldDelta = rotate(Vec2d(x: oldRadius, y:0), angle: oldAngle)
+            let oldDelta = rotate(Vec2d.XAxis * oldRadius, angle: oldAngle + quater.angle)
                 
             let newDelta = oldDelta + delta
                 
