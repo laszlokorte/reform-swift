@@ -13,6 +13,7 @@
 		F222AF441B878D16005F71A1 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF431B878D16005F71A1 /* Axis.swift */; };
 		F222AF4C1B87D589005F71A1 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4B1B87D589005F71A1 /* Sequence.swift */; };
 		F222AF4E1B8881AF005F71A1 /* ArcOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */; };
+		F222AF501B88B864005F71A1 /* AbsoluteScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */; };
 		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
@@ -111,6 +112,7 @@
 		F222AF431B878D16005F71A1 /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		F222AF4B1B87D589005F71A1 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcOutline.swift; sourceTree = "<group>"; };
+		F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbsoluteScaler.swift; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				F26D46FE1B7D26F900266096 /* BasicPointScaler.swift */,
 				F26D471F1B7D3A8700266096 /* BasicLengthScaler.swift */,
 				F26D47211B7D3B0A00266096 /* CompositeScaler.swift */,
+				F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */,
 			);
 			name = Scalers;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				F26D46B11B7D0F8600266096 /* Evaluatable.swift in Sources */,
 				F26D47241B7D3C0300266096 /* BasicAngleRotator.swift in Sources */,
 				F26D47041B7D288E00266096 /* LineOutline.swift in Sources */,
+				F222AF501B88B864005F71A1 /* AbsoluteScaler.swift in Sources */,
 				F26D471C1B7D392200266096 /* StaticLength.swift in Sources */,
 				F26D473E1B7D541600266096 /* CircleOutline.swift in Sources */,
 				F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */,

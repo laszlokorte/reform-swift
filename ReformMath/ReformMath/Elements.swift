@@ -38,7 +38,6 @@ public struct Arc2d {
 
 extension Arc2d {
     public var length : Double {
-        print(normalize360(end-start).percent/100)
         return 2 * M_PI * radius * normalize360(end-start).percent/100
     }
 }

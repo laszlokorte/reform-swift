@@ -29,17 +29,19 @@ struct ArcOutline : Outline {
                 return nil
         }
         
-        return c + rotate(Vec2d.XAxis * rad, angle: lerp(t, a: a1, b: a2))
+        let a = normalize360(a2-a1)
+        
+        return c + rotate(Vec2d.XAxis * rad, angle: a1 + t*a)
     }
     
     func getLengthFor(runtime: Runtime) -> Double? {
         guard let rad = radius.getLengthFor(runtime),
-            let a1 = angleA.getAngleFor(runtime),
-            let a2 = angleB.getAngleFor(runtime) else {
+            let a1 = angleA.getAngleFor(runtime).map(normalize360),
+            let a2 = angleB.getAngleFor(runtime).map(normalize360) else {
             return nil
         }
                 
-        return 2 * M_PI * rad * (a2-a1).percent/100
+        return 2 * M_PI * rad * normalize360(a2-a1).percent/100
     }
     
     func getSegmentsFor(runtime: Runtime) -> SegmentPath {

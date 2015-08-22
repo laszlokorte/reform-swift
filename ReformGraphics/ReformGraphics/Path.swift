@@ -16,12 +16,12 @@ public struct Path {
         self.segments += segments
     }
     
-    mutating func reset() {
+    public mutating func reset() {
         segments.removeAll()
         segments.append(.MoveTo(Vec2d()))
     }
     
-    mutating func append(segment: Segment) {
+    public mutating func append(segment: Segment) {
         segments.append(segment)
     }
 

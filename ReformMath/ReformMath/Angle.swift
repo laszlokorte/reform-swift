@@ -25,6 +25,10 @@ public struct Angle {
     public init(degree: Double) {
         self.init(radians: 2*M_PI * degree / 360.0)
     }
+    
+    public init() {
+        self.init(radians: 0)
+    }
 }
 
 extension Angle : Comparable, Equatable {
@@ -36,4 +40,16 @@ public func <(lhs: Angle, rhs: Angle) -> Bool {
 }
 public func ==(lhs: Angle, rhs: Angle) -> Bool {
     return lhs.radians == rhs.radians
+}
+
+extension Angle {
+    public var cos : Double {
+        return Darwin.cos(radians)
+    }
+    public var sin : Double {
+        return Darwin.sin(radians)
+    }
+    public var tan : Double {
+        return Darwin.tan(radians)
+    }
 }

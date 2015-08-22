@@ -156,7 +156,7 @@ extension PieForm : Scalable {
     public var scaler : Scaler {
         return CompositeScaler(scalers:
             BasicPointScaler(points: centerPoint),
-            BasicLengthScaler(length: radius, angle: angleUpperBound)
+            AbsoluteScaler(scaler: BasicLengthScaler(length: radius, angle: angleUpperBound))
         )
     }
 }
@@ -178,7 +178,53 @@ extension PieForm : Morphable {
 
 extension PieForm : Drawable {
     public func getPathFor(runtime: Runtime) -> Path? {
-        return nil
+        guard let c = centerPoint.getPositionFor(runtime),
+                  r = radius.getLengthFor(runtime),
+                  low = angleLowerBound.getAngleFor(runtime).map(normalize360),
+                  up = angleUpperBound.getAngleFor(runtime).map(normalize360) else {
+            return nil
+        }
+        
+        var path = Path(segments: .MoveTo(c))
+        let arm = Vec2d(radius: r, angle: low)
+        let end = Vec2d(radius: r, angle: up)
+        let outer = Vec2d(radius: r*sqrt(2), angle: low + Angle(degree: -45))
+        let count = abs(Int(normalize360(up-low).degree / 90))
+        let rest = Angle(degree: normalize360(up-low).degree % 90)
+        
+        path.append(.LineTo(c+arm))
+        for i in 0..<count {
+            let a = c+rotate(outer, angle: Angle(degree: Double(90+90*i)))
+            let b = c+rotate(arm, angle: Angle(degree: Double(90+90*i)))
+            path.append(.ArcTo(
+                tangent: a,
+                tangent: b,
+                radius: r)
+            )
+            
+        }
+        
+        let restCos = (rest/2).cos
+        if abs(rest.degree) > 1 {
+            let a = c + Vec2d(
+                radius: r/restCos,
+                angle:  Angle(degree: Double(90*count))+rest/2+low)
+            let b = c + end
+           
+            print(r/restCos)
+            
+            path.append(.ArcTo(
+                tangent: a,
+                tangent: b,
+                radius: r)
+            )
+        
+        }
+        path.append(.Close)
+
+        
+        
+        return path
     }
     
     public func getShapeFor(runtime: Runtime) -> Shape? {

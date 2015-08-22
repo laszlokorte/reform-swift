@@ -13,6 +13,7 @@ public enum HitArea {
     case Line(a: Vec2d, b: Vec2d)
     case Triangle(a: Vec2d, b: Vec2d, c: Vec2d)
     case Circle(center: Vec2d, radius: Double)
+    case Sector(center: Vec2d, lower: Angle, upper: Angle)
     case LeftOf(a: Vec2d, b: Vec2d)
     indirect case Union(HitArea, HitArea)
     indirect case Intersection(HitArea, HitArea)
@@ -28,6 +29,9 @@ extension HitArea {
             return onLineSegment(point, lineSegment: LineSegment2d(from: a, to:b), epsilon: 0.5)
         case .Circle(let center, let radius):
             return (point-center).length <= radius
+        case .Sector(let center, let lower, let upper):
+            let a = angle(point-center)
+            return isBetween(a, lower: lower, upper: upper)
         case Triangle(let a, let b, let c):
             return inTriangle(point, triangle: (a,b,c))
         case LeftOf(let a, let b):

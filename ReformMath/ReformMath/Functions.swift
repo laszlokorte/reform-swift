@@ -95,7 +95,7 @@ public func normalize(vector: Vec2d) -> Vec2d? {
     return vector / length
 }
 
-func normalize360(angle: Angle) -> Angle{
+public func normalize360(angle: Angle) -> Angle{
     let deg = angle.degree
     let norm = Double(Int(deg) % 360) + (deg-trunc(deg))
     if(norm>0.0) {
@@ -106,7 +106,7 @@ func normalize360(angle: Angle) -> Angle{
     }
 }
 
-func isBetween(angle: Angle, lower: Angle, upper: Angle) -> Bool {
+public func isBetween(angle: Angle, lower: Angle, upper: Angle) -> Bool {
     let a = normalize360(angle)
     let l = normalize360(lower)
     let u = normalize360(upper)

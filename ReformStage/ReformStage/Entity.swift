@@ -270,8 +270,8 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: Cir
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieForm) -> Entity? {
     guard let center = form.centerPoint.getPositionFor(runtime),
         let radius = form.radius.getLengthFor(runtime),
-        let lowerAngle = form.angleLowerBound.getAngleFor(runtime),
-        let upperAngle = form.angleUpperBound.getAngleFor(runtime)  else {
+        let lowerAngle = form.angleLowerBound.getAngleFor(runtime).map(normalize360),
+        let upperAngle = form.angleUpperBound.getAngleFor(runtime).map(normalize360)  else {
             return nil
     }
     
@@ -296,9 +296,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieFor
     
     let hit = HitArea.Intersection(
         HitArea.Circle(center: center, radius: radius),
-        HitArea.Inversion(
-            HitArea.Triangle(a: center, b: center+rotate(Vec2d(x: 2*radius, y:0), angle: lowerAngle), c: center+rotate(Vec2d(x: 2*radius, y:0), angle: upperAngle))
-        )
+        HitArea.Sector(center: center, lower: lowerAngle, upper: upperAngle)
     )
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)

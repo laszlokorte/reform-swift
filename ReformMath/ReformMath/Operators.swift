@@ -56,3 +56,7 @@ public func *(lhs: Double, rhs: Angle) -> Angle {
 public func /(lhs: Angle, rhs: Angle) -> Double {
     return lhs.radians / rhs.radians
 }
+
+public func /(lhs: Angle, rhs: Double) -> Angle {
+    return Angle(radians: lhs.radians / rhs)
+}
