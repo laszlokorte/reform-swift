@@ -65,9 +65,9 @@ public func intersections(arc arcA: Arc2d, arc arcB: Arc2d) -> [Vec2d] {
     guard (hh >= 0) else {
         return [];
     }
-    
+        
     let h = sqrt(hh);
-    let r = -delta * h / d
+    let r = orthogonal(delta) * h / d
     
     var result = [c+r]
     if abs(d - (arcA.radius + arcB.radius)) > EPSILON {
