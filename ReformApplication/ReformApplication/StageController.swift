@@ -279,7 +279,25 @@ class StageController : NSViewController {
     }
     
     override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
-        return true
+        
+        if let _ = ToolbarIdentifier(rawValue: theItem.itemIdentifier) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    enum ToolbarIdentifier : String {
+        case LineToolItem
+        case RectangleToolItem
+        case CircleToolItem
+        case PieToolItem
+        case ArcToolItem
+        
+        case MoveToolItem
+        case RotateToolItem
+        case ScaleToolItem
+        case MorphToolItem
     }
     
 }

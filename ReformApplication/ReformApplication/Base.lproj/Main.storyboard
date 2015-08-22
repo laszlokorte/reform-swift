@@ -682,77 +682,77 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="hpM-K0-Ndm"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Aw8-TL-07W"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Nit-gD-vzh"/>
-                                <toolbarItem implicitItemIdentifier="1322AA77-28F6-4CCC-9B6A-E402C723F3AF" label="Line" paletteLabel="Draw Line" tag="-1" image="line" id="65U-vF-hDk">
+                                <toolbarItem implicitItemIdentifier="1322AA77-28F6-4CCC-9B6A-E402C723F3AF" explicitItemIdentifier="LineToolItem" label="Line" paletteLabel="Draw Line" tag="-1" image="line" selectable="YES" id="65U-vF-hDk">
                                     <connections>
                                         <action selector="selectToolCreateLine:" target="Oky-zY-oP4" id="oTF-SG-CXT"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="AE3640CF-BBDA-4D3C-846C-8D60B9A92F45" label="Rectangle" paletteLabel="Draw Rectangle" tag="-1" image="rect" id="Vg0-94-OBF">
+                                <toolbarItem implicitItemIdentifier="AE3640CF-BBDA-4D3C-846C-8D60B9A92F45" explicitItemIdentifier="RectangleToolItem" label="Rectangle" paletteLabel="Draw Rectangle" tag="-1" image="rect" selectable="YES" id="Vg0-94-OBF">
                                     <connections>
                                         <action selector="selectToolCreateRectangle:" target="Oky-zY-oP4" id="zM2-k0-FIN"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C3E67C07-8337-4718-9B4B-7B47DED0144E" label="Circle" paletteLabel="Draw Circle" tag="-1" image="circle" id="hTQ-Cw-1Gh">
+                                <toolbarItem implicitItemIdentifier="C3E67C07-8337-4718-9B4B-7B47DED0144E" explicitItemIdentifier="CircleToolItem" label="Circle" paletteLabel="Draw Circle" tag="-1" image="circle" selectable="YES" id="hTQ-Cw-1Gh">
                                     <connections>
                                         <action selector="selectToolCreateCircle:" target="Oky-zY-oP4" id="pMK-pp-I3H"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="398CEE34-4B8B-48CA-9B82-9A173CE1C93C" label="Pie" paletteLabel="Draw Pie" tag="-1" image="pie" id="7Vw-3G-OOA">
+                                <toolbarItem implicitItemIdentifier="398CEE34-4B8B-48CA-9B82-9A173CE1C93C" explicitItemIdentifier="PieToolItem" label="Pie" paletteLabel="Draw Pie" tag="-1" image="pie" selectable="YES" id="7Vw-3G-OOA">
                                     <connections>
                                         <action selector="selectToolCreatePie:" target="Oky-zY-oP4" id="mGH-qG-q3V"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5CF46872-9C12-4255-8398-798E50814F48" label="Arc" paletteLabel="Draw Arc" tag="-1" image="arc" id="kTZ-2q-E9U">
+                                <toolbarItem implicitItemIdentifier="5CF46872-9C12-4255-8398-798E50814F48" explicitItemIdentifier="ArcToolItem" label="Arc" paletteLabel="Draw Arc" tag="-1" image="arc" selectable="YES" id="kTZ-2q-E9U">
                                     <connections>
                                         <action selector="selectToolCreateArc:" target="Oky-zY-oP4" id="sXb-3p-ZZb"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="70F341DB-CC04-45D4-84C4-F6CA6434E40C" label="Text" paletteLabel="Draw Text" tag="-1" image="text" id="zIl-ka-KKn">
+                                <toolbarItem implicitItemIdentifier="70F341DB-CC04-45D4-84C4-F6CA6434E40C" explicitItemIdentifier="TextToolItem" label="Text" paletteLabel="Draw Text" tag="-1" image="text" selectable="YES" id="zIl-ka-KKn">
                                     <connections>
                                         <action selector="toolbarButton:" target="B8D-0N-5wS" id="viN-fl-sU2"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="D359E598-7B36-4D6B-B3FB-CB0416C73750" label="Picture" paletteLabel="Draw Picture" tag="-1" image="picture" id="w42-Wf-VOx">
+                                <toolbarItem implicitItemIdentifier="D359E598-7B36-4D6B-B3FB-CB0416C73750" explicitItemIdentifier="PictureToolItem" label="Picture" paletteLabel="Draw Picture" tag="-1" image="picture" selectable="YES" id="w42-Wf-VOx">
                                     <connections>
                                         <action selector="toolbarButton:" target="B8D-0N-5wS" id="dJn-5A-78C"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="1CF814B6-18B8-49AE-AD89-BED61017BB60" label="Select" paletteLabel="Selection Tool" tag="-1" image="cursor" id="n5b-Nv-PnN">
+                                <toolbarItem implicitItemIdentifier="1CF814B6-18B8-49AE-AD89-BED61017BB60" explicitItemIdentifier="SelectionToolItem" label="Select" paletteLabel="Selection Tool" tag="-1" image="cursor" id="n5b-Nv-PnN">
                                     <connections>
                                         <action selector="toolbarButton:" target="B8D-0N-5wS" id="4Fx-VF-nd6"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="31BA3348-3AA5-413A-9E82-993901DF0C2C" label="Move" paletteLabel="Move Tool" tag="-1" image="move" id="6gl-vn-jm5">
+                                <toolbarItem implicitItemIdentifier="31BA3348-3AA5-413A-9E82-993901DF0C2C" explicitItemIdentifier="MoveToolItem" label="Move" paletteLabel="Move Tool" tag="-1" image="move" selectable="YES" id="6gl-vn-jm5">
                                     <connections>
                                         <action selector="selectToolMove:" target="Oky-zY-oP4" id="Aa1-d4-Ccz"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="1B302077-491A-486E-B8F3-2E6BD2273D37" label="Rotate" paletteLabel="Rotation Tool" tag="-1" image="rotate" id="fXG-6r-lpF">
+                                <toolbarItem implicitItemIdentifier="1B302077-491A-486E-B8F3-2E6BD2273D37" explicitItemIdentifier="RotateToolItem" label="Rotate" paletteLabel="Rotation Tool" tag="-1" image="rotate" selectable="YES" id="fXG-6r-lpF">
                                     <connections>
                                         <action selector="selectToolRotate:" target="Oky-zY-oP4" id="gCs-Ie-d7H"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E17CBF33-1B99-4A7D-B65C-ACFE594593EF" label="Scale" paletteLabel="Scale Tool" tag="-1" image="scale" id="zoX-OX-RXR">
+                                <toolbarItem implicitItemIdentifier="E17CBF33-1B99-4A7D-B65C-ACFE594593EF" explicitItemIdentifier="ScaleToolItem" label="Scale" paletteLabel="Scale Tool" tag="-1" image="scale" selectable="YES" id="zoX-OX-RXR">
                                     <connections>
                                         <action selector="selectToolScale:" target="Oky-zY-oP4" id="bDW-Bu-HpK"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="4CCFD131-B41E-41BE-A085-95A92EB45CDB" label="Morph" paletteLabel="Morph Tool" tag="-1" image="morph" id="9NG-yI-lkR">
+                                <toolbarItem implicitItemIdentifier="4CCFD131-B41E-41BE-A085-95A92EB45CDB" explicitItemIdentifier="MorphToolItem" label="Morph" paletteLabel="Morph Tool" tag="-1" image="morph" selectable="YES" id="9NG-yI-lkR">
                                     <connections>
                                         <action selector="selectToolMorph:" target="Oky-zY-oP4" id="1l2-nI-MwD"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5BC26FF1-8008-4234-BB74-5523FB2D2E38" label="Crop" paletteLabel="Crop Tool" tag="-1" image="crop" id="oeh-R9-CaW">
+                                <toolbarItem implicitItemIdentifier="5BC26FF1-8008-4234-BB74-5523FB2D2E38" explicitItemIdentifier="CropToolItem" label="Crop" paletteLabel="Crop Tool" tag="-1" image="crop" selectable="YES" id="oeh-R9-CaW">
                                     <connections>
                                         <action selector="toolbarButton:" target="B8D-0N-5wS" id="gKn-sM-34W"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="06290CF1-1431-4849-AA30-D18FC9379912" label="Preview" paletteLabel="Preview Tool" tag="-1" image="preview" id="q1q-pG-kup">
+                                <toolbarItem implicitItemIdentifier="06290CF1-1431-4849-AA30-D18FC9379912" explicitItemIdentifier="PreviewToolItem" label="Preview" paletteLabel="Preview Tool" tag="-1" image="preview" selectable="YES" id="q1q-pG-kup">
                                     <connections>
                                         <action selector="toolbarButton:" target="B8D-0N-5wS" id="clX-P5-8fB"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="603596DC-BFFF-4C37-8144-EA63B03B4698" label="Export" paletteLabel="Export Tool" tag="-1" image="export" id="Thp-1b-cjQ"/>
+                                <toolbarItem implicitItemIdentifier="603596DC-BFFF-4C37-8144-EA63B03B4698" explicitItemIdentifier="ExportToolItem" label="Export" paletteLabel="Export Tool" tag="-1" image="export" id="Thp-1b-cjQ"/>
                                 <toolbarItem implicitItemIdentifier="C9C9D321-69A7-4D18-963F-D470A2CF4BE0" label="Create" paletteLabel="Create" image="line" id="WJJ-Q9-c98">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="32" height="32"/>
