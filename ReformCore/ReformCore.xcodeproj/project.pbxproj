@@ -18,6 +18,8 @@
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
 		F24AAFCE1B8150CA008DF952 /* DefaultAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCD1B8150CA008DF952 /* DefaultAnalyzer.swift */; };
+		F250B0831B88C8220081462A /* PointLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B0821B88C8220081462A /* PointLength.swift */; };
+		F250B0851B88C8D90081462A /* PointAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F250B0841B88C8D90081462A /* PointAngle.swift */; };
 		F26D45F21B7D09CA00266096 /* ReformCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D45F11B7D09CA00266096 /* ReformCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D45F91B7D09CA00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D45EE1B7D09CA00266096 /* ReformCore.framework */; };
 		F26D45FE1B7D09CA00266096 /* ReformCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45FD1B7D09CA00266096 /* ReformCoreTests.swift */; };
@@ -117,6 +119,8 @@
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
 		F24AAFCD1B8150CA008DF952 /* DefaultAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAnalyzer.swift; sourceTree = "<group>"; };
+		F250B0821B88C8220081462A /* PointLength.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointLength.swift; sourceTree = "<group>"; };
+		F250B0841B88C8D90081462A /* PointAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointAngle.swift; sourceTree = "<group>"; };
 		F26D45EE1B7D09CA00266096 /* ReformCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D45F11B7D09CA00266096 /* ReformCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformCore.h; sourceTree = "<group>"; };
 		F26D45F31B7D09CA00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -484,6 +488,8 @@
 				F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */,
 				F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */,
 				F2A104D21B82387700E97C6B /* FixSizeDestination.swift */,
+				F250B0821B88C8220081462A /* PointLength.swift */,
+				F250B0841B88C8D90081462A /* PointAngle.swift */,
 			);
 			name = Composed;
 			sourceTree = "<group>";
@@ -698,6 +704,7 @@
 				F26D471C1B7D392200266096 /* StaticLength.swift in Sources */,
 				F26D473E1B7D541600266096 /* CircleOutline.swift in Sources */,
 				F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */,
+				F250B0831B88C8220081462A /* PointLength.swift in Sources */,
 				F26D47571B7D6EDF00266096 /* ScaleInstruction.swift in Sources */,
 				F26D47351B7D415B00266096 /* Operators.swift in Sources */,
 				F26D46D01B7D141C00266096 /* Picture.swift in Sources */,
@@ -747,6 +754,7 @@
 				F26D46BC1B7D10FB00266096 /* Length.swift in Sources */,
 				F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */,
 				F26D473A1B7D477700266096 /* AnchorPoint.swift in Sources */,
+				F250B0851B88C8D90081462A /* PointAngle.swift in Sources */,
 				F26D471A1B7D37DF00266096 /* PictureForm.swift in Sources */,
 				F26D46ED1B7D189000266096 /* ExposedPoint.swift in Sources */,
 				F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */,

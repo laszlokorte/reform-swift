@@ -54,12 +54,15 @@ final public class ArcForm : Form, Creatable {
         return [
             PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
             PointId.End.rawValue:ExposedPoint(point: endPoint, name: "End"),
-            PointId.Center.rawValue:ExposedPoint(point: AnchorPoint(anchor: controlAnchor), name: "Center"),
+            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
     public var outline : Outline {
-        return NullOutline()
+        return CompositeOutline(parts:
+            LineOutline(start: startPoint, end: endPoint),
+            ArcOutline(center: centerPoint, radius: PointLength(pointA: startPoint, pointB: centerPoint), angleA: PointAngle(center: centerPoint, point: startPoint), angleB: PointAngle(center: centerPoint, point: endPoint))
+        )
     }
 }
 
@@ -81,7 +84,10 @@ extension ArcForm : Translatable {
 extension ArcForm : Scalable {
     
     public var scaler : Scaler {
-        return BasicPointScaler(points: startPoint, endPoint)
+        return CompositeScaler(scalers:
+            BasicPointScaler(points: startPoint, endPoint),
+            AbsoluteScaler(scaler: BasicLengthScaler(length: offset, angle: ConstantAngle()))
+        )
     }
     
 }
@@ -89,6 +95,10 @@ extension ArcForm : Scalable {
 extension ArcForm {
     var controlAnchor : Anchor {
         return OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset)
+    }
+    
+    var centerPoint : RuntimePoint {
+        return AnchorPoint(anchor: controlAnchor)
     }
 }
 
