@@ -23,23 +23,21 @@ extension LineSegment2d {
 }
 
 public struct Arc2d {
-    let from: Vec2d
-    let to: Vec2d
-    let radius: Double
+    public let center : Vec2d
+    public let radius: Double
+    public let start: Angle
+    public let end: Angle
     
-    public init(from: Vec2d, to: Vec2d, radius: Double) {
-        self.from = from
-        self.to = to
+    public init(center: Vec2d, radius:Double, start: Angle, end: Angle) {
+        self.center = center
         self.radius = radius
+        self.start = start
+        self.end = end
     }
 }
 
 extension Arc2d {
-    var center : Vec2d {
-        return (to+from)/2
-    }
-    
-    var length : Double {
-        return M_PI * radius
+    public var length : Double {
+        return 2 * M_PI * radius * (end-start).percent
     }
 }

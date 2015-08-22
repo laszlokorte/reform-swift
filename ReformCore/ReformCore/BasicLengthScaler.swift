@@ -27,7 +27,7 @@ struct BasicLengthScaler : Scaler {
             let p = rotate(Vec2d(x:oldLength, y:0), angle: angleValue + offset)
         
             let projected = project(p, onto: axis)
-                        
+                
             let scaled = oldLength + projected.length * (factor - 1) * signum(oldLength)
             
             length.setLengthFor(runtime, length: scaled)

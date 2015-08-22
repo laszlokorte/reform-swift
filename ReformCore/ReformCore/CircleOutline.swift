@@ -43,8 +43,6 @@ struct CircleOutline : Outline {
         let a = angle.getAngleFor(runtime) else {
             return []
         }
-        let from = c + rotate(Vec2d(x:r, y:0), angle: a)
-        let to = c + rotate(Vec2d(x:r, y:0), angle: a + Angle(degree: 90))
-        return [Segment.Arc(Arc2d(from: from, to: to, radius: r)), Segment.Arc(Arc2d(from: to, to: from, radius: r))]
+        return [Segment.Arc(Arc2d(center: c, radius: r, start: Angle(percent: 0), end:Angle(percent: 100)))]
     }
 }

@@ -214,11 +214,12 @@ extension CircleForm : Drawable {
     public func getPathFor(runtime: Runtime) -> Path? {
         guard
             let c = centerPoint.getPositionFor(runtime),
-            let r = radius.getLengthFor(runtime)
+            let rd = radius.getLengthFor(runtime)
             else {
                 return nil
         }
         
+        let r = abs(rd)
         let left = c - Vec2d(x:r, y: 0)
         let right = c + Vec2d(x:r, y: 0)
         let top = c - Vec2d(x:0, y: r)

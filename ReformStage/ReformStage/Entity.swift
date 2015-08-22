@@ -240,22 +240,22 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: Cir
         CircleForm.AnchorId.Top.rawValue : (
             CircleForm.PointId.Top.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Bottom.rawValue, "Height"),
+            CircleForm.PointId.Bottom.rawValue, nil),
         
         CircleForm.AnchorId.Bottom.rawValue : (
             CircleForm.PointId.Bottom.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Top.rawValue, "Height"),
+            CircleForm.PointId.Top.rawValue, nil),
         
         CircleForm.AnchorId.Left.rawValue : (
             CircleForm.PointId.Left.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Right.rawValue, "Width"),
+            CircleForm.PointId.Right.rawValue, nil),
         
         CircleForm.AnchorId.Right.rawValue : (
             CircleForm.PointId.Right.rawValue,
             CircleForm.PointId.Center.rawValue,
-            CircleForm.PointId.Left.rawValue, "Width"),
+            CircleForm.PointId.Left.rawValue, nil),
         ])
     
     let points = collectPoints(analyzer, runtime: runtime, form: form)
