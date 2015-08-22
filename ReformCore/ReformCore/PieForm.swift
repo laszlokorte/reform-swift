@@ -55,9 +55,9 @@ final public class PieForm : Form, Creatable {
         centerPoint.setPositionFor(runtime, position: c)
         radius.setLengthFor(runtime, length: delta.length/2)
         
-        angleUpperBound.setAngleFor(runtime, angle: ReformMath.angle(delta))
+        angleUpperBound.setAngleFor(runtime, angle: ReformMath.angle(delta) + Angle.PI)
         
-        angleLowerBound.setAngleFor(runtime, angle: ReformMath.angle(delta) - Angle.PI)
+        angleLowerBound.setAngleFor(runtime, angle: ReformMath.angle(delta))
     }
     
     public func getPoints() -> [ExposedPointIdentifier:protocol<RuntimePoint,Labeled>] {
@@ -69,7 +69,14 @@ final public class PieForm : Form, Creatable {
     }
     
     public var outline : Outline {
-        return NullOutline()
+        let pointA = AnchorPoint(anchor: lowerAnchor)
+        let pointB = AnchorPoint(anchor: upperAnchor)
+        
+        return CompositeOutline(parts:
+            LineOutline(start: centerPoint, end: pointA),
+            ArcOutline(center: centerPoint, radius: radius, angleA: angleLowerBound, angleB: angleUpperBound),
+            LineOutline(start: pointB, end: centerPoint)
+        )
     }
     
 }

@@ -26,3 +26,14 @@ public struct Angle {
         self.init(radians: 2*M_PI * degree / 360.0)
     }
 }
+
+extension Angle : Comparable, Equatable {
+ 
+}
+
+public func <(lhs: Angle, rhs: Angle) -> Bool {
+    return (lhs.radians < rhs.radians)
+}
+public func ==(lhs: Angle, rhs: Angle) -> Bool {
+    return lhs.radians == rhs.radians
+}

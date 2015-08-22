@@ -72,8 +72,19 @@ func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double
         }
 
         return (u, line.from+projected)
-    case .Arc:
-        return nil
+    case .Arc(let arc):
+        let delta = closestTo - arc.center
+        let a = angle(delta)
+        let distance = abs((delta).length - arc.radius)
+                
+        guard distance <= maxDistance else {
+            return nil
+        }
+        guard isBetween(a, lower: arc.start, upper: arc.end)else {
+            return nil
+        }
+                
+        return (normalize360(a-arc.start)/normalize360(arc.end-arc.start), arc.center + Vec2d(radius: arc.radius, angle: a))
     }
 }
 

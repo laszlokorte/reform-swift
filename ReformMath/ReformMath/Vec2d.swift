@@ -23,6 +23,11 @@ public struct Vec2d :Equatable {
         self.x = x
         self.y = y
     }
+    
+    
+    public init(radius : Double, angle : Angle) {
+        self = rotate(Vec2d.XAxis * radius, angle: angle)
+    }
 }
 
 public func ==(lhs: Vec2d, rhs: Vec2d) -> Bool {

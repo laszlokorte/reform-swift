@@ -26,7 +26,7 @@ struct CircleOutline : Outline {
             return nil
         }
         
-        return c + rotate(Vec2d(x: rad, y:0), angle: a)
+        return c + rotate(Vec2d(x: rad, y:0), angle: t*a)
     }
     
     func getLengthFor(runtime: Runtime) -> Double? {
@@ -43,6 +43,6 @@ struct CircleOutline : Outline {
         let a = angle.getAngleFor(runtime) else {
             return []
         }
-        return [Segment.Arc(Arc2d(center: c, radius: r, start: Angle(percent: 0), end:Angle(percent: 100)))]
+        return [Segment.Arc(Arc2d(center: c, radius: r, start: a, end:a+Angle(percent: 100)))]
     }
 }

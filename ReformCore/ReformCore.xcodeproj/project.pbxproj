@@ -12,6 +12,7 @@
 		F222AF421B878349005F71A1 /* ConstantScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */; };
 		F222AF441B878D16005F71A1 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF431B878D16005F71A1 /* Axis.swift */; };
 		F222AF4C1B87D589005F71A1 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4B1B87D589005F71A1 /* Sequence.swift */; };
+		F222AF4E1B8881AF005F71A1 /* ArcOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */; };
 		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
@@ -109,6 +110,7 @@
 		F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantScaleFactor.swift; sourceTree = "<group>"; };
 		F222AF431B878D16005F71A1 /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		F222AF4B1B87D589005F71A1 /* Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcOutline.swift; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				F26D47031B7D288E00266096 /* LineOutline.swift */,
 				F26D473D1B7D541600266096 /* CircleOutline.swift */,
 				F26D473F1B7D577E00266096 /* NullOutline.swift */,
+				F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */,
 			);
 			name = Static;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				F26D46C91B7D136600266096 /* Analyzer.swift in Sources */,
 				F26D46DE1B7D157A00266096 /* Anchor.swift in Sources */,
 				F26D46F21B7D1FC600266096 /* RuntimeError.swift in Sources */,
+				F222AF4E1B8881AF005F71A1 /* ArcOutline.swift in Sources */,
 				F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */,
 				F26D470C1B7D342D00266096 /* CenterPoint.swift in Sources */,
 				F26D46CE1B7D140700266096 /* Project.swift in Sources */,

@@ -25,6 +25,10 @@ public func lerp(t:Double, a: Vec2d, b: Vec2d) -> Vec2d {
     return Vec2d(x: lerp(t, a: a.x, b: b.x), y: lerp(t, a: a.y, b: b.y))
 }
 
+public func lerp(t:Double, a: Angle, b: Angle) -> Angle {
+    return Angle(radians: lerp(t, a: a.radians, b: b.radians))
+}
+
 public func lerp(t:Double, a: Double, b: Double) -> Double {
     return a*(1-t) + t*b
 }
@@ -89,4 +93,27 @@ public func normalize(vector: Vec2d) -> Vec2d? {
     }
     
     return vector / length
+}
+
+func normalize360(angle: Angle) -> Angle{
+    let deg = angle.degree
+    let norm = Double(Int(deg) % 360) + (deg-trunc(deg))
+    if(norm>0.0) {
+        return Angle(degree: norm)
+    }
+    else {
+        return Angle(degree: norm + 360)
+    }
+}
+
+func isBetween(angle: Angle, lower: Angle, upper: Angle) -> Bool {
+    let a = normalize360(angle)
+    let l = normalize360(lower)
+    let u = normalize360(upper)
+    
+    if  l < u {
+        return l <= a && a <= u
+    } else {
+        return l <= a || a <= u
+    }
 }

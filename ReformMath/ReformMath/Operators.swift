@@ -44,3 +44,15 @@ public prefix func -(op: Angle) -> Angle {
 public prefix func -(op: Vec2d) -> Vec2d {
     return Vec2d(x: -op.x, y: -op.y)
 }
+
+public func *(lhs: Angle, rhs: Double) -> Angle {
+    return Angle(radians: lhs.radians * rhs)
+}
+
+public func *(lhs: Double, rhs: Angle) -> Angle {
+    return Angle(radians: lhs * rhs.radians)
+}
+
+public func /(lhs: Angle, rhs: Angle) -> Double {
+    return lhs.radians / rhs.radians
+}
