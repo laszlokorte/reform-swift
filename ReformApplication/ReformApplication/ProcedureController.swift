@@ -32,7 +32,7 @@ extension ProcedureController : NSOutlineViewDataSource {
         
         let indent = cellView.constraints.filter { (constr) -> Bool in
             return constr.identifier == "indentSpace"
-        }.first
+            }.first
         
         if let ind = indent {
             ind.constant = row % 2 == 0 ? 15 : 30
@@ -40,4 +40,4 @@ extension ProcedureController : NSOutlineViewDataSource {
         
         return cellView
     }
-    }
+}

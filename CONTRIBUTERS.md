@@ -1,4 +1,4 @@
-Contributers
-============
+Reform - Contributers
+=====================
 
- - Laszlo Korte
+- Laszlo Korte (reform@laszlokorte.de)

@@ -10,15 +10,21 @@ It is based on Bret Victor's talk "Drawing Dynamic Visualizations".
 
 Currently it is still under development and not yet released.
 
+When will it be releaed?
+------------------------
+
+Once it's done.  
+Take a look at the TODO.md to get an impression of what's missing.
+
 
 Links
 -----
 
-Bret Victor: 
+Bret Victor:  
 http://worrydream.com/
 
-Bret Victor's talk "Drawing Dynamic Visualisations": 
+Bret Victor's talk "Drawing Dynamic Visualisations":  
 http://vimeo.com/66085662
 
-Bret's talk notes:
+Bret's talk notes:  
 http://worrydream.com/DrawingDynamicVisualizationsTalkAddendum/'
