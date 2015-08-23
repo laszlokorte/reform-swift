@@ -276,8 +276,9 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieFor
     guard let
         center = form.centerPoint.getPositionFor(runtime),
         radius = form.radius.getLengthFor(runtime),
-        lowerAngle = form.angleLowerBound.getAngleFor(runtime).map(normalize360),
-        upperAngle = form.angleUpperBound.getAngleFor(runtime).map(normalize360)  else {
+        lowerAngle = form.angleLowerBound.getAngleFor(runtime),
+        upperAngle = form.angleUpperBound.getAngleFor(runtime)
+    else {
             return nil
     }
     

@@ -14,7 +14,7 @@ public func rotate(vector: Vec2d, angle: Angle) -> Vec2d {
 }
 
 public func angle(vector: Vec2d) -> Angle {
-    return Angle(radians: atan2(vector.y,vector.x))
+    return normalize360(Angle(radians: atan2(vector.y,vector.x)))
 }
 
 public func clamp<T:Comparable>(value: T, between: T, and: T) -> T {

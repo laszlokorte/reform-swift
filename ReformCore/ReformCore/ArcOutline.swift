@@ -38,8 +38,9 @@ struct ArcOutline : Outline {
     func getLengthFor(runtime: Runtime) -> Double? {
         guard let
             rad = radius.getLengthFor(runtime),
-            a1 = angleA.getAngleFor(runtime).map(normalize360),
-            a2 = angleB.getAngleFor(runtime).map(normalize360) else {
+            a1 = angleA.getAngleFor(runtime),
+            a2 = angleB.getAngleFor(runtime)
+        else {
             return nil
         }
                 
@@ -50,8 +51,8 @@ struct ArcOutline : Outline {
         guard let
             r = radius.getLengthFor(runtime),
             c = center.getPositionFor(runtime),
-            a1 = angleA.getAngleFor(runtime).map(normalize360),
-            a2 = angleB.getAngleFor(runtime).map(normalize360) else {
+            a1 = angleA.getAngleFor(runtime),
+            a2 = angleB.getAngleFor(runtime) else {
                 return []
         }
         

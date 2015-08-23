@@ -23,7 +23,7 @@ struct CircleOutline : Outline {
         guard let
             c = center.getPositionFor(runtime),
             rad = radius.getLengthFor(runtime).map(abs),
-            a = angle.getAngleFor(runtime).map(normalize360) else {
+            a = angle.getAngleFor(runtime) else {
             return nil
         }
         
@@ -42,7 +42,7 @@ struct CircleOutline : Outline {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
             c = center.getPositionFor(runtime),
-            a = angle.getAngleFor(runtime).map(normalize360) else {
+            a = angle.getAngleFor(runtime) else {
             return []
         }
         return [

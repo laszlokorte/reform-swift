@@ -181,8 +181,9 @@ extension PieForm : Drawable {
     public func getPathFor(runtime: Runtime) -> Path? {
         guard let c = centerPoint.getPositionFor(runtime),
                   r = radius.getLengthFor(runtime),
-                  low = angleLowerBound.getAngleFor(runtime).map(normalize360),
-                  up = angleUpperBound.getAngleFor(runtime).map(normalize360) else {
+                  low = angleLowerBound.getAngleFor(runtime),
+                  up = angleUpperBound.getAngleFor(runtime)
+        else {
             return nil
         }
         
