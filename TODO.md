@@ -23,6 +23,9 @@ Promotion
 Performance
 -----------
  - Profile application with Xcode profilers
+ - QuadTree for Stage content?
+ - Switch from Double to Float for entity positions?
+ - lazy intersection calculation when entity-count is height
 
 Swift
 -----
