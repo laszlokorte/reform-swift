@@ -97,7 +97,7 @@ extension ArcForm {
         return OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset)
     }
     
-    var centerPoint : RuntimePoint {
+    public var centerPoint : RuntimePoint {
         return AnchorPoint(anchor: controlAnchor)
     }
 }

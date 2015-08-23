@@ -306,6 +306,7 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieFor
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, arc form: ArcForm) -> Entity? {
     guard let start = form.startPoint.getPositionFor(runtime),
         let end = form.endPoint.getPositionFor(runtime),
+        let center = form.centerPoint.getPositionFor(runtime),
         let offset = form.offset.getLengthFor(runtime) else {
             return nil
     }
@@ -329,11 +330,10 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, arc form: ArcFor
     
     let outline = form.outline.getSegmentsFor(runtime)
     
-    let center = (start + end) / 2
-    let radius = sqrt((start-end).length2 + offset*offset)
+    let radius = (start - center).length
     let hit = HitArea.Intersection(
         HitArea.Circle(center: center, radius: radius),
-        HitArea.LeftOf(a: start, b: end)
+        HitArea.LeftOf(a: end, b: start)
     )
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles, points: points, outline: outline)

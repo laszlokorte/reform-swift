@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:LICENSE.md">
+   </FileRef>
+   <FileRef
+      location = "group:TODO.md">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:CONTRIBUTERS.md">
+   </FileRef>
+   <FileRef
       location = "group:ReformGraphics/ReformGraphics.xcodeproj">
    </FileRef>
    <FileRef
