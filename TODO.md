@@ -26,8 +26,10 @@ Performance
 
 Swift
 -----
- - EventFlow (stream api?)
- - Analyzer
+ - Guides
+ - Generate correct form names
+ - EventFlow (stream api? notificationcenter?)
+ - Analyzer: collect nodes
  - Draw Arc
  - Selection Tool
  - Picture Tool / Recursion
@@ -50,14 +52,15 @@ Swift
  - Auto-center Circle
  - Formtype-dependent striehtening
  - fix responder-chain for toolbar
- - improve controller hirarchie
+ - improve controller hirarchie/documentbased architecture
+ - Window-Title/Filepath
  - Fix canvas clipping/Infinite Canvas
  - FormAttributes: Colors, Stroke
+    - custom attributes
  - Tooltips
  - Negative Pie scaling
  - Improve Angle-range handling
  - Text Rendering
- - Window-Title/Filepath
  - Multiple Windows/Projects
  - Canvas focus/default responder
  - color chooser
@@ -70,6 +73,9 @@ Far future concepts:
  - Accessibility
     - learn about cocoa/appkit accessibility
     - find a way to implement UI/tools in an accessible ways
+ - Multi languagal
+ - Optimize energy usage
+ - Filters
 
 Conceptually open:
 ------------------
