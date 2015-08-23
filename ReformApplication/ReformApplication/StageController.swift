@@ -200,8 +200,6 @@ class StageController : NSViewController {
 
         }
         
-        print(instructionFocus.current)
-        
         procedureChanged()
         toolController.currentTool.refresh()
 
