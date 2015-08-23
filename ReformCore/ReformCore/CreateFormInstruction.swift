@@ -38,7 +38,8 @@ public struct CreateFormInstruction : Instruction {
     public func analyze(analyzer: Analyzer) {
         analyzer.announceForm(form)
         
-        if let picture = form as? PictureForm, let id = picture.pictureIdentifier {
+        if let picture = form as? PictureForm,
+                id = picture.pictureIdentifier {
             analyzer.announceDepencency(id)
         }
     }

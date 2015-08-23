@@ -155,8 +155,9 @@ struct PaperPoint : RuntimePoint, Labeled {
     }
     
     func getPositionFor(runtime: Runtime) -> Vec2d? {
-        guard let w = width.getLengthFor(runtime),
-            let h = height.getLengthFor(runtime) else {
+        guard let
+            w = width.getLengthFor(runtime),
+            h = height.getLengthFor(runtime) else {
             return nil
         }
         return Vec2d(x: side.x * w, y:side.y * h)

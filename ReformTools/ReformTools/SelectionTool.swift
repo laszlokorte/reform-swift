@@ -85,12 +85,12 @@ public class SelectionTool : Tool {
                 break
             case .Press:
                 let entities = entitiesNear(position)
-                if let previous = selection.selected,
-                    let index = entities.indexOf({$0.id == previous}) {
+                if let
+                    previous = selection.selected,
+                    index = entities.indexOf({$0.id == previous}) {
                     state = .Selecting(entity: entities[index], cycle: index)
                     
                 } else {
-                    
                     state = .Selecting(entity: entities.first, cycle: 0)
                 }
                 break

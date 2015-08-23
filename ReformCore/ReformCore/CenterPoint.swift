@@ -18,7 +18,9 @@ struct CenterPoint : RuntimePoint {
     }
     
     func getPositionFor(runtime: Runtime) -> Vec2d? {
-        guard let a = pointA.getPositionFor(runtime), let b = pointB.getPositionFor(runtime) else {
+        guard let
+            a = pointA.getPositionFor(runtime),
+            b = pointB.getPositionFor(runtime) else {
             return nil
         }
         

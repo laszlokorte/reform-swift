@@ -134,24 +134,32 @@ final public class ExpressionPrinter {
         case .Reference(let id):
             return sheet.definitionWithId(id)?.name ?? "[?\(id.id)]"
         case .Unary(let op, let expr):
-            if let (name, def) = findOperator(op), let sub = toString(expr, outerPrecedence: def.precedence) {
-                if outerPrecedence < def.precedence {
-                    return "\(name)\(sub)"
-                } else {
-                    return "(\(name)\(sub))"
-                }
-            } else { return nil }
+            guard let
+                (name, def) = findOperator(op),
+                sub = toString(expr, outerPrecedence: def.precedence)
+            else {
+                return nil
+            }
+            
+            if outerPrecedence < def.precedence {
+                return "\(name)\(sub)"
+            } else {
+                return "(\(name)\(sub))"
+            }
         case .Binary(let op, let lhs, let rhs):
-            if let (name, def) = findOperator(op),
-                let left = toString(lhs, outerPrecedence: def.precedence, isLeft: true),
-                let right = toString(rhs,outerPrecedence:  def.precedence) {
-                    
-                    if outerPrecedence < def.precedence || outerPrecedence == def.precedence && isLeft {
-                        return "\(left) \(name) \(right)"
-                    } else {
-                        return "(\(left) \(name) \(right))"
-                    }
-            } else { return nil }
+            guard let
+                (name, def) = findOperator(op),
+                left = toString(lhs, outerPrecedence: def.precedence, isLeft: true),
+                right = toString(rhs,outerPrecedence:  def.precedence)
+            else {
+                return nil
+            }
+    
+            if outerPrecedence < def.precedence || outerPrecedence == def.precedence && isLeft {
+                return "\(left) \(name) \(right)"
+            } else {
+                return "(\(left) \(name) \(right))"
+            }
         case .Call(let function, let params):
             if let fname = functionName(function) {
                 let pstr = ", ".join(params.flatMap({ toString($0) }))

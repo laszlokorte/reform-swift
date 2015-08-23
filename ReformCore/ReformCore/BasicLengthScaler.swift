@@ -21,16 +21,19 @@ struct BasicLengthScaler : Scaler {
     
     
     func scale(runtime : Runtime, factor: Double, fix: Vec2d, axis: Vec2d) {
-        if let oldLength = length.getLengthFor(runtime),
-            let angleValue = angle.getAngleFor(runtime) {
-            
-            let p = rotate(Vec2d(x:oldLength, y:0), angle: angleValue + offset)
-        
-            let projected = project(p, onto: axis)
-                
-            let scaled = oldLength + projected.length * (factor - 1) * signum(oldLength)
-            
-            length.setLengthFor(runtime, length: scaled)
+        guard let
+            oldLength = length.getLengthFor(runtime),
+            angleValue = angle.getAngleFor(runtime) else {
+            return
         }
+        
+        let p = rotate(Vec2d(x:oldLength, y:0), angle: angleValue + offset)
+    
+        let projected = project(p, onto: axis)
+            
+        let scaled = oldLength + projected.length * (factor - 1) * signum(oldLength)
+        
+        length.setLengthFor(runtime, length: scaled)
+        
     }
 }

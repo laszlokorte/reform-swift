@@ -77,8 +77,9 @@ public func ==(lhs: EntityPoint, rhs: EntityPoint) -> Bool {
 }
 
 func createEntityPoint(analyzer: Analyzer, runtime: Runtime, formId: FormIdentifier, pointId: ExposedPointIdentifier) -> EntityPoint? {
-    guard let point = runtime.get(formId)?.getPoints()[pointId],
-        let position = point.getPositionFor(runtime) else {
+    guard let
+        point = runtime.get(formId)?.getPoints()[pointId],
+        position = point.getPositionFor(runtime) else {
         return nil
     }
     
@@ -116,10 +117,11 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, formId: FormIden
 
 func collectHandles<F:Form where F:Morphable>(analyzer: Analyzer, runtime: Runtime, form: F, pivots: [AnchorIdentifier:(ExposedPointIdentifier, ExposedPointIdentifier,ExposedPointIdentifier, axisName: String?)]) -> [Handle] {
     return form.getAnchors().flatMap() { (anchorId, anchor) -> Handle? in
-        guard let pivot = pivots[anchorId],
-            let primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1),
-            let secondary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.2),
-            let position = anchor.getPositionFor(runtime) else {
+        guard let
+            pivot = pivots[anchorId],
+            primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1),
+            secondary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.2),
+            position = anchor.getPositionFor(runtime) else {
                 return nil
         }
         
@@ -148,8 +150,9 @@ func collectPoints(analyzer: Analyzer, runtime: Runtime, form: Form) -> [EntityP
 
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, line form: LineForm) -> Entity? {
-    guard let start = form.startAnchor.getPositionFor(runtime),
-        let end = form.endAnchor.getPositionFor(runtime) else {
+    guard let
+        start = form.startAnchor.getPositionFor(runtime),
+        end = form.endAnchor.getPositionFor(runtime) else {
         return nil
     }
     
@@ -170,10 +173,11 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, line form: LineF
 }
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, rectangle form: RectangleForm) -> Entity? {
-    guard let topLeft = form.topLeftAnchor.getPositionFor(runtime),
-        let topRight = form.topRightAnchor.getPositionFor(runtime),
-        let bottomLeft = form.bottomLeftAnchor.getPositionFor(runtime),
-        let bottomRight = form.bottomRightAnchor.getPositionFor(runtime)else {
+    guard let
+        topLeft = form.topLeftAnchor.getPositionFor(runtime),
+        topRight = form.topRightAnchor.getPositionFor(runtime),
+        bottomLeft = form.bottomLeftAnchor.getPositionFor(runtime),
+        bottomRight = form.bottomRightAnchor.getPositionFor(runtime) else {
             return nil
     }
     
@@ -229,8 +233,9 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, rectangle form: 
 }
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: CircleForm) -> Entity? {
-    guard let center = form.centerPoint.getPositionFor(runtime),
-        let radius = form.radius.getLengthFor(runtime) else {
+    guard let
+        center = form.centerPoint.getPositionFor(runtime),
+        radius = form.radius.getLengthFor(runtime) else {
             return nil
     }
     
@@ -268,10 +273,11 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, circle form: Cir
 }
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieForm) -> Entity? {
-    guard let center = form.centerPoint.getPositionFor(runtime),
-        let radius = form.radius.getLengthFor(runtime),
-        let lowerAngle = form.angleLowerBound.getAngleFor(runtime).map(normalize360),
-        let upperAngle = form.angleUpperBound.getAngleFor(runtime).map(normalize360)  else {
+    guard let
+        center = form.centerPoint.getPositionFor(runtime),
+        radius = form.radius.getLengthFor(runtime),
+        lowerAngle = form.angleLowerBound.getAngleFor(runtime).map(normalize360),
+        upperAngle = form.angleUpperBound.getAngleFor(runtime).map(normalize360)  else {
             return nil
     }
     
@@ -304,10 +310,10 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, pie form: PieFor
 
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, arc form: ArcForm) -> Entity? {
-    guard let start = form.startPoint.getPositionFor(runtime),
-        let end = form.endPoint.getPositionFor(runtime),
-        let center = form.centerPoint.getPositionFor(runtime),
-        let offset = form.offset.getLengthFor(runtime) else {
+    guard let
+        start = form.startPoint.getPositionFor(runtime),
+        end = form.endPoint.getPositionFor(runtime),
+        center = form.centerPoint.getPositionFor(runtime) else {
             return nil
     }
     
@@ -342,8 +348,9 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, arc form: ArcFor
 
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, text form: TextForm) -> Entity? {
-    guard let start = form.startPoint.getPositionFor(runtime),
-        let end = form.endPoint.getPositionFor(runtime) else {
+    guard let
+        start = form.startPoint.getPositionFor(runtime),
+        end = form.endPoint.getPositionFor(runtime) else {
             return nil
     }
     
@@ -373,10 +380,11 @@ func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, text form: TextF
 
 func entityForRuntimeForm(analyzer: Analyzer, runtime: Runtime, picture form: PictureForm) -> Entity? {
     
-    guard let topLeft = form.topLeftAnchor.getPositionFor(runtime),
-        let topRight = form.topRightAnchor.getPositionFor(runtime),
-        let bottomLeft = form.bottomLeftAnchor.getPositionFor(runtime),
-        let bottomRight = form.bottomRightAnchor.getPositionFor(runtime) else {
+    guard let
+        topLeft = form.topLeftAnchor.getPositionFor(runtime),
+        topRight = form.topRightAnchor.getPositionFor(runtime),
+        bottomLeft = form.bottomLeftAnchor.getPositionFor(runtime),
+        bottomRight = form.bottomRightAnchor.getPositionFor(runtime) else {
             return nil
     }
     

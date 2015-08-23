@@ -110,9 +110,10 @@ private struct PieCornerAnchor : Anchor {
     
     
     func getPositionFor(runtime: Runtime) -> Vec2d? {
-        guard let c = center.getPositionFor(runtime),
-            let angle = rotation.getAngleFor(runtime),
-            let r = radius.getLengthFor(runtime) else {
+        guard let
+            c = center.getPositionFor(runtime),
+            angle = rotation.getAngleFor(runtime),
+            r = radius.getLengthFor(runtime) else {
                 return nil
         }
         
@@ -121,7 +122,7 @@ private struct PieCornerAnchor : Anchor {
     
     func translate(runtime: Runtime, delta: Vec2d) {
         if let oldAngle = rotation.getAngleFor(runtime),
-            let oldRadius = radius.getLengthFor(runtime) {
+                oldRadius = radius.getLengthFor(runtime) {
             let oldDelta = rotate(Vec2d(x: oldRadius, y:0), angle: oldAngle)
                 
             let newDelta = oldDelta + delta

@@ -207,10 +207,11 @@ private struct RectangleAnchor : Anchor {
     
     
     func getPositionFor(runtime: Runtime) -> Vec2d? {
-        guard let c = center.getPositionFor(runtime),
-            let angle = rotation.getAngleFor(runtime),
-            let w = width.getLengthFor(runtime),
-            let h = height.getLengthFor(runtime) else {
+        guard let
+            c = center.getPositionFor(runtime),
+            angle = rotation.getAngleFor(runtime),
+            w = width.getLengthFor(runtime),
+            h = height.getLengthFor(runtime) else {
                 return nil
         }
         
@@ -218,10 +219,11 @@ private struct RectangleAnchor : Anchor {
     }
     
     func translate(runtime: Runtime, delta: Vec2d) {
-        if let oldAngle = rotation.getAngleFor(runtime),
-            let oldWidth = width.getLengthFor(runtime),
-            let oldHeight = height.getLengthFor(runtime),
-            let oldCenter = center.getPositionFor(runtime) {
+        if let
+            oldAngle = rotation.getAngleFor(runtime),
+            oldWidth = width.getLengthFor(runtime),
+            oldHeight = height.getLengthFor(runtime),
+            oldCenter = center.getPositionFor(runtime) {
                 
                 let oldSize = Vec2d(x: oldWidth, y: oldHeight)
                 let oldDelta = rotate(Vec2d(x: Double(side.x)*oldSize.x, y: Double(side.y)*oldSize.y) / 2, angle: oldAngle)

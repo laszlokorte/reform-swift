@@ -18,8 +18,9 @@ extension RuntimeAxis {
         switch self {
         case .None: return Vec2d()
         case  .Named(_, let from, let to):
-            guard let start = from.getPositionFor(runtime),
-                let end = to.getPositionFor(runtime) else {
+            guard let
+                start = from.getPositionFor(runtime),
+                end = to.getPositionFor(runtime) else {
                     return nil
             }
             

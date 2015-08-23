@@ -52,7 +52,8 @@ class RuntimeStack {
     }
     
     func setData(id: FormIdentifier, offset: Int, newValue: UInt64){
-        if let o = offsets[id] where o + offset < dataSize {
+        if let o = offsets[id]
+        where o + offset < dataSize {
             data[o+offset] = newValue
 
         }
