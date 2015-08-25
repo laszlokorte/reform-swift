@@ -865,6 +865,7 @@
                     </splitView>
                 </viewController>
                 <customObject id="aPK-8P-8m9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="24w-Bw-G7o"/>
             </objects>
             <point key="canvasLocation" x="63" y="866"/>
         </scene>
