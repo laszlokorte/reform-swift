@@ -25,6 +25,7 @@ struct StageUI {
 
 }
 
+@objc
 class StageController : NSViewController {
 
     private var stage : Stage?
@@ -44,37 +45,41 @@ class StageController : NSViewController {
         self.stageUI = stageUI
 
         let collector = StageCollector(stage: stage, analyzer: analyzer) {
+            Swift.print("stage colelctor working")
             return instructionFocus.current === $0 as? InstructionNode
         }
 
         self.collector = collector
 
         runtime.listeners.append(collector)
+
+        canvas?.toolController = toolController
+
+        canvas?.renderers.append(SelectionUIRenderer(selectionUI: stageUI.selectionUI, stage: stage))
+
+
+        canvas?.renderers.append(SnapUIRenderer(snapUI: stageUI.snapUI, stage: stage))
+
+        canvas?.renderers.append(CropUIRenderer(cropUI: stageUI.cropUI))
+
+
+        canvas?.renderers.append(GrabUIRenderer(grabUI: stageUI.grabUI))
+        canvas?.renderers.append(HandleUIRenderer(handleUI: stageUI.handleUI))
+
+        canvas?.renderers.append(PivotUIRenderer(pivotUI: stageUI.pivotUI))
+
+        Swift.print("setup")
+
     }
 
 
     @IBOutlet var canvas : CanvasView?
     
     override func viewDidLoad() {
-        
-        canvas?.toolController = toolController
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "toolChanged", name:"ToolChanged", object: nil)
+        Swift.print("did load")
 
-        if let stageUI = stageUI, stage = stage {
-
-            canvas?.renderers.append(SelectionUIRenderer(selectionUI: stageUI.selectionUI, stage: stage))
-
-            
-            canvas?.renderers.append(SnapUIRenderer(snapUI: stageUI.snapUI, stage: stage))
-            
-            canvas?.renderers.append(CropUIRenderer(cropUI: stageUI.cropUI))
-            
-            
-            canvas?.renderers.append(GrabUIRenderer(grabUI: stageUI.grabUI))
-            canvas?.renderers.append(HandleUIRenderer(handleUI: stageUI.handleUI))
-            
-            canvas?.renderers.append(PivotUIRenderer(pivotUI: stageUI.pivotUI))
-
-        }
         if let canvas = canvas {
         
             let trackingOptions : NSTrackingAreaOptions = [.MouseMoved, .EnabledDuringMouseDrag, .ActiveInKeyWindow, .InVisibleRect]
@@ -83,9 +88,20 @@ class StageController : NSViewController {
             
             canvas.addTrackingArea(trackingArea)
         }
-        
-        toolController?.currentTool.refresh()
 
+    }
+
+    dynamic func procedureChanged() {
+        if let stage = stage {
+            canvas?.shapes = stage.currentShapes
+            canvas?.canvasSize = stage.size
+            canvas?.needsDisplay = true
+            Swift.print("procedure changed\(stage.size)")
+        }
+    }
+
+    dynamic func toolChanged() {
+        canvas?.needsDisplay = true
     }
     
 }

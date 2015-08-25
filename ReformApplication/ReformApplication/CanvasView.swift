@@ -17,7 +17,11 @@ import ReformTools
 @IBDesignable
 class CanvasView : NSView {
     var toolController : ToolController?
-    var canvasSize = Vec2d(x: 300, y: 300)
+    var canvasSize = Vec2d(x: 100, y: 100) {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
     
     var shapes : [IdentifiedShape] = []
     var renderers : [Renderer] = []

@@ -85,9 +85,9 @@ class ProjectWindowController : NSWindowController {
 
         toolController.currentTool = rotationTool
 
-        let rectangleForm = RectangleForm(id: FormIdentifier(100), name: "Rectangle 1")
+        let rectangleForm = RectangleForm(id: FormIdentifier(98), name: "Rectangle 1")
 
-        let lineForm = LineForm(id: FormIdentifier(101), name: "Line 1")
+        let lineForm = LineForm(id: FormIdentifier(99), name: "Line 1")
 
         let rectangleDestination = RelativeDestination(
             from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue),
@@ -129,13 +129,15 @@ class ProjectWindowController : NSWindowController {
 
         procedure.root.append(child: node4)
 
-        instructionFocus.current = node2
+        instructionFocus.current = node4
 
         if let pictureController = contentViewController as? PictureController {
 
             let stageUI = StageUI(selectionUI: selectionUI, snapUI: snapUI, grabUI: grabUI, handleUI: handleUI, pivotUI: pivotUI, cropUI: cropUI)
             pictureController.setup(stage, analyzer: analyzer, runtime: runtime, instructionFocus: instructionFocus, toolController: toolController, stageUI: stageUI)
         }
+
+        procedureChanged()
     }
     
 
@@ -155,45 +157,56 @@ class ProjectWindowController : NSWindowController {
         //        }
 
         toolController.currentTool.refresh()
+
+    NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: procedure)
     }
 
     @IBAction func selectToolCreateLine(sender: AnyObject) {
         toolController.currentTool = createLineTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
     @IBAction func selectToolCreateRectangle(sender: AnyObject) {
         toolController.currentTool = createRectTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
     @IBAction func selectToolCreateCircle(sender: AnyObject) {
         toolController.currentTool = createCircleTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
     @IBAction func selectToolCreatePie(sender: AnyObject) {
         toolController.currentTool = createPieTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
     @IBAction func selectToolCreateArc(sender: AnyObject) {
         toolController.currentTool = createArcTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
     @IBAction func selectToolMove(sender: AnyObject) {
         toolController.currentTool = moveTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
 
     @IBAction func selectToolMorph(sender: AnyObject) {
         toolController.currentTool = morphTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
 
     @IBAction func selectToolRotate(sender: AnyObject) {
         toolController.currentTool = rotationTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
 
     @IBAction func selectToolScale(sender: AnyObject) {
         toolController.currentTool = scalingTool
+        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
     }
 
     override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
