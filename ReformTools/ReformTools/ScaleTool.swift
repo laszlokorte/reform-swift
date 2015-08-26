@@ -143,7 +143,9 @@ public class ScaleTool : Tool {
                 let piv = pivot.pointFor(grabbedHandle)
                 let axis = (grabbedHandle.position - piv.position)
                 let distance = pos - piv.position - offset
-                state = .Scaling(handle: grabbedHandle, factor: dot(distance, axis)/axis.length2, offset: offset)
+                let length = axis.length2
+                let factor = length == 0 ? 1 : dot(distance, axis)/axis.length2
+                state = .Scaling(handle: grabbedHandle, factor: factor, offset: offset)
                 
             case .Press:
                 break
