@@ -12,9 +12,11 @@ import ReformTools
 class ProcedureViewModel {
     let analyzer : DefaultAnalyzer
     let instructionFocus : InstructionFocus
+    let snapshotCollector : SnapshotCollector
 
-    init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus) {
+    init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus, snapshotCollector : SnapshotCollector) {
         self.analyzer = analyzer
         self.instructionFocus = instructionFocus
+        self.snapshotCollector = snapshotCollector
     }
 }

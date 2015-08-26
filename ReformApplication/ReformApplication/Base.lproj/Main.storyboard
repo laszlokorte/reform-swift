@@ -1099,6 +1099,7 @@
                                                             <connections>
                                                                 <outlet property="indentConstraint" destination="Fyb-tA-C39" id="xd2-Na-h0y"/>
                                                                 <outlet property="labelField" destination="Zkc-lx-sSz" id="yIu-Fk-33i"/>
+                                                                <outlet property="previewImage" destination="Uys-HT-WxB" id="S7q-c0-86f"/>
                                                                 <outlet property="textField" destination="Zkc-lx-sSz" id="Ydd-Ht-i1J"/>
                                                             </connections>
                                                         </tableCellView>

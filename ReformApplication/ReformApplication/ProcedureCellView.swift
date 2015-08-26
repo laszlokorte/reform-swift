@@ -10,16 +10,18 @@ import Foundation
 import ReformCore
 
 protocol ProcedureCellView {
-    func configure(node: InstructionOutlineRow)
+    func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel)
 }
 
 class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
     @IBOutlet var labelField : NSTextField?
+    @IBOutlet var previewImage : NSImageView?
     @IBOutlet var indentConstraint : NSLayoutConstraint?
 
-    func configure(node: InstructionOutlineRow) {
-        indentConstraint?.constant = CGFloat(15 * node.depth)
-        labelField?.stringValue = node.label
+    func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
+        indentConstraint?.constant = CGFloat(15 * row.depth)
+        labelField?.stringValue = row.label
+        previewImage?.image = procedureViewModel.snapshotCollector.imageFor(InstructionNodeKey(row.node))
 
     }
 }
@@ -28,8 +30,8 @@ class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
     @IBOutlet var labelField : NSTextField?
     @IBOutlet var indentConstraint : NSLayoutConstraint?
 
-    func configure(node: InstructionOutlineRow) {
-        indentConstraint?.constant = CGFloat(15 * node.depth)
-        labelField?.stringValue = node.label
+    func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
+        indentConstraint?.constant = CGFloat(15 * row.depth)
+        labelField?.stringValue = row.label
     }
 }

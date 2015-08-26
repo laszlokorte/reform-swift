@@ -15,8 +15,6 @@ class ProcedureController : NSViewController {
 
     override var representedObject : AnyObject? {
         didSet {
-            print("didSet repr")
-
             procedureViewModel = representedObject as? ProcedureViewModel
         }
     }
@@ -42,7 +40,6 @@ class ProcedureController : NSViewController {
             index = instructions.indexOf({ $0.node === focus }) {
                 tableView?.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
 
-                print("scroll \(index)")
                 tableView?.scrollRowToVisible(index)
         }
     }
@@ -69,8 +66,8 @@ extension ProcedureController : NSOutlineViewDelegate {
         let cellId = instructions[row].isGroup ? "groupCell" : "thumbnailCell"
         let cellView = tableView.makeViewWithIdentifier(cellId, owner: self)
         
-        if let cell = cellView as? ProcedureCellView {
-            cell.configure(instructions[row])
+        if let cell = cellView as? ProcedureCellView, procedureViewModel = procedureViewModel {
+            cell.configure(instructions[row], procedureViewModel: procedureViewModel)
         }
 
         

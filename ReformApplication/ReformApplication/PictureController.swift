@@ -30,7 +30,6 @@ class PictureController : NSViewController {
 
             if let procedureController = procedureController
             {
-                print("wuhu")
                 updateProcedure(procedureController, withSession: pictureSession)
             }
         }
@@ -59,7 +58,7 @@ class PictureController : NSViewController {
     }
 
     func updateProcedure(procedureController: ProcedureController, withSession pictureSession: PictureSession) {
-        procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus)
+        procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus, snapshotCollector: pictureSession.snapshotCollector)
     }
 
 

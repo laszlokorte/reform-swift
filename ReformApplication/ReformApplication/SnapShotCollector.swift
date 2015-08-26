@@ -101,6 +101,11 @@ final public class SnapshotCollector : RuntimeListener {
             NSColor.whiteColor().setFill()
             NSRectFill(NSRect(origin: CGPoint(), size: size))
 
+            CGContextScaleCTM(context, size.width / CGFloat(currentSize.0), size.height / CGFloat(currentSize.1))
+
+
+            NSColor.grayColor().setFill()
+            NSColor.grayColor().set()
             for path in paths {
                 path.draw(context)
                 CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
@@ -120,7 +125,6 @@ final public class SnapshotCollector : RuntimeListener {
                 guard let path = form.getPathFor(runtime) else {
                     continue
                 }
-
                 if isGuide {
                     NSColor.cyanColor().setFill()
                     NSColor.cyanColor().set()
@@ -133,6 +137,7 @@ final public class SnapshotCollector : RuntimeListener {
                 }
 
                 path.draw(context)
+                CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
             }
         }
     }
