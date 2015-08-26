@@ -14,6 +14,21 @@ import ReformCore
 
 typealias Picture = ReformCore.Picture
 
+class InstructionFocusChanger {
+    let instructionFocus : InstructionFocus
+    let callback : () -> ()
+
+    init(instructionFocus : InstructionFocus, callback: () -> ()) {
+        self.instructionFocus = instructionFocus
+        self.callback = callback
+    }
+
+    func setFocus(node : InstructionNode?) {
+        self.instructionFocus.current = node
+        callback()
+    }
+}
+
 class ProcedureChangeProcessor {
     let picture : Picture
     let runtime: Runtime
@@ -89,6 +104,7 @@ class PictureSession {
     let scalingTool : ScaleTool
 
     let procedureChangeProcessor : ProcedureChangeProcessor
+    let instructionFocusChanger : InstructionFocusChanger
 
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {
         self.projectSession = projectSession
@@ -126,6 +142,8 @@ class PictureSession {
 
 
         self.procedureChangeProcessor = ProcedureChangeProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController)
+
+        self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus, callback: self.procedureChangeProcessor.trigger)
 
         self.instructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureChangeProcessor.trigger)
         self.selectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.stageUI.selectionUI)

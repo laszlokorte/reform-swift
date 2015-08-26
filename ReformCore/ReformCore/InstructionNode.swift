@@ -129,7 +129,10 @@ extension InstructionNode {
 extension InstructionNode : Evaluatable {
     public func evaluate(runtime: Runtime) {
         switch content {
-        case .Null: break
+        case .Null:
+            runtime.eval(self) {
+
+            }
         case .Single(let instruction):
             runtime.eval(self) {
                 instruction.evaluate(runtime)

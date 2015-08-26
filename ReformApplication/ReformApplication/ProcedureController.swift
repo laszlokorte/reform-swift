@@ -79,7 +79,8 @@ extension ProcedureController : NSOutlineViewDelegate {
 
     func tableViewSelectionDidChange(aNotification: NSNotification) {
         if !cycle, let index = tableView?.selectedRow {
-            procedureViewModel?.instructionFocus.current = instructions[index].node
+            procedureViewModel?.instructionFocusChanger.setFocus(instructions[index].node)
+            print(instructions[index].node)
         }
     }
 }
