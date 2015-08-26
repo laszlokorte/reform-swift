@@ -144,7 +144,9 @@ public class RotateTool : Tool {
                 fallthrough
             case .Move:
                 let piv = pivot.pointFor(grabbedHandle)
-                state = .Rotating(handle: grabbedHandle, angle: angle(pos - piv.position - offset) - angle(grabbedHandle.position - piv.position), offset: offset)
+                state = .Rotating(handle: grabbedHandle, angle:
+                    angleBetween(vector: pos - piv.position - offset,
+                        vector: grabbedHandle.position - piv.position), offset: offset)
                 
             case .Press:
                 break

@@ -20,7 +20,7 @@ public struct ConstantAngle : RuntimeRotationAngle, Labeled {
     }
     
     public func getDescription(analyzer: Analyzer) -> String {
-        return "\(angle.percent)%"
+        return String(format: "%.2f%%", angle.percent)
     }
     
     public func isDegenerated() -> Bool {

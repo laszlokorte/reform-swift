@@ -26,7 +26,7 @@ class ProcedureController : NSViewController {
     }
 
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureEvaluated", object: nil)
     }
 
     dynamic func procedureChanged() {
@@ -80,7 +80,6 @@ extension ProcedureController : NSOutlineViewDelegate {
     func tableViewSelectionDidChange(aNotification: NSNotification) {
         if !cycle, let index = tableView?.selectedRow {
             procedureViewModel?.instructionFocusChanger.setFocus(instructions[index].node)
-            print(instructions[index].node)
         }
     }
 }

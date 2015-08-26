@@ -29,7 +29,7 @@ class InstructionFocusChanger {
     }
 }
 
-class ProcedureChangeProcessor {
+class ProcedureProcessor {
     let picture : Picture
     let runtime: Runtime
     let analyzer : Analyzer
@@ -57,7 +57,7 @@ class ProcedureChangeProcessor {
         //        }
 
         toolController.currentTool.refresh()
-        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: picture.procedure)
+    NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
     }
 }
 
@@ -103,7 +103,7 @@ class PictureSession {
     let rotationTool : RotateTool
     let scalingTool : ScaleTool
 
-    let procedureChangeProcessor : ProcedureChangeProcessor
+    let procedureProcessor : ProcedureProcessor
     let instructionFocusChanger : InstructionFocusChanger
 
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {
@@ -141,11 +141,11 @@ class PictureSession {
         self.toolController = ToolController()
 
 
-        self.procedureChangeProcessor = ProcedureChangeProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController)
+        self.procedureProcessor = ProcedureProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController)
 
-        self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus, callback: self.procedureChangeProcessor.trigger)
+        self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus, callback: self.procedureProcessor.trigger)
 
-        self.instructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureChangeProcessor.trigger)
+        self.instructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureProcessor.trigger)
         self.selectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.stageUI.selectionUI)
 
 
@@ -172,7 +172,7 @@ class PictureSession {
     }
 
     func refresh() {
-        self.procedureChangeProcessor.trigger()
+        self.procedureProcessor.trigger()
     }
 
     var tool : Tool {

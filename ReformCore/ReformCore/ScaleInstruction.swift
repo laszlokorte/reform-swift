@@ -58,11 +58,12 @@ public struct ScaleInstruction : Instruction {
         switch axis {
         case .None:
             targetName = formName
-        case .Named(let axisName):
+        case .Named(let axisName, _, _):
             targetName = "\(formName)'s \(axisName)"
         }
+        let factorLabel = factor.getDescription(analyzer)
         
-        return  "Scale \(targetName) around \(fixPoint.getDescription(analyzer)) by \(factor)"
+        return  "Scale \(targetName) around \(fixPoint.getDescription(analyzer)) by \(factorLabel)"
     }
     
     public func analyze(analyzer: Analyzer) {

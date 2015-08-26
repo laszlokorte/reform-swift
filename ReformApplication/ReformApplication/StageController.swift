@@ -56,7 +56,7 @@ class StageController : NSViewController {
     }
     
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureEvaluated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "toolChanged", name:"ToolChanged", object: nil)
 
         if let canvas = canvas {

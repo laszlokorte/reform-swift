@@ -21,7 +21,7 @@ public struct ConstantScaleFactor : RuntimeScaleFactor, Labeled {
     }
     
     public func getDescription(analyzer: Analyzer) -> String {
-        return "\(factor*100)%"
+        return String(format: "%.2f%%", factor * 100)
     }
     
     public func isDegenerated() -> Bool {

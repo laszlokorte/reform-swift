@@ -19,6 +19,17 @@ public struct Entity {
     public let handles : [Handle]
     public let points : [EntityPoint]
     public let outline: SegmentPath
+
+    init(formType: Form.Type, id: FormIdentifier, label: String, type: EntityType, hitArea: HitArea, handles: [Handle], points: [EntityPoint], outline: SegmentPath) {
+        self.formType = formType
+        self.id = id
+        self.label = label
+        self.type = type
+        self.hitArea = hitArea
+        self.handles = handles
+        self.points = points
+        self.outline = outline
+    }
 }
 
 extension Entity : CustomDebugStringConvertible {

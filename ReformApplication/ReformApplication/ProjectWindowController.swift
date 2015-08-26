@@ -93,54 +93,8 @@ class ProjectWindowController : NSWindowController {
 
         pictureSession.refresh()
     }
-    
-
-    @IBAction func selectToolCreateLine(sender: AnyObject) {
-        pictureSession.tool = pictureSession.createLineTool
-    }
-
-    @IBAction func selectToolCreateRectangle(sender: AnyObject) {
-        pictureSession.tool = pictureSession.createRectTool
-    }
-
-    @IBAction func selectToolCreateCircle(sender: AnyObject) {
-        pictureSession.tool = pictureSession.createCircleTool
-    }
-
-    @IBAction func selectToolCreatePie(sender: AnyObject) {
-        pictureSession.tool = pictureSession.createPieTool
-
-    }
-
-    @IBAction func selectToolCreateArc(sender: AnyObject) {
-        pictureSession.tool = pictureSession.createArcTool
-
-    }
-
-    @IBAction func selectToolMove(sender: AnyObject) {
-        pictureSession.tool = pictureSession.moveTool
-    }
-
-
-    @IBAction func selectToolMorph(sender: AnyObject) {
-        pictureSession.tool = pictureSession.morphTool
-
-    }
-
-
-    @IBAction func selectToolRotate(sender: AnyObject) {
-        pictureSession.tool = pictureSession.rotationTool
-
-    }
-
-
-    @IBAction func selectToolScale(sender: AnyObject) {
-        pictureSession.tool = pictureSession.scalingTool
-
-    }
 
     override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
-
         if let _ = ToolbarIdentifier(rawValue: theItem.itemIdentifier) {
             return true
         } else {
@@ -149,6 +103,33 @@ class ProjectWindowController : NSWindowController {
     }
 
     @IBAction func toolbarButton(sender: NSToolbarItem) {
+        guard let id = ToolbarIdentifier(rawValue: sender.itemIdentifier) else {
+            return
+        }
+
+        switch id {
+        case .LineToolItem:
+            pictureSession.tool = pictureSession.createLineTool
+        case .RectangleToolItem:
+            pictureSession.tool = pictureSession.createRectTool
+        case .CircleToolItem:
+            pictureSession.tool = pictureSession.createCircleTool
+        case .PieToolItem:
+            pictureSession.tool = pictureSession.createPieTool
+        case .ArcToolItem:
+            pictureSession.tool = pictureSession.createArcTool
+        case .SelectionToolItem:
+            pictureSession.tool = pictureSession.selectionTool
+        case .MoveToolItem:
+            pictureSession.tool = pictureSession.moveTool
+        case .RotateToolItem:
+            pictureSession.tool = pictureSession.rotationTool
+        case .ScaleToolItem:
+            pictureSession.tool = pictureSession.scalingTool
+        case .MorphToolItem:
+            pictureSession.tool = pictureSession.morphTool
+
+        }
     }
 
     enum ToolbarIdentifier : String {
@@ -158,6 +139,7 @@ class ProjectWindowController : NSWindowController {
         case PieToolItem
         case ArcToolItem
 
+        case SelectionToolItem
         case MoveToolItem
         case RotateToolItem
         case ScaleToolItem

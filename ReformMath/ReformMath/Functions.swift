@@ -17,6 +17,10 @@ public func angle(vector: Vec2d) -> Angle {
     return normalize360(Angle(radians: atan2(vector.y,vector.x)))
 }
 
+public func angleBetween(vector a: Vec2d, vector b: Vec2d) -> Angle {
+    return normalize360(angle(a) - angle(b))
+}
+
 public func clamp<T:Comparable>(value: T, between: T, and: T) -> T {
     return max(between, min(value, and))
 }
