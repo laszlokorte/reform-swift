@@ -106,6 +106,7 @@ final public class SnapshotCollector : RuntimeListener {
 
             NSColor.grayColor().setFill()
             NSColor.grayColor().set()
+            CGContextSetLineWidth(context, 9)
             for path in paths {
                 path.draw(context)
                 CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
