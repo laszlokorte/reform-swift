@@ -15,7 +15,7 @@ public protocol DataSet {
 public struct ReferenceId : Hashable {
     let id : Int
     
-    init(_ id: Int) {
+    public init(_ id: Int) {
         self.id = id
     }
     

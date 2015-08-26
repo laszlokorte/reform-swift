@@ -14,7 +14,7 @@ public class IdentifierSequence<T:SequenceGeneratable> {
     var sequenceValue : Int64
     let type : T.Type
     
-    public init(type: T.Type, initialValue : Int64) {
+    public init(type: T.Type = T.self, initialValue : Int64) {
         self.sequenceValue = initialValue
         self.type = type
     }

@@ -20,9 +20,9 @@ public struct GlompPoint : RuntimePoint, Labeled, Equatable {
     
     public func getDescription(analyzer: Analyzer) -> String {
         let formName = analyzer.get(formId)?.name ?? "???"
-        let value = analyzer.getExpressionPrinter().toString(lerp)
+        let value = analyzer.getExpressionPrinter().toString(lerp) ?? "??"
         
-        return "#\(value) along \(formName)"
+        return "\(value) along \(formName)"
     }
     
     public func getPositionFor(runtime: Runtime) -> Vec2d? {

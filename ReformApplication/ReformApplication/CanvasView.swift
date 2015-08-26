@@ -79,8 +79,12 @@ extension CanvasView {
     
     private func fromPoint(point: NSPoint) -> Vec2d {
         let pos = convertPoint(point, fromView: nil)
-        
-        return Vec2d(x: Double(pos.x-25), y: Double(pos.y-25))
+
+        let offsetX = (bounds.width-CGFloat(canvasSize.x))/2.0
+        let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
+
+
+        return Vec2d(x: Double(pos.x-offsetX), y: Double(pos.y-offsetY))
     }
     
     override func mouseDown(theEvent: NSEvent) {

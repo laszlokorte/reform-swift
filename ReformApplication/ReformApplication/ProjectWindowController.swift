@@ -17,73 +17,27 @@ import ReformTools
 
 class ProjectWindowController : NSWindowController {
 
-    var procedure = Procedure()
-    lazy var picture : ReformCore.Picture = ReformCore.Picture(identifier : PictureIdentifier(0), name: "Untiled", size: (580,330), procedure: self.procedure)
+
+    lazy var picture : ReformCore.Picture = ReformCore.Picture(identifier : PictureIdentifier(0), name: "Untiled", size: (580,330), data: self.data, procedure: self.procedure)
 
     lazy var project : Project = Project(pictures: self.picture)
-
-    let sheet = BaseSheet()
-    lazy var expressionPrinter : ExpressionPrinter = ExpressionPrinter(sheet: self.sheet)
-
-
-    lazy var analyzer : DefaultAnalyzer = DefaultAnalyzer(expressionPrinter : self.expressionPrinter)
-    let runtime = DefaultRuntime()
-
-
-    let formIdSequence = IdentifierSequence(type: FormIdentifier.self, initialValue: 100)
-
-    let instructionFocus = InstructionFocus()
-    let formSelection = FormSelection()
-    let stage = Stage()
-
-    let selectionUI = SelectionUI()
-    let snapUI = SnapUI()
-    let grabUI = GrabUI()
-    let pivotUI = PivotUI()
-    let handleUI = HandleUI()
-    let cropUI = CropUI()
-
-    lazy var pointSnapper : PointSnapper = PointSnapper(stage: self.stage, snapUI: self.snapUI, radius: 10)
-    lazy var pointGrabber : PointGrabber = PointGrabber(stage: self.stage, grabUI: self.grabUI, radius: 10)
-    lazy var handleGrabber : HandleGrabber = HandleGrabber(stage: self.stage, handleUI: self.handleUI, radius: 10)
-
-    lazy var streightener : Streightener = Streightener()
-    lazy var aligner : Aligner = Aligner()
-
-    lazy var instructionCreator : InstructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureChanged)
-
-    lazy var selectionTool : SelectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.selectionUI)
-
-
-    lazy var createLineTool : CreateFormTool = CreateFormTool(formType: LineForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
-
-    lazy var createRectTool : CreateFormTool = CreateFormTool(formType: RectangleForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
-
-    lazy var createCircleTool : CreateFormTool = CreateFormTool(formType: CircleForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
-
-    lazy var createPieTool : CreateFormTool = CreateFormTool(formType: PieForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
-
-    lazy var createArcTool : CreateFormTool = CreateFormTool(formType: ArcForm.self, idSequence: self.formIdSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
-
-    lazy var moveTool : MoveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
-
-    lazy var morphTool : MorphTool = MorphTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
-
-    lazy var rotationTool : RotateTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.pivotUI)
-
-
-    lazy var scalingTool : ScaleTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.pivotUI)
-
-    let toolController = ToolController()
     
+
+
+    lazy var projectSession : ProjectSession = ProjectSession(project: self.project)
+
+
+    lazy var pictureSession : PictureSession = PictureSession(projectSession: self.projectSession, picture: self.picture)
+
+    var procedure = Procedure()
+    let data = BaseSheet()
+
 
     override func windowDidLoad() {
         if let screenFrame = window?.screen?.frame {
             window?.setFrame(NSRect(x:25, y:100, width: screenFrame.width-50, height: screenFrame.height-120), display: true)
             window?.center()
         }
-
-        toolController.currentTool = rotationTool
 
         let rectangleForm = RectangleForm(id: FormIdentifier(98), name: "Rectangle 1")
 
@@ -129,84 +83,59 @@ class ProjectWindowController : NSWindowController {
 
         procedure.root.append(child: node4)
 
-        instructionFocus.current = node4
+        pictureSession.instructionFocus.current = node4
 
         if let pictureController = contentViewController as? PictureController {
 
-            let stageUI = StageUI(selectionUI: selectionUI, snapUI: snapUI, grabUI: grabUI, handleUI: handleUI, pivotUI: pivotUI, cropUI: cropUI)
-            pictureController.setup(stage, analyzer: analyzer, runtime: runtime, instructionFocus: instructionFocus, toolController: toolController, stageUI: stageUI)
+            pictureController.representedObject = pictureSession
         }
 
-        procedureChanged()
+        pictureSession.refresh()
     }
     
 
-
-    func procedureChanged() {
-        procedure.analyzeWith(analyzer)
-        procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
-
-        //        print("Entities:")
-        //        for e in stage.entities {
-        //            print(e)
-        //        }
-
-        //        print("Final Shapes:")
-        //        for s in stage.currentShapes {
-        //            print(s)
-        //        }
-
-        toolController.currentTool.refresh()
-
-    NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: procedure)
-    }
-
     @IBAction func selectToolCreateLine(sender: AnyObject) {
-        toolController.currentTool = createLineTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.createLineTool
     }
 
     @IBAction func selectToolCreateRectangle(sender: AnyObject) {
-        toolController.currentTool = createRectTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.createRectTool
     }
 
     @IBAction func selectToolCreateCircle(sender: AnyObject) {
-        toolController.currentTool = createCircleTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.createCircleTool
     }
 
     @IBAction func selectToolCreatePie(sender: AnyObject) {
-        toolController.currentTool = createPieTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.createPieTool
+
     }
 
     @IBAction func selectToolCreateArc(sender: AnyObject) {
-        toolController.currentTool = createArcTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.createArcTool
+
     }
 
     @IBAction func selectToolMove(sender: AnyObject) {
-        toolController.currentTool = moveTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.moveTool
     }
 
 
     @IBAction func selectToolMorph(sender: AnyObject) {
-        toolController.currentTool = morphTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.morphTool
+
     }
 
 
     @IBAction func selectToolRotate(sender: AnyObject) {
-        toolController.currentTool = rotationTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.rotationTool
+
     }
 
 
     @IBAction func selectToolScale(sender: AnyObject) {
-        toolController.currentTool = scalingTool
-        NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+        pictureSession.tool = pictureSession.scalingTool
+
     }
 
     override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {

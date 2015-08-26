@@ -12,4 +12,8 @@ public class InstructionFocus {
     public var current : InstructionNode?
     
     public init() {}
+
+    public func isCurrent(node : Evaluatable) -> Bool {
+        return current === node
+    }
 }

@@ -6,6 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+import ReformExpression
+
 public struct PictureIdentifier : Hashable, SubCallId {
     public typealias CallType = Picture
     private let id : Int64
@@ -27,13 +29,15 @@ final public class Picture {
     public var name : String
     public var size : (Int, Int)
     public let procedure  : Procedure
+    public let data : Sheet
 
 
-    public init(identifier : PictureIdentifier, name: String, size: (Int, Int), procedure : Procedure) {
+    public init(identifier : PictureIdentifier, name: String, size: (Int, Int), data: Sheet, procedure : Procedure) {
         self.identifier = identifier
         self.name = name
         self.procedure = procedure
         self.size = size
+        self.data = data
     }
     
 }

@@ -23,62 +23,41 @@ struct StageUI {
     let pivotUI : PivotUI
     let cropUI : CropUI
 
+    init() {
+        self.selectionUI = SelectionUI()
+        self.snapUI = SnapUI()
+        self.grabUI = GrabUI()
+        self.handleUI = HandleUI()
+        self.pivotUI = PivotUI()
+        self.cropUI = CropUI()
+    }
 }
 
 @objc
 class StageController : NSViewController {
 
-    private var stage : Stage?
-    private var analyzer : Analyzer?
-    private var runtime : Runtime?
-    private var collector : StageCollector?
-    private var instructionFocus : InstructionFocus?
-    private var toolController : ToolController?
-    private var stageUI : StageUI?
-
-    func setup(stage: Stage, analyzer: Analyzer, runtime: Runtime, instructionFocus : InstructionFocus, toolController: ToolController, stageUI : StageUI) {
-        self.stage = stage
-        self.analyzer = analyzer
-        self.runtime = runtime
-        self.instructionFocus = instructionFocus
-        self.toolController = toolController
-        self.stageUI = stageUI
-
-        let collector = StageCollector(stage: stage, analyzer: analyzer) {
-            Swift.print("stage colelctor working")
-            return instructionFocus.current === $0 as? InstructionNode
+    override var representedObject : AnyObject? {
+        didSet {
+            if let stageModel = representedObject as? StageViewModel,
+                canvas = canvas {
+                    configureCanvas(canvas, withStage: stageModel)
+            }
         }
-
-        self.collector = collector
-
-        runtime.listeners.append(collector)
-
-        canvas?.toolController = toolController
-
-        canvas?.renderers.append(SelectionUIRenderer(selectionUI: stageUI.selectionUI, stage: stage))
-
-
-        canvas?.renderers.append(SnapUIRenderer(snapUI: stageUI.snapUI, stage: stage))
-
-        canvas?.renderers.append(CropUIRenderer(cropUI: stageUI.cropUI))
-
-
-        canvas?.renderers.append(GrabUIRenderer(grabUI: stageUI.grabUI))
-        canvas?.renderers.append(HandleUIRenderer(handleUI: stageUI.handleUI))
-
-        canvas?.renderers.append(PivotUIRenderer(pivotUI: stageUI.pivotUI))
-
-        Swift.print("setup")
-
     }
 
 
-    @IBOutlet var canvas : CanvasView?
+    @IBOutlet var canvas : CanvasView? {
+        didSet {
+            if let stageModel = representedObject as? StageViewModel,
+                canvas = canvas {
+                    configureCanvas(canvas, withStage: stageModel)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureChanged", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "toolChanged", name:"ToolChanged", object: nil)
-        Swift.print("did load")
 
         if let canvas = canvas {
         
@@ -88,15 +67,27 @@ class StageController : NSViewController {
             
             canvas.addTrackingArea(trackingArea)
         }
+    }
 
+    func configureCanvas(canvas: CanvasView, withStage stageModel: StageViewModel) {
+        canvas.toolController = stageModel.toolController
+
+        canvas.renderers = [
+            SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage),
+            SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage),
+            CropUIRenderer(cropUI: stageModel.stageUI.cropUI),
+            GrabUIRenderer(grabUI: stageModel.stageUI.grabUI),
+            HandleUIRenderer(handleUI: stageModel.stageUI.handleUI),
+            PivotUIRenderer(pivotUI: stageModel.stageUI.pivotUI)
+
+        ]
     }
 
     dynamic func procedureChanged() {
-        if let stage = stage {
-            canvas?.shapes = stage.currentShapes
-            canvas?.canvasSize = stage.size
+        if let stageModel = representedObject as? StageViewModel {
+            canvas?.shapes = stageModel.stage.currentShapes
+            canvas?.canvasSize = stageModel.stage.size
             canvas?.needsDisplay = true
-            Swift.print("procedure changed\(stage.size)")
         }
     }
 

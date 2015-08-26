@@ -116,7 +116,7 @@ final public class ExpressionPrinter {
         case .IntValue(let int):
             return "\(int)"
         case .DoubleValue(let double):
-            return "\(double)"
+            return String(format: "%.2f", double)
         case .StringValue(let string):
             return "\"\(string)\""
         case .ColorValue(let r, let g, let b, let a):

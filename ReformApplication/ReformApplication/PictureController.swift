@@ -17,25 +17,61 @@ import ReformTools
 
 class PictureController : NSViewController {
 
-    @IBOutlet var stageController : StageController?
 
-    private var stage : Stage?
-    private var analyzer : Analyzer?
-    private var runtime : Runtime?
-    private var instructionFocus : InstructionFocus?
-    private var toolController : ToolController?
-    private var stageUI : StageUI?
+    override var representedObject: AnyObject? {
+        didSet {
+            guard let pictureSession = representedObject as? PictureSession else {
+                return
+            }
+            if let stageController = stageController
+            {
+                updateStage(stageController, withSession: pictureSession)
+            }
 
-    func setup(stage: Stage, analyzer: Analyzer, runtime: Runtime, instructionFocus : InstructionFocus, toolController: ToolController, stageUI : StageUI) {
-
-        if let stageController = stageController {
-            stageController.setup(stage, analyzer: analyzer, runtime: runtime, instructionFocus: instructionFocus, toolController: toolController, stageUI: stageUI)
+            if let procedureController = procedureController
+            {
+                print("wuhu")
+                updateProcedure(procedureController, withSession: pictureSession)
+            }
         }
-
     }
 
+    var stageController : StageController? {
+        didSet {
+            if let pictureSession = representedObject as? PictureSession,
+                stageController = stageController {
+                    updateStage(stageController, withSession: pictureSession)
+            }
+        }
+    }
+
+    var procedureController : ProcedureController? {
+        didSet {
+            if let pictureSession = representedObject as? PictureSession,
+                procedureController = procedureController {
+                    updateProcedure(procedureController, withSession: pictureSession)
+            }
+        }
+    }
+
+    func updateStage(stage: StageController, withSession pictureSession: PictureSession) {
+        stage.representedObject = StageViewModel(stage: pictureSession.stage, stageUI: pictureSession.stageUI, toolController: pictureSession.toolController)
+    }
+
+    func updateProcedure(procedureController: ProcedureController, withSession pictureSession: PictureSession) {
+        procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus)
+    }
+
+
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        self.stageController = segue.destinationController as? StageController
+
+        if let s = segue.destinationController as? StageController {
+            self.stageController = s
+        }
+
+        if let p = segue.destinationController as? ProcedureController {
+            self.procedureController = p
+        }
 
     }
 

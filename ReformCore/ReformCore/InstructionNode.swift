@@ -25,6 +25,32 @@ public class InstructionNode {
 }
 
 extension InstructionNode {
+    public var isGroup : Bool {
+        if case .Group = content {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    public var isEmpty : Bool {
+        if case .Null = content {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    public var target : FormIdentifier? {
+        guard case .Single(let instruction) = content else {
+            return nil
+        }
+
+        return instruction.target
+    }
+}
+
+extension InstructionNode {
     public var previous : InstructionNode? {
         guard let parent = parent else {
             return nil
@@ -125,8 +151,10 @@ extension InstructionNode : Analyzable {
             break
         case .Single(let instruction):
             analyzer.publish(self, label: instruction.getDescription(analyzer))
+            instruction.analyze(analyzer)
         case .Group(let group, let children):
             analyzer.publish(self, label: group.getDescription(analyzer)) {
+                group.analyze(analyzer)
                 for c in children {
                     c.analyze(analyzer)
                 }

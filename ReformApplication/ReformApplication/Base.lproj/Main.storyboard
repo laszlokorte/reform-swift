@@ -865,7 +865,6 @@
                     </splitView>
                 </viewController>
                 <customObject id="aPK-8P-8m9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="24w-Bw-G7o"/>
             </objects>
             <point key="canvasLocation" x="63" y="866"/>
         </scene>
@@ -1067,7 +1066,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="thumbnailCell" id="dsB-2R-lHb">
+                                                        <tableCellView identifier="thumbnailCell" id="dsB-2R-lHb" customClass="ProcedureSingleCellView" customModule="ReformApplication" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="486" height="77"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1098,10 +1097,12 @@
                                                                 <constraint firstItem="Uys-HT-WxB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dsB-2R-lHb" secondAttribute="top" constant="5" id="yyv-hJ-3bU"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="indentConstraint" destination="Fyb-tA-C39" id="xd2-Na-h0y"/>
+                                                                <outlet property="labelField" destination="Zkc-lx-sSz" id="yIu-Fk-33i"/>
                                                                 <outlet property="textField" destination="Zkc-lx-sSz" id="Ydd-Ht-i1J"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="groupCell" id="SGW-YC-Zgm">
+                                                        <tableCellView identifier="groupCell" id="SGW-YC-Zgm" customClass="ProcedureGroupCellView" customModule="ReformApplication" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="80" width="486" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1120,6 +1121,8 @@
                                                                 <constraint firstItem="ggG-dT-IQB" firstAttribute="centerY" secondItem="SGW-YC-Zgm" secondAttribute="centerY" id="xia-a7-sIf"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="indentConstraint" destination="sbA-5h-aii" id="5aO-zq-sl3"/>
+                                                                <outlet property="labelField" destination="ggG-dT-IQB" id="1RF-xp-CM1"/>
                                                                 <outlet property="textField" destination="ggG-dT-IQB" id="Zao-rY-hSp"/>
                                                             </connections>
                                                         </tableCellView>
@@ -1337,17 +1340,17 @@
             <objects>
                 <viewController id="DG2-kz-iLd" userLabel="Stage" customClass="StageController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <customView key="view" id="IjJ-iQ-isN">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="362"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="487"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="vDA-zV-cBj">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="362"/>
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="487"/>
                                 <clipView key="contentView" id="g7B-av-OYX" customClass="CenteredClipView" customModule="ReformApplication" customModuleProvider="target">
-                                    <rect key="frame" x="1" y="1" width="498" height="360"/>
+                                    <rect key="frame" x="1" y="1" width="498" height="485"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="281" width="450" height="302"/>
+                                            <rect key="frame" x="49" y="49" width="400" height="387"/>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.20880448190789477" alpha="1" colorSpace="calibratedWhite"/>
@@ -1356,12 +1359,12 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="58L-Eb-ieO"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="IHc-n2-JkS"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="YES" id="hnn-4r-jtF">
-                                    <rect key="frame" x="1" y="285" width="434" height="15"/>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="1" horizontal="YES" id="hnn-4r-jtF">
+                                    <rect key="frame" x="1" y="346" width="483" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="NO" id="F3w-72-j3g">
-                                    <rect key="frame" x="435" y="1" width="15" height="284"/>
+                                    <rect key="frame" x="484" y="1" width="15" height="345"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1379,7 +1382,7 @@
                 </viewController>
                 <customObject id="mpJ-EO-JWn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="924"/>
+            <point key="canvasLocation" x="789" y="986.5"/>
         </scene>
     </scenes>
     <resources>

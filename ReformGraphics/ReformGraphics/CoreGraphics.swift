@@ -75,7 +75,7 @@ public extension Shape {
 }
 
 extension Path {
-    func draw(context: CGContext) {
+    public func draw(context: CGContext) {
         for segment in self {
             context
             switch segment {

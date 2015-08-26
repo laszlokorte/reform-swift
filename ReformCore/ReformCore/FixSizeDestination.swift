@@ -31,8 +31,10 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
     
     public func getDescription(analyzer: Analyzer) -> String {
         let fromLabel = from.getDescription(analyzer)
-        
-        return "From \(fromLabel) to \(delta.x), \(delta.y)"
+        let x = String(format: "%.2f", delta.x)
+        let y = String(format: "%.2f", delta.y)
+
+        return "From \(fromLabel) to \(x) Horizontally, \(y) Vertically"
     }
     
     public func isDegenerated() -> Bool {
