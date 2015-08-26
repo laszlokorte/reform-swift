@@ -32,6 +32,6 @@ class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
 
     func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
         indentConstraint?.constant = CGFloat(15 * row.depth)
-        labelField?.stringValue = row.label
+        labelField?.stringValue = row.node.isEmpty ? "" : row.label
     }
 }

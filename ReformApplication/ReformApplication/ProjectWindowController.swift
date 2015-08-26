@@ -57,6 +57,7 @@ class ProjectWindowController : NSWindowController {
 
         let node1 = InstructionNode(instruction: createInstruction)
 
+        procedure.root.append(child: InstructionNode())
         procedure.root.append(child: node1)
 
         let moveInstruction = TranslateInstruction(formId: rectangleForm.identifier, distance: RelativeDistance(

@@ -58,12 +58,15 @@ extension ProcedureController : NSTableViewDataSource {
 
 extension ProcedureController : NSOutlineViewDelegate {
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return instructions[row].isGroup ? 25 : 70
+        let outlineRow = instructions[row]
+
+        return outlineRow.isGroup || outlineRow.node.isEmpty ? 25 : 70
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        
-        let cellId = instructions[row].isGroup ? "groupCell" : "thumbnailCell"
+
+        let outlineRow = instructions[row]
+        let cellId = outlineRow.isGroup || outlineRow.node.isEmpty ? "groupCell" : "thumbnailCell"
         let cellView = tableView.makeViewWithIdentifier(cellId, owner: self)
         
         if let cell = cellView as? ProcedureCellView, procedureViewModel = procedureViewModel {
