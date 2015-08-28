@@ -162,7 +162,7 @@ final public class ExpressionPrinter {
             }
         case .Call(let function, let params):
             if let fname = functionName(function) {
-                let pstr = ", ".join(params.flatMap({ toString($0) }))
+                let pstr = params.flatMap({ toString($0) }).joinWithSeparator(", ")
                 return "\(fname)(\(pstr))"
             } else {
                 return nil

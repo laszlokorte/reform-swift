@@ -249,7 +249,7 @@ func sortDefinitions(definitions: [Definition]) -> (Set<ReferenceId>, [Definitio
         }
     }
     
-    return (duplicates, topologicallySorted(nodes.values.array).map { node -> Definition in
+    return (duplicates, topologicallySorted(Array(nodes.values)).map { node -> Definition in
         return node.data
     })
 }
