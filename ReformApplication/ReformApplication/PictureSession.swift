@@ -57,7 +57,13 @@ class ProcedureProcessor {
         //        }
 
         toolController.currentTool.refresh()
-    NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+    }
+
+    func triggerEval() {
+        picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
+        toolController.currentTool.refresh()
+        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
     }
 }
 
@@ -172,7 +178,7 @@ class PictureSession {
 
         self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
 
-        self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture, callback: self.procedureProcessor.trigger)
+        self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture, callback: self.procedureProcessor.triggerEval)
 
         self.toolController.currentTool = selectionTool
     }
