@@ -46,6 +46,7 @@
 		F2A104CB1B821DD200E97C6B /* HandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CA1B821DD200E97C6B /* HandleUI.swift */; };
 		F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CC1B821E5700E97C6B /* SnapUI.swift */; };
 		F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CE1B821F0200E97C6B /* GrabUI.swift */; };
+		F2DF635F1B91E3F500A2EFB6 /* CropGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		F2A104CA1B821DD200E97C6B /* HandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleUI.swift; sourceTree = "<group>"; };
 		F2A104CC1B821E5700E97C6B /* SnapUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapUI.swift; sourceTree = "<group>"; };
 		F2A104CE1B821F0200E97C6B /* GrabUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabUI.swift; sourceTree = "<group>"; };
+		F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropGrabber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				F222AF361B85FCBE005F71A1 /* PointGrabber.swift */,
 				F222AF381B8768BA005F71A1 /* HandleGrabber.swift */,
 				F222AF481B87A621005F71A1 /* PivotSwitcher.swift */,
+				F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				F2A104B61B821A8C00E97C6B /* PreviewTool.swift in Sources */,
 				F222AF201B83B68D005F71A1 /* PointType.swift in Sources */,
 				F2A104A81B82149A00E97C6B /* ToolController.swift in Sources */,
+				F2DF635F1B91E3F500A2EFB6 /* CropGrabber.swift in Sources */,
 				F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */,
 				F2A104BA1B821AD900E97C6B /* ScaleTool.swift in Sources */,
 			);

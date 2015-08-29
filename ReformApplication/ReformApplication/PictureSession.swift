@@ -84,6 +84,7 @@ class PictureSession {
     let pointSnapper : PointSnapper
     let pointGrabber : PointGrabber
     let handleGrabber : HandleGrabber
+    let cropGrabber : CropGrabber
 
     let streightener : Streightener
     let aligner : Aligner
@@ -102,6 +103,8 @@ class PictureSession {
     let morphTool : MorphTool
     let rotationTool : RotateTool
     let scalingTool : ScaleTool
+
+    let cropTool : CropTool
 
     let procedureProcessor : ProcedureProcessor
     let instructionFocusChanger : InstructionFocusChanger
@@ -134,6 +137,7 @@ class PictureSession {
         self.pointSnapper = PointSnapper(stage: self.stage, snapUI: self.stageUI.snapUI, radius: 10)
         self.pointGrabber = PointGrabber(stage: self.stage, grabUI: self.stageUI.grabUI, radius: 10)
         self.handleGrabber = HandleGrabber(stage: self.stage, handleUI: self.stageUI.handleUI, radius: 10)
+        self.cropGrabber = CropGrabber(stage: stage, cropUI: self.stageUI.cropUI, radius: 10)
 
         self.streightener = Streightener()
         self.aligner = Aligner()
@@ -167,6 +171,8 @@ class PictureSession {
 
 
         self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
+
+        self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture, callback: self.procedureProcessor.trigger)
 
         self.toolController.currentTool = selectionTool
     }

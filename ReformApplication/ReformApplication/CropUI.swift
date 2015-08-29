@@ -17,7 +17,7 @@ struct CropUIRenderer : Renderer {
         CGContextSetRGBFillColor(context, 0.23, 0.85, 0.3, 1)
         CGContextSetRGBStrokeColor(context, 0.18, 0.5, 0.24, 1)
         CGContextSetLineWidth(context, 2)
-        let dotSize : Double = 12
+        let dotSize : Double = 9
         
         
         switch cropUI.state {
@@ -25,16 +25,21 @@ struct CropUIRenderer : Renderer {
             return
         case .Show(let points):
             for p in points {
-                drawDotAt(context, position: p.position, size: dotSize*1.5)
+                drawDotAt(context, position: p.position, size: dotSize)
             }
-            
+            CGContextDrawPath(context, .FillStroke)
+
+
             break
         case .Active(let active, let points):
             for p in points {
-                drawDotAt(context, position: p.position, size: dotSize*1.5)
+                drawDotAt(context, position: p.position, size: dotSize)
             }
-            
+            CGContextDrawPath(context, .FillStroke)
+
             drawDotAt(context, position: active.position, size: dotSize*1.5)
+            CGContextDrawPath(context, .FillStroke)
+
             break
             
         }

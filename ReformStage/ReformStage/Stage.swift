@@ -27,3 +27,16 @@ public struct IdentifiedShape {
     public let id : FormIdentifier
     public let shape : Shape
 }
+
+extension Stage {
+    private static let allSides : [CropSide] = [
+        .Top, .Right, .Bottom, .Left,
+        .TopLeft, .TopRight, .BottomLeft, .BottomRight
+    ]
+
+    public var cropPoints : [CropPoint] {
+        return Stage.allSides.map { side in
+            return CropPoint(position: size * side.vector / 2 + size/2, offset: side)
+        }
+    }
+}

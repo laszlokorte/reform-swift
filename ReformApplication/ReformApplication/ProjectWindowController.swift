@@ -128,6 +128,8 @@ class ProjectWindowController : NSWindowController {
             pictureSession.tool = pictureSession.scalingTool
         case .MorphToolItem:
             pictureSession.tool = pictureSession.morphTool
+        case .CropToolItem:
+            pictureSession.tool = pictureSession.cropTool
 
         }
     }
@@ -144,6 +146,8 @@ class ProjectWindowController : NSWindowController {
         case RotateToolItem
         case ScaleToolItem
         case MorphToolItem
-    }
-    
+
+        case CropToolItem
+}
+
 }

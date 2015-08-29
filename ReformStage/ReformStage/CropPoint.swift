@@ -11,6 +11,11 @@ import ReformMath
 public struct CropPoint {
     public let position : Vec2d
     public let offset : CropSide
+
+    public init(position: Vec2d, offset: CropSide) {
+        self.position = position
+        self.offset = offset
+    }
 }
 
 public enum CropSide : Hashable {
@@ -22,6 +27,19 @@ public enum CropSide : Hashable {
     case TopRight
     case BottomLeft
     case BottomRight
+
+    public var vector : Vec2d {
+        switch self {
+        case .Top: return Vec2d(x: 0,y: 1)
+        case .Left: return Vec2d(x: -1,y: 0)
+        case .Right: return Vec2d(x: 1,y: 0)
+        case .Bottom: return Vec2d(x: 0,y: -1)
+        case .TopLeft: return Vec2d(x: -1,y: 1)
+        case .TopRight: return Vec2d(x: 1,y: 1)
+        case .BottomLeft: return Vec2d(x: -1,y: -1)
+        case .BottomRight: return Vec2d(x: 1,y: -1)
+        }
+    }
 }
 
 extension CropPoint : Hashable {

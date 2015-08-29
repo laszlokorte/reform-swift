@@ -764,7 +764,7 @@
                                     <popUpButton key="view" id="vcP-b3-fKp">
                                         <rect key="frame" x="0.0" y="14" width="50" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="68C6A2D2-77E7-4E0A-B227-E964687F3EE4" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" selectedItem="loL-Lk-i5T" id="ezS-Nn-FMh">
+                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="5C678E98-228D-4A93-98B9-35F943DF0CE6" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" selectedItem="loL-Lk-i5T" id="ezS-Nn-FMh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="qao-IS-ECe">
@@ -864,7 +864,7 @@
                             </containerView>
                         </subviews>
                         <holdingPriorities>
-                            <real value="250"/>
+                            <real value="300"/>
                             <real value="250"/>
                         </holdingPriorities>
                         <connections>
@@ -1386,7 +1386,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="68C6A2D2-77E7-4E0A-B227-E964687F3EE4" width="1" height="1">
+        <image name="5C678E98-228D-4A93-98B9-35F943DF0CE6" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

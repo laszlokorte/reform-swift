@@ -7,42 +7,117 @@
 //
 
 import ReformMath
+import ReformCore
 import ReformStage
+
 
 public class CropTool : Tool {
     enum State
     {
         case Idle
-        case Hover
-        case Pressed
-    }
-    
-    var state : State = .Idle
-    let stage : Stage
-    let cropUI : CropUI
-    
-    public init(stage: Stage, cropUI: CropUI) {
-        self.stage = stage
-        self.cropUI = cropUI
+        case Cropping(cropPoint: CropPoint, oldSize: Vec2d, size: Vec2d, offset: Vec2d)
     }
 
-    
+    var state : State = .Idle
+
+    let picture : ReformCore.Picture
+    let stage : Stage
+    let cropGrabber : CropGrabber
+    let streightener : Streightener
+    let notifier : () -> ()
+
+    public init(stage: Stage, cropGrabber: CropGrabber, streightener: Streightener, picture: ReformCore.Picture, callback: ()->()) {
+        self.stage = stage
+        self.cropGrabber = cropGrabber
+        self.picture = picture
+
+        self.streightener = streightener
+        self.notifier = callback
+    }
+
     public func setUp() {
+        state = .Idle
+        cropGrabber.enable()
     }
-    
+
     public func tearDown() {
-        cropUI.state = .Hide
+        cropGrabber.disable()
+        state = .Idle
     }
-    
+
     public func refresh() {
+        cropGrabber.refresh()
     }
-    
+
     public func focusChange() {
     }
-    
+
     public func cancel() {
+        switch self.state {
+        case .Idle:
+            state = .Idle
+            cropGrabber.disable()
+        case .Cropping(_, let oldSize,_,_):
+            picture.size = (Int(oldSize.x), Int(oldSize.y))
+            notifier()
+            state = .Idle;
+        }
     }
-    
-    public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
+
+    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+
+        if modifier.isStreight {
+            streightener.enable()
+        } else {
+            streightener.disable()
+        }
+
+        switch state {
+        case .Idle:
+            switch input {
+            case .Move, .ModifierChange:
+                cropGrabber.searchAt(pos)
+            case .Press:
+                if let grabbedHandle = cropGrabber.current {
+                    state = .Cropping(cropPoint: grabbedHandle, oldSize: stage.size, size: stage.size, offset: pos - grabbedHandle.position)
+                }
+            case .Cycle:
+                cropGrabber.cycle()
+            case .Toggle, .Release:
+                break
+            }
+        case .Cropping(let grabbedHandle, let oldSize, _, let offset):
+            switch input {
+
+            case .ModifierChange:
+                fallthrough
+            case .Move:
+                let handlePosition = (grabbedHandle.offset.vector+1)/2 * oldSize
+                let cursorPos = pos - stage.size + oldSize
+                let o = grabbedHandle.offset.vector * (cursorPos-offset-handlePosition)
+                let newSize = oldSize + o
+                state = .Cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: newSize, offset: offset)
+
+            case .Press:
+                break
+            case .Release:
+                state = .Idle
+                process(.Move, atPosition: pos, withModifier: modifier)
+            case .Cycle:
+                break
+            case .Toggle:
+                streightener.invert()
+            }
+        }
+
+        publish()
+    }
+
+    private func publish() {
+        if case .Cropping(_, _, let size, _) = state {
+
+            picture.size = (Int(size.x), Int(size.y))
+            notifier()
+        }
     }
 }
