@@ -38,17 +38,19 @@ The following was already implement in java but has to be ported/adopted to the 
 - [ ] make forms markable as "guide"
 - [ ] Generate correct form names
 - [ ] EventFlow (stream api? notificationcenter?)
-- [ ] Analyzer: collect nodes
+- [x] Analyzer: collect nodes
 - [ ] Draw Arc
-- [ ] Selection Tool
+- [x] Selection Tool
 - [ ] Picture Tool / Recursion
 - [ ] Reduce Code duplication for Tools
-- [ ] Crop Tool
+- [x] Crop Tool
 - [ ] Preview Tool
 - [ ] Export Tool
 - [ ] SPACE-key preview
 - [ ] Procedure-View
-- [ ] snapshot collector
+  - [x] Show Instructions and Preview
+  - [ ] Show Errors
+- [x] snapshot collector
 - [ ] preview collector
 - [ ] Save/Load
 - [ ] Data-View
@@ -60,10 +62,11 @@ The following was already implement in java but has to be ported/adopted to the 
 - [ ] Non-Rotation-Handles (Arc, Pie)
 - [ ] Auto-center Circle
 - [ ] Formtype-dependent striehtening
-- [ ] fix responder-chain for toolbar
+- [x] fix responder-chain for toolbar
 - [ ] improve controller hirarchie/documentbased architecture
+  - [x] class to capture editor state
 - [ ] Window-Title/Filepath
-- [ ] Fix canvas clipping/Infinite Canvas
+- [x] Fix canvas clipping/Infinite Canvas
 - [ ] FormAttributes: Colors, Stroke
 - [ ] custom attributes
 - [ ] Tooltips
