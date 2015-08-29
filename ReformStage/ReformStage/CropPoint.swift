@@ -18,6 +18,12 @@ public struct CropPoint {
     }
 }
 
+extension CropPoint {
+    public var isCorner : Bool {
+        return offset.vector.x != 0 && offset.vector.y != 0
+    }
+}
+
 public enum CropSide : Hashable {
     case Top
     case Left

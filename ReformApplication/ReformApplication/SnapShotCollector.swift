@@ -28,7 +28,7 @@ func ==(lhs: InstructionNodeKey, rhs: InstructionNodeKey) -> Bool {
 
 final public class SnapshotCollector : RuntimeListener {
 
-    private let maxSize : (Int, Int)
+    private let maxSize : (Double, Double)
     private var currentSize : (Double, Double) = (0,0)
     private var currentScaled : (Double, Double) = (0,0)
     private(set) var snapshots = [InstructionNodeKey:NSImage]()
@@ -39,11 +39,11 @@ final public class SnapshotCollector : RuntimeListener {
 
     private var redraw = true
 
-    public init(maxSize : (Int, Int)) {
+    public init(maxSize : (Double, Double)) {
         self.maxSize = maxSize
     }
 
-    public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Int, Int)) {
+    public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Double, Double)) {
         paths.removeAll()
         errors.removeAll()
         instructions.removeAll()

@@ -27,12 +27,12 @@ final public class Picture {
 
     public let identifier : PictureIdentifier
     public var name : String
-    public var size : (Int, Int)
+    public var size : (Double, Double)
     public let procedure  : Procedure
     public let data : Sheet
 
 
-    public init(identifier : PictureIdentifier, name: String, size: (Int, Int), data: Sheet, procedure : Procedure) {
+    public init(identifier : PictureIdentifier, name: String, size: (Double, Double), data: Sheet, procedure : Procedure) {
         self.identifier = identifier
         self.name = name
         self.procedure = procedure

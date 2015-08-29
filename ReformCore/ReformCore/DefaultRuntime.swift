@@ -25,12 +25,12 @@ final public class DefaultRuntime : Runtime {
         _stopped = false
     }
     
-    public func subCall<T:SubCallId>(id: T, width: Int, height: Int, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ()) {
+    public func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ()) {
         self.dataSet = dataSet
         
     }
     
-    public func run(width width: Int, height: Int, block: () -> ()) {
+    public func run(width width: Double, height: Double, block: () -> ()) {
         stack.clear()
         
         listeners.forEach() {

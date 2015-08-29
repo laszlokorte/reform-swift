@@ -24,7 +24,7 @@ final public class StageCollector : RuntimeListener {
         self.focusFilter = focusFilter
     }
     
-    public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Int, Int)) {
+    public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Double, Double)) {
         collected = false
         buffer.clear()
         buffer.size = Vec2d(x: Double(size.0), y: Double(size.1))

@@ -37,7 +37,7 @@ final public class Procedure {
 }
 
 extension Procedure {
-    public func evaluateWith(width width: Int, height: Int, runtime: Runtime) {
+    public func evaluateWith(width width: Double, height: Double, runtime: Runtime) {
         runtime.run(width: width, height: height) {
             runtime.scoped() {
                 runtime.declare(self.paper)

@@ -57,7 +57,7 @@ public class CropTool : Tool {
         case .Idle:
             state = .Idle
         case .Cropping(_, let oldSize,_,_):
-            picture.size = (Int(oldSize.x), Int(oldSize.y))
+            picture.size = (oldSize.x, oldSize.y)
             notifier()
             state = .Idle;
         }
@@ -94,7 +94,9 @@ public class CropTool : Tool {
                 let handlePosition = (grabbedHandle.offset.vector+1)/2 * stage.size
                 let o = grabbedHandle.offset.vector * (pos-offset-handlePosition)
                 let newSize = stage.size + o
-                state = .Cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: newSize, offset: offset)
+                let adjustedSize = grabbedHandle.isCorner ? streightener.adjust(newSize, keepRatioOf: oldSize) : newSize
+
+                state = .Cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: adjustedSize, offset: offset)
             case .Press:
                 break
             case .Release:
@@ -114,7 +116,7 @@ public class CropTool : Tool {
         if case .Cropping(_, _, let size, _) = state {
 
 
-            picture.size = (max(1,Int(size.x)), max(1,Int(size.y)))
+            picture.size = (max(1,size.x), max(1,size.y))
             notifier()
         }
     }

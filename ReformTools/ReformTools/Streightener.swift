@@ -51,6 +51,15 @@ public class Streightener {
             return delta
         }
     }
+
+    func adjust(delta: Vec2d, keepRatioOf: Vec2d) -> Vec2d {
+        switch state {
+        case .Enabled:
+            return project(delta, onto: keepRatioOf)
+        case .Disabled:
+            return delta
+        }
+    }
     
     func adjust(angle: Angle) -> Angle {
         switch state {

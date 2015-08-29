@@ -13,7 +13,7 @@ public protocol SubCallId {
 }
 
 public protocol RuntimeListener {
-    func runtimeBeginEvaluation(runtime: Runtime, withSize: (Int, Int))
+    func runtimeBeginEvaluation(runtime: Runtime, withSize: (Double, Double))
     func runtimeFinishEvaluation(runtime: Runtime)
     func runtime(runtime: Runtime, didEval: Evaluatable)
     func runtime(runtime: Runtime, exitScopeWithForms: [FormIdentifier])
@@ -25,9 +25,9 @@ public protocol Runtime : class {
     
     var listeners : [RuntimeListener] { get set }
     
-    func subCall<T:SubCallId>(id: T, width: Int, height: Int, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ())
+    func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ())
     
-    func run(width width: Int, height: Int, block: () -> ())
+    func run(width width: Double, height: Double, block: () -> ())
     
     func eval(instruction : Evaluatable, block: () -> ())
 
