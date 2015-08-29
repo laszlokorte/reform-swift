@@ -153,10 +153,10 @@ extension InstructionNode : Analyzable {
             analyzer.publish(self, label: "Null")
             break
         case .Single(let instruction):
-            analyzer.publish(self, label: instruction.getDescription(analyzer))
+            analyzer.publish(self, label: instruction.getDescription(analyzer.stringifier))
             instruction.analyze(analyzer)
         case .Group(let group, let children):
-            analyzer.publish(self, label: group.getDescription(analyzer)) {
+            analyzer.publish(self, label: group.getDescription(analyzer.stringifier)) {
                 group.analyze(analyzer)
                 for c in children {
                     c.analyze(analyzer)

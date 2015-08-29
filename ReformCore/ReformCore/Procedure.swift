@@ -17,7 +17,7 @@ private struct RootInstruction : GroupInstruction {
         }
     }
     
-    func getDescription(analyzer: Analyzer) -> String {
+    func getDescription(stringifier: Stringifier) -> String {
         return "Root"
     }
     

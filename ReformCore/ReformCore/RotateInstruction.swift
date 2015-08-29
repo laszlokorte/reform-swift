@@ -44,9 +44,9 @@ public struct RotateInstruction : Instruction {
     }
     
     
-    public func getDescription(analyzer: Analyzer) -> String {        let formName = analyzer.get(formId)?.name ?? "???"
+    public func getDescription(stringifier: Stringifier) -> String {        let formName = stringifier.labelFor(formId) ?? "???"
         
-        return "Rotate \(formName) around \(fixPoint.getDescription(analyzer)) by \(angle.getDescription(analyzer))"
+        return "Rotate \(formName) around \(fixPoint.getDescription(stringifier)) by \(angle.getDescription(stringifier))"
     }
     
     

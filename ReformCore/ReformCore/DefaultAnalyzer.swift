@@ -15,18 +15,51 @@ public struct InstructionOutlineRow {
     public let isGroup : Bool
 }
 
-final public class DefaultAnalyzer : Analyzer {
+class AnalyzerStringifier : Stringifier {
     private var forms = [FormIdentifier:Form]()
-    public private(set) var instructions = [InstructionOutlineRow]()
     private let expressionPrinter : ExpressionPrinter
+
+    init(expressionPrinter : ExpressionPrinter) {
+        self.expressionPrinter = expressionPrinter
+    }
+
+    func labelFor(formId: FormIdentifier) -> String? {
+        return forms[formId].map{ $0.name }
+    }
+
+    func labelFor(formId: FormIdentifier, pointId: ExposedPointIdentifier) -> String? {
+        return forms[formId].flatMap { $0.getPoints()[pointId].map { $0.getDescription(self) } }
+    }
+
+    func labelFor(formId: FormIdentifier, anchorId: AnchorIdentifier) -> String? {
+        return forms[formId].flatMap{
+            ($0 as? Morphable).flatMap {
+                $0.getAnchors()[anchorId].map {
+                    $0.name
+                }
+            }
+        }
+    }
+
+    func stringFor(expression: Expression) -> String? {
+        return expressionPrinter.toString(expression)
+    }
+}
+
+final public class DefaultAnalyzer : Analyzer {
+    public private(set) var instructions = [InstructionOutlineRow]()
+    private let analyzerStringifier : AnalyzerStringifier
+    public var stringifier : Stringifier {
+        return analyzerStringifier
+    }
     private var depth: Int = 0
     
     public init(expressionPrinter: ExpressionPrinter) {
-        self.expressionPrinter = expressionPrinter
+        self.analyzerStringifier = AnalyzerStringifier(expressionPrinter: expressionPrinter)
     }
     
     public func analyze(block: () -> ()) {
-        forms.removeAll()
+        analyzerStringifier.forms.removeAll()
         instructions.removeAll()
         depth = 0
         block()
@@ -56,18 +89,10 @@ final public class DefaultAnalyzer : Analyzer {
     }
     
     public func announceForm(form: Form) {
-        forms[form.identifier] = form
+        analyzerStringifier.forms[form.identifier] = form
     }
     
     public func announceDepencency(id: PictureIdentifier) {
     
-    }
-    
-    public func get(id: FormIdentifier) -> Form? {
-        return forms[id]
-    }
-    
-    public func getExpressionPrinter() -> ExpressionPrinter {
-        return expressionPrinter
     }
 }

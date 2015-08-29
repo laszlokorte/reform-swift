@@ -52,8 +52,8 @@ public struct ScaleInstruction : Instruction {
     }
     
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let formName = analyzer.get(formId)?.name ?? "???"
+    public func getDescription(stringifier: Stringifier) -> String {
+        let formName = stringifier.labelFor(formId) ?? "???"
         let targetName : String
         switch axis {
         case .None:
@@ -61,9 +61,9 @@ public struct ScaleInstruction : Instruction {
         case .Named(let axisName, _, _):
             targetName = "\(formName)'s \(axisName)"
         }
-        let factorLabel = factor.getDescription(analyzer)
+        let factorLabel = factor.getDescription(stringifier)
         
-        return  "Scale \(targetName) around \(fixPoint.getDescription(analyzer)) by \(factorLabel)"
+        return  "Scale \(targetName) around \(fixPoint.getDescription(stringifier)) by \(factorLabel)"
     }
     
     public func analyze(analyzer: Analyzer) {

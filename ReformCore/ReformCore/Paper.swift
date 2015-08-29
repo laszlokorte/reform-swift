@@ -162,7 +162,7 @@ struct PaperPoint : RuntimePoint, Labeled {
         }
         return Vec2d(x: side.x * w, y:side.y * h)
     }
-    func getDescription(analyzer: Analyzer) -> String {
+    func getDescription(stringifier: Stringifier) -> String {
         return "Canvas' \(side.name)"
     }
 }

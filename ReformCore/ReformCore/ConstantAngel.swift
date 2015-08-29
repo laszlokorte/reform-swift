@@ -19,7 +19,7 @@ public struct ConstantAngle : RuntimeRotationAngle, Labeled {
         return angle
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
+    public func getDescription(stringifier: Stringifier) -> String {
         return String(format: "%.2f%%", angle.percent)
     }
     

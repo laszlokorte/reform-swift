@@ -19,9 +19,9 @@ public struct RuntimeIntersectionPoint : RuntimePoint, Labeled {
         self.formB = formB
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let formAName = analyzer.get(formA)?.name ?? "???"
-        let formBName = analyzer.get(formB)?.name ?? "???"
+    public func getDescription(stringifier: Stringifier) -> String {
+        let formAName = stringifier.labelFor(formA) ?? "???"
+        let formBName = stringifier.labelFor(formB) ?? "???"
         
         return "Intersection #\(index) of \(formAName) and \(formBName)"
     }

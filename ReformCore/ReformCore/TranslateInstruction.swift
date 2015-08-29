@@ -36,9 +36,9 @@ public struct TranslateInstruction : Instruction {
     }
     
     
-    public func getDescription(analyzer: Analyzer) -> String {        let formName = analyzer.get(formId)?.name ?? "???"
+    public func getDescription(stringifier: Stringifier) -> String {        let formName = stringifier.labelFor(formId) ?? "???"
         
-        return "Move \(formName) \(distance.getDescription(analyzer))"
+        return "Move \(formName) \(distance.getDescription(stringifier))"
     }
     
     

@@ -19,7 +19,7 @@ struct AnchorPoint : RuntimePoint, Labeled {
         return anchor.getPositionFor(runtime)
     }
     
-    func getDescription(analyzer: Analyzer) -> String {
+    func getDescription(stringifier: Stringifier) -> String {
         return anchor.name
     }
 }

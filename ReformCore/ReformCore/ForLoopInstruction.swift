@@ -30,8 +30,8 @@ public struct ForLoopInstruction : GroupInstruction {
         }
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let expressionString = analyzer.getExpressionPrinter().toString(expression) ?? "???"
+    public func getDescription(stringifier: Stringifier) -> String {
+        let expressionString = stringifier.stringFor(expression) ?? "???"
         
         return "Repeat \(expressionString) times:"
     }

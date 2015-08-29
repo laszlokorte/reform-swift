@@ -18,9 +18,9 @@ public struct GlompPoint : RuntimePoint, Labeled, Equatable {
         self.lerp = lerp
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let formName = analyzer.get(formId)?.name ?? "???"
-        let value = analyzer.getExpressionPrinter().toString(lerp) ?? "??"
+    public func getDescription(stringifier: Stringifier) -> String {
+        let formName = stringifier.labelFor(formId) ?? "???"
+        let value = stringifier.stringFor(lerp) ?? "??"
         
         return "\(value) along \(formName)"
     }

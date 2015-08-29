@@ -16,7 +16,7 @@ public enum Cartesian : RuntimeDirection, Labeled {
     case Vertical
     case Horizontal
     
-    public func getDescription(analyzer: Analyzer) -> String {
+    public func getDescription(stringifier: Stringifier) -> String {
         switch self {
         case .Vertical:
             return "Vertical"
@@ -41,7 +41,7 @@ public struct FreeDirection : RuntimeDirection, Labeled {
     
     public init() {}
     
-    public func getDescription(analyzer: Analyzer) -> String {
+    public func getDescription(stringifier: Stringifier) -> String {
         return ""
     }
     
@@ -59,7 +59,7 @@ public struct ProportionalDirection : RuntimeDirection, Labeled {
         self.proportion = proportion
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
+    public func getDescription(stringifier: Stringifier) -> String {
         return ""
     }
     

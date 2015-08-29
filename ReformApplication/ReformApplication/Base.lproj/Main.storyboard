@@ -764,7 +764,7 @@
                                     <popUpButton key="view" id="vcP-b3-fKp">
                                         <rect key="frame" x="0.0" y="14" width="50" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="line" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" selectedItem="loL-Lk-i5T" id="ezS-Nn-FMh">
+                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="68C6A2D2-77E7-4E0A-B227-E964687F3EE4" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" selectedItem="loL-Lk-i5T" id="ezS-Nn-FMh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="qao-IS-ECe">
@@ -851,9 +851,13 @@
                                     <real value="252"/>
                                 </holdingPriorities>
                             </splitView>
-                            <containerView fixedFrame="YES" id="QlB-Sb-enK">
+                            <containerView id="QlB-Sb-enK">
                                 <rect key="frame" x="120" y="0.0" width="330" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="330" id="98s-ck-n0K"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="iMy-Ee-XZG"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="DG2-kz-iLd" kind="embed" id="12m-Wr-pKR"/>
                                 </connections>
@@ -1344,59 +1348,95 @@
         <scene sceneID="FT0-WQ-uXX">
             <objects>
                 <viewController id="DG2-kz-iLd" userLabel="Stage" customClass="StageController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <customView key="view" id="IjJ-iQ-isN">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="487"/>
+                    <scrollView key="view" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" id="vDA-zV-cBj">
+                        <rect key="frame" x="0.0" y="0.0" width="502" height="310"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="vDA-zV-cBj">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="487"/>
-                                <clipView key="contentView" id="g7B-av-OYX">
-                                    <rect key="frame" x="1" y="1" width="498" height="485"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <view focusRingType="none" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="300" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="498" height="485"/>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="1jR-MF-2gx" firstAttribute="height" relation="greaterThanOrEqual" secondItem="g7B-av-OYX" secondAttribute="height" id="0bm-mR-xWi"/>
-                                        <constraint firstItem="1jR-MF-2gx" firstAttribute="centerX" secondItem="g7B-av-OYX" secondAttribute="centerX" placeholder="YES" id="V3l-0E-iSe"/>
-                                        <constraint firstItem="1jR-MF-2gx" firstAttribute="centerY" secondItem="g7B-av-OYX" secondAttribute="centerY" placeholder="YES" id="W6s-kK-svX"/>
-                                        <constraint firstItem="1jR-MF-2gx" firstAttribute="width" relation="greaterThanOrEqual" secondItem="g7B-av-OYX" secondAttribute="width" id="pKc-Pk-88f"/>
-                                    </constraints>
-                                    <color key="backgroundColor" white="0.20880448190789477" alpha="1" colorSpace="calibratedWhite"/>
-                                </clipView>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="58L-Eb-ieO"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="IHc-n2-JkS"/>
-                                </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" doubleValue="1" horizontal="YES" id="hnn-4r-jtF">
-                                    <rect key="frame" x="1" y="346" width="483" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="NO" id="F3w-72-j3g">
-                                    <rect key="frame" x="484" y="1" width="15" height="345"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="vDA-zV-cBj" firstAttribute="top" secondItem="IjJ-iQ-isN" secondAttribute="top" id="CJH-ND-xcR"/>
-                            <constraint firstAttribute="bottom" secondItem="vDA-zV-cBj" secondAttribute="bottom" id="Rid-IX-Ipe"/>
-                            <constraint firstItem="vDA-zV-cBj" firstAttribute="leading" secondItem="IjJ-iQ-isN" secondAttribute="leading" id="TjF-fU-4l8"/>
-                            <constraint firstAttribute="trailing" secondItem="vDA-zV-cBj" secondAttribute="trailing" id="c3t-Na-8X9"/>
-                        </constraints>
-                    </customView>
+                        <clipView key="contentView" id="g7B-av-OYX">
+                            <rect key="frame" x="1" y="1" width="500" height="308"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <view focusRingType="none" misplaced="YES" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="15" width="500" height="308"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="1jR-MF-2gx" firstAttribute="height" relation="greaterThanOrEqual" secondItem="g7B-av-OYX" secondAttribute="height" id="0bm-mR-xWi"/>
+                                <constraint firstItem="1jR-MF-2gx" firstAttribute="centerX" secondItem="g7B-av-OYX" secondAttribute="centerX" placeholder="YES" id="V3l-0E-iSe"/>
+                                <constraint firstItem="1jR-MF-2gx" firstAttribute="centerY" secondItem="g7B-av-OYX" secondAttribute="centerY" placeholder="YES" id="W6s-kK-svX"/>
+                                <constraint firstItem="1jR-MF-2gx" firstAttribute="width" relation="greaterThanOrEqual" secondItem="g7B-av-OYX" secondAttribute="width" id="pKc-Pk-88f"/>
+                            </constraints>
+                            <color key="backgroundColor" white="0.20880448190789477" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="YES" id="hnn-4r-jtF">
+                            <rect key="frame" x="1" y="294" width="485" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" arrowsPosition="none" horizontal="NO" id="F3w-72-j3g">
+                            <rect key="frame" x="486" y="1" width="15" height="293"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                     <connections>
                         <outlet property="canvas" destination="1jR-MF-2gx" id="K0j-tL-ejA"/>
                     </connections>
                 </viewController>
                 <customObject id="mpJ-EO-JWn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="986.5"/>
+            <point key="canvasLocation" x="815" y="991"/>
         </scene>
     </scenes>
     <resources>
+        <image name="68C6A2D2-77E7-4E0A-B227-E964687F3EE4" width="1" height="1">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwwAAgAOAC1Z7MSwgMX3SFQoWGFpOUy5vYmplY3RzoReABIAK0hUKGh2iGxyA
+BYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxEIdE1NACoAAAAKAAAADgEAAAMA
+AAABAAEAAAEBAAMAAAABAAEAAAECAAMAAAACAAgACAEDAAMAAAABAAEAAAEGAAMAAAABAAEAAAERAAQA
+AAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAIAAAEWAAMAAAABAAEAAAEXAAQAAAABAAAAAgEcAAMA
+AAABAAEAAAFSAAMAAAABAAEAAAFTAAMAAAACAAEAAYdzAAcAAAe8AAAAuAAAAAAAAAe8YXBwbAIgAABt
+bnRyR1JBWVhZWiAH0AACAA4ADAAAAABhY3NwQVBQTAAAAABub25lAAAAAAAAAAAAAAAAAAAAAAAA9tYA
+AQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVk
+ZXNjAAAAwAAAAG9kc2NtAAABMAAABi5jcHJ0AAAHYAAAADh3dHB0AAAHmAAAABRrVFJDAAAHrAAAAA5k
+ZXNjAAAAAAAAABVHZW5lcmljIEdyYXkgUHJvZmlsZQAAAAAAAAAAAAAAFUdlbmVyaWMgR3JheSBQcm9m
+aWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbWx1YwAAAAAA
+AAAeAAAADHNrU0sAAAAqAAABeGRhREsAAAA0AAABomNhRVMAAAAsAAAB1nB0QlIAAAAqAAACAnVrVUEA
+AAAsAAACLGZyRlUAAAAqAAACWGh1SFUAAAAuAAACgnpoVFcAAAAQAAACsG5iTk8AAAAsAAACwGNzQ1oA
+AAAkAAAC7GhlSUwAAAAgAAADEGl0SVQAAAAuAAADMHJvUk8AAAAkAAADXmRlREUAAAA6AAADgmtvS1IA
+AAAYAAADvHN2U0UAAAAuAAAD1HpoQ04AAAAQAAAEAmphSlAAAAAWAAAEEmVsR1IAAAAkAAAEKHB0UE8A
+AAA4AAAETG5sTkwAAAAqAAAEhGVzRVMAAAAoAAAErnRoVEgAAAAkAAAE1nRyVFIAAAAiAAAE+mZpRkkA
+AAAsAAAFHGhySFIAAAA6AAAFSHBsUEwAAAA2AAAFgnJ1UlUAAAAmAAAFuGFyRUcAAAAoAAAF3mVuVVMA
+AAAoAAAGBgBWAWEAZQBvAGIAZQBjAG4A/QAgAHMAaQB2AP0AIABwAHIAbwBmAGkAbABHAGUAbgBlAHIA
+ZQBsACAAZwByAOUAdABvAG4AZQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAUABlAHIAZgBpAGwAIABkAGUA
+IABnAHIAaQBzACAAZwBlAG4A6AByAGkAYwBQAGUAcgBmAGkAbAAgAEMAaQBuAHoAYQAgAEcAZQBuAOkA
+cgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABHAHIAYQB5AFAAcgBvAGYA
+aQBsACAAZwDpAG4A6QByAGkAcQB1AGUAIABnAHIAaQBzAMEAbAB0AGEAbADhAG4AbwBzACAAcwB6APwA
+cgBrAGUAIABwAHIAbwBmAGkAbJAadShwcJaOgnJfaWPPj/AARwBlAG4AZQByAGkAcwBrACAAZwByAOUA
+dABvAG4AZQBwAHIAbwBmAGkAbABPAGIAZQBjAG4A/QAgAWEAZQBkAP0AIABwAHIAbwBmAGkAbAXkBegF
+1QXkBdkF3AAgAEcAcgBhAHkAIAXbBdwF3AXZAFAAcgBvAGYAaQBsAG8AIABnAHIAaQBnAGkAbwAgAGcA
+ZQBuAGUAcgBpAGMAbwBQAHIAbwBmAGkAbAAgAGcAcgBpACAAZwBlAG4AZQByAGkAYwBBAGwAbABnAGUA
+bQBlAGkAbgBlAHMAIABHAHIAYQB1AHMAdAB1AGYAZQBuAC0AUAByAG8AZgBpAGzHfLwYACAARwByAGEA
+eQAg1QS4XNMMx3wARwBlAG4AZQByAGkAcwBrACAAZwByAOUAcwBrAGEAbABlAHAAcgBvAGYAaQBsZm6Q
+GnBwXqZjz4/wZYdO9k4AgiwwsDDsMKQw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAPAA8EDvwPGA68D
+uwAgA7MDugPBA7kAUABlAHIAZgBpAGwAIABnAGUAbgDpAHIAaQBjAG8AIABkAGUAIABjAGkAbgB6AGUA
+bgB0AG8AcwBBAGwAZwBlAG0AZQBlAG4AIABnAHIAaQBqAHMAcAByAG8AZgBpAGUAbABQAGUAcgBmAGkA
+bAAgAGcAcgBpAHMAIABnAGUAbgDpAHIAaQBjAG8OQg4bDiMORA4fDiUOTA4qDjUOQA4XDjIOFw4xDkgO
+Jw5EDhsARwBlAG4AZQBsACAARwByAGkAIABQAHIAbwBmAGkAbABpAFkAbABlAGkAbgBlAG4AIABoAGEA
+cgBtAGEAYQBwAHIAbwBmAGkAaQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABwAHIAbwBmAGkAbAAgAHMA
+aQB2AGkAaAAgAHQAbwBuAG8AdgBhAFUAbgBpAHcAZQByAHMAYQBsAG4AeQAgAHAAcgBvAGYAaQBsACAA
+cwB6AGEAcgBvAVsAYwBpBB4EMQRJBDgEOQAgBEEENQRABEsEOQAgBD8EQAQ+BEQEOAQ7BEwGRQZEBkEA
+IAYqBjkGMQZKBkEAIABHAHIAYQB5ACAGJwZEBjkGJwZFAEcAZQBuAGUAcgBpAGMAIABHAHIAYQB5ACAA
+UAByAG8AZgBpAGwAZQAAdGV4dAAAAABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRz
+IHJlc2VydmVkLgBYWVogAAAAAAAA81EAAQAAAAEWzGN1cnYAAAAAAAAAAQHNAADSJSYnKFokY2xhc3Nu
+YW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMpKitfEBBOU0JpdG1hcEltYWdlUmVwWk5TSW1h
+Z2VSZXBYTlNPYmplY3TSJSYtLldOU0FycmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJyYXmjMC0r0zM0CjU2
+N1dOU1doaXRlXE5TQ29sb3JTcGFjZUQwIDAAEAOADNIlJjk6V05TQ29sb3KiOSvSJSY8PVdOU0ltYWdl
+ojwrXxAPTlNLZXllZEFyY2hpdmVy0UBBVHJvb3SAAQAIABEAGgAjAC0AMgA3AEYATABXAF4AZQByAHkA
+gQCDAIUAigCMAI4AlQCaAKUApwCpAKsAsACzALUAtwC5ALsAwADXANkA2wlTCVgJYwlsCX8JgwmWCaEJ
+qgmvCbcJugm/Cc4J0gnZCeEJ7gnzCfUJ9wn8CgQKBwoMChQKFwopCiwKMQAAAAAAAAIBAAAAAAAAAEIA
+AAAAAAAAAAAAAAAAAAozA
+</mutableData>
+        </image>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="arc" width="32" height="32"/>
         <image name="circle" width="32" height="32"/>

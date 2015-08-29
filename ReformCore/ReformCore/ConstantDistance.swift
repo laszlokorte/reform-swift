@@ -21,7 +21,7 @@ public struct ConstantDistance : RuntimeDistance, Labeled {
         return delta
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
+    public func getDescription(stringifier: Stringifier) -> String {
         let x = String(format: "%.2f", delta.x)
         let y = String(format: "%.2f", delta.y)
 

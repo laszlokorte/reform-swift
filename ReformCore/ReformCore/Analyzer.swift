@@ -18,8 +18,6 @@ public protocol Analyzer : class {
     func announceForm(form: Form)
     
     func announceDepencency(id: PictureIdentifier)
-    
-    func get(id: FormIdentifier) -> Form?
-    
-    func getExpressionPrinter() -> ExpressionPrinter
+        
+    var stringifier : Stringifier { get }
 }

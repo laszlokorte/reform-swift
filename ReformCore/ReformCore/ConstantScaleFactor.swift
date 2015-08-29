@@ -20,7 +20,7 @@ public struct ConstantScaleFactor : RuntimeScaleFactor, Labeled {
         return factor
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
+    public func getDescription(stringifier: Stringifier) -> String {
         return String(format: "%.2f%%", factor * 100)
     }
     

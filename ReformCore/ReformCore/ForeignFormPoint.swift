@@ -27,10 +27,9 @@ public struct ForeignFormPoint : RuntimePoint, Labeled {
         return point.getPositionFor(runtime)
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let form = analyzer.get(formId)
-        let formName = form?.name ?? "???"
-        let pointName = form?.getPoints()[pointId]?.getDescription(analyzer) ?? "??"
+    public func getDescription(stringifier: Stringifier) -> String {
+        let formName = stringifier.labelFor(formId) ?? "???"
+        let pointName = stringifier.labelFor(formId, pointId: pointId) ?? "???" ?? "??"
         
         return "\(formName)'s \(pointName)"
         

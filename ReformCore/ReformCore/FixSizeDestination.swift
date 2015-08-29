@@ -29,8 +29,8 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
         return alignment.getMinMax(from: min, to: min + delta)
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let fromLabel = from.getDescription(analyzer)
+    public func getDescription(stringifier: Stringifier) -> String {
+        let fromLabel = from.getDescription(stringifier)
         let x = String(format: "%.2f", delta.x)
         let y = String(format: "%.2f", delta.y)
 

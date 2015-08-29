@@ -34,9 +34,9 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
         return alignment.getMinMax(from: fromPos, to: direction.getAdjustedFor(runtime, anchor: fromPos, position: toPos))
     }
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        let fromLabel = from.getDescription(analyzer)
-        let toLabel = to.getDescription(analyzer)
+    public func getDescription(stringifier: Stringifier) -> String {
+        let fromLabel = from.getDescription(stringifier)
+        let toLabel = to.getDescription(stringifier)
         
         return "From \(fromLabel) to \(toLabel)"
     }

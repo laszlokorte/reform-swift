@@ -94,7 +94,7 @@ func createEntityPoint(analyzer: Analyzer, runtime: Runtime, formId: FormIdentif
         return nil
     }
     
-    return EntityPoint(position: position, label: point.getDescription(analyzer), formId: formId, pointId: pointId)
+    return EntityPoint(position: position, label: point.getDescription(analyzer.stringifier), formId: formId, pointId: pointId)
 }
 
 
@@ -155,7 +155,7 @@ func collectPoints(analyzer: Analyzer, runtime: Runtime, form: Form) -> [EntityP
                 return nil
             }
             
-            return EntityPoint(position: position, label: point.getDescription(analyzer), formId: form.identifier, pointId: pointId)
+            return EntityPoint(position: position, label: point.getDescription(analyzer.stringifier), formId: form.identifier, pointId: pointId)
         }
 }
 

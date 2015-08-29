@@ -41,11 +41,11 @@ public struct MorphInstruction : Instruction {
     }
     
     
-    public func getDescription(analyzer: Analyzer) -> String {        let form = analyzer.get(formId)
-        let formName = form?.name ?? "???"
-        let anchorName = (form as? Morphable)?.getAnchors()[anchorId]?.name ?? "??"
+    public func getDescription(stringifier: Stringifier) -> String {
+        let formName = stringifier.labelFor(formId) ?? "???"
+        let anchorName = stringifier.labelFor(formId, anchorId: anchorId) ?? "??"
         
-        return "Move \(formName)'s \(anchorName) \(distance.getDescription(analyzer))"
+        return "Move \(formName)'s \(anchorName) \(distance.getDescription(stringifier))"
     }
     
     public func analyze(analyzer: Analyzer) {

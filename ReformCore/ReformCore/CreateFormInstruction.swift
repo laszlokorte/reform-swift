@@ -31,8 +31,8 @@ public struct CreateFormInstruction : Instruction {
     }
     
     
-    public func getDescription(analyzer: Analyzer) -> String {
-        return "Create \(form.name) \(destination.getDescription(analyzer))"
+    public func getDescription(stringifier: Stringifier) -> String {
+        return "Create \(form.name) \(destination.getDescription(stringifier))"
     }
     
     public func analyze(analyzer: Analyzer) {
