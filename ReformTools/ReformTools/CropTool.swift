@@ -56,7 +56,6 @@ public class CropTool : Tool {
         switch self.state {
         case .Idle:
             state = .Idle
-            cropGrabber.disable()
         case .Cropping(_, let oldSize,_,_):
             picture.size = (Int(oldSize.x), Int(oldSize.y))
             notifier()
@@ -92,12 +91,10 @@ public class CropTool : Tool {
             case .ModifierChange:
                 fallthrough
             case .Move:
-                let handlePosition = (grabbedHandle.offset.vector+1)/2 * oldSize
-                let cursorPos = pos - stage.size + oldSize
-                let o = grabbedHandle.offset.vector * (cursorPos-offset-handlePosition)
-                let newSize = oldSize + o
+                let handlePosition = (grabbedHandle.offset.vector+1)/2 * stage.size
+                let o = grabbedHandle.offset.vector * (pos-offset-handlePosition)
+                let newSize = stage.size + o
                 state = .Cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: newSize, offset: offset)
-
             case .Press:
                 break
             case .Release:
@@ -116,7 +113,8 @@ public class CropTool : Tool {
     private func publish() {
         if case .Cropping(_, _, let size, _) = state {
 
-            picture.size = (Int(size.x), Int(size.y))
+
+            picture.size = (max(1,Int(size.x)), max(1,Int(size.y)))
             notifier()
         }
     }

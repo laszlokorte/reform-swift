@@ -30,7 +30,7 @@ final public class SnapshotCollector : RuntimeListener {
 
     private let maxSize : (Int, Int)
     private var currentSize : (Int, Int) = (0,0)
-    private var currentScaled : (Int, Int) = (0,0)
+    private var currentScaled : (Double, Double) = (0,0)
     private(set) var snapshots = [InstructionNodeKey:NSImage]()
     private(set) var instructions = Set<InstructionNodeKey>()
     private(set) var errors = [InstructionNodeKey:RuntimeError]()
@@ -55,8 +55,8 @@ final public class SnapshotCollector : RuntimeListener {
                 Double(maxSize.1)/Double(currentSize.1))
 
             currentScaled = (
-                Int(round(scale * Double(size.0))),
-                Int(round(scale * Double(size.1)))
+                scale * Double(size.0),
+                scale * Double(size.1)
             )
         }
     }
