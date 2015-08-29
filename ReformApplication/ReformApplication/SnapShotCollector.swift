@@ -29,7 +29,7 @@ func ==(lhs: InstructionNodeKey, rhs: InstructionNodeKey) -> Bool {
 final public class SnapshotCollector : RuntimeListener {
 
     private let maxSize : (Int, Int)
-    private var currentSize : (Int, Int) = (0,0)
+    private var currentSize : (Double, Double) = (0,0)
     private var currentScaled : (Double, Double) = (0,0)
     private(set) var snapshots = [InstructionNodeKey:NSImage]()
     private(set) var instructions = Set<InstructionNodeKey>()
@@ -48,17 +48,16 @@ final public class SnapshotCollector : RuntimeListener {
         errors.removeAll()
         instructions.removeAll()
 
-        if currentSize.0 != size.0 || currentSize.1 != size.1 {
-            snapshots.removeAll()
-            currentSize = size
-            let scale = min(Double(maxSize.0)/Double(currentSize.0),
-                Double(maxSize.1)/Double(currentSize.1))
+        currentSize = (Double(size.0), Double(size.1))
 
-            currentScaled = (
-                scale * Double(size.0),
-                scale * Double(size.1)
-            )
-        }
+        let scale = min(Double(maxSize.0)/Double(currentSize.0),
+            Double(maxSize.1)/Double(currentSize.1))
+
+        currentScaled = (
+            scale * Double(size.0),
+            scale * Double(size.1)
+        )
+
     }
 
     public func runtimeFinishEvaluation(runtime: Runtime) {
@@ -98,14 +97,21 @@ final public class SnapshotCollector : RuntimeListener {
                 return
             }
 
-            NSColor.whiteColor().setFill()
-            NSRectFill(NSRect(origin: CGPoint(), size: size))
-
-            CGContextScaleCTM(context, size.width / CGFloat(currentSize.0), size.height / CGFloat(currentSize.1))
+            CGContextClearRect(context, CGRect(origin: CGPoint(), size: size))
 
 
-            NSColor.grayColor().setFill()
-            NSColor.grayColor().set()
+            CGContextTranslateCTM(context,
+                (size.width -  CGFloat(currentScaled.0)) / 2,
+                (size.height - CGFloat(currentScaled.1)) / 2)
+            CGContextScaleCTM(context, CGFloat(currentScaled.0 / currentSize.0), CGFloat(currentScaled.1 / currentSize.1))
+
+
+            CGContextSetRGBFillColor(context, 1, 1, 1, 1)
+            CGContextFillRect(context, CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
+
+            CGContextSetRGBFillColor(context, 0.5,0.5,0.5,1)
+            CGContextSetRGBStrokeColor(context, 0.5,0.5,0.5,1)
+
             CGContextSetLineWidth(context, 9)
             for path in paths {
                 path.draw(context)
@@ -127,14 +133,14 @@ final public class SnapshotCollector : RuntimeListener {
                     continue
                 }
                 if isGuide {
-                    NSColor.cyanColor().setFill()
-                    NSColor.cyanColor().set()
+                    CGContextSetRGBFillColor(context, 0, 0.9, 0.9, 1.0)
+                    CGContextSetRGBStrokeColor(context, 0, 0.9, 0.9, 1.0)
                 } else if isCurrent {
-                    NSColor.blueColor().setFill()
-                    NSColor.blueColor().set()
+                    CGContextSetRGBFillColor(context, 0.1, 0.5, 0.9, 1.0)
+                    CGContextSetRGBStrokeColor(context, 0.1, 0.5, 0.9, 1.0)
                 } else {
-                    NSColor.grayColor().setFill()
-                    NSColor.grayColor().set()
+                    CGContextSetRGBFillColor(context, 0.5,0.5,0.5,1)
+                    CGContextSetRGBStrokeColor(context, 0.5,0.5,0.5,1)
                 }
 
                 path.draw(context)
@@ -145,7 +151,7 @@ final public class SnapshotCollector : RuntimeListener {
 
     func imageFor(key: InstructionNodeKey) -> NSImage {
         guard let image = snapshots[key] else {
-            let image = NSImage(size: NSSize(width: CGFloat(currentScaled.0), height: CGFloat(currentScaled.1)))
+            let image = NSImage(size: NSSize(width: CGFloat(maxSize.0), height: CGFloat(maxSize.1)))
             snapshots[key] = image
             return image
         }
