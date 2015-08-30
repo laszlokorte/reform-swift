@@ -797,21 +797,21 @@
                                         <action selector="toolbarButton:" target="Oky-zY-oP4" id="hhR-qy-JRi"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C9C9D321-69A7-4D18-963F-D470A2CF4BE0" label="Create" paletteLabel="Create" image="line" id="WJJ-Q9-c98">
+                                <toolbarItem implicitItemIdentifier="C9C9D321-69A7-4D18-963F-D470A2CF4BE0" label="Create" paletteLabel="Create" image="circle" id="WJJ-Q9-c98">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="32" height="32"/>
                                     <size key="maxSize" width="80" height="64"/>
                                     <popUpButton key="view" id="vcP-b3-fKp">
                                         <rect key="frame" x="0.0" y="14" width="50" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="line" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" selectedItem="loL-Lk-i5T" id="ezS-Nn-FMh">
+                                        <popUpButtonCell key="cell" type="bevel" title="Circle" bezelStyle="regularSquare" image="line" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" selectedItem="N89-dH-SHj" id="ezS-Nn-FMh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="qao-IS-ECe">
                                                 <items>
-                                                    <menuItem image="line" hidden="YES" id="loL-Lk-i5T"/>
+                                                    <menuItem title="Line" image="line" id="loL-Lk-i5T"/>
                                                     <menuItem title="Rectangle" state="on" image="rect" id="ygS-Dr-Gcs"/>
-                                                    <menuItem title="Circle" image="circle" id="N89-dH-SHj"/>
+                                                    <menuItem title="Circle" state="on" image="circle" id="N89-dH-SHj"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
@@ -1115,20 +1115,30 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="54O-Dj-p9h">
-                                        <rect key="frame" x="450" y="-2" width="14" height="32"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="OTI-KL-2EI">
+                                    <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AI4-sb-mAI">
+                                        <rect key="frame" x="435" y="5" width="29" height="19"/>
+                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="ZZI-F7-xvX" id="atb-QI-b5H">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
+                                            <menu key="menu" id="pGS-ph-lLS">
+                                                <items>
+                                                    <menuItem image="NSActionTemplate" hidden="YES" enabled="NO" id="ZZI-F7-xvX"/>
+                                                    <menuItem title="Wrap in Loop" id="VCU-HX-dX6"/>
+                                                    <menuItem title="Wrap in Condition" id="E3T-1b-W0z"/>
+                                                    <menuItem title="Delete" id="Lez-ln-4uq">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="54O-Dj-p9h" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="0tA-U4-Rdf"/>
                                     <constraint firstAttribute="height" constant="28" id="EPN-2R-DC4"/>
-                                    <constraint firstItem="DrF-aR-Bxr" firstAttribute="leading" secondItem="54O-Dj-p9h" secondAttribute="trailing" constant="8" id="LB0-9w-ncn"/>
+                                    <constraint firstItem="DrF-aR-Bxr" firstAttribute="leading" secondItem="AI4-sb-mAI" secondAttribute="trailing" constant="8" id="FRB-co-7Ye"/>
                                     <constraint firstItem="l1W-9O-OBt" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="Nsc-0W-mpv"/>
                                     <constraint firstItem="DrF-aR-Bxr" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="aHW-21-Bol"/>
+                                    <constraint firstItem="AI4-sb-mAI" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="mzb-gL-pYh"/>
                                     <constraint firstItem="l1W-9O-OBt" firstAttribute="leading" secondItem="5w7-Wi-mWB" secondAttribute="leading" constant="7" id="ncV-oR-fci"/>
                                     <constraint firstAttribute="trailing" secondItem="DrF-aR-Bxr" secondAttribute="trailing" constant="8" id="wAk-ws-xjT"/>
                                 </constraints>
@@ -1429,8 +1439,8 @@
                             <rect key="frame" x="1" y="1" width="500" height="308"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view focusRingType="none" misplaced="YES" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="15" width="500" height="308"/>
+                                <view focusRingType="none" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="500" height="308"/>
                                 </view>
                             </subviews>
                             <constraints>

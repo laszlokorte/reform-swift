@@ -41,6 +41,6 @@
       location = "group:ReformCore/ReformCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformApplication/ReformApplication.xcodeproj">
+      location = "group:/Users/laszlokorte/Desktop/swift-reform-workspace/ReformApplication/Reform.xcodeproj">
    </FileRef>
 </Workspace>
