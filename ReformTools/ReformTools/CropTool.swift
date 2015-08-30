@@ -116,7 +116,7 @@ public class CropTool : Tool {
         if case .Cropping(_, _, let size, _) = state {
 
 
-            picture.size = (max(1,size.x), max(1,size.y))
+            picture.size = (max(5,size.x), max(5,size.y))
             notifier()
         }
     }

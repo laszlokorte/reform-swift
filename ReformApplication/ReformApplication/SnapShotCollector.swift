@@ -99,6 +99,7 @@ final public class SnapshotCollector : RuntimeListener {
 
             CGContextClearRect(context, CGRect(origin: CGPoint(), size: size))
 
+            CGContextSetLineWidth(context, 6)
 
             CGContextTranslateCTM(context,
                 (size.width -  CGFloat(currentScaled.0)) / 2,
@@ -107,12 +108,13 @@ final public class SnapshotCollector : RuntimeListener {
 
 
             CGContextSetRGBFillColor(context, 1, 1, 1, 1)
+            CGContextClipToRect(context, CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
+
             CGContextFillRect(context, CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
 
-            CGContextSetRGBFillColor(context, 0.5,0.5,0.5,1)
-            CGContextSetRGBStrokeColor(context, 0.5,0.5,0.5,1)
+            CGContextSetRGBFillColor(context, 0.5,0.5,0.5,0.7)
+            CGContextSetRGBStrokeColor(context, 0.6,0.6,0.6,1)
 
-            CGContextSetLineWidth(context, 9)
             for path in paths {
                 path.draw(context)
                 CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
@@ -133,14 +135,14 @@ final public class SnapshotCollector : RuntimeListener {
                     continue
                 }
                 if isGuide {
-                    CGContextSetRGBFillColor(context, 0, 0.9, 0.9, 1.0)
-                    CGContextSetRGBStrokeColor(context, 0, 0.9, 0.9, 1.0)
+                    CGContextSetRGBFillColor(context, 0, 0.9, 0.9, 0.7)
+                    CGContextSetRGBStrokeColor(context, 0, 0.8, 0.8, 1)
                 } else if isCurrent {
-                    CGContextSetRGBFillColor(context, 0.1, 0.5, 0.9, 1.0)
-                    CGContextSetRGBStrokeColor(context, 0.1, 0.5, 0.9, 1.0)
+                    CGContextSetRGBFillColor(context, 0.1, 0.5, 0.9, 0.7)
+                    CGContextSetRGBStrokeColor(context, 0, 0.4, 0.8, 1)
                 } else {
-                    CGContextSetRGBFillColor(context, 0.5,0.5,0.5,1)
-                    CGContextSetRGBStrokeColor(context, 0.5,0.5,0.5,1)
+                    CGContextSetRGBFillColor(context, 0.5,0.5,0.5, 0.7)
+                    CGContextSetRGBStrokeColor(context, 0.4,0.4,0.4,1)
                 }
 
                 path.draw(context)

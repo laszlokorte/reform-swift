@@ -80,7 +80,7 @@ class StageController : NSViewController {
 
             SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage),
             SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage),
-            CropUIRenderer(cropUI: stageModel.stageUI.cropUI),
+            CropUIRenderer(stage: stageModel.stage, cropUI: stageModel.stageUI.cropUI),
             GrabUIRenderer(grabUI: stageModel.stageUI.grabUI),
             HandleUIRenderer(handleUI: stageModel.stageUI.handleUI),
             PivotUIRenderer(pivotUI: stageModel.stageUI.pivotUI)
