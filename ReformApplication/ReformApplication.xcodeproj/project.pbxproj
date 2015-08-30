@@ -51,6 +51,7 @@
 		F27391221B7FAA7800100F2F /* StageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391211B7FAA7800100F2F /* StageController.swift */; };
 		F2DF63681B927E1D00A2EFB6 /* StageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */; settings = {ASSET_TAGS = (); }; };
 		F2DF636A1B927E7100A2EFB6 /* MaskUIRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF636C1B929A4800A2EFB6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF636B1B929A4800A2EFB6 /* GradientView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
 		F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageRenderer.swift; sourceTree = "<group>"; };
 		F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskUIRenderer.swift; sourceTree = "<group>"; };
+		F2DF636B1B929A4800A2EFB6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 				F27391211B7FAA7800100F2F /* StageController.swift */,
 				F262B7711B7E275800B29E2D /* ProcedureController.swift */,
 				F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */,
+				F2DF636B1B929A4800A2EFB6 /* GradientView.swift */,
 			);
 			path = ReformApplication;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
 				F222AF0A1B835CD8005F71A1 /* Renderer.swift in Sources */,
+				F2DF636C1B929A4800A2EFB6 /* GradientView.swift in Sources */,
 				F2339B041B8D534F00C0AE41 /* ProcedureViewModel.swift in Sources */,
 				F222AF0E1B835D48005F71A1 /* SnapUI.swift in Sources */,
 				F222AF191B836232005F71A1 /* Modifier.swift in Sources */,

@@ -105,6 +105,7 @@ class PictureSession {
     let createCircleTool : CreateFormTool
     let createPieTool : CreateFormTool
     let createArcTool : CreateFormTool
+    let createTextTool : CreateFormTool
     let moveTool : MoveTool
     let morphTool : MorphTool
     let rotationTool : RotateTool
@@ -169,6 +170,8 @@ class PictureSession {
         self.createPieTool = CreateFormTool(formType: PieForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
         self.createArcTool = CreateFormTool(formType: ArcForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+
+        self.createTextTool = CreateFormTool(formType: TextForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
         self.moveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
 

@@ -126,7 +126,6 @@ extension ArcForm : Drawable {
         guard let
             start = startPoint.getPositionFor(runtime),
             end = endPoint.getPositionFor(runtime),
-            offset = offset.getLengthFor(runtime),
             center = centerPoint.getPositionFor(runtime) else {
                 return nil
         }

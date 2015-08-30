@@ -53,7 +53,7 @@ final public class TextForm : Form, Creatable {
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
             ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
-            ExposedPointIdentifier(1):ExposedPoint(point: startPoint, name: "End"),
+            ExposedPointIdentifier(1):ExposedPoint(point: endPoint, name: "End"),
             ExposedPointIdentifier(2):ExposedPoint(point: centerPoint, name: "Bottom"),
             ExposedPointIdentifier(3):AnchorPoint(anchor: controlPointAnchor)
         ]
@@ -111,7 +111,7 @@ extension TextForm : Morphable {
     }
     
     var controlPointAnchor : Anchor {
-        return OrthogonalOffsetAnchor(name: "Control Point", pointA: startPoint, pointB: endPoint, offset: offset)
+        return OrthogonalOffsetAnchor(name: "Control Point", pointA: endPoint, pointB: startPoint, offset: offset)
     }
     
     var startAnchor : Anchor {
