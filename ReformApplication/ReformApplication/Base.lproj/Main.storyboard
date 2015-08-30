@@ -12,6 +12,46 @@
                     <view key="view" id="qqM-RU-3J6">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Su4-2H-5Ws">
+                                <rect key="frame" x="419" y="13" width="47" height="32"/>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6o6-uh-b2n">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHy-Hv-5ry">
+                                <rect key="frame" x="20" y="61" width="440" height="189"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="RLW-hE-tyL">
+                                    <rect key="frame" x="0.0" y="0.0" width="440" height="189"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView id="guz-Aw-k2H">
+                                            <rect key="frame" x="0.0" y="0.0" width="440" height="189"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kcq-8L-wLD">
+                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="nCk-Wg-My0">
+                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="eHy-Hv-5ry" firstAttribute="leading" secondItem="qqM-RU-3J6" secondAttribute="leading" constant="20" id="2k9-Il-WN5"/>
+                            <constraint firstItem="eHy-Hv-5ry" firstAttribute="top" secondItem="qqM-RU-3J6" secondAttribute="top" constant="20" id="Aln-5F-t6y"/>
+                            <constraint firstAttribute="trailing" secondItem="eHy-Hv-5ry" secondAttribute="trailing" constant="20" id="acs-8b-ojw"/>
+                            <constraint firstItem="Su4-2H-5Ws" firstAttribute="top" secondItem="eHy-Hv-5ry" secondAttribute="bottom" constant="20" id="evx-h6-3GU"/>
+                            <constraint firstAttribute="trailing" secondItem="Su4-2H-5Ws" secondAttribute="trailing" constant="20" id="gLh-ql-mLu"/>
+                            <constraint firstAttribute="bottom" secondItem="Su4-2H-5Ws" secondAttribute="bottom" constant="20" id="lXg-XU-GOd"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="cbp-HT-e9a" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1075,9 +1115,18 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="54O-Dj-p9h">
+                                        <rect key="frame" x="450" y="-2" width="14" height="32"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="OTI-KL-2EI">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="54O-Dj-p9h" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="0tA-U4-Rdf"/>
                                     <constraint firstAttribute="height" constant="28" id="EPN-2R-DC4"/>
+                                    <constraint firstItem="DrF-aR-Bxr" firstAttribute="leading" secondItem="54O-Dj-p9h" secondAttribute="trailing" constant="8" id="LB0-9w-ncn"/>
                                     <constraint firstItem="l1W-9O-OBt" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="Nsc-0W-mpv"/>
                                     <constraint firstItem="DrF-aR-Bxr" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="aHW-21-Bol"/>
                                     <constraint firstItem="l1W-9O-OBt" firstAttribute="leading" secondItem="5w7-Wi-mWB" secondAttribute="leading" constant="7" id="ncV-oR-fci"/>
@@ -1411,6 +1460,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="arc" width="32" height="32"/>
         <image name="circle" width="32" height="32"/>
