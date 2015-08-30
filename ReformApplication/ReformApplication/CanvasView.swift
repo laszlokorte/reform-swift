@@ -23,7 +23,6 @@ class CanvasView : NSView {
         }
     }
     
-    var shapes : [IdentifiedShape] = []
     var renderers : [Renderer] = []
     
     private var currentContext : CGContext? {
@@ -53,13 +52,6 @@ class CanvasView : NSView {
             let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
             CGContextTranslateCTM(context, offsetX, offsetY)
 
-            CGContextSetRGBFillColor(context, 1, 1, 1, 1)
-            CGContextFillRect(context, CGRect(x:0,y:0, width: CGFloat(canvasSize.x), height: CGFloat(canvasSize.y)))
-            
-            for shape in shapes {
-                shape.shape.render(context)
-            }
-            
             for r in renderers {
                 r.renderInContext(context)
             }

@@ -60,7 +60,7 @@ final public class ArcForm : Form, Creatable {
     
     public var outline : Outline {
         return CompositeOutline(parts:
-            LineOutline(start: startPoint, end: endPoint),
+            LineOutline(start: endPoint, end: startPoint),
             ArcOutline(center: centerPoint, radius: PointLength(pointA: startPoint, pointB: centerPoint), angleA: PointAngle(center: centerPoint, point: startPoint), angleB: PointAngle(center: centerPoint, point: endPoint))
         )
     }
@@ -123,7 +123,22 @@ extension ArcForm : Morphable {
 extension ArcForm : Drawable {
     
     public func getPathFor(runtime: Runtime) -> Path? {
-        return nil
+        guard let
+            start = startPoint.getPositionFor(runtime),
+            end = endPoint.getPositionFor(runtime),
+            offset = offset.getLengthFor(runtime),
+            center = centerPoint.getPositionFor(runtime) else {
+                return nil
+        }
+
+        let radius = (start-center).length
+        let low = angle(start - center)
+        let up = angle(end - center)
+        var path = Path(center: center, radius: radius, lower: low, upper: up)
+
+        path.append(.Close)
+
+        return path
     }
     
     public func getShapeFor(runtime: Runtime) -> Shape? {

@@ -47,6 +47,7 @@
 		F2A104CD1B821E5700E97C6B /* SnapUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CC1B821E5700E97C6B /* SnapUI.swift */; };
 		F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104CE1B821F0200E97C6B /* GrabUI.swift */; };
 		F2DF635F1B91E3F500A2EFB6 /* CropGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF63641B92781300A2EFB6 /* MaskUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63631B92781300A2EFB6 /* MaskUI.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		F2A104CC1B821E5700E97C6B /* SnapUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapUI.swift; sourceTree = "<group>"; };
 		F2A104CE1B821F0200E97C6B /* GrabUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrabUI.swift; sourceTree = "<group>"; };
 		F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropGrabber.swift; sourceTree = "<group>"; };
+		F2DF63631B92781300A2EFB6 /* MaskUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskUI.swift; sourceTree = "<group>"; };
+		F2DF63651B927AA800A2EFB6 /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +114,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2A104C71B821C8B00E97C6B /* ReformStage.framework in Frameworks */,
-				F2A104C31B821C4100E97C6B /* ReformMath.framework in Frameworks */,
 				F2A104C11B821C3B00E97C6B /* ReformCore.framework in Frameworks */,
+				F2A104C31B821C4100E97C6B /* ReformMath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +189,7 @@
 		F26D46501B7D0B9500266096 = {
 			isa = PBXGroup;
 			children = (
+				F2DF63651B927AA800A2EFB6 /* ReformGraphics.framework */,
 				F2A104C61B821C8B00E97C6B /* ReformStage.framework */,
 				F2A104C21B821C4100E97C6B /* ReformMath.framework */,
 				F2A104C01B821C3B00E97C6B /* ReformCore.framework */,
@@ -276,6 +280,7 @@
 				F2A104CA1B821DD200E97C6B /* HandleUI.swift */,
 				F2A104CC1B821E5700E97C6B /* SnapUI.swift */,
 				F2A104CE1B821F0200E97C6B /* GrabUI.swift */,
+				F2DF63631B92781300A2EFB6 /* MaskUI.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -395,6 +400,7 @@
 				F2A104AA1B8214C900E97C6B /* Input.swift in Sources */,
 				F2A104AC1B8219BD00E97C6B /* CreateFormTool.swift in Sources */,
 				F2A104BF1B821BCF00E97C6B /* SelectionUI.swift in Sources */,
+				F2DF63641B92781300A2EFB6 /* MaskUI.swift in Sources */,
 				F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */,
 				F222AF2C1B851728005F71A1 /* Target.swift in Sources */,
 				F222AF401B8776B8005F71A1 /* DragToolTemplate.swift in Sources */,

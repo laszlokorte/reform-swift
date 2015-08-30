@@ -41,8 +41,7 @@ struct SnapUIRenderer : Renderer {
                 drawSegmentPath(context, path:entity.outline)
                 CGContextDrawPath(context, .Stroke)
             }
-            
-            
+
             
             CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
             CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
@@ -50,7 +49,6 @@ struct SnapUIRenderer : Renderer {
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            CGContextDrawPath(context, .FillStroke)
 
             drawDotAt(context, position: active.position, size: dotSize*1.3)
             CGContextDrawPath(context, .FillStroke)

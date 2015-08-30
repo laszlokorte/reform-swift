@@ -187,43 +187,13 @@ extension PieForm : Drawable {
             return nil
         }
         
-        var path = Path(segments: .MoveTo(c))
-        let arm = Vec2d(radius: r, angle: low)
-        let end = Vec2d(radius: r, angle: up)
-        let outer = Vec2d(radius: r*sqrt(2), angle: low + Angle(degree: -45))
-        let count = abs(Int(normalize360(up-low).degree / 90))
-        let rest = Angle(degree: normalize360(up-low).degree % 90)
-        
-        path.append(.LineTo(c+arm))
-        for i in 0..<count {
-            let a = c+rotate(outer, angle: Angle(degree: Double(90+90*i)))
-            let b = c+rotate(arm, angle: Angle(degree: Double(90+90*i)))
-            path.append(.ArcTo(
-                tangent: a,
-                tangent: b,
-                radius: r)
-            )
-            
-        }
-        
-        let restCos = (rest/2).cos
-        if abs(rest.degree) > 1 {
-            let a = c + Vec2d(
-                radius: r/restCos,
-                angle:  Angle(degree: Double(90*count))+rest/2+low)
-            let b = c + end
-            
-            path.append(.ArcTo(
-                tangent: a,
-                tangent: b,
-                radius: r)
-            )
-        
-        }
+        var path = Path(center: c, radius: r, lower: low, upper: up)
+
+        path.append(.LineTo(c))
+
         path.append(.Close)
 
-        
-        
+
         return path
     }
     

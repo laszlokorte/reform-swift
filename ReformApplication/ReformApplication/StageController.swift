@@ -22,6 +22,7 @@ struct StageUI {
     let handleUI : HandleUI
     let pivotUI : PivotUI
     let cropUI : CropUI
+    let maskUI : MaskUI
 
     init() {
         self.selectionUI = SelectionUI()
@@ -30,6 +31,7 @@ struct StageUI {
         self.handleUI = HandleUI()
         self.pivotUI = PivotUI()
         self.cropUI = CropUI()
+        self.maskUI = MaskUI()
     }
 }
 
@@ -73,6 +75,9 @@ class StageController : NSViewController {
         canvas.toolController = stageModel.toolController
 
         canvas.renderers = [
+            MaskUIRenderer(maskUI: stageModel.stageUI.maskUI),
+            StageRenderer(stage: stageModel.stage),
+
             SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage),
             SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage),
             CropUIRenderer(cropUI: stageModel.stageUI.cropUI),
@@ -85,7 +90,6 @@ class StageController : NSViewController {
 
     dynamic func procedureChanged() {
         if let stageModel = representedObject as? StageViewModel {
-            canvas?.shapes = stageModel.stage.currentShapes
             canvas?.canvasSize = stageModel.stage.size
             canvas?.needsDisplay = true
         }

@@ -39,7 +39,7 @@ The following was already implement in java but has to be ported/adopted to the 
 - [ ] Generate correct form names
 - [ ] EventFlow (stream api? notificationcenter?)
 - [x] Analyzer: collect nodes
-- [ ] Draw Arc
+- [x] Draw Arc
 - [x] Selection Tool
 - [ ] Picture Tool / Recursion
 - [ ] Reduce Code duplication for Tools

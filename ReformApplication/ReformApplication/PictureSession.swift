@@ -109,6 +109,7 @@ class PictureSession {
     let morphTool : MorphTool
     let rotationTool : RotateTool
     let scalingTool : ScaleTool
+    let previewTool : PreviewTool
 
     let cropTool : CropTool
 
@@ -179,6 +180,8 @@ class PictureSession {
         self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
 
         self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture, callback: self.procedureProcessor.triggerEval)
+
+        self.previewTool = PreviewTool(stage: self.stage, maskUI: stageUI.maskUI)
 
         self.toolController.currentTool = selectionTool
     }
