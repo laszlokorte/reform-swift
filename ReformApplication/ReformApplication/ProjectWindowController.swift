@@ -102,6 +102,7 @@ class ProjectWindowController : NSWindowController {
         }
     }
 
+
     @IBAction func toolbarButton(sender: NSToolbarItem) {
         guard let id = ToolbarIdentifier(rawValue: sender.itemIdentifier) else {
             return
@@ -154,6 +155,17 @@ class ProjectWindowController : NSWindowController {
 
         case CropToolItem
         case PreviewToolItem
+    }
+
 }
 
+extension ProjectWindowController : NSWindowDelegate {
+
+    func windowDidBecomeMain(notification: NSNotification) {
+        contentViewController?.view.needsDisplay = true
+    }
+
+    func windowDidResignMain(notification: NSNotification) {
+        contentViewController?.view.needsDisplay = true
+    }
 }

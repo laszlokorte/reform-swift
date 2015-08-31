@@ -74,6 +74,7 @@ class PictureController : NSViewController {
 
     }
 
+
 }
 
 extension PictureController : NSSplitViewDelegate {

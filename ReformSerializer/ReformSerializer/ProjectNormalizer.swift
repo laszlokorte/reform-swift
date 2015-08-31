@@ -304,6 +304,7 @@ func formType(normalizedValue: NormalizedValue) throws -> protocol<Form, Normali
 
 
 func destinationType(normalizedValue: NormalizedValue) throws -> protocol<RuntimeInitialDestination, Normalizable, Labeled>.Type {
+    throw InitialisationError.Unknown
 
 }
 
@@ -461,7 +462,7 @@ extension LineForm : Normalizable {
             throw InitialisationError.Unknown
         }
 
-        self.init(id: FormIdentifier(normalizedValue: id), name: name)
+        self.init(id: try FormIdentifier(normalizedValue: id), name: name)
     }
 
 }

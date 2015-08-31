@@ -804,7 +804,7 @@
                                     <popUpButton key="view" id="vcP-b3-fKp">
                                         <rect key="frame" x="0.0" y="14" width="50" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" title="Rectangle" bezelStyle="regularSquare" image="line" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" selectedItem="ygS-Dr-Gcs" id="ezS-Nn-FMh">
+                                        <popUpButtonCell key="cell" type="bevel" title="Rectangle" bezelStyle="regularSquare" image="rect" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" selectedItem="ygS-Dr-Gcs" id="ezS-Nn-FMh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="qao-IS-ECe">
@@ -842,6 +842,9 @@
                                 <toolbarItem reference="3UZ-1U-DCe"/>
                             </defaultToolbarItems>
                         </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="rPr-41-kT7"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="hFx-Lk-q3W" kind="relationship" relationship="window.shadowedContentViewController" id="vNh-Tt-v1p"/>
