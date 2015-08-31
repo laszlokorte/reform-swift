@@ -47,7 +47,7 @@ public protocol Function {
 }
 
 public func ==(left: ReferenceId, right: ReferenceId) -> Bool {
-    return left.id == right.id
+    return left.value == right.value
 }
 
 public enum Expression : Equatable {
@@ -90,7 +90,7 @@ extension Expression {
             if let value = dataSet.lookUp(id) {
                 return .Success(value)
             } else {
-                return .Fail(.UnresolvedReference(message: "[?\(id.id)]"))
+                return .Fail(.UnresolvedReference(message: "[?\(id.value)]"))
             }
         case .Unary(let op, let expr):
             switch expr.eval(dataSet) {

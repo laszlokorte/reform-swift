@@ -16,9 +16,9 @@ public struct RotateInstruction : Instruction {
         return formId
     }
     
-    let formId : FormIdentifier
-    let angle : AngleType
-    var fixPoint : PointType
+    public let formId : FormIdentifier
+    public let angle : AngleType
+    public let fixPoint : PointType
     
     public init(formId: FormIdentifier, angle: AngleType, fixPoint: PointType) {
         self.formId = formId

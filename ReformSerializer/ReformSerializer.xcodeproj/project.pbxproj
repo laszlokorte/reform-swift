@@ -10,6 +10,14 @@
 		F26D46821B7D0BBD00266096 /* ReformSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46811B7D0BBD00266096 /* ReformSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46891B7D0BBD00266096 /* ReformSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D467E1B7D0BBD00266096 /* ReformSerializer.framework */; };
 		F26D468E1B7D0BBD00266096 /* ReformSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D468D1B7D0BBD00266096 /* ReformSerializerTests.swift */; };
+		F2DF63701B93B64D00A2EFB6 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636D1B93B64D00A2EFB6 /* ReformCore.framework */; };
+		F2DF63711B93B64D00A2EFB6 /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636E1B93B64D00A2EFB6 /* ReformExpression.framework */; };
+		F2DF63721B93B64D00A2EFB6 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636F1B93B64D00A2EFB6 /* ReformMath.framework */; };
+		F2DF63751B93B75300A2EFB6 /* Normalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63741B93B75300A2EFB6 /* Normalizer.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF63781B93B8CA00A2EFB6 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63771B93B8CA00A2EFB6 /* Encoder.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF637A1B93B8D300A2EFB6 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63791B93B8D300A2EFB6 /* Decoder.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF637D1B93BFC700A2EFB6 /* JsonFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF637C1B93BFC700A2EFB6 /* JsonFormat.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF63801B93C0AF00A2EFB6 /* ProjectNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF637F1B93C0AF00A2EFB6 /* ProjectNormalizer.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		F26D46881B7D0BBD00266096 /* ReformSerializerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReformSerializerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D468D1B7D0BBD00266096 /* ReformSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformSerializerTests.swift; sourceTree = "<group>"; };
 		F26D468F1B7D0BBD00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2DF636D1B93B64D00A2EFB6 /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
+		F2DF636E1B93B64D00A2EFB6 /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
+		F2DF636F1B93B64D00A2EFB6 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
+		F2DF63741B93B75300A2EFB6 /* Normalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Normalizer.swift; sourceTree = "<group>"; };
+		F2DF63771B93B8CA00A2EFB6 /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		F2DF63791B93B8D300A2EFB6 /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		F2DF637C1B93BFC700A2EFB6 /* JsonFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonFormat.swift; sourceTree = "<group>"; };
+		F2DF637F1B93C0AF00A2EFB6 /* ProjectNormalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectNormalizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +52,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2DF63701B93B64D00A2EFB6 /* ReformCore.framework in Frameworks */,
+				F2DF63711B93B64D00A2EFB6 /* ReformExpression.framework in Frameworks */,
+				F2DF63721B93B64D00A2EFB6 /* ReformMath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +72,9 @@
 		F26D46741B7D0BBD00266096 = {
 			isa = PBXGroup;
 			children = (
+				F2DF636D1B93B64D00A2EFB6 /* ReformCore.framework */,
+				F2DF636E1B93B64D00A2EFB6 /* ReformExpression.framework */,
+				F2DF636F1B93B64D00A2EFB6 /* ReformMath.framework */,
 				F26D46801B7D0BBD00266096 /* ReformSerializer */,
 				F26D468C1B7D0BBD00266096 /* ReformSerializerTests */,
 				F26D467F1B7D0BBD00266096 /* Products */,
@@ -71,6 +93,9 @@
 		F26D46801B7D0BBD00266096 /* ReformSerializer */ = {
 			isa = PBXGroup;
 			children = (
+				F2DF637B1B93BFA300A2EFB6 /* Formats */,
+				F2DF63761B93B8B300A2EFB6 /* Coding */,
+				F2DF63731B93B65D00A2EFB6 /* Normalizer */,
 				F26D46811B7D0BBD00266096 /* ReformSerializer.h */,
 				F26D46831B7D0BBD00266096 /* Info.plist */,
 			);
@@ -84,6 +109,40 @@
 				F26D468F1B7D0BBD00266096 /* Info.plist */,
 			);
 			path = ReformSerializerTests;
+			sourceTree = "<group>";
+		};
+		F2DF63731B93B65D00A2EFB6 /* Normalizer */ = {
+			isa = PBXGroup;
+			children = (
+				F2DF637E1B93C07200A2EFB6 /* Extensions */,
+				F2DF63741B93B75300A2EFB6 /* Normalizer.swift */,
+			);
+			name = Normalizer;
+			sourceTree = "<group>";
+		};
+		F2DF63761B93B8B300A2EFB6 /* Coding */ = {
+			isa = PBXGroup;
+			children = (
+				F2DF63771B93B8CA00A2EFB6 /* Encoder.swift */,
+				F2DF63791B93B8D300A2EFB6 /* Decoder.swift */,
+			);
+			name = Coding;
+			sourceTree = "<group>";
+		};
+		F2DF637B1B93BFA300A2EFB6 /* Formats */ = {
+			isa = PBXGroup;
+			children = (
+				F2DF637C1B93BFC700A2EFB6 /* JsonFormat.swift */,
+			);
+			name = Formats;
+			sourceTree = "<group>";
+		};
+		F2DF637E1B93C07200A2EFB6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F2DF637F1B93C0AF00A2EFB6 /* ProjectNormalizer.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +201,7 @@
 		F26D46751B7D0BBD00266096 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Laszlo Korte";
 				TargetAttributes = {
@@ -193,6 +253,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2DF63781B93B8CA00A2EFB6 /* Encoder.swift in Sources */,
+				F2DF637A1B93B8D300A2EFB6 /* Decoder.swift in Sources */,
+				F2DF63801B93C0AF00A2EFB6 /* ProjectNormalizer.swift in Sources */,
+				F2DF637D1B93BFC700A2EFB6 /* JsonFormat.swift in Sources */,
+				F2DF63751B93B75300A2EFB6 /* Normalizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +367,7 @@
 		F26D46931B7D0BBD00266096 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -314,12 +380,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformSerializer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F26D46941B7D0BBD00266096 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -376,6 +444,7 @@
 				F26D46941B7D0BBD00266096 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F26D46951B7D0BBD00266096 /* Build configuration list for PBXNativeTarget "ReformSerializerTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +453,7 @@
 				F26D46971B7D0BBD00266096 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

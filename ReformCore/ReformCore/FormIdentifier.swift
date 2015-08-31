@@ -7,27 +7,27 @@
 //
 
 public struct FormIdentifier : Hashable {
-    private let id : Int64
+    public let value : Int
     
-    public init(_ id : Int64) {
-        self.id = id
+    public init(_ value : Int) {
+        self.value = value
     }
     
-    public var hashValue : Int { return Int(id) }
+    public var hashValue : Int { return Int(value) }
 }
 
 public func ==(lhs: FormIdentifier, rhs: FormIdentifier) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.value == rhs.value
 }
 
 extension FormIdentifier : CustomDebugStringConvertible {
     public var debugDescription : String {
-        return "FormId(\(id))"
+        return "FormId(\(value))"
     }
 }
 
 extension FormIdentifier : SequenceGeneratable {
-    public init(id : Int64) {
+    public init(id : Int) {
         self.init(id)
     }
 }

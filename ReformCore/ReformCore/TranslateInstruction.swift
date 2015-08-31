@@ -14,8 +14,8 @@ public struct TranslateInstruction : Instruction {
         return formId
     }
     
-    let formId : FormIdentifier
-    let distance : DistanceType
+    public let formId : FormIdentifier
+    public let distance : DistanceType
     
     public init(formId: FormIdentifier, distance: DistanceType) {
         self.formId = formId

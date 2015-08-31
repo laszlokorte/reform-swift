@@ -13,8 +13,8 @@ public struct CreateFormInstruction : Instruction {
         return form.identifier
     }
     
-    let form : Form
-    var destination : DestinationType
+    public let form : Form
+    public let destination : DestinationType
     
     public init(form : Form, destination: DestinationType) {
         self.form = form

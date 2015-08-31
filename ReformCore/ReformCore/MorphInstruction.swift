@@ -13,9 +13,9 @@ public struct MorphInstruction : Instruction {
         return formId
     }
     
-    let formId : FormIdentifier
-    let anchorId : AnchorIdentifier
-    var distance : DistanceType
+    public let formId : FormIdentifier
+    public let anchorId : AnchorIdentifier
+    public let distance : DistanceType
     
     public init(formId : FormIdentifier, anchorId: AnchorIdentifier, distance : DistanceType) {
         self.formId = formId

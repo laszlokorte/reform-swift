@@ -26,14 +26,16 @@ private struct RootInstruction : GroupInstruction {
 }
 
 final public class Procedure {
-    public let root = InstructionNode(group: RootInstruction())
+    public let root : InstructionNode
     public let paper = Paper()
     
     public init() {
-        
+        root = InstructionNode(group: RootInstruction())
     }
-    
-    
+
+    public init(children: [InstructionNode]) {
+        root = InstructionNode(group: RootInstruction(), children: children)
+    }
 }
 
 extension Procedure {

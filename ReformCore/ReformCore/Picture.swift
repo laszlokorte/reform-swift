@@ -10,17 +10,17 @@ import ReformExpression
 
 public struct PictureIdentifier : Hashable, SubCallId {
     public typealias CallType = Picture
-    private let id : Int64
+    public let value : Int
     
-    public init(_ id : Int64) {
-        self.id = id
+    public init(_ id : Int) {
+        self.value = id
     }
     
-    public var hashValue : Int { return Int(id) }
+    public var hashValue : Int { return value }
 }
 
 public func ==(lhs: PictureIdentifier, rhs: PictureIdentifier) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.value == rhs.value
 }
 
 final public class Picture {

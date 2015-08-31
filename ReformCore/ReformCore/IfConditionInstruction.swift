@@ -9,7 +9,7 @@
 import ReformExpression
 
 public struct IfConditionInstruction : GroupInstruction {
-    var expression : Expression
+    public let expression : Expression
     
     public var target : FormIdentifier? { return nil }
 

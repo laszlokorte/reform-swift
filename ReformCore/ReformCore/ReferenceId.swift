@@ -9,7 +9,7 @@
 import ReformExpression
 
 extension ReferenceId : SequenceGeneratable {
-    public init(id: Int64) {
-        self.init(Int(id))
+    public init(id: Int) {
+        self.init(id)
     }
 }

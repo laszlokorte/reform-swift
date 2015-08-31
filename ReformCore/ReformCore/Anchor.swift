@@ -17,31 +17,31 @@ public protocol Anchor {
 }
 
 public struct AnchorIdentifier : Hashable {
-    private let id : Int
+    public let value : Int
     
-    init(_ id : Int) {
-        self.id = id
+    public init(_ value : Int) {
+        self.value = value
     }
     
-    public var hashValue : Int { return Int(id) }
+    public var hashValue : Int { return value }
 }
 
 public func ==(lhs: AnchorIdentifier, rhs: AnchorIdentifier) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.value == rhs.value
 }
 
 extension AnchorIdentifier : IntegerLiteralConvertible, RawRepresentable {
     
     public init?(rawValue: Int) {
-        self.id = rawValue
+        self.value = rawValue
     }
     
     public var rawValue: Int {
-        return id
+        return value
     }
     
     public init(integerLiteral value: Int8) {
-        self.id = Int(value)
+        self.value = Int(value)
     }
     
 }

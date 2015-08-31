@@ -12,16 +12,16 @@ import Cocoa
 class GradientView : NSView {
 
     override func drawRect(dirtyRect: NSRect) {
-        if let main = self.window?.mainWindow where main {
+        if let main = self.window?.keyWindow where !main {
             NSGradient(
-                startingColor: NSColor(red: 0.8157, green:0.8118, blue: 0.8157, alpha: 1.0),
-                endingColor: NSColor(red: 0.69, green:0.69, blue: 0.69, alpha: 1.0)
+                startingColor: NSColor(red: 0.9647, green:0.9647, blue: 0.9647, alpha: 1.0),
+                endingColor: NSColor(red: 0.9647, green:0.9647, blue: 0.9647, alpha: 1.0)
 
                 )?.drawInRect(self.bounds, angle: -90)
         } else {
             NSGradient(
-                startingColor: NSColor(red: 0.9647, green:0.9647, blue: 0.9647, alpha: 1.0),
-                endingColor: NSColor(red: 0.9647, green:0.9647, blue: 0.9647, alpha: 1.0)
+                startingColor: NSColor(red: 0.8157, green:0.8118, blue: 0.8157, alpha: 1.0),
+                endingColor: NSColor(red: 0.69, green:0.69, blue: 0.69, alpha: 1.0)
 
                 )?.drawInRect(self.bounds, angle: -90)
         }

@@ -7,9 +7,13 @@
 //
 
 final public class Project {
-    var pictures : [Picture]
+    public private(set) var pictures : [Picture]
     
     public init(pictures: Picture...) {
+        self.pictures = pictures
+    }
+
+    public init(pictures: [Picture]) {
         self.pictures = pictures
     }
 }

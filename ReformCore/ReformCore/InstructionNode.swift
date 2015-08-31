@@ -6,8 +6,8 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public class InstructionNode {
-    private var content : InstructionContent
+public final class InstructionNode {
+    public private(set) var content : InstructionContent
     public private(set) weak var parent : InstructionNode?
     
     public init() {
@@ -167,7 +167,7 @@ extension InstructionNode : Analyzable {
 }
 
 
-private enum InstructionContent {
+public enum InstructionContent {
     case Null
     case Single(Instruction)
     case Group(GroupInstruction, [InstructionNode])

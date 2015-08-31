@@ -132,7 +132,7 @@ final public class ExpressionPrinter {
         case .NamedConstant(let label, _):
             return label
         case .Reference(let id):
-            return sheet.definitionWithId(id)?.name ?? "[?\(id.id)]"
+            return sheet.definitionWithId(id)?.name ?? "[?\(id.value)]"
         case .Unary(let op, let expr):
             guard let
                 (name, def) = findOperator(op),

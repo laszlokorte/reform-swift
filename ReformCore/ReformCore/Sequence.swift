@@ -7,14 +7,14 @@
 //
 
 public protocol SequenceGeneratable {
-    init(id: Int64)
+    init(id: Int)
 }
 
 public class IdentifierSequence<T:SequenceGeneratable> {
-    var sequenceValue : Int64
+    var sequenceValue : Int
     let type : T.Type
     
-    public init(type: T.Type = T.self, initialValue : Int64) {
+    public init(type: T.Type = T.self, initialValue : Int) {
         self.sequenceValue = initialValue
         self.type = type
     }

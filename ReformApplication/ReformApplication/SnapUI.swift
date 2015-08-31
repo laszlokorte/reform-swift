@@ -39,10 +39,10 @@ struct SnapUIRenderer : Renderer {
 
             for entity in stage.entities where active.belongsTo(entity.id) {
                 drawSegmentPath(context, path:entity.outline)
-                CGContextDrawPath(context, .Stroke)
             }
+            CGContextDrawPath(context, .Stroke)
 
-            
+
             CGContextSetRGBFillColor(context, 1, 0.8, 0.2, 1)
             CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
             CGContextSetLineWidth(context, 1)

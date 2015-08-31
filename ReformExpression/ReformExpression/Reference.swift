@@ -13,11 +13,11 @@ public protocol DataSet {
 }
 
 public struct ReferenceId : Hashable {
-    let id : Int
+    public let value : Int
     
-    public init(_ id: Int) {
-        self.id = id
+    public init(_ value: Int) {
+        self.value = value
     }
     
-    public var hashValue : Int { return id }
+    public var hashValue : Int { return value }
 }

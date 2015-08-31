@@ -17,10 +17,10 @@ public struct ScaleInstruction : Instruction {
         return formId
     }
     
-    let formId : FormIdentifier
-    let factor : FactorType
-    let axis : RuntimeAxis
-    var fixPoint : PointType
+    public let formId : FormIdentifier
+    public let factor : FactorType
+    public let axis : RuntimeAxis
+    public let fixPoint : PointType
     
     public init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType, axis: RuntimeAxis = .None) {
         self.formId = formId

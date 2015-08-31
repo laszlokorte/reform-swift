@@ -797,21 +797,21 @@
                                         <action selector="toolbarButton:" target="Oky-zY-oP4" id="hhR-qy-JRi"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C9C9D321-69A7-4D18-963F-D470A2CF4BE0" label="Create" paletteLabel="Create" image="circle" id="WJJ-Q9-c98">
+                                <toolbarItem implicitItemIdentifier="C9C9D321-69A7-4D18-963F-D470A2CF4BE0" label="Create" paletteLabel="Create" image="rect" id="WJJ-Q9-c98">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="32" height="32"/>
                                     <size key="maxSize" width="80" height="64"/>
                                     <popUpButton key="view" id="vcP-b3-fKp">
                                         <rect key="frame" x="0.0" y="14" width="50" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" title="Circle" bezelStyle="regularSquare" image="line" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" selectedItem="N89-dH-SHj" id="ezS-Nn-FMh">
+                                        <popUpButtonCell key="cell" type="bevel" title="Rectangle" bezelStyle="regularSquare" image="line" imagePosition="only" alignment="center" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" selectedItem="ygS-Dr-Gcs" id="ezS-Nn-FMh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                             <menu key="menu" id="qao-IS-ECe">
                                                 <items>
                                                     <menuItem title="Line" image="line" id="loL-Lk-i5T"/>
                                                     <menuItem title="Rectangle" state="on" image="rect" id="ygS-Dr-Gcs"/>
-                                                    <menuItem title="Circle" state="on" image="circle" id="N89-dH-SHj"/>
+                                                    <menuItem title="Circle" image="circle" id="N89-dH-SHj"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
