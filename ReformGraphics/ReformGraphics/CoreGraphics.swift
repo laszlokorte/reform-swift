@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReformMath
 
 internal extension Color {
     func setAsBackground(context: CGContext) {
@@ -48,9 +49,10 @@ public extension Shape {
             }
             
             break
-        case .TextArea(let position, let rotation, let alignment, let text, let size):
+        case .TextArea(let left, let right, let alignment, let text, let size):
             // TODO: not working
 
+            let rotation = ReformMath.angle(right-left)
             let attr : [String:NSFont]
             if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
                 attr = [NSFontAttributeName:font]
@@ -62,14 +64,29 @@ public extension Shape {
             let attributedString = CFAttributedStringCreate(nil, text, attr)
             let line = CTLineCreateWithAttributedString(attributedString)
             let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
-            
-            let xn = CGFloat(position.x) - bounds.width/2
+
+            let center = (left+right)/2
+            let position : Vec2d
+            switch alignment {
+            case .Left: position = left
+            case .Right: position = right
+            case .Center: position = center
+            }
+
+            let xn : CGFloat
+
+            switch alignment {
+            case .Left: xn = CGFloat(position.x)
+            case .Right: xn = CGFloat(position.x) - bounds.width
+            case .Center: xn = CGFloat(position.x) - bounds.width/2
+            }
+
             let yn = CGFloat(position.y) // - bounds.midY
             CGContextSetTextMatrix(context,CGAffineTransformMakeTranslation(xn, yn))
 
-            CGContextTranslateCTM(context, xn + CGFloat(size), yn)
+            CGContextTranslateCTM(context, CGFloat(position.x), CGFloat(position.y))
             CGContextRotateCTM(context, CGFloat(rotation.radians))
-            CGContextTranslateCTM(context, -xn - CGFloat(size), -yn)
+            CGContextTranslateCTM(context, -CGFloat(position.x), -CGFloat(position.y))
 
             CTLineDraw(line, context)
             CGContextFlush(context)

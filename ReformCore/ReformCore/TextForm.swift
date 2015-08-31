@@ -139,12 +139,12 @@ extension TextForm : Drawable {
     }
     
     public func getShapeFor(runtime: Runtime) -> Shape? {
-        guard let center = centerPoint.getPositionFor(runtime),
+        guard let start = startPoint.getPositionFor(runtime),
                 end = endPoint.getPositionFor(runtime),
                 size = offset.getLengthFor(runtime) else {
             return nil
         }
 
-        return Shape(area: .TextArea(center, rotation: angle(end-center), alignment: .Left, text: "Test", size: size), background: .Fill(Color(r: 40, g: 40, b: 40, a: 255)), stroke: .None)
+        return Shape(area: .TextArea(start, end, alignment: .Center, text: "Test", size: size), background: .Fill(Color(r: 40, g: 40, b: 40, a: 255)), stroke: .None)
     }
 }
