@@ -48,27 +48,30 @@ public extension Shape {
             }
             
             break
-        case .TextArea:
+        case .TextArea(let position, let rotation, let alignment, let text, let size):
             // TODO: not working
-            
-            fatalError("Font rendering not implemented")
-//            CGContextSetTextPosition(context, CGFloat(position.x), CGFloat(position.y))
-//            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
-//                let attr = [NSFontAttributeName:font]
-//                let attributedString = CFAttributedStringCreate(nil, text, attr)
-//                let line = CTLineCreateWithAttributedString(attributedString)
-//                let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
-//                
-//                let xn = CGFloat(position.x) - bounds.width/2
-//                let yn = CGFloat(position.y) // - bounds.midY
-//                CGContextSetTextPosition(context, xn, yn)
-//                
-//                CGContextSetFontSize(context, CGFloat(size))
-//                CTLineDraw(line, context)
-//                CGContextFlush(context)
-//
-//                
-//            }
+
+            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
+                CGContextSaveGState(context);
+
+                let attr = [NSFontAttributeName:font]
+                let attributedString = CFAttributedStringCreate(nil, text, attr)
+                let line = CTLineCreateWithAttributedString(attributedString)
+                let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+                
+                let xn = CGFloat(position.x) - bounds.width/2
+                let yn = CGFloat(position.y) // - bounds.midY
+                CGContextSetTextMatrix(context,CGAffineTransformMakeTranslation(xn, yn))
+
+                CGContextTranslateCTM(context, xn + CGFloat(size), yn)
+                CGContextRotateCTM(context, CGFloat(rotation.radians))
+                CGContextTranslateCTM(context, -xn - CGFloat(size), -yn)
+
+                CTLineDraw(line, context)
+                CGContextFlush(context)
+
+                CGContextRestoreGState(context)
+            }
             break
         }
     }

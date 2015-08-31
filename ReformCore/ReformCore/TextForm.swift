@@ -126,12 +126,24 @@ extension TextForm : Morphable {
 extension TextForm : Drawable {
     
     public func getPathFor(runtime: Runtime) -> Path? {
-        return nil
+        guard let center = centerPoint.getPositionFor(runtime),
+            end = endPoint.getPositionFor(runtime),
+            start = startPoint.getPositionFor(runtime),
+            ctrl = controlPointAnchor.getPositionFor(runtime) else {
+                return nil
+        }
+
+        let up = ctrl - center
+
+        return Path(segments: .MoveTo(start), .LineTo(end), .LineTo(end+up), .LineTo(start+up), .Close)
     }
     
     public func getShapeFor(runtime: Runtime) -> Shape? {
-        guard let path = getPathFor(runtime) else { return nil }
-        
-        return Shape(area: .PathArea(path), background: .Fill(Color(r: 40, g: 40, b: 40, a: 255)), stroke: .None)
+        guard let center = centerPoint.getPositionFor(runtime),
+                end = endPoint.getPositionFor(runtime) else {
+            return nil
+        }
+
+        return Shape(area: .TextArea(center, rotation: angle(end-center), alignment: .Left, text: "Test", size: 24), background: .Fill(Color(r: 40, g: 40, b: 40, a: 255)), stroke: .None)
     }
 }

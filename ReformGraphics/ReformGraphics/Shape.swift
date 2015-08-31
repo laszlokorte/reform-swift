@@ -26,9 +26,15 @@ public struct Shape {
     }
 }
 
+public enum Aligment {
+    case Left
+    case Right
+    case Center
+}
+
 public enum FillArea {
     case PathArea(Path)
-    case TextArea(Vec2d, text: String, size: Double)
+    case TextArea(Vec2d, rotation: Angle, alignment: Aligment, text: String, size: Double)
 }
 
 public enum Background {
