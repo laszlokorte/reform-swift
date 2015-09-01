@@ -16,7 +16,8 @@ import ReformTools
 
 @IBDesignable
 class CanvasView : NSView {
-    var toolController : ToolController?
+    @IBOutlet weak var deleagte : NSViewController?
+
     var canvasSize = Vec2d(x: 100, y: 100) {
         didSet {
             invalidateIntrinsicContentSize()
@@ -62,88 +63,14 @@ class CanvasView : NSView {
     override var intrinsicContentSize : NSSize {
         return NSSize(width: canvasSize.x + 50, height: canvasSize.y + 50)
     }
-}
 
-extension CanvasView {
-    private func fromEvent(event: NSEvent) -> Vec2d {
-        return fromPoint(event.locationInWindow)
-    }
-    
-    private func fromPoint(point: NSPoint) -> Vec2d {
-        let pos = convertPoint(point, fromView: nil)
-
-        let offsetX = (bounds.width-CGFloat(canvasSize.x))/2.0
-        let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
-
-
-        return Vec2d(x: Double(pos.x-offsetX), y: Double(pos.y-offsetY))
-    }
-    
-    override func mouseDown(theEvent: NSEvent) {
-        toolController?.process(.Press, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
-        
-        self.needsDisplay = true
-    }
-    
-    override func mouseUp(theEvent: NSEvent) {
-        toolController?.process(.Release, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
-        
-        self.needsDisplay = true
-    }
-    
-    override func mouseMoved(theEvent: NSEvent) {
-        
-        toolController?.process(.Move, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
-        
-        self.needsDisplay = true
-    }
-    
-    override func mouseDragged(theEvent: NSEvent) {
-        toolController?.process(.Move, atPosition: fromEvent(theEvent), withModifier: Modifier.fromEvent(theEvent))
-        
-        self.needsDisplay = true
-    }
-    
-    override func flagsChanged(theEvent: NSEvent) {
-        guard let mousePostion = window?.mouseLocationOutsideOfEventStream else {
-            return
-        }
-        
-        toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
-        
-        self.needsDisplay = true
-    }
-    
     override var acceptsFirstResponder : Bool { return true }
-    
-    override func keyDown(theEvent: NSEvent) {
-        guard let mousePostion = window?.mouseLocationOutsideOfEventStream else {
-            return
-        }
-        
-        if theEvent.keyCode == 13 /*W*/ {
-            toolController?.process(.Toggle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
-        } else if theEvent.keyCode == 53 /*ESC*/ {
-            toolController?.cancel()
-        }else if theEvent.keyCode == 48 || theEvent.keyCode == 50 /*TAB*/ {
-            toolController?.process(.Cycle, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
-        }
-                
-        if !theEvent.modifierFlags.isEmpty {
-            toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
-        }
-        self.needsDisplay = true
 
+    override func keyDown(theEvent: NSEvent) {
+        deleagte?.keyDown(theEvent)
     }
-    
+
     override func keyUp(theEvent: NSEvent) {
-        guard let mousePostion = window?.mouseLocationOutsideOfEventStream else {
-            return
-        }
-        
-        if !theEvent.modifierFlags.isEmpty {
-            toolController?.process(.ModifierChange, atPosition: fromPoint(mousePostion), withModifier: Modifier.fromEvent(theEvent))
-        }
-    
+        deleagte?.keyUp(theEvent)
     }
 }

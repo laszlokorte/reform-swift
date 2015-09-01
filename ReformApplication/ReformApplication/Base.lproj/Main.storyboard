@@ -1444,6 +1444,9 @@
                             <subviews>
                                 <view focusRingType="none" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="500" height="308"/>
+                                    <connections>
+                                        <outlet property="deleagte" destination="DG2-kz-iLd" id="glg-UU-klS"/>
+                                    </connections>
                                 </view>
                             </subviews>
                             <constraints>

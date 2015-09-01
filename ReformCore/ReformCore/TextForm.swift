@@ -60,7 +60,7 @@ final public class TextForm : Form, Creatable {
     }
     
     public var outline : Outline {
-        return NullOutline()
+        return LineOutline(start: startPoint, end: endPoint)
     }
 }
 

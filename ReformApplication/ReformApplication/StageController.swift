@@ -37,6 +37,8 @@ struct StageUI {
 
 @objc
 class StageController : NSViewController {
+    var toolController : ToolController?
+    var stageRenderer : StageRenderer?
 
     override var representedObject : AnyObject? {
         didSet {
@@ -65,19 +67,21 @@ class StageController : NSViewController {
         
             let trackingOptions : NSTrackingAreaOptions = [.MouseMoved, .EnabledDuringMouseDrag, .ActiveInKeyWindow, .InVisibleRect]
             
-            let trackingArea = NSTrackingArea(rect: canvas.bounds, options: trackingOptions, owner: canvas, userInfo: nil)
+            let trackingArea = NSTrackingArea(rect: canvas.bounds, options: trackingOptions, owner: self, userInfo: nil)
             
             canvas.addTrackingArea(trackingArea)
         }
     }
 
     func configureCanvas(canvas: CanvasView, withStage stageModel: StageViewModel) {
-        canvas.toolController = stageModel.toolController
+        toolController = stageModel.toolController
+
+        let sr = StageRenderer(stage: stageModel.stage)
+        stageRenderer = sr
 
         canvas.renderers = [
             MaskUIRenderer(maskUI: stageModel.stageUI.maskUI),
-            StageRenderer(stage: stageModel.stage),
-
+            sr,
             SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage),
             SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage),
             CropUIRenderer(stage: stageModel.stage, cropUI: stageModel.stageUI.cropUI),
@@ -98,5 +102,110 @@ class StageController : NSViewController {
     dynamic func toolChanged() {
         canvas?.needsDisplay = true
     }
-    
+
+    private func fromEvent(event: NSEvent) -> Vec2d? {
+        return fromPoint(event.locationInWindow)
+    }
+
+    private func fromPoint(point: NSPoint) -> Vec2d? {
+        guard let canvas = canvas else {
+            return nil
+        }
+
+        let pos = canvas.convertPoint(point, fromView: nil)
+
+        let offsetX = (canvas.bounds.width-CGFloat(canvas.canvasSize.x))/2.0
+        let offsetY = (canvas.bounds.height-CGFloat(canvas.canvasSize.y))/2.0
+
+
+        return Vec2d(x: Double(pos.x-offsetX), y: Double(pos.y-offsetY))
+    }
+
+    override func mouseDown(theEvent: NSEvent) {
+        guard let pos = fromEvent(theEvent) else { return }
+
+        toolController?.process(.Press, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+
+        canvas?.needsDisplay = true
+    }
+
+    override func mouseUp(theEvent: NSEvent) {
+        guard let pos = fromEvent(theEvent) else { return }
+
+
+        toolController?.process(.Release, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+
+        canvas?.needsDisplay = true
+    }
+
+    override func mouseMoved(theEvent: NSEvent) {
+        guard let pos = fromEvent(theEvent) else { return }
+
+        toolController?.process(.Move, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+
+        canvas?.needsDisplay = true
+    }
+
+    override func mouseDragged(theEvent: NSEvent) {
+        guard let pos = fromEvent(theEvent) else { return }
+
+
+        toolController?.process(.Move, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+
+        canvas?.needsDisplay = true
+    }
+
+    override func flagsChanged(theEvent: NSEvent) {
+        guard let mousePostion = canvas?.window?.mouseLocationOutsideOfEventStream else {
+            return
+        }
+        guard let pos = fromPoint(mousePostion) else { return }
+
+        toolController?.process(.ModifierChange, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+
+        canvas?.needsDisplay = true
+    }
+
+    override func keyDown(theEvent: NSEvent) {
+        guard let mousePostion = canvas?.window?.mouseLocationOutsideOfEventStream else {
+            return
+        }
+        guard let pos = fromPoint(mousePostion) else { return }
+
+
+        if theEvent.keyCode == 49 {
+            stageRenderer?.lookIntoFuture = true
+        } else if theEvent.keyCode == 13 /*W*/ {
+            toolController?.process(.Toggle, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+        } else if theEvent.keyCode == 53 /*ESC*/ {
+            toolController?.cancel()
+        } else if theEvent.keyCode == 48 || theEvent.keyCode == 50 /*TAB*/ {
+            toolController?.process(.Cycle, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+        } else if !theEvent.modifierFlags.isEmpty {
+            toolController?.process(.ModifierChange, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+        } else {
+            super.keyDown(theEvent)
+            return
+        }
+        canvas?.needsDisplay = true
+    }
+
+    override func keyUp(theEvent: NSEvent) {
+        guard let mousePostion = canvas?.window?.mouseLocationOutsideOfEventStream else {
+            return
+        }
+        guard let pos = fromPoint(mousePostion) else { return }
+
+
+        if theEvent.keyCode == 49 {
+            stageRenderer?.lookIntoFuture = false
+        } else if !theEvent.modifierFlags.isEmpty {
+            toolController?.process(.ModifierChange, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
+        } else {
+            super.keyUp(theEvent)
+            return
+        }
+        canvas?.needsDisplay = true
+    }
+
 }

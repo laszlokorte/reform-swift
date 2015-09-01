@@ -11,8 +11,13 @@ import ReformStage
 import ReformTools
 
 
-struct StageRenderer : Renderer {
+class StageRenderer : Renderer {
     let stage : Stage
+    var lookIntoFuture = false
+
+    init(stage: Stage) {
+        self.stage = stage
+    }
 
     func renderInContext(context: CGContext) {
 
@@ -20,9 +25,19 @@ struct StageRenderer : Renderer {
         CGContextFillRect(context, CGRect(x:0,y:0, width: CGFloat(stage.size.x), height: CGFloat(stage.size.y)))
 
 
+        if lookIntoFuture {
+            for shape in stage.finalShapes {
+                shape.shape.render(context)
+            }
+
+            CGContextSetAlpha(context, 0.5)
+        }
+
+
         for shape in stage.currentShapes {
             shape.shape.render(context)
         }
+
 
     }
 }
