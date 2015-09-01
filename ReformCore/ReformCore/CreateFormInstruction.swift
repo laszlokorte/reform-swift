@@ -21,7 +21,7 @@ public struct CreateFormInstruction : Instruction {
         self.destination = destination
     }
     
-    public func evaluate(runtime: Runtime) {
+    public func evaluate<T:Runtime>(runtime: T) {
         guard let (min, max) = destination.getMinMaxFor(runtime) else {
             runtime.reportError(.InvalidDestination)
             return
@@ -35,7 +35,7 @@ public struct CreateFormInstruction : Instruction {
         return "Create \(form.name) \(destination.getDescription(stringifier))"
     }
     
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
         analyzer.announceForm(form)
         
         if let picture = form as? PictureForm,

@@ -127,7 +127,7 @@ extension InstructionNode {
 }
 
 extension InstructionNode : Evaluatable {
-    public func evaluate(runtime: Runtime) {
+    public func evaluate<T:Runtime>(runtime: T) {
         switch content {
         case .Null:
             runtime.eval(self) {
@@ -147,7 +147,7 @@ extension InstructionNode : Evaluatable {
 }
 
 extension InstructionNode : Analyzable {
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
         switch content {
         case .Null:
             analyzer.publish(self, label: "Null")
@@ -174,9 +174,9 @@ public enum InstructionContent {
 }
 
 public protocol Instruction : Labeled {
-    func evaluate(runtime: Runtime)
+    func evaluate<T:Runtime>(runtime: T)
     
-    func analyze(analyzer: Analyzer)
+    func analyze<T:Analyzer>(analyzer: T)
     
     var target : FormIdentifier? { get }
 }
@@ -186,7 +186,7 @@ public protocol GroupInstruction : Labeled {
     
     var target : FormIdentifier? { get }
     
-    func evaluate(runtime: Runtime, withChildren: [InstructionNode])
+    func evaluate<T:Runtime>(runtime: T, withChildren: [InstructionNode])
     
-    func analyze(analyzer: Analyzer)
+    func analyze<T:Analyzer>(analyzer: T)
 }

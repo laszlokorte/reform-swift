@@ -23,7 +23,7 @@ public struct MorphInstruction : Instruction {
         self.distance = distance
     }
     
-    public func evaluate(runtime: Runtime) {
+    public func evaluate<T:Runtime>(runtime: T) {
         guard let form = runtime.get(formId) as? Morphable else {
             runtime.reportError(.UnknownForm)
             return
@@ -48,6 +48,6 @@ public struct MorphInstruction : Instruction {
         return "Move \(formName)'s \(anchorName) \(distance.getDescription(stringifier))"
     }
     
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
     }
 }

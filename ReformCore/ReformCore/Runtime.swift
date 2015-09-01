@@ -13,11 +13,11 @@ public protocol SubCallId {
 }
 
 public protocol RuntimeListener {
-    func runtimeBeginEvaluation(runtime: Runtime, withSize: (Double, Double))
-    func runtimeFinishEvaluation(runtime: Runtime)
-    func runtime(runtime: Runtime, didEval: Evaluatable)
-    func runtime(runtime: Runtime, exitScopeWithForms: [FormIdentifier])
-    func runtime(runtime: Runtime, triggeredError: RuntimeError, on: Evaluatable)
+    func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize: (Double, Double))
+    func runtimeFinishEvaluation<R:Runtime>(runtime: R)
+    func runtime<R:Runtime>(runtime: R, didEval: Evaluatable)
+    func runtime<R:Runtime>(runtime: R, exitScopeWithForms: [FormIdentifier])
+    func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on: Evaluatable)
 }
 
 public protocol Runtime : class {

@@ -24,17 +24,17 @@ final public class StageCollector : RuntimeListener {
         self.focusFilter = focusFilter
     }
     
-    public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Double, Double)) {
+    public func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize size: (Double, Double)) {
         collected = false
         buffer.clear()
         buffer.size = Vec2d(x: Double(size.0), y: Double(size.1))
     }
     
-    public func runtimeFinishEvaluation(runtime: Runtime) {
+    public func runtimeFinishEvaluation<R:Runtime>(runtime: R) {
         buffer.flush(stage)
     }
 
-    public func runtime(runtime: Runtime, didEval instruction: Evaluatable) {
+    public func runtime<R:Runtime>(runtime: R, didEval instruction: Evaluatable) {
         guard !collected else { return }
         guard focusFilter(instruction) else { return }
         
@@ -58,7 +58,7 @@ final public class StageCollector : RuntimeListener {
         }
     }
 
-    public func runtime(runtime: Runtime, exitScopeWithForms forms: [FormIdentifier]) {
+    public func runtime<R:Runtime>(runtime: R, exitScopeWithForms forms: [FormIdentifier]) {
         for id in forms {
             guard let form = runtime.get(id) as? Drawable where form.drawingMode == .Draw else {
                 continue
@@ -78,7 +78,7 @@ final public class StageCollector : RuntimeListener {
         }
     }
 
-    public func runtime(runtime: Runtime, triggeredError: RuntimeError, on: Evaluatable) {
+    public func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on: Evaluatable) {
         
     }
 

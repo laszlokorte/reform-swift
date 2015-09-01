@@ -7,5 +7,5 @@
 //
 
 public protocol Evaluatable : class, Analyzable {
-    func evaluate(runtime: Runtime)
+    func evaluate<T:Runtime>(runtime: T)
 }

@@ -17,7 +17,7 @@ public struct IfConditionInstruction : GroupInstruction {
         self.expression = expression
     }
     
-    public func evaluate(runtime: Runtime, withChildren children: [InstructionNode]) {
+    public func evaluate<T:Runtime>(runtime: T, withChildren children: [InstructionNode]) {
         guard case .Success(.BoolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
             runtime.reportError(.InvalidExpression)
             return
@@ -36,6 +36,6 @@ public struct IfConditionInstruction : GroupInstruction {
         return "if \(expressionString):"
     }
 
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
     }
 }

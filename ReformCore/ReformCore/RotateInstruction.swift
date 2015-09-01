@@ -26,7 +26,7 @@ public struct RotateInstruction : Instruction {
         self.fixPoint = fixPoint
     }
     
-    public func evaluate(runtime: Runtime) {
+    public func evaluate<T:Runtime>(runtime: T) {
         guard let form = runtime.get(formId) as? Rotatable else {
             runtime.reportError(.UnknownForm)
             return
@@ -51,7 +51,7 @@ public struct RotateInstruction : Instruction {
     
     
     
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
     }
     
 }

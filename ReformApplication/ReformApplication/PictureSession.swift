@@ -29,13 +29,13 @@ class InstructionFocusChanger {
     }
 }
 
-class ProcedureProcessor {
+class ProcedureProcessor<R:Runtime, A:Analyzer> {
     let picture : Picture
-    let runtime: Runtime
-    let analyzer : Analyzer
+    let runtime: R
+    let analyzer : A
     let toolController : ToolController
 
-    init(picture : Picture, analyzer: Analyzer, runtime: Runtime, toolController: ToolController) {
+    init(picture : Picture, analyzer: A, runtime: R, toolController: ToolController) {
         self.picture = picture
         self.analyzer = analyzer
         self.runtime = runtime
@@ -76,7 +76,7 @@ class PictureSession {
     let formSelection : FormSelection
     let instructionFocus : InstructionFocus
     let analyzer : DefaultAnalyzer
-    let runtime : Runtime
+    let runtime : DefaultRuntime
 
     let formIDSequence : IdentifierSequence<FormIdentifier>
     let referenceIDSequence : IdentifierSequence<ReferenceId>
@@ -114,7 +114,7 @@ class PictureSession {
 
     let cropTool : CropTool
 
-    let procedureProcessor : ProcedureProcessor
+    let procedureProcessor : ProcedureProcessor<DefaultRuntime, DefaultAnalyzer>
     let instructionFocusChanger : InstructionFocusChanger
 
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {

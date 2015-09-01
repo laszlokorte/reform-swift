@@ -43,7 +43,7 @@ final public class SnapshotCollector : RuntimeListener {
         self.maxSize = maxSize
     }
 
-    public func runtimeBeginEvaluation(runtime: Runtime, withSize size: (Double, Double)) {
+    public func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize size: (Double, Double)) {
         paths.removeAll()
         errors.removeAll()
         instructions.removeAll()
@@ -60,10 +60,10 @@ final public class SnapshotCollector : RuntimeListener {
 
     }
 
-    public func runtimeFinishEvaluation(runtime: Runtime) {
+    public func runtimeFinishEvaluation<R:Runtime>(runtime: R) {
     }
 
-    public func runtime(runtime: Runtime, didEval instruction: Evaluatable) {
+    public func runtime<R:Runtime>(runtime: R, didEval instruction: Evaluatable) {
         guard let instruction = instruction as? InstructionNode else {
             return
         }
@@ -160,7 +160,7 @@ final public class SnapshotCollector : RuntimeListener {
         return image
     }
 
-    public func runtime(runtime: Runtime, exitScopeWithForms forms: [FormIdentifier]) {
+    public func runtime<R:Runtime>(runtime: R, exitScopeWithForms forms: [FormIdentifier]) {
 
         for formId in forms {
             guard let form = runtime.get(formId) as? Drawable else {
@@ -180,7 +180,7 @@ final public class SnapshotCollector : RuntimeListener {
 
     }
 
-    public func runtime(runtime: Runtime, triggeredError: RuntimeError, on: Evaluatable) {
+    public func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on: Evaluatable) {
         guard let node = on as? InstructionNode else {
             return
         }

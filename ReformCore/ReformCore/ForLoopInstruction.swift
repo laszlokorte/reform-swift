@@ -17,7 +17,7 @@ public struct ForLoopInstruction : GroupInstruction {
         self.expression = expression
     }
     
-    public func evaluate(runtime: Runtime, withChildren children: [InstructionNode]) {
+    public func evaluate<T:Runtime>(runtime: T, withChildren children: [InstructionNode]) {
         guard case .Success(.IntValue(let count)) = expression.eval(runtime.getDataSet()) else {
             runtime.reportError(.InvalidExpression)
             return
@@ -36,6 +36,6 @@ public struct ForLoopInstruction : GroupInstruction {
         return "Repeat \(expressionString) times:"
     }
     
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
     }
 }

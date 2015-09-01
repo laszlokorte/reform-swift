@@ -7,5 +7,5 @@
 //
 
 public protocol Analyzable {
-    func analyze(analyzer: Analyzer)
+    func analyze<T:Analyzer>(analyzer: T)
 }

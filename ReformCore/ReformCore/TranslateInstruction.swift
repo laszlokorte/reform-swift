@@ -22,7 +22,7 @@ public struct TranslateInstruction : Instruction {
         self.distance = distance
     }
     
-    public func evaluate(runtime: Runtime) {
+    public func evaluate<T:Runtime>(runtime: T) {
         guard let form = runtime.get(formId) as? Translatable else {
             runtime.reportError(.UnknownForm)
             return
@@ -42,6 +42,6 @@ public struct TranslateInstruction : Instruction {
     }
     
     
-    public func analyze(analyzer: Analyzer) {
+    public func analyze<T:Analyzer>(analyzer: T) {
     }
 }
