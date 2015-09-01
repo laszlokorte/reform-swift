@@ -14,7 +14,7 @@ public enum RuntimeAxis {
 }
 
 extension RuntimeAxis {
-    func getVectorFor(runtime: Runtime) ->  Vec2d? {
+    func getVectorFor<R:Runtime>(runtime: R) ->  Vec2d? {
         switch self {
         case .None: return Vec2d()
         case  .Named(_, let from, let to):

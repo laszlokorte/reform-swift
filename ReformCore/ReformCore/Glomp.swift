@@ -25,7 +25,7 @@ public struct GlompPoint : RuntimePoint, Labeled, Equatable {
         return "\(value) along \(formName)"
     }
     
-    public func getPositionFor(runtime: Runtime) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let formOutline = runtime.get(formId)?.outline else {
             return nil
         }

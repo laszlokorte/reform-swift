@@ -15,7 +15,7 @@ public struct ConstantAngle : RuntimeRotationAngle, Labeled {
         self.angle = angle
     }
     
-    public func getAngleFor(runtime: Runtime) -> Angle? {
+    public func getAngleFor<R:Runtime>(runtime: R) -> Angle? {
         return angle
     }
     

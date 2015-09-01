@@ -10,9 +10,9 @@
 import ReformMath
 
 public protocol RuntimePoint {
-    func getPositionFor(runtime: Runtime) -> Vec2d?
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d?
 }
 
 public protocol WriteableRuntimePoint : RuntimePoint {
-    func setPositionFor(runtime: Runtime, position: Vec2d)
+    func setPositionFor<R:Runtime>(runtime: R, position: Vec2d)
 }

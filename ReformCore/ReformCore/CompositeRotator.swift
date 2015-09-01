@@ -16,7 +16,7 @@ struct CompositeRotator : Rotator {
     }
     
     
-    func rotate(runtime: Runtime, angle: Angle, fix: Vec2d) {
+    func rotate<R:Runtime>(runtime: R, angle: Angle, fix: Vec2d) {
         for rotator in rotators {
             rotator.rotate(runtime, angle: angle, fix: fix)
         }

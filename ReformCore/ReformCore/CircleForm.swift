@@ -46,7 +46,7 @@ final public class CircleForm : Form, Creatable {
         return StaticAngle(formId: identifier, offset: 3)
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         let c = (min+max) / 2
         let delta = max - min
         
@@ -139,7 +139,7 @@ private struct CircleAnchor : Anchor {
     }
     
     
-    func getPositionFor(runtime: Runtime) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             angle = rotation.getAngleFor(runtime),
@@ -150,7 +150,7 @@ private struct CircleAnchor : Anchor {
         return c + rotate(Vec2d.XAxis * r, angle: angle + quater.angle)
     }
     
-    func translate(runtime: Runtime, delta: Vec2d) {
+    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
         guard let
             oldAngle = rotation.getAngleFor(runtime),
             oldRadius = radius.getLengthFor(runtime) else {
@@ -215,7 +215,7 @@ extension CircleForm : Morphable {
 
 extension CircleForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         guard
             let c = centerPoint.getPositionFor(runtime),
             let rd = radius.getLengthFor(runtime)
@@ -243,7 +243,7 @@ extension CircleForm : Drawable {
         )
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
         return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))

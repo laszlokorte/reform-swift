@@ -84,7 +84,7 @@ class PictureSession {
     let stage : Stage
     let stageUI : StageUI
 
-    let stageCollector : StageCollector
+    let stageCollector : StageCollector<DefaultAnalyzer>
     let snapshotCollector : SnapshotCollector
 
     let pointSnapper : PointSnapper

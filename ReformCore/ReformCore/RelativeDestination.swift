@@ -24,7 +24,7 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
         self.alignment = alignment
     }
     
-    public func getMinMaxFor(runtime: Runtime) -> (Vec2d,Vec2d)? {
+    public func getMinMaxFor<R:Runtime>(runtime: R) -> (Vec2d,Vec2d)? {
         guard let
             fromPos = from.getPositionFor(runtime),
             toPos = to.getPositionFor(runtime) else {

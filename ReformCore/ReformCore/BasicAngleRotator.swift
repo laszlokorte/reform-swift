@@ -16,7 +16,7 @@ struct BasicAngleRotator : Rotator {
     }
     
     
-    func rotate(runtime: Runtime, angle: Angle, fix: Vec2d) {
+    func rotate<R:Runtime>(runtime: R, angle: Angle, fix: Vec2d) {
         for a in angles {
             if let old = a.getAngleFor(runtime) {
                 a.setAngleFor(runtime, angle: old + angle)

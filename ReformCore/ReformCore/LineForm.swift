@@ -38,7 +38,7 @@ final public class LineForm : Form, Creatable {
         get { return StaticPoint(formId: identifier, offset: 2) }
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
     }
@@ -109,7 +109,7 @@ extension LineForm : Morphable {
 }
 
 extension LineForm : Drawable {
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         guard
             let start = startAnchor.getPositionFor(runtime),
             let end = endAnchor.getPositionFor(runtime)
@@ -120,7 +120,7 @@ extension LineForm : Drawable {
         return Path(segments: .MoveTo(start), .LineTo(end))
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
         return Shape(area: .PathArea(path), background: .None, stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))

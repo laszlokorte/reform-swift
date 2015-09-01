@@ -16,7 +16,7 @@ public struct ConstantScaleFactor : RuntimeScaleFactor, Labeled {
         self.factor = factor
     }
     
-    public func getFactorFor(runtime: Runtime) -> Double? {
+    public func getFactorFor<R:Runtime>(runtime: R) -> Double? {
         return factor
     }
     

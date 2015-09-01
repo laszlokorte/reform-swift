@@ -17,7 +17,7 @@ struct StaticPoint : WriteableRuntimePoint {
         self.offset = offset
     }
     
-    func getPositionFor(runtime: Runtime) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             x = runtime.read(formId, offset: offset),
             y = runtime.read(formId, offset: offset+1) else {
@@ -26,7 +26,7 @@ struct StaticPoint : WriteableRuntimePoint {
         return Vec2d(x: unsafeBitCast(x, Double.self), y:unsafeBitCast(y, Double.self))
     }
     
-    func setPositionFor(runtime: Runtime, position: Vec2d) {
+    func setPositionFor<R:Runtime>(runtime: R, position: Vec2d) {
         runtime.write(formId, offset: offset, value: unsafeBitCast(position.x, UInt64.self))
         
         runtime.write(formId, offset: offset+1, value: unsafeBitCast(position.y, UInt64.self))

@@ -9,15 +9,15 @@
 import ReformMath
 
 struct NullOutline : Outline {    
-    func getPositionFor(runtime: Runtime, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
         return nil
     }
     
-    func getLengthFor(runtime: Runtime) -> Double? {
+    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
         return nil
     }
     
-    func getSegmentsFor(runtime: Runtime) -> SegmentPath {
+    func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath {
         return []
     }
 }

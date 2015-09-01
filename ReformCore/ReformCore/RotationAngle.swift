@@ -9,9 +9,9 @@
 import ReformMath
 
 public protocol RuntimeRotationAngle : Degeneratable {
-    func getAngleFor(runtime: Runtime) -> Angle?
+    func getAngleFor<R:Runtime>(runtime: R) -> Angle?
 }
 
 public protocol WriteableRuntimeRotationAngle : RuntimeRotationAngle {
-    func setAngleFor(runtime: Runtime, angle: Angle)
+    func setAngleFor<R:Runtime>(runtime: R, angle: Angle)
 }

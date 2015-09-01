@@ -17,7 +17,7 @@ public struct ConstantDistance : RuntimeDistance, Labeled {
         self.delta = delta
     }
     
-    public func getDeltaFor(runtime: Runtime) -> Vec2d? {
+    public func getDeltaFor<R:Runtime>(runtime: R) -> Vec2d? {
         return delta
     }
     

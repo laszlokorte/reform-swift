@@ -53,7 +53,7 @@ final public class RectangleForm : Form, Creatable {
         return StaticAngle(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         let w = max.x - min.x
         let h = max.y - min.y
         let c = (min+max) / 2
@@ -206,7 +206,7 @@ private struct RectangleAnchor : Anchor {
     }
     
     
-    func getPositionFor(runtime: Runtime) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             angle = rotation.getAngleFor(runtime),
@@ -218,7 +218,7 @@ private struct RectangleAnchor : Anchor {
         return c + rotate(Vec2d(x:Double(side.x)*w, y:Double(side.y)*h)/2, angle: angle)
     }
     
-    func translate(runtime: Runtime, delta: Vec2d) {
+    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
         if let
             oldAngle = rotation.getAngleFor(runtime),
             oldWidth = width.getLengthFor(runtime),
@@ -306,7 +306,7 @@ extension RectangleForm : Morphable {
 
 extension RectangleForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         guard
             let topLeft = topLeftAnchor.getPositionFor(runtime),
             let topRight = topRightAnchor.getPositionFor(runtime),
@@ -319,7 +319,7 @@ extension RectangleForm : Drawable {
         return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft), .Close)
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
         return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))

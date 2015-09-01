@@ -26,7 +26,7 @@ public struct RuntimeIntersectionPoint : RuntimePoint, Labeled {
         return "Intersection #\(index) of \(formAName) and \(formBName)"
     }
     
-    public func getPositionFor(runtime: Runtime) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             formAOutline = runtime.get(formA)?.outline,
             formBOutline = runtime.get(formB)?.outline else {

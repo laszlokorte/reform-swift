@@ -10,15 +10,15 @@ import ReformMath
 import ReformCore
 
 
-final public class StageCollector : RuntimeListener {
+final public class StageCollector<A:Analyzer> : RuntimeListener {
     
     private let stage : Stage
-    private let analyzer : Analyzer
+    private let analyzer : A
     private let focusFilter : (Evaluatable) -> Bool
     private var collected : Bool = false
     private let buffer = StageBuffer()
     
-    public init(stage: Stage, analyzer: Analyzer, focusFilter: (Evaluatable) -> Bool) {
+    public init(stage: Stage, analyzer: A, focusFilter: (Evaluatable) -> Bool) {
         self.stage = stage
         self.analyzer = analyzer
         self.focusFilter = focusFilter

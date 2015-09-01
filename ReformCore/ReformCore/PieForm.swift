@@ -49,7 +49,7 @@ final public class PieForm : Form, Creatable {
         return StaticAngle(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         let c = (min+max) / 2
         let delta = max - min
         centerPoint.setPositionFor(runtime, position: c)
@@ -109,7 +109,7 @@ private struct PieCornerAnchor : Anchor {
     }
     
     
-    func getPositionFor(runtime: Runtime) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             angle = rotation.getAngleFor(runtime),
@@ -120,7 +120,7 @@ private struct PieCornerAnchor : Anchor {
         return c + rotate(Vec2d.XAxis * r, angle: angle)
     }
     
-    func translate(runtime: Runtime, delta: Vec2d) {
+    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
         if let oldAngle = rotation.getAngleFor(runtime),
                 oldRadius = radius.getLengthFor(runtime) {
             let oldDelta = rotate(Vec2d(x: oldRadius, y:0), angle: oldAngle)
@@ -178,7 +178,7 @@ extension PieForm : Morphable {
 }
 
 extension PieForm : Drawable {
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         guard let c = centerPoint.getPositionFor(runtime),
                   r = radius.getLengthFor(runtime),
                   low = angleLowerBound.getAngleFor(runtime),
@@ -197,7 +197,7 @@ extension PieForm : Drawable {
         return path
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
         return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))

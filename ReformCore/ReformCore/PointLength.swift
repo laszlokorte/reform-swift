@@ -17,7 +17,7 @@ struct PointLength : RuntimeLength {
         self.pointB = pointB
     }
     
-    func getLengthFor(runtime: Runtime) -> Double? {
+    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
         guard let a = pointA.getPositionFor(runtime),
                   b = pointB.getPositionFor(runtime) else {
             return nil

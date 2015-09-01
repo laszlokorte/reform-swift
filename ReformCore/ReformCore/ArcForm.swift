@@ -44,7 +44,7 @@ final public class ArcForm : Form, Creatable {
         return StaticLength(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
         offset.setLengthFor(runtime, length: 50)
@@ -122,7 +122,7 @@ extension ArcForm : Morphable {
 
 extension ArcForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         guard let
             start = startPoint.getPositionFor(runtime),
             end = endPoint.getPositionFor(runtime),
@@ -140,7 +140,7 @@ extension ArcForm : Drawable {
         return path
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
         return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))

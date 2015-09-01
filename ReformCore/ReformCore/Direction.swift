@@ -9,7 +9,7 @@
 import ReformMath
 
 public protocol RuntimeDirection {
-    func getAdjustedFor(runtime: Runtime, anchor: Vec2d, position: Vec2d) -> Vec2d
+    func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d
 }
 
 public enum Cartesian : RuntimeDirection, Labeled {
@@ -25,7 +25,7 @@ public enum Cartesian : RuntimeDirection, Labeled {
         }
     }
     
-    public func getAdjustedFor(runtime: Runtime, anchor: Vec2d, position: Vec2d) -> Vec2d {
+    public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
         switch self {
             
         case .Vertical:
@@ -45,7 +45,7 @@ public struct FreeDirection : RuntimeDirection, Labeled {
         return ""
     }
     
-    public func getAdjustedFor(runtime: Runtime, anchor: Vec2d, position: Vec2d) -> Vec2d {
+    public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
         return position
     }
 }
@@ -63,7 +63,7 @@ public struct ProportionalDirection : RuntimeDirection, Labeled {
         return ""
     }
     
-    public func getAdjustedFor(runtime: Runtime, anchor: Vec2d, position: Vec2d) -> Vec2d {
+    public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
         return anchor + proportioned((position-anchor), proportion: proportion)
     }
 }

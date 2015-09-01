@@ -26,9 +26,9 @@ public protocol Morphable {
 }
 
 public protocol Drawable {
-    func getPathFor(runtime: Runtime) -> Path?
+    func getPathFor<R:Runtime>(runtime: R) -> Path?
     
-    func getShapeFor(runtime: Runtime) -> Shape?
+    func getShapeFor<R:Runtime>(runtime: R) -> Shape?
     
     var drawingMode : DrawingMode { get set }
 }
@@ -44,7 +44,7 @@ public protocol Form {
     
     var identifier : FormIdentifier { get }
     
-    func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d)
+    func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d)
     
     func getPoints() -> [ExposedPointIdentifier:LabeledPoint]
     

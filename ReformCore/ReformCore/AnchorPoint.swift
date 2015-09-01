@@ -15,7 +15,7 @@ struct AnchorPoint : RuntimePoint, Labeled {
         self.anchor = anchor
     }
     
-    func getPositionFor(runtime: Runtime) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         return anchor.getPositionFor(runtime)
     }
     

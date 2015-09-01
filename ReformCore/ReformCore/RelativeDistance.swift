@@ -21,7 +21,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
         self.direction = direction
     }
     
-    public func getDeltaFor(runtime: Runtime) -> Vec2d? {
+    public func getDeltaFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             source = from.getPositionFor(runtime),
             target = to.getPositionFor(runtime) else {

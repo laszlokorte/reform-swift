@@ -16,7 +16,7 @@ struct CompositeOutline : Outline {
         self.parts = parts
     }
     
-    func getPositionFor(runtime: Runtime, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
         let partLengths = parts.flatMap { $0.getLengthFor(runtime) }
         guard partLengths.count == parts.count else { return nil }
         
@@ -35,7 +35,7 @@ struct CompositeOutline : Outline {
         return nil
     }
     
-    func getLengthFor(runtime: Runtime) -> Double? {
+    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
         var length = 0.0
         
         for part in parts {
@@ -49,7 +49,7 @@ struct CompositeOutline : Outline {
         return length
     }
     
-    func getSegmentsFor(runtime: Runtime) -> [Segment] {
+    func getSegmentsFor<R:Runtime>(runtime: R) -> [Segment] {
         var result = [Segment]()
         
         for part in parts {

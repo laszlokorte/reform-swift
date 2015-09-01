@@ -9,9 +9,9 @@
 import ReformMath
 
 public protocol Anchor {
-    func getPositionFor(runtime: Runtime) -> Vec2d?
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d?
     
-    func translate(runtime: Runtime, delta: Vec2d)
+    func translate<R:Runtime>(runtime: R, delta: Vec2d)
     
     var name : String { get }
 }

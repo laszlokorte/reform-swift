@@ -43,7 +43,7 @@ final public class TextForm : Form, Creatable {
         return StaticLength(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
         offset.setLengthFor(runtime, length: 16)
@@ -125,7 +125,7 @@ extension TextForm : Morphable {
 
 extension TextForm : Drawable {
     
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         guard let center = centerPoint.getPositionFor(runtime),
             end = endPoint.getPositionFor(runtime),
             start = startPoint.getPositionFor(runtime),
@@ -138,7 +138,7 @@ extension TextForm : Drawable {
         return Path(segments: .MoveTo(start), .LineTo(end), .LineTo(end+up), .LineTo(start+up), .Close)
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         guard let start = startPoint.getPositionFor(runtime),
                 end = endPoint.getPositionFor(runtime),
                 size = offset.getLengthFor(runtime) else {

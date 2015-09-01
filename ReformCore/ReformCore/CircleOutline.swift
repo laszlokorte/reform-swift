@@ -19,7 +19,7 @@ struct CircleOutline : Outline {
         self.angle = angle
     }
     
-    func getPositionFor(runtime: Runtime, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             rad = radius.getLengthFor(runtime).map(abs),
@@ -30,7 +30,7 @@ struct CircleOutline : Outline {
         return c + rotate(Vec2d(x: rad, y:0), angle: a + Angle(percent: t*100))
     }
     
-    func getLengthFor(runtime: Runtime) -> Double? {
+    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
         guard let rad = radius.getLengthFor(runtime).map(abs) else {
             return nil
         }
@@ -38,7 +38,7 @@ struct CircleOutline : Outline {
         return 2 * M_PI * rad
     }
     
-    func getSegmentsFor(runtime: Runtime) -> SegmentPath {
+    func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
             c = center.getPositionFor(runtime),

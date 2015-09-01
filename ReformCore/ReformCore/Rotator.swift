@@ -9,6 +9,6 @@
 import ReformMath
 
 public protocol Rotator {
-    func rotate(runtime: Runtime, angle: Angle, fix: Vec2d)
+    func rotate<R:Runtime>(runtime: R, angle: Angle, fix: Vec2d)
 
 }

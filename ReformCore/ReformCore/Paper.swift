@@ -36,7 +36,7 @@ final public class Paper : Form {
         return StaticLength(formId: identifier, offset: 1)
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         let delta = max - min
         width.setLengthFor(runtime, length: delta.x)
         height.setLengthFor(runtime, length: delta.y)
@@ -154,7 +154,7 @@ struct PaperPoint : RuntimePoint, Labeled {
         self.height = height
     }
     
-    func getPositionFor(runtime: Runtime) -> Vec2d? {
+    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
         guard let
             w = width.getLengthFor(runtime),
             h = height.getLengthFor(runtime) else {

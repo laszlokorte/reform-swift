@@ -16,7 +16,7 @@ struct StaticLength : WriteableRuntimeLength {
         self.offset = offset
     }
     
-    func getLengthFor(runtime: Runtime) -> Double? {
+    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
         guard let l = runtime.read(formId, offset: offset) else {
                 return nil
         }
@@ -24,7 +24,7 @@ struct StaticLength : WriteableRuntimeLength {
     }
     
     
-    func setLengthFor(runtime: Runtime, length: Double) {
+    func setLengthFor<R:Runtime>(runtime: R, length: Double) {
         runtime.write(formId, offset: offset, value: unsafeBitCast(length, UInt64.self))
     }
 }

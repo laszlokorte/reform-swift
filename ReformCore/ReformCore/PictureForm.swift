@@ -48,7 +48,7 @@ final public class PictureForm : Form, Creatable {
         return rectangle.angle
     }
     
-    public func initWithRuntime(runtime: Runtime, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         rectangle.initWithRuntime(runtime, min: min, max: max)
     }
     
@@ -97,11 +97,11 @@ extension PictureForm : Drawable {
         set { rectangle.drawingMode = newValue }
     }
     
-    public func getPathFor(runtime: Runtime) -> Path? {
+    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
         return Path()
     }
     
-    public func getShapeFor(runtime: Runtime) -> Shape? {
+    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
         return Shape()
     }
 }

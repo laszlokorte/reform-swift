@@ -9,9 +9,9 @@
 import ReformMath
 
 public protocol RuntimeLength {
-    func getLengthFor(runtime: Runtime) -> Double?
+    func getLengthFor<R:Runtime>(runtime: R) -> Double?
 }
 
 public protocol WriteableRuntimeLength : RuntimeLength {
-    func setLengthFor(runtime: Runtime, length: Double)
+    func setLengthFor<R:Runtime>(runtime: R, length: Double)
 }

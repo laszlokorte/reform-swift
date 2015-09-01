@@ -9,5 +9,5 @@
 import ReformMath
 
 public protocol RuntimeInitialDestination : Degeneratable {
-    func getMinMaxFor(runtime: Runtime) -> (Vec2d,Vec2d)?
+    func getMinMaxFor<R:Runtime>(runtime: R) -> (Vec2d,Vec2d)?
 }
