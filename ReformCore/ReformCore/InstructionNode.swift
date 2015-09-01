@@ -21,6 +21,10 @@ public final class InstructionNode {
     public init(group: GroupInstruction, children: [InstructionNode] = []) {
         content = .Group(group, children)
     }
+
+    private init(content: InstructionContent) {
+        self.content = content
+    }
     
 }
 
@@ -120,9 +124,31 @@ extension InstructionNode {
 }
 
 extension InstructionNode {
-    
+
     public func replaceWith(instruction: Instruction) {
         content = InstructionContent.Single(instruction)
+    }
+}
+
+extension InstructionNode {
+
+    public func unwrap() -> Bool {
+        guard case .Group(_, let children) = self.content else {
+            return false
+        }
+
+        for c in children.suffixFrom(1) {
+            self.append(sibling: c)
+        }
+
+        return self.removeFromParent()
+    }
+
+    public func wrapIn(instruction: GroupInstruction) {
+        if case .Null = content {
+            return
+        }
+        content = .Group(instruction, [InstructionNode(), InstructionNode(content: content)])
     }
 }
 

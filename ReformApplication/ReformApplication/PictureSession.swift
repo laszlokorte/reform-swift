@@ -57,6 +57,7 @@ class ProcedureProcessor<R:Runtime, A:Analyzer> {
         //        }
 
         toolController.currentTool.refresh()
+        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: picture.procedure)
         NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
     }
 
@@ -156,7 +157,7 @@ class PictureSession {
         self.procedureProcessor = ProcedureProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController)
 
         self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus) {
-                [collector=self.stageCollector, trigger=self.procedureProcessor.trigger] b in
+                [collector=self.stageCollector, trigger=self.procedureProcessor.triggerEval] b in
                 collector.recalcIntersections = true
                 trigger()
             }
@@ -193,7 +194,11 @@ class PictureSession {
 
         self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
 
-        self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture, callback: self.procedureProcessor.triggerEval)
+        self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture) {
+            [trigger=self.procedureProcessor.triggerEval,collector=self.stageCollector] in
+            collector.recalcIntersections = true
+            trigger()
+        }
 
         self.previewTool = PreviewTool(stage: self.stage, maskUI: stageUI.maskUI)
 

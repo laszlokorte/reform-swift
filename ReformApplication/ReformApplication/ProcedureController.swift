@@ -26,7 +26,8 @@ class ProcedureController : NSViewController {
     }
 
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureEvaluated", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureEvaluated", name:"ProcedureEvaluated", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureChanged", object: nil)
     }
 
     dynamic func procedureChanged() {
@@ -39,6 +40,15 @@ class ProcedureController : NSViewController {
         if let focus = procedureViewModel?.instructionFocus.current,
             index = instructions.indexOf({ $0.node === focus }) {
                 tableView?.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+        }
+
+    }
+
+    dynamic func procedureEvaluated() {
+        instructions = procedureViewModel?.analyzer.instructions ?? []
+
+        if let focus = procedureViewModel?.instructionFocus.current,
+            index = instructions.indexOf({ $0.node === focus }) {
 
                 tableView?.scrollRowToVisible(index)
         }
