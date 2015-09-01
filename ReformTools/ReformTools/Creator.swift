@@ -17,9 +17,9 @@ public class InstructionCreator {
     private var state : CreationState = .Idle
     
     let focus : InstructionFocus
-    let notifier : ChangeNotifier
+    let notifier : (Bool) -> ()
     
-    public init(focus: InstructionFocus, notifier: ChangeNotifier) {
+    public init(focus: InstructionFocus, notifier: (Bool) -> ()) {
         self.focus = focus
         self.notifier = notifier
     }
@@ -30,7 +30,7 @@ public class InstructionCreator {
             focused.append(sibling: node)
             focus.current = node
             state = .Creating(node)
-            notifier()
+            notifier(false)
         }
     }
     
@@ -39,18 +39,19 @@ public class InstructionCreator {
             focus.current = node.previous
             node.removeFromParent()
             state = .Idle
-            notifier()
+            notifier(false)
         }
     }
     
     func update(instruction: Instruction) {
         if case .Creating(let node) = state {
             node.replaceWith(instruction)
-            notifier()
+            notifier(false)
         }
     }
     
     func commit() {
+        notifier(true)
         state = .Idle
     }
 }

@@ -82,11 +82,17 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
         
     }
 
+    public var recalcIntersections : Bool {
+        set(b) { buffer.recalcIntersections = b }
+        get { return buffer.recalcIntersections }
+    }
+
 }
 
 
 private class StageBuffer {
-    
+
+    var recalcIntersections = true
     var size : Vec2d = Vec2d()
     var entities : [Entity] = []
 
@@ -106,12 +112,16 @@ private class StageBuffer {
         stage.entities = entities.reverse()
         stage.currentShapes = currentShapes
         stage.finalShapes = finalShapes
-        
-        stage.intersections = intersectionsOf(entities)
+
+        if recalcIntersections {
+            stage.intersections = intersectionsOf(entities)
+            recalcIntersections = false
+        }
     }
 }
 
 func intersectionsOf(entities: [Entity]) -> [IntersectionSnapPoint] {
+    
     var result = [IntersectionSnapPoint]()
     for (ai, a) in entities.enumerate() {
         for (bi, b) in entities.enumerate()

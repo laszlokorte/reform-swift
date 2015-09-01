@@ -155,9 +155,20 @@ class PictureSession {
 
         self.procedureProcessor = ProcedureProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController)
 
-        self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus, callback: self.procedureProcessor.trigger)
+        self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus) {
+                [collector=self.stageCollector, trigger=self.procedureProcessor.trigger] b in
+                collector.recalcIntersections = true
+                trigger()
+            }
 
-        self.instructionCreator = InstructionCreator(focus: self.instructionFocus, notifier: self.procedureProcessor.trigger)
+        self.instructionCreator = InstructionCreator(focus: self.instructionFocus) {
+            [collector=self.stageCollector, trigger=self.procedureProcessor.trigger] b in
+            if b {
+            collector.recalcIntersections = true
+            }
+            trigger()
+        }
+
         self.selectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.stageUI.selectionUI)
 
 
