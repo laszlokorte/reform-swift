@@ -8,6 +8,8 @@
 
 import Foundation
 import Cocoa
+
+import ReformExpression
 import ReformCore
 
 class ProcedureController : NSViewController {
@@ -88,8 +90,57 @@ extension ProcedureController : NSOutlineViewDelegate {
     }
 
     func tableViewSelectionDidChange(aNotification: NSNotification) {
-        if !cycle, let index = tableView?.selectedRow {
+        if !cycle, let index = tableView?.selectedRow where index > -1 {
             procedureViewModel?.instructionFocusChanger.setFocus(instructions[index].node)
         }
+    }
+}
+
+extension ProcedureController : NSMenuDelegate {
+    @IBAction func wrapInstructionInLoop(sender: AnyObject) {
+        guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
+            return
+        }
+
+        instructions[selectedIndex].node.wrapIn(ForLoopInstruction(expression: .Constant(Value(int: 10))))
+
+        procedureViewModel?.instructionChanger()
+    }
+
+    @IBAction func wrapInstructionInCondition(sender: AnyObject) {
+        guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
+            return
+        }
+
+        instructions[selectedIndex].node.wrapIn(IfConditionInstruction(expression: .Constant(Value(bool: true))))
+
+        procedureViewModel?.instructionChanger()
+    }
+
+    @IBAction func delete(sender: AnyObject) {
+        guard let indices = tableView?.selectedRowIndexes else {
+            return
+        }
+
+        var newFocus : InstructionNode?
+
+        for index in indices {
+            let node = instructions[index].node
+            guard !node.isEmpty else {
+                continue
+            }
+
+            if let prev = node.previous {
+                newFocus = prev
+            }
+            node.removeFromParent()
+        }
+
+        procedureViewModel?.instructionChanger()
+
+        if let f = newFocus {
+            procedureViewModel?.instructionFocusChanger.setFocus(f)
+        }
+
     }
 }

@@ -209,6 +209,9 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Delete" id="pa3-QI-u2k">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="delete:" target="Ady-hI-5gd" id="0Mk-Ml-PaM"/>
@@ -980,7 +983,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" viewBased="YES" floatsGroupRows="NO" id="mGn-fM-UZA">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="298" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1111,39 +1114,44 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DrF-aR-Bxr">
-                                        <rect key="frame" x="472" y="-2" width="11" height="32"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="qTb-no-NHi">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AI4-sb-mAI">
-                                        <rect key="frame" x="435" y="5" width="29" height="19"/>
-                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="ZZI-F7-xvX" id="atb-QI-b5H">
+                                        <rect key="frame" x="456" y="4" width="29" height="19"/>
+                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="atb-QI-b5H">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="pGS-ph-lLS">
                                                 <items>
                                                     <menuItem image="NSActionTemplate" hidden="YES" enabled="NO" id="ZZI-F7-xvX"/>
-                                                    <menuItem title="Wrap in Loop" id="VCU-HX-dX6"/>
-                                                    <menuItem title="Wrap in Condition" id="E3T-1b-W0z"/>
+                                                    <menuItem title="Wrap in Loop" id="VCU-HX-dX6">
+                                                        <connections>
+                                                            <action selector="wrapInstructionInLoop" target="tWe-V1-zXv" id="Lyb-0m-07d"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Wrap in Condition" id="E3T-1b-W0z">
+                                                        <connections>
+                                                            <action selector="wrapInstructionInCondition" target="tWe-V1-zXv" id="MeH-HC-zgd"/>
+                                                        </connections>
+                                                    </menuItem>
                                                     <menuItem title="Delete" id="Lez-ln-4uq">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="delete:" target="tWe-V1-zXv" id="nVg-eh-m2Q"/>
+                                                        </connections>
                                                     </menuItem>
                                                 </items>
+                                                <connections>
+                                                    <outlet property="delegate" destination="tWe-V1-zXv" id="dT9-Ea-Uck"/>
+                                                </connections>
                                             </menu>
                                         </popUpButtonCell>
                                     </popUpButton>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="EPN-2R-DC4"/>
-                                    <constraint firstItem="DrF-aR-Bxr" firstAttribute="leading" secondItem="AI4-sb-mAI" secondAttribute="trailing" constant="8" id="FRB-co-7Ye"/>
                                     <constraint firstItem="l1W-9O-OBt" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="Nsc-0W-mpv"/>
-                                    <constraint firstItem="DrF-aR-Bxr" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="aHW-21-Bol"/>
                                     <constraint firstItem="AI4-sb-mAI" firstAttribute="centerY" secondItem="5w7-Wi-mWB" secondAttribute="centerY" id="mzb-gL-pYh"/>
                                     <constraint firstItem="l1W-9O-OBt" firstAttribute="leading" secondItem="5w7-Wi-mWB" secondAttribute="leading" constant="7" id="ncV-oR-fci"/>
-                                    <constraint firstAttribute="trailing" secondItem="DrF-aR-Bxr" secondAttribute="trailing" constant="8" id="wAk-ws-xjT"/>
+                                    <constraint firstAttribute="trailing" secondItem="AI4-sb-mAI" secondAttribute="trailing" constant="6" id="q3Z-XT-OD9"/>
                                 </constraints>
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="79" horizontalPageScroll="10" verticalLineScroll="79" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3o-xa-Lmc">
@@ -1152,8 +1160,8 @@
                                     <rect key="frame" x="1" y="1" width="489" height="271"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="77" rowSizeStyle="automatic" viewBased="YES" id="Usf-Zm-XQS">
-                                            <rect key="frame" x="0.0" y="0.0" width="489" height="271"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="77" rowSizeStyle="automatic" viewBased="YES" id="Usf-Zm-XQS">
+                                            <rect key="frame" x="0.0" y="0.0" width="489" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1318,7 +1326,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="medium" headerView="6Pv-le-48b" viewBased="YES" id="hi6-1L-2Ua">
-                                            <rect key="frame" x="0.0" y="0.0" width="298" height="108"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="297" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

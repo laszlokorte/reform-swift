@@ -10,19 +10,23 @@ public final class InstructionNode {
     public private(set) var content : InstructionContent
     public private(set) weak var parent : InstructionNode?
     
-    public init() {
+    public init(parent: InstructionNode? = nil) {
+        self.parent = parent
         content = .Null
     }
     
-    public init(instruction: Instruction) {
+    public init(parent: InstructionNode? = nil, instruction: Instruction) {
+        self.parent = parent
         content = .Single(instruction)
     }
     
-    public init(group: GroupInstruction, children: [InstructionNode] = []) {
+    public init(parent: InstructionNode? = nil, group: GroupInstruction, children: [InstructionNode] = []) {
+        self.parent = parent
         content = .Group(group, children)
     }
 
-    private init(content: InstructionContent) {
+    private init(parent: InstructionNode? = nil, content: InstructionContent) {
+        self.parent = parent
         self.content = content
     }
     
@@ -148,7 +152,14 @@ extension InstructionNode {
         if case .Null = content {
             return
         }
-        content = .Group(instruction, [InstructionNode(), InstructionNode(content: content)])
+
+        if case .Group(_, let children) = content {
+            for c in children {
+                c.parent = self
+            }
+        }
+
+        content = .Group(instruction, [InstructionNode(parent: self), InstructionNode(parent: self, content: content)])
     }
 }
 

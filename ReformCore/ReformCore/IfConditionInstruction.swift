@@ -13,7 +13,7 @@ public struct IfConditionInstruction : GroupInstruction {
     
     public var target : FormIdentifier? { return nil }
 
-    init(expression : Expression) {
+    public init(expression : Expression) {
         self.expression = expression
     }
     
@@ -24,8 +24,10 @@ public struct IfConditionInstruction : GroupInstruction {
         }
         
         if bool {
-            for c in children {
-                c.evaluate(runtime)
+            runtime.scoped() {
+                for c in children {
+                    c.evaluate(runtime)
+                }
             }
         }
     }

@@ -21,7 +21,7 @@ class RuntimeStack {
     func popFrame() {
         let top = frames.removeLast()
         
-        for id in top.forms {
+        for id in top.forms.reverse() {
             remove(id)
         }
     }

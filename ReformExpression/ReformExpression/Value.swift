@@ -13,23 +13,23 @@ public enum Value : Equatable {
     case ColorValue(r: UInt8, g:UInt8, b:UInt8, a:UInt8)
     case BoolValue(value: Bool)
     
-    init(string: String) {
+    public init(string: String) {
         self = .StringValue(value: string)
     }
     
-    init(int: Int) {
+    public init(int: Int) {
         self = .IntValue(value: int)
     }
     
-    init(double: Double) {
+    public init(double: Double) {
         self = .DoubleValue(value: double)
     }
     
-    init(r: UInt8,g: UInt8,b: UInt8,a: UInt8) {
+    public init(r: UInt8,g: UInt8,b: UInt8,a: UInt8) {
         self = .ColorValue(r:r, g:g, b:b, a:a)
     }
     
-    init(bool: Bool) {
+    public init(bool: Bool) {
         self = .BoolValue(value: bool)
     }
 }

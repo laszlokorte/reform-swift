@@ -13,7 +13,7 @@ public struct ForLoopInstruction : GroupInstruction {
     
     public var target : FormIdentifier? { return nil }
     
-    init(expression : Expression) {
+    public init(expression : Expression) {
         self.expression = expression
     }
     
@@ -24,8 +24,10 @@ public struct ForLoopInstruction : GroupInstruction {
         }
         
         for var i=0; i<count;i++ {
-            for c in children {
-                c.evaluate(runtime)
+            runtime.scoped() {
+                for c in children {
+                    c.evaluate(runtime)
+                }
             }
         }
     }
