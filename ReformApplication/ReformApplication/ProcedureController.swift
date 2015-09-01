@@ -124,6 +124,7 @@ extension ProcedureController : NSMenuDelegate {
 
         var newFocus : InstructionNode?
 
+
         for index in indices {
             let node = instructions[index].node
             guard !node.isEmpty else {
@@ -136,11 +137,28 @@ extension ProcedureController : NSMenuDelegate {
             node.removeFromParent()
         }
 
+        let validIndices = indices.filter({!instructions[$0].node.isEmpty})
         procedureViewModel?.instructionChanger()
 
-        if let f = newFocus {
-            procedureViewModel?.instructionFocusChanger.setFocus(f)
+        if let min = validIndices.minElement() {
+            tableView?.selectRowIndexes(NSIndexSet(index: min-1), byExtendingSelection: false)
         }
+
+    }
+
+    @IBAction func doubleClick(sender: AnyObject) {
+
+        guard let popOverViewController = storyboard?.instantiateControllerWithIdentifier("instructionDetailController") as? NSViewController else {
+            return
+        }
+
+
+        guard let row = tableView?.selectedRow, cell = tableView?.viewAtColumn(0, row: row, makeIfNecessary: false) else {
+            return
+        }
+
+
+        self.presentViewController(popOverViewController, asPopoverRelativeToRect: cell.frame, ofView: cell, preferredEdge: NSRectEdge.MaxX, behavior: NSPopoverBehavior.Transient)
 
     }
 }

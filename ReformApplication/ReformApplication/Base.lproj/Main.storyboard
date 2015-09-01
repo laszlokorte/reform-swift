@@ -1245,6 +1245,7 @@ CA
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
+                                                <action trigger="doubleAction" selector="doubleClick:" target="tWe-V1-zXv" id="fDs-vr-JFj"/>
                                                 <outlet property="dataSource" destination="tWe-V1-zXv" id="Kki-8B-pvy"/>
                                                 <outlet property="delegate" destination="tWe-V1-zXv" id="jGf-rO-VEn"/>
                                             </connections>
@@ -1282,7 +1283,7 @@ CA
                 </viewController>
                 <customObject id="AF6-1g-yDN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="285.5" y="1362"/>
+            <point key="canvasLocation" x="283.5" y="1375"/>
         </scene>
         <!--Mesurement Editor-->
         <scene sceneID="axU-8C-Fue">
@@ -1481,6 +1482,19 @@ CA
                 <customObject id="mpJ-EO-JWn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="815" y="991"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qDr-uV-dNl">
+            <objects>
+                <viewController storyboardIdentifier="instructionDetailController" id="GxX-DY-fEH" sceneMemberID="viewController">
+                    <view key="view" id="fOS-DC-0Pv">
+                        <rect key="frame" x="0.0" y="0.0" width="223" height="134"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="ljU-Ev-jdN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="743.5" y="1304"/>
         </scene>
     </scenes>
     <resources>
