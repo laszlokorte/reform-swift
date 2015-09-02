@@ -1428,7 +1428,7 @@ CA
                             <rect key="frame" x="1" y="1" width="500" height="308"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view focusRingType="none" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
+                                <view autoresizesSubviews="NO" canDrawConcurrently="YES" focusRingType="none" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="1jR-MF-2gx" customClass="CanvasView" customModule="ReformApplication" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="500" height="308"/>
                                     <connections>
                                         <outlet property="deleagte" destination="DG2-kz-iLd" id="glg-UU-klS"/>
