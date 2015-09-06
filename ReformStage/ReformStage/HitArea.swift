@@ -45,3 +45,28 @@ extension HitArea {
         }
     }
 }
+
+extension HitArea {
+    public func intersects(aabb: AABB) -> Bool {
+        switch self {
+        case None:
+            return false
+        case .Line(let a, let b):
+            return aabb.intersectsLine(from: a, to: b)
+        case .Circle(let center, let radius):
+            return aabb.intersectsCircle(center: center, radius: radius)
+        case .Sector(let center, let lower, let upper):
+            return false
+        case Triangle(let a, let b, let c):
+            return aabb.intersectsLine(from: a, to: b) || aabb.intersectsLine(from: b, to: c) || aabb.intersectsLine(from: c, to: a)
+        case LeftOf(let a, let b):
+            return false
+        case .Union(let a, let b):
+            return a.intersects(aabb) || b.intersects(aabb)
+        case .Intersection(let a, let b):
+            return a.intersects(aabb)
+        case Inversion(let area):
+            return !area.intersects(aabb)
+        }
+    }
+}

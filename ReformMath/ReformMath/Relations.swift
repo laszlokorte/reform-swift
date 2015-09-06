@@ -136,3 +136,12 @@ public func onLineSegment(point: Vec2d, lineSegment: LineSegment2d, epsilon: Dou
     
     return -epsilon < delta && delta < epsilon
 }
+
+
+
+
+
+
+public func inside(point: Vec2d, aabb: AABB) -> Bool {
+    return aabb.outCode(point) == .Inside
+}

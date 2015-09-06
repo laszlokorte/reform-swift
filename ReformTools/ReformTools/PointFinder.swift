@@ -14,7 +14,7 @@ import ReformExpression
 enum LocationFilter : Equatable {
     case Any
     case Near(Vec2d, distance: Double)
-    case AABB(min: Vec2d, max: Vec2d)
+    case AABB(ReformMath.AABB)
 }
 
 extension LocationFilter {
@@ -23,8 +23,8 @@ extension LocationFilter {
         case .Any: return true
         case .Near(let point, let distance):
             return hitArea.contains(point, margin: distance)
-        case .AABB(let min, let max):
-            return false
+        case .AABB(let aabb):
+            return hitArea.intersects(aabb)
         }
     }
 
@@ -33,17 +33,20 @@ extension LocationFilter {
         case .Any: return true
         case .Near(let loc, let d):
             return (point-loc).length <= d
-        case .AABB(let min, let max):
-            return false
+        case .AABB(let aabb):
+            return inside(point, aabb: aabb)
         }
     }
 }
 
 func ==(lhs: LocationFilter, rhs: LocationFilter) -> Bool {
     switch (lhs, rhs) {
-    case (.Any, .Any): return true
-    case (.Near(let p1, let d1), .Near(let p2, let d2)): return p1==p2 && d1 == d2
-    case (.AABB(let min1, let max1), .AABB(let min2, let max2)): return min1==min2 && max1 == max2
+    case (.Any, .Any):
+        return true
+    case (.Near(let p1, let d1), .Near(let p2, let d2)):
+        return p1==p2 && d1 == d2
+    case (.AABB(let aabb1), .AABB(let aabb2)):
+        return aabb1 == aabb2
     default: return false
     }
 }

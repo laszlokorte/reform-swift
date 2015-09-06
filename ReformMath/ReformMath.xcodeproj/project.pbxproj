@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F210B7181B9C96BC003E1440 /* AABB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7171B9C96BC003E1440 /* AABB.swift */; settings = {ASSET_TAGS = (); }; };
 		F26D46161B7D09F200266096 /* ReformMath.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46151B7D09F200266096 /* ReformMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D461D1B7D09F200266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46121B7D09F200266096 /* ReformMath.framework */; };
 		F26D46221B7D09F200266096 /* ReformMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46211B7D09F200266096 /* ReformMathTests.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F210B7171B9C96BC003E1440 /* AABB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABB.swift; sourceTree = "<group>"; };
 		F26D46121B7D09F200266096 /* ReformMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46151B7D09F200266096 /* ReformMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformMath.h; sourceTree = "<group>"; };
 		F26D46171B7D09F200266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				F27391001B7F854B00100F2F /* Elements.swift */,
 				F27391061B7F8ACE00100F2F /* Relations.swift */,
 				F273911B1B7F94F800100F2F /* Path.swift */,
+				F210B7171B9C96BC003E1440 /* AABB.swift */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				F26D46F01B7D1AAA00266096 /* Angle.swift in Sources */,
 				F273911C1B7F94F800100F2F /* Path.swift in Sources */,
 				F27391071B7F8ACE00100F2F /* Relations.swift in Sources */,
+				F210B7181B9C96BC003E1440 /* AABB.swift in Sources */,
 				F26D46A81B7D0CF400266096 /* Vec2d.swift in Sources */,
 				F26D470E1B7D34B700266096 /* Operators.swift in Sources */,
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,

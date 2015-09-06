@@ -1135,13 +1135,13 @@ CA
                                     <constraint firstAttribute="trailing" secondItem="AI4-sb-mAI" secondAttribute="trailing" constant="6" id="q3Z-XT-OD9"/>
                                 </constraints>
                             </customView>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="79" horizontalPageScroll="10" verticalLineScroll="79" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3o-xa-Lmc">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="92" horizontalPageScroll="10" verticalLineScroll="92" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3o-xa-Lmc">
                                 <rect key="frame" x="0.0" y="0.0" width="491" height="273"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="SZ4-IH-Cf7">
                                     <rect key="frame" x="0.0" y="0.0" width="491" height="273"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="77" rowSizeStyle="automatic" viewBased="YES" id="Usf-Zm-XQS">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="90" rowSizeStyle="automatic" viewBased="YES" id="Usf-Zm-XQS">
                                             <rect key="frame" x="0.0" y="0.0" width="491" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1162,18 +1162,18 @@ CA
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="thumbnailCell" id="dsB-2R-lHb" customClass="ProcedureSingleCellView" customModule="ReformApplication" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="488" height="77"/>
+                                                            <rect key="frame" x="1" y="1" width="488" height="90"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uys-HT-WxB">
-                                                                    <rect key="frame" x="5" y="5" width="100" height="67"/>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Uys-HT-WxB">
+                                                                    <rect key="frame" x="5" y="5" width="120" height="80"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="Uys-HT-WxB" secondAttribute="height" multiplier="3:2" id="jYI-5X-n3U"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="example-thumbnail" id="p2y-aj-mbt"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="example-thumbnail" id="p2y-aj-mbt"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zkc-lx-sSz" userLabel="Instruction Description">
-                                                                    <rect key="frame" x="111" y="5" width="357" height="67"/>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zkc-lx-sSz" userLabel="Instruction Description">
+                                                                    <rect key="frame" x="131" y="5" width="339" height="80"/>
                                                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Create Rectangle from Canvas Top Left to Canvas Bottom Right" id="1Mg-dZ-YZu">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1192,14 +1192,13 @@ CA
                                                                 <constraint firstItem="Uys-HT-WxB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dsB-2R-lHb" secondAttribute="top" constant="5" id="yyv-hJ-3bU"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="imageView" destination="Uys-HT-WxB" id="XrZ-Ed-eHY"/>
                                                                 <outlet property="indentConstraint" destination="Fyb-tA-C39" id="xd2-Na-h0y"/>
-                                                                <outlet property="labelField" destination="Zkc-lx-sSz" id="yIu-Fk-33i"/>
-                                                                <outlet property="previewImage" destination="Uys-HT-WxB" id="S7q-c0-86f"/>
                                                                 <outlet property="textField" destination="Zkc-lx-sSz" id="Ydd-Ht-i1J"/>
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="groupCell" id="SGW-YC-Zgm" customClass="ProcedureGroupCellView" customModule="ReformApplication" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="80" width="488" height="27"/>
+                                                            <rect key="frame" x="1" y="93" width="488" height="27"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ggG-dT-IQB">
@@ -1218,7 +1217,6 @@ CA
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="indentConstraint" destination="sbA-5h-aii" id="5aO-zq-sl3"/>
-                                                                <outlet property="labelField" destination="ggG-dT-IQB" id="1RF-xp-CM1"/>
                                                                 <outlet property="textField" destination="ggG-dT-IQB" id="Zao-rY-hSp"/>
                                                             </connections>
                                                         </tableCellView>

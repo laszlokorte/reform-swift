@@ -121,3 +121,11 @@ public func isBetween(angle: Angle, lower: Angle, upper: Angle) -> Bool {
         return l <= a || a <= u
     }
 }
+
+func min(a: Vec2d, _ b: Vec2d) -> Vec2d {
+    return Vec2d(x: min(a.x,b.x), y: min(a.y,b.y))
+}
+
+func max(a: Vec2d, _ b: Vec2d) -> Vec2d {
+    return Vec2d(x: max(a.x,b.x), y: max(a.y,b.y))
+}

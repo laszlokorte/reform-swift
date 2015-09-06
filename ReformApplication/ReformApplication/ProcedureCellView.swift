@@ -15,25 +15,22 @@ protocol ProcedureCellView {
 
 
 class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
-    @IBOutlet var labelField : NSTextField?
-    @IBOutlet var previewImage : NSImageView?
     @IBOutlet var indentConstraint : NSLayoutConstraint?
 
     func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
         indentConstraint?.constant = CGFloat(15 * row.depth)
-        labelField?.stringValue = row.label
-        previewImage?.image = procedureViewModel.snapshotCollector.imageFor(InstructionNodeKey(row.node))
+        textField?.stringValue = row.label
+        imageView?.image = procedureViewModel.snapshotCollector.imageFor(InstructionNodeKey(row.node))
 
     }
 }
 
 class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
-    @IBOutlet var labelField : NSTextField?
     @IBOutlet var indentConstraint : NSLayoutConstraint?
 
 
     func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
         indentConstraint?.constant = CGFloat(15 * row.depth)
-        labelField?.stringValue = row.node.isEmpty ? "" : row.label
+        textField?.stringValue = row.node.isEmpty ? "" : row.label
     }
 }
