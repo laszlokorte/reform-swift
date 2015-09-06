@@ -29,16 +29,15 @@ extension FormSelection {
         selected.removeAll()
     }
 
-    public func select(formId: FormIdentifier?, replace: Bool = true) {
-        if replace {
-            selected.removeAll()
-        }
-        selected.exclusiveOrInPlace(formId.map({[$0]}) ?? [])
+    public func select(formIds: Set<FormIdentifier>) {
+        selected.removeAll()
+
+        selected.unionInPlace(formIds)
     }
-    public func select(formIds: [FormIdentifier], replace: Bool = true) {
-        if replace {
-            selected.removeAll()
-        }
-        selected.exclusiveOrInPlace(formIds)
+
+    public func select(formId: FormIdentifier) {
+        selected.removeAll()
+
+        selected.insert(formId)
     }
 }

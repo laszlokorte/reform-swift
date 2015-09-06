@@ -83,9 +83,6 @@ extension AABB {
         let fromOut = outCode(from)
         let toOut = outCode(to)
 
-        print(fromOut, toOut)
-        print(max)
-
         if fromOut.union(toOut) == .Inside {
             return true
         } else if fromOut.intersect(toOut) != .Inside {

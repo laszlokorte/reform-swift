@@ -7,14 +7,29 @@
 //
 
 import ReformMath
+import ReformCore
 import ReformStage
 
 public class SelectionTool : Tool {
     enum State
     {
         case Idle
-        case Selecting(entity: Entity?, cycle: Int)
-        case MultiSelect(from: Vec2d, to: Vec2d)
+        case Selecting(entity: Entity?, cycle: Int, old: Set<FormIdentifier>)
+        case MultiSelect(from: Vec2d, to: Vec2d, old: Set<FormIdentifier>)
+    }
+
+    enum ChangeMode {
+        case Replace
+        case XOR
+
+        func combine(old: Set<FormIdentifier>, with: [FormIdentifier]) -> Set<FormIdentifier> {
+            switch self {
+            case .Replace:
+                return Set().union(with)
+            case .XOR:
+                return old.exclusiveOr(with)
+            }
+        }
     }
 
     var state : State = .Idle {
@@ -22,6 +37,8 @@ public class SelectionTool : Tool {
             update(state)
         }
     }
+
+    var changeMode : ChangeMode = .Replace
     
     let stage : Stage
     let selection : FormSelection
@@ -29,8 +46,6 @@ public class SelectionTool : Tool {
     
     let entityFinder : EntityFinder
 
-    var xorMode = false
-        
     public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI) {
         self.stage = stage
         self.selection = selection
@@ -40,7 +55,7 @@ public class SelectionTool : Tool {
     }
     
     public func setUp() {
-        xorMode = false
+        changeMode = .Replace
         state = .Idle
         selectionUI.state = .Show(selection)
     }
@@ -63,15 +78,15 @@ public class SelectionTool : Tool {
     }
     
     public func process(input: Input, atPosition position: Vec2d, withModifier: Modifier) {
-        xorMode = withModifier.isStreight
+        changeMode = withModifier.isStreight ? .XOR : .Replace
         
         switch state {
-        case .Selecting(_, let cycle):
+        case .Selecting(_, let cycle, let old):
             switch input {
             case .Cycle:
                 let entities = entitiesNear(position)
                 if entities.count > 0 {
-                    state = .Selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1)
+                    state = .Selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1, old: old)
                 }
             case .Release:
                 state = .Idle
@@ -83,23 +98,23 @@ public class SelectionTool : Tool {
             case .Press:
                 let entities = entitiesNear(position)
                 if entities.isEmpty {
-                    state = .MultiSelect(from: position, to: position)
-                } else if let
+                    state = .MultiSelect(from: position, to: position, old: selection.selected)
+                } else if changeMode == .Replace, let
                     previous = selection.one,
                     index = entities.indexOf({$0.id == previous}) {
-                    state = .Selecting(entity: entities[index], cycle: index)
+                    state = .Selecting(entity: entities[index], cycle: index, old: selection.selected)
                     
                 } else {
-                    state = .Selecting(entity: entities.first, cycle: 0)
+                    state = .Selecting(entity: entities.first, cycle: 0, old: selection.selected)
                 }
             case .Release, .Cycle, .Toggle, .ModifierChange, .Move:
                 break
             }
 
-        case .MultiSelect(let from, _):
+        case .MultiSelect(let from, _, let old):
             switch input {
             case .Move:
-                state = .MultiSelect(from: from, to: position)
+                state = .MultiSelect(from: from, to: position, old: old)
             case .Release:
                 state = .Idle
             case .Press, .Toggle, .ModifierChange, .Cycle:
@@ -121,13 +136,13 @@ public class SelectionTool : Tool {
     private func update(state: State) {
 
         switch state {
-        case .Selecting(let entity, _):
-            selection.select(entity?.id, replace: !xorMode)
+        case .Selecting(let entity, _, let old):
+            selection.select(changeMode.combine(old, with: entity.map{[$0.id]} ?? []))
             fallthrough
         case .Idle:
             selectionUI.rect = .Hide
-        case .MultiSelect(let from, let to):
-            selection.select(entitiesInside(min: from, max: to).map{$0.id}, replace: !xorMode)
+        case .MultiSelect(let from, let to, let old):
+            selection.select(changeMode.combine(old, with: entitiesInside(min: from, max: to).map{$0.id}))
             selectionUI.rect = .Show(from, to)
         }
     }
