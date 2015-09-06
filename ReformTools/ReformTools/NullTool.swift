@@ -9,7 +9,7 @@
 import ReformMath
 import ReformStage
 
-public class NullTool : Tool {
+public final class NullTool : Tool {
     
     public init() {
     }

@@ -10,7 +10,7 @@ import ReformMath
 import ReformCore
 import ReformStage
 
-public class MorphTool : Tool {
+public final class MorphTool : Tool {
     enum State
     {
         case Idle

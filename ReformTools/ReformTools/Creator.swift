@@ -13,7 +13,7 @@ private enum CreationState {
     case Idle
 }
 
-public class InstructionCreator {
+public final class InstructionCreator {
     private var state : CreationState = .Idle
     
     let focus : InstructionFocus

@@ -10,7 +10,7 @@ import ReformMath
 import ReformGraphics
 import ReformStage
 
-public class PreviewTool : Tool {
+public final class PreviewTool : Tool {
 
     private let maskUI : MaskUI
     private let stage : Stage

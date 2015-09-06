@@ -9,7 +9,7 @@
 import ReformCore
 import ReformStage
 
-public class SnapUI {
+public final class SnapUI {
     public enum State {
         case Hide
         case Show([SnapPoint])

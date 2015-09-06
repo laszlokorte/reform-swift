@@ -15,7 +15,7 @@ enum AlignmentMode {
 }
 
 
-public class Aligner {
+public final class Aligner {
     var state : AlignmentMode = .Aligned
     
     public init() {}

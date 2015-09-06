@@ -8,7 +8,7 @@
 
 import ReformCore
 
-public class InstructionFocus {
+public final class InstructionFocus {
     public var current : InstructionNode?
     
     public init() {}

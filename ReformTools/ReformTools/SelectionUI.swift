@@ -9,7 +9,7 @@
 import ReformCore
 import ReformMath
 
-public class SelectionUI {
+public final class SelectionUI {
     public enum State {
         case Hide
         case Show(FormSelection)

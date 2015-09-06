@@ -9,7 +9,7 @@
 import ReformCore
 import ReformStage
 
-public class HandleUI {
+public final class HandleUI {
     public enum State {
         case Hide
         case Show([Handle])

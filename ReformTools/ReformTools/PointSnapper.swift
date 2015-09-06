@@ -9,7 +9,7 @@
 import ReformMath
 import ReformStage
 
-public class PointSnapper {
+public final class PointSnapper {
     
     private enum State {
         case Idle
@@ -24,12 +24,14 @@ public class PointSnapper {
     private var state : State = .Idle
     let snapUI : SnapUI
     let pointFinder : PointFinder
-    let distance : Double
+    let camera: Camera
+    let radius : Double
     
-    public init(stage : Stage, snapUI : SnapUI, radius: Double) {
+    public init(stage : Stage, snapUI : SnapUI, camera: Camera, radius: Double) {
         self.snapUI = snapUI
         self.pointFinder = PointFinder(stage: stage)
-        self.distance = radius
+        self.radius = radius
+        self.camera = camera
     }
 
     func refresh() {
@@ -86,7 +88,7 @@ public class PointSnapper {
     
     private func resultFor(filter: FormFilter, pointType: PointType, position: Vec2d, cycle: Int) -> SearchingResult {
         
-        let points = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: pointType, location: .Near(position, distance: distance)))
+        let points = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: pointType, location: .Near(position, distance: radius / camera.zoom)))
         
         if points.count > 0 {
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)

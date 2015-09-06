@@ -11,7 +11,7 @@ import ReformCore
 import ReformStage
 
 
-public class CropGrabber {
+public final class CropGrabber {
 
     private enum State {
         case Idle
@@ -27,12 +27,14 @@ public class CropGrabber {
     private var state : State = .Idle
     let cropUI : CropUI
     let stage : Stage
+    let camera: Camera
     let radius : Double
 
-    public init(stage : Stage, cropUI : CropUI, radius: Double) {
+    public init(stage : Stage, cropUI : CropUI, camera: Camera, radius: Double) {
         self.cropUI = cropUI
         self.stage = stage
         self.radius = radius
+        self.camera = camera
     }
 
     func refresh() {
@@ -89,7 +91,7 @@ public class CropGrabber {
 
     private func resultFor(position: Vec2d, cycle: Int) -> SearchingResult {
 
-        let points = stage.cropPoints.filter({distance(point: $0.position,point: position) <= radius})
+        let points = stage.cropPoints.filter({distance(point: $0.position,point: position) <= radius / camera.zoom})
 
         if points.count > 0 {
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)

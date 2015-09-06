@@ -79,15 +79,16 @@ class StageController : NSViewController {
         let sr = StageRenderer(stage: stageModel.stage)
         stageRenderer = sr
 
+        canvas.camera = stageModel.camera
         canvas.renderers = [
             MaskUIRenderer(maskUI: stageModel.stageUI.maskUI),
             sr,
-            SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage),
-            SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage),
-            CropUIRenderer(stage: stageModel.stage, cropUI: stageModel.stageUI.cropUI),
-            GrabUIRenderer(grabUI: stageModel.stageUI.grabUI),
-            HandleUIRenderer(handleUI: stageModel.stageUI.handleUI),
-            PivotUIRenderer(pivotUI: stageModel.stageUI.pivotUI)
+            SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage, camera: stageModel.camera),
+            SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage, camera: stageModel.camera),
+            CropUIRenderer(stage: stageModel.stage, cropUI: stageModel.stageUI.cropUI, camera: stageModel.camera),
+            GrabUIRenderer(grabUI: stageModel.stageUI.grabUI, camera: stageModel.camera),
+            HandleUIRenderer(handleUI: stageModel.stageUI.handleUI, camera: stageModel.camera),
+            PivotUIRenderer(pivotUI: stageModel.stageUI.pivotUI, camera: stageModel.camera)
 
         ]
     }

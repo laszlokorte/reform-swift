@@ -10,7 +10,7 @@ import ReformMath
 import ReformCore
 import ReformStage
 
-public class HandleGrabber {
+public final class HandleGrabber {
     
     private enum State {
         case Idle
@@ -26,12 +26,14 @@ public class HandleGrabber {
     let handleUI : HandleUI
 
     let handleFinder : HandleFinder
+    let camera: Camera
     let radius : Double
     
-    public init(stage : Stage, handleUI : HandleUI, radius: Double) {
+    public init(stage : Stage, handleUI : HandleUI, camera: Camera, radius: Double) {
         self.handleUI = handleUI
         self.handleFinder = HandleFinder(stage: stage)
         self.radius = radius
+        self.camera = camera
     }
     
     func refresh() {
@@ -89,7 +91,7 @@ public class HandleGrabber {
     
     private func resultFor(formId : FormIdentifier, position: Vec2d, cycle: Int) -> SearchingResult {
         
-        let points = handleFinder.getHandles(HandleQuery(filter: .Only(formId), location: .Near(position, distance: radius)))
+        let points = handleFinder.getHandles(HandleQuery(filter: .Only(formId), location: .Near(position, distance: radius / camera.zoom)))
         
         if points.count > 0 {
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)

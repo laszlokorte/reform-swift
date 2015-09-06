@@ -9,7 +9,7 @@
 import ReformCore
 import ReformStage
 
-public class PivotUI {
+public final class PivotUI {
     public enum State {
         case Hide
         case Show(SnapPoint)

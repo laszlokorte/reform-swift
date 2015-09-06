@@ -54,7 +54,7 @@ class PictureController : NSViewController {
     }
 
     func updateStage(stage: StageController, withSession pictureSession: PictureSession) {
-        stage.representedObject = StageViewModel(stage: pictureSession.stage, stageUI: pictureSession.stageUI, toolController: pictureSession.toolController)
+        stage.representedObject = StageViewModel(stage: pictureSession.stage, stageUI: pictureSession.stageUI, toolController: pictureSession.toolController, camera: pictureSession.camera)
     }
 
     func updateProcedure(procedureController: ProcedureController, withSession pictureSession: PictureSession) {

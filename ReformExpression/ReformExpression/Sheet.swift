@@ -122,7 +122,7 @@ public protocol EditableSheet : Sheet {
     func removeDefinition(definition: ReferenceId)
 }
 
-public class BaseSheet : EditableSheet {
+public final class BaseSheet : EditableSheet {
     private var definitions: [Definition] = []
     
     public init() {
@@ -174,7 +174,7 @@ public class BaseSheet : EditableSheet {
     }
 }
 
-public class DerivedSheet : EditableSheet {
+public final class DerivedSheet : EditableSheet {
     private var definitions: [Definition] = []
     private let baseSheet : Sheet
     

@@ -12,13 +12,15 @@ import ReformStage
 
 struct HandleUIRenderer : Renderer {
     let handleUI : HandleUI
+    let camera: Camera
     
     func renderInContext(context: CGContext) {
-        
+        let inverse = CGFloat(1 / camera.zoom)
+
         CGContextSetRGBFillColor(context, 0.1, 0.9, 0.6, 1)
         CGContextSetRGBStrokeColor(context, 0, 0.6, 0.4, 1)
-        CGContextSetLineWidth(context, 1)
-        let dotSize : Double = 8
+        CGContextSetLineWidth(context, 1 * inverse)
+        let dotSize : Double = 8 / camera.zoom
         
         
         switch handleUI.state {

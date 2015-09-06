@@ -11,7 +11,7 @@ import ReformCore
 import ReformStage
 
 
-public class RotateTool : Tool {
+public final class RotateTool : Tool {
     enum State
     {
         case Idle

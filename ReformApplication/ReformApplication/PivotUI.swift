@@ -12,13 +12,15 @@ import ReformStage
 
 struct PivotUIRenderer : Renderer {
     let pivotUI : PivotUI
+    let camera: Camera
     
     func renderInContext(context: CGContext) {
-        
+        let inverse = CGFloat(1 / camera.zoom)
+
         CGContextSetRGBFillColor(context, 0.9, 0.3, 0.8, 1)
         CGContextSetRGBStrokeColor(context, 0.8, 0.2, 0.7, 1)
-        CGContextSetLineWidth(context, 1)
-        let dotSize : Double = 4
+        CGContextSetLineWidth(context, 1*inverse)
+        let dotSize : Double = 4 / camera.zoom
         
         switch pivotUI.state {
         case .Hide:

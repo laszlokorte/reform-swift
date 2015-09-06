@@ -13,11 +13,14 @@ import ReformStage
 struct SelectionUIRenderer : Renderer {
     let selectionUI : SelectionUI
     let stage : Stage
+    let camera: Camera
     
     func renderInContext(context: CGContext) {
+        let inverse = CGFloat(1 / camera.zoom)
+
         CGContextSetRGBFillColor(context, 0.2, 0.7, 1, 0.6)
         CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 0.6)
-        CGContextSetLineWidth(context, 5)
+        CGContextSetLineWidth(context, 5 * inverse)
         
         switch selectionUI.state {
         case .Hide:
@@ -36,7 +39,7 @@ struct SelectionUIRenderer : Renderer {
             break
         case .Show(let min, let max):
             let rect = CGRect(x: Int(min.x), y:Int(min.y), width: Int(max.x - min.x), height: Int(max.y - min.y))
-            CGContextSetLineWidth(context, 1)
+            CGContextSetLineWidth(context, 1 * inverse)
             CGContextSetRGBStrokeColor(context, 0.6, 0.6, 0.6, 0.6)
             CGContextSetRGBFillColor(context, 0.6, 0.6, 0.6, 0.1)
 

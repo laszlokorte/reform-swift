@@ -10,7 +10,7 @@ import ReformCore
 import ReformMath
 
 
-public class Streightener {
+public final class Streightener {
     private enum State {
         case Disabled
         case Enabled(inverted: Bool)

@@ -10,7 +10,7 @@ import ReformMath
 
 public typealias ChangeNotifier = () -> ()
 
-public class ToolController {
+public final class ToolController {
     public var currentTool : Tool = NullTool() {
         willSet {
             currentTool.tearDown()

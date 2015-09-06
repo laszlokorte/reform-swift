@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F210B71A1B9CCFB3003E1440 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7191B9CCFB3003E1440 /* Camera.swift */; settings = {ASSET_TAGS = (); }; };
 		F222AF201B83B68D005F71A1 /* PointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1F1B83B68D005F71A1 /* PointType.swift */; };
 		F222AF221B83B6A9005F71A1 /* PointFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF211B83B6A9005F71A1 /* PointFinder.swift */; };
 		F222AF271B83EF6D005F71A1 /* EntityFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF261B83EF6D005F71A1 /* EntityFinder.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F210B7191B9CCFB3003E1440 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		F222AF1F1B83B68D005F71A1 /* PointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointType.swift; sourceTree = "<group>"; };
 		F222AF211B83B6A9005F71A1 /* PointFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointFinder.swift; sourceTree = "<group>"; };
 		F222AF261B83EF6D005F71A1 /* EntityFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityFinder.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				F222AF381B8768BA005F71A1 /* HandleGrabber.swift */,
 				F222AF481B87A621005F71A1 /* PivotSwitcher.swift */,
 				F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */,
+				F210B7191B9CCFB3003E1440 /* Camera.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				F2A104AC1B8219BD00E97C6B /* CreateFormTool.swift in Sources */,
 				F2A104BF1B821BCF00E97C6B /* SelectionUI.swift in Sources */,
 				F2DF63641B92781300A2EFB6 /* MaskUI.swift in Sources */,
+				F210B71A1B9CCFB3003E1440 /* Camera.swift in Sources */,
 				F2A104B41B821A7900E97C6B /* NullTool.swift in Sources */,
 				F222AF2C1B851728005F71A1 /* Target.swift in Sources */,
 				F222AF401B8776B8005F71A1 /* DragToolTemplate.swift in Sources */,

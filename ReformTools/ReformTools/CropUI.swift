@@ -9,7 +9,7 @@
 import ReformCore
 import ReformStage
 
-public class CropUI {
+public final class CropUI {
     public enum State {
         case Hide
         case Show([CropPoint])

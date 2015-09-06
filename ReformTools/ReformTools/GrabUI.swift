@@ -9,7 +9,7 @@
 import ReformCore
 import ReformStage
 
-public class GrabUI {
+public final class GrabUI {
     public enum State {
         case Hide
         case Show([EntityPoint])

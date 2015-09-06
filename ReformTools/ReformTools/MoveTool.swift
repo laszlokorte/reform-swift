@@ -10,7 +10,7 @@ import ReformMath
 import ReformCore
 import ReformStage
 
-public class MoveTool : Tool {
+public final class MoveTool : Tool {
 
     enum State
     {

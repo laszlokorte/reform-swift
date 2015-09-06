@@ -16,14 +16,15 @@ import ReformTools
 
 @IBDesignable
 class CanvasView : NSView {
-    @IBOutlet weak var deleagte : NSViewController?
+    @IBOutlet weak var delegate : NSViewController?
 
     var canvasSize = Vec2d(x: 100, y: 100) {
         didSet {
             invalidateIntrinsicContentSize()
         }
     }
-    
+
+    var camera : Camera? = nil
     var renderers : [Renderer] = []
     
     private var currentContext : CGContext? {
@@ -48,7 +49,10 @@ class CanvasView : NSView {
     
     override func drawRect(dirtyRect: NSRect) {
         if let context = currentContext {
-            
+            if let camera = camera {
+                camera.zoom = Double(self.convertSize(NSSize(width:1, height: 1), toView: nil).width)
+            }
+
             let offsetX = (bounds.width-CGFloat(canvasSize.x))/2.0
             let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
             CGContextTranslateCTM(context, offsetX, offsetY)
@@ -56,7 +60,6 @@ class CanvasView : NSView {
             for r in renderers {
                 r.renderInContext(context)
             }
-
         }
     }
     
@@ -67,10 +70,11 @@ class CanvasView : NSView {
     override var acceptsFirstResponder : Bool { return true }
 
     override func keyDown(theEvent: NSEvent) {
-        deleagte?.keyDown(theEvent)
+        delegate?.keyDown(theEvent)
     }
 
     override func keyUp(theEvent: NSEvent) {
-        deleagte?.keyUp(theEvent)
+        delegate?.keyUp(theEvent)
     }
+
 }

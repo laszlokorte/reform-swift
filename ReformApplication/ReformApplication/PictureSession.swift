@@ -88,6 +88,7 @@ class PictureSession {
     let stageCollector : StageCollector<DefaultAnalyzer>
     let snapshotCollector : SnapshotCollector
 
+    let camera : Camera
     let pointSnapper : PointSnapper
     let pointGrabber : PointGrabber
     let handleGrabber : HandleGrabber
@@ -143,10 +144,11 @@ class PictureSession {
         runtime.listeners.append(snapshotCollector)
 
 
-        self.pointSnapper = PointSnapper(stage: self.stage, snapUI: self.stageUI.snapUI, radius: 10)
-        self.pointGrabber = PointGrabber(stage: self.stage, grabUI: self.stageUI.grabUI, radius: 10)
-        self.handleGrabber = HandleGrabber(stage: self.stage, handleUI: self.stageUI.handleUI, radius: 10)
-        self.cropGrabber = CropGrabber(stage: stage, cropUI: self.stageUI.cropUI, radius: 10)
+        self.camera = Camera()
+        self.pointSnapper = PointSnapper(stage: self.stage, snapUI: self.stageUI.snapUI, camera: camera, radius: 10)
+        self.pointGrabber = PointGrabber(stage: self.stage, grabUI: self.stageUI.grabUI, camera: camera, radius: 10)
+        self.handleGrabber = HandleGrabber(stage: self.stage, handleUI: self.stageUI.handleUI, camera: camera, radius: 10)
+        self.cropGrabber = CropGrabber(stage: stage, cropUI: self.stageUI.cropUI, camera: camera, radius: 10)
 
         self.streightener = Streightener()
         self.aligner = Aligner()

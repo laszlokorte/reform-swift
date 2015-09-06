@@ -11,7 +11,7 @@ import ReformCore
 import ReformStage
 
 
-public class CropTool : Tool {
+public final class CropTool : Tool {
     enum State
     {
         case Idle

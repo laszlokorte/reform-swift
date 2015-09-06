@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public class MaskUI {
+public final class MaskUI {
     public enum State {
         case Disabled
         case Clip(x: Double, y: Double, width: Double, height: Double)

@@ -39,7 +39,7 @@ enum State<StartType>
     case Dragging(start: StartType, target: Target, offset: Vec2d)
 }
 
-public class DragTool<Delegate: DragToolProtocol> {
+public final class DragTool<Delegate: DragToolProtocol> {
 
     
     var delegate : Delegate

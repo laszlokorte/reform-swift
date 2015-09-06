@@ -10,7 +10,7 @@ public protocol SequenceGeneratable {
     init(id: Int)
 }
 
-public class IdentifierSequence<T:SequenceGeneratable> {
+public final class IdentifierSequence<T:SequenceGeneratable> {
     var sequenceValue : Int
     let type : T.Type
     

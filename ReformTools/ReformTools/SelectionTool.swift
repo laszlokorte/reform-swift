@@ -10,7 +10,7 @@ import ReformMath
 import ReformCore
 import ReformStage
 
-public class SelectionTool : Tool {
+public final class SelectionTool : Tool {
     enum State
     {
         case Idle

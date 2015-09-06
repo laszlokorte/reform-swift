@@ -12,12 +12,15 @@ import ReformStage
 
 struct GrabUIRenderer : Renderer {
     let grabUI : GrabUI
+    let camera: Camera
     
     func renderInContext(context: CGContext) {
+        let inverse = CGFloat(1 / camera.zoom)
+
         CGContextSetRGBFillColor(context, 0.2, 0.7, 1, 1)
         CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 1)
-        CGContextSetLineWidth(context, 1)
-        let dotSize : Double = 7
+        CGContextSetLineWidth(context, 1 * inverse)
+        let dotSize : Double = 7 / camera.zoom
         
         
         switch grabUI.state {

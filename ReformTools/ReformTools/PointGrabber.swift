@@ -11,7 +11,7 @@ import ReformCore
 import ReformStage
 
 
-public class PointGrabber {
+public final class PointGrabber {
     
     private enum State {
         case Idle
@@ -28,13 +28,15 @@ public class PointGrabber {
     let grabUI : GrabUI
     let entityFinder : EntityFinder
     let pointFinder : PointFinder
+    let camera: Camera
     let radius : Double
     
-    public init(stage : Stage, grabUI : GrabUI, radius: Double) {
+    public init(stage : Stage, grabUI : GrabUI, camera: Camera, radius: Double) {
         self.grabUI = grabUI
         self.entityFinder = EntityFinder(stage: stage)
         self.pointFinder = PointFinder(stage: stage)
         self.radius = radius
+        self.camera = camera
     }
     
     func refresh() {
@@ -96,7 +98,7 @@ public class PointGrabber {
         guard let entity = entityFinder.getEntity(formId) else {
             return .None
         }
-        let points = entity.points.filter({distance(point: $0.position,point: position) <= radius})
+        let points = entity.points.filter({distance(point: $0.position,point: position) <= radius / camera.zoom})
         
         if points.count > 0 {
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
