@@ -1432,7 +1432,7 @@ CA
         <scene sceneID="FT0-WQ-uXX">
             <objects>
                 <viewController id="DG2-kz-iLd" userLabel="Stage" customClass="StageController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <scrollView key="view" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" id="vDA-zV-cBj">
+                    <scrollView key="view" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" maxMagnification="5" minMagnification="1" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" verticalScrollElasticity="allowed" id="vDA-zV-cBj">
                         <rect key="frame" x="0.0" y="0.0" width="502" height="310"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="g7B-av-OYX">
