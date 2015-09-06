@@ -162,6 +162,16 @@ extension InstructionNode {
         content = .Group(instruction, [InstructionNode(parent: self), InstructionNode(parent: self, content: content)])
     }
 }
+extension InstructionNode {
+
+    public func hasAncestor(node : InstructionNode) -> Bool {
+        guard let parent = self.parent else {
+            return false
+        }
+
+        return parent === node || parent.hasAncestor(node)
+    }
+}
 
 extension InstructionNode : Evaluatable {
     public func evaluate<T:Runtime>(runtime: T) {
@@ -188,7 +198,6 @@ extension InstructionNode : Analyzable {
         switch content {
         case .Null:
             analyzer.publish(self, label: "Null")
-            break
         case .Single(let instruction):
             analyzer.publish(self, label: instruction.getDescription(analyzer.stringifier))
             instruction.analyze(analyzer)

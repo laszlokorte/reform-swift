@@ -97,12 +97,10 @@ public class CropTool : Tool {
                 let adjustedSize = grabbedHandle.isCorner ? streightener.adjust(newSize, keepRatioOf: oldSize) : newSize
 
                 state = .Cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: adjustedSize, offset: offset)
-            case .Press:
-                break
             case .Release:
                 state = .Idle
                 process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle:
+            case .Cycle, .Press:
                 break
             case .Toggle:
                 streightener.invert()

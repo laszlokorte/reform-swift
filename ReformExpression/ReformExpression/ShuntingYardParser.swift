@@ -106,8 +106,6 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.wereValues.push(true);
                     }
                 }
-                break;
-                
             case .LiteralValue:
                 if (context.lastTokenAtom)
                 {
@@ -127,9 +125,6 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     context.wereValues.pop();
                     context.wereValues.push(true);
                 }
-                
-                break;
-                
             case .ArgumentSeparator:
                 while let peek = context.stack.peek() where peek.type != .ParenthesisLeft
                 {
@@ -150,11 +145,8 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 {
                     context.argCount.push(argCount + 1);
                 }
-                context.wereValues.push(true);
-                context.lastTokenAtom = false;
-                
-                break;
-                
+                context.wereValues.push(true)
+                context.lastTokenAtom = false
             case .Operator:
                 if (isOperator(context.prevToken) && delegate.hasUnaryOperator(
                     token))
@@ -197,15 +189,12 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     context.stack.push(token);
                     context.lastTokenAtom = false;
                 }
-                break;
-            
             case .ParenthesisLeft:
                 if (context.lastTokenAtom)
                 {
                     return .Fail(.UnexpectedToken(token: token, message: ""))
                 }
                 context.stack.push(token);
-                break
             case .ParenthesisRight:
                 while let peek = context.stack.peek() where !delegate.isMatchingPair(
                     peek, right: token)
@@ -240,7 +229,6 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         return .Fail(error)
                     }
                 }
-                break
             case .Ignore:
                 continue
             }

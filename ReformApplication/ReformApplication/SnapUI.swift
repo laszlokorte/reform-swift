@@ -31,8 +31,6 @@ struct SnapUIRenderer : Renderer {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
             CGContextDrawPath(context, .FillStroke)
-
-            break
         case .Active(let active, let points):
             CGContextSetLineWidth(context, 3)
             CGContextSetRGBStrokeColor(context, 0.9, 0.7, 0.2, 1)
@@ -51,10 +49,7 @@ struct SnapUIRenderer : Renderer {
             }
 
             drawDotAt(context, position: active.position, size: dotSize*1.3)
-            CGContextDrawPath(context, .FillStroke)
-
-            break
-            
+            CGContextDrawPath(context, .FillStroke)            
         }
     }
 }

@@ -81,8 +81,14 @@ final public class DefaultAnalyzer : Analyzer {
         if depth > 0 {
             instructions.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: true))
         }
+        defer {
+            if depth > 0 {
+            instructions.append(InstructionOutlineRow(node: node, label: "", depth: depth, isGroup: true))
+            }
+        }
 
         depth++
+
         defer { depth-- }
 
         block()

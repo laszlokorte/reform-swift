@@ -45,7 +45,7 @@ public class MorphTool : Tool {
     public func setUp() {
         state = .Idle
         selectionTool.setUp()
-        if let selected = selection.selected {
+        if let selected = selection.one {
             handleGrabber.enable(selected)
         }
     }
@@ -153,7 +153,7 @@ public class MorphTool : Tool {
             }
         }
         
-        if let entity = selection.selected {
+        if let entity = selection.one {
             handleGrabber.enable(entity)
         } else {
             handleGrabber.disable()

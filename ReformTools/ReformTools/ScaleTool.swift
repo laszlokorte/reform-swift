@@ -47,7 +47,7 @@ public class ScaleTool : Tool {
         state = .Idle
         selectionTool.setUp()
         
-        if let selected = selection.selected {
+        if let selected = selection.one {
             handleGrabber.enable(selected)
         }
     }
@@ -146,21 +146,18 @@ public class ScaleTool : Tool {
                 let length = axis.length2
                 let factor = length == 0 ? 1 : dot(distance, axis)/axis.length2
                 state = .Scaling(handle: grabbedHandle, factor: factor, offset: offset)
-                
-            case .Press:
-                break
             case .Release:
                 instructionCreator.commit()
                 state = .Idle
                 process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle:
+            case .Cycle, .Press:
                 break
             case .Toggle:
                 streightener.invert()
             }
         }
         
-        if let entity = selection.selected {
+        if let entity = selection.one {
             handleGrabber.enable(entity)
         } else {
             handleGrabber.disable()

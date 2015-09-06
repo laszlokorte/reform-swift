@@ -47,7 +47,7 @@ public class MoveTool : Tool {
         state = .Idle
         selectionTool.setUp()
         
-        if let selected = selection.selected {
+        if let selected = selection.one {
             pointGrabber.enable(selected)
         }
     }
@@ -156,7 +156,7 @@ public class MoveTool : Tool {
             }
         }
         
-        if let entity = selection.selected {
+        if let entity = selection.one {
             pointGrabber.enable(entity)
         } else {
             pointGrabber.disable()

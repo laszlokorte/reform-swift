@@ -7,14 +7,21 @@
 //
 
 import ReformCore
+import ReformMath
 
 public class SelectionUI {
     public enum State {
         case Hide
         case Show(FormSelection)
     }
+
+    public enum Rect {
+        case Hide
+        case Show(Vec2d, Vec2d)
+    }
     
     public var state : State = .Hide
-    
+    public var rect : Rect = .Hide
+
     public init() {}
 }

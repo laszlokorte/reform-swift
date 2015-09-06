@@ -14,12 +14,36 @@ import ReformExpression
 enum LocationFilter : Equatable {
     case Any
     case Near(Vec2d, distance: Double)
+    case AABB(min: Vec2d, max: Vec2d)
+}
+
+extension LocationFilter {
+    func matches(hitArea: HitArea) -> Bool {
+        switch self {
+        case .Any: return true
+        case .Near(let point, let distance):
+            return hitArea.contains(point, margin: distance)
+        case .AABB(let min, let max):
+            return false
+        }
+    }
+
+    func matches(point: Vec2d) -> Bool {
+        switch self {
+        case .Any: return true
+        case .Near(let loc, let d):
+            return (point-loc).length <= d
+        case .AABB(let min, let max):
+            return false
+        }
+    }
 }
 
 func ==(lhs: LocationFilter, rhs: LocationFilter) -> Bool {
     switch (lhs, rhs) {
     case (.Any, .Any): return true
     case (.Near(let p1, let d1), .Near(let p2, let d2)): return p1==p2 && d1 == d2
+    case (.AABB(let min1, let max1), .AABB(let min2, let max2)): return min1==min2 && max1 == max2
     default: return false
     }
 }
@@ -93,7 +117,7 @@ struct PointFinder {
                 
                 if query.pointType.contains(.Form) {
                     for p in entity.points {
-                        if case .Near(let loc, let d) = query.location where (loc-p.position).length > d {
+                        guard query.location.matches(p.position) else {
                             continue
                         }
                         result.append(p)
@@ -118,7 +142,7 @@ struct PointFinder {
                 if case .Except(let id) = query.filter where id == intersection.formIdA || id == intersection.formIdB {
                     continue
                 }
-                if case .Near(let loc, let d) = query.location where (loc-intersection.position).length > d {
+                guard query.location.matches(intersection.position) else {
                     continue
                 }
                 result.append(intersection)

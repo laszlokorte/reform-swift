@@ -29,9 +29,6 @@ struct CropUIRenderer : Renderer {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
             CGContextDrawPath(context, .FillStroke)
-
-
-            break
         case .Active(let active, let points):
 
             CGContextSetRGBStrokeColor(context, 0.23, 0.85, 0.3, 1)
@@ -49,9 +46,6 @@ struct CropUIRenderer : Renderer {
 
             drawDotAt(context, position: active.position, size: dotSize*1.5)
             CGContextDrawPath(context, .FillStroke)
-
-            break
-            
         }
     }
 }

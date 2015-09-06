@@ -55,7 +55,7 @@ struct HandleFinder {
             }
             
             for handle in entity.handles {
-                if case .Near(let loc, let d) = query.location where (loc-handle.position).length > d {
+                guard query.location.matches(handle.position) else {
                     continue
                 }
                 result.append(handle)

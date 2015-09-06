@@ -116,7 +116,7 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
                 {
                     return nil
                 } else {
-                    break
+                    break outer
                 }
             }
             else if let peek = inputQueue.peek()
@@ -150,7 +150,7 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
                 {
                     if (currentRule != nil)
                     {
-                        break;
+                        break outer
                     }
                     currentRule = nil;
                     currentPrio = 0;

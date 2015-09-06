@@ -30,9 +30,6 @@ struct HandleUIRenderer : Renderer {
             }
             
             CGContextDrawPath(context, .FillStroke)
-
-            
-            break
         case .Active(let active, let points):
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
@@ -43,9 +40,6 @@ struct HandleUIRenderer : Renderer {
             drawDotAt(context, position: active.position, size: dotSize*1.5)
             
             CGContextDrawPath(context, .FillStroke)
-
-            break
-            
         }
     }
 }

@@ -66,9 +66,10 @@ extension ProcedureController : NSTableViewDataSource {
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return instructions.count
     }
+
 }
 
-extension ProcedureController : NSOutlineViewDelegate {
+extension ProcedureController : NSTableViewDelegate {
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         let outlineRow = instructions[row]
 
@@ -88,6 +89,7 @@ extension ProcedureController : NSOutlineViewDelegate {
         
         return cellView
     }
+
 
     func tableViewSelectionDidChange(aNotification: NSNotification) {
         if !cycle, let index = tableView?.selectedRow where index > -1 {

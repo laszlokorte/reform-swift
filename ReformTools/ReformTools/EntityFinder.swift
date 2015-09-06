@@ -42,7 +42,8 @@ struct EntityFinder {
                 continue
             }
 
-            if case .Near(let loc, let d) = query.location where !entity.hitArea.contains(loc, margin: d) {
+
+            guard query.location.matches(entity.hitArea) else {
                 continue
             }
             

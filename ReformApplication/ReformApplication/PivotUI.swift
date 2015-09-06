@@ -26,7 +26,6 @@ struct PivotUIRenderer : Renderer {
         case .Show(let point):
             drawDotAt(context, position: point.position, size: dotSize*1.5)
             CGContextDrawPath(context, .FillStroke)
-            break
         }
         
     }

@@ -170,7 +170,7 @@ public class CreateFormTool : Tool {
                             point: startPoint)
                     )
                     
-                    selection.selected = form.identifier
+                    selection.select(form.identifier)
                     pointSnapper.enable(
                         .Except(form.identifier), pointType: snapType)
                     

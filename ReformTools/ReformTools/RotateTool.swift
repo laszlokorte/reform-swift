@@ -47,7 +47,7 @@ public class RotateTool : Tool {
     public func setUp() {
         state = .Idle
         selectionTool.setUp()
-        if let selected = selection.selected {
+        if let selected = selection.one {
             handleGrabber.enable(selected)
         }
     }
@@ -147,21 +147,18 @@ public class RotateTool : Tool {
                 state = .Rotating(handle: grabbedHandle, angle:
                     angleBetween(vector: pos - piv.position - offset,
                         vector: grabbedHandle.position - piv.position), offset: offset)
-                
-            case .Press:
-                break
             case .Release:
                 instructionCreator.commit()
                 state = .Idle
                 process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle:
+            case .Cycle, .Press:
                     break
             case .Toggle:
                 streightener.invert()
             }
         }
         
-        if let entity = selection.selected {
+        if let entity = selection.one {
             handleGrabber.enable(entity)
         } else {
             handleGrabber.disable()

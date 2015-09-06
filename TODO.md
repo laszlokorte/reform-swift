@@ -137,6 +137,7 @@ features which are streightforward to implement
 - [ ] Improve Error-Checking in analyzer and runtime regarding expressions
 - [ ] Add Expression-Distance
 - [ ] Add Expression-Destination
+- [ ] multi selection
 
 UI:
 ---

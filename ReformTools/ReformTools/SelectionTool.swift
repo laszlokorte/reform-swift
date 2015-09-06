@@ -14,8 +14,9 @@ public class SelectionTool : Tool {
     {
         case Idle
         case Selecting(entity: Entity?, cycle: Int)
+        case MultiSelect(from: Vec2d, to: Vec2d)
     }
-    
+
     var state : State = .Idle {
         didSet {
             update(state)
@@ -27,6 +28,8 @@ public class SelectionTool : Tool {
     let selectionUI : SelectionUI
     
     let entityFinder : EntityFinder
+
+    var xorMode = false
         
     public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI) {
         self.stage = stage
@@ -37,6 +40,7 @@ public class SelectionTool : Tool {
     }
     
     public func setUp() {
+        xorMode = false
         state = .Idle
         selectionUI.state = .Show(selection)
     }
@@ -54,11 +58,12 @@ public class SelectionTool : Tool {
     }
     
     public func cancel() {
-        selection.selected = nil
+        selection.clear()
         state = .Idle
     }
     
     public func process(input: Input, atPosition position: Vec2d, withModifier: Modifier) {
+        xorMode = withModifier.isStreight
         
         switch state {
         case .Selecting(_, let cycle):
@@ -68,37 +73,38 @@ public class SelectionTool : Tool {
                 if entities.count > 0 {
                     state = .Selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1)
                 }
-                break
-                
             case .Release:
                 state = .Idle
-                break
             case .Press, .Toggle, .ModifierChange, .Move:
                 break
-                
-                
             }
-            break
         case .Idle:
             switch input {
-            case .Move:
-                break
             case .Press:
                 let entities = entitiesNear(position)
-                if let
-                    previous = selection.selected,
+                if entities.isEmpty {
+                    state = .MultiSelect(from: position, to: position)
+                } else if let
+                    previous = selection.one,
                     index = entities.indexOf({$0.id == previous}) {
                     state = .Selecting(entity: entities[index], cycle: index)
                     
                 } else {
                     state = .Selecting(entity: entities.first, cycle: 0)
                 }
+            case .Release, .Cycle, .Toggle, .ModifierChange, .Move:
                 break
-            case .Release, .Cycle, .Toggle, .ModifierChange:
-                break
-                
             }
-            break
+
+        case .MultiSelect(let from, _):
+            switch input {
+            case .Move:
+                state = .MultiSelect(from: from, to: position)
+            case .Release:
+                state = .Idle
+            case .Press, .Toggle, .ModifierChange, .Cycle:
+                break
+            }
         }
     }
     
@@ -106,15 +112,23 @@ public class SelectionTool : Tool {
         let query = EntityQuery(filter: .Any, location: .Near(position, distance: 0))
         return entityFinder.getEntities(query)
     }
+
+    private func entitiesInside(min min: Vec2d, max: Vec2d) -> [Entity] {
+        let query = EntityQuery(filter: .Any, location: .AABB(min: min, max: max))
+        return entityFinder.getEntities(query)
+    }
     
     private func update(state: State) {
+
         switch state {
         case .Selecting(let entity, _):
-            selection.selected = entity?.id
-
-            break
+            selection.select(entity?.id, replace: !xorMode)
+            fallthrough
         case .Idle:
-            break
+            selectionUI.rect = .Hide
+        case .MultiSelect(let from, let to):
+            selection.select(entitiesInside(min: from, max: to).map{$0.id}, replace: !xorMode)
+            selectionUI.rect = .Show(from, to)
         }
     }
 }

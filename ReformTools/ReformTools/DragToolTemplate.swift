@@ -172,7 +172,7 @@ public class DragTool<Delegate: DragToolProtocol> {
             }
         }
         
-        delegate.filterStart(selection.selected)
+        delegate.filterStart(selection.one)
         
         publish()
     }
