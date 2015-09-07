@@ -70,15 +70,17 @@ final public class SnapshotCollector : RuntimeListener {
 
         let key = InstructionNodeKey(instruction)
 
+        guard !instructions.contains(key) && !errors.keys.contains(key) else {
+            return
+        }
+
+        instructions.insert(key)
+
         guard !instruction.isEmpty else {
             return
         }
 
         guard !instruction.isGroup else {
-            return
-        }
-
-        guard !errors.keys.contains(key) else {
             return
         }
 
@@ -117,8 +119,8 @@ final public class SnapshotCollector : RuntimeListener {
 
             for path in paths {
                 path.draw(context)
-                CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
             }
+            CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
 
             for formId in runtime.getForms() {
                 guard let form = runtime.get(formId) as? Drawable else {
