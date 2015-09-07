@@ -46,7 +46,7 @@ The following was already implement in java but has to be ported/adopted to the 
 - [x] Crop Tool
 - [ ] Preview Tool
 - [ ] Export Tool
-- [ ] SPACE-key preview
+- [x] SPACE-key preview
 - [ ] Procedure-View
   - [x] Show Instructions and Preview
   - [ ] Show Errors
@@ -56,12 +56,12 @@ The following was already implement in java but has to be ported/adopted to the 
 - [ ] Data-View
 - [ ] Measurement-View
 - [ ] Picture-Selection
-- [ ] Creation-Tool Dropdown
+- [-] Creation-Tool Dropdown
 - [ ] Make toolbar hightlight robust
 - [ ] Menubar
 - [ ] Non-Rotation-Handles (Arc, Pie)
 - [ ] Auto-center Circle
-- [ ] Formtype-dependent striehtening
+- [ ] Formtype-dependent streightening
 - [x] fix responder-chain for toolbar
 - [ ] improve controller hirarchie/documentbased architecture
   - [x] class to capture editor state
@@ -72,7 +72,7 @@ The following was already implement in java but has to be ported/adopted to the 
 - [ ] Tooltips
 - [ ] Negative Pie scaling
 - [ ] Improve Angle-range handling
-- [ ] Text Rendering
+- [x] Text Rendering
 - [ ] Multiple Windows/Projects
 - [ ] Canvas focus/default responder
 - [ ] color chooser
@@ -95,6 +95,7 @@ Conceptually open:
 ------------------
 features for which is not yet decided how to implement them in detail or how they should work/behave
 
+- [ ] strongly typed attributes/parameters/data/measurments
 - [ ] Iterate over points
 - [ ] Itetate over forms
 - [ ] "Reference"-forms in difference colors with generalized snap/grap points
@@ -138,6 +139,11 @@ features which are streightforward to implement
 - [ ] Add Expression-Distance
 - [ ] Add Expression-Destination
 - [ ] multi selection
+  - [x] Shift-Click to select/deselect additional entities
+  - [x] Drag Selection-box to select all entities inside
+  - improve Selection-Box
+    - [ ] fix intersection calculations (currently just mocked for line and rect forms)
+    - [ ] curently selection box only appears when drag starts on canvas. Add option to force selection box even when starting on entity 
 
 UI:
 ---
