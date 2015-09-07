@@ -124,17 +124,10 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        var newFocus : InstructionNode?
-
-
         for index in indices {
             let node = instructions[index].node
             guard !node.isEmpty else {
                 continue
-            }
-
-            if let prev = node.previous {
-                newFocus = prev
             }
             node.removeFromParent()
         }
