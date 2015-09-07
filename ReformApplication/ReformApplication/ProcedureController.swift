@@ -148,7 +148,7 @@ extension ProcedureController : NSMenuDelegate {
         }
 
 
-        guard let row = tableView?.selectedRow, cell = tableView?.viewAtColumn(0, row: row, makeIfNecessary: false) else {
+        guard let row = tableView?.selectedRow where row > 0, let cell = tableView?.viewAtColumn(0, row: row, makeIfNecessary: false) else {
             return
         }
 

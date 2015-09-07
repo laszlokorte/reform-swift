@@ -19,6 +19,7 @@
 		F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF131B835E58005F71A1 /* HandleUI.swift */; };
 		F222AF161B835E60005F71A1 /* SelectionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF151B835E60005F71A1 /* SelectionUI.swift */; };
 		F222AF191B836232005F71A1 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF181B836232005F71A1 /* Modifier.swift */; };
+		F2237FC31B9D43DB00E025A6 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2237FC21B9D43DB00E025A6 /* ExportController.swift */; settings = {ASSET_TAGS = (); }; };
 		F2339AF61B8D25B300C0AE41 /* PictureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339AF51B8D25B300C0AE41 /* PictureSession.swift */; };
 		F2339AF81B8D260000C0AE41 /* ProjectSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339AF71B8D260000C0AE41 /* ProjectSession.swift */; };
 		F2339AFD1B8D321300C0AE41 /* SnapShotCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339AFC1B8D321300C0AE41 /* SnapShotCollector.swift */; };
@@ -104,6 +105,7 @@
 		F222AF131B835E58005F71A1 /* HandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleUI.swift; sourceTree = "<group>"; };
 		F222AF151B835E60005F71A1 /* SelectionUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionUI.swift; sourceTree = "<group>"; };
 		F222AF181B836232005F71A1 /* Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+		F2237FC21B9D43DB00E025A6 /* ExportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportController.swift; sourceTree = "<group>"; };
 		F2339AF51B8D25B300C0AE41 /* PictureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureSession.swift; sourceTree = "<group>"; };
 		F2339AF71B8D260000C0AE41 /* ProjectSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSession.swift; sourceTree = "<group>"; };
 		F2339AFC1B8D321300C0AE41 /* SnapShotCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapShotCollector.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				F262B7711B7E275800B29E2D /* ProcedureController.swift */,
 				F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */,
 				F2DF636B1B929A4800A2EFB6 /* GradientView.swift */,
+				F2237FC21B9D43DB00E025A6 /* ExportController.swift */,
 			);
 			path = ReformApplication;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				F222AF0C1B835D1F005F71A1 /* CropUI.swift in Sources */,
 				F2339AF81B8D260000C0AE41 /* ProjectSession.swift in Sources */,
 				F2339AFD1B8D321300C0AE41 /* SnapShotCollector.swift in Sources */,
+				F2237FC31B9D43DB00E025A6 /* ExportController.swift in Sources */,
 				F27391221B7FAA7800100F2F /* StageController.swift in Sources */,
 				F2339B061B8D5AAE00C0AE41 /* ProcedureCellView.swift in Sources */,
 				F222AF101B835E49005F71A1 /* PivotUI.swift in Sources */,
