@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class MeasurementController : NSViewController {
+final class MeasurementController : NSViewController {
 
 }
 

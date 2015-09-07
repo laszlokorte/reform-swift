@@ -14,7 +14,7 @@ import ReformCore
 
 typealias Picture = ReformCore.Picture
 
-class InstructionFocusChanger {
+final class InstructionFocusChanger {
     let instructionFocus : InstructionFocus
     let callback : () -> ()
 
@@ -29,13 +29,13 @@ class InstructionFocusChanger {
     }
 }
 
-class ProcedureProcessor<R:Runtime, A:Analyzer> {
+final class ProcedureProcessor<A:Analyzer> {
     let picture : Picture
-    let runtime: R
+    let runtime: DefaultRuntime
     let analyzer : A
     let toolController : ToolController
 
-    init(picture : Picture, analyzer: A, runtime: R, toolController: ToolController) {
+    init(picture : Picture, analyzer: A, runtime: DefaultRuntime, toolController: ToolController) {
         self.picture = picture
         self.analyzer = analyzer
         self.runtime = runtime
@@ -68,7 +68,7 @@ class ProcedureProcessor<R:Runtime, A:Analyzer> {
     }
 }
 
-class PictureSession {
+final class PictureSession {
     private weak var projectSession : ProjectSession?
 
     let expressionPrinter : ExpressionPrinter
@@ -116,7 +116,7 @@ class PictureSession {
 
     let cropTool : CropTool
 
-    let procedureProcessor : ProcedureProcessor<DefaultRuntime, DefaultAnalyzer>
+    let procedureProcessor : ProcedureProcessor<DefaultAnalyzer>
     let instructionFocusChanger : InstructionFocusChanger
 
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {

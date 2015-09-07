@@ -12,7 +12,7 @@ import ReformStage
 import ReformMath
 import ReformTools
 
-class ProjectSession {
+final class ProjectSession {
 
     let project : Project
 

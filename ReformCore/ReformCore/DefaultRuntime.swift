@@ -25,12 +25,12 @@ final public class DefaultRuntime : Runtime {
         _stopped = false
     }
     
-    public func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ()) {
+    public func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (picture: T.CallType) -> ()) {
         self.dataSet = dataSet
         
     }
     
-    public func run(width width: Double, height: Double, block: () -> ()) {
+    public func run(width width: Double, height: Double, @noescape block: (DefaultRuntime) -> ()) {
         stack.clear()
         
         listeners.forEach() {
@@ -47,11 +47,11 @@ final public class DefaultRuntime : Runtime {
             _stopped = true
         }
         
-        block()
+        block(self)
         
     }
     
-    public func eval(instruction : Evaluatable, block: () -> ()) {
+    public func eval(instruction : InstructionNode, @noescape block: (DefaultRuntime) -> ()) {
         defer {
             listeners.forEach() {
                 $0.runtime(self, didEval: instruction)
@@ -60,11 +60,11 @@ final public class DefaultRuntime : Runtime {
         
         currentInstructions.append(instruction)
         defer { currentInstructions.removeLast() }
-        
-        block()
+
+        block(self)
     }
     
-    public func scoped(block: () -> ()) {
+    public func scoped(@noescape block: (DefaultRuntime) -> ()) {
         stack.pushFrame()
         defer {
             guard let forms = stack.frames.last?.forms else {
@@ -75,7 +75,7 @@ final public class DefaultRuntime : Runtime {
             }
             stack.popFrame()
         }
-        block()
+        block(self)
     }
     
     public func declare(form : Form) {

@@ -14,7 +14,7 @@ protocol ProcedureCellView {
 }
 
 
-class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
+final class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
     @IBOutlet var indentConstraint : NSLayoutConstraint?
 
     func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
@@ -25,7 +25,7 @@ class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
     }
 }
 
-class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
+final class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
     @IBOutlet var indentConstraint : NSLayoutConstraint?
 
 

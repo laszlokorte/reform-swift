@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class SheetController : NSViewController {
+final class SheetController : NSViewController {
     @IBOutlet var tableView : NSTableView?
 }
 

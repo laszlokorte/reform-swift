@@ -17,14 +17,14 @@ public struct IfConditionInstruction : GroupInstruction {
         self.expression = expression
     }
     
-    public func evaluate<T:Runtime>(runtime: T, withChildren children: [InstructionNode]) {
+    public func evaluate<T:Runtime where T.Ev==InstructionNode>(runtime: T, withChildren children: [InstructionNode]) {
         guard case .Success(.BoolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
             runtime.reportError(.InvalidExpression)
             return
         }
         
         if bool {
-            runtime.scoped() {
+            runtime.scoped() { runtime in
                 for c in children {
                     c.evaluate(runtime)
                 }

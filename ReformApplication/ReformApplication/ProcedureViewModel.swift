@@ -9,7 +9,7 @@
 import ReformCore
 import ReformTools
 
-class ProcedureViewModel {
+final class ProcedureViewModel {
     let analyzer : DefaultAnalyzer
     let instructionFocus : InstructionFocus
     let snapshotCollector : SnapshotCollector

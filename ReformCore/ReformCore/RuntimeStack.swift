@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class RuntimeStack {
+final class RuntimeStack {
     var frames = [StackFrame]()
     var data : [UInt64] = []
     var dataSize : Int = 0
@@ -86,6 +86,6 @@ class RuntimeStack {
     }
 }
 
-class StackFrame {
+final class StackFrame {
     var forms : [FormIdentifier] = []
 }

@@ -11,7 +11,7 @@ import ReformStage
 import ReformTools
 
 
-class StageRenderer : Renderer {
+final class StageRenderer : Renderer {
     let stage : Stage
     var lookIntoFuture = false
 

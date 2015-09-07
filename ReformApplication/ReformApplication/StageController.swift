@@ -36,7 +36,7 @@ struct StageUI {
 }
 
 @objc
-class StageController : NSViewController {
+final class StageController : NSViewController {
     var toolController : ToolController?
     var stageRenderer : StageRenderer?
 

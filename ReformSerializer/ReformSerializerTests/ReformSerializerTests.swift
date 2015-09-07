@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReformSerializer
 
-class ReformSerializerTests: XCTestCase {
+final class ReformSerializerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

@@ -20,18 +20,19 @@ public protocol RuntimeListener {
     func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on: Evaluatable)
 }
 
-public protocol Runtime : class {
+public protocol Runtime {
     static var maxDepth : Int { get }
+    typealias Ev : Evaluatable
     
     var listeners : [RuntimeListener] { get set }
     
-    func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: (picture: T.CallType) -> ())
+    func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (picture: T.CallType) -> ())
     
-    func run(width width: Double, height: Double, block: () -> ())
+    func run(width width: Double, height: Double, @noescape block: (Self) -> ())
     
-    func eval(instruction : Evaluatable, block: () -> ())
+    func eval(instruction : Ev, @noescape block: (Self) -> ())
 
-    func scoped(block: () -> ())
+    func scoped(@noescape block: (Self) -> ())
 
     func declare(form : Form)
     

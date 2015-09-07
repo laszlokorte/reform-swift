@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReformMath
 
-class ReformMathTests: XCTestCase {
+final class ReformMathTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

@@ -12,7 +12,7 @@ import Cocoa
 import ReformExpression
 import ReformCore
 
-class ProcedureController : NSViewController {
+final class ProcedureController : NSViewController {
     private var cycle = false
 
     override var representedObject : AnyObject? {

@@ -15,7 +15,7 @@ import ReformStage
 import ReformMath
 import ReformTools
 
-class ProjectWindowController : NSWindowController {
+final class ProjectWindowController : NSWindowController {
 
 
     lazy var picture : ReformCore.Picture = ReformCore.Picture(identifier : PictureIdentifier(0), name: "Untiled", size: (580,330), data: self.data, procedure: self.procedure)

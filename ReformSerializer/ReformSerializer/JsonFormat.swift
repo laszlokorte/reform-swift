@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class JsonFormat : Encoder, Decoder {
+final class JsonFormat : Encoder, Decoder {
     func encode(value: NormalizedValue) -> String {
         return ""
     }

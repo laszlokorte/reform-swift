@@ -15,7 +15,7 @@ import ReformStage
 import ReformTools
 
 @IBDesignable
-class CanvasView : NSView {
+final class CanvasView : NSView {
     @IBOutlet weak var delegate : NSViewController?
 
     var canvasSize = Vec2d(x: 100, y: 100) {

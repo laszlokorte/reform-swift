@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ExportController : NSViewController {
+final class ExportController : NSViewController {
     func cancel(sender: AnyObject?) {
         dismissViewController(self)
     }

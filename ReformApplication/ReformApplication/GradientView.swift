@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class GradientView : NSView {
+final class GradientView : NSView {
 
     override func drawRect(dirtyRect: NSRect) {
         if let main = self.window?.keyWindow where !main {

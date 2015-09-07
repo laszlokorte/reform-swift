@@ -15,7 +15,7 @@ import ReformStage
 import ReformMath
 import ReformTools
 
-class PictureController : NSViewController {
+final class PictureController : NSViewController {
 
 
     override var representedObject: AnyObject? {

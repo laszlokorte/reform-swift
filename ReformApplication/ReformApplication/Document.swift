@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class Document: NSDocument {
+final class Document: NSDocument {
     
     override init() {
         super.init()

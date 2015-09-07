@@ -174,19 +174,19 @@ extension InstructionNode {
 }
 
 extension InstructionNode : Evaluatable {
-    public func evaluate<T:Runtime>(runtime: T) {
+    public func evaluate<T:Runtime where T.Ev == InstructionNode>(runtime: T) {
         switch content {
         case .Null:
-            runtime.eval(self) {
+            runtime.eval(self) { _ in
 
             }
         case .Single(let instruction):
-            runtime.eval(self) {
-                instruction.evaluate(runtime)
+            runtime.eval(self) { r in
+                instruction.evaluate(r)
             }
         case .Group(let group, let children):
-            runtime.eval(self) {
-                group.evaluate(runtime, withChildren: children)
+            runtime.eval(self) { r in
+                group.evaluate(r, withChildren: children)
             }
         }
 
@@ -232,7 +232,7 @@ public protocol GroupInstruction : Labeled {
     
     var target : FormIdentifier? { get }
     
-    func evaluate<T:Runtime>(runtime: T, withChildren: [InstructionNode])
+    func evaluate<T:Runtime where T.Ev==InstructionNode>(runtime: T, withChildren: [InstructionNode])
     
     func analyze<T:Analyzer>(analyzer: T)
 }

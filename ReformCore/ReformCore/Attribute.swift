@@ -12,7 +12,7 @@ enum AttributeType {
     case PictureId
 }
 
-class Attribute {
+final class Attribute {
     let name : String
     let type : AttributeType
     

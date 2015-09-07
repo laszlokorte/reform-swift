@@ -15,7 +15,7 @@ public struct InstructionOutlineRow {
     public let isGroup : Bool
 }
 
-class AnalyzerStringifier : Stringifier {
+final class AnalyzerStringifier : Stringifier {
     private var forms = [FormIdentifier:Form]()
     private let expressionPrinter : ExpressionPrinter
 
@@ -58,7 +58,7 @@ final public class DefaultAnalyzer : Analyzer {
         self.analyzerStringifier = AnalyzerStringifier(expressionPrinter: expressionPrinter)
     }
     
-    public func analyze(block: () -> ()) {
+    public func analyze(@noescape block: () -> ()) {
         analyzerStringifier.forms.removeAll()
         instructions.removeAll()
         depth = 0
@@ -72,7 +72,7 @@ final public class DefaultAnalyzer : Analyzer {
         instructions.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: false))
     }
     
-    public func publish(instruction: Analyzable, label: String, block: () -> ()) {
+    public func publish(instruction: Analyzable, label: String, @noescape block: () -> ()) {
         guard let node = instruction as? InstructionNode else {
             return
         }

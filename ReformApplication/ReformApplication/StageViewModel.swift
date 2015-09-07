@@ -9,7 +9,7 @@
 import ReformStage
 import ReformTools
 
-class StageViewModel {
+final class StageViewModel {
     let stage : Stage
     let stageUI : StageUI
     let toolController : ToolController
