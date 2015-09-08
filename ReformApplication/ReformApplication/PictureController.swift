@@ -17,6 +17,9 @@ import ReformTools
 
 final class PictureController : NSViewController {
 
+    @IBOutlet weak var leftSplit: NSSplitView!
+    @IBOutlet weak var centerSplit: NSView!
+    @IBOutlet weak var rightSplit: NSView!
 
     override var representedObject: AnyObject? {
         didSet {
@@ -78,5 +81,13 @@ final class PictureController : NSViewController {
 }
 
 extension PictureController : NSSplitViewDelegate {
+
+    func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
+        return [leftSplit, rightSplit].contains(subview)
+    }
+
+    func splitView(splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAtIndex dividerIndex: Int) -> Bool {
+        return false
+    }
 
 }

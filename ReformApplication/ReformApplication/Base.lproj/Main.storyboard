@@ -930,28 +930,28 @@ Gw
             <objects>
                 <viewController id="hFx-Lk-q3W" userLabel="Picture" customClass="PictureController" customModule="ReformApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <splitView key="view" dividerStyle="thin" vertical="YES" id="Ndr-xT-mGE">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="335"/>
+                        <rect key="frame" x="0.0" y="0.0" width="599" height="335"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <splitView fixedFrame="YES" dividerStyle="thin" id="YZy-BI-4QK">
                                 <rect key="frame" x="0.0" y="0.0" width="119" height="335"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <containerView fixedFrame="YES" id="c5X-ro-zf9">
+                                    <containerView fixedFrame="YES" id="c5X-ro-zf9" userLabel="Parameters">
                                         <rect key="frame" x="0.0" y="0.0" width="119" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <connections>
                                             <segue destination="Jdn-j4-Nab" kind="embed" id="LTY-lK-E4g"/>
                                         </connections>
                                     </containerView>
-                                    <containerView fixedFrame="YES" id="IqM-79-kXz">
+                                    <containerView fixedFrame="YES" id="IqM-79-kXz" userLabel="Procedure">
                                         <rect key="frame" x="0.0" y="17" width="119" height="295"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <connections>
                                             <segue destination="tWe-V1-zXv" kind="embed" id="O4P-4N-1lq"/>
                                         </connections>
                                     </containerView>
-                                    <containerView fixedFrame="YES" id="MVK-dw-NWh">
+                                    <containerView fixedFrame="YES" id="MVK-dw-NWh" userLabel="Measurements">
                                         <rect key="frame" x="0.0" y="313" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <connections>
@@ -966,14 +966,14 @@ Gw
                                 </holdingPriorities>
                             </splitView>
                             <customView id="QVb-bE-6Ed">
-                                <rect key="frame" x="120" y="0.0" width="330" height="335"/>
+                                <rect key="frame" x="120" y="0.0" width="369" height="335"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="THj-mi-BxT" customClass="GradientView" customModule="ReformApplication" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="307" width="330" height="28"/>
+                                        <rect key="frame" x="0.0" y="307" width="369" height="28"/>
                                         <subviews>
                                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="uWS-pb-pov">
-                                                <rect key="frame" x="0.0" y="0.0" width="330" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="369" height="28"/>
                                                 <connections>
                                                     <segue destination="b1s-Wp-Ikd" kind="embed" id="cc2-pz-K6U"/>
                                                 </connections>
@@ -987,8 +987,8 @@ Gw
                                             <constraint firstAttribute="bottom" secondItem="uWS-pb-pov" secondAttribute="bottom" id="wAo-iW-5UF"/>
                                         </constraints>
                                     </customView>
-                                    <containerView translatesAutoresizingMaskIntoConstraints="NO" id="QlB-Sb-enK">
-                                        <rect key="frame" x="0.0" y="0.0" width="330" height="307"/>
+                                    <containerView translatesAutoresizingMaskIntoConstraints="NO" id="QlB-Sb-enK" userLabel="CanvasView">
+                                        <rect key="frame" x="0.0" y="0.0" width="369" height="307"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="330" id="98s-ck-n0K"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="iMy-Ee-XZG"/>
@@ -1008,19 +1008,35 @@ Gw
                                     <constraint firstAttribute="trailing" secondItem="QlB-Sb-enK" secondAttribute="trailing" id="vva-cv-iyS"/>
                                 </constraints>
                             </customView>
+                            <containerView id="oFA-Is-aF2" userLabel="Attributes">
+                                <rect key="frame" x="490" y="0.0" width="109" height="335"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="aLg-Dz-FBj"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="sBt-2Q-4vn" kind="embed" id="VfP-iw-Klg"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <holdingPriorities>
                             <real value="300"/>
-                            <real value="250"/>
+                            <real value="100"/>
+                            <real value="300"/>
                         </holdingPriorities>
                         <connections>
                             <outlet property="delegate" destination="hFx-Lk-q3W" id="j6l-T5-m0D"/>
                         </connections>
                     </splitView>
+                    <connections>
+                        <outlet property="centerSplit" destination="QVb-bE-6Ed" id="w5S-cj-93i"/>
+                        <outlet property="leftSplit" destination="YZy-BI-4QK" id="C5P-wT-34p"/>
+                        <outlet property="rightSplit" destination="oFA-Is-aF2" id="DWq-Kl-mv5"/>
+                    </connections>
                 </viewController>
                 <customObject id="aPK-8P-8m9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="63" y="865.5"/>
+            <point key="canvasLocation" x="137.5" y="865.5"/>
         </scene>
         <!--Data Editor-->
         <scene sceneID="DwK-Ed-G7g">
@@ -1121,11 +1137,11 @@ Gw
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="7ak-ac-fNM"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="e8b-V0-DQA"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="LCb-fr-rgN">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.23814616469675851" horizontal="YES" id="LCb-fr-rgN">
                                     <rect key="frame" x="0.0" y="107" width="300" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="F9x-sW-BB8">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="4.568371824925e-14" horizontal="NO" id="F9x-sW-BB8">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1427,7 +1443,7 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="AQT-OX-Fbo">
-                                                            <rect key="frame" x="1" y="1" width="115.83105597713137" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="116" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QFn-sU-QDU">
@@ -1445,7 +1461,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="178.27429027316862" minWidth="40" maxWidth="1000" id="RCu-Zm-GHw">
+                                                <tableColumn width="178.12907677425332" minWidth="40" maxWidth="1000" id="RCu-Zm-GHw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1459,7 +1475,7 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="JS5-Cj-uGG">
-                                                            <rect key="frame" x="119.83105597713137" y="1" width="178.60972705938946" height="17"/>
+                                                            <rect key="frame" x="120" y="1" width="179" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pK2-7Y-EHB">
@@ -1494,7 +1510,7 @@ Gw
                                     <rect key="frame" x="0.0" y="111" width="300" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.036237252299179089" horizontal="NO" id="qGu-Nv-zuN">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="qGu-Nv-zuN">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1609,6 +1625,33 @@ Gw
             <point key="canvasLocation" x="743.5" y="1304"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="LEA-Mb-aK2">
+            <objects>
+                <viewController id="sBt-2Q-4vn" sceneMemberID="viewController">
+                    <view key="view" id="Gf4-AR-Vhc">
+                        <rect key="frame" x="0.0" y="0.0" width="246" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ngp-Sb-x0W">
+                                <rect key="frame" x="91" y="263" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Attributes" id="5fb-CC-1kg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Ngp-Sb-x0W" firstAttribute="centerX" secondItem="Gf4-AR-Vhc" secondAttribute="centerX" id="Ngb-xI-L89"/>
+                            <constraint firstItem="Ngp-Sb-x0W" firstAttribute="top" secondItem="Gf4-AR-Vhc" secondAttribute="top" constant="20" symbolic="YES" id="ZxB-sj-KF4"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="gpX-aD-aaZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1411" y="958"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="XA2-6T-JQU">
             <objects>
                 <viewController id="b1s-Wp-Ikd" sceneMemberID="viewController">
@@ -1677,6 +1720,18 @@ Gw
                 <customObject id="rRZ-ZZ-vCY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="901" y="725"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="c7l-Kh-Kqb">
+            <objects>
+                <viewController id="fgS-K2-7le" sceneMemberID="viewController">
+                    <view key="view" id="7fV-7D-o7d">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="MFE-QY-U6p" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
