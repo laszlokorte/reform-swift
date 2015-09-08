@@ -92,6 +92,7 @@ final class PictureSession {
     let pointSnapper : PointSnapper
     let pointGrabber : PointGrabber
     let handleGrabber : HandleGrabber
+    let affineHandleGrabber : AffineHandleGrabber
     let cropGrabber : CropGrabber
 
     let streightener : Streightener
@@ -148,6 +149,7 @@ final class PictureSession {
         self.pointSnapper = PointSnapper(stage: self.stage, snapUI: self.stageUI.snapUI, camera: camera, radius: 10)
         self.pointGrabber = PointGrabber(stage: self.stage, grabUI: self.stageUI.grabUI, camera: camera, radius: 10)
         self.handleGrabber = HandleGrabber(stage: self.stage, handleUI: self.stageUI.handleUI, camera: camera, radius: 10)
+        self.affineHandleGrabber = AffineHandleGrabber(stage: self.stage, handleUI: self.stageUI.handleUI, camera: camera, radius: 10)
         self.cropGrabber = CropGrabber(stage: stage, cropUI: self.stageUI.cropUI, camera: camera, radius: 10)
 
         self.streightener = Streightener()
@@ -191,10 +193,10 @@ final class PictureSession {
 
         self.morphTool = MorphTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
 
-        self.rotationTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
+        self.rotationTool = RotateTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.affineHandleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
 
 
-        self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.handleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
+        self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.affineHandleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
 
         self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture) {
             [trigger=self.procedureProcessor.triggerEval,collector=self.stageCollector] in

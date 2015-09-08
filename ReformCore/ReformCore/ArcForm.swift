@@ -107,14 +107,14 @@ extension ArcForm : Morphable {
     public enum AnchorId : AnchorIdentifier {
         case Start = 0
         case End = 1
-        case Offset = 2
+        case Center = 2
     }
     
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
             AnchorId.Start.rawValue:StaticPointAnchor(point: startPoint, name: "Start"),
             AnchorId.End.rawValue:StaticPointAnchor(point: endPoint, name: "End"),
-            AnchorId.Offset.rawValue:controlAnchor,
+            AnchorId.Center.rawValue:controlAnchor,
         ]
     }
     

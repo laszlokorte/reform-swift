@@ -97,7 +97,7 @@ public final class SelectionTool : Tool {
             switch input {
             case .Press:
                 let entities = entitiesNear(position)
-                if entities.isEmpty {
+                if entities.isEmpty || withModifier.contains(.Glomp) {
                     state = .MultiSelect(from: position, to: position, old: selection.selected)
                 } else if changeMode == .Replace, let
                     previous = selection.one,

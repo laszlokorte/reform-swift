@@ -14,7 +14,8 @@ extension TextForm {
     public enum PointId : ExposedPointIdentifier {
         case Start = 0
         case End = 1
-        case Center = 2
+        case Bottom = 2
+        case Top = 3
     }
 }
 
@@ -52,10 +53,10 @@ final public class TextForm : Form, Creatable {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            ExposedPointIdentifier(0):ExposedPoint(point: startPoint, name: "Start"),
-            ExposedPointIdentifier(1):ExposedPoint(point: endPoint, name: "End"),
-            ExposedPointIdentifier(2):ExposedPoint(point: centerPoint, name: "Bottom"),
-            ExposedPointIdentifier(3):AnchorPoint(anchor: controlPointAnchor)
+            PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
+            PointId.End.rawValue:ExposedPoint(point: endPoint, name: "End"),
+            PointId.Bottom.rawValue:ExposedPoint(point: centerPoint, name: "Bottom"),
+            PointId.Top.rawValue:AnchorPoint(anchor: controlPointAnchor)
         ]
     }
     
@@ -99,14 +100,14 @@ extension TextForm : Morphable {
     public enum AnchorId : AnchorIdentifier {
         case Start = 0
         case End = 1
-        case Offset = 2
+        case Top = 2
     }
-    
+
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
             AnchorId.Start.rawValue:startAnchor,
             AnchorId.End.rawValue:endAnchor,
-            AnchorId.Offset.rawValue:controlPointAnchor,
+            AnchorId.Top.rawValue:controlPointAnchor,
         ]
     }
     

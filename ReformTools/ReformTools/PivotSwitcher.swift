@@ -16,7 +16,7 @@ public enum PivotChoice {
 }
 
 extension PivotChoice {
-    func pointFor(handle : Handle) -> SnapPoint {
+    func pointFor(handle : AffineHandle) -> SnapPoint {
         switch self {
         case .Primary:
             return handle.defaultPivot.0

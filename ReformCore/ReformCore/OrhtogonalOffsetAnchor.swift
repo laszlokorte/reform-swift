@@ -45,16 +45,16 @@ struct OrthogonalOffsetAnchor : Anchor {
                 b = pointB.getPositionFor(runtime),
                 oldOffset = offset.getLengthFor(runtime) {
                
-            let delta = b - a
-            let distance = delta.length
-            
-            let orth = distance != 0 ? orthogonal(delta) / distance : Vec2d(x:0,y:-1)
+            let d = b - a
+
+            let orth = normalize(orthogonal(d)) ?? Vec2d(x:0,y:-1)
             
             let old = orth * oldOffset
             
-            let new = old + delta
-            
-            offset.setLengthFor(runtime, length: dot(new, orth))
+            let new = old - delta
+            let length = dot(new, orth)
+
+            offset.setLengthFor(runtime, length: length)
         }
     }
 }

@@ -16,7 +16,7 @@ public final class RotateTool : Tool {
     {
         case Idle
         case Delegating
-        case Rotating(handle: Handle, angle: Angle, offset: Vec2d)
+        case Rotating(handle: AffineHandle, angle: Angle, offset: Vec2d)
     }
     
     var pivot : PivotChoice = .Primary
@@ -24,7 +24,7 @@ public final class RotateTool : Tool {
     var snapType : PointType = []
     
     let stage : Stage
-    let handleGrabber : HandleGrabber
+    let handleGrabber : AffineHandleGrabber
     let streightener : Streightener
     let instructionCreator : InstructionCreator
     
@@ -33,7 +33,7 @@ public final class RotateTool : Tool {
     
     let pivotUI : PivotUI
     
-    public init(stage: Stage, selection: FormSelection, handleGrabber: HandleGrabber, streightener: Streightener, instructionCreator: InstructionCreator, selectionTool: SelectionTool, pivotUI : PivotUI) {
+    public init(stage: Stage, selection: FormSelection, handleGrabber: AffineHandleGrabber, streightener: Streightener, instructionCreator: InstructionCreator, selectionTool: SelectionTool, pivotUI : PivotUI) {
         self.stage = stage
         self.selection = selection
         self.selectionTool = selectionTool
@@ -122,9 +122,9 @@ public final class RotateTool : Tool {
                     
                     
                     instructionCreator
-                        .beginCreation(RotateInstruction(formId: grabbedHandle.formId, angle: ConstantAngle(angle: Angle(degree: 0)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
+                        .beginCreation(RotateInstruction(formId: grabbedHandle.handle.formId, angle: ConstantAngle(angle: Angle(degree: 0)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
                     
-                    state = .Rotating(handle: grabbedHandle, angle: Angle(degree: 0), offset: pos - grabbedHandle.position)
+                    state = .Rotating(handle: grabbedHandle, angle: Angle(degree: 0), offset: pos - grabbedHandle.handle.position)
                 
                     
                 } else {
@@ -146,7 +146,7 @@ public final class RotateTool : Tool {
                 let piv = pivot.pointFor(grabbedHandle)
                 state = .Rotating(handle: grabbedHandle, angle:
                     angleBetween(vector: pos - piv.position - offset,
-                        vector: grabbedHandle.position - piv.position), offset: offset)
+                        vector: grabbedHandle.handle.position - piv.position), offset: offset)
             case .Release:
                 instructionCreator.commit()
                 state = .Idle
@@ -170,7 +170,7 @@ public final class RotateTool : Tool {
     private func publish() {
         if case .Rotating(let grabbedHandle, let angle, _) = state {
             
-            instructionCreator.update(RotateInstruction(formId: grabbedHandle.formId, angle: ConstantAngle(angle: streightener.adjust(angle)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
+            instructionCreator.update(RotateInstruction(formId: grabbedHandle.handle.formId, angle: ConstantAngle(angle: streightener.adjust(angle)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
         }
     }
 }

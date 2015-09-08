@@ -21,6 +21,8 @@
 		F222AF3D1B876941005F71A1 /* HandleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3C1B876941005F71A1 /* HandleFinder.swift */; };
 		F222AF401B8776B8005F71A1 /* DragToolTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */; };
 		F222AF491B87A621005F71A1 /* PivotSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF481B87A621005F71A1 /* PivotSwitcher.swift */; };
+		F25909581B9F4E2000F9A6F7 /* AffineHandleGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25909571B9F4E2000F9A6F7 /* AffineHandleGrabber.swift */; settings = {ASSET_TAGS = (); }; };
+		F259095A1B9F4E6F00F9A6F7 /* AffineHandleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25909591B9F4E6F00F9A6F7 /* AffineHandleFinder.swift */; settings = {ASSET_TAGS = (); }; };
 		F26D465E1B7D0B9600266096 /* ReformTools.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D465D1B7D0B9600266096 /* ReformTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46651B7D0B9600266096 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D465A1B7D0B9600266096 /* ReformTools.framework */; };
 		F26D466A1B7D0B9600266096 /* ReformToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46691B7D0B9600266096 /* ReformToolsTests.swift */; };
@@ -76,6 +78,8 @@
 		F222AF3C1B876941005F71A1 /* HandleFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandleFinder.swift; sourceTree = "<group>"; };
 		F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragToolTemplate.swift; sourceTree = "<group>"; };
 		F222AF481B87A621005F71A1 /* PivotSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PivotSwitcher.swift; sourceTree = "<group>"; };
+		F25909571B9F4E2000F9A6F7 /* AffineHandleGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleGrabber.swift; sourceTree = "<group>"; };
+		F25909591B9F4E6F00F9A6F7 /* AffineHandleFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleFinder.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D465D1B7D0B9600266096 /* ReformTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformTools.h; sourceTree = "<group>"; };
 		F26D465F1B7D0B9600266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				F222AF481B87A621005F71A1 /* PivotSwitcher.swift */,
 				F2DF635E1B91E3F500A2EFB6 /* CropGrabber.swift */,
 				F210B7191B9CCFB3003E1440 /* Camera.swift */,
+				F25909571B9F4E2000F9A6F7 /* AffineHandleGrabber.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				F222AF3C1B876941005F71A1 /* HandleFinder.swift */,
+				F25909591B9F4E6F00F9A6F7 /* AffineHandleFinder.swift */,
 			);
 			name = HandleFinder;
 			sourceTree = "<group>";
@@ -396,6 +402,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F259095A1B9F4E6F00F9A6F7 /* AffineHandleFinder.swift in Sources */,
+				F25909581B9F4E2000F9A6F7 /* AffineHandleGrabber.swift in Sources */,
 				F222AF2E1B851741005F71A1 /* Aligner.swift in Sources */,
 				F2A104B81B821ABD00E97C6B /* RotateTool.swift in Sources */,
 				F2A104CF1B821F0200E97C6B /* GrabUI.swift in Sources */,
