@@ -28,6 +28,13 @@ public final class InstructionNode {
     private init(parent: InstructionNode? = nil, content: InstructionContent) {
         self.parent = parent
         self.content = content
+
+
+        if case .Group(_, let children) = content {
+            for c in children {
+                c.parent = self
+            }
+        }
     }
     
 }
@@ -153,13 +160,10 @@ extension InstructionNode {
             return
         }
 
-        if case .Group(_, let children) = content {
-            for c in children {
-                c.parent = self
-            }
-        }
-
-        content = .Group(instruction, [InstructionNode(parent: self), InstructionNode(parent: self, content: content)])
+        content = .Group(instruction, [
+            InstructionNode(parent: self),
+            InstructionNode(parent: self, content: content)]
+        )
     }
 }
 extension InstructionNode {
