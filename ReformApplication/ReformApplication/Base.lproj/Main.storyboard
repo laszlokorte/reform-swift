@@ -803,8 +803,8 @@ CA
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="43106B8C-E6C7-4840-A1CF-9BBCDD921616" label="View" paletteLabel="View" tag="-1" id="sNv-T5-vP7">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="40"/>
-                                    <size key="maxSize" width="60" height="50"/>
+                                    <size key="minSize" width="60" height="20"/>
+                                    <size key="maxSize" width="60" height="33"/>
                                     <stackView key="view" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" id="wiQ-BY-Ka0">
                                         <rect key="frame" x="0.0" y="14" width="128" height="33"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -812,16 +812,16 @@ CA
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ham-MK-5FG">
                                                 <rect key="frame" x="0.0" y="6" width="50" height="22"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="30" placeholder="YES" id="T2y-Fz-RT3"/>
+                                                    <constraint firstAttribute="width" constant="20" placeholder="YES" id="T2y-Fz-RT3"/>
                                                 </constraints>
-                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-left" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="BXA-fA-lvU">
+                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-left" imagePosition="only" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="BXA-fA-lvU">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                             </button>
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tML-wU-vzM">
                                                 <rect key="frame" x="58" y="6" width="70" height="22"/>
-                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-right" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="7Ms-Cz-Vcc">
+                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-right" imagePosition="only" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="7Ms-Cz-Vcc">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
