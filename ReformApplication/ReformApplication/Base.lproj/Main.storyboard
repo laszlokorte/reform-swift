@@ -801,10 +801,50 @@ CA
                                         <segue destination="gGV-WX-gqu" kind="sheet" id="X6j-ku-6gD"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="43106B8C-E6C7-4840-A1CF-9BBCDD921616" label="View" paletteLabel="View" tag="-1" id="sNv-T5-vP7">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="40"/>
+                                    <size key="maxSize" width="60" height="50"/>
+                                    <stackView key="view" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" id="wiQ-BY-Ka0">
+                                        <rect key="frame" x="0.0" y="14" width="128" height="33"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <middleViews>
+                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ham-MK-5FG">
+                                                <rect key="frame" x="0.0" y="6" width="50" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" placeholder="YES" id="T2y-Fz-RT3"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-left" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="BXA-fA-lvU">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tML-wU-vzM">
+                                                <rect key="frame" x="58" y="6" width="70" height="22"/>
+                                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-right" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="7Ms-Cz-Vcc">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                        </middleViews>
+                                        <constraints>
+                                            <constraint firstItem="Ham-MK-5FG" firstAttribute="width" secondItem="tML-wU-vzM" secondAttribute="width" id="3Gn-sV-Vnm"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="3UZ-1U-DCe"/>
-                                <toolbarItem reference="Nit-gD-vzh"/>
+                                <toolbarItem reference="Aw8-TL-07W"/>
+                                <toolbarItem reference="sNv-T5-vP7"/>
                                 <toolbarItem reference="Nit-gD-vzh"/>
                                 <toolbarItem reference="65U-vF-hDk"/>
                                 <toolbarItem reference="Vg0-94-OBF"/>
@@ -819,7 +859,6 @@ CA
                                 <toolbarItem reference="fXG-6r-lpF"/>
                                 <toolbarItem reference="zoX-OX-RXR"/>
                                 <toolbarItem reference="9NG-yI-lkR"/>
-                                <toolbarItem reference="Aw8-TL-07W"/>
                                 <toolbarItem reference="oeh-R9-CaW"/>
                                 <toolbarItem reference="Nit-gD-vzh"/>
                                 <toolbarItem reference="q1q-pG-kup"/>
@@ -1753,6 +1792,8 @@ Gw
         <image name="rect" width="256" height="256"/>
         <image name="rotate" width="256" height="256"/>
         <image name="scale" width="256" height="256"/>
+        <image name="sidebar-left" width="256" height="256"/>
+        <image name="sidebar-right" width="256" height="256"/>
         <image name="text" width="256" height="256"/>
     </resources>
 </document>
