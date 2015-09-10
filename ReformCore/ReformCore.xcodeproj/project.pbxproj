@@ -95,6 +95,7 @@
 		F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */; };
 		F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104D21B82387700E97C6B /* FixSizeDestination.swift */; };
 		F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
+		F2CA10B81BA09DA000A7864A /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA10B71BA09DA000A7864A /* VM.swift */; settings = {ASSET_TAGS = (); }; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -200,6 +201,7 @@
 		F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantAngel.swift; sourceTree = "<group>"; };
 		F2A104D21B82387700E97C6B /* FixSizeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixSizeDestination.swift; sourceTree = "<group>"; };
 		F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
+		F2CA10B71BA09DA000A7864A /* VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VM.swift; sourceTree = "<group>"; };
 		F2DC43C01B81E247006748E0 /* InstructionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +279,7 @@
 				F26D46B21B7D0FB700266096 /* Validation */,
 				F26D46AF1B7D0F5600266096 /* Relations */,
 				F26D46AC1B7D0D4D00266096 /* Runtime */,
+				F2CA10B61BA09D8900A7864A /* VM */,
 				F26D46A91B7D0D3900266096 /* Form */,
 				F26D45F11B7D09CA00266096 /* ReformCore.h */,
 				F26D45F31B7D09CA00266096 /* Info.plist */,
@@ -579,6 +582,14 @@
 			name = Glomp;
 			sourceTree = "<group>";
 		};
+		F2CA10B61BA09D8900A7864A /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				F2CA10B71BA09DA000A7864A /* VM.swift */,
+			);
+			name = VM;
+			sourceTree = "<group>";
+		};
 		F2DC43BD1B81E1EE006748E0 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
@@ -721,6 +732,7 @@
 				F26D46B61B7D101700266096 /* Direction.swift in Sources */,
 				F26D46E21B7D169D00266096 /* DrawingMode.swift in Sources */,
 				F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */,
+				F2CA10B81BA09DA000A7864A /* VM.swift in Sources */,
 				F26D47161B7D37C800266096 /* ArcForm.swift in Sources */,
 				F26D474C1B7D696700266096 /* ForLoopInstruction.swift in Sources */,
 				F273911E1B7FA24000100F2F /* Glomp.swift in Sources */,

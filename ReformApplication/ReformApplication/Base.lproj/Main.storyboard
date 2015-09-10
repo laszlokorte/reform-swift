@@ -804,13 +804,13 @@ CA
                                 <toolbarItem implicitItemIdentifier="43106B8C-E6C7-4840-A1CF-9BBCDD921616" label="View" paletteLabel="View" tag="-1" id="sNv-T5-vP7">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="60" height="20"/>
-                                    <size key="maxSize" width="60" height="33"/>
+                                    <size key="maxSize" width="128" height="33"/>
                                     <stackView key="view" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" id="wiQ-BY-Ka0">
                                         <rect key="frame" x="0.0" y="14" width="128" height="33"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <middleViews>
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ham-MK-5FG">
-                                                <rect key="frame" x="0.0" y="6" width="50" height="22"/>
+                                                <rect key="frame" x="0.0" y="4" width="0.0" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" placeholder="YES" id="T2y-Fz-RT3"/>
                                                 </constraints>
@@ -820,7 +820,7 @@ CA
                                                 </buttonCell>
                                             </button>
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tML-wU-vzM">
-                                                <rect key="frame" x="58" y="6" width="70" height="22"/>
+                                                <rect key="frame" x="8" y="4" width="120" height="25"/>
                                                 <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-right" imagePosition="only" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="7Ms-Cz-Vcc">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1728,8 +1728,8 @@ Gw
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aS1-mu-6fu">
                                         <rect key="frame" x="480" y="17" width="53" height="19"/>
-                                        <buttonCell key="cell" type="roundRect" title="Glomp" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Y6-Qk-ep1">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <buttonCell key="cell" type="roundRect" title="Glomp" bezelStyle="roundedRect" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Y6-Qk-ep1">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="cellTitle"/>
                                         </buttonCell>
                                     </button>

@@ -59,8 +59,8 @@ final public class DefaultAnalyzer : Analyzer {
     }
     
     public func analyze(@noescape block: () -> ()) {
-        analyzerStringifier.forms.removeAll()
-        instructions.removeAll()
+        analyzerStringifier.forms.removeAll(keepCapacity: true)
+        instructions.removeAll(keepCapacity: true)
         depth = 0
         block()
     }

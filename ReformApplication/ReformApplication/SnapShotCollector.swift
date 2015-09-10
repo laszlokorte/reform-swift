@@ -44,9 +44,9 @@ final public class SnapshotCollector : RuntimeListener {
     }
 
     public func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize size: (Double, Double)) {
-        paths.removeAll()
-        errors.removeAll()
-        instructions.removeAll()
+        paths.removeAll(keepCapacity: true)
+        errors.removeAll(keepCapacity: true)
+        instructions.removeAll(keepCapacity: true)
 
         currentSize = (Double(size.0), Double(size.1))
 

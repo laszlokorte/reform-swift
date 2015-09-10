@@ -101,15 +101,15 @@ private class StageBuffer {
     
     
     func clear() {
-        entities.removeAll()
-        currentShapes.removeAll()
-        finalShapes.removeAll()
+        entities.removeAll(keepCapacity: true)
+        currentShapes.removeAll(keepCapacity: true)
+        finalShapes.removeAll(keepCapacity: true)
         size = Vec2d()
     }
     
     func flush(stage: Stage) {
         stage.size = size
-        stage.entities = entities.reverse()
+        stage.entities = entities.lazy.reverse()
         stage.currentShapes = currentShapes
         stage.finalShapes = finalShapes
 

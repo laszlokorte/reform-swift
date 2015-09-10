@@ -8,27 +8,35 @@
 
 public final class InstructionNode {
     public private(set) var content : InstructionContent
-    public private(set) weak var parent : InstructionNode?
+    public private(set) weak var parent : InstructionNode? {
+        didSet {
+            self.depth = (parent?.depth ?? -1) + 1
+        }
+    }
+    private var depth : Int
     
     public init(parent: InstructionNode? = nil) {
         self.parent = parent
-        content = .Null
+        self.content = .Null
+        self.depth = (parent?.depth ?? -1) + 1
     }
     
     public init(parent: InstructionNode? = nil, instruction: Instruction) {
         self.parent = parent
-        content = .Single(instruction)
+        self.content = .Single(instruction)
+        self.depth = (parent?.depth ?? -1) + 1
     }
     
     public init(parent: InstructionNode? = nil, group: GroupInstruction, children: [InstructionNode] = []) {
         self.parent = parent
-        content = .Group(group, children)
+        self.content = .Group(group, children)
+        self.depth = (parent?.depth ?? -1) + 1
     }
 
     private init(parent: InstructionNode? = nil, content: InstructionContent) {
         self.parent = parent
         self.content = content
-
+        self.depth = (parent?.depth ?? -1) + 1
 
         if case .Group(_, let children) = content {
             for c in children {
@@ -155,8 +163,27 @@ extension InstructionNode {
         return self.removeFromParent()
     }
 
+    public func isDeeperThan(depth: Int) -> Bool {
+        if self.depth > depth {
+            return true
+        }
+
+        if case .Group(_, let children) = self.content {
+            for c in children {
+                if c.isDeeperThan(depth) {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
     public func wrapIn(instruction: GroupInstruction) {
         if case .Null = content {
+            return
+        }
+        if isDeeperThan(2) {
             return
         }
 
