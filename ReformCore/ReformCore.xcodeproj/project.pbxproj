@@ -95,7 +95,7 @@
 		F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */; };
 		F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104D21B82387700E97C6B /* FixSizeDestination.swift */; };
 		F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
-		F2CA10B81BA09DA000A7864A /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA10B71BA09DA000A7864A /* VM.swift */; settings = {ASSET_TAGS = (); }; };
+		F2CA10B81BA09DA000A7864A /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA10B71BA09DA000A7864A /* VM.swift */; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -654,6 +654,7 @@
 		F26D45E51B7D09CA00266096 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Laszlo Korte";

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F210B7181B9C96BC003E1440 /* AABB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7171B9C96BC003E1440 /* AABB.swift */; settings = {ASSET_TAGS = (); }; };
+		F210B7181B9C96BC003E1440 /* AABB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7171B9C96BC003E1440 /* AABB.swift */; };
 		F26D46161B7D09F200266096 /* ReformMath.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46151B7D09F200266096 /* ReformMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D461D1B7D09F200266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46121B7D09F200266096 /* ReformMath.framework */; };
 		F26D46221B7D09F200266096 /* ReformMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46211B7D09F200266096 /* ReformMathTests.swift */; };
@@ -182,6 +182,7 @@
 		F26D46091B7D09F200266096 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Laszlo Korte";

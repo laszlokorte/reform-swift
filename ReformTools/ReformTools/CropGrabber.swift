@@ -91,7 +91,7 @@ public final class CropGrabber {
 
     private func resultFor(position: Vec2d, cycle: Int) -> SearchingResult {
 
-        let points = stage.cropPoints.filter({distance(point: $0.position,point: position) <= radius / camera.zoom})
+        let points = stage.cropPoints.filter({distance(point:$0.position, point: position) <= radius / camera.zoom})
 
         if points.count > 0 {
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)

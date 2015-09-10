@@ -13,11 +13,11 @@
 		F2DF63701B93B64D00A2EFB6 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636D1B93B64D00A2EFB6 /* ReformCore.framework */; };
 		F2DF63711B93B64D00A2EFB6 /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636E1B93B64D00A2EFB6 /* ReformExpression.framework */; };
 		F2DF63721B93B64D00A2EFB6 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636F1B93B64D00A2EFB6 /* ReformMath.framework */; };
-		F2DF63751B93B75300A2EFB6 /* Normalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63741B93B75300A2EFB6 /* Normalizer.swift */; settings = {ASSET_TAGS = (); }; };
-		F2DF63781B93B8CA00A2EFB6 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63771B93B8CA00A2EFB6 /* Encoder.swift */; settings = {ASSET_TAGS = (); }; };
-		F2DF637A1B93B8D300A2EFB6 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63791B93B8D300A2EFB6 /* Decoder.swift */; settings = {ASSET_TAGS = (); }; };
-		F2DF637D1B93BFC700A2EFB6 /* JsonFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF637C1B93BFC700A2EFB6 /* JsonFormat.swift */; settings = {ASSET_TAGS = (); }; };
-		F2DF63801B93C0AF00A2EFB6 /* ProjectNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF637F1B93C0AF00A2EFB6 /* ProjectNormalizer.swift */; settings = {ASSET_TAGS = (); }; };
+		F2DF63751B93B75300A2EFB6 /* Normalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63741B93B75300A2EFB6 /* Normalizer.swift */; };
+		F2DF63781B93B8CA00A2EFB6 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63771B93B8CA00A2EFB6 /* Encoder.swift */; };
+		F2DF637A1B93B8D300A2EFB6 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63791B93B8D300A2EFB6 /* Decoder.swift */; };
+		F2DF637D1B93BFC700A2EFB6 /* JsonFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF637C1B93BFC700A2EFB6 /* JsonFormat.swift */; };
+		F2DF63801B93C0AF00A2EFB6 /* ProjectNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF637F1B93C0AF00A2EFB6 /* ProjectNormalizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,6 +201,7 @@
 		F26D46751B7D0BBD00266096 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Laszlo Korte";
