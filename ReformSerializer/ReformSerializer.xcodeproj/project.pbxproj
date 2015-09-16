@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F23BCFAA1BA9F0C0001A04EF /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFA91BA9F0C0001A04EF /* ReformExpression.framework */; };
+		F23BCFAC1BA9F0C9001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFAB1BA9F0C9001A04EF /* ReformCore.framework */; };
+		F23BCFAE1BA9F0CD001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFAD1BA9F0CD001A04EF /* ReformMath.framework */; };
 		F26D46821B7D0BBD00266096 /* ReformSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46811B7D0BBD00266096 /* ReformSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46891B7D0BBD00266096 /* ReformSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D467E1B7D0BBD00266096 /* ReformSerializer.framework */; };
 		F26D468E1B7D0BBD00266096 /* ReformSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D468D1B7D0BBD00266096 /* ReformSerializerTests.swift */; };
-		F2DF63701B93B64D00A2EFB6 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636D1B93B64D00A2EFB6 /* ReformCore.framework */; };
-		F2DF63711B93B64D00A2EFB6 /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636E1B93B64D00A2EFB6 /* ReformExpression.framework */; };
-		F2DF63721B93B64D00A2EFB6 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DF636F1B93B64D00A2EFB6 /* ReformMath.framework */; };
 		F2DF63751B93B75300A2EFB6 /* Normalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63741B93B75300A2EFB6 /* Normalizer.swift */; };
 		F2DF63781B93B8CA00A2EFB6 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63771B93B8CA00A2EFB6 /* Encoder.swift */; };
 		F2DF637A1B93B8D300A2EFB6 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63791B93B8D300A2EFB6 /* Decoder.swift */; };
@@ -31,6 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F23BCFA91BA9F0C0001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
+		F23BCFAB1BA9F0C9001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
+		F23BCFAD1BA9F0CD001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F26D467E1B7D0BBD00266096 /* ReformSerializer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformSerializer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46811B7D0BBD00266096 /* ReformSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformSerializer.h; sourceTree = "<group>"; };
 		F26D46831B7D0BBD00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,9 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2DF63701B93B64D00A2EFB6 /* ReformCore.framework in Frameworks */,
-				F2DF63711B93B64D00A2EFB6 /* ReformExpression.framework in Frameworks */,
-				F2DF63721B93B64D00A2EFB6 /* ReformMath.framework in Frameworks */,
+				F23BCFAE1BA9F0CD001A04EF /* ReformMath.framework in Frameworks */,
+				F23BCFAC1BA9F0C9001A04EF /* ReformCore.framework in Frameworks */,
+				F23BCFAA1BA9F0C0001A04EF /* ReformExpression.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +75,9 @@
 		F26D46741B7D0BBD00266096 = {
 			isa = PBXGroup;
 			children = (
+				F23BCFAD1BA9F0CD001A04EF /* ReformMath.framework */,
+				F23BCFAB1BA9F0C9001A04EF /* ReformCore.framework */,
+				F23BCFA91BA9F0C0001A04EF /* ReformExpression.framework */,
 				F2DF636D1B93B64D00A2EFB6 /* ReformCore.framework */,
 				F2DF636E1B93B64D00A2EFB6 /* ReformExpression.framework */,
 				F2DF636F1B93B64D00A2EFB6 /* ReformMath.framework */,

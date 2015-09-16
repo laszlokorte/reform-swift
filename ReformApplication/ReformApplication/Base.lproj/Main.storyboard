@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -804,7 +804,7 @@ CA
                                 <toolbarItem implicitItemIdentifier="43106B8C-E6C7-4840-A1CF-9BBCDD921616" label="View" paletteLabel="View" tag="-1" id="sNv-T5-vP7">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="60" height="20"/>
-                                    <size key="maxSize" width="128" height="33"/>
+                                    <size key="maxSize" width="60" height="33"/>
                                     <stackView key="view" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" id="wiQ-BY-Ka0">
                                         <rect key="frame" x="0.0" y="14" width="128" height="33"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1759,18 +1759,6 @@ Gw
                 <customObject id="rRZ-ZZ-vCY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="901" y="725"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="c7l-Kh-Kqb">
-            <objects>
-                <viewController id="fgS-K2-7le" sceneMemberID="viewController">
-                    <view key="view" id="7fV-7D-o7d">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="MFE-QY-U6p" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

@@ -26,20 +26,20 @@
 		F2339B011B8D4A2A00C0AE41 /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B001B8D4A2A00C0AE41 /* StageViewModel.swift */; };
 		F2339B041B8D534F00C0AE41 /* ProcedureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */; };
 		F2339B061B8D5AAE00C0AE41 /* ProcedureCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */; };
-		F24AAFE21B8177AF008DF952 /* ReformStage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD61B817576008DF952 /* ReformStage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F24AAFE41B8177AF008DF952 /* ReformMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD21B817520008DF952 /* ReformMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F24AAFE61B8177AF008DF952 /* ReformSerializer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F24AAFE81B8177AF008DF952 /* ReformCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F26D469A1B7D0C3600266096 /* ReformCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F24AAFEA1B8177BB008DF952 /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD61B817576008DF952 /* ReformStage.framework */; };
-		F24AAFEB1B8177BB008DF952 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFD21B817520008DF952 /* ReformMath.framework */; };
-		F24AAFEC1B8177BB008DF952 /* ReformSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */; };
-		F24AAFED1B8177BB008DF952 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D469A1B7D0C3600266096 /* ReformCore.framework */; };
-		F24AAFEE1B81797F008DF952 /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
-		F24AAFEF1B81797F008DF952 /* ReformGraphics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F24AAFF01B81797F008DF952 /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
-		F24AAFF11B81797F008DF952 /* ReformExpression.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F24AAFF41B8179D5008DF952 /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFF21B8179A6008DF952 /* ReformTools.framework */; };
-		F24AAFF51B8179D5008DF952 /* ReformTools.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F24AAFF21B8179A6008DF952 /* ReformTools.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFBE1BA9F122001A04EF /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; };
+		F23BCFBF1BA9F122001A04EF /* ReformStage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFC11BA9F130001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC01BA9F130001A04EF /* ReformCore.framework */; };
+		F23BCFC21BA9F130001A04EF /* ReformCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC01BA9F130001A04EF /* ReformCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFC41BA9F13C001A04EF /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC31BA9F13C001A04EF /* ReformExpression.framework */; };
+		F23BCFC51BA9F13C001A04EF /* ReformExpression.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC31BA9F13C001A04EF /* ReformExpression.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFC71BA9F143001A04EF /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC61BA9F143001A04EF /* ReformGraphics.framework */; };
+		F23BCFC81BA9F143001A04EF /* ReformGraphics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC61BA9F143001A04EF /* ReformGraphics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFCC1BA9F14D001A04EF /* ReformTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFCB1BA9F14D001A04EF /* ReformTools.framework */; };
+		F23BCFCD1BA9F14D001A04EF /* ReformTools.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFCB1BA9F14D001A04EF /* ReformTools.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFCF1BA9F15D001A04EF /* ReformSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFCE1BA9F15D001A04EF /* ReformSerializer.framework */; };
+		F23BCFD01BA9F15D001A04EF /* ReformSerializer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFCE1BA9F15D001A04EF /* ReformSerializer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F23BCFD21BA9F168001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFD11BA9F168001A04EF /* ReformMath.framework */; };
+		F23BCFD31BA9F168001A04EF /* ReformMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFD11BA9F168001A04EF /* ReformMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7711B7E275800B29E2D /* ProcedureController.swift */; };
 		F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7731B7E412800B29E2D /* CanvasView.swift */; };
 		F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45B91B7D090000266096 /* AppDelegate.swift */; };
@@ -79,13 +79,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F24AAFE81B8177AF008DF952 /* ReformCore.framework in Embed Frameworks */,
-				F24AAFF11B81797F008DF952 /* ReformExpression.framework in Embed Frameworks */,
-				F24AAFE21B8177AF008DF952 /* ReformStage.framework in Embed Frameworks */,
-				F24AAFF51B8179D5008DF952 /* ReformTools.framework in Embed Frameworks */,
-				F24AAFEF1B81797F008DF952 /* ReformGraphics.framework in Embed Frameworks */,
-				F24AAFE61B8177AF008DF952 /* ReformSerializer.framework in Embed Frameworks */,
-				F24AAFE41B8177AF008DF952 /* ReformMath.framework in Embed Frameworks */,
+				F23BCFBF1BA9F122001A04EF /* ReformStage.framework in Embed Frameworks */,
+				F23BCFC21BA9F130001A04EF /* ReformCore.framework in Embed Frameworks */,
+				F23BCFC81BA9F143001A04EF /* ReformGraphics.framework in Embed Frameworks */,
+				F23BCFD31BA9F168001A04EF /* ReformMath.framework in Embed Frameworks */,
+				F23BCFD01BA9F15D001A04EF /* ReformSerializer.framework in Embed Frameworks */,
+				F23BCFC51BA9F13C001A04EF /* ReformExpression.framework in Embed Frameworks */,
+				F23BCFCD1BA9F14D001A04EF /* ReformTools.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,7 +112,13 @@
 		F2339B001B8D4A2A00C0AE41 /* StageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
 		F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureViewModel.swift; sourceTree = "<group>"; };
 		F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureCellView.swift; sourceTree = "<group>"; };
-		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
+		F23BCFBD1BA9F122001A04EF /* ReformStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformStage.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformStage.framework"; sourceTree = "<absolute>"; };
+		F23BCFC01BA9F130001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformCore.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<absolute>"; };
+		F23BCFC31BA9F13C001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformExpression.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<absolute>"; };
+		F23BCFC61BA9F143001A04EF /* ReformGraphics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformGraphics.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<absolute>"; };
+		F23BCFCB1BA9F14D001A04EF /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformTools.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformTools.framework"; sourceTree = "<absolute>"; };
+		F23BCFCE1BA9F15D001A04EF /* ReformSerializer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformSerializer.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformSerializer.framework"; sourceTree = "<absolute>"; };
+		F23BCFD11BA9F168001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformMath.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<absolute>"; };
 		F24AAFD21B817520008DF952 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F24AAFD61B817576008DF952 /* ReformStage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformStage.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformStage.framework"; sourceTree = "<group>"; };
 		F24AAFF21B8179A6008DF952 /* ReformTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformTools.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformTools.framework"; sourceTree = "<group>"; };
@@ -134,7 +140,6 @@
 		F26D46A01B7D0C7A00266096 /* ReformSerializer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformSerializer.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformSerializer.framework"; sourceTree = "<group>"; };
 		F273911F1B7FA80E00100F2F /* PictureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureController.swift; sourceTree = "<group>"; };
 		F27391211B7FAA7800100F2F /* StageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageController.swift; sourceTree = "<group>"; };
-		F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
 		F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageRenderer.swift; sourceTree = "<group>"; };
 		F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskUIRenderer.swift; sourceTree = "<group>"; };
 		F2DF636B1B929A4800A2EFB6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -145,13 +150,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F24AAFEA1B8177BB008DF952 /* ReformStage.framework in Frameworks */,
-				F24AAFF01B81797F008DF952 /* ReformExpression.framework in Frameworks */,
-				F24AAFEB1B8177BB008DF952 /* ReformMath.framework in Frameworks */,
-				F24AAFEE1B81797F008DF952 /* ReformGraphics.framework in Frameworks */,
-				F24AAFF41B8179D5008DF952 /* ReformTools.framework in Frameworks */,
-				F24AAFEC1B8177BB008DF952 /* ReformSerializer.framework in Frameworks */,
-				F24AAFED1B8177BB008DF952 /* ReformCore.framework in Frameworks */,
+				F23BCFBE1BA9F122001A04EF /* ReformStage.framework in Frameworks */,
+				F23BCFC11BA9F130001A04EF /* ReformCore.framework in Frameworks */,
+				F23BCFC71BA9F143001A04EF /* ReformGraphics.framework in Frameworks */,
+				F23BCFD21BA9F168001A04EF /* ReformMath.framework in Frameworks */,
+				F23BCFCF1BA9F15D001A04EF /* ReformSerializer.framework in Frameworks */,
+				F23BCFC41BA9F13C001A04EF /* ReformExpression.framework in Frameworks */,
+				F23BCFCC1BA9F14D001A04EF /* ReformTools.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +230,13 @@
 		F26D45AD1B7D090000266096 = {
 			isa = PBXGroup;
 			children = (
+				F23BCFD11BA9F168001A04EF /* ReformMath.framework */,
+				F23BCFCE1BA9F15D001A04EF /* ReformSerializer.framework */,
+				F23BCFCB1BA9F14D001A04EF /* ReformTools.framework */,
+				F23BCFC61BA9F143001A04EF /* ReformGraphics.framework */,
+				F23BCFC31BA9F13C001A04EF /* ReformExpression.framework */,
+				F23BCFC01BA9F130001A04EF /* ReformCore.framework */,
+				F23BCFBD1BA9F122001A04EF /* ReformStage.framework */,
 				F24AAFF21B8179A6008DF952 /* ReformTools.framework */,
 				F24AAFD61B817576008DF952 /* ReformStage.framework */,
 				F24AAFD21B817520008DF952 /* ReformMath.framework */,

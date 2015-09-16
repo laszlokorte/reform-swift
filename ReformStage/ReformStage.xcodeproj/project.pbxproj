@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		F222AF461B878F33005F71A1 /* ScaleAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF451B878F33005F71A1 /* ScaleAxis.swift */; };
+		F23BCFB61BA9F0F4001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB51BA9F0F4001A04EF /* ReformCore.framework */; };
 		F24AAFD11B8160D0008DF952 /* RuntimeStageCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */; };
 		F26D463A1B7D0B7800266096 /* ReformStage.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46391B7D0B7800266096 /* ReformStage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D46411B7D0B7800266096 /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46361B7D0B7800266096 /* ReformStage.framework */; };
 		F26D46461B7D0B7800266096 /* ReformStageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46451B7D0B7800266096 /* ReformStageTests.swift */; };
-		F26D46A51B7D0CBE00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46A41B7D0CBE00266096 /* ReformCore.framework */; };
 		F273910C1B7F916600100F2F /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910B1B7F916600100F2F /* Stage.swift */; };
 		F273910E1B7F91DD00100F2F /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910D1B7F91DD00100F2F /* Entity.swift */; };
 		F27391101B7F920600100F2F /* CropPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F273910F1B7F920600100F2F /* CropPoint.swift */; };
@@ -36,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		F222AF451B878F33005F71A1 /* ScaleAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleAxis.swift; sourceTree = "<group>"; };
+		F23BCFB51BA9F0F4001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
 		F24AAFD01B8160D0008DF952 /* RuntimeStageCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeStageCollector.swift; sourceTree = "<group>"; };
 		F26D46361B7D0B7800266096 /* ReformStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformStage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46391B7D0B7800266096 /* ReformStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformStage.h; sourceTree = "<group>"; };
@@ -61,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F26D46A51B7D0CBE00266096 /* ReformCore.framework in Frameworks */,
+				F23BCFB61BA9F0F4001A04EF /* ReformCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +88,7 @@
 		F26D462C1B7D0B7800266096 = {
 			isa = PBXGroup;
 			children = (
+				F23BCFB51BA9F0F4001A04EF /* ReformCore.framework */,
 				F26D46A41B7D0CBE00266096 /* ReformCore.framework */,
 				F26D46A21B7D0CB600266096 /* ReformTools.framework */,
 				F26D46381B7D0B7800266096 /* ReformStage */,

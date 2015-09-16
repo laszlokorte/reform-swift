@@ -17,7 +17,7 @@
       location = "group:SETUP.md">
    </FileRef>
    <FileRef
-      location = "group:/Users/laszlokorte/Desktop/swift-reform-workspace/STYLEGUIDE.md">
+      location = "group:STYLEGUIDE.md">
    </FileRef>
    <FileRef
       location = "group:ReformGraphics/ReformGraphics.xcodeproj">
@@ -41,6 +41,6 @@
       location = "group:ReformCore/ReformCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/laszlokorte/Desktop/swift-reform-workspace/ReformApplication/Reform.xcodeproj">
+      location = "group:/Users/laszlokorte/dev/swift-reform-workspace/ReformApplication/Reform.xcodeproj">
    </FileRef>
 </Workspace>

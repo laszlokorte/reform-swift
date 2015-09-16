@@ -15,7 +15,9 @@
 		F222AF4E1B8881AF005F71A1 /* ArcOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */; };
 		F222AF501B88B864005F71A1 /* AbsoluteScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */; };
 		F2339AFA1B8D2BAD00C0AE41 /* ReferenceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339AF91B8D2BAD00C0AE41 /* ReferenceId.swift */; };
-		F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23F12941B7E0AD900A2D73E /* ReformExpression.framework */; };
+		F23BCFB81BA9F100001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB71BA9F100001A04EF /* ReformMath.framework */; };
+		F23BCFBA1BA9F105001A04EF /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB91BA9F105001A04EF /* ReformExpression.framework */; };
+		F23BCFBC1BA9F108001A04EF /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBB1BA9F108001A04EF /* ReformGraphics.framework */; };
 		F23F12981B7E0B0D00A2D73E /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23F12971B7E0B0D00A2D73E /* Attribute.swift */; };
 		F24AAFCC1B814C1D008DF952 /* RelativeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */; };
 		F24AAFCE1B8150CA008DF952 /* DefaultAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AAFCD1B8150CA008DF952 /* DefaultAnalyzer.swift */; };
@@ -24,7 +26,6 @@
 		F26D45F21B7D09CA00266096 /* ReformCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D45F11B7D09CA00266096 /* ReformCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D45F91B7D09CA00266096 /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D45EE1B7D09CA00266096 /* ReformCore.framework */; };
 		F26D45FE1B7D09CA00266096 /* ReformCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45FD1B7D09CA00266096 /* ReformCoreTests.swift */; };
-		F26D46991B7D0C0900266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46981B7D0C0900266096 /* ReformMath.framework */; };
 		F26D46AB1B7D0D4200266096 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46AA1B7D0D4200266096 /* Form.swift */; };
 		F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46AD1B7D0D5A00266096 /* Runtime.swift */; };
 		F26D46B11B7D0F8600266096 /* Evaluatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46B01B7D0F8600266096 /* Evaluatable.swift */; };
@@ -94,7 +95,6 @@
 		F2A1049B1B82062D00E97C6B /* RelativeDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049A1B82062D00E97C6B /* RelativeDistance.swift */; };
 		F2A1049D1B82095C00E97C6B /* ConstantAngel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1049C1B82095C00E97C6B /* ConstantAngel.swift */; };
 		F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104D21B82387700E97C6B /* FixSizeDestination.swift */; };
-		F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */; };
 		F2CA10B81BA09DA000A7864A /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA10B71BA09DA000A7864A /* VM.swift */; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 /* End PBXBuildFile section */
@@ -118,6 +118,9 @@
 		F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcOutline.swift; sourceTree = "<group>"; };
 		F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbsoluteScaler.swift; sourceTree = "<group>"; };
 		F2339AF91B8D2BAD00C0AE41 /* ReferenceId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceId.swift; sourceTree = "<group>"; };
+		F23BCFB71BA9F100001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
+		F23BCFB91BA9F105001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
+		F23BCFBB1BA9F108001A04EF /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
 		F23F12941B7E0AD900A2D73E /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23F12971B7E0B0D00A2D73E /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F24AAFCB1B814C1D008DF952 /* RelativeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelativeDestination.swift; sourceTree = "<group>"; };
@@ -210,9 +213,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F26D46991B7D0C0900266096 /* ReformMath.framework in Frameworks */,
-				F23F12951B7E0AD900A2D73E /* ReformExpression.framework in Frameworks */,
-				F2ABC74E1B7FD3E6001AD41F /* ReformGraphics.framework in Frameworks */,
+				F23BCFB81BA9F100001A04EF /* ReformMath.framework in Frameworks */,
+				F23BCFBA1BA9F105001A04EF /* ReformExpression.framework in Frameworks */,
+				F23BCFBC1BA9F108001A04EF /* ReformGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +250,9 @@
 		F26D45E41B7D09CA00266096 = {
 			isa = PBXGroup;
 			children = (
+				F23BCFBB1BA9F108001A04EF /* ReformGraphics.framework */,
+				F23BCFB91BA9F105001A04EF /* ReformExpression.framework */,
+				F23BCFB71BA9F100001A04EF /* ReformMath.framework */,
 				F2ABC74D1B7FD3E6001AD41F /* ReformGraphics.framework */,
 				F26D46981B7D0C0900266096 /* ReformMath.framework */,
 				F23F12941B7E0AD900A2D73E /* ReformExpression.framework */,
