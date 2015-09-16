@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,8 +44,6 @@
 		F26D46401B7D0B7800266096 /* ReformStageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReformStageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46451B7D0B7800266096 /* ReformStageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReformStageTests.swift; sourceTree = "<group>"; };
 		F26D46471B7D0B7800266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F26D46A21B7D0CB600266096 /* ReformTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformTools.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformTools.framework"; sourceTree = "<group>"; };
-		F26D46A41B7D0CBE00266096 /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
 		F273910B1B7F916600100F2F /* Stage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		F273910D1B7F91DD00100F2F /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		F273910F1B7F920600100F2F /* CropPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropPoint.swift; sourceTree = "<group>"; };
@@ -89,8 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				F23BCFB51BA9F0F4001A04EF /* ReformCore.framework */,
-				F26D46A41B7D0CBE00266096 /* ReformCore.framework */,
-				F26D46A21B7D0CB600266096 /* ReformTools.framework */,
 				F26D46381B7D0B7800266096 /* ReformStage */,
 				F26D46441B7D0B7800266096 /* ReformStageTests */,
 				F26D46371B7D0B7800266096 /* Products */,
@@ -229,7 +225,7 @@
 				};
 			};
 			buildConfigurationList = F26D46301B7D0B7800266096 /* Build configuration list for PBXProject "ReformStage" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		F23BCFA71BA9F0A5001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
-		F24AAFD41B81753C008DF952 /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-bwnfeqfhutwfaqhhqwgqdbzirufg/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F2ABC72F1B7FD391001AD41F /* ReformGraphics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformGraphics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2ABC7321B7FD391001AD41F /* ReformGraphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformGraphics.h; sourceTree = "<group>"; };
 		F2ABC7341B7FD391001AD41F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				F23BCFA71BA9F0A5001A04EF /* ReformMath.framework */,
-				F24AAFD41B81753C008DF952 /* ReformMath.framework */,
 				F2ABC7311B7FD391001AD41F /* ReformGraphics */,
 				F2ABC73D1B7FD391001AD41F /* ReformGraphicsTests */,
 				F2ABC7301B7FD391001AD41F /* Products */,
@@ -174,7 +172,7 @@
 				};
 			};
 			buildConfigurationList = F2ABC7291B7FD391001AD41F /* Build configuration list for PBXProject "ReformGraphics" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
