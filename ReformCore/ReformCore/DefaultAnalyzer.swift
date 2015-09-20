@@ -48,6 +48,7 @@ final class AnalyzerStringifier : Stringifier {
 
 final public class DefaultAnalyzer : Analyzer {
     public private(set) var instructions = [InstructionOutlineRow]()
+    public private(set) var instructionsDblBuf = [InstructionOutlineRow]()
     private let analyzerStringifier : AnalyzerStringifier
     public var stringifier : Stringifier {
         return analyzerStringifier
@@ -60,16 +61,18 @@ final public class DefaultAnalyzer : Analyzer {
     
     public func analyze(@noescape block: () -> ()) {
         analyzerStringifier.forms.removeAll(keepCapacity: true)
-        instructions.removeAll(keepCapacity: true)
+        instructionsDblBuf.removeAll(keepCapacity: true)
         depth = 0
         block()
+
+        swap(&instructionsDblBuf, &instructions)
     }
     
     public func publish(instruction: Analyzable, label: String) {
         guard let node = instruction as? InstructionNode else {
             return
         }
-        instructions.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: false))
+        instructionsDblBuf.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: false))
     }
     
     public func publish(instruction: Analyzable, label: String, @noescape block: () -> ()) {
@@ -79,11 +82,11 @@ final public class DefaultAnalyzer : Analyzer {
 
         // skip root
         if depth > 0 {
-            instructions.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: true))
+            instructionsDblBuf.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: true))
         }
         defer {
             if depth > 0 {
-            instructions.append(InstructionOutlineRow(node: node, label: "", depth: depth, isGroup: true))
+            instructionsDblBuf.append(InstructionOutlineRow(node: node, label: "", depth: depth, isGroup: true))
             }
         }
 

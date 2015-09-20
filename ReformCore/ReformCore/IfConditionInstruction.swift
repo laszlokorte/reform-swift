@@ -25,7 +25,7 @@ public struct IfConditionInstruction : GroupInstruction {
         
         if bool {
             runtime.scoped() { runtime in
-                for c in children {
+                for c in children where !runtime.shouldStop {
                     c.evaluate(runtime)
                 }
             }

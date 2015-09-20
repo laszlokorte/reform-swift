@@ -13,6 +13,7 @@ final public class DefaultRuntime : Runtime {
     
     public static let maxDepth : Int = 3
     private var _stopped : Bool
+    private var _canceled : Bool
     private var stack = RuntimeStack()
     private var dataSet : DataSet
     
@@ -23,11 +24,17 @@ final public class DefaultRuntime : Runtime {
     public init() {
         dataSet = WritableDataSet()
         _stopped = false
+        _canceled = false
     }
     
     public func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (picture: T.CallType) -> ()) {
         self.dataSet = dataSet
         
+    }
+
+    public func stop() {
+        _canceled = true
+        _stopped = true
     }
     
     public func run(width width: Double, height: Double, @noescape block: (DefaultRuntime) -> ()) {
@@ -37,11 +44,14 @@ final public class DefaultRuntime : Runtime {
             $0.runtimeBeginEvaluation(self, withSize: (width,height))
         }
         defer {
-            listeners.forEach() {
-                $0.runtimeFinishEvaluation(self)
+            if !_canceled {
+                listeners.forEach() {
+                    $0.runtimeFinishEvaluation(self)
+                }
             }
         }
-        
+
+        _canceled = false
         _stopped = false
         defer {
             _stopped = true
@@ -52,6 +62,8 @@ final public class DefaultRuntime : Runtime {
     }
     
     public func eval(instruction : InstructionNode, @noescape block: (DefaultRuntime) -> ()) {
+        guard !shouldStop else { return }
+
         defer {
             listeners.forEach() {
                 $0.runtime(self, didEval: instruction)
@@ -65,6 +77,8 @@ final public class DefaultRuntime : Runtime {
     }
     
     public func scoped(@noescape block: (DefaultRuntime) -> ()) {
+        guard !shouldStop else { return }
+
         stack.pushFrame()
         defer {
             guard let forms = stack.frames.last?.forms else {

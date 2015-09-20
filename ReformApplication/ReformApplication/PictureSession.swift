@@ -34,6 +34,10 @@ final class ProcedureProcessor<A:Analyzer> {
     let runtime: DefaultRuntime
     let analyzer : A
     let toolController : ToolController
+    let queue = dispatch_queue_create("reform.runtime.queue", nil)
+
+    var triggerCounter = 0;
+    var evalCounter = 0;
 
     init(picture : Picture, analyzer: A, runtime: DefaultRuntime, toolController: ToolController) {
         self.picture = picture
@@ -43,28 +47,47 @@ final class ProcedureProcessor<A:Analyzer> {
     }
 
     func trigger() {
-        picture.procedure.analyzeWith(analyzer)
-        picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
+        triggerCounter++
+        dispatch_async(queue) {
+            [picture=self.picture, toolController=self.toolController, runtime=self.runtime, analyzer=self.analyzer] in
+            defer { self.triggerCounter-- }
+            if self.triggerCounter > 1 {
+                return
+            }
 
-        //        print("Entities:")
-        //        for e in stage.entities {
-        //            print(e)
-        //        }
+            picture.procedure.analyzeWith(analyzer)
+            runtime.stop()
+            picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
 
-        //        print("Final Shapes:")
-        //        for s in stage.currentShapes {
-        //            print(s)
-        //        }
+            toolController.currentTool.refresh()
 
-        toolController.currentTool.refresh()
-        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: picture.procedure)
-        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+            dispatch_async(dispatch_get_main_queue()) {
+                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: picture.procedure)
+                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+            }
+        }
     }
 
     func triggerEval() {
-        picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
-        toolController.currentTool.refresh()
-        NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+        evalCounter++
+        dispatch_async(queue) {
+            [picture=self.picture, toolController=self.toolController, runtime=self.runtime] in
+            defer { self.evalCounter-- }
+
+            if self.evalCounter > 1 {
+                return
+            }
+
+            runtime.stop()
+
+            picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
+            toolController.currentTool.refresh()
+
+            dispatch_async(dispatch_get_main_queue()) {
+                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+            }
+
+        }
     }
 }
 
