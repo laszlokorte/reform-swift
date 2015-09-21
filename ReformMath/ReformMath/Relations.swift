@@ -6,8 +6,6 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-let EPSILON = 0.000001
-
 public func distance(point pointA: Vec2d, point pointB: Vec2d) -> Double {
     return (pointB - pointA).length
 }

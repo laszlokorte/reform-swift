@@ -41,6 +41,12 @@ extension Vec2d {
 }
 
 extension Vec2d {
+    public var angle : Angle {
+        return ReformMath.angle(self)
+    }
+}
+
+extension Vec2d {
     public var length2 : Double {
         return x*x + y*y
     }

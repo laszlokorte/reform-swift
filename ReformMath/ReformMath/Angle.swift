@@ -7,15 +7,15 @@
 //
 
 public struct Angle {
-    public static let PI = Angle(radians: M_PI)
+    public static let PI = Angle(radians: ReformMath.PI)
     
     public let radians : Double
     
-    public var degree : Double { get { return radians * 360 / (2*M_PI) } }
-    public var percent : Double { get { return radians * 100 / (2*M_PI) } }
+    public var degree : Double { get { return radians * 360 / (TAU) } }
+    public var percent : Double { get { return radians * 100 / (TAU) } }
     
     public init(percent: Double) {
-        self.init(radians: 2*M_PI * percent / 100.0)
+        self.init(radians: TAU * percent / 100.0)
     }
     
     public init(radians: Double) {
@@ -23,7 +23,7 @@ public struct Angle {
     }
     
     public init(degree: Double) {
-        self.init(radians: 2*M_PI * degree / 360.0)
+        self.init(radians: TAU * degree / 360.0)
     }
     
     public init() {
@@ -31,9 +31,7 @@ public struct Angle {
     }
 }
 
-extension Angle : Comparable, Equatable {
- 
-}
+extension Angle : Comparable, Equatable {}
 
 public func <(lhs: Angle, rhs: Angle) -> Bool {
     return (lhs.radians < rhs.radians)
