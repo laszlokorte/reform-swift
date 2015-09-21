@@ -14,6 +14,7 @@ import ReformMath
 import ReformStage
 import ReformTools
 
+
 @IBDesignable
 final class CanvasView : NSView {
     @IBOutlet weak var delegate : NSViewController?
@@ -26,26 +27,30 @@ final class CanvasView : NSView {
 
     var camera : Camera? = nil
     var renderers : [Renderer] = []
-    
+
+
     private var currentContext : CGContext? {
         get {
             // The 10.10 SDK provides a CGContext on NSGraphicsContext, but
             // that's not available to folks running 10.9, so perform this
             // violence to get a context via a void*.
             // iOS can just use UIGraphicsGetCurrentContext.
-            
-            let unsafeContextPointer = NSGraphicsContext.currentContext()?.graphicsPort
-            
-            if let contextPointer = unsafeContextPointer {
-                let opaquePointer = COpaquePointer(contextPointer)
-                let context: CGContextRef = Unmanaged.fromOpaque(opaquePointer).takeUnretainedValue()
-                return context
+            if #available(OSX 10.10, *) {
+                return NSGraphicsContext.currentContext()?.CGContext
             } else {
-                return nil
+                let unsafeContextPointer = NSGraphicsContext.currentContext()?.graphicsPort
+                
+                if let contextPointer = unsafeContextPointer {
+                    let opaquePointer = COpaquePointer(contextPointer)
+                    let context: CGContextRef = Unmanaged.fromOpaque(opaquePointer).takeUnretainedValue()
+                    return context
+                } else {
+                    return nil
+                }
             }
         }
     }
-    
+
     
     override func drawRect(dirtyRect: NSRect) {
         if let context = currentContext {
