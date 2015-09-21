@@ -59,5 +59,5 @@ extension OrthogonalOffsetAnchor : Equatable {
 }
 
 func ==(lhs: OrthogonalOffsetAnchor, rhs: OrthogonalOffsetAnchor) -> Bool {
-    return /* TODO: lhs.offset == rhs.offset && */lhs.pointA.isEqualTo(rhs.pointA) && lhs.pointB.isEqualTo(rhs.pointB)
+    return lhs.offset.isEqualTo(rhs.offset) && lhs.pointA.isEqualTo(rhs.pointA) && lhs.pointB.isEqualTo(rhs.pointB)
 }

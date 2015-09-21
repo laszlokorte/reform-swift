@@ -140,7 +140,7 @@ private struct PieCornerAnchor : Anchor {
 extension PieCornerAnchor : Equatable {}
 
 private func ==(lhs: PieCornerAnchor, rhs: PieCornerAnchor) -> Bool {
-    return false // TODO
+    return lhs.name == rhs.name && lhs.center.isEqualTo(rhs.center) && lhs.radius.isEqualTo(rhs.radius) && lhs.rotation.isEqualTo(rhs.rotation)
 }
 
 extension PieForm : Rotatable {

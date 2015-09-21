@@ -29,3 +29,11 @@ struct PointAngle : RuntimeRotationAngle {
         return false
     }
 }
+
+
+extension PointAngle : Equatable {
+}
+
+func ==(lhs: PointAngle, rhs: PointAngle) -> Bool {
+    return lhs.center.isEqualTo(rhs.center) && lhs.point.isEqualTo(rhs.point)
+}

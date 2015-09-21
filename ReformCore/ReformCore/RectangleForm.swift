@@ -251,7 +251,7 @@ private struct RectangleAnchor : Anchor {
 extension RectangleAnchor : Equatable {}
 
 private func ==(lhs: RectangleAnchor, rhs: RectangleAnchor) -> Bool {
-    return false // TODO
+    return lhs.name == rhs.name && lhs.side == rhs.side && lhs.center.isEqualTo(rhs.center) && lhs.rotation.isEqualTo(rhs.rotation) && lhs.width.isEqualTo(rhs.width) && lhs.height.isEqualTo(rhs.height)
 }
 
 extension RectangleForm : Rotatable {

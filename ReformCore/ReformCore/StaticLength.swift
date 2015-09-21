@@ -28,3 +28,11 @@ struct StaticLength : WriteableRuntimeLength {
         runtime.write(formId, offset: offset, value: unsafeBitCast(length, UInt64.self))
     }
 }
+
+
+extension StaticLength : Equatable {
+}
+
+func ==(lhs: StaticLength, rhs: StaticLength) -> Bool {
+    return lhs.formId == rhs.formId && lhs.offset == rhs.offset
+}

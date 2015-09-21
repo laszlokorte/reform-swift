@@ -172,7 +172,7 @@ private struct CircleAnchor : Anchor {
 extension CircleAnchor : Equatable {}
 
 private func ==(lhs: CircleAnchor, rhs: CircleAnchor) -> Bool {
-    return false // TODO
+    return lhs.name == rhs.name && lhs.quater == rhs.quater && lhs.center.isEqualTo(rhs.center) && lhs.rotation.isEqualTo(rhs.rotation) && lhs.radius.isEqualTo(rhs.radius)
 }
 
 

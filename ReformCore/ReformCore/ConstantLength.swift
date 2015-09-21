@@ -17,3 +17,10 @@ struct ConstantLength : RuntimeLength {
         return length
     }
 }
+
+extension ConstantLength : Equatable {
+}
+
+func ==(lhs: ConstantLength, rhs: ConstantLength) -> Bool {
+    return lhs.length == rhs.length
+}

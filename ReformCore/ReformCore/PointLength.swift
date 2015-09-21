@@ -25,3 +25,10 @@ struct PointLength : RuntimeLength {
         return (b-a).length
     }
 }
+
+extension PointLength : Equatable {
+}
+
+func ==(lhs: PointLength, rhs: PointLength) -> Bool {
+    return lhs.pointA.isEqualTo(rhs.pointA) && lhs.pointB.isEqualTo(rhs.pointB)
+}

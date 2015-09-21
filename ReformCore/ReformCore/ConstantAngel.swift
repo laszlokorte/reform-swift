@@ -27,3 +27,10 @@ public struct ConstantAngle : RuntimeRotationAngle, Labeled {
         return angle.radians == 0
     }
 }
+
+extension ConstantAngle : Equatable {
+}
+
+public func ==(lhs: ConstantAngle, rhs: ConstantAngle) -> Bool {
+    return lhs.angle == rhs.angle
+}

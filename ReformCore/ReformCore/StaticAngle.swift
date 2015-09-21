@@ -32,3 +32,10 @@ struct StaticAngle : WriteableRuntimeRotationAngle {
         return false
     }
 }
+
+extension StaticAngle : Equatable {
+}
+
+func ==(lhs: StaticAngle, rhs: StaticAngle) -> Bool {
+    return lhs.formId == rhs.formId && lhs.offset == rhs.offset
+}
