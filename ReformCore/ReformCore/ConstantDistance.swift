@@ -22,10 +22,7 @@ public struct ConstantDistance : RuntimeDistance, Labeled {
     }
     
     public func getDescription(stringifier: Stringifier) -> String {
-        let x = String(format: "%.2f", delta.x)
-        let y = String(format: "%.2f", delta.y)
-
-        return "\(x) Horizontally, \(y) Vertically"
+        return delta.label
     }
     
     public func isDegenerated() -> Bool {

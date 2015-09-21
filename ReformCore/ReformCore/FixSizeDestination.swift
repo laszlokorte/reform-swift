@@ -31,10 +31,13 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
     
     public func getDescription(stringifier: Stringifier) -> String {
         let fromLabel = from.getDescription(stringifier)
-        let x = String(format: "%.2f", delta.x)
-        let y = String(format: "%.2f", delta.y)
-
-        return "From \(fromLabel) to \(x) Horizontally, \(y) Vertically"
+        
+        switch alignment {
+        case .Centered:
+            return "Around \(fromLabel) to \(delta.label)"
+        case .Leading:
+            return "From \(fromLabel) to  \(delta.label)"
+        }
     }
     
     public func isDegenerated() -> Bool {

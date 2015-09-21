@@ -37,8 +37,13 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
     public func getDescription(stringifier: Stringifier) -> String {
         let fromLabel = from.getDescription(stringifier)
         let toLabel = to.getDescription(stringifier)
-        
-        return "From \(fromLabel) to \(toLabel)"
+
+        switch alignment {
+        case .Centered:
+            return "Around \(fromLabel) to \(toLabel)"
+        case .Leading:
+            return "From \(fromLabel) to \(toLabel)"
+        }
     }
     
     public func isDegenerated() -> Bool {
