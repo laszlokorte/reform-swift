@@ -90,9 +90,28 @@ final public class SnapshotCollector : RuntimeListener {
         }
 
         let image = imageFor(key)
+        var currentPaths = [(Bool, Bool, Path)]()
+
+        for formId in runtime.getForms() {
+            guard let form = runtime.get(formId) as? Drawable else {
+                continue
+            }
+            let isCurrent = instruction.target == formId
+            let isGuide = form.drawingMode == .Guide
+
+            guard isCurrent || !isGuide else {
+                continue
+            }
+
+            guard let path = form.getPathFor(runtime) else {
+                continue
+            }
+
+            currentPaths.append((isGuide, isCurrent, path))
+        }
 
 
-        do {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [currentScaled, currentSize, paths, currentPaths] in
             image.lockFocus()
             defer { image.unlockFocus() }
             let size = image.size
@@ -123,20 +142,7 @@ final public class SnapshotCollector : RuntimeListener {
             }
             CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
 
-            for formId in runtime.getForms() {
-                guard let form = runtime.get(formId) as? Drawable else {
-                    continue
-                }
-                let isCurrent = instruction.target == formId
-                let isGuide = form.drawingMode == .Guide
-
-                guard isCurrent || !isGuide else {
-                    continue
-                }
-
-                guard let path = form.getPathFor(runtime) else {
-                    continue
-                }
+            for (isGuide, isCurrent, path) in currentPaths {
                 if isGuide {
                     CGContextSetRGBFillColor(context, 0, 0.9, 0.9, 0.7)
                     CGContextSetRGBStrokeColor(context, 0, 0.8, 0.8, 1)
