@@ -142,6 +142,6 @@ public func onLineSegment(point: Vec2d, lineSegment: LineSegment2d, epsilon: Dou
 
 
 
-public func inside(point: Vec2d, aabb: AABB) -> Bool {
+public func inside(point: Vec2d, aabb: AABB2d) -> Bool {
     return aabb.outCode(point) == .Inside
 }

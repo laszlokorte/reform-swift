@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public struct AABB : Equatable {
+public struct AABB2d : Equatable {
     public let min: Vec2d
     public let max: Vec2d
 
@@ -16,11 +16,11 @@ public struct AABB : Equatable {
     }
 }
 
-public func ==(lhs: AABB, rhs: AABB) -> Bool {
+public func ==(lhs: AABB2d, rhs: AABB2d) -> Bool {
     return lhs.min == rhs.min && lhs.max == rhs.max
 }
 
-extension AABB {
+extension AABB2d {
     public var xMaxYMin : Vec2d {
         return Vec2d(x: max.x, y: min.y)
     }
@@ -30,7 +30,7 @@ extension AABB {
     }
 }
 
-extension AABB {
+extension AABB2d {
     struct OutCode : OptionSetType, CustomDebugStringConvertible {
         let rawValue: UInt8
 

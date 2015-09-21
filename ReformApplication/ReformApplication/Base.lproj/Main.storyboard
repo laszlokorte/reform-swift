@@ -1295,18 +1295,20 @@ Gw
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AI4-sb-mAI">
                                         <rect key="frame" x="456" y="4" width="29" height="19"/>
                                         <animations/>
-                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="atb-QI-b5H">
+                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="E3T-1b-W0z" id="atb-QI-b5H">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="pGS-ph-lLS">
                                                 <items>
                                                     <menuItem image="NSActionTemplate" hidden="YES" enabled="NO" id="ZZI-F7-xvX"/>
-                                                    <menuItem title="Wrap in Loop" id="VCU-HX-dX6">
+                                                    <menuItem title="Wrap in Loop" keyEquivalent="l" id="VCU-HX-dX6">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="wrapInstructionInLoop" target="tWe-V1-zXv" id="Lyb-0m-07d"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Wrap in Condition" id="E3T-1b-W0z">
+                                                    <menuItem title="Wrap in Condition" keyEquivalent="i" id="E3T-1b-W0z">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="wrapInstructionInCondition" target="tWe-V1-zXv" id="MeH-HC-zgd"/>
                                                         </connections>

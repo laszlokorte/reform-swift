@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F210B7181B9C96BC003E1440 /* AABB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7171B9C96BC003E1440 /* AABB.swift */; };
+		F210B7181B9C96BC003E1440 /* AABB2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7171B9C96BC003E1440 /* AABB2d.swift */; };
+		F21403711BB05CF600A6F672 /* LineSegment2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403701BB05CF600A6F672 /* LineSegment2d.swift */; };
+		F21403731BB05D0D00A6F672 /* Arc2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403721BB05D0D00A6F672 /* Arc2d.swift */; };
+		F21403751BB05DFD00A6F672 /* Circle2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403741BB05DFD00A6F672 /* Circle2d.swift */; };
+		F21403771BB05E5500A6F672 /* Triangle2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403761BB05E5500A6F672 /* Triangle2d.swift */; };
+		F21403791BB05FAA00A6F672 /* Ray2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403781BB05FAA00A6F672 /* Ray2d.swift */; };
 		F26D46161B7D09F200266096 /* ReformMath.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46151B7D09F200266096 /* ReformMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D461D1B7D09F200266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46121B7D09F200266096 /* ReformMath.framework */; };
 		F26D46221B7D09F200266096 /* ReformMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46211B7D09F200266096 /* ReformMathTests.swift */; };
@@ -31,7 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F210B7171B9C96BC003E1440 /* AABB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABB.swift; sourceTree = "<group>"; };
+		F210B7171B9C96BC003E1440 /* AABB2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABB2d.swift; sourceTree = "<group>"; };
+		F21403701BB05CF600A6F672 /* LineSegment2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineSegment2d.swift; sourceTree = "<group>"; };
+		F21403721BB05D0D00A6F672 /* Arc2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arc2d.swift; sourceTree = "<group>"; };
+		F21403741BB05DFD00A6F672 /* Circle2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle2d.swift; sourceTree = "<group>"; };
+		F21403761BB05E5500A6F672 /* Triangle2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle2d.swift; sourceTree = "<group>"; };
+		F21403781BB05FAA00A6F672 /* Ray2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ray2d.swift; sourceTree = "<group>"; };
 		F26D46121B7D09F200266096 /* ReformMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46151B7D09F200266096 /* ReformMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformMath.h; sourceTree = "<group>"; };
 		F26D46171B7D09F200266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +76,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F214036F1BB05CD400A6F672 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				F21403701BB05CF600A6F672 /* LineSegment2d.swift */,
+				F21403721BB05D0D00A6F672 /* Arc2d.swift */,
+				F210B7171B9C96BC003E1440 /* AABB2d.swift */,
+				F21403741BB05DFD00A6F672 /* Circle2d.swift */,
+				F21403761BB05E5500A6F672 /* Triangle2d.swift */,
+				F21403781BB05FAA00A6F672 /* Ray2d.swift */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
 		F26D46081B7D09F200266096 = {
 			isa = PBXGroup;
 			children = (
@@ -117,11 +140,11 @@
 		F26D46EE1B7D1A9F00266096 /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
+				F214036F1BB05CD400A6F672 /* Elements */,
 				F26D46EF1B7D1AAA00266096 /* Angle.swift */,
 				F27391001B7F854B00100F2F /* Elements.swift */,
 				F27391061B7F8ACE00100F2F /* Relations.swift */,
 				F273911B1B7F94F800100F2F /* Path.swift */,
-				F210B7171B9C96BC003E1440 /* AABB.swift */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -237,12 +260,17 @@
 			files = (
 				F26D46F01B7D1AAA00266096 /* Angle.swift in Sources */,
 				F273911C1B7F94F800100F2F /* Path.swift in Sources */,
+				F21403751BB05DFD00A6F672 /* Circle2d.swift in Sources */,
+				F21403771BB05E5500A6F672 /* Triangle2d.swift in Sources */,
 				F27391071B7F8ACE00100F2F /* Relations.swift in Sources */,
-				F210B7181B9C96BC003E1440 /* AABB.swift in Sources */,
+				F210B7181B9C96BC003E1440 /* AABB2d.swift in Sources */,
 				F26D46A81B7D0CF400266096 /* Vec2d.swift in Sources */,
+				F21403791BB05FAA00A6F672 /* Ray2d.swift in Sources */,
 				F26D470E1B7D34B700266096 /* Operators.swift in Sources */,
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,
 				F27391011B7F854B00100F2F /* Elements.swift in Sources */,
+				F21403731BB05D0D00A6F672 /* Arc2d.swift in Sources */,
+				F21403711BB05CF600A6F672 /* LineSegment2d.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

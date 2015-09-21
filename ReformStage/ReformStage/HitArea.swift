@@ -47,7 +47,7 @@ extension HitArea {
 }
 
 extension HitArea {
-    public func intersects(aabb: AABB) -> Bool {
+    public func intersects(aabb: AABB2d) -> Bool {
         switch self {
         case None:
             return false

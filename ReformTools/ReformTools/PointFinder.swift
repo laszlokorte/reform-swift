@@ -14,7 +14,7 @@ import ReformExpression
 enum LocationFilter : Equatable {
     case Any
     case Near(Vec2d, distance: Double)
-    case AABB(ReformMath.AABB)
+    case AABB(ReformMath.AABB2d)
 }
 
 extension LocationFilter {

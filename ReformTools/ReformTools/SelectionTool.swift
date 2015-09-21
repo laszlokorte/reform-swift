@@ -129,7 +129,7 @@ public final class SelectionTool : Tool {
     }
 
     private func entitiesInside(min min: Vec2d, max: Vec2d) -> [Entity] {
-        let query = EntityQuery(filter: .Any, location: .AABB(AABB(min: min, max: max)))
+        let query = EntityQuery(filter: .Any, location: .AABB(AABB2d(min: min, max: max)))
         return entityFinder.getEntities(query)
     }
     
