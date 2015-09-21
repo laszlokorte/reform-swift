@@ -27,8 +27,8 @@ struct StaticAngle : WriteableRuntimeRotationAngle {
     func setAngleFor<R:Runtime>(runtime: R, angle: Angle) {
         runtime.write(formId, offset: offset, value: unsafeBitCast(normalize360(angle).radians, UInt64.self))
     }
-    
-    func isDegenerated() -> Bool {
+
+    var isDegenerated : Bool {
         return false
     }
 }

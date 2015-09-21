@@ -137,6 +137,12 @@ private struct PieCornerAnchor : Anchor {
 }
 
 
+extension PieCornerAnchor : Equatable {}
+
+private func ==(lhs: PieCornerAnchor, rhs: PieCornerAnchor) -> Bool {
+    return false // TODO
+}
+
 extension PieForm : Rotatable {
     public var rotator : Rotator {
         return CompositeRotator(rotators:

@@ -169,6 +169,12 @@ private struct CircleAnchor : Anchor {
     }
 }
 
+extension CircleAnchor : Equatable {}
+
+private func ==(lhs: CircleAnchor, rhs: CircleAnchor) -> Bool {
+    return false // TODO
+}
+
 
 extension CircleForm : Rotatable {
     

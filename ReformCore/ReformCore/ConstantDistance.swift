@@ -25,7 +25,9 @@ public struct ConstantDistance : RuntimeDistance, Labeled {
         return delta.label
     }
     
-    public func isDegenerated() -> Bool {
-        return delta.length2 == 0
+
+
+    public var isDegenerated : Bool {
+        return delta.x == 0 && delta.y == 0
     }
 }

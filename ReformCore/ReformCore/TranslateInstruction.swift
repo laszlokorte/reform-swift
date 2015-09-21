@@ -44,4 +44,8 @@ public struct TranslateInstruction : Instruction {
     
     public func analyze<T:Analyzer>(analyzer: T) {
     }
+
+    public var isDegenerated : Bool {
+        return distance.isDegenerated
+    }
 }

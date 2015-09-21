@@ -248,6 +248,12 @@ private struct RectangleAnchor : Anchor {
     }
 }
 
+extension RectangleAnchor : Equatable {}
+
+private func ==(lhs: RectangleAnchor, rhs: RectangleAnchor) -> Bool {
+    return false // TODO
+}
+
 extension RectangleForm : Rotatable {
     
     public var rotator : Rotator {

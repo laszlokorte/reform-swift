@@ -25,7 +25,7 @@ struct PointAngle : RuntimeRotationAngle {
         return normalize360(angle(p-c))
     }
     
-    func isDegenerated() -> Bool {
+    var isDegenerated : Bool {
         return false
     }
 }

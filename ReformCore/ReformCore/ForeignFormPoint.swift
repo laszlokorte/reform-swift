@@ -36,6 +36,15 @@ public struct ForeignFormPoint : RuntimePoint, Labeled {
     }
 }
 
+extension ForeignFormPoint : Equatable {
+
+}
+
+
+public func ==(lhs: ForeignFormPoint, rhs: ForeignFormPoint) -> Bool {
+    return lhs.formId == rhs.formId && lhs.pointId == rhs.pointId
+}
+
 public struct AnonymousFormPoint : RuntimePoint {
     let formId : FormIdentifier
     let pointId : ExposedPointIdentifier
@@ -54,4 +63,14 @@ public struct AnonymousFormPoint : RuntimePoint {
         
         return point.getPositionFor(runtime)
     }
+}
+
+
+extension AnonymousFormPoint : Equatable {
+
+}
+
+
+public func ==(lhs: AnonymousFormPoint, rhs: AnonymousFormPoint) -> Bool {
+    return lhs.formId == rhs.formId && lhs.pointId == rhs.pointId
 }

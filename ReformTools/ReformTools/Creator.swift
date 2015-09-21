@@ -51,7 +51,16 @@ public final class InstructionCreator {
     }
     
     func commit() {
-        notifier(true)
-        state = .Idle
+        if case .Creating(let node) = state {
+            if node.isDegenerated {
+                focus.current = node.previous
+                node.removeFromParent()
+                notifier(false)
+            } else {
+                notifier(true)
+            }
+
+            state = .Idle
+        }
     }
 }

@@ -56,3 +56,11 @@ struct ExposedPoint : RuntimePoint, Labeled {
         return name
     }
 }
+
+extension ExposedPoint : Equatable {
+
+}
+
+func ==(lhs: ExposedPoint, rhs: ExposedPoint) -> Bool {
+    return lhs.point.isEqualTo(rhs.point)
+}

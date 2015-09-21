@@ -22,8 +22,8 @@ public struct ConstantAngle : RuntimeRotationAngle, Labeled {
     public func getDescription(stringifier: Stringifier) -> String {
         return String(format: "%.2f%%", angle.percent)
     }
-    
-    public func isDegenerated() -> Bool {
+
+    public var isDegenerated : Bool {
         return angle.radians == 0
     }
 }

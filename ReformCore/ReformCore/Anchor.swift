@@ -14,6 +14,18 @@ public protocol Anchor {
     func translate<R:Runtime>(runtime: R, delta: Vec2d)
     
     var name : String { get }
+
+    func isEqualTo(other: Anchor) -> Bool
+}
+
+extension Anchor where Self : Equatable {
+    public func isEqualTo(other: Anchor) -> Bool {
+        guard let other = other as? Self else {
+            return false
+        }
+
+        return self == other
+    }
 }
 
 public struct AnchorIdentifier : Hashable {

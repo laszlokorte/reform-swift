@@ -40,4 +40,8 @@ public struct IfConditionInstruction : GroupInstruction {
 
     public func analyze<T:Analyzer>(analyzer: T) {
     }
+
+    public var isDegenerated : Bool {
+        return false
+    }
 }

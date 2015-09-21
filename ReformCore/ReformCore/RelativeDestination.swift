@@ -46,7 +46,7 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
         }
     }
     
-    public func isDegenerated() -> Bool {
-        return false
+    public var isDegenerated : Bool {
+        return from.isEqualTo(to)
     }
 }

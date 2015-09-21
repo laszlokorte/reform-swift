@@ -39,8 +39,8 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
             return "From \(fromLabel) to  \(delta.label)"
         }
     }
-    
-    public func isDegenerated() -> Bool {
-        return false
+
+    public var isDegenerated : Bool {
+        return delta.x == 0 && delta.y == 0
     }
 }

@@ -32,3 +32,13 @@ struct StaticPoint : WriteableRuntimePoint {
         runtime.write(formId, offset: offset+1, value: unsafeBitCast(position.y, UInt64.self))
     }
 }
+
+
+extension StaticPoint : Equatable {
+
+}
+
+
+func ==(lhs: StaticPoint, rhs: StaticPoint) -> Bool {
+    return lhs.formId == rhs.formId && lhs.offset == rhs.offset
+}

@@ -23,6 +23,10 @@ private struct RootInstruction : GroupInstruction {
     
     func analyze<T:Analyzer>(analyzer: T) {
     }
+
+    var isDegenerated : Bool {
+        return false
+    }
 }
 
 final public class Procedure {

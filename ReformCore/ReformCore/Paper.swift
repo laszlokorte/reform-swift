@@ -142,8 +142,6 @@ extension Paper.PointId {
 }
 
 struct PaperPoint : RuntimePoint, Labeled {
-    
-    
     let side : Paper.PointId
     let width : RuntimeLength
     let height : RuntimeLength
@@ -166,3 +164,12 @@ struct PaperPoint : RuntimePoint, Labeled {
         return "Canvas' \(side.name)"
     }
 }
+
+extension PaperPoint : Equatable {
+
+}
+
+func ==(lhs: PaperPoint, rhs: PaperPoint) -> Bool {
+    return lhs.side == rhs.side
+}
+

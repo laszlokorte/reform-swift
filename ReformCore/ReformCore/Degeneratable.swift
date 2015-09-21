@@ -7,5 +7,5 @@
 //
 
 public protocol Degeneratable {
-    func isDegenerated() -> Bool
+    var isDegenerated : Bool { get }
 }

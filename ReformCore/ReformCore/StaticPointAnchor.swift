@@ -28,3 +28,10 @@ struct StaticPointAnchor : Anchor {
         }
     }
 }
+
+extension StaticPointAnchor : Equatable {
+}
+
+func ==(lhs: StaticPointAnchor, rhs: StaticPointAnchor) -> Bool {
+    return lhs.point.isEqualTo(rhs.point)
+}

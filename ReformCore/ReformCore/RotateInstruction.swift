@@ -53,5 +53,9 @@ public struct RotateInstruction : Instruction {
     
     public func analyze<T:Analyzer>(analyzer: T) {
     }
-    
+
+
+    public var isDegenerated : Bool {
+        return angle.isDegenerated
+    }
 }

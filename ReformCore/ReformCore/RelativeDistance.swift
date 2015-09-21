@@ -37,8 +37,8 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
         
         return "From \(fromLabel) to \(toLabel)"
     }
-    
-    public func isDegenerated() -> Bool {
-        return false
+
+    public var isDegenerated : Bool {
+        return from.isEqualTo(to)
     }
 }

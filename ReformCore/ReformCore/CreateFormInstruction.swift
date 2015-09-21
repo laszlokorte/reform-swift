@@ -43,4 +43,8 @@ public struct CreateFormInstruction : Instruction {
             analyzer.announceDepencency(id)
         }
     }
+
+    public var isDegenerated : Bool {
+        return destination.isDegenerated
+    }
 }

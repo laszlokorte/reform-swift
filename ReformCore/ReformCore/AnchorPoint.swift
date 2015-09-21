@@ -23,3 +23,13 @@ struct AnchorPoint : RuntimePoint, Labeled {
         return anchor.name
     }
 }
+
+
+
+extension AnchorPoint : Equatable {
+
+}
+
+func ==(lhs: AnchorPoint, rhs: AnchorPoint) -> Bool {
+    return lhs.anchor.isEqualTo(rhs.anchor)
+}

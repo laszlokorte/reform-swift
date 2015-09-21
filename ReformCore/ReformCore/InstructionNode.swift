@@ -204,6 +204,21 @@ extension InstructionNode {
     }
 }
 
+extension InstructionNode {
+
+    public var isDegenerated : Bool {
+        switch content {
+        case .Null:
+            return true
+        case .Group(let instruction, let children):
+            return children.isEmpty || instruction.isDegenerated
+        case .Single(let instruction):
+            return instruction.isDegenerated
+        }
+    }
+
+}
+
 extension InstructionNode : Evaluatable {
     public func evaluate<T:Runtime where T.Ev == InstructionNode>(runtime: T) {
         switch content {
@@ -256,14 +271,18 @@ public protocol Instruction : Labeled {
     func analyze<T:Analyzer>(analyzer: T)
     
     var target : FormIdentifier? { get }
+
+    var isDegenerated : Bool { get }
 }
 
 
 public protocol GroupInstruction : Labeled {
     
-    var target : FormIdentifier? { get }
-    
     func evaluate<T:Runtime where T.Ev==InstructionNode>(runtime: T, withChildren: [InstructionNode])
     
     func analyze<T:Analyzer>(analyzer: T)
+
+    var target : FormIdentifier? { get }
+
+    var isDegenerated : Bool { get }
 }

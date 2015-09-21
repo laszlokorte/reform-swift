@@ -27,3 +27,14 @@ struct CenterPoint : RuntimePoint {
         return (a + b) / 2
     }
 }
+
+
+extension CenterPoint : Equatable {
+
+}
+
+
+func ==(lhs: CenterPoint, rhs: CenterPoint) -> Bool {
+    return lhs.pointA.isEqualTo(rhs.pointA) && lhs.pointB.isEqualTo(rhs.pointB)
+}
+

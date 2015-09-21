@@ -68,5 +68,9 @@ public struct ScaleInstruction : Instruction {
     
     public func analyze<T:Analyzer>(analyzer: T) {
     }
+
+    public var isDegenerated : Bool {
+        return factor.isDegenerated
+    }
     
 }
