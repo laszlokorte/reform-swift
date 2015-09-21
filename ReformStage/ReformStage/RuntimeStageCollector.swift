@@ -108,14 +108,19 @@ private class StageBuffer {
     }
     
     func flush(stage: Stage) {
-        stage.size = size
-        stage.entities = entities.lazy.reverse()
-        stage.currentShapes = currentShapes
-        stage.finalShapes = finalShapes
+        let recalcIntersections = self.recalcIntersections
+        dispatch_sync(dispatch_get_main_queue()) {
+            [unowned self, stage] in
 
-        if recalcIntersections {
-            stage.intersections = intersectionsOf(entities)
-            recalcIntersections = false
+            stage.size = self.size
+            stage.entities = self.entities.lazy.reverse()
+            stage.currentShapes = self.currentShapes
+            stage.finalShapes = self.finalShapes
+
+            if recalcIntersections {
+                stage.intersections = intersectionsOf(self.entities)
+                self.recalcIntersections = false
+            }
         }
     }
 }
