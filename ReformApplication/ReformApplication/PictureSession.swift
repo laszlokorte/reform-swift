@@ -64,9 +64,9 @@ final class ProcedureProcessor<A:Analyzer> {
             picture.procedure.analyzeWith(analyzer)
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
 
-            toolController.currentTool.refresh()
-
             dispatch_async(dispatch_get_main_queue()) {
+                toolController.currentTool.refresh()
+
                 NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: picture.procedure)
                 NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
             }
@@ -86,9 +86,10 @@ final class ProcedureProcessor<A:Analyzer> {
             runtime.stop()
 
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
-            toolController.currentTool.refresh()
 
             dispatch_async(dispatch_get_main_queue()) {
+                toolController.currentTool.refresh()
+
                 NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
             }
 
