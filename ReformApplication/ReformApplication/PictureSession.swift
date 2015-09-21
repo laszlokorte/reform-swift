@@ -52,11 +52,12 @@ final class ProcedureProcessor<A:Analyzer> {
         triggerCounter++
         dispatch_async(queue) {
             [picture=self.picture, toolController=self.toolController, runtime=self.runtime, analyzer=self.analyzer] in
-            defer { self.triggerCounter-- }
-            if self.triggerCounter > 1 {
-                return
+            do {
+                defer { self.triggerCounter-- }
+                if self.triggerCounter > 1 {
+                    return
+                }
             }
-
 
             runtime.stop()
             self.snapshotCollector.requireRedraw()

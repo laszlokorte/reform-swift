@@ -40,9 +40,9 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
 
         switch alignment {
         case .Centered:
-            return "Around \(fromLabel) to \(toLabel)"
+            return "\(direction.getDescription(stringifier)) around \(fromLabel) to \(toLabel)"
         case .Leading:
-            return "From \(fromLabel) to \(toLabel)"
+            return "\(direction.getDescription(stringifier)) from \(fromLabel) to \(toLabel)"
         }
     }
     

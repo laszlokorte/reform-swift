@@ -19,9 +19,9 @@ public enum Cartesian : RuntimeDirection, Labeled {
     public func getDescription(stringifier: Stringifier) -> String {
         switch self {
         case .Vertical:
-            return "Vertical"
+            return "vertically"
         case .Horizontal:
-            return "Horizontal"
+            return "horizontally"
         }
     }
     

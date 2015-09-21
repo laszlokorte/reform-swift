@@ -31,11 +31,11 @@ extension Vec2d {
             let z = -0.001...0.001
 
             if z.contains(x) == z.contains(y) {
-                return "\(fx) Horizontally, \(fy) Vertically"
+                return "\(fx) horizontally, \(fy) vertically"
             } else if z.contains(y) {
-                return "\(fx) Horizontally"
+                return "\(fx) horizontally"
             } else {
-                return "\(fy) Vertically"
+                return "\(fy) vertically"
             }
         }
     }

@@ -10,12 +10,13 @@ import ReformMath
 
 public struct RelativeDistance : RuntimeDistance, Labeled {
     public typealias PointType = protocol<RuntimePoint, Labeled>
+    public typealias DirectionType = protocol<RuntimeDirection, Labeled>
     
     let from: PointType
     let to: PointType
-    let direction : RuntimeDirection
+    let direction : DirectionType
     
-    public init(from: PointType, to: PointType, direction: RuntimeDirection) {
+    public init(from: PointType, to: PointType, direction: DirectionType) {
         self.from = from
         self.to = to
         self.direction = direction
@@ -35,7 +36,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
         let fromLabel = from.getDescription(stringifier)
         let toLabel = to.getDescription(stringifier)
         
-        return "From \(fromLabel) to \(toLabel)"
+        return "\(direction.getDescription(stringifier)) from \(fromLabel) to \(toLabel)"
     }
 
     public var isDegenerated : Bool {
