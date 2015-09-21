@@ -49,19 +49,23 @@ final class AnalyzerStringifier : Stringifier {
 final public class DefaultAnalyzer : Analyzer {
     public private(set) var instructions = [InstructionOutlineRow]()
     public private(set) var instructionsDblBuf = [InstructionOutlineRow]()
+    private let nameAllocator : NameAllocator
+
     private let analyzerStringifier : AnalyzerStringifier
     public var stringifier : Stringifier {
         return analyzerStringifier
     }
     private var depth: Int = 0
     
-    public init(expressionPrinter: ExpressionPrinter) {
+    public init(expressionPrinter: ExpressionPrinter, nameAllocator : NameAllocator) {
         self.analyzerStringifier = AnalyzerStringifier(expressionPrinter: expressionPrinter)
+        self.nameAllocator = nameAllocator
     }
     
     public func analyze(@noescape block: () -> ()) {
         analyzerStringifier.forms.removeAll(keepCapacity: true)
         instructionsDblBuf.removeAll(keepCapacity: true)
+        nameAllocator.reset()
         depth = 0
         block()
 
@@ -99,6 +103,7 @@ final public class DefaultAnalyzer : Analyzer {
     
     public func announceForm(form: Form) {
         analyzerStringifier.forms[form.identifier] = form
+        nameAllocator.announce(form.name)
     }
     
     public func announceDepencency(id: PictureIdentifier) {

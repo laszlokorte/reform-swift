@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F214035B1BAF942600A6F672 /* NameAllocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F214035A1BAF942600A6F672 /* NameAllocator.swift */; };
 		F222AF1B1B836A37005F71A1 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF1A1B836A37005F71A1 /* Alignment.swift */; };
 		F222AF291B84EFED005F71A1 /* ConstantDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF281B84EFED005F71A1 /* ConstantDistance.swift */; };
 		F222AF421B878349005F71A1 /* ConstantScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */; };
@@ -110,6 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F214035A1BAF942600A6F672 /* NameAllocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameAllocator.swift; sourceTree = "<group>"; };
 		F222AF1A1B836A37005F71A1 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		F222AF281B84EFED005F71A1 /* ConstantDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantDistance.swift; sourceTree = "<group>"; };
 		F222AF411B878349005F71A1 /* ConstantScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantScaleFactor.swift; sourceTree = "<group>"; };
@@ -227,6 +229,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F21403591BAF93DC00A6F672 /* Naming */ = {
+			isa = PBXGroup;
+			children = (
+				F214035A1BAF942600A6F672 /* NameAllocator.swift */,
+			);
+			name = Naming;
+			sourceTree = "<group>";
+		};
 		F222AF4A1B87D56E005F71A1 /* Identifers */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +290,7 @@
 				F26D46AF1B7D0F5600266096 /* Relations */,
 				F26D46AC1B7D0D4D00266096 /* Runtime */,
 				F2CA10B61BA09D8900A7864A /* VM */,
+				F21403591BAF93DC00A6F672 /* Naming */,
 				F26D46A91B7D0D3900266096 /* Form */,
 				F26D45F11B7D09CA00266096 /* ReformCore.h */,
 				F26D45F31B7D09CA00266096 /* Info.plist */,
@@ -716,6 +727,7 @@
 				F26D47241B7D3C0300266096 /* BasicAngleRotator.swift in Sources */,
 				F26D47041B7D288E00266096 /* LineOutline.swift in Sources */,
 				F222AF501B88B864005F71A1 /* AbsoluteScaler.swift in Sources */,
+				F214035B1BAF942600A6F672 /* NameAllocator.swift in Sources */,
 				F26D471C1B7D392200266096 /* StaticLength.swift in Sources */,
 				F26D473E1B7D541600266096 /* CircleOutline.swift in Sources */,
 				F26D46AE1B7D0D5A00266096 /* Runtime.swift in Sources */,

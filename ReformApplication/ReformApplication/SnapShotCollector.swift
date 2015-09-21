@@ -32,7 +32,6 @@ final public class SnapshotCollector : RuntimeListener {
     private var currentSize : (Double, Double) = (0,0)
     private var currentScaled : (Double, Double) = (0,0)
     private(set) var snapshots = [InstructionNodeKey:NSImage]()
-    private(set) var snapshotsPublished = [InstructionNodeKey:NSImage]()
     private(set) var instructions = Set<InstructionNodeKey>()
     private(set) var errors = [InstructionNodeKey:RuntimeError]()
     private(set) var paths = [Path]()
@@ -62,6 +61,7 @@ final public class SnapshotCollector : RuntimeListener {
     }
 
     public func runtimeFinishEvaluation<R:Runtime>(runtime: R) {
+        self.redraw = false
     }
 
     public func runtime<R:Runtime>(runtime: R, didEval instruction: Evaluatable) {

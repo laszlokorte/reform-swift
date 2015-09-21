@@ -28,7 +28,9 @@ public final class CreateFormTool : Tool {
     let selection : FormSelection
     
     let selectionTool : SelectionTool
-    
+
+    let baseName : String
+    let nameAllocator : NameAllocator
     let pointSnapper : PointSnapper
     let pointGrabber : PointGrabber
     let streightener : Streightener
@@ -37,9 +39,11 @@ public final class CreateFormTool : Tool {
     
     var idSequence : IdentifierSequence<FormIdentifier>
     
-    public init(formType : protocol<Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
+    public init(formType : protocol<Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
         self.formType = formType
         self.idSequence = idSequence
+        self.baseName = baseName
+        self.nameAllocator = nameAllocator
         self.selection = selection
         self.selectionTool = selectionTool
         
@@ -157,7 +161,7 @@ public final class CreateFormTool : Tool {
                 pointSnapper.searchAt(pos)
             case .Press:
                 if let startPoint = pointSnapper.current {
-                    let form = formType.init(id: idSequence.emitId(), name: "Line 1")
+                    let form = formType.init(id: idSequence.emitId(), name: self.nameAllocator.alloc(baseName, numbered: true))
                     let destination = RelativeDestination(from: startPoint.runtimePoint, to: startPoint.runtimePoint)
                     let instruction = CreateFormInstruction(form: form, destination: destination)
                     

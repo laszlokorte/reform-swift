@@ -34,16 +34,18 @@ final class ProcedureProcessor<A:Analyzer> {
     let runtime: DefaultRuntime
     let analyzer : A
     let toolController : ToolController
+    let snapshotCollector : SnapshotCollector
     let queue = dispatch_queue_create("reform.runtime.queue", nil)
 
     var triggerCounter = 0;
     var evalCounter = 0;
 
-    init(picture : Picture, analyzer: A, runtime: DefaultRuntime, toolController: ToolController) {
+    init(picture : Picture, analyzer: A, runtime: DefaultRuntime, toolController: ToolController, snapshotCollector : SnapshotCollector) {
         self.picture = picture
         self.analyzer = analyzer
         self.runtime = runtime
         self.toolController = toolController
+        self.snapshotCollector = snapshotCollector
     }
 
     func trigger() {
@@ -55,8 +57,10 @@ final class ProcedureProcessor<A:Analyzer> {
                 return
             }
 
-            picture.procedure.analyzeWith(analyzer)
+
             runtime.stop()
+            self.snapshotCollector.requireRedraw()
+            picture.procedure.analyzeWith(analyzer)
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
 
             toolController.currentTool.refresh()
@@ -121,6 +125,7 @@ final class PictureSession {
     let streightener : Streightener
     let aligner : Aligner
 
+    let nameAllocator : NameAllocator
     let instructionCreator : InstructionCreator
 
     let toolController : ToolController
@@ -144,6 +149,7 @@ final class PictureSession {
     let instructionFocusChanger : InstructionFocusChanger
 
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {
+        self.nameAllocator = NameAllocator()
         self.projectSession = projectSession
         self.picture = picture
 
@@ -151,7 +157,7 @@ final class PictureSession {
 
         self.instructionFocus = InstructionFocus()
         self.formSelection = FormSelection()
-        self.analyzer = DefaultAnalyzer(expressionPrinter: expressionPrinter)
+        self.analyzer = DefaultAnalyzer(expressionPrinter: expressionPrinter, nameAllocator: nameAllocator)
         self.runtime = DefaultRuntime()
         self.formIDSequence = IdentifierSequence(initialValue: 100)
         self.referenceIDSequence = IdentifierSequence(initialValue: 100)
@@ -181,12 +187,12 @@ final class PictureSession {
         self.toolController = ToolController()
 
 
-        self.procedureProcessor = ProcedureProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController)
+        self.procedureProcessor = ProcedureProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController, snapshotCollector : self.snapshotCollector)
 
         self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus) {
-                [collector=self.stageCollector, trigger=self.procedureProcessor.triggerEval] b in
+                [collector=self.stageCollector, triggerEval=self.procedureProcessor.triggerEval] b in
                 collector.recalcIntersections = true
-                trigger()
+                triggerEval()
             }
 
         self.instructionCreator = InstructionCreator(focus: self.instructionFocus) {
@@ -200,17 +206,17 @@ final class PictureSession {
         self.selectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.stageUI.selectionUI)
 
 
-        self.createLineTool = CreateFormTool(formType: LineForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+        self.createLineTool = CreateFormTool(formType: LineForm.self, idSequence: self.formIDSequence, baseName: "Line", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
-        self.createRectTool = CreateFormTool(formType: RectangleForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+        self.createRectTool = CreateFormTool(formType: RectangleForm.self, idSequence: self.formIDSequence, baseName: "Rectangle", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
-        self.createCircleTool = CreateFormTool(formType: CircleForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+        self.createCircleTool = CreateFormTool(formType: CircleForm.self, idSequence: self.formIDSequence, baseName: "Circle", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
-        self.createPieTool = CreateFormTool(formType: PieForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+        self.createPieTool = CreateFormTool(formType: PieForm.self, idSequence: self.formIDSequence, baseName: "Pie", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
-        self.createArcTool = CreateFormTool(formType: ArcForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+        self.createArcTool = CreateFormTool(formType: ArcForm.self, idSequence: self.formIDSequence, baseName: "Arc", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
-        self.createTextTool = CreateFormTool(formType: TextForm.self, idSequence: self.formIDSequence, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+        self.createTextTool = CreateFormTool(formType: TextForm.self, idSequence: self.formIDSequence, baseName: "Text", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
         self.moveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
 
@@ -222,7 +228,7 @@ final class PictureSession {
         self.scalingTool = ScaleTool(stage: self.stage,  selection:self.formSelection, handleGrabber: self.affineHandleGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool, pivotUI: self.stageUI.pivotUI)
 
         self.cropTool = CropTool(stage: self.stage, cropGrabber: self.cropGrabber, streightener: self.streightener, picture: self.picture) {
-            [trigger=self.procedureProcessor.triggerEval,collector=self.stageCollector] in
+            [trigger=self.procedureProcessor.trigger,collector=self.stageCollector] in
             collector.recalcIntersections = true
             trigger()
         }
