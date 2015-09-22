@@ -98,7 +98,16 @@ extension PictureForm : Drawable {
     }
     
     public func getPathFor<R:Runtime>(runtime: R) -> Path? {
-        return Path()
+        guard
+            let topLeft = topLeftAnchor.getPositionFor(runtime),
+            let topRight = topRightAnchor.getPositionFor(runtime),
+            let bottomRight = bottomRightAnchor.getPositionFor(runtime),
+            let bottomLeft = bottomLeftAnchor.getPositionFor(runtime)
+            else {
+                return nil
+        }
+
+        return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft), .Close)
     }
     
     public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {

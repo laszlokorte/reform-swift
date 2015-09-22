@@ -121,6 +121,8 @@ final class ProjectWindowController : NSWindowController {
             pictureSession.tool = pictureSession.createArcTool
         case .TextToolItem:
             pictureSession.tool = pictureSession.createTextTool
+        case .PictureToolItem:
+            pictureSession.tool = pictureSession.createPictureTool
         case .SelectionToolItem:
             pictureSession.tool = pictureSession.selectionTool
         case .MoveToolItem:
@@ -146,6 +148,7 @@ final class ProjectWindowController : NSWindowController {
         case PieToolItem
         case ArcToolItem
         case TextToolItem
+        case PictureToolItem
 
         case SelectionToolItem
         case MoveToolItem

@@ -144,6 +144,7 @@ final class PictureSession {
     let createPieTool : CreateFormTool
     let createArcTool : CreateFormTool
     let createTextTool : CreateFormTool
+    let createPictureTool : CreateFormTool
     let moveTool : MoveTool
     let morphTool : MorphTool
     let rotationTool : RotateTool
@@ -175,7 +176,7 @@ final class PictureSession {
 
         self.stageCollector = StageCollector(stage: stage, analyzer: analyzer, focusFilter: self.instructionFocus.isCurrent)
 
-        self.snapshotCollector = SnapshotCollector(maxSize: (120,80))
+        self.snapshotCollector = SnapshotCollector(maxSize: (90,56))
 
         runtime.listeners.append(stageCollector)
         runtime.listeners.append(snapshotCollector)
@@ -224,6 +225,8 @@ final class PictureSession {
         self.createArcTool = CreateFormTool(formType: ArcForm.self, idSequence: self.formIDSequence, baseName: "Arc", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
         self.createTextTool = CreateFormTool(formType: TextForm.self, idSequence: self.formIDSequence, baseName: "Text", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
+
+        self.createPictureTool = CreateFormTool(formType: PictureForm.self, idSequence: self.formIDSequence, baseName: "Picture", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)
 
         self.moveTool = MoveTool(stage: self.stage,  selection:self.formSelection,  pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, instructionCreator: self.instructionCreator,selectionTool: self.selectionTool)
 
