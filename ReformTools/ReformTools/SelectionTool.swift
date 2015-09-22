@@ -104,7 +104,7 @@ public final class SelectionTool : Tool {
                     index = entities.indexOf({$0.id == previous}) {
                     state = .Selecting(entity: entities[index], cycle: index, old: selection.selected)
                     
-                } else {
+                } else if changeMode == .XOR || selection.selected.intersect(entities.map{$0.id}).isEmpty {
                     state = .Selecting(entity: entities.first, cycle: 0, old: selection.selected)
                 }
             case .Release, .Cycle, .Toggle, .ModifierChange, .Move:
