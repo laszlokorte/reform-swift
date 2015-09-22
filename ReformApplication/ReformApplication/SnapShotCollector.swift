@@ -71,9 +71,10 @@ final public class SnapshotCollector : RuntimeListener {
 
         let key = InstructionNodeKey(instruction)
 
-        guard !instructions.contains(key) && !errors.keys.contains(key) else {
+        guard !instructions.contains(key) else {
             return
         }
+
 
         instructions.insert(key)
 
@@ -90,6 +91,36 @@ final public class SnapshotCollector : RuntimeListener {
         }
 
         let image = imageFor(key)
+
+
+        if errors.keys.contains(key) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [currentScaled, currentSize] in
+                image.lockFocus()
+                defer { image.unlockFocus() }
+                let size = image.size
+                guard let context =  NSGraphicsContext.currentContext()?.CGContext else {
+                    return
+                }
+
+                CGContextClearRect(context, CGRect(origin: CGPoint(), size: size))
+
+                CGContextSetLineWidth(context, 6)
+
+                CGContextTranslateCTM(context,
+                    (size.width -  CGFloat(currentScaled.0)) / 2,
+                    (size.height - CGFloat(currentScaled.1)) / 2)
+                CGContextScaleCTM(context, CGFloat(currentScaled.0 / currentSize.0), CGFloat(currentScaled.1 / currentSize.1))
+
+
+                CGContextSetRGBFillColor(context, 1, 0.7, 0.6, 1)
+                CGContextSetRGBStrokeColor(context, 0.8549, 0.1020, 0.0902, 1.0)
+                CGContextFillRect(context, CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
+                CGContextStrokeRect(context, CGRect(x: 4, y: 4, width: currentSize.0-8, height: currentSize.1-8))
+                
+            }
+            return
+        }
+
         var currentPaths = [(Bool, Bool, Path)]()
 
         for formId in runtime.getForms() {
