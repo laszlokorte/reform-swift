@@ -80,6 +80,7 @@ extension AABB2d {
     }
 
     public func intersectsLine(var from from: Vec2d, var to: Vec2d) -> Bool {
+        // https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
         var fromOut = outCode(from)
         var toOut = outCode(to)
         while true {
@@ -89,34 +90,27 @@ extension AABB2d {
             } else if fromOut.intersect(toOut) != .Inside {
                 return false
             } else {
-                // failed both tests, so calculate the line segment to clip
-                // from an outside point to an intersection with clip edge
                 let x : Double
                 let y : Double
 
-                // At least one endpoint is outside the clip rectangle; pick it.
                 let outcodeOut = fromOut != .Inside ? fromOut : toOut
 
-                // Now find the intersection point;
-                // use formulas y = y0 + slope * (x - x0), x = x0 + (1 / slope) * (y - y0)
-                if (outcodeOut.contains(.Top)) {           // point is above the clip rectangle
+                if (outcodeOut.contains(.Top)) {
                     x = from.x + (to.x - from.x) * (max.y - from.y) / (to.y - from.y)
                     y = max.y
-                } else if (outcodeOut.contains(.Bottom)) { // point is below the clip rectangle
+                } else if (outcodeOut.contains(.Bottom)) {
                     x = from.x + (to.x - from.x) * (min.y - from.y) / (to.y - from.y)
                     y = min.y
-                } else if (outcodeOut.contains(.Right)) {  // point is to the right of clip rectangle
+                } else if (outcodeOut.contains(.Right)) {
                     y = from.y + (to.y - from.y) * (max.x - from.x) / (to.x - from.x)
                     x = max.x
-                } else if (outcodeOut.contains(.Left)) {   // point is to the left of clip rectangle
+                } else if (outcodeOut.contains(.Left)) {
                     y = from.y + (to.y - from.y) * (min.x - from.x) / (to.x - from.x)
                     x = min.x
                 } else {
                     return false
                 }
-                
-                // Now we move outside point to intersection point to clip
-                // and get ready for next pass.
+
                 if (outcodeOut == fromOut) {
                     from = Vec2d(x: x, y: y)
                     fromOut = outCode(from)
