@@ -29,3 +29,9 @@ extension Arc2d {
         return 2 * M_PI * radius * normalize360(end-start).percent/100
     }
 }
+
+extension Arc2d {
+    public var circle : Circle2d {
+        return Circle2d(center: center, radius: radius)
+    }
+}
