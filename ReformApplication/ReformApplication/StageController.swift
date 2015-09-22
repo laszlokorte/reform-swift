@@ -39,12 +39,16 @@ struct StageUI {
 final class StageController : NSViewController {
     var toolController : ToolController?
     var stageRenderer : StageRenderer?
+    var selection : FormSelection?
+    var stage : Stage?
 
     override var representedObject : AnyObject? {
         didSet {
             if let stageModel = representedObject as? StageViewModel,
                 canvas = canvas {
                     configureCanvas(canvas, withStage: stageModel)
+                selection = stageModel.selection
+                stage = stageModel.stage
             }
         }
     }
@@ -205,6 +209,13 @@ final class StageController : NSViewController {
         } else {
             super.keyUp(theEvent)
             return
+        }
+        canvas?.needsDisplay = true
+    }
+
+    override func selectAll(sender: AnyObject?) {
+        if let stage = stage {
+            selection?.select(Set(stage.entities.lazy.filter{$0.hitArea != HitArea.None}.map{$0.id}))
         }
         canvas?.needsDisplay = true
     }

@@ -197,7 +197,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, line f
         
     let outline = form.outline.getSegmentsFor(runtime)
         
-    let hit = HitArea.Line(a: start, b: end)
+    let hit = HitArea.Line(LineSegment2d(from: start, to: end))
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
@@ -280,8 +280,8 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, rectan
     let outline = form.outline.getSegmentsFor(runtime)
     
     let hit = HitArea.Union(
-        HitArea.Triangle(a: topLeft, b: topRight, c: bottomRight),
-        HitArea.Triangle(a: topLeft, b: bottomRight, c: bottomLeft)
+        HitArea.Triangle(Triangle2d(a: topLeft, b: topRight, c: bottomRight)),
+        HitArea.Triangle(Triangle2d(a: topLeft, b: bottomRight, c: bottomLeft))
     )
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
@@ -336,7 +336,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, circle
     
     let outline = form.outline.getSegmentsFor(runtime)
     
-    let hit = HitArea.Circle(center: center, radius: radius)
+    let hit = HitArea.Circle(Circle2d(center: center, radius: radius))
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
@@ -380,7 +380,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pie fo
     let outline = form.outline.getSegmentsFor(runtime)
     
     let hit = HitArea.Intersection(
-        HitArea.Circle(center: center, radius: radius),
+        HitArea.Arc(Arc2d(center: center, radius: radius, start: lowerAngle, end: upperAngle)),
         HitArea.Sector(center: center, lower: lowerAngle, upper: upperAngle)
     )
     
@@ -424,10 +424,18 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, arc fo
     let outline = form.outline.getSegmentsFor(runtime)
     
     let radius = (start - center).length
-    let hit = HitArea.Intersection(
-        HitArea.Circle(center: center, radius: radius),
-        HitArea.LeftOf(a: end, b: start)
-    )
+
+    let hit : HitArea
+
+    if let ray = Ray2d(from: end, direction: start-end) {
+        hit = HitArea.Intersection(
+            HitArea.Arc(Arc2d(center: center, radius: radius, start: angle(start-center), end: angle(end-center))),
+            HitArea.LeftOf(ray)
+        )
+    } else {
+        hit = HitArea.Circle(Circle2d(center: center, radius: radius))
+    }
+
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
@@ -470,7 +478,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, text f
     
     let outline = form.outline.getSegmentsFor(runtime)
     
-    let hit = HitArea.Line(a: start, b: end)
+    let hit = HitArea.Line(LineSegment2d(from: start, to: end))
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
@@ -562,8 +570,8 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pictur
     
     
     let hit = HitArea.Union(
-        HitArea.Triangle(a: topLeft, b: topRight, c: bottomRight),
-        HitArea.Triangle(a: topLeft, b: bottomRight, c: bottomLeft)
+        HitArea.Triangle(Triangle2d(a: topLeft, b: topRight, c: bottomRight)),
+        HitArea.Triangle(Triangle2d(a: topLeft, b: bottomRight, c: bottomLeft))
     )
     
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)

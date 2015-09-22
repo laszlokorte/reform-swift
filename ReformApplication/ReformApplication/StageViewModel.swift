@@ -13,12 +13,14 @@ final class StageViewModel {
     let stage : Stage
     let stageUI : StageUI
     let toolController : ToolController
+    let selection : FormSelection
     let camera: Camera
 
-    init(stage: Stage, stageUI: StageUI, toolController : ToolController, camera: Camera) {
+    init(stage: Stage, stageUI: StageUI, toolController : ToolController, selection: FormSelection, camera: Camera) {
         self.stage = stage
         self.stageUI = stageUI
         self.toolController = toolController
+        self.selection = selection
         self.camera = camera
     }
 }

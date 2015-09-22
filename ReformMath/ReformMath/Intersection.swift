@@ -127,3 +127,84 @@ public func intersections(line line: LineSegment2d, arc: Arc2d) -> [Vec2d] {
         return isBetween(angle(point - arc.center), lower: arc.start, upper: arc.end)
     }
 }
+
+public func intersects(aabb aabb: AABB2d, line: LineSegment2d) -> Bool {
+    // https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
+    var from = line.from
+    var to = line.to
+    var fromOut = aabb.outCode(from)
+    var toOut = aabb.outCode(to)
+    while true {
+
+        if fromOut.union(toOut) == .Inside {
+            return true
+        } else if fromOut.intersect(toOut) != .Inside {
+            return false
+        } else {
+            let x : Double
+            let y : Double
+
+            let outcodeOut = fromOut != .Inside ? fromOut : toOut
+
+            if (outcodeOut.contains(.Top)) {
+                x = from.x + (to.x - from.x) * (aabb.max.y - from.y) / (to.y - from.y)
+                y = aabb.max.y
+            } else if (outcodeOut.contains(.Bottom)) {
+                x = from.x + (to.x - from.x) * (aabb.min.y - from.y) / (to.y - from.y)
+                y = aabb.min.y
+            } else if (outcodeOut.contains(.Right)) {
+                y = from.y + (to.y - from.y) * (aabb.max.x - from.x) / (to.x - from.x)
+                x = aabb.max.x
+            } else if (outcodeOut.contains(.Left)) {
+                y = from.y + (to.y - from.y) * (aabb.min.x - from.x) / (to.x - from.x)
+                x = aabb.min.x
+            } else {
+                return false
+            }
+
+            if (outcodeOut == fromOut) {
+                from = Vec2d(x: x, y: y)
+                fromOut = aabb.outCode(from)
+            } else {
+                to = Vec2d(x: x, y: y)
+                toOut = aabb.outCode(to)
+            }
+        }
+    }
+
+}
+
+public func intersects(aabb aabb: AABB2d, circle: Circle2d) -> Bool {
+    let size = aabb.max - aabb.min
+
+    let circleDistance = abs(circle.center - (aabb.min+aabb.max)/2)
+
+    if (circleDistance.x > (size.x/2 + circle.radius)) { return false }
+    if (circleDistance.y > (size.y/2 + circle.radius)) { return false }
+
+    if (circleDistance.x <= (size.x/2)) { return true; }
+    if (circleDistance.y <= (size.y/2)) { return true; }
+
+    return (circleDistance - size/2).length2 <= circle.radius*circle.radius;
+    
+}
+
+public func intersects(aabb aabb: AABB2d, arc: Arc2d) -> Bool {
+    let size = aabb.max - aabb.min
+
+    let circleDistance = abs(arc.center - (aabb.min+aabb.max)/2)
+
+    if (circleDistance.x > (size.x/2 + arc.radius)) { return false }
+    if (circleDistance.y > (size.y/2 + arc.radius)) { return false }
+
+    if (circleDistance.x <= (size.x/2)) { return true; }
+    if (circleDistance.y <= (size.y/2)) { return true; }
+
+    return (circleDistance - size/2).length2 <= arc.radius*arc.radius;
+    
+}
+
+public func intersects(aabb aabb: AABB2d, triangle: Triangle2d) -> Bool {
+    return intersects(aabb: aabb, line: LineSegment2d(from: triangle.a, to: triangle.b)) || intersects(aabb: aabb, line: LineSegment2d(from: triangle.b, to: triangle.c)) || intersects(aabb: aabb, line: LineSegment2d(from: triangle.c, to: triangle.a))
+}
+

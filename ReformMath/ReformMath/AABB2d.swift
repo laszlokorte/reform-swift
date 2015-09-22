@@ -61,80 +61,22 @@ extension AABB2d {
         }
     }
 
-    func outCode(point: Vec2d) -> OutCode {
+    func outCode(point: Vec2d, epsilon:Double = 0) -> OutCode {
         var outCode : OutCode = []
 
-        if (point.x < min.x) {
+        if (point.x < min.x - epsilon) {
             outCode.insert(.Left)
-        } else if (point.x > max.x) {
+        } else if (point.x > max.x + epsilon) {
             outCode.insert(.Right)
         }
 
-        if (point.y < min.y) {
+        if (point.y < min.y - epsilon) {
             outCode.insert(.Bottom)
-        } else if (point.y > max.y) {
+        } else if (point.y > max.y + epsilon) {
             outCode.insert(.Top)
         }
 
         return outCode
-    }
-
-    public func intersectsLine(var from from: Vec2d, var to: Vec2d) -> Bool {
-        // https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
-        var fromOut = outCode(from)
-        var toOut = outCode(to)
-        while true {
-
-            if fromOut.union(toOut) == .Inside {
-                return true
-            } else if fromOut.intersect(toOut) != .Inside {
-                return false
-            } else {
-                let x : Double
-                let y : Double
-
-                let outcodeOut = fromOut != .Inside ? fromOut : toOut
-
-                if (outcodeOut.contains(.Top)) {
-                    x = from.x + (to.x - from.x) * (max.y - from.y) / (to.y - from.y)
-                    y = max.y
-                } else if (outcodeOut.contains(.Bottom)) {
-                    x = from.x + (to.x - from.x) * (min.y - from.y) / (to.y - from.y)
-                    y = min.y
-                } else if (outcodeOut.contains(.Right)) {
-                    y = from.y + (to.y - from.y) * (max.x - from.x) / (to.x - from.x)
-                    x = max.x
-                } else if (outcodeOut.contains(.Left)) {
-                    y = from.y + (to.y - from.y) * (min.x - from.x) / (to.x - from.x)
-                    x = min.x
-                } else {
-                    return false
-                }
-
-                if (outcodeOut == fromOut) {
-                    from = Vec2d(x: x, y: y)
-                    fromOut = outCode(from)
-                } else {
-                    to = Vec2d(x: x, y: y)
-                    toOut = outCode(to)
-                }
-            }
-        }
-    }
-
-    public func intersectsCircle(center center: Vec2d, radius: Double) -> Bool {
-
-        let size = max - min
-
-        let circleDistance = abs(center - (min+max)/2)
-
-        if (circleDistance.x > (size.x/2 + radius)) { return false }
-        if (circleDistance.y > (size.y/2 + radius)) { return false }
-
-        if (circleDistance.x <= (size.x/2)) { return true; }
-        if (circleDistance.y <= (size.y/2)) { return true; }
-
-        return (circleDistance - size/2).length2 <= radius*radius;
     }
 }
 

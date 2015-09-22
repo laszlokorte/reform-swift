@@ -67,7 +67,7 @@ final class CanvasView : NSView {
             }
         }
     }
-    
+
     override var intrinsicContentSize : NSSize {
         return NSSize(width: canvasSize.x + 50, height: canvasSize.y + 50)
     }
@@ -80,6 +80,10 @@ final class CanvasView : NSView {
 
     override func keyUp(theEvent: NSEvent) {
         delegate?.keyUp(theEvent)
+    }
+
+    override func selectAll(sender: AnyObject?) {
+        delegate?.selectAll(sender)
     }
 
 }
