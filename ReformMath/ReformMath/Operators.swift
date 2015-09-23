@@ -57,6 +57,10 @@ public func /(lhs: Vec2d, rhs: Double) -> Vec2d {
     return Vec2d(x: lhs.x / rhs, y: lhs.y / rhs)
 }
 
+public func /(lhs: Double, rhs: Vec2d) -> Vec2d {
+    return Vec2d(x: lhs / rhs.x, y: lhs / rhs.y)
+}
+
 
 
 // Angle-Angle

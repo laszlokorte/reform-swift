@@ -17,6 +17,11 @@ public struct Ray2d : Equatable {
         self.from = from
         self.direction = dir
     }
+
+    public init(from: Vec2d, angle: Angle) {
+        self.from = from
+        self.direction = Vec2d(radius: 1, angle: angle)
+    }
 }
 
 public func ==(lhs: Ray2d, rhs: Ray2d) -> Bool {

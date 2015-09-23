@@ -31,6 +31,24 @@ extension AABB2d {
 }
 
 extension AABB2d {
+    public var top : LineSegment2d {
+        return LineSegment2d(from: xMinYMax, to: max)
+    }
+
+    public var bottom : LineSegment2d {
+        return LineSegment2d(from: min, to: xMaxYMin)
+    }
+
+    public var left : LineSegment2d {
+        return LineSegment2d(from: min, to: xMinYMax)
+    }
+
+    public var right : LineSegment2d {
+        return LineSegment2d(from: xMaxYMin, to: max)
+    }
+}
+
+extension AABB2d {
     struct OutCode : OptionSetType, CustomDebugStringConvertible {
         let rawValue: UInt8
 

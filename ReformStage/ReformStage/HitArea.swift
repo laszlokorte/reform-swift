@@ -89,16 +89,17 @@ extension HitArea {
         case .Arc(let arc):
             return ReformMath.intersects(aabb: aabb, arc: arc)
         case .Sector(let center, let lower, let upper):
-            return
-                isBetween(angle(aabb.min-center), lower: lower, upper: upper) ||
-                isBetween(angle(aabb.max-center), lower: lower, upper: upper) ||
-                isBetween(angle(aabb.xMaxYMin-center), lower: lower, upper: upper) ||
-                isBetween(angle(aabb.xMinYMax-center), lower: lower, upper: upper)
-
+            return isBetween(angle(aabb.min-center), lower: lower, upper: upper)
+                || isBetween(angle(aabb.max-center), lower: lower, upper: upper)
+                || isBetween(angle(aabb.xMaxYMin-center), lower: lower, upper: upper)
+                || isBetween(angle(aabb.xMinYMax-center), lower: lower, upper: upper)
+                || ReformMath.intersects(aabb: aabb, ray: Ray2d(from: center, angle: lower))
+                || ReformMath.intersects(aabb: aabb, ray: Ray2d(from: center, angle: upper))
         case Triangle(let triangle):
             return ReformMath.intersects(aabb: aabb, triangle: triangle)
         case LeftOf(let ray):
-            return leftOf(aabb.min, ray: ray) || leftOf(aabb.max, ray: ray)
+            return leftOf(aabb.min, ray: ray)
+                || leftOf(aabb.max, ray: ray)
                 || leftOf(aabb.xMaxYMin, ray: ray)
                 || leftOf(aabb.xMaxYMin, ray: ray)
         case .Union(let a, let b):
