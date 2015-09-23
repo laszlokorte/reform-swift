@@ -28,6 +28,14 @@ extension AABB2d {
     public var xMinYMax : Vec2d {
         return Vec2d(x: min.x, y: max.y)
     }
+
+    public var center : Vec2d {
+        return (min + max) / 2
+    }
+
+    public var size : Vec2d {
+        return max - min
+    }
 }
 
 extension AABB2d {

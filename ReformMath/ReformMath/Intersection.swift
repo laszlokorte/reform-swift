@@ -208,15 +208,13 @@ public func intersects(aabb aabb: AABB2d, circle: Circle2d) -> Bool {
 }
 
 public func intersects(aabb aabb: AABB2d, arc: Arc2d) -> Bool {
-    let size = aabb.max - aabb.min
+    let circleDistance = abs(arc.center - aabb.center)
 
-    let circleDistance = abs(arc.center - (aabb.min+aabb.max)/2)
+    if (circleDistance.x > (aabb.size.x/2 + arc.radius)) { return false }
+    if (circleDistance.y > (aabb.size.y/2 + arc.radius)) { return false }
 
-    if (circleDistance.x > (size.x/2 + arc.radius)) { return false }
-    if (circleDistance.y > (size.y/2 + arc.radius)) { return false }
-
-    if (circleDistance.x <= (size.x/2)) { return true }
-    if (circleDistance.y <= (size.y/2)) { return true }
+    if (circleDistance.x <= (aabb.size.x/2)) { return true }
+    if (circleDistance.y <= (aabb.size.y/2)) { return true }
 
     return !intersections(line: aabb.top, arc: arc).isEmpty
         || !intersections(line: aabb.left, arc: arc).isEmpty
