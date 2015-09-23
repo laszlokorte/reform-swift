@@ -427,10 +427,10 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, arc fo
 
     let hit : HitArea
 
-    if let ray = Ray2d(from: end, direction: end-start) {
+    if let line = Line2d(from: end, direction: end-start) {
         hit = HitArea.Intersection(
             HitArea.Arc(Arc2d(center: center, radius: radius, start: angle(start-center), end: angle(end-center))),
-            HitArea.LeftOf(ray)
+            HitArea.LeftOf(line)
         )
     } else {
         hit = HitArea.Circle(Circle2d(center: center, radius: radius))

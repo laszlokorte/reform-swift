@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F20ABE9B1BB304C400245EB7 /* Overlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20ABE9A1BB304C400245EB7 /* Overlap.swift */; };
+		F20ABE9D1BB305C500245EB7 /* Line2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20ABE9C1BB305C500245EB7 /* Line2d.swift */; };
+		F20ABE9F1BB315D700245EB7 /* Sector2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20ABE9E1BB315D700245EB7 /* Sector2d.swift */; };
+		F20ABEA11BB315E100245EB7 /* Segment2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20ABEA01BB315E100245EB7 /* Segment2d.swift */; };
+		F20ABEA31BB35D5200245EB7 /* Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20ABEA21BB35D5200245EB7 /* Distance.swift */; };
+		F20ABEA51BB35E6100245EB7 /* Incidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20ABEA41BB35E6100245EB7 /* Incidence.swift */; };
 		F210B7181B9C96BC003E1440 /* AABB2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F210B7171B9C96BC003E1440 /* AABB2d.swift */; };
 		F21403711BB05CF600A6F672 /* LineSegment2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403701BB05CF600A6F672 /* LineSegment2d.swift */; };
 		F21403731BB05D0D00A6F672 /* Arc2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403721BB05D0D00A6F672 /* Arc2d.swift */; };
@@ -39,6 +45,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F20ABE9A1BB304C400245EB7 /* Overlap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlap.swift; sourceTree = "<group>"; };
+		F20ABE9C1BB305C500245EB7 /* Line2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line2d.swift; sourceTree = "<group>"; };
+		F20ABE9E1BB315D700245EB7 /* Sector2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sector2d.swift; sourceTree = "<group>"; };
+		F20ABEA01BB315E100245EB7 /* Segment2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment2d.swift; sourceTree = "<group>"; };
+		F20ABEA21BB35D5200245EB7 /* Distance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distance.swift; sourceTree = "<group>"; };
+		F20ABEA41BB35E6100245EB7 /* Incidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Incidence.swift; sourceTree = "<group>"; };
 		F210B7171B9C96BC003E1440 /* AABB2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AABB2d.swift; sourceTree = "<group>"; };
 		F21403701BB05CF600A6F672 /* LineSegment2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineSegment2d.swift; sourceTree = "<group>"; };
 		F21403721BB05D0D00A6F672 /* Arc2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arc2d.swift; sourceTree = "<group>"; };
@@ -91,6 +103,9 @@
 				F21403741BB05DFD00A6F672 /* Circle2d.swift */,
 				F21403761BB05E5500A6F672 /* Triangle2d.swift */,
 				F21403781BB05FAA00A6F672 /* Ray2d.swift */,
+				F20ABE9C1BB305C500245EB7 /* Line2d.swift */,
+				F20ABE9E1BB315D700245EB7 /* Sector2d.swift */,
+				F20ABEA01BB315E100245EB7 /* Segment2d.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -110,6 +125,9 @@
 			children = (
 				F214037E1BB0E6F700A6F672 /* Intersection.swift */,
 				F21403801BB0E92700A6F672 /* Containment.swift */,
+				F20ABE9A1BB304C400245EB7 /* Overlap.swift */,
+				F20ABEA21BB35D5200245EB7 /* Distance.swift */,
+				F20ABEA41BB35E6100245EB7 /* Incidence.swift */,
 			);
 			name = Relations;
 			sourceTree = "<group>";
@@ -287,18 +305,24 @@
 				F26D46F01B7D1AAA00266096 /* Angle.swift in Sources */,
 				F21403751BB05DFD00A6F672 /* Circle2d.swift in Sources */,
 				F21403771BB05E5500A6F672 /* Triangle2d.swift in Sources */,
+				F20ABE9F1BB315D700245EB7 /* Sector2d.swift in Sources */,
 				F210B7181B9C96BC003E1440 /* AABB2d.swift in Sources */,
 				F26D46A81B7D0CF400266096 /* Vec2d.swift in Sources */,
+				F20ABEA11BB315E100245EB7 /* Segment2d.swift in Sources */,
 				F214037C1BB064BA00A6F672 /* Constants.swift in Sources */,
+				F20ABEA31BB35D5200245EB7 /* Distance.swift in Sources */,
 				F21403791BB05FAA00A6F672 /* Ray2d.swift in Sources */,
 				F21403831BB0E9BD00A6F672 /* Path2d.swift in Sources */,
 				F26D470E1B7D34B700266096 /* Operators.swift in Sources */,
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,
 				F21403861BB0EF0900A6F672 /* Relations.swift in Sources */,
+				F20ABE9B1BB304C400245EB7 /* Overlap.swift in Sources */,
+				F20ABEA51BB35E6100245EB7 /* Incidence.swift in Sources */,
 				F21403731BB05D0D00A6F672 /* Arc2d.swift in Sources */,
 				F27391071B7F8ACE00100F2F /* PathRelations.swift in Sources */,
 				F214037F1BB0E6F700A6F672 /* Intersection.swift in Sources */,
 				F21403711BB05CF600A6F672 /* LineSegment2d.swift in Sources */,
+				F20ABE9D1BB305C500245EB7 /* Line2d.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

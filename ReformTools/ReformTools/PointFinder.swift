@@ -24,7 +24,7 @@ extension LocationFilter {
         case .Near(let point, let distance):
             return hitArea.contains(point, margin: distance)
         case .AABB(let aabb):
-            return hitArea.intersects(aabb)
+            return hitArea.overlaps(aabb)
         }
     }
 
