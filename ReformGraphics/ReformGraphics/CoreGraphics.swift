@@ -85,6 +85,69 @@ public extension Shape {
             CGContextRestoreGState(context)
         }
     }
+
+    func drawOutline(context: CGContext, width: Double, color: Color) {
+        switch self.area {
+        case .PathArea(let path):
+            path.draw(context)
+            CGContextSetLineWidth(context, CGFloat(width))
+            color.setAsStroke(context)
+            CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+        case .TextArea(let left, let right, let alignment, let text, let size):
+
+            let rotation = ReformMath.angle(right-left)
+            let attr : [String:AnyObject]
+            let realFont : NSFont
+            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
+                realFont = font
+            } else {
+                realFont = NSFont.systemFontOfSize(CGFloat(size))
+            }
+
+            let transparent = NSColor(red:0,green:0,blue:0,alpha:0)
+            attr = [
+                NSFontAttributeName:realFont,
+                NSForegroundColorAttributeName:transparent,
+                NSStrokeWidthAttributeName:width,
+                NSStrokeColorAttributeName:NSColor(red: CGFloat(color.red), green: CGFloat(color.green), blue: CGFloat(color.blue), alpha: CGFloat(color.alpha))
+            ]
+
+
+            CGContextSaveGState(context);
+
+            let attributedString = CFAttributedStringCreate(nil, text, attr)
+            let line = CTLineCreateWithAttributedString(attributedString)
+            let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+
+            let center = (left+right)/2
+            let position : Vec2d
+            switch alignment {
+            case .Left: position = left
+            case .Right: position = right
+            case .Center: position = center
+            }
+
+            let xn : CGFloat
+
+            switch alignment {
+            case .Left: xn = CGFloat(position.x)
+            case .Right: xn = CGFloat(position.x) - bounds.width
+            case .Center: xn = CGFloat(position.x) - bounds.width/2
+            }
+
+            let yn = CGFloat(position.y) // - bounds.midY
+            CGContextSetTextMatrix(context,CGAffineTransformMakeTranslation(xn, yn))
+
+            CGContextTranslateCTM(context, CGFloat(position.x), CGFloat(position.y))
+            CGContextRotateCTM(context, CGFloat(rotation.radians))
+            CGContextTranslateCTM(context, -CGFloat(position.x), -CGFloat(position.y))
+
+            CTLineDraw(line, context)
+            CGContextFlush(context)
+            
+            CGContextRestoreGState(context)
+        }
+    }
 }
 
 extension Path {

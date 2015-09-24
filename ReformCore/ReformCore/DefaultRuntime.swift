@@ -12,18 +12,18 @@ final public class DefaultRuntime : Runtime {
     public var listeners = [RuntimeListener]()
     
     public static let maxDepth : Int = 3
-    private var _stopped : Bool
+    private var _running : Bool
     private var _canceled : Bool
     private var stack = RuntimeStack()
     private var dataSet : DataSet
     
     private var currentInstructions = [Evaluatable]()
 
-    public var shouldStop : Bool { get { return _stopped } }
+    public var shouldStop : Bool { return _canceled }
     
     public init() {
         dataSet = WritableDataSet()
-        _stopped = false
+        _running = false
         _canceled = false
     }
     
@@ -34,7 +34,6 @@ final public class DefaultRuntime : Runtime {
 
     public func stop() {
         _canceled = true
-        _stopped = true
     }
     
     public func run(width width: Double, height: Double, @noescape block: (DefaultRuntime) -> ()) {
@@ -52,9 +51,9 @@ final public class DefaultRuntime : Runtime {
         }
 
         _canceled = false
-        _stopped = false
+        _running = true
         defer {
-            _stopped = true
+            _running = false
         }
         
         block(self)
@@ -65,8 +64,10 @@ final public class DefaultRuntime : Runtime {
         guard !shouldStop else { return }
 
         defer {
-            listeners.forEach() {
-                $0.runtime(self, didEval: instruction)
+            if !shouldStop {
+                listeners.forEach() {
+                    $0.runtime(self, didEval: instruction)
+                }
             }
         }
         
@@ -77,17 +78,20 @@ final public class DefaultRuntime : Runtime {
     }
     
     public func scoped(@noescape block: (DefaultRuntime) -> ()) {
-        guard !shouldStop else { return }
+        if shouldStop { return }
 
         stack.pushFrame()
         defer {
-            guard let forms = stack.frames.last?.forms else {
-                fatalError()
-            }
-            listeners.forEach() {
-                $0.runtime(self, exitScopeWithForms: forms)
+            if !shouldStop {
+                guard let forms = stack.frames.last?.forms else {
+                    fatalError()
+                }
+                listeners.forEach() {
+                    $0.runtime(self, exitScopeWithForms: forms)
+                }
             }
             stack.popFrame()
+
         }
         block(self)
     }

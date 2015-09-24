@@ -39,6 +39,7 @@ struct StageUI {
 final class StageController : NSViewController {
     var toolController : ToolController?
     var stageRenderer : StageRenderer?
+    var selectionRenderer : SelectionUIRenderer?
     var selection : FormSelection?
     var stage : Stage?
 
@@ -82,12 +83,14 @@ final class StageController : NSViewController {
 
         let sr = StageRenderer(stage: stageModel.stage)
         stageRenderer = sr
+        let slr = SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage, camera: stageModel.camera)
+        selectionRenderer = slr
 
         canvas.camera = stageModel.camera
         canvas.renderers = [
             MaskUIRenderer(maskUI: stageModel.stageUI.maskUI),
             sr,
-            SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage, camera: stageModel.camera),
+            slr,
             SnapUIRenderer(snapUI: stageModel.stageUI.snapUI, stage: stageModel.stage, camera: stageModel.camera),
             CropUIRenderer(stage: stageModel.stage, cropUI: stageModel.stageUI.cropUI, camera: stageModel.camera),
             GrabUIRenderer(grabUI: stageModel.stageUI.grabUI, camera: stageModel.camera),
@@ -180,6 +183,7 @@ final class StageController : NSViewController {
 
         if theEvent.keyCode == 49 {
             stageRenderer?.lookIntoFuture = true
+            selectionRenderer?.lookIntoFuture = true
         } else if theEvent.keyCode == 13 /*W*/ {
             toolController?.process(.Toggle, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
         } else if theEvent.keyCode == 53 /*ESC*/ {
@@ -204,6 +208,7 @@ final class StageController : NSViewController {
 
         if theEvent.keyCode == 49 {
             stageRenderer?.lookIntoFuture = false
+            selectionRenderer?.lookIntoFuture = false
         } else if !theEvent.modifierFlags.isEmpty {
             toolController?.process(.ModifierChange, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
         } else {

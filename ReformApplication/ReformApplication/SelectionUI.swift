@@ -9,12 +9,21 @@
 import Foundation
 import ReformTools
 import ReformStage
+import ReformGraphics
 
-struct SelectionUIRenderer : Renderer {
+final class SelectionUIRenderer : Renderer {
     let selectionUI : SelectionUI
     let stage : Stage
     let camera: Camera
-    
+    var lookIntoFuture = false
+
+
+    init(selectionUI : SelectionUI, stage : Stage, camera: Camera) {
+        self.selectionUI = selectionUI
+        self.stage = stage
+        self.camera = camera
+    }
+
     func renderInContext(context: CGContext) {
         let inverse = CGFloat(1 / camera.zoom)
 
@@ -26,12 +35,20 @@ struct SelectionUIRenderer : Renderer {
         case .Hide:
             break
         case .Show(let selection):
+
+            if lookIntoFuture {
+                for identifiedShape in stage.finalShapes where selection.selected.contains(identifiedShape.id) {
+                    identifiedShape.shape.drawOutline(context,width: 5/camera.zoom, color: Color(r: 90,g:177,b:83, a:255))
+                }
+                CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 1)
+            }
+
             for entity in stage.entities where selection.selected.contains(entity.id) {
                 drawSegmentPath(context, path:entity.outline)
                 
                 CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-                
             }
+
         }
 
         switch selectionUI.rect {

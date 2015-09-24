@@ -36,6 +36,8 @@ final public class SnapshotCollector : RuntimeListener {
     private(set) var errors = [InstructionNodeKey:RuntimeError]()
     private(set) var paths = [Path]()
 
+    let drawQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+
 
     private var redraw = true
 
@@ -44,9 +46,9 @@ final public class SnapshotCollector : RuntimeListener {
     }
 
     public func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize size: (Double, Double)) {
-        paths.removeAll(keepCapacity: true)
-        errors.removeAll(keepCapacity: true)
-        instructions.removeAll(keepCapacity: true)
+        paths.removeAll(keepCapacity: false)
+        errors.removeAll(keepCapacity: false)
+        instructions.removeAll(keepCapacity: false)
 
         currentSize = (Double(size.0), Double(size.1))
 
@@ -94,7 +96,7 @@ final public class SnapshotCollector : RuntimeListener {
 
 
         if errors.keys.contains(key) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [currentScaled, currentSize] in
+            dispatch_async(drawQueue) { [currentScaled, currentSize] in
                 image.lockFocus()
                 defer { image.unlockFocus() }
                 let size = image.size
@@ -142,7 +144,7 @@ final public class SnapshotCollector : RuntimeListener {
         }
 
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [currentScaled, currentSize, paths, currentPaths] in
+        dispatch_async(drawQueue) { [currentScaled, currentSize, paths, currentPaths] in
             image.lockFocus()
             defer { image.unlockFocus() }
             let size = image.size

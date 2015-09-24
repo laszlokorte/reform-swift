@@ -34,4 +34,17 @@ extension Arc2d {
     public var circle : Circle2d {
         return Circle2d(center: center, radius: radius)
     }
+
+    public var quadrants : [Arc2d] {
+        return [
+            (Angle(percent: 0), Angle(percent: 25)),
+            (Angle(percent: 25), Angle(percent: 50)),
+            (Angle(percent: 50), Angle(percent: 75)),
+            (Angle(percent: 75), Angle(percent: 100)),
+        ].lazy.flatMap { range in
+            intersection(range: range, range: (start, end))
+        }.flatMap { (start, end) in
+            Arc2d(center: center, radius: radius, start: start, end: end)
+        }
+    }
 }

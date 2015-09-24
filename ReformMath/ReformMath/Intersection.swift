@@ -6,6 +6,16 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+func intersection(range rangeA: (from: Angle, to: Angle), range rangeB: (from: Angle, to:Angle)) -> (Angle, Angle)? {
+    let from = max(rangeA.from, rangeB.from)
+    let to = min(rangeA.to, rangeB.to)
+
+    if from <= to {
+        return (from, to)
+    } else {
+        return nil
+    }
+}
 
 public func intersection(line lineA: LineSegment2d, line lineB: LineSegment2d) -> Vec2d? {
     // ref http://paulbourke.net/geometry/pointlineplane/
