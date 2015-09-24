@@ -17,6 +17,10 @@ internal extension Color {
     func setAsStroke(context: CGContext) {
         CGContextSetRGBStrokeColor(context, CGFloat(red)/255.0, CGFloat(green)/255.0, CGFloat(blue)/255.0, CGFloat(alpha)/255.0)
     }
+
+    var toNSColor : NSColor {
+        return NSColor(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: CGFloat(alpha)/255)
+    }
 }
 
 public extension Shape {
@@ -44,12 +48,37 @@ public extension Shape {
             // TODO: not working
 
             let rotation = ReformMath.angle(right-left)
-            let attr : [String:NSFont]
-            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
-                attr = [NSFontAttributeName:font]
-            } else {
-                attr = [NSFontAttributeName:NSFont.systemFontOfSize(CGFloat(size))]
+            let font = NSFont(name: "Helvetica", size: CGFloat(size)) ?? NSFont.systemFontOfSize(CGFloat(size))
+
+            let backgroundColor : NSColor
+            let strokeWidth : CGFloat
+            let strokeColor : NSColor
+
+            switch (background, stroke) {
+            case (.Fill(let bColor), .Solid(let width, let sColor)):
+                backgroundColor = bColor.toNSColor
+                strokeColor = sColor.toNSColor
+                strokeWidth = -CGFloat(50*width/size)
+            case (.None, .Solid(let width, let sColor)):
+                backgroundColor = NSColor(red:0,green:0,blue:0,alpha:0)
+                strokeColor = sColor.toNSColor
+                // stroke width is relative to font size
+                // https://developer.apple.com/library/mac/qa/qa1531/_index.html
+                strokeWidth = CGFloat(50*width/size)
+            case (.Fill(let bColor), .None):
+                backgroundColor = bColor.toNSColor
+                strokeColor = NSColor(red:0,green:0,blue:0,alpha:0)
+                strokeWidth = 0
+            case (.None, .None): return
             }
+
+            let attr : [String:AnyObject] = [
+                NSFontAttributeName:font,
+                NSForegroundColorAttributeName:backgroundColor,
+                NSStrokeWidthAttributeName:strokeWidth,
+                NSStrokeColorAttributeName:strokeColor
+            ]
+
             CGContextSaveGState(context);
 
             let attributedString = CFAttributedStringCreate(nil, text, attr)
@@ -96,21 +125,20 @@ public extension Shape {
         case .TextArea(let left, let right, let alignment, let text, let size):
 
             let rotation = ReformMath.angle(right-left)
-            let attr : [String:AnyObject]
-            let realFont : NSFont
-            if let font = NSFont(name: "Helvetica", size: CGFloat(size)) {
-                realFont = font
-            } else {
-                realFont = NSFont.systemFontOfSize(CGFloat(size))
-            }
+            let font = NSFont(name: "Helvetica", size: CGFloat(size)) ?? NSFont.systemFontOfSize(CGFloat(size))
 
             let transparent = NSColor(red:0,green:0,blue:0,alpha:0)
-            attr = [
-                NSFontAttributeName:realFont,
+            let nsColor = color.toNSColor
+            let attr : [String:AnyObject] = [
+                // stroke width is relative to font size
+                // https://developer.apple.com/library/mac/qa/qa1531/_index.html
+                NSFontAttributeName:font,
                 NSForegroundColorAttributeName:transparent,
-                NSStrokeWidthAttributeName:width,
-                NSStrokeColorAttributeName:NSColor(red: CGFloat(color.red), green: CGFloat(color.green), blue: CGFloat(color.blue), alpha: CGFloat(color.alpha))
+                NSStrokeWidthAttributeName:50*width/size,
+                NSStrokeColorAttributeName:nsColor
             ]
+
+            print(100*width/size)
 
 
             CGContextSaveGState(context);
