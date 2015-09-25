@@ -48,3 +48,9 @@ public struct CreateFormInstruction : Instruction {
         return destination.isDegenerated
     }
 }
+
+extension CreateFormInstruction : Mergeable {
+    public func mergeWith(other: CreateFormInstruction) -> CreateFormInstruction? {
+        return nil
+    }
+}

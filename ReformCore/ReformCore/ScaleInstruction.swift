@@ -74,3 +74,23 @@ public struct ScaleInstruction : Instruction {
     }
     
 }
+
+extension ScaleInstruction : Mergeable {
+    public func mergeWith(other: ScaleInstruction) -> ScaleInstruction? {
+        guard formId == other.formId else {
+            return nil
+        }
+        guard axis == other.axis else {
+            return nil
+        }
+        guard fixPoint.isEqualTo(other.fixPoint) else {
+            return nil
+        }
+
+        guard let factorA = factor as? ConstantScaleFactor, factorB = other.factor as? ConstantScaleFactor else {
+            return nil
+        }
+
+        return ScaleInstruction(formId: formId, factor: combine(factor: factorA, factor: factorB), fixPoint: fixPoint, axis: axis)
+    }
+}

@@ -59,3 +59,20 @@ public struct RotateInstruction : Instruction {
         return angle.isDegenerated
     }
 }
+
+extension RotateInstruction : Mergeable {
+    public func mergeWith(other: RotateInstruction) -> RotateInstruction? {
+        guard formId == other.formId else {
+            return nil
+        }
+        guard fixPoint.isEqualTo(other.fixPoint) else {
+            return nil
+        }
+
+        guard let angleA = angle as? ConstantAngle, angleB = other.angle as? ConstantAngle else {
+            return nil
+        }
+
+        return RotateInstruction(formId: formId, angle: combine(angle: angleA, angle: angleB), fixPoint: fixPoint)
+    }
+}

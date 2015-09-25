@@ -8,7 +8,7 @@
 
 import ReformMath
 
-public enum RuntimeAxis {
+public enum RuntimeAxis : Equatable {
     case None
     case Named(String, from: RuntimePoint, to: RuntimePoint)
 }
@@ -26,5 +26,14 @@ extension RuntimeAxis {
             
             return normalize((end - start))
         }
+    }
+}
+
+public func ==(lhs: RuntimeAxis, rhs: RuntimeAxis) -> Bool {
+    switch (lhs, rhs) {
+    case (.None, .None): return true
+    case (.Named(let nameA, let fromA, let toA),.Named(let nameB, let formB, let toB)):
+        return nameA == nameB && fromA.isEqualTo(formB) && toA.isEqualTo(toB)
+    default: return false
     }
 }

@@ -28,3 +28,7 @@ public struct ConstantScaleFactor : RuntimeScaleFactor, Labeled {
         return factor == 1
     }
 }
+
+func combine(factor a: ConstantScaleFactor, factor b: ConstantScaleFactor) -> ConstantScaleFactor {
+    return ConstantScaleFactor(factor: a.factor * b.factor)
+}

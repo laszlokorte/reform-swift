@@ -55,3 +55,30 @@ public struct MorphInstruction : Instruction {
         return distance.isDegenerated
     }
 }
+
+extension MorphInstruction : Mergeable {
+    public func mergeWith(other: MorphInstruction) -> MorphInstruction? {
+        guard formId == other.formId else {
+            return nil
+        }
+        guard anchorId == other.anchorId else {
+            return nil
+        }
+
+        let newDistance : protocol<RuntimeDistance, Labeled>
+
+        if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
+            newDistance = combine(distance: distanceA, distance: distanceB)
+        } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? RelativeDistance {
+            newDistance = combine(distance: distanceA, distance: distanceB)
+        } else if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? RelativeDistance {
+            newDistance = combine(distance: distanceA, distance: distanceB)
+        } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? ConstantDistance where distanceB.isDegenerated {
+            newDistance = distanceA
+        } else {
+            return nil
+        }
+
+        return MorphInstruction(formId: formId, anchorId: anchorId, distance: newDistance)
+    }
+}

@@ -43,3 +43,13 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
         return from.isEqualTo(to)
     }
 }
+
+
+
+func combine(distance a: ConstantDistance, distance b: RelativeDistance) -> RelativeDistance {
+    return b
+}
+
+func combine(distance a: RelativeDistance, distance b: RelativeDistance) -> RelativeDistance {
+    return b
+}

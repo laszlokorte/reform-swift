@@ -31,3 +31,7 @@ public struct ConstantDistance : RuntimeDistance, Labeled {
         return delta.x == 0 && delta.y == 0
     }
 }
+
+func combine(distance a: ConstantDistance, distance b: ConstantDistance) -> ConstantDistance {
+    return ConstantDistance(delta: a.delta + b.delta)
+}

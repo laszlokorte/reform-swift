@@ -108,11 +108,11 @@ extension InstructionNode {
         guard let parent = parent else {
             return false
         }
-        
+
         guard case .Group(let group, var children) = parent.content else {
             return false
         }
-        
+
         guard let index = children.indexOf({$0===self}) else {
             return false
         }
@@ -120,8 +120,43 @@ extension InstructionNode {
         children.insert(node, atIndex: index+1)
         parent.content = .Group(group, children)
         return true
-        
+
     }
+
+    public func prepend(sibling node: InstructionNode) -> Bool {
+        guard let parent = parent else {
+            return false
+        }
+
+        guard case .Group(let group, var children) = parent.content else {
+            return false
+        }
+
+        guard let index = children.indexOf({$0===self}) else {
+            return false
+        }
+        node.parent = parent
+        children.insert(node, atIndex: index)
+        parent.content = .Group(group, children)
+        return true
+
+    }
+}
+
+extension InstructionNode {
+    public func mergedWith<I where I:Instruction>(instruction: I) -> InstructionNode? {
+
+        guard case .Single(let base) = content else {
+            return nil
+        }
+
+        guard let typedBase = base as? I else {
+            return nil
+        }
+
+        return typedBase.mergeWith(instruction).map { InstructionNode(instruction: $0) }
+    }
+
 }
 
 extension InstructionNode {
@@ -146,6 +181,12 @@ extension InstructionNode {
 
     public func replaceWith(instruction: Instruction) {
         content = InstructionContent.Single(instruction)
+    }
+
+    public func replaceWith(node: InstructionNode) {
+        if case .Single(let instruction) = node.content {
+            content = InstructionContent.Single(instruction)
+        }
     }
 }
 
@@ -273,6 +314,8 @@ public protocol Instruction : Labeled {
     var target : FormIdentifier? { get }
 
     var isDegenerated : Bool { get }
+
+    func mergeWith(other: Instruction) -> Instruction?
 }
 
 
@@ -285,4 +328,18 @@ public protocol GroupInstruction : Labeled {
     var target : FormIdentifier? { get }
 
     var isDegenerated : Bool { get }
+}
+
+public protocol Mergeable {
+    func mergeWith(other: Self) -> Self?
+}
+
+extension Instruction where Self : Mergeable {
+    public func mergeWith(other: Instruction) -> Instruction? {
+        guard let typed = other as? Self else {
+            return nil
+        }
+
+        return self.mergeWith(typed)
+    }
 }

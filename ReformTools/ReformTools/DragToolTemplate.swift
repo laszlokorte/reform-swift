@@ -17,8 +17,9 @@ public protocol Positioned {
 
 public protocol DragToolProtocol {
     typealias StartType : Positioned
+    typealias InstructionType : Instruction
     
-    func instructionForDrag(from: StartType, to: Target, offset: Vec2d) -> Instruction
+    func instructionForDrag(from: StartType, to: Target, offset: Vec2d) -> InstructionType
     
     func refresh()
 

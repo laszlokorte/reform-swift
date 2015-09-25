@@ -49,3 +49,27 @@ public struct TranslateInstruction : Instruction {
         return distance.isDegenerated
     }
 }
+
+extension TranslateInstruction : Mergeable {
+    public func mergeWith(other: TranslateInstruction) -> TranslateInstruction? {
+        guard formId == other.formId else {
+            return nil
+        }
+
+        let newDistance : protocol<RuntimeDistance, Labeled>
+
+        if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
+            newDistance = combine(distance: distanceA, distance: distanceB)
+        } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? RelativeDistance {
+            newDistance = combine(distance: distanceA, distance: distanceB)
+        } else if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? RelativeDistance {
+            newDistance = combine(distance: distanceA, distance: distanceB)
+        } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? ConstantDistance where distanceB.isDegenerated {
+            newDistance = distanceA
+        } else {
+            return nil
+        }
+
+        return TranslateInstruction(formId: formId, distance: newDistance)
+    }
+}

@@ -34,3 +34,7 @@ extension ConstantAngle : Equatable {
 public func ==(lhs: ConstantAngle, rhs: ConstantAngle) -> Bool {
     return lhs.angle == rhs.angle
 }
+
+func combine(angle a: ConstantAngle, angle b: ConstantAngle) -> ConstantAngle {
+    return ConstantAngle(angle: a.angle + b.angle)
+}
