@@ -36,5 +36,5 @@ public func ==(lhs: ConstantAngle, rhs: ConstantAngle) -> Bool {
 }
 
 func combine(angle a: ConstantAngle, angle b: ConstantAngle) -> ConstantAngle {
-    return ConstantAngle(angle: a.angle + b.angle)
+    return ConstantAngle(angle: normalize360(a.angle + b.angle))
 }
