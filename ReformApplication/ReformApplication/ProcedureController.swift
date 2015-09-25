@@ -77,6 +77,7 @@ extension ProcedureController : NSTableViewDelegate {
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard row < instructions.count else { return nil }
 
         let outlineRow = instructions[row]
         let cellId = outlineRow.isGroup || outlineRow.node.isEmpty ? "groupCell" : "thumbnailCell"
