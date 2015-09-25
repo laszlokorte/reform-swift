@@ -58,7 +58,7 @@ struct CircleOutline : Outline {
                 return nil
         }
 
-        let h = Vec2d(x:r/2,y:r/2)
+        let h = Vec2d(x:r,y:r)
         return AABB2d(min: c - h, max: c + h)
     }
 }

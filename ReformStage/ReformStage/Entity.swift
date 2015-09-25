@@ -132,13 +132,13 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, formId
     }
 }
 
-func collectAffineHandles<F:Form,  R:Runtime, A:Analyzer where F:Morphable>(analyzer: A, runtime: R, form: F, pivots: [AnchorIdentifier:(ExposedPointIdentifier, ExposedPointIdentifier,ExposedPointIdentifier, axisName: String?)]) -> [AffineHandle] {
-    return form.getAnchors().flatMap() { (anchorId, anchor) -> AffineHandle? in
+func collectAffineHandles<F:Form,  R:Runtime, A:Analyzer>(analyzer: A, runtime: R, form: F, pivots: [ExposedPointIdentifier:(ExposedPointIdentifier,ExposedPointIdentifier, axisName: String?)]) -> [AffineHandle] {
+    return form.getPoints().flatMap() { (pointId, point) -> AffineHandle? in
         guard let
-            pivot = pivots[anchorId],
-            primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1),
-            secondary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.2),
-            position = anchor.getPositionFor(runtime) else {
+            pivot = pivots[pointId],
+            primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.0),
+            secondary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1),
+            position = point.getPositionFor(runtime) else {
                 return nil
         }
 
@@ -150,7 +150,7 @@ func collectAffineHandles<F:Form,  R:Runtime, A:Analyzer where F:Morphable>(anal
             axis = .None
         }
 
-        return AffineHandle(handle: Handle(formId: form.identifier, anchorId: anchorId, pointId: pivot.0, label: anchor.name, position: position), defaultPivot: (primary, secondary), scaleAxis: axis
+        return AffineHandle(formId: form.identifier, pointId: pointId, label: point.getDescription(analyzer.stringifier), position: position, defaultPivot: (primary, secondary), scaleAxis: axis
         )
     }
 }
@@ -188,8 +188,8 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, line f
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        LineForm.AnchorId.Start.rawValue : (LineForm.PointId.Start.rawValue, LineForm.PointId.End.rawValue, LineForm.PointId.Center.rawValue, nil),
-        LineForm.AnchorId.End.rawValue : (LineForm.PointId.End.rawValue, LineForm.PointId.Start.rawValue, LineForm.PointId.Center.rawValue, nil),
+        LineForm.PointId.Start.rawValue : (LineForm.PointId.End.rawValue, LineForm.PointId.Center.rawValue, nil),
+        LineForm.PointId.End.rawValue : (LineForm.PointId.Start.rawValue, LineForm.PointId.Center.rawValue, nil),
         ])
 
     let handles = collectHandles(analyzer, runtime: runtime, form: form, points: [
@@ -218,38 +218,30 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, rectan
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        RectangleForm.AnchorId.TopLeft.rawValue :
-            (RectangleForm.PointId.TopLeft.rawValue,
-                RectangleForm.PointId.BottomRight.rawValue, RectangleForm.PointId.Center.rawValue, nil),
+        RectangleForm.PointId.TopLeft.rawValue :
+            (RectangleForm.PointId.BottomRight.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
-        RectangleForm.AnchorId.TopRight.rawValue :
-            (RectangleForm.PointId.TopRight.rawValue,
-                RectangleForm.PointId.BottomLeft.rawValue, RectangleForm.PointId.Center.rawValue, nil),
+        RectangleForm.PointId.TopRight.rawValue :
+            (RectangleForm.PointId.BottomLeft.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
-        RectangleForm.AnchorId.BottomLeft.rawValue :
-            (RectangleForm.PointId.BottomLeft.rawValue,
-                RectangleForm.PointId.TopRight.rawValue, RectangleForm.PointId.Center.rawValue, nil),
+        RectangleForm.PointId.BottomLeft.rawValue :
+            (RectangleForm.PointId.TopRight.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
-        RectangleForm.AnchorId.BottomRight.rawValue :
-            (RectangleForm.PointId.BottomRight.rawValue,
-                RectangleForm.PointId.TopLeft.rawValue, RectangleForm.PointId.Center.rawValue, nil),
+        RectangleForm.PointId.BottomRight.rawValue :
+            (RectangleForm.PointId.TopLeft.rawValue, RectangleForm.PointId.Center.rawValue, nil),
         
-        RectangleForm.AnchorId.Top.rawValue :
+        RectangleForm.PointId.Top.rawValue :
+            (RectangleForm.PointId.Bottom.rawValue, RectangleForm.PointId.Center.rawValue, "Height"),
+        
+        RectangleForm.PointId.Bottom.rawValue :
             (RectangleForm.PointId.Top.rawValue,
-                RectangleForm.PointId.Bottom.rawValue, RectangleForm.PointId.Center.rawValue, "Height"),
-        
-        RectangleForm.AnchorId.Bottom.rawValue :
-            (RectangleForm.PointId.Bottom.rawValue,
-                RectangleForm.PointId.Top.rawValue,
                 RectangleForm.PointId.Center.rawValue, "Height"),
         
-        RectangleForm.AnchorId.Left.rawValue :
-            (RectangleForm.PointId.Left.rawValue,
-                RectangleForm.PointId.Right.rawValue, RectangleForm.PointId.Center.rawValue, "Width"),
+        RectangleForm.PointId.Left.rawValue :
+            (RectangleForm.PointId.Right.rawValue, RectangleForm.PointId.Center.rawValue, "Width"),
         
-        RectangleForm.AnchorId.Right.rawValue :
-            (RectangleForm.PointId.Right.rawValue,
-                RectangleForm.PointId.Left.rawValue,
+        RectangleForm.PointId.Right.rawValue :
+            (RectangleForm.PointId.Left.rawValue,
                 RectangleForm.PointId.Center.rawValue, "Width"),
         ])
 
@@ -301,23 +293,19 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, circle
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        CircleForm.AnchorId.Top.rawValue : (
-            CircleForm.PointId.Top.rawValue,
+        CircleForm.PointId.Top.rawValue : (
             CircleForm.PointId.Center.rawValue,
             CircleForm.PointId.Bottom.rawValue, nil),
         
-        CircleForm.AnchorId.Bottom.rawValue : (
-            CircleForm.PointId.Bottom.rawValue,
+        CircleForm.PointId.Bottom.rawValue : (
             CircleForm.PointId.Center.rawValue,
             CircleForm.PointId.Top.rawValue, nil),
         
-        CircleForm.AnchorId.Left.rawValue : (
-            CircleForm.PointId.Left.rawValue,
+        CircleForm.PointId.Left.rawValue : (
             CircleForm.PointId.Center.rawValue,
             CircleForm.PointId.Right.rawValue, nil),
         
-        CircleForm.AnchorId.Right.rawValue : (
-            CircleForm.PointId.Right.rawValue,
+        CircleForm.PointId.Right.rawValue : (
             CircleForm.PointId.Center.rawValue,
             CircleForm.PointId.Left.rawValue, nil),
         ])
@@ -358,13 +346,11 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pie fo
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        PieForm.AnchorId.Start.rawValue : (
-            PieForm.PointId.Start.rawValue,
+        PieForm.PointId.Start.rawValue : (
             PieForm.PointId.Center.rawValue,
             PieForm.PointId.End.rawValue, nil),
         
-        PieForm.AnchorId.End.rawValue : (
-            PieForm.PointId.End.rawValue,
+        PieForm.PointId.End.rawValue : (
             PieForm.PointId.Center.rawValue,
             PieForm.PointId.Start.rawValue, nil),
         
@@ -403,16 +389,13 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, arc fo
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        ArcForm.AnchorId.Start.rawValue : (
-            ArcForm.PointId.Start.rawValue,
+        ArcForm.PointId.Start.rawValue : (
             ArcForm.PointId.End.rawValue,
             ArcForm.PointId.Center.rawValue, nil),
         
-        ArcForm.AnchorId.End.rawValue : (
-            ArcForm.PointId.End.rawValue,
+        ArcForm.PointId.End.rawValue : (
             ArcForm.PointId.Start.rawValue,
             ArcForm.PointId.Center.rawValue, nil),
-        
         ])
 
     let handles = collectHandles(analyzer, runtime: runtime, form: form, points: [
@@ -456,13 +439,11 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, text f
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        TextForm.AnchorId.Start.rawValue : (
-            TextForm.PointId.Start.rawValue,
+        TextForm.PointId.Start.rawValue : (
             TextForm.PointId.End.rawValue,
             TextForm.PointId.Bottom.rawValue, nil),
         
-        TextForm.AnchorId.End.rawValue : (
-            TextForm.PointId.End.rawValue,
+        TextForm.PointId.End.rawValue : (
             TextForm.PointId.Start.rawValue,
             TextForm.PointId.Bottom.rawValue, nil),
         ])
@@ -501,43 +482,35 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pictur
     let type = EntityType(drawingMode: form.drawingMode)
     
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
-        PictureForm.AnchorId.TopLeft.rawValue : (
-                PictureForm.PointId.TopLeft.rawValue,
-                PictureForm.PointId.BottomRight.rawValue,
-                PictureForm.PointId.Center.rawValue, nil),
-        
-        PictureForm.AnchorId.TopRight.rawValue : (
-            PictureForm.PointId.TopRight.rawValue,
-            PictureForm.PointId.BottomLeft.rawValue,
-            PictureForm.PointId.Center.rawValue, nil),
-        
-        PictureForm.AnchorId.BottomLeft.rawValue : (
-            PictureForm.PointId.BottomLeft.rawValue,
-            PictureForm.PointId.TopRight.rawValue,
-            PictureForm.PointId.Center.rawValue, nil),
-        
-        PictureForm.AnchorId.BottomRight.rawValue : (
+        PictureForm.PointId.TopLeft.rawValue : (
             PictureForm.PointId.BottomRight.rawValue,
+            PictureForm.PointId.Center.rawValue, nil),
+        
+        PictureForm.PointId.TopRight.rawValue : (
+            PictureForm.PointId.BottomLeft.rawValue,
+            PictureForm.PointId.Center.rawValue, nil),
+        
+        PictureForm.PointId.BottomLeft.rawValue : (
+            PictureForm.PointId.TopRight.rawValue,
+            PictureForm.PointId.Center.rawValue, nil),
+        
+        PictureForm.PointId.BottomRight.rawValue : (
             PictureForm.PointId.TopLeft.rawValue,
             PictureForm.PointId.Center.rawValue, nil),
         
-        PictureForm.AnchorId.Top.rawValue : (
-            PictureForm.PointId.Top.rawValue,
+        PictureForm.PointId.Top.rawValue : (
             PictureForm.PointId.Bottom.rawValue,
             PictureForm.PointId.Center.rawValue, nil),
         
-        PictureForm.AnchorId.Bottom.rawValue : (
-            PictureForm.PointId.Bottom.rawValue,
+        PictureForm.PointId.Bottom.rawValue : (
             PictureForm.PointId.Top.rawValue,
             PictureForm.PointId.Center.rawValue, nil),
         
-        PictureForm.AnchorId.Left.rawValue : (
-            PictureForm.PointId.Left.rawValue,
+        PictureForm.PointId.Left.rawValue : (
             PictureForm.PointId.Right.rawValue,
             PictureForm.PointId.Center.rawValue, nil),
         
-        PictureForm.AnchorId.Right.rawValue : (
-            PictureForm.PointId.Right.rawValue,
+        PictureForm.PointId.Right.rawValue : (
             PictureForm.PointId.Left.rawValue,
             PictureForm.PointId.Center.rawValue, nil),
         ])
@@ -589,7 +562,42 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper 
 
     let points = collectPoints(analyzer, runtime: runtime, form: form)
 
-    
+
+    let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
+
+        ProxyForm.PointId.TopLeft.rawValue : (
+            ProxyForm.PointId.BottomRight.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.TopRight.rawValue : (
+            ProxyForm.PointId.BottomLeft.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.BottomLeft.rawValue : (
+            ProxyForm.PointId.TopRight.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.BottomRight.rawValue : (
+            ProxyForm.PointId.TopLeft.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.Top.rawValue : (
+            ProxyForm.PointId.Bottom.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.Bottom.rawValue : (
+            ProxyForm.PointId.Top.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.Left.rawValue : (
+            ProxyForm.PointId.Right.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+
+        ProxyForm.PointId.Right.rawValue : (
+            ProxyForm.PointId.Left.rawValue,
+            ProxyForm.PointId.Center.rawValue, nil),
+        ])
+
     let outline = form.outline.getSegmentsFor(runtime)
 
     guard let aabb = form.outline.getAABBFor(runtime) else {
@@ -601,7 +609,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper 
         HitArea.Triangle(Triangle2d(a: aabb.max, b: aabb.xMaxYMin, c: aabb.min))
     )
 
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [],affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 

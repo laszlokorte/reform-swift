@@ -29,7 +29,11 @@ struct ProxyOutline : Outline {
             return nil
         }
 
-        return form.outline.getLengthFor(runtime)
+        guard let aabb = form.outline.getAABBFor(runtime) else {
+            return nil
+        }
+
+        return aabb.size.x * 2 + aabb.size.y * 2
     }
 
     func getSegmentsFor<R:Runtime>(runtime: R) -> [Segment] {
@@ -37,7 +41,16 @@ struct ProxyOutline : Outline {
             return []
         }
 
-        return form.outline.getSegmentsFor(runtime)
+        guard let aabb = form.outline.getAABBFor(runtime) else {
+            return []
+        }
+
+        return [
+            .Line(LineSegment2d(from: aabb.min, to: aabb.xMinYMax)),
+            .Line(LineSegment2d(from: aabb.xMinYMax, to: aabb.max)),
+            .Line(LineSegment2d(from: aabb.max, to: aabb.xMaxYMin)),
+            .Line(LineSegment2d(from: aabb.xMaxYMin, to: aabb.min)),
+        ]
     }
 
     func getAABBFor<R:Runtime>(runtime: R) -> AABB2d? {

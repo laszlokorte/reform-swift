@@ -21,7 +21,12 @@ public struct Handle {
 }
 
 public struct AffineHandle {
-    public let handle : Handle
+    public let formId : FormIdentifier
+    public let pointId : ExposedPointIdentifier
+
+    public let label : String
+    public let position : Vec2d
+
     public let defaultPivot : PivotPair
     public let scaleAxis : ScaleAxis
 }
@@ -43,16 +48,18 @@ public func ==(lhs: Handle, rhs: Handle) -> Bool {
 
 extension AffineHandle {
     public var runtimePoint : LabeledPoint {
-        return handle.runtimePoint
+        return ForeignFormPoint(formId: formId, pointId: pointId)
     }
 }
 
 
 extension AffineHandle : Hashable {
-    public var hashValue : Int { return handle.hashValue }
+    public var hashValue : Int {
+        return formId.hashValue * 13 + pointId.hashValue
+    }
 }
 
 public func ==(lhs: AffineHandle, rhs: AffineHandle) -> Bool {
-    return lhs.handle == rhs.handle
+    return lhs.formId == rhs.formId && lhs.pointId == rhs.pointId
 }
 

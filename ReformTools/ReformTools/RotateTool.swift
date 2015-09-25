@@ -122,9 +122,9 @@ public final class RotateTool : Tool {
                     
                     
                     instructionCreator
-                        .beginCreation(RotateInstruction(formId: grabbedHandle.handle.formId, angle: ConstantAngle(angle: Angle(degree: 0)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
+                        .beginCreation(RotateInstruction(formId: grabbedHandle.formId, angle: ConstantAngle(angle: Angle(degree: 0)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
                     
-                    state = .Rotating(handle: grabbedHandle, angle: Angle(degree: 0), offset: pos - grabbedHandle.handle.position)
+                    state = .Rotating(handle: grabbedHandle, angle: Angle(degree: 0), offset: pos - grabbedHandle.position)
                 
                     
                 } else {
@@ -146,7 +146,7 @@ public final class RotateTool : Tool {
                 let piv = pivot.pointFor(grabbedHandle)
                 state = .Rotating(handle: grabbedHandle, angle:
                     angleBetween(vector: pos - piv.position - offset,
-                        vector: grabbedHandle.handle.position - piv.position), offset: offset)
+                        vector: grabbedHandle.position - piv.position), offset: offset)
             case .Release:
                 instructionCreator.commit()
                 state = .Idle
@@ -170,7 +170,7 @@ public final class RotateTool : Tool {
     private func publish() {
         if case .Rotating(let grabbedHandle, let angle, _) = state {
             
-            instructionCreator.update(RotateInstruction(formId: grabbedHandle.handle.formId, angle: ConstantAngle(angle: streightener.adjust(angle)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
+            instructionCreator.update(RotateInstruction(formId: grabbedHandle.formId, angle: ConstantAngle(angle: streightener.adjust(angle)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
         }
     }
 }

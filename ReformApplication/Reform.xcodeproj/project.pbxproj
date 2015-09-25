@@ -26,6 +26,7 @@
 		F2339B011B8D4A2A00C0AE41 /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B001B8D4A2A00C0AE41 /* StageViewModel.swift */; };
 		F2339B041B8D534F00C0AE41 /* ProcedureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */; };
 		F2339B061B8D5AAE00C0AE41 /* ProcedureCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */; };
+		F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */; settings = {ASSET_TAGS = (); }; };
 		F23BCFBE1BA9F122001A04EF /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; };
 		F23BCFBF1BA9F122001A04EF /* ReformStage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F23BCFC11BA9F130001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC01BA9F130001A04EF /* ReformCore.framework */; };
@@ -112,6 +113,7 @@
 		F2339B001B8D4A2A00C0AE41 /* StageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
 		F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureViewModel.swift; sourceTree = "<group>"; };
 		F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureCellView.swift; sourceTree = "<group>"; };
+		F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleUI.swift; sourceTree = "<group>"; };
 		F23BCFBD1BA9F122001A04EF /* ReformStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformStage.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformStage.framework"; sourceTree = "<absolute>"; };
 		F23BCFC01BA9F130001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformCore.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<absolute>"; };
 		F23BCFC31BA9F13C001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformExpression.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<absolute>"; };
@@ -181,6 +183,7 @@
 				F222AF0F1B835E49005F71A1 /* PivotUI.swift */,
 				F222AF111B835E50005F71A1 /* GrabUI.swift */,
 				F222AF131B835E58005F71A1 /* HandleUI.swift */,
+				F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */,
 				F222AF151B835E60005F71A1 /* SelectionUI.swift */,
 				F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */,
 				F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */,
@@ -430,6 +433,7 @@
 				F2DF63681B927E1D00A2EFB6 /* StageRenderer.swift in Sources */,
 				F2042A291B7EC865009144E9 /* Document.swift in Sources */,
 				F222AF121B835E50005F71A1 /* GrabUI.swift in Sources */,
+				F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */,
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,

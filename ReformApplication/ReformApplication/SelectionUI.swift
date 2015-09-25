@@ -44,6 +44,11 @@ final class SelectionUIRenderer : Renderer {
             }
 
             for entity in stage.entities where selection.selected.contains(entity.id) {
+                if entity.type == .Proxy {
+                    CGContextSetRGBStrokeColor(context, 0.9569, 0.4078, 0.9059, 0.6)
+                } else {
+                    CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 0.6)
+                }
                 drawSegmentPath(context, path:entity.outline)
                 
                 CGContextDrawPath(context, CGPathDrawingMode.Stroke)

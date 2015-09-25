@@ -18,9 +18,9 @@ struct AffineHandleFinder {
 
     func getUpdatedHandle(oldHandle: AffineHandle) -> AffineHandle? {
         for entity in stage.entities
-            where entity.id == oldHandle.handle.formId {
+            where entity.id == oldHandle.formId {
                 for handle in entity.affineHandles
-                    where handle.handle.anchorId == oldHandle.handle.anchorId {
+                    where handle == oldHandle {
                         return handle
                 }
         }
@@ -46,7 +46,7 @@ struct AffineHandleFinder {
             }
 
             for handle in entity.affineHandles {
-                guard query.location.matches(handle.handle.position) else {
+                guard query.location.matches(handle.position) else {
                     continue
                 }
                 result.append(handle)

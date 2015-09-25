@@ -23,14 +23,14 @@ public final class AffineHandleGrabber {
     }
 
     private var state : State = .Idle
-    let handleUI : HandleUI
+    let affineHandleUI : AffineHandleUI
 
     let handleFinder : AffineHandleFinder
     let camera: Camera
     let radius : Double
 
-    public init(stage : Stage, handleUI : HandleUI, camera: Camera, radius: Double) {
-        self.handleUI = handleUI
+    public init(stage : Stage, affineHandleUI : AffineHandleUI, camera: Camera, radius: Double) {
+        self.affineHandleUI = affineHandleUI
         self.handleFinder = AffineHandleFinder(stage: stage)
         self.radius = radius
         self.camera = camera
@@ -43,13 +43,13 @@ public final class AffineHandleGrabber {
 
             if case .Found(_, let current, _) = result,
                 let updated = handleFinder.getUpdatedHandle(current){
-                    handleUI.state = .Active(updated.handle, allPoints.map{$0.handle})
+                    affineHandleUI.state = .Active(updated, allPoints)
             } else {
-                handleUI.state = .Show(allPoints.map{$0.handle})
+                affineHandleUI.state = .Show(allPoints)
             }
 
         } else {
-            handleUI.state = .Hide
+            affineHandleUI.state = .Hide
         }
     }
 

@@ -119,9 +119,9 @@ public final class ScaleTool : Tool {
                 if let grabbedHandle = handleGrabber.current {
                     
                     instructionCreator
-                        .beginCreation(ScaleInstruction(formId: grabbedHandle.handle.formId, factor: ConstantScaleFactor(factor: 0), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis:  streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
+                        .beginCreation(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: 0), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis:  streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
                     
-                    state = .Scaling(handle: grabbedHandle, factor: 1.0, offset: pos - grabbedHandle.handle.position)
+                    state = .Scaling(handle: grabbedHandle, factor: 1.0, offset: pos - grabbedHandle.position)
                     
                     
                 } else {
@@ -141,7 +141,7 @@ public final class ScaleTool : Tool {
                 fallthrough
             case .Move:
                 let piv = pivot.pointFor(grabbedHandle)
-                let axis = (grabbedHandle.handle.position - piv.position)
+                let axis = (grabbedHandle.position - piv.position)
                 let distance = pos - piv.position - offset
                 let length = axis.length2
                 let factor = length == 0 ? 1 : dot(distance, axis)/axis.length2
@@ -169,7 +169,7 @@ public final class ScaleTool : Tool {
     private func publish() {
         if case .Scaling(let grabbedHandle, let factor, _) = state {
             
-            instructionCreator.update(ScaleInstruction(formId: grabbedHandle.handle.formId, factor: ConstantScaleFactor(factor: factor), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis: streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
+            instructionCreator.update(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: factor), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis: streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
         }
     }
 }

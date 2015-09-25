@@ -20,6 +20,7 @@ struct StageUI {
     let snapUI : SnapUI
     let grabUI : GrabUI
     let handleUI : HandleUI
+    let affineHandleUI : AffineHandleUI
     let pivotUI : PivotUI
     let cropUI : CropUI
     let maskUI : MaskUI
@@ -29,6 +30,7 @@ struct StageUI {
         self.snapUI = SnapUI()
         self.grabUI = GrabUI()
         self.handleUI = HandleUI()
+        self.affineHandleUI = AffineHandleUI()
         self.pivotUI = PivotUI()
         self.cropUI = CropUI()
         self.maskUI = MaskUI()
@@ -95,6 +97,7 @@ final class StageController : NSViewController {
             CropUIRenderer(stage: stageModel.stage, cropUI: stageModel.stageUI.cropUI, camera: stageModel.camera),
             GrabUIRenderer(grabUI: stageModel.stageUI.grabUI, camera: stageModel.camera),
             HandleUIRenderer(handleUI: stageModel.stageUI.handleUI, camera: stageModel.camera),
+            AffineHandleUIRenderer(affineHandleUI: stageModel.stageUI.affineHandleUI, camera: stageModel.camera),
             PivotUIRenderer(pivotUI: stageModel.stageUI.pivotUI, camera: stageModel.camera)
 
         ]
