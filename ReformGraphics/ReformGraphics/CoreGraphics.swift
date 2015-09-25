@@ -45,10 +45,10 @@ public extension Shape {
             case (.None, .None): break
             }
         case .TextArea(let left, let right, let alignment, let text, let size):
-            // TODO: not working
+            let absSize = abs(size)
 
-            let rotation = ReformMath.angle(right-left)
-            let font = NSFont(name: "Helvetica", size: CGFloat(size)) ?? NSFont.systemFontOfSize(CGFloat(size))
+            let rotation = ReformMath.angle(signum(size)*(right-left))
+            let font = NSFont(name: "Helvetica", size: CGFloat(absSize)) ?? NSFont.systemFontOfSize(CGFloat(absSize))
 
             let backgroundColor : NSColor
             let strokeWidth : CGFloat
@@ -64,7 +64,7 @@ public extension Shape {
                 strokeColor = sColor.toNSColor
                 // stroke width is relative to font size
                 // https://developer.apple.com/library/mac/qa/qa1531/_index.html
-                strokeWidth = CGFloat(50*width/size)
+                strokeWidth = CGFloat(50*width/absSize)
             case (.Fill(let bColor), .None):
                 backgroundColor = bColor.toNSColor
                 strokeColor = NSColor(red:0,green:0,blue:0,alpha:0)
@@ -123,9 +123,10 @@ public extension Shape {
             color.setAsStroke(context)
             CGContextDrawPath(context, CGPathDrawingMode.Stroke)
         case .TextArea(let left, let right, let alignment, let text, let size):
+            let absSize = abs(size)
 
-            let rotation = ReformMath.angle(right-left)
-            let font = NSFont(name: "Helvetica", size: CGFloat(size)) ?? NSFont.systemFontOfSize(CGFloat(size))
+            let rotation = ReformMath.angle(signum(size)*(right-left))
+            let font = NSFont(name: "Helvetica", size: CGFloat(absSize)) ?? NSFont.systemFontOfSize(CGFloat(absSize))
 
             let transparent = NSColor(red:0,green:0,blue:0,alpha:0)
             let nsColor = color.toNSColor
@@ -134,12 +135,9 @@ public extension Shape {
                 // https://developer.apple.com/library/mac/qa/qa1531/_index.html
                 NSFontAttributeName:font,
                 NSForegroundColorAttributeName:transparent,
-                NSStrokeWidthAttributeName:50*width/size,
+                NSStrokeWidthAttributeName:50*width/absSize,
                 NSStrokeColorAttributeName:nsColor
             ]
-
-            print(100*width/size)
-
 
             CGContextSaveGState(context);
 
