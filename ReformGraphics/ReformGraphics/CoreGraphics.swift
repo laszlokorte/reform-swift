@@ -58,7 +58,7 @@ public extension Shape {
             case (.Fill(let bColor), .Solid(let width, let sColor)):
                 backgroundColor = bColor.toNSColor
                 strokeColor = sColor.toNSColor
-                strokeWidth = -CGFloat(50*width/size)
+                strokeWidth = -CGFloat(100*width/size)
             case (.None, .Solid(let width, let sColor)):
                 backgroundColor = NSColor(red:0,green:0,blue:0,alpha:0)
                 strokeColor = sColor.toNSColor
@@ -135,7 +135,7 @@ public extension Shape {
                 // https://developer.apple.com/library/mac/qa/qa1531/_index.html
                 NSFontAttributeName:font,
                 NSForegroundColorAttributeName:transparent,
-                NSStrokeWidthAttributeName:50*width/absSize,
+                NSStrokeWidthAttributeName:100*width/absSize,
                 NSStrokeColorAttributeName:nsColor
             ]
 
