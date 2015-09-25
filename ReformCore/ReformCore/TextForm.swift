@@ -91,7 +91,9 @@ extension TextForm : Translatable {
 extension TextForm : Scalable {
     
     public var scaler : Scaler {
-        return BasicPointScaler(points: startPoint, endPoint)
+        return CompositeScaler(scalers: BasicPointScaler(points: startPoint, endPoint),
+            AbsoluteScaler(scaler: BasicLengthScaler(length: offset, angle: ConstantAngle()))
+        )
     }
 }
 
@@ -146,6 +148,6 @@ extension TextForm : Drawable {
             return nil
         }
 
-        return Shape(area: .TextArea(start, end, alignment: .Center, text: "Test", size: size), background: .Fill(Color(r: 40, g: 40, b: 40, a: 255)), stroke: .None)
+        return Shape(area: .TextArea(start, end, alignment: .Center, text: "Test", size: size), background: .Fill(Color(r: 40, g: 40, b: 40, a: 125)), stroke: .None)
     }
 }
