@@ -15,7 +15,7 @@ public final class CreateFormTool : Tool {
     enum State
     {
         case Idle
-        case Started(startPoint: SnapPoint, form: Form, target: Target)
+        case Started(startPoint: SnapPoint, form: protocol<Form, Creatable>, target: Target)
         case Delegating
     }
     

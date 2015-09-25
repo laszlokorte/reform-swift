@@ -37,15 +37,16 @@ public typealias LabeledPoint = protocol<RuntimePoint, Labeled>
 
 public protocol Creatable {
     init(id: FormIdentifier, name: String)
+
+
+    func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d)
 }
 
 public protocol Form {
     static var stackSize : Int { get }
     
     var identifier : FormIdentifier { get }
-    
-    func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d)
-    
+
     func getPoints() -> [ExposedPointIdentifier:LabeledPoint]
     
     var name : String { get set }

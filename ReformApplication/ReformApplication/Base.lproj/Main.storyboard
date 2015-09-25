@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9052" systemVersion="15B17c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B17c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9052"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -1295,7 +1295,7 @@ Gw
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AI4-sb-mAI">
                                         <rect key="frame" x="456" y="4" width="29" height="19"/>
                                         <animations/>
-                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="E3T-1b-W0z" id="atb-QI-b5H">
+                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" selectedItem="VCU-HX-dX6" id="atb-QI-b5H">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="pGS-ph-lLS">
@@ -1311,6 +1311,12 @@ Gw
                                                         <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="wrapInstructionInCondition" target="tWe-V1-zXv" id="MeH-HC-zgd"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Add Iterator" keyEquivalent="f" id="Pl4-yN-vFW">
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="createIterator:" target="tWe-V1-zXv" id="5bx-pF-hhP"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Delete" id="Lez-ln-4uq">

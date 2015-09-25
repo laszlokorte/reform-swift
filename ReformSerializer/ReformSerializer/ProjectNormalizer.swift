@@ -286,7 +286,7 @@ extension CreateFormInstruction : Normalizable {
     }
 }
 
-func formType(normalizedValue: NormalizedValue) throws -> protocol<Form, Normalizable>.Type {
+func formType(normalizedValue: NormalizedValue) throws -> protocol<Form, Normalizable, Creatable>.Type {
     guard case .String(let type) = normalizedValue else {
         throw InitialisationError.Unknown
 

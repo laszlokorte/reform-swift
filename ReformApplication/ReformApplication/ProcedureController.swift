@@ -120,6 +120,26 @@ extension ProcedureController : NSMenuDelegate {
         procedureViewModel?.instructionChanger()
     }
 
+    @IBAction func createIterator(sender: AnyObject) {
+        guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
+            return
+        }
+
+        guard let formIds = procedureViewModel?.formSelection.selected where !formIds.isEmpty else {
+            return
+        }
+
+        let node = InstructionNode(group:
+            FormIteratorInstruction(proxyForm:
+                ProxyForm(id: FormIdentifier(1337), name: "Proxy"), formIds: Array(formIds)))
+
+        node.append(child: InstructionNode())
+        instructions[selectedIndex].node.append(sibling:
+            node
+        )
+        procedureViewModel?.instructionChanger()
+    }
+
     @IBAction func delete(sender: AnyObject) {
         guard let indices = tableView?.selectedRowIndexes else {
             return

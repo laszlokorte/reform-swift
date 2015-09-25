@@ -13,10 +13,10 @@ public struct CreateFormInstruction : Instruction {
         return form.identifier
     }
     
-    public let form : Form
+    public let form : protocol<Form, Creatable>
     public let destination : DestinationType
     
-    public init(form : Form, destination: DestinationType) {
+    public init(form : protocol<Form, Creatable>, destination: DestinationType) {
         self.form = form
         self.destination = destination
     }

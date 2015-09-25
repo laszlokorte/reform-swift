@@ -16,6 +16,8 @@
 		F222AF4E1B8881AF005F71A1 /* ArcOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */; };
 		F222AF501B88B864005F71A1 /* AbsoluteScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */; };
 		F2339AFA1B8D2BAD00C0AE41 /* ReferenceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339AF91B8D2BAD00C0AE41 /* ReferenceId.swift */; };
+		F236C0E01BB4F8BD0051FA6B /* FormInteratorInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0DF1BB4F8BC0051FA6B /* FormInteratorInstruction.swift */; settings = {ASSET_TAGS = (); }; };
+		F236C0E31BB4FBF60051FA6B /* ProxyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E21BB4FBF60051FA6B /* ProxyForm.swift */; settings = {ASSET_TAGS = (); }; };
 		F23BCFB81BA9F100001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB71BA9F100001A04EF /* ReformMath.framework */; };
 		F23BCFBA1BA9F105001A04EF /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB91BA9F105001A04EF /* ReformExpression.framework */; };
 		F23BCFBC1BA9F108001A04EF /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBB1BA9F108001A04EF /* ReformGraphics.framework */; };
@@ -120,6 +122,8 @@
 		F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcOutline.swift; sourceTree = "<group>"; };
 		F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbsoluteScaler.swift; sourceTree = "<group>"; };
 		F2339AF91B8D2BAD00C0AE41 /* ReferenceId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferenceId.swift; sourceTree = "<group>"; };
+		F236C0DF1BB4F8BC0051FA6B /* FormInteratorInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInteratorInstruction.swift; sourceTree = "<group>"; };
+		F236C0E21BB4FBF60051FA6B /* ProxyForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyForm.swift; sourceTree = "<group>"; };
 		F23BCFB71BA9F100001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
 		F23BCFB91BA9F105001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
 		F23BCFBB1BA9F108001A04EF /* ReformGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformGraphics.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformGraphics.framework"; sourceTree = "<group>"; };
@@ -246,6 +250,14 @@
 			name = Identifers;
 			sourceTree = "<group>";
 		};
+		F236C0E11BB4FBE10051FA6B /* Proxy */ = {
+			isa = PBXGroup;
+			children = (
+				F236C0E21BB4FBF60051FA6B /* ProxyForm.swift */,
+			);
+			name = Proxy;
+			sourceTree = "<group>";
+		};
 		F23F12961B7E0AE400A2D73E /* Attributes */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +322,7 @@
 		F26D46A91B7D0D3900266096 /* Form */ = {
 			isa = PBXGroup;
 			children = (
+				F236C0E11BB4FBE10051FA6B /* Proxy */,
 				F26D46F31B7D213000266096 /* Forms */,
 				F26D46AA1B7D0D4200266096 /* Form.swift */,
 				F26D46E61B7D174B00266096 /* FormIdentifier.swift */,
@@ -545,6 +558,7 @@
 			children = (
 				F26D47491B7D693900266096 /* IfConditionInstruction.swift */,
 				F26D474B1B7D696700266096 /* ForLoopInstruction.swift */,
+				F236C0DF1BB4F8BC0051FA6B /* FormInteratorInstruction.swift */,
 			);
 			name = GroupInstructions;
 			sourceTree = "<group>";
@@ -761,6 +775,7 @@
 				F26D470C1B7D342D00266096 /* CenterPoint.swift in Sources */,
 				F26D46CE1B7D140700266096 /* Project.swift in Sources */,
 				F26D475C1B7D868B00266096 /* RuntimeStack.swift in Sources */,
+				F236C0E01BB4F8BD0051FA6B /* FormInteratorInstruction.swift in Sources */,
 				F26D46DC1B7D14B600266096 /* Outline.swift in Sources */,
 				F222AF291B84EFED005F71A1 /* ConstantDistance.swift in Sources */,
 				F26D46E51B7D172800266096 /* Paper.swift in Sources */,
@@ -774,6 +789,7 @@
 				F26D47261B7D3D3C00266096 /* CompositeRotator.swift in Sources */,
 				F26D47121B7D37B300266096 /* CircleForm.swift in Sources */,
 				F26D46C21B7D129300266096 /* Degeneratable.swift in Sources */,
+				F236C0E31BB4FBF60051FA6B /* ProxyForm.swift in Sources */,
 				F222AF441B878D16005F71A1 /* Axis.swift in Sources */,
 				F26D474F1B7D6A3600266096 /* CreateFormInstruction.swift in Sources */,
 				F27391051B7F88B400100F2F /* IntersectionPoint.swift in Sources */,
