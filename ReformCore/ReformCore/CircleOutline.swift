@@ -50,4 +50,15 @@ struct CircleOutline : Outline {
             Segment.Arc(Arc2d(center: c, radius: r, start: normalize360(a+Angle(percent: 50)), end:normalize360(a+Angle(percent: 100))))
         ]
     }
+
+    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+        guard let
+            r = radius.getLengthFor(runtime).map(abs),
+            c = center.getPositionFor(runtime) else {
+                return nil
+        }
+
+        let h = Vec2d(x:r/2,y:r/2)
+        return AABB2d(min: c - h, max: c + h)
+    }
 }

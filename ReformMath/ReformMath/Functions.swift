@@ -122,10 +122,15 @@ public func isBetween(angle: Angle, lower: Angle, upper: Angle) -> Bool {
     }
 }
 
-func min(a: Vec2d, _ b: Vec2d) -> Vec2d {
+public func min(a: Vec2d, _ b: Vec2d) -> Vec2d {
     return Vec2d(x: min(a.x,b.x), y: min(a.y,b.y))
 }
 
-func max(a: Vec2d, _ b: Vec2d) -> Vec2d {
+public func max(a: Vec2d, _ b: Vec2d) -> Vec2d {
     return Vec2d(x: max(a.x,b.x), y: max(a.y,b.y))
+}
+
+
+public func union(aabb a: AABB2d, aabb b: AABB2d) -> AABB2d {
+    return AABB2d(min: min(a.min, b.min), max: max(a.max, b.max))
 }

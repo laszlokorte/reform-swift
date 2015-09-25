@@ -14,6 +14,8 @@ public protocol Outline {
     func getLengthFor<R:Runtime>(runtime: R) -> Double?
     
     func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath
+
+    func getAABBFor<R:Runtime>(runtime: R) -> AABB2d?
 }
 
 

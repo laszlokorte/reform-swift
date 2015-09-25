@@ -46,4 +46,14 @@ struct LineOutline : Outline {
         
         return [.Line(LineSegment2d(from: from, to: to))]
     }
+
+    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+        guard let
+            from = start.getPositionFor(runtime),
+            to = end.getPositionFor(runtime) else {
+                return nil
+        }
+
+        return AABB2d(min: min(from, to), max: max(from, to))
+    }
 }

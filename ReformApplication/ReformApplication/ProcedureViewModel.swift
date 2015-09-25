@@ -16,13 +16,15 @@ final class ProcedureViewModel {
     let instructionFocusChanger : InstructionFocusChanger
     let instructionChanger : () -> ()
     let formSelection : FormSelection
+    let formIdSequence : IdentifierSequence<FormIdentifier>
 
-    init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus, snapshotCollector : SnapshotCollector, instructionFocusChanger : InstructionFocusChanger, formSelection: FormSelection, instructionChanger : () -> ()) {
+    init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus, snapshotCollector : SnapshotCollector, instructionFocusChanger : InstructionFocusChanger, formSelection: FormSelection, formIdSequence: IdentifierSequence<FormIdentifier>, instructionChanger : () -> ()) {
         self.analyzer = analyzer
         self.instructionFocus = instructionFocus
         self.snapshotCollector = snapshotCollector
         self.instructionFocusChanger = instructionFocusChanger
         self.instructionChanger = instructionChanger
         self.formSelection = formSelection
+        self.formIdSequence = formIdSequence
     }
 }

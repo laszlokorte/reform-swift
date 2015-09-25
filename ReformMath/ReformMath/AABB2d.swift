@@ -14,6 +14,7 @@ public struct AABB2d : Equatable {
         self.min = ReformMath.min(min, max)
         self.max = ReformMath.max(min, max)
     }
+
 }
 
 public func ==(lhs: AABB2d, rhs: AABB2d) -> Bool {

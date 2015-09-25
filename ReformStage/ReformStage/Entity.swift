@@ -54,6 +54,7 @@ public enum EntityType {
     case Mask
     case Guide
     case Canvas
+    case Proxy
 }
 
 extension EntityType {
@@ -122,6 +123,9 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, formId
     case let form as PictureForm:
         return entityForRuntimeForm(analyzer, runtime: runtime, picture: form)
     case let form as Paper:
+        return entityForRuntimeForm(analyzer, runtime: runtime, paper: form)
+
+    case let form as ProxyForm:
         return entityForRuntimeForm(analyzer, runtime: runtime, paper: form)
     default:
         return nil
@@ -564,6 +568,8 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pictur
             PictureForm.PointId.Right.rawValue,
     ])
 
+    
+
     let points = collectPoints(analyzer, runtime: runtime, form: form)
     
     let outline = form.outline.getSegmentsFor(runtime)
@@ -578,14 +584,35 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pictur
 }
 
 
-func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper form: Paper) -> Entity? {
-    
-    let type = EntityType.Canvas
-    
+func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper form: ProxyForm) -> Entity? {
+    let type = EntityType.Proxy
+
     let points = collectPoints(analyzer, runtime: runtime, form: form)
+
     
     let outline = form.outline.getSegmentsFor(runtime)
-    
+
+    guard let aabb = form.outline.getAABBFor(runtime) else {
+        return nil
+    }
+
+    let hit = HitArea.Union(
+        HitArea.Triangle(Triangle2d(a: aabb.min, b: aabb.xMinYMax, c: aabb.max)),
+        HitArea.Triangle(Triangle2d(a: aabb.max, b: aabb.xMaxYMin, c: aabb.min))
+    )
+
+    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
+}
+
+
+func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper form: Paper) -> Entity? {
+
+    let type = EntityType.Canvas
+
+    let points = collectPoints(analyzer, runtime: runtime, form: form)
+
+    let outline = form.outline.getSegmentsFor(runtime)
+
     let hit = HitArea.None
     return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
 }

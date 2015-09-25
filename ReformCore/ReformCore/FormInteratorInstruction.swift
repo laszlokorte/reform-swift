@@ -32,7 +32,7 @@ public struct FormIteratorInstruction : GroupInstruction {
         for form in forms {
             runtime.scoped() { runtime in
                 runtime.declare(proxyForm)
-                proxyForm.initWithRuntime(runtime, formId: form.identifier)
+                proxyForm.initWithRuntime(runtime, form: form)
                 for c in children where !runtime.shouldStop {
                     c.evaluate(runtime)
                 }
@@ -48,7 +48,10 @@ public struct FormIteratorInstruction : GroupInstruction {
         return "Foreach \(names) as \(proxyForm.name):"
     }
 
+
+
     public func analyze<T:Analyzer>(analyzer: T) {
+        analyzer.announceForm(proxyForm)
     }
 
     public var isDegenerated : Bool {

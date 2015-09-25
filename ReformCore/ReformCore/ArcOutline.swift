@@ -58,4 +58,15 @@ struct ArcOutline : Outline {
         
         return [Segment.Arc(Arc2d(center: c, radius: r, start: a1, end:a2))]
     }
+
+    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+        guard let
+            r = radius.getLengthFor(runtime).map(abs),
+            c = center.getPositionFor(runtime) else {
+                return nil
+        }
+
+        let h = Vec2d(x:r/2,y:r/2)
+        return AABB2d(min: c - h, max: c + h)
+    }
 }

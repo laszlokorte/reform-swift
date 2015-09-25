@@ -60,4 +60,22 @@ struct CompositeOutline : Outline {
         
         return result
     }
+
+
+
+    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+        return parts.map {
+            $0.getAABBFor(runtime)
+        }.reduce(nil) { a,b in
+            if let a = a {
+                if let b=b {
+                    return union(aabb: a, aabb: b)
+                } else {
+                    return a
+                }
+            } else {
+                return b
+            }
+        }
+    }
 }

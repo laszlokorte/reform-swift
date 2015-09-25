@@ -129,9 +129,13 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
+        guard let formId = procedureViewModel?.formIdSequence.emitId() else {
+            return
+        }
+
         let node = InstructionNode(group:
             FormIteratorInstruction(proxyForm:
-                ProxyForm(id: FormIdentifier(1337), name: "Proxy"), formIds: Array(formIds)))
+                ProxyForm(id: formId, name: "Proxy"), formIds: Array(formIds)))
 
         node.append(child: InstructionNode())
         instructions[selectedIndex].node.append(sibling:

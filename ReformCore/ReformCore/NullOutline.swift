@@ -20,4 +20,8 @@ struct NullOutline : Outline {
     func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath {
         return []
     }
+
+    func getAABBFor<R:Runtime>(runtime: R) -> AABB2d? {
+        return nil
+    }
 }
