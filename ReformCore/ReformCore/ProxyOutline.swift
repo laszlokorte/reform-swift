@@ -21,7 +21,38 @@ struct ProxyOutline : Outline {
             return nil
         }
 
-        return form.outline.getPositionFor(runtime, t: t)
+        guard let aabb = form.outline.getAABBFor(runtime) else {
+            return nil
+        }
+
+        let width = aabb.size.x
+        let height = aabb.size.y
+        let length = width + height
+
+        let x : Double
+        let y : Double
+
+        if 0..<0.5 ~= t {
+            if t*2 * length > height {
+                x = t*2 * length - height
+                y = height
+            } else {
+                x = 0
+                y = t*2 * length
+            }
+        } else if 0.5...1 ~= t {
+            if (t-0.5)*2 * length > height {
+                x = width - ((t-0.5)*2 * length - height)
+                y = 0
+            } else {
+                x = width
+                y = height - (t-0.5)*2 * length
+            }
+        } else {
+            return nil
+        }
+
+        return aabb.min + Vec2d(x:x, y:y)
     }
 
     func getLengthFor<R:Runtime>(runtime: R) -> Double? {
