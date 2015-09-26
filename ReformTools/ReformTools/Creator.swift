@@ -51,7 +51,7 @@ public final class InstructionCreator {
             state = .Idle
             notifier(false)
         } else if case .Amending(let original, let node) = state {
-            focus.current = node.previous
+            focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
             state = .Idle
@@ -86,7 +86,7 @@ public final class InstructionCreator {
     func commit() {
         if case .Creating(let original, let node) = state {
             if node.isDegenerated {
-                focus.current = node.previous
+                focus.current = original
                 node.removeFromParent()
                 notifier(false)
             } else {
