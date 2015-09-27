@@ -13,7 +13,15 @@ public final class InstructionNode {
             self.depth = (parent?.depth ?? -1) + 1
         }
     }
-    private var depth : Int
+    private var depth : Int {
+        didSet {
+            if case .Group(_, let children) = content {
+                for c in children {
+                    c.depth = depth + 1
+                }
+            }
+        }
+    }
     
     public init(parent: InstructionNode? = nil) {
         self.parent = parent
