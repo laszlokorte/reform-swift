@@ -19,7 +19,8 @@ public struct IntersectionSnapPoint : SnapPoint, Equatable {
     }
 
     public func belongsTo(formId: FormIdentifier) -> Bool {
-        return formId == self.point.formA || formId == self.point.formB
+        return formId == self.point.formA
+            || formId == self.point.formB
     }
 }
 

@@ -37,7 +37,7 @@ struct SnapUIRenderer : Renderer {
             CGContextSetLineWidth(context, 3*inverse)
             CGContextSetRGBStrokeColor(context, 0.9, 0.7, 0.2, 1)
 
-            for entity in stage.entities where active.belongsTo(entity.id) {
+            for entity in stage.entities where active.belongsTo(entity.id.runtimeId) {
                 drawSegmentPath(context, path:entity.outline)
             }
             CGContextDrawPath(context, .Stroke)

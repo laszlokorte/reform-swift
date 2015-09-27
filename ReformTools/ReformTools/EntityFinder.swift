@@ -23,7 +23,7 @@ struct EntityFinder {
     
     func getEntity(id: FormIdentifier) -> Entity? {
         for entity in stage.entities {
-            if entity.id == id {
+            if entity.id.runtimeId == id {
                 return entity
             }
         }

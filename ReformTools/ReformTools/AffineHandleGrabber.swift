@@ -39,7 +39,7 @@ public final class AffineHandleGrabber {
     func refresh() {
         if case .Searching(let formId, let result) = state {
 
-            let allPoints = handleFinder.getHandles(HandleQuery(filter: .Only(formId), location: .Any))
+            let allPoints = handleFinder.getHandles(HandleQuery(filter: .Only(.Form(formId)), location: .Any))
 
             if case .Found(_, let current, _) = result,
                 let updated = handleFinder.getUpdatedHandle(current){
@@ -91,7 +91,7 @@ public final class AffineHandleGrabber {
 
     private func resultFor(formId : FormIdentifier, position: Vec2d, cycle: Int) -> SearchingResult {
 
-        let points = handleFinder.getHandles(HandleQuery(filter: .Only(formId), location: .Near(position, distance: radius / camera.zoom)))
+        let points = handleFinder.getHandles(HandleQuery(filter: .Only(.Form(formId)), location: .Near(position, distance: radius / camera.zoom)))
 
         if points.count > 0 {
             return .Found(position: position, point: points[cycle%points.count], cycle: cycle)

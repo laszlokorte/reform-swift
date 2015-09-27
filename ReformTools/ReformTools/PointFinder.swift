@@ -54,8 +54,21 @@ func ==(lhs: LocationFilter, rhs: LocationFilter) -> Bool {
 enum FormFilter : Equatable {
     case None
     case Any
-    case Only(FormIdentifier)
-    case Except(FormIdentifier)
+    case Only(SourceIdentifier)
+    case Except(SourceIdentifier)
+}
+
+extension FormFilter {
+    func excludes(id: SourceIdentifier) -> Bool {
+        if case .Except(let excl) = self {
+            return intersects(excl, id: id)
+        }
+        if case .Only(let only) = self {
+            return !intersects(only, id: id)
+        }
+
+        return false
+    }
 }
 
 func ==(lhs: FormFilter, rhs: FormFilter) -> Bool {
@@ -111,13 +124,10 @@ struct PointFinder {
         
         if (query.pointType.contains(.Form) || query.pointType.contains(.Glomp))  {
             for entity in stage.entities {
-                if case .Except(entity.id) = query.filter {
+                if query.filter.excludes(entity.id) {
                     continue
                 }
-                if case .Only(let id) = query.filter where id != entity.id {
-                    continue
-                }
-                
+
                 if query.pointType.contains(.Form) {
                     for p in entity.points {
                         guard query.location.matches(p.position) else {
@@ -130,7 +140,7 @@ struct PointFinder {
                 if case .Near(let loc, let d) = query.location where query.pointType.contains(.Glomp) {
                     if let (u, pos) = pointOn(segmentPath: entity.outline, closestTo: loc, maxDistance: d) {
 
-                        result.append(GlompSnapPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(formId: entity.id, lerp: Expression.Constant(.DoubleValue(value: u)))))
+                        result.append(GlompSnapPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(formId: entity.id.runtimeId, lerp: Expression.Constant(.DoubleValue(value: u)))))
                     }
                 }
             }
@@ -142,7 +152,7 @@ struct PointFinder {
         
         if query.pointType.contains(.Intersection) {
             for intersection in stage.intersections {
-                if case .Except(let id) = query.filter where id == intersection.formIdA || id == intersection.formIdB {
+                if case .Except(let id) = query.filter where matches(id, id: intersection.formIdA) || matches(id, id: intersection.formIdB) {
                     continue
                 }
                 guard query.location.matches(intersection.position) else {

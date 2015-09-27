@@ -223,7 +223,7 @@ final class StageController : NSViewController {
 
     override func selectAll(sender: AnyObject?) {
         if let stage = stage {
-            selection?.select(Set(stage.entities.lazy.filter{$0.hitArea != HitArea.None}.map{$0.id}))
+            selection?.select(Set(stage.entities.lazy.filter{$0.hitArea != HitArea.None}.map{$0.id.runtimeId}))
         }
         canvas?.needsDisplay = true
     }

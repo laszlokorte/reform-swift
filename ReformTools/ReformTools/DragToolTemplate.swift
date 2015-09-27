@@ -12,7 +12,7 @@ import ReformStage
 
 public protocol Positioned {
     var position : Vec2d { get }
-    var formId : FormIdentifier { get }
+    var formId : SourceIdentifier { get }
 }
 
 public protocol DragToolProtocol {

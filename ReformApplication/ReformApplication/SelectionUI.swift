@@ -43,7 +43,7 @@ final class SelectionUIRenderer : Renderer {
                 CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 1)
             }
 
-            for entity in stage.entities where selection.selected.contains(entity.id) {
+            for entity in stage.entities where selection.selected.contains(entity.id.runtimeId) {
                 if entity.type == .Proxy {
                     CGContextSetRGBStrokeColor(context, 0.3843, 0.4157, 1.0000, 0.6)
                 } else {

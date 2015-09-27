@@ -101,10 +101,10 @@ public final class SelectionTool : Tool {
                     state = .MultiSelect(from: position, to: position, old: selection.selected)
                 } else if changeMode == .Replace, let
                     previous = selection.one,
-                    index = entities.indexOf({$0.id == previous}) {
+                    index = entities.indexOf({$0.id.runtimeId == previous}) {
                     state = .Selecting(entity: entities[index], cycle: index, old: selection.selected)
                     
-                } else if changeMode == .XOR || selection.selected.intersect(entities.map{$0.id}).isEmpty {
+                } else if changeMode == .XOR || selection.selected.intersect(entities.map{$0.id.runtimeId}).isEmpty {
                     state = .Selecting(entity: entities.first, cycle: 0, old: selection.selected)
                 }
             case .Release, .Cycle, .Toggle, .ModifierChange, .Move:
@@ -137,12 +137,12 @@ public final class SelectionTool : Tool {
 
         switch state {
         case .Selecting(let entity, _, let old):
-            selection.select(changeMode.combine(old, with: entity.map{[$0.id]} ?? []))
+            selection.select(changeMode.combine(old, with: entity.map{[$0.id.runtimeId]} ?? []))
             fallthrough
         case .Idle:
             selectionUI.rect = .Hide
         case .MultiSelect(let from, let to, let old):
-            selection.select(changeMode.combine(old, with: entitiesInside(min: from, max: to).map{$0.id}))
+            selection.select(changeMode.combine(old, with: entitiesInside(min: from, max: to).map{$0.id.runtimeId}))
             selectionUI.rect = .Show(from, to)
         }
     }

@@ -38,10 +38,7 @@ struct AffineHandleFinder {
 
 
         for entity in stage.entities {
-            if case .Except(entity.id) = query.filter {
-                continue
-            }
-            if case .Only(let id) = query.filter where id != entity.id {
+            if query.filter.excludes(entity.id) {
                 continue
             }
 

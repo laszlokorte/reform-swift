@@ -107,7 +107,7 @@ public final class MorphTool : Tool {
                 if let grabbedHandle = handleGrabber.current {
                     
                     let distance = ConstantDistance(delta: Vec2d())
-                    let instruction = MorphInstruction(formId: grabbedHandle.formId, anchorId: grabbedHandle.anchorId, distance: distance)
+                    let instruction = MorphInstruction(formId: grabbedHandle.formId.runtimeId, anchorId: grabbedHandle.anchorId, distance: distance)
                     
                     instructionCreator
                         .beginCreation(instruction)
@@ -172,7 +172,7 @@ public final class MorphTool : Tool {
                 distance = RelativeDistance(from: grabbedHandle.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - grabbedHandle.position))
             }
             
-            instructionCreator.update(MorphInstruction(formId: grabbedHandle.formId, anchorId: grabbedHandle.anchorId, distance: distance))
+            instructionCreator.update(MorphInstruction(formId: grabbedHandle.formId.runtimeId, anchorId: grabbedHandle.anchorId, distance: distance))
         }
     }
 }

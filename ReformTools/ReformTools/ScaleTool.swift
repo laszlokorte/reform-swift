@@ -119,7 +119,7 @@ public final class ScaleTool : Tool {
                 if let grabbedHandle = handleGrabber.current {
                     
                     instructionCreator
-                        .beginCreation(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: 0), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis:  streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
+                        .beginCreation(ScaleInstruction(formId: grabbedHandle.formId.runtimeId, factor: ConstantScaleFactor(factor: 0), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis:  streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
                     
                     state = .Scaling(handle: grabbedHandle, factor: 1.0, offset: pos - grabbedHandle.position)
                     
@@ -169,7 +169,7 @@ public final class ScaleTool : Tool {
     private func publish() {
         if case .Scaling(let grabbedHandle, let factor, _) = state {
             
-            instructionCreator.update(ScaleInstruction(formId: grabbedHandle.formId, factor: ConstantScaleFactor(factor: factor), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis: streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
+            instructionCreator.update(ScaleInstruction(formId: grabbedHandle.formId.runtimeId, factor: ConstantScaleFactor(factor: factor), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis: streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
         }
     }
 }

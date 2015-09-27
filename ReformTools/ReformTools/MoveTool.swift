@@ -110,7 +110,7 @@ public final class MoveTool : Tool {
                 if let grabbedPoint = pointGrabber.current {
  
                     let distance = ConstantDistance(delta: Vec2d())
-                    let instruction = TranslateInstruction(formId: grabbedPoint.formId, distance: distance)
+                    let instruction = TranslateInstruction(formId: grabbedPoint.formId.runtimeId, distance: distance)
                     
                     instructionCreator
                         .beginCreation(instruction)
@@ -175,7 +175,7 @@ public final class MoveTool : Tool {
                 distance = RelativeDistance(from: activePoint.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - activePoint.position))
             }
             
-            instructionCreator.update(TranslateInstruction(formId: activePoint.formId, distance: distance))
+            instructionCreator.update(TranslateInstruction(formId: activePoint.formId.runtimeId, distance: distance))
         }
     }
     

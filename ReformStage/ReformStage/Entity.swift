@@ -9,9 +9,85 @@
 import ReformCore
 import ReformMath
 
+public enum SourceIdentifier : Equatable {
+    case Form(FormIdentifier)
+    case Proxy(proxy: FormIdentifier, instance: FormIdentifier)
+
+    public init(form id: FormIdentifier) {
+        self = Form(id)
+    }
+
+    public init(proxy: FormIdentifier, id: FormIdentifier) {
+        self = Proxy(proxy: proxy, instance: id)
+    }
+
+    public var runtimeId : FormIdentifier {
+        switch self {
+        case Form(let id):
+            return id
+        case .Proxy(let id, _):
+            return id
+        }
+    }
+}
+
+extension SourceIdentifier : Hashable {
+    public var hashValue : Int {
+        switch self {
+        case Form(let id):
+            return id.hashValue
+        case .Proxy(let p, let i):
+            return p.hashValue + 13 * i.hashValue
+        }
+    }
+}
+
+public func matches(lhs: SourceIdentifier, id rhs: FormIdentifier) -> Bool {
+    switch lhs {
+    case .Form(let id):
+        return id == rhs
+    case .Proxy(let proxyId, let id):
+        return proxyId == rhs
+            || id == rhs
+    }
+}
+
+public func intersects(lhs: SourceIdentifier, id rhs: SourceIdentifier) -> Bool {
+    switch lhs {
+    case .Form(let id):
+        switch rhs {
+        case .Form(let a):
+            return id == a
+        case .Proxy(let a, let b):
+            return id == a || id == b
+        }
+    case .Proxy(let proxyId, let id):
+        switch rhs {
+        case .Form(let a):
+            return id == a || proxyId == a
+        case .Proxy(let a, let b):
+            return id == a
+                || id == b
+                || proxyId == a
+                || proxyId == b
+        }
+    }
+}
+
+public func ==(lhs: SourceIdentifier, rhs: SourceIdentifier) -> Bool {
+    switch (lhs, rhs) {
+    case (.Form(let l), .Form(let r)):
+        return l == r
+    case (.Proxy(let p1, let i1), .Proxy(let p2, let i2)):
+        return p1 == p2 && i1 == i2
+    default:
+        return false
+    }
+}
+
 public struct Entity {
     public let formType : Form.Type
-    public let id : FormIdentifier
+    public let id : SourceIdentifier
     public let label : String
     public let type : EntityType
     public let hitArea : HitArea
@@ -21,7 +97,7 @@ public struct Entity {
     public let points : [EntityPoint]
     public let outline: SegmentPath
 
-    init(formType: Form.Type, id: FormIdentifier, label: String, type: EntityType, hitArea: HitArea, handles: [Handle], affineHandles: [AffineHandle], points: [EntityPoint], outline: SegmentPath) {
+    init(formType: Form.Type, id: SourceIdentifier, label: String, type: EntityType, hitArea: HitArea, handles: [Handle], affineHandles: [AffineHandle], points: [EntityPoint], outline: SegmentPath) {
         self.formType = formType
         self.id = id
         self.label = label
@@ -73,15 +149,15 @@ extension EntityType {
 public struct EntityPoint : SnapPoint, Equatable {
     public let position : Vec2d
     public let label : String
-    public let formId : FormIdentifier
+    public let formId : SourceIdentifier
     public let pointId : ExposedPointIdentifier
     
     public var runtimePoint : LabeledPoint {
-        return ForeignFormPoint(formId: formId, pointId: pointId)
+        return ForeignFormPoint(formId: formId.runtimeId, pointId: pointId)
     }
     
     public func belongsTo(formId: FormIdentifier) -> Bool {
-        return formId == self.formId
+        return self.formId.runtimeId == formId
     }
 }
 
@@ -90,14 +166,14 @@ public func ==(lhs: EntityPoint, rhs: EntityPoint) -> Bool {
     return lhs.position == rhs.position && lhs.label == rhs.label && lhs.formId == rhs.formId && lhs.pointId == rhs.pointId
 }
 
-func createEntityPoint<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, formId: FormIdentifier, pointId: ExposedPointIdentifier) -> EntityPoint? {
+func createEntityPoint<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, formId: FormIdentifier, pointId: ExposedPointIdentifier, sourceId: SourceIdentifier? = nil) -> EntityPoint? {
     guard let
         point = runtime.get(formId)?.getPoints()[pointId],
         position = point.getPositionFor(runtime) else {
         return nil
     }
     
-    return EntityPoint(position: position, label: point.getDescription(analyzer.stringifier), formId: formId, pointId: pointId)
+    return EntityPoint(position: position, label: point.getDescription(analyzer.stringifier), formId: sourceId ?? .Form(formId), pointId: pointId)
 }
 
 
@@ -132,12 +208,12 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, formId
     }
 }
 
-func collectAffineHandles<F:Form,  R:Runtime, A:Analyzer>(analyzer: A, runtime: R, form: F, pivots: [ExposedPointIdentifier:(ExposedPointIdentifier,ExposedPointIdentifier, axisName: String?)]) -> [AffineHandle] {
+func collectAffineHandles<F:Form,  R:Runtime, A:Analyzer>(analyzer: A, runtime: R, form: F, pivots: [ExposedPointIdentifier:(ExposedPointIdentifier,ExposedPointIdentifier, axisName: String?)], sourceId: SourceIdentifier? = nil) -> [AffineHandle] {
     return form.getPoints().flatMap() { (pointId, point) -> AffineHandle? in
         guard let
             pivot = pivots[pointId],
-            primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.0),
-            secondary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1),
+            primary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.0, sourceId: sourceId),
+            secondary = createEntityPoint(analyzer, runtime: runtime, formId: form.identifier, pointId: pivot.1, sourceId: sourceId),
             position = point.getPositionFor(runtime) else {
                 return nil
         }
@@ -150,7 +226,7 @@ func collectAffineHandles<F:Form,  R:Runtime, A:Analyzer>(analyzer: A, runtime: 
             axis = .None
         }
 
-        return AffineHandle(formId: form.identifier, pointId: pointId, label: point.getDescription(analyzer.stringifier), position: position, defaultPivot: (primary, secondary), scaleAxis: axis
+        return AffineHandle(formId: .Form(form.identifier), pointId: pointId, label: point.getDescription(analyzer.stringifier), position: position, defaultPivot: (primary, secondary), scaleAxis: axis
         )
     }
 }
@@ -163,17 +239,17 @@ func collectHandles<F:Form,  R:Runtime, A:Analyzer where F:Morphable>(analyzer: 
                 return nil
         }
 
-        return Handle(formId: form.identifier, anchorId: anchorId, pointId: pointId, label: anchor.name, position: position)
+        return Handle(formId: .Form(form.identifier), anchorId: anchorId, pointId: pointId, label: anchor.name, position: position)
     }
 }
 
-func collectPoints<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, form: Form) -> [EntityPoint] {
+func collectPoints<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, form: Form, sourceId: SourceIdentifier? = nil) -> [EntityPoint] {
         return form.getPoints().flatMap { (pointId, point) -> EntityPoint? in
             guard let position = point.getPositionFor(runtime) else {
                 return nil
             }
             
-            return EntityPoint(position: position, label: point.getDescription(analyzer.stringifier), formId: form.identifier, pointId: pointId)
+            return EntityPoint(position: position, label: point.getDescription(analyzer.stringifier), formId: sourceId ?? .Form(form.identifier), pointId: pointId)
         }
 }
 
@@ -203,7 +279,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, line f
         
     let hit = HitArea.Line(LineSegment2d(from: start, to: end))
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, rectangle form: RectangleForm) -> Entity? {
@@ -280,7 +356,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, rectan
         HitArea.Triangle(Triangle2d(a: topLeft, b: bottomRight, c: bottomLeft))
     )
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, circle form: CircleForm) -> Entity? {
@@ -330,7 +406,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, circle
     
     let hit = HitArea.Circle(Circle2d(center: center, radius: radius))
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pie form: PieForm) -> Entity? {
@@ -374,7 +450,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pie fo
         HitArea.Sector(center: center, lower: lowerAngle, upper: upperAngle)
     )
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -424,7 +500,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, arc fo
     }
 
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -465,7 +541,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, text f
     
     let hit = HitArea.Line(LineSegment2d(from: start, to: end))
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -553,15 +629,23 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pictur
         HitArea.Triangle(Triangle2d(a: topLeft, b: bottomRight, c: bottomLeft))
     )
     
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
 
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper form: ProxyForm) -> Entity? {
     let type = EntityType.Proxy
 
-    let points = collectPoints(analyzer, runtime: runtime, form: form)
+    guard let instanceId = form.getFormIdForRuntime(runtime) else {
+        return nil
+    }
 
+    guard let aabb = form.outline.getAABBFor(runtime) else {
+        return nil
+    }
+
+
+    let points = collectPoints(analyzer, runtime: runtime, form: form, sourceId: .Proxy(proxy: form.identifier, instance: instanceId))
 
     let affineHandles = collectAffineHandles(analyzer, runtime: runtime, form: form, pivots: [
 
@@ -596,20 +680,16 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper 
         ProxyForm.PointId.Right.rawValue : (
             ProxyForm.PointId.Left.rawValue,
             ProxyForm.PointId.Center.rawValue, nil),
-        ])
+        ], sourceId: .Proxy(proxy: form.identifier, instance: instanceId))
 
     let outline = form.outline.getSegmentsFor(runtime)
-
-    guard let aabb = form.outline.getAABBFor(runtime) else {
-        return nil
-    }
 
     let hit = HitArea.Union(
         HitArea.Triangle(Triangle2d(a: aabb.min, b: aabb.xMinYMax, c: aabb.max)),
         HitArea.Triangle(Triangle2d(a: aabb.max, b: aabb.xMaxYMin, c: aabb.min))
     )
 
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [],affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Proxy(proxy: form.identifier, instance: instanceId), label: form.name, type: type, hitArea: hit, handles: [],affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -622,5 +702,5 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, paper 
     let outline = form.outline.getSegmentsFor(runtime)
 
     let hit = HitArea.None
-    return Entity(formType: form.dynamicType, id: form.identifier, label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
+    return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
 }

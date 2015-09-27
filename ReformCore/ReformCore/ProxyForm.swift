@@ -71,6 +71,12 @@ final public class ProxyForm : Form {
 
 }
 
+extension ProxyForm {
+    public func getFormIdForRuntime<R:Runtime>(runtime: R) -> FormIdentifier? {
+        return formReference.getFormFor(runtime)?.identifier
+    }
+}
+
 extension ProxyForm : Rotatable {
 
     public var rotator : Rotator {

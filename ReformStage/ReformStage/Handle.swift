@@ -12,7 +12,7 @@ import ReformMath
 public typealias PivotPair = (EntityPoint, EntityPoint)
 
 public struct Handle {
-    public let formId : FormIdentifier
+    public let formId : SourceIdentifier
     public let anchorId : AnchorIdentifier
     public let pointId : ExposedPointIdentifier
     
@@ -21,7 +21,7 @@ public struct Handle {
 }
 
 public struct AffineHandle {
-    public let formId : FormIdentifier
+    public let formId : SourceIdentifier
     public let pointId : ExposedPointIdentifier
 
     public let label : String
@@ -33,13 +33,13 @@ public struct AffineHandle {
 
 extension Handle {
     public var runtimePoint : LabeledPoint {
-        return ForeignFormPoint(formId: formId, pointId: pointId)
+        return ForeignFormPoint(formId: formId.runtimeId, pointId: pointId)
     }
 }
 
 
 extension Handle : Hashable {
-    public var hashValue : Int { return formId.hashValue * 13 + anchorId.hashValue }
+    public var hashValue : Int { return formId.runtimeId.hashValue * 13 + anchorId.hashValue }
 }
 
 public func ==(lhs: Handle, rhs: Handle) -> Bool {
@@ -48,7 +48,7 @@ public func ==(lhs: Handle, rhs: Handle) -> Bool {
 
 extension AffineHandle {
     public var runtimePoint : LabeledPoint {
-        return ForeignFormPoint(formId: formId, pointId: pointId)
+        return ForeignFormPoint(formId: formId.runtimeId, pointId: pointId)
     }
 }
 

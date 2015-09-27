@@ -120,7 +120,7 @@ public final class CreateFormTool : Tool {
         case .Started(let startPoint, let form, _):
             switch input {
             case .ModifierChange:
-                pointSnapper.enable(.Except(form.identifier), pointType: snapType)
+                pointSnapper.enable(.Except(.Form(form.identifier)), pointType: snapType)
                 fallthrough
             case .Move:
                 pointSnapper.searchAt(pos)
@@ -176,7 +176,7 @@ public final class CreateFormTool : Tool {
                     
                     selection.select(form.identifier)
                     pointSnapper.enable(
-                        .Except(form.identifier), pointType: snapType)
+                        .Except(.Form(form.identifier)), pointType: snapType)
                     
                     pointGrabber.enable(form.identifier)
                     
