@@ -32,6 +32,7 @@
 		F26D470E1B7D34B700266096 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D470D1B7D34B700266096 /* Operators.swift */; };
 		F26D47311B7D3F7F00266096 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47301B7D3F7F00266096 /* Functions.swift */; };
 		F27391071B7F8ACE00100F2F /* PathRelations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391061B7F8ACE00100F2F /* PathRelations.swift */; };
+		F2799BFE1BB81A9E00C4D1E3 /* AngleRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2799BFD1BB81A9E00C4D1E3 /* AngleRange.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		F26D470D1B7D34B700266096 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		F26D47301B7D3F7F00266096 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		F27391061B7F8ACE00100F2F /* PathRelations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathRelations.swift; sourceTree = "<group>"; };
+		F2799BFD1BB81A9E00C4D1E3 /* AngleRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngleRange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 		F26D46EE1B7D1A9F00266096 /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
+				F2799BFC1BB81A9400C4D1E3 /* Range */,
 				F21403841BB0EA0200A6F672 /* Path */,
 				F214037D1BB0E6E700A6F672 /* Relations */,
 				F214037A1BB0638200A6F672 /* Primitives */,
@@ -190,6 +193,14 @@
 				F21403851BB0EF0900A6F672 /* Relations.swift */,
 			);
 			name = Geometry;
+			sourceTree = "<group>";
+		};
+		F2799BFC1BB81A9400C4D1E3 /* Range */ = {
+			isa = PBXGroup;
+			children = (
+				F2799BFD1BB81A9E00C4D1E3 /* AngleRange.swift */,
+			);
+			name = Range;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +328,7 @@
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,
 				F21403861BB0EF0900A6F672 /* Relations.swift in Sources */,
 				F20ABE9B1BB304C400245EB7 /* Overlap.swift in Sources */,
+				F2799BFE1BB81A9E00C4D1E3 /* AngleRange.swift in Sources */,
 				F20ABEA51BB35E6100245EB7 /* Incidence.swift in Sources */,
 				F21403731BB05D0D00A6F672 /* Arc2d.swift in Sources */,
 				F27391071B7F8ACE00100F2F /* PathRelations.swift in Sources */,

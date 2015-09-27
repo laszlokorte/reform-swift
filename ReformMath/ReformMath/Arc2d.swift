@@ -9,24 +9,22 @@
 public struct Arc2d : Equatable {
     public let center : Vec2d
     public let radius: Double
-    public let start: Angle
-    public let end: Angle
+    public let range: AngleRange
 
-    public init(center: Vec2d, radius:Double, start: Angle, end: Angle) {
+    public init(center: Vec2d, radius:Double, range: AngleRange) {
         self.center = center
         self.radius = radius
-        self.start = start
-        self.end = end
+        self.range = range
     }
 }
 
 public func ==(lhs: Arc2d, rhs: Arc2d) -> Bool {
-    return lhs.center == rhs.center && lhs.radius == rhs.radius && lhs.start == rhs.start && lhs.end == rhs.end
+    return lhs.center == rhs.center && lhs.radius == rhs.radius && lhs.range == rhs.range
 }
 
 extension Arc2d {
     public var length : Double {
-        return 2 * M_PI * radius * normalize360(end-start).percent/100
+        return 2 * M_PI * radius * range.delta.percent/100
     }
 }
 
@@ -37,14 +35,14 @@ extension Arc2d {
 
     public var quadrants : [Arc2d] {
         return [
-            (Angle(percent: 0), Angle(percent: 25)),
-            (Angle(percent: 25), Angle(percent: 50)),
-            (Angle(percent: 50), Angle(percent: 75)),
-            (Angle(percent: 75), Angle(percent: 100)),
-        ].lazy.flatMap { range in
-            intersection(range: range, range: (start, end))
-        }.flatMap { (start, end) in
-            Arc2d(center: center, radius: radius, start: start, end: end)
+            AngleRange(start: Angle(percent: 0), end: Angle(percent: 25)),
+            AngleRange(start: Angle(percent: 25), end: Angle(percent: 50)),
+            AngleRange(start: Angle(percent: 50), end: Angle(percent: 75)),
+            AngleRange(start: Angle(percent: 75), end: Angle(percent: 100)),
+        ].lazy.flatMap { (r:AngleRange) in
+            intersection(range: range, range: self.range)
+        }.flatMap { (r:AngleRange) in
+            Arc2d(center: center, radius: radius, range: r)
         }
     }
 }

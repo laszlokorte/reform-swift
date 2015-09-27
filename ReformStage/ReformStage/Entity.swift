@@ -446,8 +446,8 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(analyzer: A, runtime: R, pie fo
     let outline = form.outline.getSegmentsFor(runtime)
     
     let hit = HitArea.Intersection(
-        HitArea.Arc(Arc2d(center: center, radius: radius, start: lowerAngle, end: upperAngle)),
-        HitArea.Sector(center: center, lower: lowerAngle, upper: upperAngle)
+        HitArea.Arc(Arc2d(center: center, radius: radius, range: AngleRange(start: lowerAngle, end: upperAngle))),
+        HitArea.Sector(center: center, range: AngleRange(start: lowerAngle, end: upperAngle))
     )
     
     return Entity(formType: form.dynamicType, id: .Form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)

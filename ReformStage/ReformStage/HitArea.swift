@@ -14,7 +14,7 @@ public enum HitArea : Equatable {
     case Triangle(Triangle2d)
     case Circle(Circle2d)
     case Arc(Arc2d)
-    case Sector(center: Vec2d, lower: Angle, upper: Angle)
+    case Sector(center: Vec2d, range: AngleRange)
     case LeftOf(Line2d)
     indirect case Union(HitArea, HitArea)
     indirect case Intersection(HitArea, HitArea)
@@ -60,9 +60,9 @@ extension HitArea {
             return inside(point, circle: circle, epsilon: margin)
         case .Arc(let arc):
             return inside(point, arc: arc, epsilon: margin)
-        case .Sector(let center, let lower, let upper):
+        case .Sector(let center, let range):
             let a = angle(point-center)
-            return isBetween(a, lower: lower, upper: upper)
+            return inside(a, range: range)
         case Triangle(let triangle):
             return inside(point, triangle: triangle, epsilon: margin)
         case LeftOf(let line):
@@ -88,13 +88,13 @@ extension HitArea {
             return ReformMath.overlaps(aabb: aabb, circle: circle)
         case .Arc(let arc):
             return ReformMath.overlaps(aabb: aabb, arc: arc)
-        case .Sector(let center, let lower, let upper):
-            return isBetween(angle(aabb.min-center), lower: lower, upper: upper)
-                || isBetween(angle(aabb.max-center), lower: lower, upper: upper)
-                || isBetween(angle(aabb.xMaxYMin-center), lower: lower, upper: upper)
-                || isBetween(angle(aabb.xMinYMax-center), lower: lower, upper: upper)
-                || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: lower))
-                || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: upper))
+        case .Sector(let center, let range):
+            return inside(angle(aabb.min-center), range: range)
+                || inside(angle(aabb.max-center), range: range)
+                || inside(angle(aabb.xMaxYMin-center), range: range)
+                || inside(angle(aabb.xMinYMax-center), range: range)
+                || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: range.start))
+                || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: range.end))
         case Triangle(let triangle):
             return ReformMath.overlaps(aabb: aabb, triangle: triangle)
         case LeftOf(let line):

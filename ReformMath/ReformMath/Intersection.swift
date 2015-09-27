@@ -6,12 +6,12 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-func intersection(range rangeA: (from: Angle, to: Angle), range rangeB: (from: Angle, to:Angle)) -> (Angle, Angle)? {
-    let from = max(rangeA.from, rangeB.from)
-    let to = min(rangeA.to, rangeB.to)
+func intersection(range rangeA: AngleRange, range rangeB: AngleRange) -> AngleRange? {
+    let from = max(rangeA.start, rangeB.start)
+    let to = min(rangeA.end, rangeB.end)
 
     if from <= to {
-        return (from, to)
+        return AngleRange(start: from, end: to)
     } else {
         return nil
     }
@@ -123,8 +123,8 @@ public func intersections(arc arcA: Arc2d, arc arcB: Arc2d) -> [Vec2d] {
     return circleIntersections.filter {
         point in
         return
-            isBetween(angle(point - arcA.center), lower: arcA.start, upper: arcA.end) &&
-            isBetween(angle(point - arcB.center), lower: arcB.start, upper: arcB.end)
+        inside(angle(point - arcA.center), range: arcA.range) &&
+                inside(angle(point - arcB.center), range: arcB.range)
     }
 
 }
@@ -134,7 +134,7 @@ public func intersections(line line: LineSegment2d, arc: Arc2d) -> [Vec2d] {
 
     return circleIntersections.filter {
         point in
-        return isBetween(angle(point - arc.center), lower: arc.start, upper: arc.end)
+        return inside(angle(point - arc.center), range: arc.range)
     }
 }
 

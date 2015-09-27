@@ -63,11 +63,11 @@ func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double
         guard distance <= maxDistance else {
             return nil
         }
-        guard isBetween(a, lower: arc.start, upper: arc.end)else {
+        guard inside(a, range: arc.range)else {
             return nil
         }
                 
-        return (normalize360(a-arc.start)/normalize360(arc.end-arc.start), arc.center + Vec2d(radius: arc.radius, angle: a))
+        return (normalize360(a-arc.range.start)/normalize360(arc.range.end-arc.range.start), arc.center + Vec2d(radius: arc.radius, angle: a))
     }
 }
 

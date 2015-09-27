@@ -110,18 +110,6 @@ public func normalize360(angle: Angle) -> Angle{
     }
 }
 
-public func isBetween(angle: Angle, lower: Angle, upper: Angle) -> Bool {
-    let a = normalize360(angle)
-    let l = normalize360(lower)
-    let u = normalize360(upper)
-    
-    if  l < u {
-        return l <= a && a <= u
-    } else {
-        return l <= a || a <= u
-    }
-}
-
 public func min(a: Vec2d, _ b: Vec2d) -> Vec2d {
     return Vec2d(x: min(a.x,b.x), y: min(a.y,b.y))
 }

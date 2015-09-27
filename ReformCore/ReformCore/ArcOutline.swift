@@ -56,7 +56,7 @@ struct ArcOutline : Outline {
                 return []
         }
         
-        return [Segment.Arc(Arc2d(center: c, radius: r, start: a1, end:a2))]
+        return [Segment.Arc(Arc2d(center: c, radius: r, range: AngleRange(start: a1, end:a2)))]
     }
 
     func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {

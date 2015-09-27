@@ -26,9 +26,9 @@ func drawSegmentPath(context: CGContext, path: SegmentPath) {
             CGContextMoveToPoint(context, CGFloat(line.from.x), CGFloat(line.from.y))
             CGContextAddLineToPoint(context, CGFloat(line.to.x), CGFloat(line.to.y))
         case .Arc(let arc):
-            let startPoint = arc.center + Vec2d(radius: arc.radius, angle: arc.start)
+            let startPoint = arc.center + Vec2d(radius: arc.radius, angle: arc.range.start)
             CGContextMoveToPoint(context, CGFloat(startPoint.x), CGFloat(startPoint.y))
-            CGContextAddArc(context, CGFloat(arc.center.x), CGFloat(arc.center.y), CGFloat(arc.radius), CGFloat(arc.start.radians), CGFloat(arc.end.radians), 0)
+            CGContextAddArc(context, CGFloat(arc.center.x), CGFloat(arc.center.y), CGFloat(arc.radius), CGFloat(arc.range.start.radians), CGFloat(arc.range.end.radians), 0)
         }
         
         

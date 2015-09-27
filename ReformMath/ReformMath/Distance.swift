@@ -11,6 +11,5 @@ public func distance(point pointA: Vec2d, point pointB: Vec2d) -> Double {
 }
 
 public func distance(point point: Vec2d, line: Line2d) -> Double {
-    // todo implement
-    fatalError()
+    return abs(dot((point - line.from), orthogonal(line.direction)))
 }

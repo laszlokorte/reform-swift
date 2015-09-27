@@ -10,8 +10,8 @@
 public struct Segment2d : Equatable {
     let arc : Arc2d
 
-    public init(center: Vec2d, radius:Double, start: Angle, end: Angle) {
-        self.arc = Arc2d(center: center, radius: radius, start: start, end: end)
+    public init(center: Vec2d, radius:Double, range: AngleRange) {
+        self.arc = Arc2d(center: center, radius: radius, range: range)
     }
 }
 

@@ -46,8 +46,8 @@ struct CircleOutline : Outline {
             return []
         }
         return [
-            Segment.Arc(Arc2d(center: c, radius: r, start: a, end:normalize360(a+Angle(percent: 50)))),
-            Segment.Arc(Arc2d(center: c, radius: r, start: normalize360(a+Angle(percent: 50)), end:normalize360(a+Angle(percent: 100))))
+            Segment.Arc(Arc2d(center: c, radius: r, range: AngleRange(start: a, end:normalize360(a+Angle(percent: 50))))),
+            Segment.Arc(Arc2d(center: c, radius: r, range: AngleRange(start: normalize360(a+Angle(percent: 50)), end:normalize360(a+Angle(percent: 100)))))
         ]
     }
 
