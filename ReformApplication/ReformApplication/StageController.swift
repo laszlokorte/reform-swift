@@ -83,7 +83,7 @@ final class StageController : NSViewController {
     func configureCanvas(canvas: CanvasView, withStage stageModel: StageViewModel) {
         toolController = stageModel.toolController
 
-        let sr = StageRenderer(stage: stageModel.stage)
+        let sr = StageRenderer(stage: stageModel.stage, camera: stageModel.camera, maskUI: stageModel.stageUI.maskUI)
         stageRenderer = sr
         let slr = SelectionUIRenderer(selectionUI: stageModel.stageUI.selectionUI, stage: stageModel.stage, camera: stageModel.camera)
         selectionRenderer = slr
