@@ -51,7 +51,6 @@ final class StageRenderer : Renderer {
                 drawSegmentPath(context, path:entity.outline)
 
                 CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-
             }
         }
     }
