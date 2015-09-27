@@ -45,7 +45,7 @@ public struct FormIteratorInstruction : GroupInstruction {
             stringifier.labelFor($0) ?? "???"
         }).joinWithSeparator(", ")
 
-        return "Foreach \(names) as \(proxyForm.name):"
+        return "With each  [\(names)] as \(proxyForm.name) do:"
     }
 
 
