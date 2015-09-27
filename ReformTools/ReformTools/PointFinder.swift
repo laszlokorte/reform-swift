@@ -64,7 +64,7 @@ extension FormFilter {
             return intersects(excl, id: id)
         }
         if case .Only(let only) = self {
-            return !intersects(only, id: id)
+            return id.runtimeId != only.runtimeId
         }
 
         return false
