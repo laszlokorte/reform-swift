@@ -125,6 +125,10 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
+        if instructions[selectedIndex].node.isDeeperThan(2) {
+            return
+        }
+
         guard let formIds = procedureViewModel?.formSelection.selected where !formIds.isEmpty else {
             return
         }
