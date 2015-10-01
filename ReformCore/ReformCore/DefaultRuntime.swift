@@ -14,8 +14,11 @@ final public class DefaultRuntime : Runtime {
     public static let maxDepth : Int = 3
     private var _running : Bool
     private var _canceled : Bool
+
     private var stack = RuntimeStack()
     private var dataSet : DataSet
+
+    private var _depth : Int
     
     private var currentInstructions = [Evaluatable]()
 
@@ -25,10 +28,23 @@ final public class DefaultRuntime : Runtime {
         dataSet = WritableDataSet()
         _running = false
         _canceled = false
+        _depth = 0
+    }
+
+    init(depth: Int) {
+        dataSet = WritableDataSet()
+        _running = false
+        _canceled = false
+        _depth = depth
     }
     
-    public func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (picture: T.CallType) -> ()) {
+    public func subCall(id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (runtime: DefaultRuntime, picture: Picture) -> ()) {
+        if _depth > DefaultRuntime.maxDepth {
+            return
+        }
+
         self.dataSet = dataSet
+        callback(runtime: DefaultRuntime(depth: _depth+1), picture: Picture(identifier : id, name: "Test", size: (width, height), data: BaseSheet(), procedure : Procedure()))
         
     }
 

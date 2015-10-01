@@ -8,8 +8,7 @@
 
 import ReformExpression
 
-public struct PictureIdentifier : Hashable, SubCallId {
-    public typealias CallType = Picture
+public struct PictureIdentifier : Hashable {
     public let value : Int
     
     public init(_ id : Int) {

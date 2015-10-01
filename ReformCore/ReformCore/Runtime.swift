@@ -8,10 +8,6 @@
 
 import ReformExpression
 
-public protocol SubCallId {
-    typealias CallType
-}
-
 public protocol RuntimeListener {
     func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize: (Double, Double))
     func runtimeFinishEvaluation<R:Runtime>(runtime: R)
@@ -26,7 +22,7 @@ public protocol Runtime {
     
     var listeners : [RuntimeListener] { get set }
     
-    func subCall<T:SubCallId>(id: T, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (picture: T.CallType) -> ())
+    func subCall(id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (runtime: Self, picture: Picture) -> ())
     
     func run(width width: Double, height: Double, @noescape block: (Self) -> ())
     

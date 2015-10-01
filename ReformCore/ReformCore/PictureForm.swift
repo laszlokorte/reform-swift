@@ -9,6 +9,7 @@
 
 import ReformMath
 import ReformGraphics
+import ReformExpression
 
 
 final public class PictureForm : Form, Creatable {
@@ -26,7 +27,7 @@ final public class PictureForm : Form, Creatable {
         set { rectangle.name = newValue }
     }
     
-    var pictureIdentifier : PictureIdentifier? = nil
+    var pictureIdentifier : PictureIdentifier? = PictureIdentifier(0)
     
     public init(id: FormIdentifier, name : String) {
         self.rectangle = RectangleForm(id: id, name: name)
@@ -50,6 +51,22 @@ final public class PictureForm : Form, Creatable {
     
     public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
         rectangle.initWithRuntime(runtime, min: min, max: max)
+        let width = abs(max.x - min.x)
+        let height = abs(max.y - min.y)
+
+        guard let pictureIdentifier = pictureIdentifier else {
+            return
+        }
+
+        guard let runtime = runtime as? DefaultRuntime else {
+            return
+        }
+
+        runtime.subCall(pictureIdentifier, width: width, height: height, makeFit: false, dataSet: WritableDataSet()) { (runtime, picture : Picture) in
+
+            picture.procedure.evaluateWith(width: width, height: height, runtime: runtime)
+
+        }
     }
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
