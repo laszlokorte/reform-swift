@@ -21,9 +21,13 @@ extension Modifier {
         if event.modifierFlags.contains(.AlternateKeyMask) {
             result.unionInPlace(Modifier.AlternativeAlignment)
         }
-        
+
         if event.modifierFlags.contains(.CommandKeyMask) {
             result.unionInPlace(Modifier.Glomp)
+        }
+
+        if event.modifierFlags.contains(.ControlKeyMask) {
+            result.unionInPlace(Modifier.Free)
         }
 
         

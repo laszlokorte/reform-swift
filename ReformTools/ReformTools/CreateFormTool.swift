@@ -96,7 +96,8 @@ public final class CreateFormTool : Tool {
     }
     
     public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
-        snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
+        snapType = modifier.contains(.Glomp) ? [.Glomp] :
+            modifier.contains(.Free) ? [.None] : [.Form, .Intersection]
         
         aligner.setMode(modifier.isAlignOption ? .Centered : .Aligned)
         if modifier.isStreight {

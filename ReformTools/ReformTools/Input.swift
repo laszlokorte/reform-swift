@@ -19,6 +19,7 @@ public struct Modifier : OptionSetType {
     public static let Streight = Modifier(rawValue: 1)
     public static let AlternativeAlignment = Modifier(rawValue: 2)
     public static let Glomp = Modifier(rawValue: 4)
+    public static let Free = Modifier(rawValue: 8)
 }
 
 public func ==(lhs: Modifier, rhs: Modifier) -> Bool {
