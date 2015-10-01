@@ -101,12 +101,26 @@ extension ProcedureController : NSTableViewDelegate {
 
 extension ProcedureController : NSMenuDelegate {
     @IBAction func wrapInstructionInLoop(sender: AnyObject) {
+        guard let selectedIndexes = tableView?.selectedRowIndexes where selectedIndexes.count > 0 else {
+            return
+        }
+
+        guard let seq = InstructionNodeSequence(nodes: selectedIndexes.map { instructions[$0].node }) else {
+            return
+        }
+
+        seq.wrapIn(ForLoopInstruction(expression: .Constant(Value(int: 10))))
+
+        procedureViewModel?.instructionChanger()
+    }
+
+    @IBAction func unwrapInstruction(sender: AnyObject) {
         guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
             return
         }
 
-        instructions[selectedIndex].node.wrapIn(ForLoopInstruction(expression: .Constant(Value(int: 10))))
-
+        instructions[selectedIndex].node.unwrap()
+        
         procedureViewModel?.instructionChanger()
     }
 

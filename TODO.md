@@ -36,7 +36,7 @@ Swift
 The following was already implement in java but has to be ported/adopted to the swift implementation
 
 - [ ] make forms markable as "guide"
-- [ ] Generate correct form names
+- [x] Generate correct form names
 - [ ] EventFlow (stream api? notificationcenter?)
 - [x] Analyzer: collect nodes
 - [x] Draw Arc

@@ -107,6 +107,7 @@
 		F2CA10B81BA09DA000A7864A /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA10B71BA09DA000A7864A /* VM.swift */; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
 		F2E600091BBDBB390022FE56 /* GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E600081BBDBB390022FE56 /* GridPoint.swift */; };
+		F2E6000D1BBDCBFF0022FE56 /* NodeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6000C1BBDCBFF0022FE56 /* NodeSequence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +224,7 @@
 		F2CA10B71BA09DA000A7864A /* VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VM.swift; sourceTree = "<group>"; };
 		F2DC43C01B81E247006748E0 /* InstructionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionNode.swift; sourceTree = "<group>"; };
 		F2E600081BBDBB390022FE56 /* GridPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPoint.swift; sourceTree = "<group>"; };
+		F2E6000C1BBDCBFF0022FE56 /* NodeSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeSequence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -648,6 +650,7 @@
 			isa = PBXGroup;
 			children = (
 				F2DC43C01B81E247006748E0 /* InstructionNode.swift */,
+				F2E6000C1BBDCBFF0022FE56 /* NodeSequence.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				F2A1049B1B82062D00E97C6B /* RelativeDistance.swift in Sources */,
 				F26D47061B7D2D5C00266096 /* DefaultRuntime.swift in Sources */,
 				F26D46BC1B7D10FB00266096 /* Length.swift in Sources */,
+				F2E6000D1BBDCBFF0022FE56 /* NodeSequence.swift in Sources */,
 				F26D46C61B7D130D00266096 /* TranslationDistance.swift in Sources */,
 				F26D473A1B7D477700266096 /* AnchorPoint.swift in Sources */,
 				F250B0851B88C8D90081462A /* PointAngle.swift in Sources */,

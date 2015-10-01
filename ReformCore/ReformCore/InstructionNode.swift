@@ -206,7 +206,7 @@ extension InstructionNode {
         }
 
         for c in children.suffixFrom(1) {
-            self.append(sibling: c)
+            self.prepend(sibling: c)
         }
 
         return self.removeFromParent()
