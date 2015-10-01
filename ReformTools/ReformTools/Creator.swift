@@ -18,11 +18,11 @@ public final class InstructionCreator {
     private var state : CreationState = .Idle
     
     let focus : InstructionFocus
-    let notifier : (Bool) -> ()
+    let intend : (commit: Bool) -> ()
     
-    public init(focus: InstructionFocus, notifier: (Bool) -> ()) {
+    public init(focus: InstructionFocus, intend: (commit: Bool) -> ()) {
         self.focus = focus
-        self.notifier = notifier
+        self.intend = intend
     }
     
     func beginCreation<I:Instruction>(instruction : I) {
@@ -40,7 +40,7 @@ public final class InstructionCreator {
                 state = .Creating(original: focused, node)
             }
 
-            notifier(false)
+            intend(commit: false)
         }
     }
     
@@ -49,13 +49,13 @@ public final class InstructionCreator {
             focus.current = original
             node.removeFromParent()
             state = .Idle
-            notifier(false)
+            intend(commit: false)
         } else if case .Amending(let original, let node) = state {
             focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
             state = .Idle
-            notifier(false)
+            intend(commit: false)
         }
     }
     
@@ -69,7 +69,7 @@ public final class InstructionCreator {
             } else {
                 node.replaceWith(instruction)
             }
-            notifier(false)
+            intend(commit: false)
         } else if case .Amending(let original, let node) = state {
             if let merged = original.mergedWith(instruction) {
                 node.replaceWith(merged)
@@ -79,7 +79,7 @@ public final class InstructionCreator {
                 focus.current = node
                 state = .Creating(original: original, node)
             }
-            notifier(false)
+            intend(commit: false)
         }
     }
     
@@ -88,9 +88,9 @@ public final class InstructionCreator {
             if node.isDegenerated {
                 focus.current = original
                 node.removeFromParent()
-                notifier(false)
+                intend(commit: false)
             } else {
-                notifier(true)
+                intend(commit: true)
             }
 
             state = .Idle
@@ -99,9 +99,9 @@ public final class InstructionCreator {
                 focus.current = original
                 node.prepend(sibling: original)
                 node.removeFromParent()
-                notifier(false)
+                intend(commit: false)
             } else {
-                notifier(true)
+                intend(commit: true)
             }
 
             state = .Idle

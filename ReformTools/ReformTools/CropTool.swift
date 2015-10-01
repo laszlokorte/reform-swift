@@ -24,7 +24,7 @@ public final class CropTool : Tool {
     let stage : Stage
     let cropGrabber : CropGrabber
     let streightener : Streightener
-    let notifier : () -> ()
+    let intend : () -> ()
 
     public init(stage: Stage, cropGrabber: CropGrabber, streightener: Streightener, picture: ReformCore.Picture, callback: ()->()) {
         self.stage = stage
@@ -32,7 +32,7 @@ public final class CropTool : Tool {
         self.picture = picture
 
         self.streightener = streightener
-        self.notifier = callback
+        self.intend = callback
     }
 
     public func setUp() {
@@ -58,7 +58,7 @@ public final class CropTool : Tool {
             state = .Idle
         case .Cropping(_, let oldSize,_,_):
             picture.size = (oldSize.x, oldSize.y)
-            notifier()
+            intend()
             state = .Idle;
         }
     }
@@ -112,10 +112,8 @@ public final class CropTool : Tool {
 
     private func publish() {
         if case .Cropping(_, _, let size, _) = state {
-
-
             picture.size = (max(5,size.x), max(5,size.y))
-            notifier()
+            intend()
         }
     }
 }

@@ -16,16 +16,16 @@ typealias Picture = ReformCore.Picture
 
 final class InstructionFocusChanger {
     let instructionFocus : InstructionFocus
-    let callback : () -> ()
+    let intent : () -> ()
 
-    init(instructionFocus : InstructionFocus, callback: () -> ()) {
+    init(instructionFocus : InstructionFocus, intend: () -> ()) {
         self.instructionFocus = instructionFocus
-        self.callback = callback
+        self.intent = intend
     }
 
     func setFocus(node : InstructionNode?) {
         self.instructionFocus.current = node
-        callback()
+        intent()
     }
 }
 
