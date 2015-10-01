@@ -59,7 +59,7 @@ The following was already implement in java but has to be ported/adopted to the 
 - [-] Creation-Tool Dropdown
 - [ ] Make toolbar hightlight robust
 - [ ] Menubar
-- [ ] Non-Rotation-Handles (Arc, Pie)
+- [x] Non-Rotation-Handles (Arc, Pie)
 - [ ] Auto-center Circle
 - [ ] Formtype-dependent streightening
 - [x] fix responder-chain for toolbar
@@ -71,12 +71,12 @@ The following was already implement in java but has to be ported/adopted to the 
 - [ ] custom attributes
 - [ ] Tooltips
 - [ ] Negative Pie scaling
-- [ ] Improve Angle-range handling
+- [x] Improve Angle-range handling
 - [x] Text Rendering
 - [ ] Multiple Windows/Projects
 - [ ] Canvas focus/default responder
 - [ ] color chooser
-- [ ] fix arc/pie intersections
+- [x] fix arc/pie intersections
 - [ ] simplify glomp/intersection calculation
 - [ ] simplify/unify linesegment/arc/shape/path/hitarea api
 
@@ -97,8 +97,10 @@ features for which is not yet decided how to implement them in detail or how the
 
 - [ ] strongly typed attributes/parameters/data/measurments
 - [ ] Iterate over points
-- [ ] Itetate over forms
-- [ ] "Reference"-forms in difference colors with generalized snap/grap points
+- [x] Itetate over forms
+- [ ] "Proxy"-forms in difference colors with generalized snap/grap points
+    - [x] basically working
+    - [ ] fix rotation
 - [ ] Form Groups (transform multiple forms in one step)
 - [ ] Snap point filter (option to show only snap points of selected form)
 - [ ] Path Tool (Runtime Heap to store path points)
@@ -107,6 +109,8 @@ features for which is not yet decided how to implement them in detail or how the
 - [ ] Export JavaScript (eg d3)
 - [ ] Export bytecode
 - [ ] Zoom/Camera
+    - [x] basially working
+    - [ ] improve to work more like expected from other apps
 - [ ] Masking (Instruction scopes?)
 - [ ] Layers, Boolean Combination
 - [ ] List of errors
@@ -130,7 +134,7 @@ features which are streightforward to implement
 - [ ] changeable Form names
 - [ ] Undo/Redo
 - [ ] Manual No-Snap mode
-- [ ] merge consecutive instructions if possible
+- [x] merge consecutive instructions if possible
 - [ ] improve scrolling when resizing canvas
 - [ ] Increment/Decrement Expressions
 - [ ] Iteration Focus
