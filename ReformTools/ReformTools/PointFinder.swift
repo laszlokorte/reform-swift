@@ -161,6 +161,21 @@ struct PointFinder {
                 result.append(intersection)
             }
         }
+
+        if query.pointType.contains(.Grid) {
+            for x in (0...10) {
+                for y in (0...10) {
+                    let percent = Vec2d(x:Double(x) / 10, y:Double(y) / 10)
+                    let position = percent * stage.size
+
+                    guard query.location.matches(position) else {
+                        continue
+                    }
+
+                    result.append(GridSnapPoint(position: position, point: GridPoint(percent: percent)))
+                }
+            }
+        }
         
         return result
     }

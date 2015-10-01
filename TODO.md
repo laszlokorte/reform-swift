@@ -116,7 +116,7 @@ features for which is not yet decided how to implement them in detail or how the
 - [ ] List of errors
 - [ ] Magnets
 - [ ] Rulers (vertical and horinzontally lines, position stored in %)
-- [ ] snap to grid (configurable grid size, store location in %)
+- [x] snap to grid (configurable grid size, store location in %)
 
 Minor improvements:
 -------------------

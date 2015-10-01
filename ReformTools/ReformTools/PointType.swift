@@ -16,4 +16,5 @@ struct PointType : OptionSetType {
     static let Form = PointType(rawValue: 1)
     static let Intersection = PointType(rawValue: 2)
     static let Glomp = PointType(rawValue: 4)
+    static let Grid = PointType(rawValue: 8)
 }

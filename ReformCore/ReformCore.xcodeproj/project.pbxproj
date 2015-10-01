@@ -16,14 +16,14 @@
 		F222AF4E1B8881AF005F71A1 /* ArcOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4D1B8881AF005F71A1 /* ArcOutline.swift */; };
 		F222AF501B88B864005F71A1 /* AbsoluteScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF4F1B88B864005F71A1 /* AbsoluteScaler.swift */; };
 		F2339AFA1B8D2BAD00C0AE41 /* ReferenceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339AF91B8D2BAD00C0AE41 /* ReferenceId.swift */; };
-		F236C0E01BB4F8BD0051FA6B /* FormInteratorInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0DF1BB4F8BC0051FA6B /* FormInteratorInstruction.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0E31BB4FBF60051FA6B /* ProxyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E21BB4FBF60051FA6B /* ProxyForm.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0E51BB514090051FA6B /* ProxyRotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E41BB514090051FA6B /* ProxyRotator.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0E71BB514520051FA6B /* StaticFormReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E61BB514520051FA6B /* StaticFormReference.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0E91BB516270051FA6B /* ProxyScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E81BB516270051FA6B /* ProxyScaler.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0EB1BB516740051FA6B /* ProxyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0EA1BB516740051FA6B /* ProxyTranslator.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0ED1BB517B40051FA6B /* ProxyOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0EC1BB517B40051FA6B /* ProxyOutline.swift */; settings = {ASSET_TAGS = (); }; };
-		F236C0F01BB518950051FA6B /* ProxyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0EF1BB518950051FA6B /* ProxyPoint.swift */; settings = {ASSET_TAGS = (); }; };
+		F236C0E01BB4F8BD0051FA6B /* FormInteratorInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0DF1BB4F8BC0051FA6B /* FormInteratorInstruction.swift */; };
+		F236C0E31BB4FBF60051FA6B /* ProxyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E21BB4FBF60051FA6B /* ProxyForm.swift */; };
+		F236C0E51BB514090051FA6B /* ProxyRotator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E41BB514090051FA6B /* ProxyRotator.swift */; };
+		F236C0E71BB514520051FA6B /* StaticFormReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E61BB514520051FA6B /* StaticFormReference.swift */; };
+		F236C0E91BB516270051FA6B /* ProxyScaler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0E81BB516270051FA6B /* ProxyScaler.swift */; };
+		F236C0EB1BB516740051FA6B /* ProxyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0EA1BB516740051FA6B /* ProxyTranslator.swift */; };
+		F236C0ED1BB517B40051FA6B /* ProxyOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0EC1BB517B40051FA6B /* ProxyOutline.swift */; };
+		F236C0F01BB518950051FA6B /* ProxyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0EF1BB518950051FA6B /* ProxyPoint.swift */; };
 		F23BCFB81BA9F100001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB71BA9F100001A04EF /* ReformMath.framework */; };
 		F23BCFBA1BA9F105001A04EF /* ReformExpression.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB91BA9F105001A04EF /* ReformExpression.framework */; };
 		F23BCFBC1BA9F108001A04EF /* ReformGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBB1BA9F108001A04EF /* ReformGraphics.framework */; };
@@ -106,6 +106,7 @@
 		F2A104D31B82387700E97C6B /* FixSizeDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A104D21B82387700E97C6B /* FixSizeDestination.swift */; };
 		F2CA10B81BA09DA000A7864A /* VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CA10B71BA09DA000A7864A /* VM.swift */; };
 		F2DC43C11B81E247006748E0 /* InstructionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DC43C01B81E247006748E0 /* InstructionNode.swift */; };
+		F2E600091BBDBB390022FE56 /* GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E600081BBDBB390022FE56 /* GridPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +222,7 @@
 		F2A104D21B82387700E97C6B /* FixSizeDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixSizeDestination.swift; sourceTree = "<group>"; };
 		F2CA10B71BA09DA000A7864A /* VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VM.swift; sourceTree = "<group>"; };
 		F2DC43C01B81E247006748E0 /* InstructionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionNode.swift; sourceTree = "<group>"; };
+		F2E600081BBDBB390022FE56 /* GridPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +375,7 @@
 				F26D470A1B7D342300266096 /* Composed */,
 				F26D46FB1B7D23F800266096 /* Static */,
 				F236C0EE1BB518760051FA6B /* Proxy */,
+				F2E600071BBDBB130022FE56 /* Grid */,
 				F26D47361B7D43D200266096 /* Constant */,
 				F26D46B51B7D101700266096 /* Direction.swift */,
 				F26D46B71B7D106E00266096 /* InitialDestination.swift */,
@@ -649,6 +652,14 @@
 			name = Nodes;
 			sourceTree = "<group>";
 		};
+		F2E600071BBDBB130022FE56 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				F2E600081BBDBB390022FE56 /* GridPoint.swift */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -841,6 +852,7 @@
 				F26D47011B7D273B00266096 /* BasicPointRotator.swift in Sources */,
 				F24AAFCE1B8150CA008DF952 /* DefaultAnalyzer.swift in Sources */,
 				F26D46CB1B7D13A000266096 /* Analyzable.swift in Sources */,
+				F2E600091BBDBB390022FE56 /* GridPoint.swift in Sources */,
 				F236C0E91BB516270051FA6B /* ProxyScaler.swift in Sources */,
 				F26D47141B7D37C100266096 /* PieForm.swift in Sources */,
 				F26D46C01B7D116100266096 /* RotationAngle.swift in Sources */,

@@ -83,7 +83,7 @@ public final class MoveTool : Tool {
     }
     
     public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
-        snapType = modifier.contains(.Glomp) ? [.Glomp] : modifier.contains(.Free) ? [.None] : [.Form, .Intersection]
+        snapType = modifier.contains(.Glomp) ? (modifier.contains(.Free) ? [.Grid] : [.Glomp]) : modifier.contains(.Free) ? [.None] : [.Form, .Intersection]
         
         if modifier.isStreight {
             streightener.enable()

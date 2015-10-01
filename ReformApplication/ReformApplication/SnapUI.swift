@@ -30,7 +30,7 @@ struct SnapUIRenderer : Renderer {
             CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
             CGContextSetLineWidth(context, 1*inverse)
             for p in points {
-                drawDotAt(context, position: p.position, size: dotSize)
+                drawDotAt(context, position: p.position, size: p is GridSnapPoint ? 0.6*dotSize :dotSize)
             }
             CGContextDrawPath(context, .FillStroke)
         case .Active(let active, let points):
@@ -47,7 +47,7 @@ struct SnapUIRenderer : Renderer {
             CGContextSetRGBStrokeColor(context, 0.8, 0.5, 0.1, 1)
             CGContextSetLineWidth(context, 1*inverse)
             for p in points {
-                drawDotAt(context, position: p.position, size: dotSize)
+                drawDotAt(context, position: p.position, size: p is GridSnapPoint ? 0.6*dotSize :dotSize)
             }
             CGContextDrawPath(context, .FillStroke)
 
