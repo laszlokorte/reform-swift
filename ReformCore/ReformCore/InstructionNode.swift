@@ -307,6 +307,19 @@ extension InstructionNode : Analyzable {
     }
 }
 
+extension InstructionNode {
+    public var instruction : Any? {
+        switch content {
+        case .Null:
+            return nil
+        case .Single(let instruction):
+            return instruction
+        case .Group(let group, _):
+            return group
+        }
+    }
+}
+
 
 public enum InstructionContent {
     case Null

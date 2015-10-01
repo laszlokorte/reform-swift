@@ -191,15 +191,41 @@ extension ProcedureController : NSMenuDelegate {
 
     @IBAction func doubleClick(sender: AnyObject) {
 
-        guard let popOverViewController = storyboard?.instantiateControllerWithIdentifier("instructionDetailController") as? NSViewController else {
-            return
-        }
 
 
         guard let row = tableView?.selectedRow where row > 0, let cell = tableView?.viewAtColumn(0, row: row, makeIfNecessary: false) else {
             return
         }
 
+
+        let controllerID : String
+
+        switch instructions[row].node.instruction {
+        case _ as ForLoopInstruction:
+            controllerID = "forInstructionDetailController"
+        case _ as IfConditionInstruction:
+            controllerID = "ifInstructionDetailController"
+        case _ as FormIteratorInstruction:
+            controllerID = "iteratorInstructionDetailController"
+        case _ as CreateFormInstruction:
+            controllerID = "createFormInstructionDetailController"
+        case _ as TranslateInstruction:
+            controllerID = "translateInstructionDetailController"
+        case _ as RotateInstruction:
+            controllerID = "rotateInstructionDetailController"
+        case _ as ScaleInstruction:
+            controllerID = "scaleInstructionDetailController"
+        case _ as MorphInstruction:
+            controllerID = "morphInstructionDetailController"
+        default:
+            return
+        }
+
+        guard let popOverViewController = storyboard?.instantiateControllerWithIdentifier(controllerID) as? NSViewController else {
+            return
+        }
+
+        popOverViewController.representedObject = instructions[row].node
 
         self.presentViewController(popOverViewController, asPopoverRelativeToRect: cell.frame, ofView: cell, preferredEdge: NSRectEdge.MaxX, behavior: NSPopoverBehavior.Transient)
 

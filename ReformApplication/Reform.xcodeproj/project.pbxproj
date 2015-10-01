@@ -26,7 +26,7 @@
 		F2339B011B8D4A2A00C0AE41 /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B001B8D4A2A00C0AE41 /* StageViewModel.swift */; };
 		F2339B041B8D534F00C0AE41 /* ProcedureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */; };
 		F2339B061B8D5AAE00C0AE41 /* ProcedureCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */; };
-		F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */; settings = {ASSET_TAGS = (); }; };
+		F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */; };
 		F23BCFBE1BA9F122001A04EF /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; };
 		F23BCFBF1BA9F122001A04EF /* ReformStage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F23BCFC11BA9F130001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC01BA9F130001A04EF /* ReformCore.framework */; };
@@ -54,6 +54,7 @@
 		F2DF63681B927E1D00A2EFB6 /* StageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */; };
 		F2DF636A1B927E7100A2EFB6 /* MaskUIRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */; };
 		F2DF636C1B929A4800A2EFB6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF636B1B929A4800A2EFB6 /* GradientView.swift */; };
+		F2E600101BBDDE940022FE56 /* MoveInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6000F1BBDDE940022FE56 /* MoveInstructionDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageRenderer.swift; sourceTree = "<group>"; };
 		F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskUIRenderer.swift; sourceTree = "<group>"; };
 		F2DF636B1B929A4800A2EFB6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		F2E6000F1BBDDE940022FE56 /* MoveInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveInstructionDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 		F26D45B81B7D090000266096 /* ReformApplication */ = {
 			isa = PBXGroup;
 			children = (
+				F2E6000E1BBDDE6B0022FE56 /* InstructionDetails */,
 				F2339B021B8D533E00C0AE41 /* ViewModels */,
 				F2339AFB1B8D320700C0AE41 /* Sidebar */,
 				F2339AF41B8D258900C0AE41 /* Session */,
@@ -296,6 +299,14 @@
 				F26D45D81B7D090000266096 /* Info.plist */,
 			);
 			path = ReformApplicationUITests;
+			sourceTree = "<group>";
+		};
+		F2E6000E1BBDDE6B0022FE56 /* InstructionDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F2E6000F1BBDDE940022FE56 /* MoveInstructionDetailController.swift */,
+			);
+			name = InstructionDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,6 +447,7 @@
 				F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */,
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */,
+				F2E600101BBDDE940022FE56 /* MoveInstructionDetailController.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
 				F222AF0A1B835CD8005F71A1 /* Renderer.swift in Sources */,
