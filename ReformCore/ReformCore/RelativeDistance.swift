@@ -12,9 +12,9 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
     public typealias PointType = protocol<RuntimePoint, Labeled>
     public typealias DirectionType = protocol<RuntimeDirection, Labeled>
     
-    let from: PointType
-    let to: PointType
-    let direction : DirectionType
+    public let from: PointType
+    public let to: PointType
+    public let direction : DirectionType
     
     public init(from: PointType, to: PointType, direction: DirectionType) {
         self.from = from

@@ -56,12 +56,25 @@ final class PictureController : NSViewController {
         }
     }
 
+    var attributesController : AttributesController? {
+        didSet {
+            if let pictureSession = representedObject as? PictureSession,
+                attributesController = attributesController {
+                    updateAttributes(attributesController, withSession: pictureSession)
+            }
+        }
+    }
+
     func updateStage(stage: StageController, withSession pictureSession: PictureSession) {
         stage.representedObject = StageViewModel(stage: pictureSession.stage, stageUI: pictureSession.stageUI, toolController: pictureSession.toolController, selection: pictureSession.formSelection, camera: pictureSession.camera)
     }
 
     func updateProcedure(procedureController: ProcedureController, withSession pictureSession: PictureSession) {
         procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus, snapshotCollector: pictureSession.snapshotCollector, instructionFocusChanger: pictureSession.instructionFocusChanger, formSelection: pictureSession.formSelection, formIdSequence: pictureSession.formIDSequence, nameAllocator: pictureSession.nameAllocator, instructionChanger: pictureSession.procedureProcessor.trigger)
+    }
+
+    func updateAttributes(attributesController: AttributesController, withSession pictureSession: PictureSession) {
+        attributesController.representedObject = AttributesViewModel()
     }
 
 
@@ -73,6 +86,10 @@ final class PictureController : NSViewController {
 
         if let p = segue.destinationController as? ProcedureController {
             self.procedureController = p
+        }
+
+        if let p = segue.destinationController as? AttributesController {
+            self.attributesController = p
         }
 
     }

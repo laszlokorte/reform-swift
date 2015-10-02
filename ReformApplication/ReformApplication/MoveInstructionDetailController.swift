@@ -10,7 +10,15 @@ import Cocoa
 import ReformCore
 
 class MoveInstructionDetailController : NSViewController {
-    @IBOutlet var distanceLabel : NSTextField?
+    @IBOutlet var verticalDistanceField : NSTextField?
+    @IBOutlet var horizontalDistanceField : NSTextField?
+    @IBOutlet var relativeDistanceLabel : NSTextField?
+    @IBOutlet var tabView : NSTabView?
+    @IBOutlet var relativeDistanceTab : NSTabViewItem?
+    @IBOutlet var constantDistanceTab : NSTabViewItem?
+
+
+    var stringifier : Stringifier?
 
     override var representedObject : AnyObject? {
         didSet {
@@ -31,17 +39,20 @@ class MoveInstructionDetailController : NSViewController {
             return
         }
 
-        let labelText : String
-
-        switch instruction.distance {
-        case let d as RelativeDistance:
-            labelText = "Relative"
-        case let d as ConstantDistance:
-            labelText = "Constant"
-        default:
+        guard let stringifier = stringifier else {
             return
         }
 
-        distanceLabel?.stringValue = labelText
+        switch instruction.distance {
+        case let d as RelativeDistance:
+            relativeDistanceLabel?.stringValue = "\(d.from.getDescription(stringifier)) to \(d.to.getDescription(stringifier))"
+            tabView?.selectTabViewItem(relativeDistanceTab)
+        case let d as ConstantDistance:
+            tabView?.selectTabViewItem(constantDistanceTab)
+            horizontalDistanceField?.doubleValue = d.delta.x
+            verticalDistanceField?.doubleValue = d.delta.y
+        default:
+            return
+        }
     }
 }

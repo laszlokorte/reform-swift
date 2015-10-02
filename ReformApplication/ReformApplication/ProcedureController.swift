@@ -225,6 +225,10 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
+        if let mov = popOverViewController as? MoveInstructionDetailController {
+            mov.stringifier = procedureViewModel?.analyzer.stringifier
+
+        }
         popOverViewController.representedObject = instructions[row].node
 
         self.presentViewController(popOverViewController, asPopoverRelativeToRect: cell.frame, ofView: cell, preferredEdge: NSRectEdge.MaxX, behavior: NSPopoverBehavior.Transient)

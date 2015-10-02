@@ -27,6 +27,8 @@
 		F2339B041B8D534F00C0AE41 /* ProcedureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */; };
 		F2339B061B8D5AAE00C0AE41 /* ProcedureCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */; };
 		F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */; };
+		F238ABBB1BBE306B00B9D2D4 /* AttributesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238ABBA1BBE306B00B9D2D4 /* AttributesController.swift */; };
+		F238ABBD1BBE313200B9D2D4 /* AttributesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F238ABBC1BBE313200B9D2D4 /* AttributesViewModel.swift */; };
 		F23BCFBE1BA9F122001A04EF /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; };
 		F23BCFBF1BA9F122001A04EF /* ReformStage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFBD1BA9F122001A04EF /* ReformStage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F23BCFC11BA9F130001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFC01BA9F130001A04EF /* ReformCore.framework */; };
@@ -115,6 +117,8 @@
 		F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureViewModel.swift; sourceTree = "<group>"; };
 		F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureCellView.swift; sourceTree = "<group>"; };
 		F236C0F31BB539E50051FA6B /* AffineHandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleUI.swift; sourceTree = "<group>"; };
+		F238ABBA1BBE306B00B9D2D4 /* AttributesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributesController.swift; sourceTree = "<group>"; };
+		F238ABBC1BBE313200B9D2D4 /* AttributesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributesViewModel.swift; sourceTree = "<group>"; };
 		F23BCFBD1BA9F122001A04EF /* ReformStage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformStage.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformStage.framework"; sourceTree = "<absolute>"; };
 		F23BCFC01BA9F130001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformCore.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<absolute>"; };
 		F23BCFC31BA9F13C001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformExpression.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<absolute>"; };
@@ -223,6 +227,7 @@
 			children = (
 				F2339B001B8D4A2A00C0AE41 /* StageViewModel.swift */,
 				F2339B031B8D534F00C0AE41 /* ProcedureViewModel.swift */,
+				F238ABBC1BBE313200B9D2D4 /* AttributesViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				F2339B051B8D5AAE00C0AE41 /* ProcedureCellView.swift */,
 				F2DF636B1B929A4800A2EFB6 /* GradientView.swift */,
 				F2237FC21B9D43DB00E025A6 /* ExportController.swift */,
+				F238ABBA1BBE306B00B9D2D4 /* AttributesController.swift */,
 			);
 			path = ReformApplication;
 			sourceTree = "<group>";
@@ -448,7 +454,9 @@
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */,
 				F2E600101BBDDE940022FE56 /* MoveInstructionDetailController.swift in Sources */,
+				F238ABBD1BBE313200B9D2D4 /* AttributesViewModel.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
+				F238ABBB1BBE306B00B9D2D4 /* AttributesController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
 				F222AF0A1B835CD8005F71A1 /* Renderer.swift in Sources */,
 				F2DF636C1B929A4800A2EFB6 /* GradientView.swift in Sources */,
