@@ -24,6 +24,8 @@
 		F21403811BB0E92700A6F672 /* Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403801BB0E92700A6F672 /* Containment.swift */; };
 		F21403831BB0E9BD00A6F672 /* Path2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403821BB0E9BD00A6F672 /* Path2d.swift */; };
 		F21403861BB0EF0900A6F672 /* Relations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21403851BB0EF0900A6F672 /* Relations.swift */; };
+		F21A86B71BC041300028CF91 /* Mat3x2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21A86B61BC041300028CF91 /* Mat3x2.swift */; };
+		F21A86B91BC042CD0028CF91 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21A86B81BC042CD0028CF91 /* Scalar.swift */; };
 		F26D46161B7D09F200266096 /* ReformMath.h in Headers */ = {isa = PBXBuildFile; fileRef = F26D46151B7D09F200266096 /* ReformMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F26D461D1B7D09F200266096 /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D46121B7D09F200266096 /* ReformMath.framework */; };
 		F26D46221B7D09F200266096 /* ReformMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D46211B7D09F200266096 /* ReformMathTests.swift */; };
@@ -32,7 +34,7 @@
 		F26D470E1B7D34B700266096 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D470D1B7D34B700266096 /* Operators.swift */; };
 		F26D47311B7D3F7F00266096 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D47301B7D3F7F00266096 /* Functions.swift */; };
 		F27391071B7F8ACE00100F2F /* PathRelations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27391061B7F8ACE00100F2F /* PathRelations.swift */; };
-		F2799BFE1BB81A9E00C4D1E3 /* AngleRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2799BFD1BB81A9E00C4D1E3 /* AngleRange.swift */; settings = {ASSET_TAGS = (); }; };
+		F2799BFE1BB81A9E00C4D1E3 /* AngleRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2799BFD1BB81A9E00C4D1E3 /* AngleRange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		F21403801BB0E92700A6F672 /* Containment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Containment.swift; sourceTree = "<group>"; };
 		F21403821BB0E9BD00A6F672 /* Path2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path2d.swift; sourceTree = "<group>"; };
 		F21403851BB0EF0900A6F672 /* Relations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relations.swift; sourceTree = "<group>"; };
+		F21A86B61BC041300028CF91 /* Mat3x2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mat3x2.swift; sourceTree = "<group>"; };
+		F21A86B81BC042CD0028CF91 /* Scalar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		F26D46121B7D09F200266096 /* ReformMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46151B7D09F200266096 /* ReformMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformMath.h; sourceTree = "<group>"; };
 		F26D46171B7D09F200266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 				F26D46A71B7D0CF400266096 /* Vec2d.swift */,
 				F26D46EF1B7D1AAA00266096 /* Angle.swift */,
 				F214037B1BB064BA00A6F672 /* Constants.swift */,
+				F21A86B81BC042CD0028CF91 /* Scalar.swift */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
@@ -141,6 +146,14 @@
 				F21403821BB0E9BD00A6F672 /* Path2d.swift */,
 			);
 			name = Path;
+			sourceTree = "<group>";
+		};
+		F21A86B51BC041130028CF91 /* Matrix */ = {
+			isa = PBXGroup;
+			children = (
+				F21A86B61BC041300028CF91 /* Mat3x2.swift */,
+			);
+			name = Matrix;
 			sourceTree = "<group>";
 		};
 		F26D46081B7D09F200266096 = {
@@ -185,6 +198,7 @@
 		F26D46EE1B7D1A9F00266096 /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
+				F21A86B51BC041130028CF91 /* Matrix */,
 				F2799BFC1BB81A9400C4D1E3 /* Range */,
 				F21403841BB0EA0200A6F672 /* Path */,
 				F214037D1BB0E6E700A6F672 /* Relations */,
@@ -312,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21A86B91BC042CD0028CF91 /* Scalar.swift in Sources */,
 				F21403811BB0E92700A6F672 /* Containment.swift in Sources */,
 				F26D46F01B7D1AAA00266096 /* Angle.swift in Sources */,
 				F21403751BB05DFD00A6F672 /* Circle2d.swift in Sources */,
@@ -326,6 +341,7 @@
 				F21403831BB0E9BD00A6F672 /* Path2d.swift in Sources */,
 				F26D470E1B7D34B700266096 /* Operators.swift in Sources */,
 				F26D47311B7D3F7F00266096 /* Functions.swift in Sources */,
+				F21A86B71BC041300028CF91 /* Mat3x2.swift in Sources */,
 				F21403861BB0EF0900A6F672 /* Relations.swift in Sources */,
 				F20ABE9B1BB304C400245EB7 /* Overlap.swift in Sources */,
 				F2799BFE1BB81A9E00C4D1E3 /* AngleRange.swift in Sources */,

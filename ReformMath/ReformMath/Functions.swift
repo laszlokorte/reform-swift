@@ -122,3 +122,35 @@ public func max(a: Vec2d, _ b: Vec2d) -> Vec2d {
 public func union(aabb a: AABB2d, aabb b: AABB2d) -> AABB2d {
     return AABB2d(min: min(a.min, b.min), max: max(a.max, b.max))
 }
+
+
+
+public func determinant(matrix m: Mat3x2) -> Double {
+    return m.col1.x * m.col2.y - m.col2.x * m.col1.y
+}
+
+public func inverse(matrix m: Mat3x2) -> Mat3x2? {
+    let det = determinant(matrix: m)
+
+    guard det != 0 else {
+        return nil
+    }
+
+    let invDet = 1/det
+
+    let col1 = Vec2d(
+        x: invDet * (m.col2.y /*(* 1)*/ /*- 0 * m.col3.y*/),
+        y: invDet * (/*0 * m.col3.y*/ -m.col1.y /*(* 1)*/)
+    )
+
+    let col2 = Vec2d(
+        x: invDet * (/*0 * m.col3.x*/ -m.col2.x /*(* 1)*/),
+        y: invDet * (m.col1.x /*(* 1)*/ /*- 0 * m.col3.x*/)
+    )
+
+    let col3 = Vec2d(
+        x: invDet * (m.col2.x * m.col3.y - m.col2.y * m.col3.x),
+        y: invDet * (m.col1.y * m.col3.x - m.col1.x * m.col3.y)
+    )
+    return Mat3x2(col1: col1, col2: col2, col3: col3)
+}

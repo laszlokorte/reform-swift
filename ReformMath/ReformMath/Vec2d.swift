@@ -8,6 +8,7 @@
 
 
 public struct Vec2d :Equatable {
+    public static let Zero = Vec2d(x:0, y:0)
     public static let XAxis = Vec2d(x:1, y:0)
     public static let YAxis = Vec2d(x:0, y:1)
     
