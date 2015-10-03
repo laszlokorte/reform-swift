@@ -46,10 +46,13 @@ public final class SelectionTool : Tool {
     
     let entityFinder : EntityFinder
 
-    public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI) {
+    let indend: () -> ()
+
+    public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI, indend: () -> ()) {
         self.stage = stage
         self.selection = selection
         self.selectionUI = selectionUI
+        self.indend = indend
         
         self.entityFinder = EntityFinder(stage: stage)
     }
@@ -75,8 +78,9 @@ public final class SelectionTool : Tool {
     public func cancel() {
         selection.clear()
         state = .Idle
+        indend()
     }
-    
+
     public func process(input: Input, atPosition position: Vec2d, withModifier: Modifier) {
         changeMode = withModifier.isStreight ? .XOR : .Replace
         
@@ -138,12 +142,16 @@ public final class SelectionTool : Tool {
         switch state {
         case .Selecting(let entity, _, let old):
             selection.select(changeMode.combine(old, with: entity.map{[$0.id.runtimeId]} ?? []))
+            indend()
+
             fallthrough
         case .Idle:
             selectionUI.rect = .Hide
         case .MultiSelect(let from, let to, let old):
             selection.select(changeMode.combine(old, with: entitiesInside(min: from, max: to).map{$0.id.runtimeId}))
             selectionUI.rect = .Show(from, to)
+            indend()
+
         }
     }
 }

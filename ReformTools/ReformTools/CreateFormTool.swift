@@ -176,6 +176,7 @@ public final class CreateFormTool : Tool {
                     )
                     
                     selection.select(form.identifier)
+                    selectionTool.indend()
                     pointSnapper.enable(
                         .Except(.Form(form.identifier)), pointType: snapType)
                     

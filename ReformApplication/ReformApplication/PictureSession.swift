@@ -29,6 +29,23 @@ final class InstructionFocusChanger {
     }
 }
 
+final class FormSelectionChanger {
+    let selection : FormSelection
+
+    init(selection: FormSelection, intend: () -> ()) {
+        self.selection = selection
+    }
+
+    func setSelection(ids: Set<FormIdentifier>) {
+        self.selection.select(ids)
+        publishChange()
+    }
+
+    private func publishChange() {
+        NSNotificationCenter.defaultCenter().postNotificationName("SelectionChanged", object: selection)
+    }
+}
+
 final class ProcedureProcessor<A:Analyzer> {
     let picture : Picture
     let runtime: DefaultRuntime
@@ -155,6 +172,7 @@ final class PictureSession {
 
     let procedureProcessor : ProcedureProcessor<DefaultAnalyzer>
     let instructionFocusChanger : InstructionFocusChanger
+    let formSelectionChanger : FormSelectionChanger
 
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {
         self.nameAllocator = NameAllocator()
@@ -203,6 +221,10 @@ final class PictureSession {
                 triggerEval()
             }
 
+        self.formSelectionChanger = FormSelectionChanger(selection: self.formSelection) {
+
+        }
+
         self.instructionCreator = InstructionCreator(focus: self.instructionFocus) {
             [collector=self.stageCollector, trigger=self.procedureProcessor.trigger] b in
             if b {
@@ -211,7 +233,7 @@ final class PictureSession {
             trigger()
         }
 
-        self.selectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.stageUI.selectionUI)
+        self.selectionTool = SelectionTool(stage: self.stage, selection: self.formSelection, selectionUI: self.stageUI.selectionUI, indend: formSelectionChanger.publishChange)
 
 
         self.createLineTool = CreateFormTool(formType: LineForm.self, idSequence: self.formIDSequence, baseName: "Line", nameAllocator: self.nameAllocator, selection: self.formSelection, pointSnapper: self.pointSnapper, pointGrabber: self.pointGrabber, streightener: self.streightener, aligner: self.aligner, instructionCreator: self.instructionCreator, selectionTool: self.selectionTool)

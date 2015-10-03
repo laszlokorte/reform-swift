@@ -44,6 +44,7 @@ final class StageController : NSViewController {
     var selectionRenderer : SelectionUIRenderer?
     var selection : FormSelection?
     var stage : Stage?
+    var selectionChanger : FormSelectionChanger?
 
     override var representedObject : AnyObject? {
         didSet {
@@ -52,6 +53,7 @@ final class StageController : NSViewController {
                     configureCanvas(canvas, withStage: stageModel)
                 selection = stageModel.selection
                 stage = stageModel.stage
+                selectionChanger = stageModel.selectionChanger
             }
         }
     }
@@ -65,11 +67,18 @@ final class StageController : NSViewController {
             }
         }
     }
-    
-    override func viewDidLoad() {
+
+    override func viewDidAppear() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureEvaluated", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "toolChanged", name:"ToolChanged", object: nil)
+    }
 
+    override func viewDidDisappear() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"ProcedureEvaluated", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"ToolChanged", object: nil)
+    }
+    
+    override func viewDidLoad() {
         if let canvas = canvas {
         
             let trackingOptions : NSTrackingAreaOptions = [.MouseMoved, .EnabledDuringMouseDrag, .ActiveInKeyWindow, .InVisibleRect]
@@ -223,7 +232,7 @@ final class StageController : NSViewController {
 
     override func selectAll(sender: AnyObject?) {
         if let stage = stage {
-            selection?.select(Set(stage.entities.lazy.filter{$0.hitArea != HitArea.None}.map{$0.id.runtimeId}))
+            selectionChanger?.setSelection(Set(stage.entities.lazy.filter{$0.hitArea != HitArea.None}.map{$0.id.runtimeId}))
         }
         canvas?.needsDisplay = true
     }

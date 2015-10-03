@@ -6,6 +6,18 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-class AttributesViewModel {
+import ReformTools
+import ReformCore
+import ReformStage
 
+class AttributesViewModel {
+    let stage : Stage
+    let selection : FormSelection
+    let analyzer : Analyzer
+
+    init(stage : Stage, selection : FormSelection, analyzer: Analyzer) {
+        self.stage = stage
+        self.selection = selection
+        self.analyzer = analyzer
+    }
 }
