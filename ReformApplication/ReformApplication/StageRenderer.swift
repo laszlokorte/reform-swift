@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ReformCore
 import ReformStage
 import ReformTools
 
@@ -48,6 +49,16 @@ final class StageRenderer : Renderer {
             CGContextSetLineWidth(context, 1.5*inverse)
 
             for entity in stage.entities where entity.type == .Proxy{
+                drawSegmentPath(context, path:entity.outline)
+
+                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+            }
+
+            CGContextSetRGBStrokeColor(context, 0.73, 0.62, 0.54, 0.4)
+
+            CGContextSetLineWidth(context, 1.5*inverse)
+
+            for entity in stage.entities where entity.formType == PictureForm.self {
                 drawSegmentPath(context, path:entity.outline)
 
                 CGContextDrawPath(context, CGPathDrawingMode.Stroke)
