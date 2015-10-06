@@ -34,6 +34,7 @@ final public class SnapshotCollector : RuntimeListener {
     private(set) var snapshots = [InstructionNodeKey:NSImage]()
     private(set) var instructions = Set<InstructionNodeKey>()
     private(set) var errors = [InstructionNodeKey:RuntimeError]()
+    private var errorsBuffer = [InstructionNodeKey:RuntimeError]()
     private(set) var paths = [Path]()
 
     let drawQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
@@ -47,7 +48,7 @@ final public class SnapshotCollector : RuntimeListener {
 
     public func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize size: (Double, Double)) {
         paths.removeAll(keepCapacity: false)
-        errors.removeAll(keepCapacity: false)
+        errorsBuffer.removeAll(keepCapacity: false)
         instructions.removeAll(keepCapacity: false)
 
         currentSize = (Double(size.0), Double(size.1))
@@ -63,6 +64,7 @@ final public class SnapshotCollector : RuntimeListener {
     }
 
     public func runtimeFinishEvaluation<R:Runtime>(runtime: R) {
+        swap(&errors, &errorsBuffer)
         self.redraw = false
     }
 
@@ -95,7 +97,7 @@ final public class SnapshotCollector : RuntimeListener {
         let image = imageFor(key)
 
 
-        if errors.keys.contains(key) {
+        if errorsBuffer.keys.contains(key) {
             dispatch_async(drawQueue) { [currentScaled, currentSize] in
                 image.lockFocus()
                 defer { image.unlockFocus() }
@@ -123,24 +125,37 @@ final public class SnapshotCollector : RuntimeListener {
             return
         }
 
-        var currentPaths = [(Bool, Bool, Path)]()
+        var currentPaths = [(guide: Bool, current: Bool, proxy: Bool, path: Path)]()
 
-        for formId in runtime.getForms() {
-            guard let form = runtime.get(formId) as? Drawable else {
-                continue
-            }
+
+        func pushDrawable(drawable: Drawable, formId: FormIdentifier, proxy : Bool) {
             let isCurrent = instruction.target == formId
-            let isGuide = form.drawingMode == .Guide
+            let isGuide = drawable.drawingMode == .Guide
 
             guard isCurrent || !isGuide else {
-                continue
+                return
             }
 
-            guard let path = form.getPathFor(runtime) else {
-                continue
+            guard let path = drawable.getPathFor(runtime) else {
+                return
             }
 
-            currentPaths.append((isGuide, isCurrent, path))
+            currentPaths.append((guide: isGuide, current: isCurrent, proxy: proxy, path: path))
+        }
+
+        for formId in runtime.getForms() {
+            let form = runtime.get(formId)
+
+            if let drawable = form as? Drawable {
+                pushDrawable(drawable, formId: formId, proxy: false)
+
+            } else if let proxy = form as? ProxyForm {
+                if let
+                    proxyId = proxy.getFormIdForRuntime(runtime),
+                    drawable = runtime.get(proxyId) as? Drawable {
+                    pushDrawable(drawable, formId: formId, proxy: true)
+                }
+            }
         }
 
 
@@ -175,8 +190,11 @@ final public class SnapshotCollector : RuntimeListener {
             }
             CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
 
-            for (isGuide, isCurrent, path) in currentPaths {
-                if isGuide {
+            for (isGuide, isCurrent, isProxy, path) in currentPaths {
+                if isProxy {
+                    CGContextSetRGBFillColor(context, 0.7, 0.7, 0.7, 0.7)
+                    CGContextSetRGBStrokeColor(context, 0.7, 0.2, 0.7, 1)
+                } else if isGuide {
                     CGContextSetRGBFillColor(context, 0, 0.9, 0.9, 0.7)
                     CGContextSetRGBStrokeColor(context, 0, 0.8, 0.8, 1)
                 } else if isCurrent {
@@ -226,7 +244,7 @@ final public class SnapshotCollector : RuntimeListener {
         guard let node = on as? InstructionNode else {
             return
         }
-        errors[InstructionNodeKey(node)] = triggeredError
+        errorsBuffer[InstructionNodeKey(node)] = triggeredError
     }
 
     func requireRedraw() {

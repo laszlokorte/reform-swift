@@ -79,6 +79,11 @@ final class ProcedureProcessor<A:Analyzer> {
             runtime.stop()
             self.snapshotCollector.requireRedraw()
             picture.procedure.analyzeWith(analyzer)
+
+            dispatch_sync(dispatch_get_main_queue()) {
+                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureAnalyzed", object: picture.procedure)
+            }
+
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
 
             dispatch_sync(dispatch_get_main_queue()) {
@@ -86,8 +91,6 @@ final class ProcedureProcessor<A:Analyzer> {
 
             }
             dispatch_async(dispatch_get_main_queue()) {
-
-                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureChanged", object: picture.procedure)
                 NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
             }
         }

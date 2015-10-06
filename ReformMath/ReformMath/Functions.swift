@@ -154,3 +154,12 @@ public func inverse(matrix m: Mat3x2) -> Mat3x2? {
     )
     return Mat3x2(col1: col1, col2: col2, col3: col3)
 }
+
+
+
+
+public func rotate(aabb: AABB2d, angle: Angle) -> AABB2d {
+    let sizeHalf = aabb.size/2
+
+    return aabb
+}

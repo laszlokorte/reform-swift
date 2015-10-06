@@ -26,7 +26,7 @@ class AttributesController : NSViewController {
     override func viewDidAppear() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "selectionChanged", name:"SelectionChanged", object: nil)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureEvaluated", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureAnalyzed", object: nil)
 
         selectionChanged()
     }
@@ -35,7 +35,7 @@ class AttributesController : NSViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name:"SelectionChanged", object: nil)
 
 
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:"ProcedureEvaluated", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"ProcedureAnalyzed", object: nil)
     }
 
     dynamic func selectionChanged() {

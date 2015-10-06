@@ -27,11 +27,12 @@ extension ProxyForm {
 extension ProxyForm {
     func initWithRuntime<R:Runtime>(runtime: R, form: Form) {
         formReference.setFormFor(runtime, form: form)
+        angle.setAngleFor(runtime, angle: Angle())
     }
 }
 
 final public class ProxyForm : Form {
-    public static var stackSize : Int = 1
+    public static var stackSize : Int = 2
 
     public let identifier : FormIdentifier
     public var name : String
@@ -46,22 +47,26 @@ final public class ProxyForm : Form {
         return StaticFormReference(formId: identifier, offset: 0)
     }
 
+    public var angle : WriteableRuntimeRotationAngle {
+        return StaticAngle(formId: identifier, offset: 1)
+    }
+
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.TopLeft.rawValue:ProxyPoint(formReference: formReference, side: .TopLeft),
+            PointId.TopLeft.rawValue:ProxyPoint(formReference: formReference, side: .TopLeft, angle: angle),
 
-            PointId.TopRight.rawValue:ProxyPoint(formReference: formReference, side: .TopRight),
+            PointId.TopRight.rawValue:ProxyPoint(formReference: formReference, side: .TopRight, angle: angle),
 
-            PointId.BottomLeft.rawValue:ProxyPoint(formReference: formReference, side: .BottomLeft),
+            PointId.BottomLeft.rawValue:ProxyPoint(formReference: formReference, side: .BottomLeft, angle: angle),
 
-            PointId.BottomRight.rawValue:ProxyPoint(formReference: formReference, side: .BottomRight),
+            PointId.BottomRight.rawValue:ProxyPoint(formReference: formReference, side: .BottomRight, angle: angle),
 
-            PointId.Top.rawValue:ProxyPoint(formReference: formReference, side: .Top),
-            PointId.Bottom.rawValue:ProxyPoint(formReference: formReference, side: .Bottom),
-            PointId.Right.rawValue:ProxyPoint(formReference: formReference, side: .Right),
-            PointId.Left.rawValue:ProxyPoint(formReference: formReference, side: .Left),
+            PointId.Top.rawValue:ProxyPoint(formReference: formReference, side: .Top, angle: angle),
+            PointId.Bottom.rawValue:ProxyPoint(formReference: formReference, side: .Bottom, angle: angle),
+            PointId.Right.rawValue:ProxyPoint(formReference: formReference, side: .Right, angle: angle),
+            PointId.Left.rawValue:ProxyPoint(formReference: formReference, side: .Left, angle: angle),
 
-            PointId.Center.rawValue:ProxyPoint(formReference: formReference, side: .Center)
+            PointId.Center.rawValue:ProxyPoint(formReference: formReference, side: .Center, angle: angle)
         ]
     }
 
@@ -80,7 +85,7 @@ extension ProxyForm {
 extension ProxyForm : Rotatable {
 
     public var rotator : Rotator {
-        return ProxyRotator(formReference: formReference)
+        return CompositeRotator(rotators: ProxyRotator(formReference: formReference),             BasicAngleRotator(angles: angle))
     }
 }
 

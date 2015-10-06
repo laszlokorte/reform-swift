@@ -27,7 +27,7 @@ public final class InstructionCreator {
     
     func beginCreation<I:Instruction>(instruction : I) {
         if case .Idle = state, let focused = focus.current {
-            if let merged = focused.mergedWith(instruction) {
+            if let merged = merged(focused, instruction: instruction) {
                 let node = merged
                 focused.append(sibling: node)
                 focused.removeFromParent()
@@ -61,7 +61,7 @@ public final class InstructionCreator {
     
     func update<I:Instruction>(instruction: I) {
         if case .Creating(let original, let node) = state {
-            if let merged = original.mergedWith(instruction) {
+            if let merged = merged(original, instruction: instruction) {
                 node.replaceWith(merged)
                 original.removeFromParent()
                 focus.current = node
@@ -71,7 +71,7 @@ public final class InstructionCreator {
             }
             intend(commit: false)
         } else if case .Amending(let original, let node) = state {
-            if let merged = original.mergedWith(instruction) {
+            if let merged = merged(original, instruction: instruction) {
                 node.replaceWith(merged)
             } else {
                 node.replaceWith(instruction)
@@ -106,5 +106,9 @@ public final class InstructionCreator {
 
             state = .Idle
         }
+    }
+
+    func merged<I:Instruction>(node : InstructionNode, instruction : I) -> InstructionNode? {
+        return node.mergedWith(instruction)
     }
 }

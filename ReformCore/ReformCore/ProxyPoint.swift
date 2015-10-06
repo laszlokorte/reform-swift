@@ -46,11 +46,13 @@ public struct ProxyPoint : LabeledPoint {
     }
 
     private let formReference : StaticFormReference
+    private let angle : RuntimeRotationAngle
     private let side : Side
 
-    init(formReference: StaticFormReference, side : Side) {
+    init(formReference: StaticFormReference, side : Side, angle: RuntimeRotationAngle) {
         self.formReference = formReference
         self.side = side
+        self.angle = angle
     }
 
     public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
@@ -63,7 +65,13 @@ public struct ProxyPoint : LabeledPoint {
             return nil
         }
 
-        return aabb.center + Vec2d(x: Double(side.x) * aabb.size.x/2, y: Double(side.y) * aabb.size.y/2)
+        guard let angle = angle.getAngleFor(runtime) else {
+            return nil
+        }
+
+        let rotatedAABB = aabb
+
+        return rotatedAABB.center + rotate(Vec2d(x: Double(side.x) * rotatedAABB.size.x/2, y: Double(side.y) * rotatedAABB.size.y/2), angle: angle)
     }
 
     public func getDescription(stringifier: Stringifier) -> String {

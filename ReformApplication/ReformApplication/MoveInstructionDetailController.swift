@@ -9,7 +9,7 @@
 import Cocoa
 import ReformCore
 
-class MoveInstructionDetailController : NSViewController {
+class MoveInstructionDetailController : NSViewController, InstructionDetailController {
     @IBOutlet var verticalDistanceField : NSTextField?
     @IBOutlet var horizontalDistanceField : NSTextField?
     @IBOutlet var relativeDistanceLabel : NSTextField?
@@ -17,8 +17,16 @@ class MoveInstructionDetailController : NSViewController {
     @IBOutlet var relativeDistanceTab : NSTabViewItem?
     @IBOutlet var constantDistanceTab : NSTabViewItem?
 
+    @IBOutlet var errorLabel : NSTextField?
+
 
     var stringifier : Stringifier?
+
+    var error : String? {
+        didSet {
+            updateError();
+        }
+    }
 
     override var representedObject : AnyObject? {
         didSet {
@@ -28,6 +36,18 @@ class MoveInstructionDetailController : NSViewController {
 
     override func viewDidLoad() {
         updateLabel()
+        updateError()
+    }
+
+    func updateError() {
+        if let e : String = error {
+            errorLabel?.stringValue = e
+            if let errorLabel = errorLabel {
+                self.view.addSubview(errorLabel)
+            }
+        } else {
+            errorLabel?.removeFromSuperview()
+        }
     }
 
     func updateLabel() {

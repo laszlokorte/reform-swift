@@ -29,13 +29,13 @@ final class ProcedureController : NSViewController {
 
     override func viewDidAppear() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureEvaluated", name:"ProcedureEvaluated", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureAnalyzed", object: nil)
     }
 
     override func viewDidDisappear() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name:"ProcedureEvaluated", object: nil)
 
-        NSNotificationCenter.defaultCenter().removeObserver(self,  name:"ProcedureChanged", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self,  name:"ProcedureAnalyzed", object: nil)
     }
 
     dynamic func procedureChanged() {
@@ -231,9 +231,12 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        if let mov = popOverViewController as? MoveInstructionDetailController {
-            mov.stringifier = procedureViewModel?.analyzer.stringifier
+        if let instr = popOverViewController as? InstructionDetailController,
+        procedureViewModel = procedureViewModel{
+            instr.stringifier = procedureViewModel.analyzer.stringifier
+            let key = InstructionNodeKey(instructions[row].node)
 
+            instr.error = procedureViewModel.snapshotCollector.errors[key].map{String($0)}
         }
         popOverViewController.representedObject = instructions[row].node
 

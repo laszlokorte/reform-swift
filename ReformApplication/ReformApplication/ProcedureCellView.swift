@@ -22,6 +22,10 @@ final class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
         textField?.stringValue = row.label
         imageView?.image = procedureViewModel.snapshotCollector.imageFor(InstructionNodeKey(row.node))
 
+
+        let error = procedureViewModel.snapshotCollector.errors.keys.contains(InstructionNodeKey(row.node))
+        textField?.textColor = error ? NSColor.redColor() : nil
+
     }
 }
 
@@ -32,5 +36,9 @@ final class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
     func configure(row: InstructionOutlineRow, procedureViewModel: ProcedureViewModel) {
         indentConstraint?.constant = CGFloat(15 * row.depth)
         textField?.stringValue = row.node.isEmpty ? "" : row.label
+
+        let error = procedureViewModel.snapshotCollector.errors.keys.contains(InstructionNodeKey(row.node))
+        textField?.textColor = error ? NSColor.redColor() : nil
+
     }
 }

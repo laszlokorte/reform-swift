@@ -56,6 +56,14 @@
 		F2DF63681B927E1D00A2EFB6 /* StageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */; };
 		F2DF636A1B927E7100A2EFB6 /* MaskUIRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */; };
 		F2DF636C1B929A4800A2EFB6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DF636B1B929A4800A2EFB6 /* GradientView.swift */; };
+		F2E1F8AF1BC34D4300C9BB1F /* CreateFormInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8AE1BC34D4300C9BB1F /* CreateFormInstructionDetailController.swift */; };
+		F2E1F8B11BC34D5000C9BB1F /* ScaleInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8B01BC34D5000C9BB1F /* ScaleInstructionDetailController.swift */; };
+		F2E1F8B31BC34D5C00C9BB1F /* RotateInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8B21BC34D5C00C9BB1F /* RotateInstructionDetailController.swift */; };
+		F2E1F8B51BC34D7000C9BB1F /* IfConditionInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8B41BC34D7000C9BB1F /* IfConditionInstructionDetailController.swift */; };
+		F2E1F8B71BC34D8200C9BB1F /* ForLoopInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8B61BC34D8200C9BB1F /* ForLoopInstructionDetailController.swift */; };
+		F2E1F8B91BC34D8D00C9BB1F /* FormIteratorDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8B81BC34D8D00C9BB1F /* FormIteratorDetailController.swift */; };
+		F2E1F8BB1BC34D9B00C9BB1F /* MorphInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8BA1BC34D9B00C9BB1F /* MorphInstructionDetailController.swift */; };
+		F2E1F8BD1BC34E3F00C9BB1F /* InstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1F8BC1BC34E3F00C9BB1F /* InstructionDetailController.swift */; };
 		F2E600101BBDDE940022FE56 /* MoveInstructionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E6000F1BBDDE940022FE56 /* MoveInstructionDetailController.swift */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +153,14 @@
 		F2DF63671B927E1D00A2EFB6 /* StageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageRenderer.swift; sourceTree = "<group>"; };
 		F2DF63691B927E7100A2EFB6 /* MaskUIRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskUIRenderer.swift; sourceTree = "<group>"; };
 		F2DF636B1B929A4800A2EFB6 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		F2E1F8AE1BC34D4300C9BB1F /* CreateFormInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateFormInstructionDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8B01BC34D5000C9BB1F /* ScaleInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleInstructionDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8B21BC34D5C00C9BB1F /* RotateInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateInstructionDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8B41BC34D7000C9BB1F /* IfConditionInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IfConditionInstructionDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8B61BC34D8200C9BB1F /* ForLoopInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForLoopInstructionDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8B81BC34D8D00C9BB1F /* FormIteratorDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormIteratorDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8BA1BC34D9B00C9BB1F /* MorphInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphInstructionDetailController.swift; sourceTree = "<group>"; };
+		F2E1F8BC1BC34E3F00C9BB1F /* InstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionDetailController.swift; sourceTree = "<group>"; };
 		F2E6000F1BBDDE940022FE56 /* MoveInstructionDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveInstructionDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,6 +327,14 @@
 			isa = PBXGroup;
 			children = (
 				F2E6000F1BBDDE940022FE56 /* MoveInstructionDetailController.swift */,
+				F2E1F8AE1BC34D4300C9BB1F /* CreateFormInstructionDetailController.swift */,
+				F2E1F8B01BC34D5000C9BB1F /* ScaleInstructionDetailController.swift */,
+				F2E1F8B21BC34D5C00C9BB1F /* RotateInstructionDetailController.swift */,
+				F2E1F8B41BC34D7000C9BB1F /* IfConditionInstructionDetailController.swift */,
+				F2E1F8B61BC34D8200C9BB1F /* ForLoopInstructionDetailController.swift */,
+				F2E1F8B81BC34D8D00C9BB1F /* FormIteratorDetailController.swift */,
+				F2E1F8BA1BC34D9B00C9BB1F /* MorphInstructionDetailController.swift */,
+				F2E1F8BC1BC34E3F00C9BB1F /* InstructionDetailController.swift */,
 			);
 			name = InstructionDetails;
 			sourceTree = "<group>";
@@ -449,14 +473,17 @@
 			files = (
 				F2DF63681B927E1D00A2EFB6 /* StageRenderer.swift in Sources */,
 				F2042A291B7EC865009144E9 /* Document.swift in Sources */,
+				F2E1F8B11BC34D5000C9BB1F /* ScaleInstructionDetailController.swift in Sources */,
 				F222AF121B835E50005F71A1 /* GrabUI.swift in Sources */,
 				F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */,
 				F211927D1B7E57340011AA0F /* MeasurementController.swift in Sources */,
 				F222AF141B835E58005F71A1 /* HandleUI.swift in Sources */,
 				F2E600101BBDDE940022FE56 /* MoveInstructionDetailController.swift in Sources */,
 				F238ABBD1BBE313200B9D2D4 /* AttributesViewModel.swift in Sources */,
+				F2E1F8BB1BC34D9B00C9BB1F /* MorphInstructionDetailController.swift in Sources */,
 				F211927B1B7E57130011AA0F /* SheetController.swift in Sources */,
 				F238ABBB1BBE306B00B9D2D4 /* AttributesController.swift in Sources */,
+				F2E1F8B31BC34D5C00C9BB1F /* RotateInstructionDetailController.swift in Sources */,
 				F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */,
 				F222AF0A1B835CD8005F71A1 /* Renderer.swift in Sources */,
 				F2DF636C1B929A4800A2EFB6 /* GradientView.swift in Sources */,
@@ -468,16 +495,21 @@
 				F2339AFD1B8D321300C0AE41 /* SnapShotCollector.swift in Sources */,
 				F2237FC31B9D43DB00E025A6 /* ExportController.swift in Sources */,
 				F27391221B7FAA7800100F2F /* StageController.swift in Sources */,
+				F2E1F8B71BC34D8200C9BB1F /* ForLoopInstructionDetailController.swift in Sources */,
 				F2339B061B8D5AAE00C0AE41 /* ProcedureCellView.swift in Sources */,
 				F222AF101B835E49005F71A1 /* PivotUI.swift in Sources */,
 				F211927F1B7E6B550011AA0F /* ProjectWindowController.swift in Sources */,
 				F26D45BC1B7D090000266096 /* ViewController.swift in Sources */,
+				F2E1F8B91BC34D8D00C9BB1F /* FormIteratorDetailController.swift in Sources */,
 				F27391201B7FA80E00100F2F /* PictureController.swift in Sources */,
+				F2E1F8BD1BC34E3F00C9BB1F /* InstructionDetailController.swift in Sources */,
 				F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */,
 				F222AF161B835E60005F71A1 /* SelectionUI.swift in Sources */,
+				F2E1F8B51BC34D7000C9BB1F /* IfConditionInstructionDetailController.swift in Sources */,
 				F2339AF61B8D25B300C0AE41 /* PictureSession.swift in Sources */,
 				F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */,
 				F2DF636A1B927E7100A2EFB6 /* MaskUIRenderer.swift in Sources */,
+				F2E1F8AF1BC34D4300C9BB1F /* CreateFormInstructionDetailController.swift in Sources */,
 				F2339B011B8D4A2A00C0AE41 /* StageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
