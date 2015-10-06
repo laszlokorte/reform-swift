@@ -7,61 +7,92 @@
 //
 
 import ReformCore
+import ReformStage
 
 private enum CreationState {
     case Idle
     case Creating(original: InstructionNode, InstructionNode)
     case Amending(original: InstructionNode, InstructionNode)
+    case Fixing(original: InstructionNode, InstructionNode)
 }
 
 public final class InstructionCreator {
     private var state : CreationState = .Idle
-    
+
+    let stage : Stage
     let focus : InstructionFocus
     let intend : (commit: Bool) -> ()
     
-    public init(focus: InstructionFocus, intend: (commit: Bool) -> ()) {
+    public init(stage: Stage, focus: InstructionFocus, intend: (commit: Bool) -> ()) {
+        self.stage = stage
         self.focus = focus
         self.intend = intend
     }
     
-    func beginCreation<I:Instruction>(instruction : I) {
-        if case .Idle = state, let focused = focus.current {
-            if let merged = merged(focused, instruction: instruction) {
-                let node = merged
-                focused.append(sibling: node)
-                focused.removeFromParent()
-                focus.current = node
-                state = .Amending(original: focused, node)
-            } else {
-                let node = InstructionNode(instruction: instruction)
-                focused.append(sibling: node)
-                focus.current = node
-                state = .Creating(original: focused, node)
+    func beginCreation<I:Instruction>(inout instruction : I) {
+        switch state {
+        case .Idle:
+            if let focused = focus.current {
+                if let
+                    error = stage.error,
+                    fixed = merge(focused, instruction: instruction, force: true) {
+                        instruction = fixed.instruction
+
+                        let node = fixed
+                        focused.append(sibling: node)
+                        focused.removeFromParent()
+                        focus.current = node
+                        state = .Fixing(original: focused, node)
+                } else if let merged = merge(focused, instruction: instruction) {
+                    let node = merged
+                    focused.append(sibling: node)
+                    focused.removeFromParent()
+                    focus.current = node
+                    state = .Amending(original: focused, node)
+                } else {
+                    let node = InstructionNode(instruction: instruction)
+                    focused.append(sibling: node)
+                    focus.current = node
+                    state = .Creating(original: focused, node)
+                }
+                
+                intend(commit: false)
             }
 
-            intend(commit: false)
+        default:
+            break
         }
     }
     
     func cancel() {
-        if case .Creating(let original, let node) = state {
+        switch state {
+        case .Creating(let original, let node):
             focus.current = original
             node.removeFromParent()
             state = .Idle
             intend(commit: false)
-        } else if case .Amending(let original, let node) = state {
+        case .Amending(let original, let node):
             focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
             state = .Idle
             intend(commit: false)
+
+        case .Fixing(let original, let node):
+            focus.current = original
+            node.prepend(sibling: original)
+            node.removeFromParent()
+            state = .Idle
+            intend(commit: false)
+        case .Idle:
+            break
         }
     }
     
     func update<I:Instruction>(instruction: I) {
-        if case .Creating(let original, let node) = state {
-            if let merged = merged(original, instruction: instruction) {
+        switch state {
+        case .Creating(let original, let node):
+            if let merged = merge(original, instruction: instruction) {
                 node.replaceWith(merged)
                 original.removeFromParent()
                 focus.current = node
@@ -70,8 +101,8 @@ public final class InstructionCreator {
                 node.replaceWith(instruction)
             }
             intend(commit: false)
-        } else if case .Amending(let original, let node) = state {
-            if let merged = merged(original, instruction: instruction) {
+        case .Amending(let original, let node):
+            if let merged = merge(original, instruction: instruction) {
                 node.replaceWith(merged)
             } else {
                 node.replaceWith(instruction)
@@ -80,11 +111,19 @@ public final class InstructionCreator {
                 state = .Creating(original: original, node)
             }
             intend(commit: false)
+        case .Idle:
+            break
+        case .Fixing(let original, let node):
+            if let fixed = merge(original, instruction: instruction, force: true) {
+                node.replaceWith(fixed)
+            }
+            intend(commit: false)
         }
     }
     
     func commit() {
-        if case .Creating(let original, let node) = state {
+        switch state {
+        case .Creating(let original, let node):
             if node.isDegenerated {
                 focus.current = original
                 node.removeFromParent()
@@ -94,7 +133,7 @@ public final class InstructionCreator {
             }
 
             state = .Idle
-        } else if case .Amending(let original, let node) = state {
+        case .Amending(let original, let node):
             if node.isDegenerated {
                 focus.current = original
                 node.prepend(sibling: original)
@@ -105,10 +144,23 @@ public final class InstructionCreator {
             }
 
             state = .Idle
+        case .Fixing(let original, let node):
+            if node.isDegenerated {
+                focus.current = original
+                node.prepend(sibling: original)
+                node.removeFromParent()
+                intend(commit: false)
+            } else {
+                intend(commit: true)
+            }
+
+            state = .Idle
+        case .Idle:
+            break
         }
     }
 
-    func merged<I:Instruction>(node : InstructionNode, instruction : I) -> InstructionNode? {
-        return node.mergedWith(instruction)
+    func merge<I:Instruction>(node : InstructionNode, instruction : I, force: Bool = false) -> InstructionNode? {
+        return node.mergedWith(instruction, force: force)
     }
 }

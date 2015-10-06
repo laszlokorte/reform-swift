@@ -57,7 +57,7 @@ public struct MorphInstruction : Instruction {
 }
 
 extension MorphInstruction : Mergeable {
-    public func mergeWith(other: MorphInstruction) -> MorphInstruction? {
+    public func mergeWith(other: MorphInstruction, force: Bool) -> MorphInstruction? {
         guard formId == other.formId else {
             return nil
         }
@@ -67,7 +67,9 @@ extension MorphInstruction : Mergeable {
 
         let newDistance : protocol<RuntimeDistance, Labeled>
 
-        if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
+        if force {
+            newDistance = other.distance
+        } else if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
             newDistance = combine(distance: distanceA, distance: distanceB)
         } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? RelativeDistance {
             newDistance = combine(distance: distanceA, distance: distanceB)

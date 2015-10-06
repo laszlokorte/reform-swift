@@ -51,14 +51,16 @@ public struct TranslateInstruction : Instruction {
 }
 
 extension TranslateInstruction : Mergeable {
-    public func mergeWith(other: TranslateInstruction) -> TranslateInstruction? {
+    public func mergeWith(other: TranslateInstruction, force: Bool) -> TranslateInstruction? {
         guard formId == other.formId else {
             return nil
         }
 
         let newDistance : protocol<RuntimeDistance, Labeled>
 
-        if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
+        if force {
+            newDistance = other.distance
+        } else if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
             newDistance = combine(distance: distanceA, distance: distanceB)
         } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? RelativeDistance where distanceB.direction is FreeDirection {
             newDistance = combine(distance: distanceA, distance: distanceB)

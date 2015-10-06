@@ -78,8 +78,12 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
         }
     }
 
-    public func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on: Evaluatable) {
-        
+    public func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on instruction: Evaluatable) {
+        guard !collected else { return }
+
+        guard focusFilter(instruction) else { return }
+
+        buffer.error = triggeredError
     }
 
     public var recalcIntersections : Bool {
@@ -95,6 +99,7 @@ private class StageBuffer {
     var recalcIntersections = true
     var size : Vec2d = Vec2d()
     var entities : [Entity] = []
+    var error : RuntimeError?
 
     var currentShapes : [IdentifiedShape] = []
     var finalShapes : [IdentifiedShape] = []
@@ -105,6 +110,7 @@ private class StageBuffer {
         currentShapes.removeAll(keepCapacity: true)
         finalShapes.removeAll(keepCapacity: true)
         size = Vec2d()
+        error = nil
     }
     
     func flush(stage: Stage) {
@@ -116,6 +122,7 @@ private class StageBuffer {
             stage.entities = self.entities.lazy.reverse()
             stage.currentShapes = self.currentShapes
             stage.finalShapes = self.finalShapes
+            stage.error = self.error
 
             if recalcIntersections {
                 stage.intersections = intersectionsOf(self.entities)

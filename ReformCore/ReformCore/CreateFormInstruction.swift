@@ -50,7 +50,16 @@ public struct CreateFormInstruction : Instruction {
 }
 
 extension CreateFormInstruction : Mergeable {
-    public func mergeWith(other: CreateFormInstruction) -> CreateFormInstruction? {
+    public func mergeWith(other: CreateFormInstruction, force: Bool) -> CreateFormInstruction? {
+
+        guard other.form.dynamicType == form.dynamicType else {
+            return nil
+        }
+
+        if force {
+            return CreateFormInstruction(form: form, destination: other.destination)
+        }
+
         return nil
     }
 }

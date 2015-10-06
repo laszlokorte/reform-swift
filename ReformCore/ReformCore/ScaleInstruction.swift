@@ -76,10 +76,15 @@ public struct ScaleInstruction : Instruction {
 }
 
 extension ScaleInstruction : Mergeable {
-    public func mergeWith(other: ScaleInstruction) -> ScaleInstruction? {
+    public func mergeWith(other: ScaleInstruction, force: Bool) -> ScaleInstruction? {
         guard formId == other.formId else {
             return nil
         }
+
+        if force {
+            return other
+        }
+        
         guard axis == other.axis else {
             return nil
         }

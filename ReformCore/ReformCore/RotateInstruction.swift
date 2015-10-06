@@ -61,10 +61,15 @@ public struct RotateInstruction : Instruction {
 }
 
 extension RotateInstruction : Mergeable {
-    public func mergeWith(other: RotateInstruction) -> RotateInstruction? {
+    public func mergeWith(other: RotateInstruction, force: Bool) -> RotateInstruction? {
         guard formId == other.formId else {
             return nil
         }
+
+        if force {
+            return other
+        }
+
         guard fixPoint.isEqualTo(other.fixPoint) else {
             return nil
         }

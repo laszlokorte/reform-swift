@@ -228,7 +228,7 @@ final class PictureSession {
 
         }
 
-        self.instructionCreator = InstructionCreator(focus: self.instructionFocus) {
+        self.instructionCreator = InstructionCreator(stage: self.stage, focus: self.instructionFocus) {
             [collector=self.stageCollector, trigger=self.procedureProcessor.trigger] b in
             if b {
             collector.recalcIntersections = true

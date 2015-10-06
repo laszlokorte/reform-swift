@@ -18,6 +18,8 @@ final public class Stage {
     public internal(set) var finalShapes : [IdentifiedShape] = []
     
     public internal(set) var intersections : [IntersectionSnapPoint] = []
+
+    public internal(set) var error : RuntimeError? = nil
     
     public init() {}
 }

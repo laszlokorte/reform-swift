@@ -152,7 +152,7 @@ extension InstructionNode {
 }
 
 extension InstructionNode {
-    public func mergedWith<I where I:Instruction>(instruction: I) -> InstructionNode? {
+    public func mergedWith<I where I:Instruction>(instruction: I, force: Bool) -> InstructionNode? {
 
         guard case .Single(let base) = content else {
             return nil
@@ -162,7 +162,7 @@ extension InstructionNode {
             return nil
         }
 
-        return typedBase.mergeWith(instruction).map { InstructionNode(instruction: $0) }
+        return typedBase.mergeWith(instruction, force: force).map { InstructionNode(instruction: $0) }
     }
 
 }
@@ -336,7 +336,7 @@ public protocol Instruction : Labeled {
 
     var isDegenerated : Bool { get }
 
-    func mergeWith(other: Instruction) -> Instruction?
+    func mergeWith(other: Instruction, force: Bool) -> Instruction?
 }
 
 
@@ -352,15 +352,15 @@ public protocol GroupInstruction : Labeled {
 }
 
 public protocol Mergeable {
-    func mergeWith(other: Self) -> Self?
+    func mergeWith(other: Self, force: Bool) -> Self?
 }
 
 extension Instruction where Self : Mergeable {
-    public func mergeWith(other: Instruction) -> Instruction? {
+    public func mergeWith(other: Instruction, force: Bool) -> Instruction? {
         guard let typed = other as? Self else {
             return nil
         }
 
-        return self.mergeWith(typed)
+        return self.mergeWith(typed, force: force)
     }
 }
