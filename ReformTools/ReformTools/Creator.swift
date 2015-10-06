@@ -29,14 +29,13 @@ public final class InstructionCreator {
         self.intend = intend
     }
     
-    func beginCreation<I:Instruction>(inout instruction : I) {
+    func beginCreation<I:Instruction>(instruction : I) {
         switch state {
         case .Idle:
             if let focused = focus.current {
                 if let
                     error = stage.error,
                     fixed = merge(focused, instruction: instruction, force: true) {
-                        instruction = fixed.instruction
 
                         let node = fixed
                         focused.append(sibling: node)
