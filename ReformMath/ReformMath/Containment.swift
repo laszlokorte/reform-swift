@@ -22,7 +22,7 @@ public func inside(point : Vec2d, triangle: Triangle2d, epsilon : Double = 0) ->
     let b2 = sign(point, a:triangle.b, b:triangle.c) < epsilon
     let b3 = sign(point, a:triangle.c, b:triangle.a) < epsilon
 
-    return b1 == b2 && b2 == b3;
+    return b1 == b2 && b2 == b3
 }
 
 

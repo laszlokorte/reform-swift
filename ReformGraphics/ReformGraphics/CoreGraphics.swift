@@ -79,7 +79,7 @@ public extension Shape {
                 NSStrokeColorAttributeName:strokeColor
             ]
 
-            CGContextSaveGState(context);
+            CGContextSaveGState(context)
 
             let attributedString = CFAttributedStringCreate(nil, text, attr)
             let line = CTLineCreateWithAttributedString(attributedString)
@@ -139,7 +139,7 @@ public extension Shape {
                 NSStrokeColorAttributeName:nsColor
             ]
 
-            CGContextSaveGState(context);
+            CGContextSaveGState(context)
 
             let attributedString = CFAttributedStringCreate(nil, text, attr)
             let line = CTLineCreateWithAttributedString(attributedString)

@@ -59,7 +59,7 @@ public final class CropTool : Tool {
         case .Cropping(_, let oldSize,_,_):
             picture.size = (oldSize.x, oldSize.y)
             intend()
-            state = .Idle;
+            state = .Idle
         }
     }
 

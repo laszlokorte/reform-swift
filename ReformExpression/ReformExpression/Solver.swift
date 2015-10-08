@@ -15,8 +15,7 @@ final public class Solver {
     
     public func evaluate(sheet : Sheet)
     {
-    
-        dataSet.clear();
+        dataSet.clear()
 
         let (duplicates, definitions) = sheet.sortedDefinitions
         

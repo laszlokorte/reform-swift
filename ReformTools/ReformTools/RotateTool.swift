@@ -76,7 +76,7 @@ public final class RotateTool : Tool {
             pivotUI.state = .Hide
         case .Rotating:
             instructionCreator.cancel()
-            state = .Idle;
+            state = .Idle
         }
     }
     

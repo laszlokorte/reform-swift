@@ -36,8 +36,8 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
     }
     
     public func parse<T : SequenceType where T.Generator.Element==TokenType>(tokens: T) -> Result<NodeType, ShuntingYardError> {
-        let context = ShuntingYardContext<NodeType>();
-        var needOpen = false;
+        let context = ShuntingYardContext<NodeType>()
+        var needOpen = false
         
         outer:
         for token in tokens
@@ -46,11 +46,11 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             {
                 return .Fail(.UnexpectedToken(token: token, message: "Expected Opening Parenthesis."))
             }
-            needOpen = false;
+            needOpen = false
             switch (token.type)
             {
             case .EOF:
-                break outer;
+                break outer
             case .Unknown:
                 return .Fail(.UnexpectedToken(token: token, message: ""))
                 
@@ -61,49 +61,49 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 }
                 if (delegate.hasFunctionOfName(token))
                 {
-                    context.stack.push(token);
-                    context.argCount.push(0);
+                    context.stack.push(token)
+                    context.argCount.push(0)
                     
                     if (!context.wereValues.isEmpty)
                     {
-                        context.wereValues.pop();
-                        context.wereValues.push(true);
+                        context.wereValues.pop()
+                        context.wereValues.push(true)
                     }
-                    context.wereValues.push(false);
-                    needOpen = true;
+                    context.wereValues.push(false)
+                    needOpen = true
                 }
                 else if(delegate.hasConstantOfName(token))
                 {
-                    context.lastTokenAtom = true;
+                    context.lastTokenAtom = true
                     
                     switch delegate.constantTokenToNode(token) {
                         case .Success(let node):
-                            context.output.push(node);
+                            context.output.push(node)
                         case .Fail(let error):
                             return .Fail(error)
                     }
                     
                     if (!context.wereValues.isEmpty)
                     {
-                        context.wereValues.pop();
-                        context.wereValues.push(true);
+                        context.wereValues.pop()
+                        context.wereValues.push(true)
                     }
                 }
                 else
                 {
-                    context.lastTokenAtom = true;
+                    context.lastTokenAtom = true
                     
                     switch delegate.variableTokenToNode(token) {
                     case .Success(let node):
-                        context.output.push(node);
+                        context.output.push(node)
                     case .Fail(let error):
                         return .Fail(error)
                     }
                     
                     if (!context.wereValues.isEmpty)
                     {
-                        context.wereValues.pop();
-                        context.wereValues.push(true);
+                        context.wereValues.pop()
+                        context.wereValues.push(true)
                     }
                 }
             case .LiteralValue:
@@ -111,19 +111,19 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 {
                     return .Fail(.UnexpectedToken(token: token, message: ""))
                 }
-                context.lastTokenAtom = true;
+                context.lastTokenAtom = true
                 
                 switch delegate.literalTokenToNode(token) {
                 case .Success(let node):
-                    context.output.push(node);
+                    context.output.push(node)
                 case .Fail(let error):
                     return .Fail(error)
                 }
                 
                 if (!context.wereValues.isEmpty)
                 {
-                    context.wereValues.pop();
-                    context.wereValues.push(true);
+                    context.wereValues.pop()
+                    context.wereValues.push(true)
                 }
             case .ArgumentSeparator:
                 while let peek = context.stack.peek() where peek.type != .ParenthesisLeft
@@ -131,7 +131,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     context.stack.pop()
                     switch _pipe(peek, context: context) {
                     case .Success(let node):
-                        context.output.push(node);
+                        context.output.push(node)
                     case .Fail(let error):
                         return .Fail(error)
                     }
@@ -143,7 +143,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 if let wereValue = context.wereValues.pop() where wereValue,
                     let argCount = context.argCount.pop()
                 {
-                    context.argCount.push(argCount + 1);
+                    context.argCount.push(argCount + 1)
                 }
                 context.wereValues.push(true)
                 context.lastTokenAtom = false
@@ -155,8 +155,8 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     {
                         return .Fail(.UnexpectedToken(token: token, message: ""))
                     }
-                    context.unaries.insert(token);
-                    context.stack.push(token);
+                    context.unaries.insert(token)
+                    context.stack.push(token)
                 }
                 else
                 {
@@ -167,7 +167,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.stack.pop()
                         switch _pipe(peek, context: context) {
                         case .Success(let node):
-                            context.output.push(node);
+                            context.output.push(node)
                         case .Fail(let error):
                             return .Fail(error)
                         }
@@ -180,21 +180,21 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.stack.pop()
                         switch _pipe(peek, context: context) {
                         case .Success(let node):
-                            context.output.push(node);
+                            context.output.push(node)
                         case .Fail(let error):
                             return .Fail(error)
                         }
                     }
                     
-                    context.stack.push(token);
-                    context.lastTokenAtom = false;
+                    context.stack.push(token)
+                    context.lastTokenAtom = false
                 }
             case .ParenthesisLeft:
                 if (context.lastTokenAtom)
                 {
                     return .Fail(.UnexpectedToken(token: token, message: ""))
                 }
-                context.stack.push(token);
+                context.stack.push(token)
             case .ParenthesisRight:
                 while let peek = context.stack.peek() where !delegate.isMatchingPair(
                     peek, right: token)
@@ -202,7 +202,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     context.stack.pop()
                     switch _pipe(peek, context: context) {
                     case .Success(let node):
-                        context.output.push(node);
+                        context.output.push(node)
                     case .Fail(let error):
                         return .Fail(error)
                     }
@@ -210,7 +210,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 
                 if (!context.stack.isEmpty)
                 {
-                    context.stack.pop();
+                    context.stack.pop()
                 }
                 else
                 {
@@ -224,7 +224,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     
                     switch _pipe(peek, context: context) {
                     case .Success(let node):
-                        context.output.push(node);
+                        context.output.push(node)
                     case .Fail(let error):
                         return .Fail(error)
                     }
@@ -233,10 +233,10 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 continue
             }
             
-            context.prevToken = token;
+            context.prevToken = token
         }
         
-        return finalize(context);
+        return finalize(context)
     }
     
     func finalize(context : ShuntingYardContext<NodeType>) -> Result<NodeType, ShuntingYardError>
@@ -254,7 +254,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             context.stack.pop()
             switch _pipe(peek, context: context) {
             case .Success(let node):
-                context.output.push(node);
+                context.output.push(node)
             case .Fail(let error):
                 return .Fail(error)
             }
@@ -267,11 +267,11 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             {
                 return .Fail(.InvalidState)
             }
-            return .Success(result);
+            return .Success(result)
         }
         else
         {
-            return delegate.emptyNode();
+            return delegate.emptyNode()
         }
     }
     
@@ -285,17 +285,17 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             guard var argCount = context.argCount.pop() else {
                 return .Fail(.UnexpectedToken(token: op, message: ""))
             }
-            var temp = [NodeType]();
+            var temp = [NodeType]()
         
             while argCount-- > 0, let peek = context.output.pop()
             {
-                temp.append(peek);
+                temp.append(peek)
             }
             
             if let w = context.wereValues.pop() where w {
                 if let peek = context.output.pop()
                 {
-                    temp.append(peek);
+                    temp.append(peek)
                 }
                 else
                 {
@@ -303,7 +303,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 }
             }
             
-            return delegate.functionTokenToNode(op, args: temp.reverse());
+            return delegate.functionTokenToNode(op, args: temp.reverse())
 
         case .Operator:
             if (context.unaries.contains(op))
@@ -320,7 +320,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 return .Fail(.MissingOperand(token: op, arity: OperatorArity.Unary, missing: 1))
             }
             
-            return delegate.unaryOperatorToNode(op, operand: operand);
+            return delegate.unaryOperatorToNode(op, operand: operand)
             }
             else
             {
@@ -341,7 +341,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     return .Fail(.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 1))
                 }
                 
-                return delegate.binaryOperatorToNode(op, leftHand: leftHand, rightHand: rightHand);
+                return delegate.binaryOperatorToNode(op, leftHand: leftHand, rightHand: rightHand)
             }
         default:
             return .Fail(.UnexpectedToken(token: op, message: ""))
@@ -375,21 +375,21 @@ public enum ShuntingYardError : ErrorType {
 final class ShuntingYardContext<NodeType>
 {
     
-    var stack : Stack<Token<ShuntingYardTokenType>> = Stack();
-    var output : Stack<NodeType> = Stack<NodeType>();
+    var stack : Stack<Token<ShuntingYardTokenType>> = Stack()
+    var output : Stack<NodeType> = Stack<NodeType>()
     
-    var wereValues : Stack<Bool> = Stack<Bool>();
-    var argCount : Stack<Int>  = Stack<Int>();
-    var unaries: Set<Token<ShuntingYardTokenType>>  = Set();
+    var wereValues : Stack<Bool> = Stack<Bool>()
+    var argCount : Stack<Int>  = Stack<Int>()
+    var unaries: Set<Token<ShuntingYardTokenType>>  = Set()
     
-    var prevToken : Token<ShuntingYardTokenType>? = nil;
+    var prevToken : Token<ShuntingYardTokenType>? = nil
     
-    var lastTokenAtom : Bool = false;
+    var lastTokenAtom : Bool = false
     
     
     func actsAsUnary(token : Token<ShuntingYardTokenType>) -> Bool
     {
-        return unaries.contains(token);
+        return unaries.contains(token)
     }
 }
 

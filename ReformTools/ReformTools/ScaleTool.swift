@@ -76,7 +76,7 @@ public final class ScaleTool : Tool {
             pivotUI.state = .Hide
         case .Scaling:
             instructionCreator.cancel()
-            state = .Idle;
+            state = .Idle
         }
     }
     

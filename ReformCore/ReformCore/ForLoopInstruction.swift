@@ -23,7 +23,7 @@ public struct ForLoopInstruction : GroupInstruction {
             return
         }
         
-        for var i=0; i<count;i++ {
+        for _ in 0..<count {
             runtime.scoped() { runtime in
                 for c in children where !runtime.shouldStop {
                     c.evaluate(runtime)

@@ -54,8 +54,8 @@ final class ProcedureProcessor<A:Analyzer> {
     let snapshotCollector : SnapshotCollector
     let queue = dispatch_queue_create("reform.runtime.queue", DISPATCH_QUEUE_SERIAL)
 
-    var triggerCounter = 0;
-    var evalCounter = 0;
+    var triggerCounter = 0
+    var evalCounter = 0
 
     init(picture : Picture, analyzer: A, runtime: DefaultRuntime, toolController: ToolController, snapshotCollector : SnapshotCollector) {
         self.picture = picture

@@ -278,23 +278,23 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
     
     func uniqueNameFor(wantedName: String, definition: Definition? = nil) -> String {
         
-        var testName = wantedName;
-        var postfix = 0;
-        var otherDef = sheet.definitionWithName(testName);
+        var testName = wantedName
+        var postfix = 0
+        var otherDef = sheet.definitionWithName(testName)
         
         while (otherDef?.id != nil && otherDef?.id != definition?.id || functions.keys.contains(testName) || constants.keys.contains(testName))
         {
-            testName = "\(wantedName)\(++postfix)";
-            otherDef = sheet.definitionWithName(testName);
+            testName = "\(wantedName)\(++postfix)"
+            otherDef = sheet.definitionWithName(testName)
         }
         
         if (postfix > 0)
         {
-            return testName;
+            return testName
         }
         else
         {
-            return wantedName;
+            return wantedName
         }
     }
 }

@@ -75,7 +75,7 @@ public final class MorphTool : Tool {
         case .Moving:
             instructionCreator.cancel()
             pointSnapper.disable()
-            state = .Idle;
+            state = .Idle
         }
     }
     

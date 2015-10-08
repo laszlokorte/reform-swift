@@ -94,7 +94,7 @@ public final class DragTool<Delegate: DragToolProtocol> {
         case .Dragging:
             instructionCreator.cancel()
             delegate.reset()
-            state = .Idle;
+            state = .Idle
         }
     }
     

@@ -40,7 +40,7 @@ public func lerp(t:Double, a: Double, b: Double) -> Double {
 public func project(vector: Vec2d, onto: Vec2d) -> Vec2d {
     guard onto.x != 0 || onto.y != 0 else { return vector }
     
-    return dot(vector, onto) * onto / onto.length2;
+    return dot(vector, onto) * onto / onto.length2
 }
 
 public func dot(a: Vec2d, _ b: Vec2d) -> Double {
@@ -59,7 +59,7 @@ public func signum(num: Double) -> Double {
 
 public func proportioned(vector: Vec2d, proportion: Double) -> Vec2d {
 
-    let minimum = min(abs(vector.x), abs(vector.y / proportion));
+    let minimum = min(abs(vector.x), abs(vector.y / proportion))
     
     return Vec2d(x: minimum * signum(vector.x), y: minimum * signum(vector.x) * proportion)
 

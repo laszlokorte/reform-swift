@@ -89,7 +89,7 @@ public final class CreateFormTool : Tool {
             instructionCreator.cancel()
             pointGrabber.disable()
                         
-            state = .Idle;
+            state = .Idle
         }
         
         selectionTool.cancel()

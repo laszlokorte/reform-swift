@@ -97,10 +97,10 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
     
     
     public mutating func next() -> Token<T>? {
-        var currentRule : Rule<T>? = nil;
-        var currentPrio = 0;
-        var currentColumn = column;
-        var currentLine = line;
+        var currentRule : Rule<T>?
+        var currentPrio = 0
+        var currentColumn = column
+        var currentLine = line
         
         
         outer:
@@ -110,7 +110,7 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
             {
                 if (currentPos < input.endIndex)
                 {
-                    inputQueue.add(input[currentPos++]);
+                    inputQueue.add(input[currentPos++])
                 }
                 else if finished
                 {
@@ -125,15 +125,15 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
                 {
                     if (rule.matches(accumulator))
                     {
-                        currentColumn = column;
-                        currentLine = line;
-                        index += accumulator.characters.count;
+                        currentColumn = column
+                        currentLine = line
+                        index += accumulator.characters.count
                         accumulator = ""
-                        continue outer;
+                        continue outer
                     }
                 }
                 
-                var any = false;
+                var any = false
                 for rule in lexer.rules
                 {
                     let prio = lexer.rules.count - rule.inversePriority
@@ -141,9 +141,9 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
                     if (prio >= currentPrio && rule.matches(
                         accumulator + String(peek)))
                     {
-                        currentRule = rule;
-                        currentPrio = prio;
-                        any = true;
+                        currentRule = rule
+                        currentPrio = prio
+                        any = true
                     }
                 }
                 if (!any)
@@ -152,10 +152,10 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
                     {
                         break outer
                     }
-                    currentRule = nil;
-                    currentPrio = 0;
+                    currentRule = nil
+                    currentPrio = 0
                 }
-                consume();
+                consume()
             }
         }
         
@@ -165,19 +165,19 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
                 column: currentColumn), type: r.type, value:
                 accumulator)
             
-            index += accumulator.characters.count;
+            index += accumulator.characters.count
             accumulator = ""
             
-            return current;
+            return current
         }
         
         for rule in lexer.ignoreRules
         {
             if (rule.matches(accumulator))
             {
-                currentColumn = column;
-                currentLine = line;
-                index += accumulator.characters.count;
+                currentColumn = column
+                currentLine = line
+                index += accumulator.characters.count
                 accumulator = ""
             }
         }
@@ -200,7 +200,7 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
         {
             if (accumulator.isEmpty)
             {
-                accFirst = peek;
+                accFirst = peek
             }
             
             if(peek == "\n") {
@@ -209,7 +209,7 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
             }
             else
             {
-                column++;
+                column++
             }
             
             accumulator.append(peek)
@@ -240,8 +240,8 @@ public struct LexerGenerator<T:TokenType> {
 struct Rule<T:TokenType>
 {
     let type : T
-    let pattern : String;
-    let inversePriority : Int;
+    let pattern : String
+    let inversePriority : Int
     
     init(type: T, pattern: String, inversePriority: Int) {
         self.type = type

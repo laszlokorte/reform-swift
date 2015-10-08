@@ -78,7 +78,7 @@ public final class MoveTool : Tool {
         case .Moving:
             instructionCreator.cancel()
             pointSnapper.disable()
-            state = .Idle;
+            state = .Idle
         }
     }
     

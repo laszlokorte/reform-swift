@@ -24,7 +24,7 @@ class MoveInstructionDetailController : NSViewController, InstructionDetailContr
 
     var error : String? {
         didSet {
-            updateError();
+            updateError()
         }
     }
 
