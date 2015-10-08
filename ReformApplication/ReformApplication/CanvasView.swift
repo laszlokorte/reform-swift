@@ -31,23 +31,25 @@ final class CanvasView : NSView {
 
     private var currentContext : CGContext? {
         get {
-            // The 10.10 SDK provides a CGContext on NSGraphicsContext, but
-            // that's not available to folks running 10.9, so perform this
-            // violence to get a context via a void*.
-            // iOS can just use UIGraphicsGetCurrentContext.
-            if #available(OSX 10.10, *) {
-                return NSGraphicsContext.currentContext()?.CGContext
-            } else {
-                let unsafeContextPointer = NSGraphicsContext.currentContext()?.graphicsPort
-                
-                if let contextPointer = unsafeContextPointer {
-                    let opaquePointer = COpaquePointer(contextPointer)
-                    let context: CGContextRef = Unmanaged.fromOpaque(opaquePointer).takeUnretainedValue()
-                    return context
-                } else {
-                    return nil
-                }
-            }
+            return NSGraphicsContext.currentContext()?.CGContext
+
+//             The 10.10 SDK provides a CGContext on NSGraphicsContext, but
+//             that's not available to folks running 10.9, so perform this
+//             violence to get a context via a void*.
+//             iOS can just use UIGraphicsGetCurrentContext.
+//            if #available(OSX 10.10, *) {
+//                return NSGraphicsContext.currentContext()?.CGContext
+//            } else {
+//                let unsafeContextPointer = NSGraphicsContext.currentContext()?.graphicsPort
+//                
+//                if let contextPointer = unsafeContextPointer {
+//                    let opaquePointer = COpaquePointer(contextPointer)
+//                    let context: CGContextRef = Unmanaged.fromOpaque(opaquePointer).takeUnretainedValue()
+//                    return context
+//                } else {
+//                    return nil
+//                }
+//            }
         }
     }
 

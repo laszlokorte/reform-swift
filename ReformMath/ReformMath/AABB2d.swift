@@ -22,6 +22,12 @@ public func ==(lhs: AABB2d, rhs: AABB2d) -> Bool {
 }
 
 extension AABB2d {
+    public init(center: Vec2d, size: Vec2d) {
+        self.init(min: center-size, max: center+size)
+    }
+}
+
+extension AABB2d {
     public var xMaxYMin : Vec2d {
         return Vec2d(x: max.x, y: min.y)
     }

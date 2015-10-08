@@ -129,8 +129,18 @@ extension ReformCore.Picture : Normalizable {
         self.init(identifier : try PictureIdentifier(normalizedValue: id),
             name: name,
             size: (width, height),
-            data: BaseSheet(),
+            data: try BaseSheet(normalizedValue: data),
             procedure : try Procedure(normalizedValue: proc))
+    }
+}
+
+extension BaseSheet {
+    func normalize() throws -> NormalizedValue {
+        throw NormalizationError.NotNormalizable(BaseSheet)
+    }
+
+    convenience init(normalizedValue: NormalizedValue) throws {
+        throw InitialisationError.Unknown
     }
 }
 

@@ -33,10 +33,8 @@ public final class InstructionCreator {
         switch state {
         case .Idle:
             if let focused = focus.current {
-                if let
-                    error = stage.error,
-                    fixed = merge(focused, instruction: instruction, force: true) {
-
+                if stage.error != nil,
+                    let fixed = merge(focused, instruction: instruction, force: true) {
                         let node = fixed
                         focused.append(sibling: node)
                         focused.removeFromParent()
