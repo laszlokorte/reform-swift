@@ -111,56 +111,56 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
     public func isMatchingPair(left : Token<ShuntingYardTokenType>, right : Token<ShuntingYardTokenType>) -> Bool {
         return matchingPairs[left.value] == right.value
     }
-    public func variableTokenToNode(token : Token<ShuntingYardTokenType>) -> Result<Expression, ShuntingYardError> {
+    public func variableTokenToNode(token : Token<ShuntingYardTokenType>) throws -> Expression {
         if let definition = sheet.definitionWithName(token.value) {
-            return .Success(.Reference(id: definition.id))
+            return .Reference(id: definition.id)
         } else {
-            return .Fail(.UnexpectedToken(token: token, message: "unknown identifier"))
+            throw ShuntingYardError.UnexpectedToken(token: token, message: "unknown identifier")
         }
     }
     
-    public func constantTokenToNode(token : Token<ShuntingYardTokenType>) -> Result<Expression, ShuntingYardError> {
+    public func constantTokenToNode(token : Token<ShuntingYardTokenType>) throws -> Expression {
         if let val = constants[token.value] {
-            return .Success(Expression.NamedConstant(token.value, val))
+            return Expression.NamedConstant(token.value, val)
         } else {
-            return .Fail(.UnexpectedToken(token: token, message: ""))
+            throw ShuntingYardError.UnexpectedToken(token: token, message: "")
         }
     }
     
-    public func emptyNode() -> Result<Expression, ShuntingYardError> {
-        return .Success(Expression.Constant(.IntValue(value: 0)))
+    public func emptyNode() throws -> Expression {
+        return Expression.Constant(.IntValue(value: 0))
     }
     
-    public func unaryOperatorToNode(op : Token<ShuntingYardTokenType>, operand : Expression) -> Result<Expression, ShuntingYardError> {
+    public func unaryOperatorToNode(op : Token<ShuntingYardTokenType>, operand : Expression) throws -> Expression {
         if let o = unaryOperators[op.value] {
-            return .Success(Expression.Unary(o.op.init(), operand))
+            return Expression.Unary(o.op.init(), operand)
         } else {
-            return .Fail(.UnknownOperator(token: op, arity: OperatorArity.Unary))
+            throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Unary)
         }
     }
     
-    public func binaryOperatorToNode(op : Token<ShuntingYardTokenType>, leftHand : Expression, rightHand : Expression) -> Result<Expression, ShuntingYardError> {
+    public func binaryOperatorToNode(op : Token<ShuntingYardTokenType>, leftHand : Expression, rightHand : Expression) throws -> Expression {
         
         if let o = binaryOperators[op.value] {
-            return .Success(Expression.Binary(o.op.init(), leftHand, rightHand))
+            return Expression.Binary(o.op.init(), leftHand, rightHand)
         } else {
-            return .Fail(.UnknownOperator(token: op, arity: OperatorArity.Binary))
+            throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Binary)
         }
     }
     
-    public func functionTokenToNode(function : Token<ShuntingYardTokenType>, args : [Expression]) -> Result<Expression, ShuntingYardError> {
+    public func functionTokenToNode(function : Token<ShuntingYardTokenType>, args : [Expression]) throws -> Expression {
         if let f = functions[function.value] {
             let arity = f.arity
             switch(arity) {
             case .Fix(let count) where count == args.count:
-                return .Success(.Call(f.init(), args))
+                return .Call(f.init(), args)
             case .Variadic where args.count > 0:
-                return .Success(.Call(f.init(), args))
+                return .Call(f.init(), args)
             default:
-                return .Fail(.UnknownFunction(token: function, parameters: args.count))
+                throw ShuntingYardError.UnknownFunction(token: function, parameters: args.count)
             }
         } else {
-            return .Fail(.UnknownFunction(token: function, parameters: args.count))
+            throw ShuntingYardError.UnknownFunction(token: function, parameters: args.count)
         }
     }
     
@@ -180,17 +180,17 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
         return constants.keys.contains(token.value)
     }
     
-    public func literalTokenToNode(token : Token<ShuntingYardTokenType>) -> Result<Expression, ShuntingYardError> {
+    public func literalTokenToNode(token : Token<ShuntingYardTokenType>) throws -> Expression {
         
         if token.value == "true" {
-            return .Success(Expression.Constant(Value.BoolValue(value: true)))
+            return Expression.Constant(Value.BoolValue(value: true))
         } else if token.value == "false" {
-            return .Success(Expression.Constant(Value.BoolValue(value: false)))
+            return Expression.Constant(Value.BoolValue(value: false))
         } else if let range = token.value.rangeOfString("\\A\"([^\"]*)\"\\Z", options: .RegularExpressionSearch) {
             let string = token.value[range]
             let subString = string[string.startIndex.successor()..<string.endIndex.predecessor()]
             
-            return .Success(Expression.Constant(Value.StringValue(value: subString)))
+            return Expression.Constant(Value.StringValue(value: subString))
         } else if let range = token.value.rangeOfString("\\A#[0-9a-z]{6}\\Z", options: .RegularExpressionSearch) {
             
             let string = String(token.value[range].characters.dropFirst())
@@ -207,9 +207,9 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
                     let r = r1<<4 | r2
                     let g = g1<<4 | g2
                     let b = b1<<4 | b2
-                    return .Success(Expression.Constant(Value.ColorValue(r: r, g:g,  b: b, a: 255)))
+                    return Expression.Constant(Value.ColorValue(r: r, g:g,  b: b, a: 255))
             } else {
-                return .Fail(.UnexpectedToken(token: token, message: ""))
+                throw ShuntingYardError.UnexpectedToken(token: token, message: "")
             }
         } else if let range = token.value.rangeOfString("\\A#[0-9a-z]{8}\\Z", options: .RegularExpressionSearch) {
             
@@ -230,16 +230,16 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
                     let g = g1<<4 | g2
                     let b = b1<<4 | b2
                     let a = a1<<4 | a2
-                    return .Success(Expression.Constant(Value.ColorValue(r: r, g:g,  b: b, a: a)))
+                    return Expression.Constant(Value.ColorValue(r: r, g:g,  b: b, a: a))
             } else {
-                return .Fail(.UnexpectedToken(token: token, message: ""))
+                throw ShuntingYardError.UnexpectedToken(token: token, message: "")
             }
         } else if let int = Int(token.value) {
-            return .Success(Expression.Constant(Value.IntValue(value: int)))
+            return Expression.Constant(Value.IntValue(value: int))
         } else if let double = Double(token.value) {
-            return .Success(Expression.Constant(Value.DoubleValue(value: double)))
+            return Expression.Constant(Value.DoubleValue(value: double))
         } else {
-            return .Fail(.UnexpectedToken(token: token, message: ""))
+            throw ShuntingYardError.UnexpectedToken(token: token, message: "")
         }
     }
     

@@ -36,254 +36,220 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
     }
     
     public func parse<T : SequenceType where T.Generator.Element==TokenType>(tokens: T) -> Result<NodeType, ShuntingYardError> {
-        let context = ShuntingYardContext<NodeType>()
-        var needOpen = false
-        
-        outer:
-        for token in tokens
-        {
-            if (needOpen && token.type != .ParenthesisLeft)
+
+        do {
+            let context = ShuntingYardContext<NodeType>()
+            var needOpen = false
+            
+            outer:
+            for token in tokens
             {
-                return .Fail(.UnexpectedToken(token: token, message: "Expected Opening Parenthesis."))
-            }
-            needOpen = false
-            switch (token.type)
-            {
-            case .EOF:
-                break outer
-            case .Unknown:
-                return .Fail(.UnexpectedToken(token: token, message: ""))
-                
-            case .Identifier:
-                if (context.lastTokenAtom)
+                if (needOpen && token.type != .ParenthesisLeft)
                 {
-                    return .Fail(.UnexpectedToken(token: token, message: ""))
+                    throw ShuntingYardError.UnexpectedToken(token: token, message: "Expected Opening Parenthesis.")
                 }
-                if (delegate.hasFunctionOfName(token))
+                needOpen = false
+                switch (token.type)
                 {
-                    context.stack.push(token)
-                    context.argCount.push(0)
+                case .EOF:
+                    break outer
+                case .Unknown:
+                    throw ShuntingYardError.UnexpectedToken(token: token, message: "")
                     
-                    if (!context.wereValues.isEmpty)
-                    {
-                        context.wereValues.pop()
-                        context.wereValues.push(true)
-                    }
-                    context.wereValues.push(false)
-                    needOpen = true
-                }
-                else if(delegate.hasConstantOfName(token))
-                {
-                    context.lastTokenAtom = true
-                    
-                    switch delegate.constantTokenToNode(token) {
-                        case .Success(let node):
-                            context.output.push(node)
-                        case .Fail(let error):
-                            return .Fail(error)
-                    }
-                    
-                    if (!context.wereValues.isEmpty)
-                    {
-                        context.wereValues.pop()
-                        context.wereValues.push(true)
-                    }
-                }
-                else
-                {
-                    context.lastTokenAtom = true
-                    
-                    switch delegate.variableTokenToNode(token) {
-                    case .Success(let node):
-                        context.output.push(node)
-                    case .Fail(let error):
-                        return .Fail(error)
-                    }
-                    
-                    if (!context.wereValues.isEmpty)
-                    {
-                        context.wereValues.pop()
-                        context.wereValues.push(true)
-                    }
-                }
-            case .LiteralValue:
-                if (context.lastTokenAtom)
-                {
-                    return .Fail(.UnexpectedToken(token: token, message: ""))
-                }
-                context.lastTokenAtom = true
-                
-                switch delegate.literalTokenToNode(token) {
-                case .Success(let node):
-                    context.output.push(node)
-                case .Fail(let error):
-                    return .Fail(error)
-                }
-                
-                if (!context.wereValues.isEmpty)
-                {
-                    context.wereValues.pop()
-                    context.wereValues.push(true)
-                }
-            case .ArgumentSeparator:
-                while let peek = context.stack.peek() where peek.type != .ParenthesisLeft
-                {
-                    context.stack.pop()
-                    switch _pipe(peek, context: context) {
-                    case .Success(let node):
-                        context.output.push(node)
-                    case .Fail(let error):
-                        return .Fail(error)
-                    }
-                }
-                if (context.stack.isEmpty || context.wereValues.isEmpty)
-                {
-                    return .Fail(.UnexpectedToken(token: token, message: ""))
-                }
-                if let wereValue = context.wereValues.pop() where wereValue,
-                    let argCount = context.argCount.pop()
-                {
-                    context.argCount.push(argCount + 1)
-                }
-                context.wereValues.push(true)
-                context.lastTokenAtom = false
-            case .Operator:
-                if (isOperator(context.prevToken) && delegate.hasUnaryOperator(
-                    token))
-                {
+                case .Identifier:
                     if (context.lastTokenAtom)
                     {
-                        return .Fail(.UnexpectedToken(token: token, message: ""))
+                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
                     }
-                    context.unaries.insert(token)
+                    if (delegate.hasFunctionOfName(token))
+                    {
+                        context.stack.push(token)
+                        context.argCount.push(0)
+                        
+                        if (!context.wereValues.isEmpty)
+                        {
+                            context.wereValues.pop()
+                            context.wereValues.push(true)
+                        }
+                        context.wereValues.push(false)
+                        needOpen = true
+                    }
+                    else if(delegate.hasConstantOfName(token))
+                    {
+                        context.lastTokenAtom = true
+
+                        context.output.push(try delegate.constantTokenToNode(token))
+                        
+                        if (!context.wereValues.isEmpty)
+                        {
+                            context.wereValues.pop()
+                            context.wereValues.push(true)
+                        }
+                    }
+                    else
+                    {
+                        context.lastTokenAtom = true
+                        
+                        context.output.push(try delegate.variableTokenToNode(token))
+                        
+                        if (!context.wereValues.isEmpty)
+                        {
+                            context.wereValues.pop()
+                            context.wereValues.push(true)
+                        }
+                    }
+                case .LiteralValue:
+                    if (context.lastTokenAtom)
+                    {
+                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                    }
+                    context.lastTokenAtom = true
+
+                    context.output.push(try delegate.literalTokenToNode(token))
+
+                    if (!context.wereValues.isEmpty)
+                    {
+                        context.wereValues.pop()
+                        context.wereValues.push(true)
+                    }
+                case .ArgumentSeparator:
+                    while let peek = context.stack.peek() where peek.type != .ParenthesisLeft
+                    {
+                        context.stack.pop()
+                        context.output.push(try _pipe(peek, context: context))
+                    }
+                    if (context.stack.isEmpty || context.wereValues.isEmpty)
+                    {
+                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                    }
+                    if let wereValue = context.wereValues.pop() where wereValue,
+                        let argCount = context.argCount.pop()
+                    {
+                        context.argCount.push(argCount + 1)
+                    }
+                    context.wereValues.push(true)
+                    context.lastTokenAtom = false
+                case .Operator:
+                    if (isOperator(context.prevToken) && delegate.hasUnaryOperator(
+                        token))
+                    {
+                        if (context.lastTokenAtom)
+                        {
+                            throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                        }
+                        context.unaries.insert(token)
+                        context.stack.push(token)
+                    }
+                    else
+                    {
+                        
+                        if let peek = context.stack.peek() where peek.type ==
+                            ShuntingYardTokenType.Identifier
+                        {
+                            context.stack.pop()
+
+                            context.output.push(try _pipe(peek, context: context))
+                        }
+                        
+                        while let peek = context.stack.peek() where peek.type == ShuntingYardTokenType.Operator,
+                            let tokenPrec = delegate.precedenceOfOperator(token, unary: context.actsAsUnary(token)),
+                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)) where (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.Left && tokenPrec == peekPrec))
+                        {
+                            context.stack.pop()
+                            context.output.push(try _pipe(peek, context: context))
+
+                        }
+
+                        context.stack.push(token)
+                        context.lastTokenAtom = false
+                    }
+                case .ParenthesisLeft:
+                    if (context.lastTokenAtom)
+                    {
+                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                    }
                     context.stack.push(token)
-                }
-                else
-                {
+                case .ParenthesisRight:
+                    while let peek = context.stack.peek() where !delegate.isMatchingPair(
+                        peek, right: token)
+                    {
+                        context.stack.pop()
+
+                        context.output.push(try _pipe(peek, context: context))
+                    }
+
+                    if (!context.stack.isEmpty)
+                    {
+                        context.stack.pop()
+                    }
+                    else
+                    {
+                        throw ShuntingYardError.MismatchedToken(token: token, open: false)
+                    }
                     
                     if let peek = context.stack.peek() where peek.type ==
                         ShuntingYardTokenType.Identifier
                     {
                         context.stack.pop()
-                        switch _pipe(peek, context: context) {
-                        case .Success(let node):
-                            context.output.push(node)
-                        case .Fail(let error):
-                            return .Fail(error)
-                        }
+                        
+                        context.output.push(try _pipe(peek, context: context))
                     }
-                    
-                    while let peek = context.stack.peek() where peek.type == ShuntingYardTokenType.Operator,
-                        let tokenPrec = delegate.precedenceOfOperator(token, unary: context.actsAsUnary(token)),
-                        let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)) where (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.Left && tokenPrec == peekPrec))
-                    {
-                        context.stack.pop()
-                        switch _pipe(peek, context: context) {
-                        case .Success(let node):
-                            context.output.push(node)
-                        case .Fail(let error):
-                            return .Fail(error)
-                        }
-                    }
-                    
-                    context.stack.push(token)
-                    context.lastTokenAtom = false
-                }
-            case .ParenthesisLeft:
-                if (context.lastTokenAtom)
-                {
-                    return .Fail(.UnexpectedToken(token: token, message: ""))
-                }
-                context.stack.push(token)
-            case .ParenthesisRight:
-                while let peek = context.stack.peek() where !delegate.isMatchingPair(
-                    peek, right: token)
-                {
-                    context.stack.pop()
-                    switch _pipe(peek, context: context) {
-                    case .Success(let node):
-                        context.output.push(node)
-                    case .Fail(let error):
-                        return .Fail(error)
-                    }
+                case .Ignore:
+                    continue
                 }
                 
-                if (!context.stack.isEmpty)
-                {
-                    context.stack.pop()
-                }
-                else
-                {
-                    return .Fail(.MismatchedToken(token: token, open: false))
-                }
-                
-                if let peek = context.stack.peek() where peek.type ==
-                    ShuntingYardTokenType.Identifier
-                {
-                    context.stack.pop()
-                    
-                    switch _pipe(peek, context: context) {
-                    case .Success(let node):
-                        context.output.push(node)
-                    case .Fail(let error):
-                        return .Fail(error)
-                    }
-                }
-            case .Ignore:
-                continue
+                context.prevToken = token
             }
-            
-            context.prevToken = token
+
+            return .Success(try finalize(context))
+        } catch let e as ShuntingYardError {
+            return Result.Fail(e)
+        } catch {
+            return Result.Fail(ShuntingYardError.InvalidState)
         }
-        
-        return finalize(context)
     }
     
-    func finalize(context : ShuntingYardContext<NodeType>) -> Result<NodeType, ShuntingYardError>
+    func finalize(context : ShuntingYardContext<NodeType>) throws -> NodeType
     {
         while let peek = context.stack.peek()
         {
             if (peek.type == ShuntingYardTokenType.ParenthesisLeft)
             {
-                return .Fail(.MismatchedToken(token: peek, open: true))
+                throw ShuntingYardError.MismatchedToken(token: peek, open: true)
             }
             if (peek.type == ShuntingYardTokenType.ParenthesisRight)
             {
-                return .Fail(.MismatchedToken(token: peek, open: false))
+                throw ShuntingYardError.MismatchedToken(token: peek, open: false)
             }
             context.stack.pop()
-            switch _pipe(peek, context: context) {
-            case .Success(let node):
-                context.output.push(node)
-            case .Fail(let error):
-                return .Fail(error)
-            }
+
+            context.output.push(try _pipe(peek, context: context))
         }
-        
+
         if let result = context.output.pop()
         {
             
             if (!context.output.isEmpty)
             {
-                return .Fail(.InvalidState)
+                throw ShuntingYardError.InvalidState
             }
-            return .Success(result)
+            return result
         }
         else
         {
-            return delegate.emptyNode()
+            return try delegate.emptyNode()
         }
     }
     
     
-    func _pipe(op : Token<ShuntingYardTokenType>, context : ShuntingYardContext<NodeType>) -> Result<NodeType, ShuntingYardError>
+    func _pipe(op : Token<ShuntingYardTokenType>, context : ShuntingYardContext<NodeType>) throws -> NodeType
     {
         switch (op.type)
         {
         case .Identifier:
             // @TODO: CLEAN UP
             guard var argCount = context.argCount.pop() else {
-                return .Fail(.UnexpectedToken(token: op, message: ""))
+                throw ShuntingYardError.UnexpectedToken(token: op, message: "")
             }
             var temp = [NodeType]()
         
@@ -299,11 +265,11 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 }
                 else
                 {
-                    return .Fail(.UnexpectedEndOfArgumentList(token: op))
+                    throw ShuntingYardError.UnexpectedEndOfArgumentList(token: op)
                 }
             }
             
-            return delegate.functionTokenToNode(op, args: temp.reverse())
+            return try delegate.functionTokenToNode(op, args: temp.reverse())
 
         case .Operator:
             if (context.unaries.contains(op))
@@ -311,40 +277,40 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             
             guard delegate.hasUnaryOperator(op) else
             {
-                return .Fail(.UnknownOperator(token: op, arity: OperatorArity.Unary))
+                throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Unary)
             }
             
             guard let operand = context.output.pop()
             else
             {
-                return .Fail(.MissingOperand(token: op, arity: OperatorArity.Unary, missing: 1))
+                throw ShuntingYardError.MissingOperand(token: op, arity: OperatorArity.Unary, missing: 1)
             }
             
-            return delegate.unaryOperatorToNode(op, operand: operand)
+            return try delegate.unaryOperatorToNode(op, operand: operand)
             }
             else
             {
                 guard delegate.hasBinaryOperator(op) else
                 {
-                    return .Fail(.UnknownOperator(token: op, arity: OperatorArity.Binary))
+                    throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Binary)
                 }
                 
                 guard let rightHand = context.output.pop()
                 else
                 {
-                    return .Fail(.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 2))
+                    throw ShuntingYardError.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 2)
                 }
                 
                 guard let leftHand = context.output.pop()
                 else
                 {
-                    return .Fail(.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 1))
+                    throw ShuntingYardError.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 1)
                 }
                 
-                return delegate.binaryOperatorToNode(op, leftHand: leftHand, rightHand: rightHand)
+                return try delegate.binaryOperatorToNode(op, leftHand: leftHand, rightHand: rightHand)
             }
         default:
-            return .Fail(.UnexpectedToken(token: op, message: ""))
+            throw ShuntingYardError.UnexpectedToken(token: op, message: "")
         }
     }
     
@@ -402,17 +368,15 @@ public protocol ShuntingYardDelegate {
     
     func hasConstantOfName(name : Token<ShuntingYardTokenType>) -> Bool
     
-    func variableTokenToNode(token : Token<ShuntingYardTokenType>) -> Result<NodeType, ShuntingYardError>
+    func variableTokenToNode(token : Token<ShuntingYardTokenType>) throws -> NodeType
+    func constantTokenToNode(token : Token<ShuntingYardTokenType>) throws -> NodeType
+    func emptyNode() throws -> NodeType
     
-    func constantTokenToNode(token : Token<ShuntingYardTokenType>) -> Result<NodeType, ShuntingYardError>
+    func unaryOperatorToNode(op : Token<ShuntingYardTokenType>, operand : NodeType) throws -> NodeType
     
-    func emptyNode() -> Result<NodeType, ShuntingYardError>
+    func binaryOperatorToNode(op : Token<ShuntingYardTokenType>, leftHand : NodeType, rightHand : NodeType) throws -> NodeType
     
-    func unaryOperatorToNode(op : Token<ShuntingYardTokenType>, operand : NodeType) -> Result<NodeType, ShuntingYardError>
-    
-    func binaryOperatorToNode(op : Token<ShuntingYardTokenType>, leftHand : NodeType, rightHand : NodeType) -> Result<NodeType, ShuntingYardError>
-    
-    func functionTokenToNode(function : Token<ShuntingYardTokenType>, args : [NodeType]) -> Result<NodeType, ShuntingYardError>
+    func functionTokenToNode(function : Token<ShuntingYardTokenType>, args : [NodeType]) throws -> NodeType
     
     func hasBinaryOperator(op : Token<ShuntingYardTokenType>) -> Bool
     
@@ -422,6 +386,6 @@ public protocol ShuntingYardDelegate {
     
     func precedenceOfOperator(token : Token<ShuntingYardTokenType>, unary : Bool) -> Precedence?
     
-    func literalTokenToNode(token : Token<ShuntingYardTokenType>) -> Result<NodeType, ShuntingYardError>
+    func literalTokenToNode(token : Token<ShuntingYardTokenType>) throws -> NodeType
 
 }
