@@ -811,15 +811,15 @@ CA
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="43106B8C-E6C7-4840-A1CF-9BBCDD921616" label="View" paletteLabel="View" tag="-1" id="sNv-T5-vP7">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="60" height="20"/>
-                                    <size key="maxSize" width="128" height="33"/>
+                                    <size key="minSize" width="64" height="20"/>
+                                    <size key="maxSize" width="80" height="33"/>
                                     <stackView key="view" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" id="wiQ-BY-Ka0">
-                                        <rect key="frame" x="0.0" y="14" width="128" height="33"/>
+                                        <rect key="frame" x="0.0" y="14" width="80" height="33"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <animations/>
                                         <middleViews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ham-MK-5FG">
-                                                <rect key="frame" x="40" y="4" width="20" height="25"/>
+                                                <rect key="frame" x="16" y="4" width="20" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" placeholder="YES" id="T2y-Fz-RT3"/>
                                                 </constraints>
@@ -830,7 +830,7 @@ CA
                                                 </buttonCell>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tML-wU-vzM">
-                                                <rect key="frame" x="68" y="4" width="20" height="25"/>
+                                                <rect key="frame" x="44" y="4" width="20" height="25"/>
                                                 <animations/>
                                                 <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-right" imagePosition="only" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="7Ms-Cz-Vcc">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -1294,9 +1294,9 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="AI4-sb-mAI">
-                                        <rect key="frame" x="456" y="5" width="29" height="18"/>
+                                        <rect key="frame" x="456" y="5" width="29" height="19"/>
                                         <animations/>
-                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="atb-QI-b5H">
+                                        <popUpButtonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="left" alignment="center" lineBreakMode="truncatingTail" inset="2" pullsDown="YES" arrowPosition="noArrow" altersStateOfSelectedItem="NO" id="atb-QI-b5H">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" id="pGS-ph-lLS">

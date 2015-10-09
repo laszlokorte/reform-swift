@@ -165,11 +165,14 @@ extension ProcedureController : NSMenuDelegate {
             FormIteratorInstruction(proxyForm:
                 ProxyForm(id: formId, name: name), formIds: Array(formIds)))
 
-        
-        node.append(child: InstructionNode())
-        instructions[selectedIndex].node.append(sibling:
-            node
-        )
+        let child = InstructionNode()
+        node.append(child: child)
+
+        if instructions[selectedIndex].node.append(sibling:
+        node
+            ) {
+                procedureViewModel?.instructionFocus.current = child
+        }
         procedureViewModel?.instructionChanger()
     }
 
