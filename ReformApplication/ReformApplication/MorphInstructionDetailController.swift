@@ -36,9 +36,11 @@ class MorphInstructionDetailController : NSViewController, InstructionDetailCont
     func updateError() {
         if let error = error {
             errorLabel?.stringValue = error
-            errorLabel?.hidden = false
+            if let errorLabel = errorLabel {
+                self.view.addSubview(errorLabel)
+            }
         } else {
-            errorLabel?.hidden = true
+            errorLabel?.removeFromSuperview()
         }
     }
 

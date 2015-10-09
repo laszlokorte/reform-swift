@@ -13,6 +13,7 @@ import ReformCore
 class ForLoopInstructionDetailController : NSViewController, InstructionDetailController {
 
     @IBOutlet var errorLabel : NSTextField?
+    @IBOutlet var countField : NSTextField?
 
     var stringifier : Stringifier?
 
@@ -36,13 +37,28 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
     func updateError() {
         if let error = error {
             errorLabel?.stringValue = error
-            errorLabel?.hidden = false
+            if let errorLabel = errorLabel {
+                self.view.addSubview(errorLabel)
+            }
         } else {
-            errorLabel?.hidden = true
+            errorLabel?.removeFromSuperview()
         }
     }
 
     func updateLabel() {
+        guard let node = representedObject as? InstructionNode else {
+            return
+        }
+
+        guard let instruction = node.instruction as? ForLoopInstruction else {
+            return
+        }
+
+        guard let stringifier = stringifier else {
+            return
+        }
+
+        countField?.stringValue = stringifier.stringFor(instruction.expression) ?? ""
     }
     
 }

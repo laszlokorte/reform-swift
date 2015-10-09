@@ -53,7 +53,28 @@ public struct InstructionNodeSequence {
 }
 
 extension InstructionNodeSequence {
-    public func wrapIn(instruction: GroupInstruction) {
-        print("wrap")
+    public func wrapIn(instruction: GroupInstruction) -> Bool {
+        guard let first = nodes.first else {
+            return false
+        }
+
+        let group = InstructionNode(group: instruction)
+
+        for n in nodes {
+            if n.isDeeperThan(2) {
+                return false
+            }
+        }
+
+        first.prepend(sibling: group)
+
+        group.append(child: InstructionNode())
+
+        for n in nodes {
+            n.removeFromParent()
+            group.append(child: n)
+        }
+
+        return true
     }
 }
