@@ -21,7 +21,7 @@
 		F222AF3D1B876941005F71A1 /* HandleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3C1B876941005F71A1 /* HandleFinder.swift */; };
 		F222AF401B8776B8005F71A1 /* DragToolTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */; };
 		F222AF491B87A621005F71A1 /* PivotSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222AF481B87A621005F71A1 /* PivotSwitcher.swift */; };
-		F236C0F21BB539170051FA6B /* AffineHandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0F11BB539170051FA6B /* AffineHandleUI.swift */; settings = {ASSET_TAGS = (); }; };
+		F236C0F21BB539170051FA6B /* AffineHandleUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F236C0F11BB539170051FA6B /* AffineHandleUI.swift */; };
 		F23BCFB01BA9F0E2001A04EF /* ReformStage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFAF1BA9F0E2001A04EF /* ReformStage.framework */; };
 		F23BCFB21BA9F0E6001A04EF /* ReformCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB11BA9F0E6001A04EF /* ReformCore.framework */; };
 		F23BCFB41BA9F0EA001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFB31BA9F0EA001A04EF /* ReformMath.framework */; };
@@ -80,9 +80,9 @@
 		F222AF3F1B8776B8005F71A1 /* DragToolTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragToolTemplate.swift; sourceTree = "<group>"; };
 		F222AF481B87A621005F71A1 /* PivotSwitcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PivotSwitcher.swift; sourceTree = "<group>"; };
 		F236C0F11BB539170051FA6B /* AffineHandleUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleUI.swift; sourceTree = "<group>"; };
-		F23BCFAF1BA9F0E2001A04EF /* ReformStage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformStage.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformStage.framework"; sourceTree = "<group>"; };
-		F23BCFB11BA9F0E6001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
-		F23BCFB31BA9F0EA001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
+		F23BCFAF1BA9F0E2001A04EF /* ReformStage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReformStage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23BCFB11BA9F0E6001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReformCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23BCFB31BA9F0EA001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReformMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25909571B9F4E2000F9A6F7 /* AffineHandleGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleGrabber.swift; sourceTree = "<group>"; };
 		F25909591B9F4E6F00F9A6F7 /* AffineHandleFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineHandleFinder.swift; sourceTree = "<group>"; };
 		F26D465A1B7D0B9600266096 /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };

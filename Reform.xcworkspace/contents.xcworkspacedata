@@ -20,27 +20,27 @@
       location = "group:STYLEGUIDE.md">
    </FileRef>
    <FileRef
-      location = "group:ReformGraphics/ReformGraphics.xcodeproj">
+      location = "container:ReformGraphics/ReformGraphics.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformExpression/ReformExpression.xcodeproj">
+      location = "container:ReformExpression/ReformExpression.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformSerializer/ReformSerializer.xcodeproj">
+      location = "container:ReformSerializer/ReformSerializer.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformTools/ReformTools.xcodeproj">
+      location = "container:ReformTools/ReformTools.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformStage/ReformStage.xcodeproj">
+      location = "container:ReformStage/ReformStage.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformMath/ReformMath.xcodeproj">
+      location = "container:ReformMath/ReformMath.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ReformCore/ReformCore.xcodeproj">
+      location = "container:ReformCore/ReformCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/laszlokorte/dev/swift-reform-workspace/ReformApplication/Reform.xcodeproj">
+      location = "container:ReformApplication/Reform.xcodeproj">
    </FileRef>
 </Workspace>

@@ -31,9 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F23BCFA91BA9F0C0001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformExpression.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformExpression.framework"; sourceTree = "<group>"; };
-		F23BCFAB1BA9F0C9001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformCore.framework"; sourceTree = "<group>"; };
-		F23BCFAD1BA9F0CD001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReformMath.framework; path = "../../../Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<group>"; };
+		F23BCFA91BA9F0C0001A04EF /* ReformExpression.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReformExpression.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23BCFAB1BA9F0C9001A04EF /* ReformCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReformCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23BCFAD1BA9F0CD001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReformMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D467E1B7D0BBD00266096 /* ReformSerializer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReformSerializer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F26D46811B7D0BBD00266096 /* ReformSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReformSerializer.h; sourceTree = "<group>"; };
 		F26D46831B7D0BBD00266096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
