@@ -191,6 +191,18 @@ extension InstructionNode {
         content = InstructionContent.Single(instruction)
     }
 
+    public func replaceWith(instruction: GroupInstruction) {
+        let children : [InstructionNode]
+
+        if case .Group(_, let chil) = self.content {
+            children = chil
+        } else {
+            children = [InstructionNode(parent: self)]
+        }
+
+        content = InstructionContent.Group(instruction, children)
+    }
+
     public func replaceWith(node: InstructionNode) {
         if case .Single(let instruction) = node.content {
             content = InstructionContent.Single(instruction)

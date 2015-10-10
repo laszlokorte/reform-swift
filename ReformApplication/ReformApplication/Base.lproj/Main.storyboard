@@ -923,6 +923,32 @@ CA
                                             <animations/>
                                         </view>
                                     </tabViewItem>
+                                    <tabViewItem label="JSON" identifier="" id="BLp-YH-amt">
+                                        <view key="view" id="a3p-lv-vNn">
+                                            <rect key="frame" x="10" y="33" width="404" height="209"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wkR-Gt-x5y">
+                                                    <rect key="frame" x="17" y="17" width="370" height="189"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="189" id="msf-7X-Hie"/>
+                                                    </constraints>
+                                                    <animations/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="WrZ-dT-obA">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wkR-Gt-x5y" firstAttribute="leading" secondItem="a3p-lv-vNn" secondAttribute="leading" constant="17" id="Cng-Df-7kH"/>
+                                                <constraint firstItem="wkR-Gt-x5y" firstAttribute="top" secondItem="a3p-lv-vNn" secondAttribute="top" constant="3" id="Fxg-mD-fD9"/>
+                                                <constraint firstAttribute="trailing" secondItem="wkR-Gt-x5y" secondAttribute="trailing" constant="17" id="JnV-Qa-Moo"/>
+                                            </constraints>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
                                 </tabViewItems>
                             </tabView>
                             <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="I2x-3c-flV">
@@ -978,6 +1004,9 @@ Gw
                         </constraints>
                         <animations/>
                     </customView>
+                    <connections>
+                        <outlet property="jsonField" destination="wkR-Gt-x5y" id="4Tr-kR-jRC"/>
+                    </connections>
                 </viewController>
                 <customObject id="Rh3-wi-64S" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1735,6 +1764,9 @@ Gw
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="onChange:" target="GxX-DY-fEH" id="sex-gg-noP"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="teD-Jd-hzd">
                                 <rect key="frame" x="18" y="74" width="61" height="17"/>
@@ -1935,7 +1967,6 @@ Gw
                                                     <animations/>
                                                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <font key="titleFont" metaFont="message" size="11"/>
                                                 </box>
                                                 <box title="Background" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="HAw-hd-VNx">
                                                     <rect key="frame" x="17" y="152" width="225" height="78"/>
@@ -1986,7 +2017,6 @@ Gw
                                                     <animations/>
                                                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <font key="titleFont" metaFont="message" size="11"/>
                                                 </box>
                                             </subviews>
                                             <constraints>
@@ -2247,6 +2277,9 @@ Gw
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="onChange:" target="oH6-ol-ICj" id="ma2-Of-9R8"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xgb-hq-1ma">
                                 <rect key="frame" x="18" y="74" width="63" height="17"/>

@@ -9,6 +9,7 @@
 
 import Cocoa
 import ReformCore
+import ReformExpression
 
 class IfConditionInstructionDetailController : NSViewController, InstructionDetailController {
 
@@ -16,6 +17,8 @@ class IfConditionInstructionDetailController : NSViewController, InstructionDeta
     @IBOutlet var conditionField : NSTextField?
 
     var stringifier : Stringifier?
+    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var intend : (() -> ())?
 
     var error : String? {
         didSet {
@@ -59,6 +62,28 @@ class IfConditionInstructionDetailController : NSViewController, InstructionDeta
         }
 
         conditionField?.stringValue = stringifier.stringFor(instruction.expression) ?? ""
+    }
+
+    @IBAction func onChange(sender: AnyObject?) {
+        guard let
+            parser = parser,
+            string = conditionField?.stringValue,
+            intend = intend
+            else {
+                return
+        }
+
+        guard let node = representedObject as? InstructionNode else {
+            return
+        }
+
+        switch parser(string) {
+        case .Success(let expr):
+            node.replaceWith(IfConditionInstruction(expression: expr))
+            intend()
+        case .Fail(let err):
+            print(err)
+        }
     }
     
 }

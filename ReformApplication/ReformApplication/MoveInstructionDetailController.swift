@@ -8,6 +8,7 @@
 
 import Cocoa
 import ReformCore
+import ReformExpression
 
 class MoveInstructionDetailController : NSViewController, InstructionDetailController {
     @IBOutlet var verticalDistanceField : NSTextField?
@@ -21,6 +22,8 @@ class MoveInstructionDetailController : NSViewController, InstructionDetailContr
 
 
     var stringifier : Stringifier?
+    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var intend : (() -> ())?
 
     var error : String? {
         didSet {

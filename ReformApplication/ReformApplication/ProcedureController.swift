@@ -200,8 +200,6 @@ extension ProcedureController : NSMenuDelegate {
 
     @IBAction func doubleClick(sender: AnyObject) {
 
-
-
         guard let row = tableView?.selectedRow where row > 0, let cell = tableView?.viewAtColumn(0, row: row, makeIfNecessary: false) else {
             return
         }
@@ -237,6 +235,11 @@ extension ProcedureController : NSMenuDelegate {
         if let instr = popOverViewController as? InstructionDetailController,
         procedureViewModel = procedureViewModel{
             instr.stringifier = procedureViewModel.analyzer.stringifier
+            instr.parser = { string in
+                return procedureViewModel.parser.parse(procedureViewModel.lexer.tokenize(string.characters))
+            }
+            instr.intend = procedureViewModel.instructionChanger
+            
             let key = InstructionNodeKey(instructions[row].node)
 
             instr.error = procedureViewModel.snapshotCollector.errors[key].map{String($0)}

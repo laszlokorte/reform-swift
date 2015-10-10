@@ -7,6 +7,7 @@
 //
 
 import ReformCore
+import ReformExpression
 import ReformTools
 
 final class ProcedureViewModel {
@@ -18,8 +19,13 @@ final class ProcedureViewModel {
     let formSelection : FormSelection
     let formIdSequence : IdentifierSequence<FormIdentifier>
     let nameAllocator : NameAllocator
+    let lexer : Lexer<ShuntingYardTokenType>
+    let parser : ShuntingYardParser<ExpressionParserDelegate>
 
-    init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus, snapshotCollector : SnapshotCollector, instructionFocusChanger : InstructionFocusChanger, formSelection: FormSelection, formIdSequence: IdentifierSequence<FormIdentifier>, nameAllocator: NameAllocator, instructionChanger : () -> ()) {
+    init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus, snapshotCollector : SnapshotCollector, instructionFocusChanger : InstructionFocusChanger, formSelection: FormSelection, formIdSequence: IdentifierSequence<FormIdentifier>, nameAllocator: NameAllocator,
+        lexer : Lexer<ShuntingYardTokenType>,
+        parser: ShuntingYardParser<ExpressionParserDelegate>,
+        instructionChanger : () -> ()) {
         self.analyzer = analyzer
         self.instructionFocus = instructionFocus
         self.snapshotCollector = snapshotCollector
@@ -28,5 +34,7 @@ final class ProcedureViewModel {
         self.formSelection = formSelection
         self.nameAllocator = nameAllocator
         self.formIdSequence = formIdSequence
+        self.lexer = lexer
+        self.parser = parser
     }
 }

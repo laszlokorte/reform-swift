@@ -9,8 +9,8 @@
 import ReformMath
 
 public struct ForeignFormPoint : RuntimePoint, Labeled {
-    let formId : FormIdentifier
-    let pointId : ExposedPointIdentifier
+    public let formId : FormIdentifier
+    public let pointId : ExposedPointIdentifier
     
     public init(formId: FormIdentifier, pointId: ExposedPointIdentifier) {
         self.formId = formId

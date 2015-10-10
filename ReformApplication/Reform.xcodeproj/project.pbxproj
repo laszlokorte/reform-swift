@@ -43,6 +43,7 @@
 		F23BCFD01BA9F15D001A04EF /* ReformSerializer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFCE1BA9F15D001A04EF /* ReformSerializer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F23BCFD21BA9F168001A04EF /* ReformMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFD11BA9F168001A04EF /* ReformMath.framework */; };
 		F23BCFD31BA9F168001A04EF /* ReformMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F23BCFD11BA9F168001A04EF /* ReformMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F24C988A1BC9281300262027 /* ExpressionLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24C98891BC9281300262027 /* ExpressionLexer.swift */; };
 		F262B7721B7E275800B29E2D /* ProcedureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7711B7E275800B29E2D /* ProcedureController.swift */; };
 		F262B7741B7E412800B29E2D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F262B7731B7E412800B29E2D /* CanvasView.swift */; };
 		F26D45BA1B7D090000266096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26D45B91B7D090000266096 /* AppDelegate.swift */; };
@@ -134,6 +135,7 @@
 		F23BCFCB1BA9F14D001A04EF /* ReformTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformTools.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformTools.framework"; sourceTree = "<absolute>"; };
 		F23BCFCE1BA9F15D001A04EF /* ReformSerializer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformSerializer.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformSerializer.framework"; sourceTree = "<absolute>"; };
 		F23BCFD11BA9F168001A04EF /* ReformMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ReformMath.framework; path = "/Users/laszlokorte/Library/Developer/Xcode/DerivedData/Reform-cmzdxlnqpbzanlgacifzdwkhinba/Build/Products/Debug/ReformMath.framework"; sourceTree = "<absolute>"; };
+		F24C98891BC9281300262027 /* ExpressionLexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionLexer.swift; sourceTree = "<group>"; };
 		F262B7711B7E275800B29E2D /* ProcedureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcedureController.swift; sourceTree = "<group>"; };
 		F262B7731B7E412800B29E2D /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		F26D45B61B7D090000266096 /* ReformApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReformApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +250,14 @@
 			name = ViewModels;
 			sourceTree = "<group>";
 		};
+		F24C98881BC9280700262027 /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+				F24C98891BC9281300262027 /* ExpressionLexer.swift */,
+			);
+			name = Lexer;
+			sourceTree = "<group>";
+		};
 		F26D45AD1B7D090000266096 = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +288,7 @@
 		F26D45B81B7D090000266096 /* ReformApplication */ = {
 			isa = PBXGroup;
 			children = (
+				F24C98881BC9280700262027 /* Lexer */,
 				F2E6000E1BBDDE6B0022FE56 /* InstructionDetails */,
 				F2339B021B8D533E00C0AE41 /* ViewModels */,
 				F2339AFB1B8D320700C0AE41 /* Sidebar */,
@@ -473,6 +484,7 @@
 			files = (
 				F2DF63681B927E1D00A2EFB6 /* StageRenderer.swift in Sources */,
 				F2042A291B7EC865009144E9 /* Document.swift in Sources */,
+				F24C988A1BC9281300262027 /* ExpressionLexer.swift in Sources */,
 				F2E1F8B11BC34D5000C9BB1F /* ScaleInstructionDetailController.swift in Sources */,
 				F222AF121B835E50005F71A1 /* GrabUI.swift in Sources */,
 				F236C0F41BB539E50051FA6B /* AffineHandleUI.swift in Sources */,

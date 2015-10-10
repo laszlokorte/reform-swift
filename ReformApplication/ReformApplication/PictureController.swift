@@ -75,7 +75,10 @@ final class PictureController : NSViewController {
     }
 
     func updateProcedure(procedureController: ProcedureController, withSession pictureSession: PictureSession) {
-        procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus, snapshotCollector: pictureSession.snapshotCollector, instructionFocusChanger: pictureSession.instructionFocusChanger, formSelection: pictureSession.formSelection, formIdSequence: pictureSession.formIDSequence, nameAllocator: pictureSession.nameAllocator, instructionChanger: pictureSession.procedureProcessor.trigger)
+        procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus, snapshotCollector: pictureSession.snapshotCollector, instructionFocusChanger: pictureSession.instructionFocusChanger, formSelection: pictureSession.formSelection, formIdSequence: pictureSession.formIDSequence, nameAllocator: pictureSession.nameAllocator,
+            lexer: pictureSession.lexer,
+            parser: pictureSession.parser,
+            instructionChanger: pictureSession.procedureProcessor.trigger)
     }
 
     func updateAttributes(attributesController: AttributesController, withSession pictureSession: PictureSession) {

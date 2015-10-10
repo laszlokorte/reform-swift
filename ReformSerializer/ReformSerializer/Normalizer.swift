@@ -6,15 +6,15 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-enum InitialisationError : ErrorType {
+public enum InitialisationError : ErrorType {
     case Unknown
 }
 
-enum NormalizationError : ErrorType {
+public enum NormalizationError : ErrorType {
     case NotNormalizable(Any.Type)
 }
 
-enum NormalizedValue {
+public enum NormalizedValue {
     case Null
     case Bool(Swift.Bool)
     case String(Swift.String)
@@ -24,7 +24,7 @@ enum NormalizedValue {
     case Dictionary([Swift.String:NormalizedValue])
 }
 
-protocol Normalizable {
+public protocol Normalizable {
     func normalize() throws -> NormalizedValue
 
     init(normalizedValue: NormalizedValue) throws

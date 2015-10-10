@@ -8,12 +8,15 @@
 
 import Cocoa
 import ReformCore
+import ReformExpression
 
 class CreateFormInstructionDetailController : NSViewController, InstructionDetailController {
 
     @IBOutlet var errorLabel : NSTextField?
 
     var stringifier : Stringifier?
+    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var intend : (() -> ())?
 
     var error : String? {
         didSet {

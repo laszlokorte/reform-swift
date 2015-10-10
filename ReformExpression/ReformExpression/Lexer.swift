@@ -60,7 +60,7 @@ public struct Lexer<T:TokenType> {
     let rules : [Rule<T>]
     let ignoreRules : [Rule<T>]
     
-    func tokenize(input: String.CharacterView) -> Tokens<T> {
+    public func tokenize(input: String.CharacterView) -> Tokens<T> {
         return Tokens(lexer: self, input: input)
     }
 }
@@ -223,16 +223,22 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
 public struct LexerGenerator<T:TokenType> {
     private var rules : [Rule<T>] = []
     private var ignoreRules : [Rule<T>] = []
-    
-    mutating func add(type: T, pattern: String) {
+
+    public init() {}
+
+    public init(@noescape callback: (inout LexerGenerator<T>)->()) {
+        callback(&self)
+    }
+
+    public mutating func add(type: T, pattern: String) {
         rules.append(Rule(type: type, pattern: pattern, inversePriority: rules.count))
     }
     
-    mutating func ignore(pattern: String) {
+    public mutating func ignore(pattern: String) {
         ignoreRules.append(Rule(type: T.ignore, pattern: pattern, inversePriority: ignoreRules.count))
     }
     
-    func getLexer() -> Lexer<T> {
+    public func getLexer() -> Lexer<T> {
         return Lexer(rules: rules, ignoreRules: ignoreRules)
     }
 }

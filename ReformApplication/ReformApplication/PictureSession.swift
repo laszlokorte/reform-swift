@@ -9,6 +9,7 @@
 import ReformExpression
 import ReformStage
 import ReformMath
+import ReformExpression
 import ReformTools
 import ReformCore
 
@@ -47,13 +48,25 @@ final class FormSelectionChanger {
 }
 
 final class ProcedureProcessor<A:Analyzer> {
+    // The picture being edited, containing the instructions to produce th picture
     let picture : Picture
+
+    // The Runtime used to evaluate the picture's instructions
     let runtime: DefaultRuntime
+
+    // the analyzer used to to a static analysis on the picture
     let analyzer : A
+
+    // the controller managing the tools used to edit the picture
     let toolController : ToolController
+
+    // the runtime listener used to collect snapshots of the after each instruction
     let snapshotCollector : SnapshotCollector
+
+    // the queue used to schedule tasks for the background thread
     let queue = dispatch_queue_create("reform.runtime.queue", DISPATCH_QUEUE_SERIAL)
 
+    // counters to ensure runtime is not running multiple times in parallel
     var triggerCounter = 0
     var evalCounter = 0
 
@@ -123,30 +136,57 @@ final class ProcedureProcessor<A:Analyzer> {
 }
 
 final class PictureSession {
+    // the project session this picture sessions belongs to
     private weak var projectSession : ProjectSession?
 
+    // used to convert expressions into strings
     let expressionPrinter : ExpressionPrinter
 
+    // the picture being edited in this session
     let picture : Picture
+
+    // manages the form which is selected
     let formSelection : FormSelection
+
+    // manages the instruction which is currently in focus
     let instructionFocus : InstructionFocus
+
+    // analyzer to do a static analysis on the picture's instructions
     let analyzer : DefaultAnalyzer
+
+    // runtime used to evaluate the picture
     let runtime : DefaultRuntime
 
+    // generator for unique form identifiers
     let formIDSequence : IdentifierSequence<FormIdentifier>
+
+    // generator for unique expression variable identifiers
     let referenceIDSequence : IdentifierSequence<ReferenceId>
 
+    // the stage contains the result of the most recent picture evaluation
     let stage : Stage
+
+    // the current UI state for rendering the stage
     let stageUI : StageUI
 
+    // runtime listener collecting the shapes emitted during picture evaluation, passing them to the stage
     let stageCollector : StageCollector<DefaultAnalyzer>
+
+    // runtime listener collecting a snapshot of the picture after each instruction during the evaluation
     let snapshotCollector : SnapshotCollector
 
+    // the zoom and scroll position for looking at the stage
     let camera : Camera
+
+    // service to search for snap points on the stage
     let pointSnapper : PointSnapper
+    // service to search for grab points on the stage
     let pointGrabber : PointGrabber
+    // service to search for handles on the stage
     let handleGrabber : HandleGrabber
+    // service to search for affine handles on the stage
     let affineHandleGrabber : AffineHandleGrabber
+    // service to search for crop handles on the stage
     let cropGrabber : CropGrabber
 
     let streightener : Streightener
@@ -177,12 +217,22 @@ final class PictureSession {
     let instructionFocusChanger : InstructionFocusChanger
     let formSelectionChanger : FormSelectionChanger
 
+
+    let parserDelegate : ExpressionParserDelegate
+    let parser : ShuntingYardParser<ExpressionParserDelegate>
+
+    let lexer : Lexer<ShuntingYardTokenType> = lexerGenerator.getLexer()
+
     init(projectSession : ProjectSession, picture: ReformCore.Picture) {
         self.nameAllocator = NameAllocator()
         self.projectSession = projectSession
         self.picture = picture
 
         self.expressionPrinter = ExpressionPrinter(sheet: picture.data)
+
+        let parserDelegate = ExpressionParserDelegate(sheet: picture.data)
+        self.parserDelegate = parserDelegate
+        self.parser = ShuntingYardParser(delegate: parserDelegate)
 
         self.instructionFocus = InstructionFocus()
         self.formSelection = FormSelection()
@@ -271,6 +321,8 @@ final class PictureSession {
         self.previewTool = PreviewTool(stage: self.stage, maskUI: stageUI.maskUI)
 
         self.toolController.currentTool = selectionTool
+
+
     }
 
     func refresh() {

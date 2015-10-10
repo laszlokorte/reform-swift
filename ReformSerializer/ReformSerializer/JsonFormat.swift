@@ -6,12 +6,14 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-final class JsonFormat : Encoder, Decoder {
-    func encode(value: NormalizedValue) -> String {
-        return ""
+final public class JsonFormat : Encoder, Decoder {
+    public init() {}
+
+    public func encode(value: NormalizedValue) -> String {
+        return "asd"
     }
 
-    func decode(string: String) -> NormalizedValue? {
+    public func decode(string: String) -> NormalizedValue? {
         return .Null
     }
 }

@@ -141,6 +141,15 @@ final class ProjectWindowController : NSWindowController {
         }
     }
 
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+
+
+        if let p = segue.destinationController as? ExportController {
+            p.projectSession = projectSession
+        }
+        
+    }
+
     enum ToolbarIdentifier : String {
         case LineToolItem
         case RectangleToolItem

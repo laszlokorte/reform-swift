@@ -37,7 +37,7 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
     
     private let sheet : Sheet
     
-    init(sheet: Sheet) {
+    public init(sheet: Sheet) {
         self.sheet = sheet
     }
     
