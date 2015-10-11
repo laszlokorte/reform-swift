@@ -131,11 +131,15 @@ extension ProcedureController : NSMenuDelegate {
     }
 
     @IBAction func wrapInstructionInCondition(sender: AnyObject) {
-        guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
+        guard let selectedIndexes = tableView?.selectedRowIndexes where selectedIndexes.count > 0 else {
             return
         }
 
-        instructions[selectedIndex].node.wrapIn(IfConditionInstruction(expression: .Constant(Value(bool: true))))
+        guard let seq = InstructionNodeSequence(nodes: selectedIndexes.map { instructions[$0].node }) else {
+            return
+        }
+
+        seq.wrapIn(IfConditionInstruction(expression: .Constant(Value(bool: true))))
 
         procedureViewModel?.instructionChanger()
     }
