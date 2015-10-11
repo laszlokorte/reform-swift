@@ -1405,8 +1405,33 @@ Gw
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
+                                                        <tableCellView identifier="groupCell" id="SGW-YC-Zgm" customClass="ProcedureGroupCellView" customModule="ReformApplication" customModuleProvider="target">
+                                                            <rect key="frame" x="1" y="1" width="488" height="27"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ggG-dT-IQB">
+                                                                    <rect key="frame" x="3" y="7" width="467" height="14"/>
+                                                                    <animations/>
+                                                                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Group Cell" id="emQ-cp-pDx">
+                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="ggG-dT-IQB" firstAttribute="leading" secondItem="SGW-YC-Zgm" secondAttribute="leading" constant="5" id="sbA-5h-aii"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ggG-dT-IQB" secondAttribute="trailing" constant="20" symbolic="YES" id="vC5-ix-njm"/>
+                                                                <constraint firstItem="ggG-dT-IQB" firstAttribute="centerY" secondItem="SGW-YC-Zgm" secondAttribute="centerY" id="xia-a7-sIf"/>
+                                                            </constraints>
+                                                            <animations/>
+                                                            <connections>
+                                                                <outlet property="indentConstraint" destination="sbA-5h-aii" id="5aO-zq-sl3"/>
+                                                                <outlet property="textField" destination="ggG-dT-IQB" id="Zao-rY-hSp"/>
+                                                            </connections>
+                                                        </tableCellView>
                                                         <tableCellView identifier="thumbnailCell" id="dsB-2R-lHb" customClass="ProcedureSingleCellView" customModule="ReformApplication" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="488" height="90"/>
+                                                            <rect key="frame" x="1" y="30" width="488" height="90"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Uys-HT-WxB">
@@ -1442,31 +1467,6 @@ Gw
                                                                 <outlet property="imageView" destination="Uys-HT-WxB" id="XrZ-Ed-eHY"/>
                                                                 <outlet property="indentConstraint" destination="Fyb-tA-C39" id="xd2-Na-h0y"/>
                                                                 <outlet property="textField" destination="Zkc-lx-sSz" id="Ydd-Ht-i1J"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                        <tableCellView identifier="groupCell" id="SGW-YC-Zgm" customClass="ProcedureGroupCellView" customModule="ReformApplication" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="93" width="488" height="27"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ggG-dT-IQB">
-                                                                    <rect key="frame" x="3" y="7" width="467" height="14"/>
-                                                                    <animations/>
-                                                                    <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Group Cell" id="emQ-cp-pDx">
-                                                                        <font key="font" metaFont="smallSystem"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="ggG-dT-IQB" firstAttribute="leading" secondItem="SGW-YC-Zgm" secondAttribute="leading" constant="5" id="sbA-5h-aii"/>
-                                                                <constraint firstAttribute="trailing" secondItem="ggG-dT-IQB" secondAttribute="trailing" constant="20" symbolic="YES" id="vC5-ix-njm"/>
-                                                                <constraint firstItem="ggG-dT-IQB" firstAttribute="centerY" secondItem="SGW-YC-Zgm" secondAttribute="centerY" id="xia-a7-sIf"/>
-                                                            </constraints>
-                                                            <animations/>
-                                                            <connections>
-                                                                <outlet property="indentConstraint" destination="sbA-5h-aii" id="5aO-zq-sl3"/>
-                                                                <outlet property="textField" destination="ggG-dT-IQB" id="Zao-rY-hSp"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
