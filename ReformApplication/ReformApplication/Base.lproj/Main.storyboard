@@ -818,8 +818,8 @@ CA
                                         <autoresizingMask key="autoresizingMask"/>
                                         <animations/>
                                         <middleViews>
-                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ham-MK-5FG">
-                                                <rect key="frame" x="0.0" y="4" width="0.0" height="25"/>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ham-MK-5FG">
+                                                <rect key="frame" x="16" y="4" width="20" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" placeholder="YES" id="T2y-Fz-RT3"/>
                                                 </constraints>
@@ -829,8 +829,8 @@ CA
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                             </button>
-                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tML-wU-vzM">
-                                                <rect key="frame" x="8" y="4" width="72" height="25"/>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tML-wU-vzM">
+                                                <rect key="frame" x="44" y="4" width="20" height="25"/>
                                                 <animations/>
                                                 <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sidebar-right" imagePosition="only" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="7Ms-Cz-Vcc">
                                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
