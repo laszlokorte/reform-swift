@@ -55,6 +55,8 @@ final class ProcedureController : NSViewController {
     dynamic func procedureEvaluated() {
         instructions = procedureViewModel?.analyzer.instructions ?? []
 
+    tableView?.reloadDataForRowIndexes(NSIndexSet(indexesInRange: NSRange(0..<instructions.count)), columnIndexes: NSIndexSet(index: 0))
+
         if let focus = procedureViewModel?.instructionFocus.current,
             index = instructions.indexOf({ $0.node === focus }) {
 
