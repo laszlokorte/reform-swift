@@ -73,7 +73,7 @@ final class RuntimeStack {
     }
     
     private func remove(id: FormIdentifier) {
-        if let form = formMap[id] {
+        if let form = formMap.removeValueForKey(id) {
             let offset = offsets.removeValueForKey(id)!
             let size = form.dynamicType.stackSize
             for i in 0..<size
