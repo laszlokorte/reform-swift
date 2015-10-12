@@ -143,8 +143,8 @@ public final class ScaleTool : Tool {
                 let piv = pivot.pointFor(grabbedHandle)
                 let axis = (grabbedHandle.position - piv.position)
                 let distance = pos - piv.position - offset
-                let length = axis.length2
-                let factor = length == 0 ? 1 : dot(distance, axis)/axis.length2
+                let length = axis.length²
+                let factor = length == 0 ? 1 : dot(distance, axis)/axis.length²
                 state = .Scaling(handle: grabbedHandle, factor: factor, offset: offset)
             case .Release:
                 instructionCreator.commit()

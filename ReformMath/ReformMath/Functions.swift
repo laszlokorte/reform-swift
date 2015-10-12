@@ -40,7 +40,7 @@ public func lerp(t:Double, a: Double, b: Double) -> Double {
 public func project(vector: Vec2d, onto: Vec2d) -> Vec2d {
     guard onto.x != 0 || onto.y != 0 else { return vector }
     
-    return dot(vector, onto) * onto / onto.length2
+    return dot(vector, onto) * onto / onto.length²
 }
 
 public func dot(a: Vec2d, _ b: Vec2d) -> Double {

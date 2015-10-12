@@ -51,4 +51,9 @@ extension Vec2d {
     public var length2 : Double {
         return x*x + y*y
     }
+
+    public var length² : Double {
+        return length2
+    }
+
 }

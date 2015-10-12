@@ -99,7 +99,7 @@ public func overlaps(aabb aabb: AABB2d, circle: Circle2d) -> Bool {
     if (circleDistance.x <= (size.x/2)) { return true }
     if (circleDistance.y <= (size.y/2)) { return true }
 
-    return (circleDistance - size/2).length2 <= circle.radius*circle.radius
+    return (circleDistance - size/2).length² <= circle.radius*circle.radius
 
 }
 
