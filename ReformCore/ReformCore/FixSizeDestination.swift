@@ -11,9 +11,9 @@ import ReformMath
 public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
     public typealias PointType = protocol<RuntimePoint, Labeled>
     
-    let from: PointType
-    let delta: Vec2d
-    let alignment: RuntimeAlignment
+    public let from: PointType
+    public let delta: Vec2d
+    public let alignment: RuntimeAlignment
     
     public init(from: PointType, delta: Vec2d, alignment: RuntimeAlignment = .Leading) {
         self.from = from

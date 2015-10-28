@@ -53,7 +53,7 @@ public struct FreeDirection : RuntimeDirection, Labeled {
 
 public struct ProportionalDirection : RuntimeDirection, Labeled {
     
-    var proportion : Double
+    public var proportion : Double
     
     init(proportion: Double) {
         self.proportion = proportion

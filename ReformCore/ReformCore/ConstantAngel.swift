@@ -9,7 +9,7 @@
 import ReformMath
 
 public struct ConstantAngle : RuntimeRotationAngle, Labeled {
-    private let angle: Angle
+    public let angle: Angle
     
     public init(angle: Angle = Angle()) {
         self.angle = angle
