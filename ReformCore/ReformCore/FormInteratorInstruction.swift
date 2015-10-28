@@ -8,7 +8,7 @@
 
 
 public struct FormIteratorInstruction : GroupInstruction {
-    let proxyForm: ProxyForm
+    public let proxyForm: ProxyForm
     public let formIds : [FormIdentifier]
 
     public var target : FormIdentifier? { return proxyForm.identifier }

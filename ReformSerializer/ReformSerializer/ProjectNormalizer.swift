@@ -453,13 +453,29 @@ extension ForLoopInstruction : Normalizable {
     public func normalize() throws -> NormalizedValue {
         return .Dictionary([
             "expression" : try expression.normalize()
-        ])
+            ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
         throw InitialisationError.Unknown
     }
 }
+
+extension FormIteratorInstruction : Normalizable {
+
+    public func normalize() throws -> NormalizedValue {
+        return .Dictionary([
+            "proxyForm" : try proxyForm.normalize(),
+            "formIds" : .Array(try formIds.map({try $0.normalize()}))
+            ])
+    }
+
+    public init(normalizedValue: NormalizedValue) throws {
+        throw InitialisationError.Unknown
+    }
+}
+
+
 
 extension DrawingMode : Normalizable {
     public func normalize() -> NormalizedValue {
@@ -490,6 +506,20 @@ extension Form where Self: Drawable, Self:Creatable {
     }
 
     public init(normalizedValue: NormalizedValue) throws {
+        throw InitialisationError.Unknown
+    }
+}
+
+extension ProxyForm : Normalizable {
+
+    public func normalize() throws -> NormalizedValue {
+        return .Dictionary([
+            "name" : .String(name),
+            "identifier" : try identifier.normalize(),
+        ])
+    }
+
+    public convenience init(normalizedValue: NormalizedValue) throws {
         throw InitialisationError.Unknown
     }
 }
