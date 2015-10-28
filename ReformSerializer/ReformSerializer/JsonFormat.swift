@@ -28,7 +28,39 @@ final public class JsonFormat : Encoder, Decoder {
         }
     }
 
-    public func decode(string: String) -> NormalizedValue? {
-        return .Null
+    public func decode(string: String) throws -> NormalizedValue? {
+        guard let jsonData: NSData = string.dataUsingEncoding(NSUTF8StringEncoding) else {
+            return nil
+        }
+
+        let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+
+        return convert(json)
+    }
+
+    func convert(any: AnyObject) -> NormalizedValue? {
+        switch any {
+        case is NSNull:
+            return .Null
+        case let v as Bool:
+            return .Bool(v)
+        case let v as String:
+            return .String(v)
+        case let v as Int:
+            return .Int(v)
+        case let v as Double:
+            return .Double(v)
+        case let v as Array<AnyObject>:
+            return .Array(v.flatMap{convert($0)})
+        case let v as Dictionary<String, AnyObject>:
+            var newDict = [String:NormalizedValue]()
+            for (k,v) in v {
+                newDict[k] = convert(v)
+            }
+            return .Dictionary(newDict)
+
+        default:
+            return nil
+        }
     }
 }

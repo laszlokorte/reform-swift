@@ -7,5 +7,5 @@
 //
 
 protocol Decoder {
-    func decode(string: String) -> NormalizedValue?
+    func decode(string: String) throws -> NormalizedValue?
 }
