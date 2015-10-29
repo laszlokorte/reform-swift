@@ -121,7 +121,9 @@ public final class CreateFormTool : Tool {
         case .Started(let startPoint, let form, _):
             switch input {
             case .ModifierChange:
-                pointSnapper.enable(.Except(.Form(form.identifier)), pointType: snapType)
+                if let formId = self.instructionCreator.target {
+                    pointSnapper.enable(.Except(.Form(formId)), pointType: snapType)
+                }
                 fallthrough
             case .Move:
                 pointSnapper.searchAt(pos)
@@ -167,21 +169,23 @@ public final class CreateFormTool : Tool {
                     let instruction = CreateFormInstruction(form: form, destination: destination)
                     
                     self.instructionCreator.beginCreation(instruction)
+
+                    if let formId = self.instructionCreator.target {
+                        state = .Started(
+                            startPoint: startPoint,
+                            form: form,
+                            target: .Snap(
+                                point: startPoint)
+                        )
+
+
+                        selection.select(formId)
+                        selectionTool.indend()
+                        pointSnapper.enable(
+                            .Except(.Form(formId)), pointType: snapType)
                         
-                    state = .Started(
-                        startPoint: startPoint,
-                        form: form,
-                        target: .Snap(
-                            point: startPoint)
-                    )
-                    
-                    selection.select(form.identifier)
-                    selectionTool.indend()
-                    pointSnapper.enable(
-                        .Except(.Form(form.identifier)), pointType: snapType)
-                    
-                    pointGrabber.enable(form.identifier)
-                    
+                        pointGrabber.enable(formId)
+                    }
                 }  else {
                     state = .Delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)

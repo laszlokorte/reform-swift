@@ -28,6 +28,19 @@ public final class InstructionCreator {
         self.focus = focus
         self.intend = intend
     }
+
+    var target : FormIdentifier? {
+        switch state {
+        case .Idle:
+            return nil
+        case .Creating(_, let node):
+            return node.target
+        case .Amending(_, let node):
+            return node.target
+        case .Fixing(_, let node):
+            return node.target
+        }
+    }
     
     func beginCreation<I:Instruction>(instruction : I) {
         switch state {
