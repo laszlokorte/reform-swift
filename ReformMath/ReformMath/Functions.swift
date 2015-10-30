@@ -60,8 +60,13 @@ public func signum(num: Double) -> Double {
 public func proportioned(vector: Vec2d, proportion: Double, large: Bool) -> Vec2d {
     let op : (Double, Double)->Double = large ? max : min
     let base = op(abs(vector.x), abs(vector.y / proportion))
-    
-    return Vec2d(x: base * signum(vector.x), y: base * signum(vector.y) * proportion)
+
+    let signs = Vec2d(
+        x: vector.x < 0 ? -1 : 1,
+        y: vector.y < 0 ? -1 : 1
+    )
+
+    return signs * Vec2d(x: base, y: base * proportion)
 
 }
 
