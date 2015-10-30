@@ -56,19 +56,7 @@ extension TranslateInstruction : Mergeable {
             return nil
         }
 
-        let newDistance : protocol<RuntimeDistance, Labeled>
-
-        if force {
-            newDistance = other.distance
-        } else if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? ConstantDistance {
-            newDistance = combine(distance: distanceA, distance: distanceB)
-        } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? RelativeDistance where distanceB.direction is FreeDirection {
-            newDistance = combine(distance: distanceA, distance: distanceB)
-        } else if let distanceA = distance as? ConstantDistance, distanceB = other.distance as? RelativeDistance where distanceB.direction is FreeDirection {
-            newDistance = combine(distance: distanceA, distance: distanceB)
-        } else if let distanceA = distance as? RelativeDistance, distanceB = other.distance as? ConstantDistance where distanceB.isDegenerated {
-            newDistance = distanceA
-        } else {
+        guard let newDistance = merge(distance: distance, distance: other.distance, force: force) else {
             return nil
         }
 

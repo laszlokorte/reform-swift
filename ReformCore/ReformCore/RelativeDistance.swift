@@ -46,6 +46,23 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
 
 
 
+func merge(distance a: protocol<RuntimeDistance, Labeled>, distance b: protocol<RuntimeDistance, Labeled>, force: Bool) -> protocol<RuntimeDistance, Labeled>? {
+    if force {
+        return b
+    } else if let distanceA = a as? ConstantDistance, distanceB = b as? ConstantDistance {
+        return combine(distance: distanceA, distance: distanceB)
+    } else if let distanceA = a as? RelativeDistance, distanceB = b as? RelativeDistance where distanceB.direction is FreeDirection {
+        return combine(distance: distanceA, distance: distanceB)
+    } else if let distanceA = a as? ConstantDistance, distanceB = b as? RelativeDistance where distanceB.direction is FreeDirection {
+        return combine(distance: distanceA, distance: distanceB)
+    } else if let distanceA = a as? RelativeDistance, distanceB = b as? ConstantDistance where distanceB.isDegenerated {
+        return distanceA
+    } else {
+        return nil
+    }
+}
+
+
 func combine(distance a: ConstantDistance, distance b: RelativeDistance) -> RelativeDistance {
     return b
 }
