@@ -34,9 +34,9 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
         
         switch alignment {
         case .Centered:
-            return "Around \(fromLabel) to \(delta.label)"
+            return "Around \(fromLabel) \(delta.label)"
         case .Leading:
-            return "From \(fromLabel) to  \(delta.label)"
+            return "From \(fromLabel) \(delta.label)"
         }
     }
 

@@ -46,7 +46,7 @@ public final class Streightener {
     func adjust(delta: Vec2d, step: Angle) -> Vec2d {
         switch state {
         case .Enabled:
-            return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta), size: step)))
+            return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta) + Angle(degree: 45), size: step) - Angle(degree: 45)))
         case .Disabled:
             return delta
         }
@@ -70,12 +70,16 @@ public final class Streightener {
         }
     }
     
-    func directionFor(delta: Vec2d) -> protocol<RuntimeDirection, Labeled> {
+    func directionFor(delta: Vec2d, ratio: (Int,Int)? = nil) -> protocol<RuntimeDirection, Labeled> {
         switch state {
         case .Disabled:
             return FreeDirection()
         case .Enabled(let inverted):
-            return (abs(delta.x) > abs(delta.y)) != inverted ? Cartesian.Horizontal : Cartesian.Vertical
+            if let ratio = ratio {
+                return ProportionalDirection(proportion: ratio, large: inverted)
+            } else {
+                return (abs(delta.x) > abs(delta.y)) != inverted ? Cartesian.Horizontal : Cartesian.Vertical
+            }
         }
     }
     

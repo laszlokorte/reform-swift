@@ -57,11 +57,11 @@ public func signum(num: Double) -> Double {
     else { return 0 }
 }
 
-public func proportioned(vector: Vec2d, proportion: Double) -> Vec2d {
-
-    let minimum = min(abs(vector.x), abs(vector.y / proportion))
+public func proportioned(vector: Vec2d, proportion: Double, large: Bool) -> Vec2d {
+    let op : (Double, Double)->Double = large ? max : min
+    let base = op(abs(vector.x), abs(vector.y / proportion))
     
-    return Vec2d(x: minimum * signum(vector.x), y: minimum * signum(vector.x) * proportion)
+    return Vec2d(x: base * signum(vector.x), y: base * signum(vector.y) * proportion)
 
 }
 

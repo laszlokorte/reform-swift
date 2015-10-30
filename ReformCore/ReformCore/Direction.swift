@@ -52,18 +52,19 @@ public struct FreeDirection : RuntimeDirection, Labeled {
 
 
 public struct ProportionalDirection : RuntimeDirection, Labeled {
+    public let proportion : (Int, Int)
+    public let large : Bool
     
-    public var proportion : Double
-    
-    init(proportion: Double) {
+    public init(proportion: (Int, Int), large: Bool = false) {
         self.proportion = proportion
+        self.large = large
     }
     
     public func getDescription(stringifier: Stringifier) -> String {
-        return ""
+        return "proportionally \(proportion.0):\(proportion.1)"
     }
     
     public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
-        return anchor + proportioned((position-anchor), proportion: proportion)
+        return anchor + proportioned((position-anchor), proportion: Double(proportion.0)/Double(proportion.1), large: self.large)
     }
 }

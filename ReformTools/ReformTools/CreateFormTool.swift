@@ -29,17 +29,20 @@ public final class CreateFormTool : Tool {
     
     let selectionTool : SelectionTool
 
+    let autoCenter : Bool
     let baseName : String
     let nameAllocator : NameAllocator
     let pointSnapper : PointSnapper
     let pointGrabber : PointGrabber
     let streightener : Streightener
     let aligner : Aligner
+    let angleStep : Angle
+    let ratio : (Int, Int)?
     let instructionCreator : InstructionCreator
     
     var idSequence : IdentifierSequence<FormIdentifier>
     
-    public init(formType : protocol<Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool) {
+    public init(formType : protocol<Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool, autoCenter : Bool = false, angleStep: Angle = Angle(degree: 45), ratio : (Int, Int)? = nil) {
         self.formType = formType
         self.idSequence = idSequence
         self.baseName = baseName
@@ -54,6 +57,9 @@ public final class CreateFormTool : Tool {
         self.aligner = aligner
         
         self.instructionCreator = instructionCreator
+        self.autoCenter = autoCenter
+        self.angleStep = angleStep
+        self.ratio = ratio
     }
     
     public func setUp() {
@@ -99,7 +105,7 @@ public final class CreateFormTool : Tool {
         snapType = modifier.contains(.Glomp) ? (modifier.contains(.Free) ? [.Grid] : [.Glomp]) :
             modifier.contains(.Free) ? [.None] : [.Form, .Intersection]
         
-        aligner.setMode(modifier.isAlignOption ? .Centered : .Aligned)
+        aligner.setMode(modifier.isAlignOption != self.autoCenter ? .Centered : .Aligned)
         if modifier.isStreight {
             streightener.enable()
         } else {
@@ -206,12 +212,12 @@ public final class CreateFormTool : Tool {
             
             switch target {
             case .Free(let targetPosition):
-                let delta = streightener.adjust(targetPosition - start.position, step: Angle(degree: 45))
+                let delta = streightener.adjust(targetPosition - start.position, step: self.angleStep)
                 
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta, alignment: aligner.getAlignment())
                 
             case .Snap(let snapPoint):
-                destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint, direction: streightener.directionFor(snapPoint.position - start.position), alignment: aligner.getAlignment())
+                destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint, direction: streightener.directionFor(snapPoint.position - start.position, ratio: self.ratio), alignment: aligner.getAlignment())
 
             }
             

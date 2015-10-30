@@ -724,7 +724,11 @@ extension FreeDirection : Normalizable {
 
 extension ProportionalDirection : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary(["proportion": .Double(self.proportion)])
+        return .Dictionary([
+            "numerator": .Int(self.proportion.0),
+            "denominator": .Int(self.proportion.1),
+            "large": .Bool(self.large)
+        ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
