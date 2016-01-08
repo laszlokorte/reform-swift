@@ -6,6 +6,12 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
+//
+//  The intersection algorithms are based on 
+//  the ones provided by Paul Bourke
+//  http://paulbourke.net/geometry/
+//
+
 func intersection(range rangeA: AngleRange, range rangeB: AngleRange) -> AngleRange? {
     let from = max(rangeA.start, rangeB.start)
     let to = min(rangeA.end, rangeB.end)
@@ -18,8 +24,6 @@ func intersection(range rangeA: AngleRange, range rangeB: AngleRange) -> AngleRa
 }
 
 public func intersection(line lineA: LineSegment2d, line lineB: LineSegment2d) -> Vec2d? {
-    // ref http://paulbourke.net/geometry/pointlineplane/
-
     let d = (lineB.to.y - lineB.from.y) * (lineA.to.x - lineA.from.x) - (lineB.to.x - lineB.from.x) * (lineA.to.y - lineA.from.y)
 
     let na = (lineB.to.x - lineB.from.x) * (lineA.from.y - lineB.from.y) - (lineB.to.y - lineB.from.y) * (lineA.from.x - lineB.from.x)
