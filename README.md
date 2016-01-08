@@ -1,6 +1,8 @@
 Reform - Drawing Dynamic Visualizations
 =======================================
 
+![screenshot of the applciation](https://static.laszlokorte.de/reform/screenshot.png "screenshot of the applciation")
+
 What is Reform?
 ---------------
 
