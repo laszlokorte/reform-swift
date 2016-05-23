@@ -126,7 +126,6 @@ public func intersections(arc arcA: Arc2d, arc arcB: Arc2d) -> [Vec2d] {
 
     return circleIntersections.filter {
         point in
-        return
         inside(angle(point - arcA.center), range: arcA.range) &&
                 inside(angle(point - arcB.center), range: arcB.range)
     }

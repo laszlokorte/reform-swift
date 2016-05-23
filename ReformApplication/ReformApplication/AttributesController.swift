@@ -24,9 +24,9 @@ class AttributesController : NSViewController {
     var attributesViewModel : AttributesViewModel?
 
     override func viewDidAppear() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "selectionChanged", name:"SelectionChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AttributesController.selectionChanged), name:"SelectionChanged", object: nil)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "procedureChanged", name:"ProcedureAnalyzed", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AttributesController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
 
         selectionChanged()
     }

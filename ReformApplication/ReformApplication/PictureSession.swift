@@ -79,11 +79,11 @@ final class ProcedureProcessor<A:Analyzer> {
     }
 
     func trigger() {
-        triggerCounter++
+        triggerCounter += 1
         dispatch_async(queue) {
             [picture=self.picture, toolController=self.toolController, runtime=self.runtime, analyzer=self.analyzer] in
             do {
-                defer { self.triggerCounter-- }
+                defer { self.triggerCounter -= 1 }
                 if self.triggerCounter > 1 {
                     return
                 }
@@ -110,10 +110,11 @@ final class ProcedureProcessor<A:Analyzer> {
     }
 
     func triggerEval() {
-        evalCounter++
+        evalCounter += 1
+
         dispatch_async(queue) {
             [picture=self.picture, toolController=self.toolController, runtime=self.runtime] in
-            defer { self.evalCounter-- }
+            defer { self.evalCounter -= 1 }
 
             if self.evalCounter > 1 {
                 return
