@@ -10,14 +10,16 @@ Reform is an vector graphics application featuring direct manipulation programmi
 
 It is based on Bret Victor's talk "Drawing Dynamic Visualizations".
 
-Currently it is still under development and not yet released.
+Currently it is still under development. Feel free to contribute!
+
+### Demo
+
+Take a look at [this youtube playlist](https://www.youtube.com/playlist?list=PLfGbKGqfmpEJVKupyh3vSvjMvd-S2bCTH) to see the application in action.
 
 When will it be releaed?
 ------------------------
 
-Once it's done.  
-Take a look at the TODO.md to get an impression of what's missing.
-
+Once it's done. Take a look at the TODO.md to get an impression of what's missing. Contributions are very welcome.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -37,4 +39,7 @@ Bret Victor's talk "Drawing Dynamic Visualisations":
 http://vimeo.com/66085662
 
 Bret's talk notes:  
-http://worrydream.com/DrawingDynamicVisualizationsTalkAddendum/'
+http://worrydream.com/DrawingDynamicVisualizationsTalkAddendum/
+
+Reform in Java:  
+https://github.com/laszlokorte/reform-java
