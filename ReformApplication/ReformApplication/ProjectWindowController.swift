@@ -57,8 +57,8 @@ final class ProjectWindowController : NSWindowController {
 
         let node1 = InstructionNode(instruction: createInstruction)
 
-        procedure.root.append(child: InstructionNode())
-        procedure.root.append(child: node1)
+        assert(procedure.root.append(child: InstructionNode()))
+        assert(procedure.root.append(child: node1))
 
         let moveInstruction = TranslateInstruction(formId: rectangleForm.identifier, distance: RelativeDistance(
             from: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.center.rawValue),
@@ -67,7 +67,7 @@ final class ProjectWindowController : NSWindowController {
 
         let node2 = InstructionNode(instruction: moveInstruction)
 
-        procedure.root.append(child: node2)
+        assert(procedure.root.append(child: node2))
 
         let rotateInstruction = RotateInstruction(
             formId: rectangleForm.identifier,
@@ -77,12 +77,12 @@ final class ProjectWindowController : NSWindowController {
 
         let node3 = InstructionNode(instruction: rotateInstruction)
 
-        procedure.root.append(child: node3)
+        assert(procedure.root.append(child: node3))
 
         let createLineInstruction = CreateFormInstruction(form: lineForm, destination: lineDestination)
         let node4 = InstructionNode(instruction: createLineInstruction)
 
-        procedure.root.append(child: node4)
+        assert(procedure.root.append(child: node4))
 
         pictureSession.instructionFocus.current = node4
 

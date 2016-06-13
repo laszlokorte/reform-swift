@@ -117,9 +117,9 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        seq.wrapIn(ForLoopInstruction(expression: .constant(ReformExpression.Value(int: 10))))
-
-        procedureViewModel?.instructionChanger()
+        if seq.wrapIn(ForLoopInstruction(expression: .constant(ReformExpression.Value(int: 10)))) {
+            procedureViewModel?.instructionChanger()
+        }
     }
 
     @IBAction func unwrapInstruction(_ sender: AnyObject) {
@@ -127,9 +127,9 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        instructions[selectedIndex].node.unwrap()
-        
-        procedureViewModel?.instructionChanger()
+        if instructions[selectedIndex].node.unwrap() {
+            procedureViewModel?.instructionChanger()
+        }
     }
 
     @IBAction func wrapInstructionInCondition(_ sender: AnyObject) {
@@ -141,9 +141,9 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        seq.wrapIn(IfConditionInstruction(expression: .constant(ReformExpression.Value(bool: true))))
-
-        procedureViewModel?.instructionChanger()
+        if seq.wrapIn(IfConditionInstruction(expression: .constant(ReformExpression.Value(bool: true)))) {
+            procedureViewModel?.instructionChanger()
+        }
     }
 
     @IBAction func createIterator(_ sender: AnyObject) {
@@ -172,9 +172,10 @@ extension ProcedureController : NSMenuDelegate {
                 ProxyForm(id: formId, name: name), formIds: Array(formIds)))
 
         let child = InstructionNode()
-        node.append(child: child)
 
-        if instructions[selectedIndex].node.append(sibling:
+
+        if node.append(child: child) &&
+            instructions[selectedIndex].node.append(sibling:
         node
             ) {
                 procedureViewModel?.instructionFocus.current = child
@@ -189,10 +190,12 @@ extension ProcedureController : NSMenuDelegate {
 
         for index in indices {
             let node = instructions[index].node
-            guard !node.isEmpty else {
+            if node.isEmpty {
                 continue
             }
-            node.removeFromParent()
+            if !node.removeFromParent() {
+                break
+            }
         }
 
         let validIndices = indices.filter({!instructions[$0].node.isEmpty})
