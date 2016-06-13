@@ -18,14 +18,14 @@ public struct FormIteratorInstruction : GroupInstruction {
         self.formIds = formIds
     }
 
-    public func evaluate<T:Runtime where T.Ev==InstructionNode>(runtime: T, withChildren children: [InstructionNode]) {
+    public func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren children: [InstructionNode]) {
 
         let forms = formIds.flatMap {
             runtime.get($0)
         }
 
         guard forms.count == formIds.count else {
-            runtime.reportError(.UnknownForm)
+            runtime.reportError(.unknownForm)
             return
         }
 
@@ -40,17 +40,17 @@ public struct FormIteratorInstruction : GroupInstruction {
         }
     }
 
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let names = formIds.map({
             stringifier.labelFor($0) ?? "???"
-        }).joinWithSeparator(", ")
+        }).joined(separator: ", ")
 
         return "With each  [\(names)] as \(proxyForm.name) do:"
     }
 
 
 
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
         analyzer.announceForm(proxyForm)
     }
 

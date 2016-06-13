@@ -19,14 +19,14 @@ public struct RuntimeIntersectionPoint : RuntimePoint, Labeled {
         self.formB = formB
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let formAName = stringifier.labelFor(formA) ?? "???"
         let formBName = stringifier.labelFor(formB) ?? "???"
         
         return "Intersection #\(index) of \(formAName) and \(formBName)"
     }
     
-    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             formAOutline = runtime.get(formA)?.outline,
             formBOutline = runtime.get(formB)?.outline else {

@@ -13,7 +13,7 @@ public final class InstructionFocus {
     
     public init() {}
 
-    public func isCurrent(node : Evaluatable) -> Bool {
+    public func isCurrent(_ node : Evaluatable) -> Bool {
         return current === node
     }
 }

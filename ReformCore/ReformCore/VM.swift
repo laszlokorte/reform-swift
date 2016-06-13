@@ -10,8 +10,8 @@
 typealias VMInstruction = Int
 typealias VMProgramm = [VMInstruction]
 
-enum VMError : ErrorType {
-    case InvalidInstruction
+enum VMError : ErrorProtocol {
+    case invalidInstruction
 }
 
 class VM {
@@ -21,12 +21,12 @@ class VM {
     private var programCounter: Int = 0
     private var nextPC : Int? = nil
 
-    func run(program: VMProgramm) throws {
+    func run(_ program: VMProgramm) throws {
         programCounter = 0
         halt = false
         while !halt && programCounter < program.count {
             guard let instruction = VMOperatation(rawValue: program[programCounter]) else {
-                throw VMError.InvalidInstruction
+                throw VMError.invalidInstruction
             }
             instruction.executeOn(self)
             programCounter = nextPC ?? programCounter + 1
@@ -35,95 +35,95 @@ class VM {
 }
 
 enum VMOperatation : VMInstruction {
-    case PushImmediate
-    case Load
-    case Store
-    case Pop
+    case pushImmediate
+    case load
+    case store
+    case pop
 
-    case MulInt
-    case AddInt
-    case SubInt
-    case DivInt
+    case mulInt
+    case addInt
+    case subInt
+    case divInt
 
-    case MulFloat
-    case AddFloat
-    case SubFloat
-    case DivFloat
+    case mulFloat
+    case addFloat
+    case subFloat
+    case divFloat
 
-    case Sin
-    case Cos
-    case Tan
-    case ArcSin
-    case ArcCos
-    case ArcTan
+    case sin
+    case cos
+    case tan
+    case arcSin
+    case arcCos
+    case arcTan
 
-    case Sqrt
+    case sqrt
 
-    case LessThan
-    case Equal
+    case lessThan
+    case equal
 
-    case IntToFloat
-    case FloatToInt
+    case intToFloat
+    case floatToInt
 
-    case Halt
+    case halt
 
-    private func executeOn(vm: VM) {
+    private func executeOn(_ vm: VM) {
         switch self {
-        case PushImmediate:
+        case pushImmediate:
 
             vm.nextPC = vm.programCounter + 1
-        case Load:
+        case load:
             vm.nextPC = vm.programCounter + 1
-        case Store:
+        case store:
             vm.nextPC = vm.programCounter + 1
-        case Pop:
-            vm.nextPC = vm.programCounter + 1
-
-        case MulInt:
-            vm.nextPC = vm.programCounter + 1
-        case AddInt:
-            vm.nextPC = vm.programCounter + 1
-        case SubInt:
-            vm.nextPC = vm.programCounter + 1
-        case DivInt:
+        case pop:
             vm.nextPC = vm.programCounter + 1
 
-        case MulFloat:
+        case mulInt:
             vm.nextPC = vm.programCounter + 1
-        case AddFloat:
+        case addInt:
             vm.nextPC = vm.programCounter + 1
-        case SubFloat:
+        case subInt:
             vm.nextPC = vm.programCounter + 1
-        case DivFloat:
-            vm.nextPC = vm.programCounter + 1
-
-        case Sin:
-            vm.nextPC = vm.programCounter + 1
-        case Cos:
-            vm.nextPC = vm.programCounter + 1
-        case Tan:
-            vm.nextPC = vm.programCounter + 1
-        case ArcSin:
-            vm.nextPC = vm.programCounter + 1
-        case ArcCos:
-            vm.nextPC = vm.programCounter + 1
-        case ArcTan:
+        case divInt:
             vm.nextPC = vm.programCounter + 1
 
-        case Sqrt:
+        case mulFloat:
+            vm.nextPC = vm.programCounter + 1
+        case addFloat:
+            vm.nextPC = vm.programCounter + 1
+        case subFloat:
+            vm.nextPC = vm.programCounter + 1
+        case divFloat:
+            vm.nextPC = vm.programCounter + 1
+
+        case sin:
+            vm.nextPC = vm.programCounter + 1
+        case cos:
+            vm.nextPC = vm.programCounter + 1
+        case tan:
+            vm.nextPC = vm.programCounter + 1
+        case arcSin:
+            vm.nextPC = vm.programCounter + 1
+        case arcCos:
+            vm.nextPC = vm.programCounter + 1
+        case arcTan:
+            vm.nextPC = vm.programCounter + 1
+
+        case sqrt:
             vm.nextPC = vm.programCounter + 1
             
-        case LessThan:
+        case lessThan:
             vm.nextPC = vm.programCounter + 1
-        case Equal:
-            vm.nextPC = vm.programCounter + 1
-            
-        case IntToFloat:
-            vm.nextPC = vm.programCounter + 1
-        case FloatToInt:
+        case equal:
             vm.nextPC = vm.programCounter + 1
             
-        case Halt:
+        case intToFloat:
+            vm.nextPC = vm.programCounter + 1
+        case floatToInt:
+            vm.nextPC = vm.programCounter + 1
+            
+        case halt:
             vm.halt = true
         }
     }

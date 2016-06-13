@@ -12,12 +12,12 @@ import ReformStage
 
 public final class AffineHandleUI {
     public enum State {
-        case Hide
-        case Show([AffineHandle])
-        case Active(AffineHandle, [AffineHandle])
+        case hide
+        case show([AffineHandle])
+        case active(AffineHandle, [AffineHandle])
     }
 
-    public var state : State = .Hide
+    public var state : State = .hide
 
     public init() {}
 }

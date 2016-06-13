@@ -9,28 +9,28 @@
 import ReformMath
 
 public protocol RuntimeDirection {
-    func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d
+    func getAdjustedFor<R:Runtime>(_ runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d
 }
 
 public enum Cartesian : RuntimeDirection, Labeled {
-    case Vertical
-    case Horizontal
+    case vertical
+    case horizontal
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         switch self {
-        case .Vertical:
+        case .vertical:
             return "vertically"
-        case .Horizontal:
+        case .horizontal:
             return "horizontally"
         }
     }
     
-    public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
+    public func getAdjustedFor<R:Runtime>(_ runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
         switch self {
             
-        case .Vertical:
+        case .vertical:
             return Vec2d(x: anchor.x, y: position.y)
-        case .Horizontal:
+        case .horizontal:
             return Vec2d(x: position.x, y: anchor.y)
         }
         
@@ -41,11 +41,11 @@ public struct FreeDirection : RuntimeDirection, Labeled {
     
     public init() {}
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return ""
     }
     
-    public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
+    public func getAdjustedFor<R:Runtime>(_ runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
         return position
     }
 }
@@ -60,11 +60,11 @@ public struct ProportionalDirection : RuntimeDirection, Labeled {
         self.large = large
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return "proportionally \(proportion.0):\(proportion.1)"
     }
     
-    public func getAdjustedFor<R:Runtime>(runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
+    public func getAdjustedFor<R:Runtime>(_ runtime: R, anchor: Vec2d, position: Vec2d) -> Vec2d {
         return anchor + proportioned((position-anchor), proportion: Double(proportion.0)/Double(proportion.1), large: self.large)
     }
 }

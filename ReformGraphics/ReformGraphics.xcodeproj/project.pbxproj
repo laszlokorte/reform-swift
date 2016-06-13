@@ -165,6 +165,7 @@
 				TargetAttributes = {
 					F2ABC72E1B7FD391001AD41F = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					F2ABC7381B7FD391001AD41F = {
 						CreatedOnToolsVersion = 7.0;
@@ -336,6 +337,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformGraphics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -355,6 +357,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

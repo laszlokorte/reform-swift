@@ -15,7 +15,7 @@ struct BasicPointTranslator : Translator {
         self.points = points
     }
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         for p in points {
             if let oldPos = p.getPositionFor(runtime) {
                 p.setPositionFor(runtime, position: oldPos + delta)

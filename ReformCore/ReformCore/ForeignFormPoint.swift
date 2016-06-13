@@ -17,7 +17,7 @@ public struct ForeignFormPoint : RuntimePoint, Labeled {
         self.pointId = pointId
     }
     
-    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             form = runtime.get(formId),
             point = form.getPoints()[pointId] else {
@@ -27,7 +27,7 @@ public struct ForeignFormPoint : RuntimePoint, Labeled {
         return point.getPositionFor(runtime)
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let formName = stringifier.labelFor(formId) ?? "???"
         let pointName = stringifier.labelFor(formId, pointId: pointId) ?? "???" ?? "??"
         
@@ -54,7 +54,7 @@ public struct AnonymousFormPoint : RuntimePoint {
         self.pointId = pointId
     }
     
-    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             form = runtime.get(formId),
             point = form.getPoints()[pointId] else {

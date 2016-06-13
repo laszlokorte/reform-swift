@@ -21,7 +21,7 @@ struct EntityQuery {
 struct EntityFinder {
     let stage : Stage
     
-    func getEntity(id: FormIdentifier) -> Entity? {
+    func getEntity(_ id: FormIdentifier) -> Entity? {
         for entity in stage.entities {
             if entity.id.runtimeId == id {
                 return entity
@@ -31,14 +31,14 @@ struct EntityFinder {
         return nil
     }
     
-    func getEntities(query: EntityQuery) -> [Entity] {
+    func getEntities(_ query: EntityQuery) -> [Entity] {
         var result = [Entity]()
         
         for entity in stage.entities {
-            if case .Except(entity.id) = query.filter {
+            if case .except(entity.id) = query.filter {
                 continue
             }
-            if case .Only(let id) = query.filter where id != entity.id {
+            if case .only(let id) = query.filter where id != entity.id {
                 continue
             }
 

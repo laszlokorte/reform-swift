@@ -13,27 +13,27 @@ public class NameAllocator {
     }
 
     public func reset() {
-        taken.removeAll(keepCapacity: true)
+        taken.removeAll(keepingCapacity: true)
     }
 
-    public func alloc(requested: String, numbered: Bool = false) -> String {
+    public func alloc(_ requested: String, numbered: Bool = false) -> String {
         var tested = requested
         var count = 0
 
         if numbered {
-            count++
+            count += 1
             tested = "\(requested) \(count)"
         }
 
         while taken.contains(tested) {
-            count++
+            count += 1
             tested = "\(requested) \(count)"
         }
 
         return tested
     }
 
-    public func announce(name: String) {
+    public func announce(_ name: String) {
         taken.insert(name)
     }
 }

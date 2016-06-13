@@ -13,9 +13,9 @@ import ReformGraphics
 extension ArcForm {
     
     public enum PointId : ExposedPointIdentifier {
-        case Start = 0
-        case End = 1
-        case Center = 2
+        case start = 0
+        case end = 1
+        case center = 2
     }
 }
 
@@ -23,7 +23,7 @@ final public class ArcForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
-    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var drawingMode : DrawingMode = DrawingMode.draw
     public var name : String
     
     
@@ -44,7 +44,7 @@ final public class ArcForm : Form, Creatable {
         return StaticLength(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
         offset.setLengthFor(runtime, length: 50)
@@ -52,9 +52,9 @@ final public class ArcForm : Form, Creatable {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
-            PointId.End.rawValue:ExposedPoint(point: endPoint, name: "End"),
-            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
+            PointId.end.rawValue:ExposedPoint(point: endPoint, name: "End"),
+            PointId.center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
@@ -105,16 +105,16 @@ extension ArcForm {
 extension ArcForm : Morphable {
     
     public enum AnchorId : AnchorIdentifier {
-        case Start = 0
-        case End = 1
-        case Center = 2
+        case start = 0
+        case end = 1
+        case center = 2
     }
     
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorId.Start.rawValue:StaticPointAnchor(point: startPoint, name: "Start"),
-            AnchorId.End.rawValue:StaticPointAnchor(point: endPoint, name: "End"),
-            AnchorId.Center.rawValue:controlAnchor,
+            AnchorId.start.rawValue:StaticPointAnchor(point: startPoint, name: "Start"),
+            AnchorId.end.rawValue:StaticPointAnchor(point: endPoint, name: "End"),
+            AnchorId.center.rawValue:controlAnchor,
         ]
     }
     
@@ -122,7 +122,7 @@ extension ArcForm : Morphable {
 
 extension ArcForm : Drawable {
     
-    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
+    public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard let
             start = startPoint.getPositionFor(runtime),
             end = endPoint.getPositionFor(runtime),
@@ -135,14 +135,14 @@ extension ArcForm : Drawable {
         let up = angle(end - center)
         var path = Path(center: center, radius: radius, lower: low, upper: up)
 
-        path.append(.Close)
+        path.append(.close)
 
         return path
     }
     
-    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
+    public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
-        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
+        return Shape(area: .pathArea(path), background: .fill(ReformGraphics.Color(r: 128, g: 128, b: 128, a: 128)), stroke: .solid(width: 1, color: ReformGraphics.Color(r:50, g:50, b:50, a: 255)))
     }
 }

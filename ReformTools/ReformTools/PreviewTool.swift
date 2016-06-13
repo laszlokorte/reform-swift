@@ -22,16 +22,16 @@ public final class PreviewTool : Tool {
     
     public func setUp() {
         let size = stage.size
-        maskUI.state = .Clip(x:0, y:0,width: size.x, height: size.y)
+        maskUI.state = .clip(x:0, y:0,width: size.x, height: size.y)
     }
 
     public func tearDown() {
-        maskUI.state = .Disabled
+        maskUI.state = .disabled
     }
     
     public func refresh() {
         let size = stage.size
-        maskUI.state = .Clip(x:0, y:0,width: size.x, height: size.y)
+        maskUI.state = .clip(x:0, y:0,width: size.x, height: size.y)
     }
     
     public func focusChange() {
@@ -40,6 +40,6 @@ public final class PreviewTool : Tool {
     public func cancel() {
     }
     
-    public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
+    public func process(_ input: Input, atPosition: Vec2d, withModifier: Modifier) {
     }
 }

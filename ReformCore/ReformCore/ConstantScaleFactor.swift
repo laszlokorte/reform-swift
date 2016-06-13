@@ -16,11 +16,11 @@ public struct ConstantScaleFactor : RuntimeScaleFactor, Labeled {
         self.factor = factor
     }
     
-    public func getFactorFor<R:Runtime>(runtime: R) -> Double? {
+    public func getFactorFor<R:Runtime>(_ runtime: R) -> Double? {
         return factor
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return String(format: "%.2f%%", factor * 100)
     }
     

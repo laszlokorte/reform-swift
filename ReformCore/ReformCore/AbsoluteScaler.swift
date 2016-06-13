@@ -16,7 +16,7 @@ struct AbsoluteScaler : Scaler {
     }
     
     
-    func scale<R:Runtime>(runtime: R, factor: Double, fix: Vec2d, axis: Vec2d) {
+    func scale<R:Runtime>(_ runtime: R, factor: Double, fix: Vec2d, axis: Vec2d) {
         scaler.scale(runtime, factor: abs(factor), fix: fix, axis: axis)
     }
 }

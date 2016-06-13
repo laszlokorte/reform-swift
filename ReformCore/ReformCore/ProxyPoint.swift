@@ -11,34 +11,34 @@ import ReformMath
 
 public struct ProxyPoint : LabeledPoint {
     enum Side {
-        case Left
-        case Right
-        case Top
-        case Bottom
-        case TopLeft
-        case TopRight
-        case BottomLeft
-        case BottomRight
-        case Center
+        case left
+        case right
+        case top
+        case bottom
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+        case center
 
         var x : Int {
             switch self {
-            case Left, TopLeft, BottomLeft:
+            case left, topLeft, bottomLeft:
                 return -1
-            case Right, TopRight, BottomRight:
+            case right, topRight, bottomRight:
                 return 1
-            case Top, Bottom, Center:
+            case top, bottom, center:
                 return 0
             }
         }
 
         var y : Int {
             switch self {
-            case Top, TopLeft, TopRight:
+            case top, topLeft, topRight:
                 return -1
-            case Bottom, BottomLeft, BottomRight:
+            case bottom, bottomLeft, bottomRight:
                 return 1
-            case Left, Right, Center:
+            case left, right, center:
                 return 0
             }
         }
@@ -55,7 +55,7 @@ public struct ProxyPoint : LabeledPoint {
         self.angle = angle
     }
 
-    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             form = formReference.getFormFor(runtime) else {
                 return nil
@@ -74,7 +74,7 @@ public struct ProxyPoint : LabeledPoint {
         return rotatedAABB.center + rotate(Vec2d(x: Double(side.x) * rotatedAABB.size.x/2, y: Double(side.y) * rotatedAABB.size.y/2), angle: angle)
     }
 
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return "Proxy Point"
     }
 }

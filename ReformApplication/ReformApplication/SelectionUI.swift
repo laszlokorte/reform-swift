@@ -24,48 +24,48 @@ final class SelectionUIRenderer : Renderer {
         self.camera = camera
     }
 
-    func renderInContext(context: CGContext) {
+    func renderInContext(_ context: CGContext) {
         let inverse = CGFloat(1 / camera.zoom)
 
-        CGContextSetRGBFillColor(context, 0.2, 0.7, 1, 0.6)
-        CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 0.6)
-        CGContextSetLineWidth(context, 5 * inverse)
+        context.setFillColor(red: 0.2, green: 0.7, blue: 1, alpha: 0.6)
+        context.setStrokeColor(red: 0.2, green: 0.6, blue: 0.9, alpha: 0.6)
+        context.setLineWidth(5 * inverse)
         
         switch selectionUI.state {
-        case .Hide:
+        case .hide:
             break
-        case .Show(let selection):
+        case .show(let selection):
 
             if lookIntoFuture {
                 for identifiedShape in stage.finalShapes where selection.selected.contains(identifiedShape.id) {
-                    identifiedShape.shape.drawOutline(context,width: 5/camera.zoom, color: Color(r: 90,g:177,b:83, a:255))
+                    identifiedShape.shape.drawOutline(context,width: 5/camera.zoom, color: ReformGraphics.Color(r: 90,g:177,b:83, a:255))
                 }
-                CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 1)
+                context.setStrokeColor(red: 0.2, green: 0.6, blue: 0.9, alpha: 1)
             }
 
             for entity in stage.entities where selection.selected.contains(entity.id.runtimeId) {
-                if entity.type == .Proxy {
-                    CGContextSetRGBStrokeColor(context, 0.3843, 0.4157, 1.0000, 0.6)
+                if entity.type == .proxy {
+                    context.setStrokeColor(red: 0.3843, green: 0.4157, blue: 1.0000, alpha: 0.6)
                 } else {
-                    CGContextSetRGBStrokeColor(context, 0.2, 0.6, 0.9, 0.6)
+                    context.setStrokeColor(red: 0.2, green: 0.6, blue: 0.9, alpha: 0.6)
                 }
                 drawSegmentPath(context, path:entity.outline)
                 
-                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+                context.drawPath(using: CGPathDrawingMode.stroke)
             }
         }
 
         switch selectionUI.rect {
-        case .Hide:
+        case .hide:
             break
-        case .Show(let min, let max):
+        case .show(let min, let max):
             let rect = CGRect(x: Int(min.x), y:Int(min.y), width: Int(max.x - min.x), height: Int(max.y - min.y))
-            CGContextSetLineWidth(context, 1 * inverse)
-            CGContextSetRGBStrokeColor(context, 0.6, 0.6, 0.6, 0.6)
-            CGContextSetRGBFillColor(context, 0.6, 0.6, 0.6, 0.1)
+            context.setLineWidth(1 * inverse)
+            context.setStrokeColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 0.6)
+            context.setFillColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 0.1)
 
-            CGContextStrokeRect(context, rect)
-            CGContextFillRect(context, rect)
+            context.stroke(rect)
+            context.fill(rect)
         }
     }
 }

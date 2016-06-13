@@ -16,7 +16,7 @@ struct BasicPointScaler : Scaler {
     }
     
     
-    func scale<R:Runtime>(runtime : R, factor: Double, fix: Vec2d, axis: Vec2d) {
+    func scale<R:Runtime>(_ runtime : R, factor: Double, fix: Vec2d, axis: Vec2d) {
 
         for point in points {
             if let pos = point.getPositionFor(runtime) {

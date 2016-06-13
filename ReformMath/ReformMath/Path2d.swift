@@ -9,16 +9,16 @@
 public typealias SegmentPath = [Segment]
 
 public enum Segment {
-    case Line(LineSegment2d)
-    case Arc(Arc2d)
+    case line(LineSegment2d)
+    case arc(Arc2d)
 }
 
 extension Segment {
     var length : Double {
         switch self {
-        case .Line(let line):
+        case .line(let line):
             return line.length
-        case .Arc(let arc):
+        case .arc(let arc):
             return arc.length
         }
     }

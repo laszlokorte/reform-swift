@@ -9,16 +9,16 @@
 import ReformCore
 
 public enum ScaleAxis {
-    case None
-    case Named(String, formId: FormIdentifier, ExposedPointIdentifier, ExposedPointIdentifier)
+    case none
+    case named(String, formId: FormIdentifier, ExposedPointIdentifier, ExposedPointIdentifier)
 }
 
 extension ScaleAxis {
     public var runtimeAxis : RuntimeAxis {
         switch self {
-        case .None: return .None
-        case .Named(let name, let formId, let a, let b):
-            return .Named(name, from: AnonymousFormPoint(formId: formId, pointId: a), to: AnonymousFormPoint(formId: formId, pointId: b))
+        case .none: return .none
+        case .named(let name, let formId, let a, let b):
+            return .named(name, from: AnonymousFormPoint(formId: formId, pointId: a), to: AnonymousFormPoint(formId: formId, pointId: b))
         }
     }
 }

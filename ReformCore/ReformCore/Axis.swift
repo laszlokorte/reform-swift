@@ -9,15 +9,15 @@
 import ReformMath
 
 public enum RuntimeAxis : Equatable {
-    case None
-    case Named(String, from: RuntimePoint, to: RuntimePoint)
+    case none
+    case named(String, from: RuntimePoint, to: RuntimePoint)
 }
 
 extension RuntimeAxis {
-    func getVectorFor<R:Runtime>(runtime: R) ->  Vec2d? {
+    func getVectorFor<R:Runtime>(_ runtime: R) ->  Vec2d? {
         switch self {
-        case .None: return Vec2d()
-        case  .Named(_, let from, let to):
+        case .none: return Vec2d()
+        case  .named(_, let from, let to):
             guard let
                 start = from.getPositionFor(runtime),
                 end = to.getPositionFor(runtime) else {
@@ -31,8 +31,8 @@ extension RuntimeAxis {
 
 public func ==(lhs: RuntimeAxis, rhs: RuntimeAxis) -> Bool {
     switch (lhs, rhs) {
-    case (.None, .None): return true
-    case (.Named(let nameA, let fromA, let toA),.Named(let nameB, let formB, let toB)):
+    case (.none, .none): return true
+    case (.named(let nameA, let fromA, let toA),.named(let nameB, let formB, let toB)):
         return nameA == nameB && fromA.isEqualTo(formB) && toA.isEqualTo(toB)
     default: return false
     }

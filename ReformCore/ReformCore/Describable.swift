@@ -10,16 +10,16 @@ import ReformExpression
 import ReformMath
 
 public protocol Labeled {
-    func getDescription(stringifier: Stringifier) -> String
+    func getDescription(_ stringifier: Stringifier) -> String
 }
 
 public protocol Stringifier {
-    func labelFor(formId: FormIdentifier) -> String?
-    func labelFor(formId: FormIdentifier, pointId: ExposedPointIdentifier) -> String?
+    func labelFor(_ formId: FormIdentifier) -> String?
+    func labelFor(_ formId: FormIdentifier, pointId: ExposedPointIdentifier) -> String?
 
-    func labelFor(formId: FormIdentifier, anchorId: AnchorIdentifier) -> String?
+    func labelFor(_ formId: FormIdentifier, anchorId: AnchorIdentifier) -> String?
 
-    func stringFor(expression: Expression) -> String?
+    func stringFor(_ expression: ReformExpression.Expression) -> String?
 
 }
 

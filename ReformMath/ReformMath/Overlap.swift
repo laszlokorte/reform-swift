@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public func overlaps(aabb aabb: AABB2d, line: LineSegment2d) -> Bool {
+public func overlaps(aabb: AABB2d, line: LineSegment2d) -> Bool {
     // https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
     var from = line.from
     var to = line.to
@@ -16,7 +16,7 @@ public func overlaps(aabb aabb: AABB2d, line: LineSegment2d) -> Bool {
 
         if fromOut.union(toOut) == .Inside {
             return true
-        } else if fromOut.intersect(toOut) != .Inside {
+        } else if fromOut.intersection(toOut) != .Inside {
             return false
         } else {
             let x : Double
@@ -52,7 +52,7 @@ public func overlaps(aabb aabb: AABB2d, line: LineSegment2d) -> Bool {
 
 }
 
-public func overlaps(aabb aabb: AABB2d, ray: Ray2d) -> Bool {
+public func overlaps(aabb: AABB2d, ray: Ray2d) -> Bool {
     let inv = 1/ray.direction
 
     let tx1 = (aabb.min.x - ray.from.x)*inv.x
@@ -70,7 +70,7 @@ public func overlaps(aabb aabb: AABB2d, ray: Ray2d) -> Bool {
     return  tmax2 >= tmin2 && tx1 >= 0 && ty1 >= 0
 }
 
-public func overlaps(aabb aabb: AABB2d, line: Line2d) -> Bool {
+public func overlaps(aabb: AABB2d, line: Line2d) -> Bool {
     let inv = 1/line.direction
 
     let tx1 = (aabb.min.x - line.from.x)*inv.x
@@ -88,7 +88,7 @@ public func overlaps(aabb aabb: AABB2d, line: Line2d) -> Bool {
     return  tmax2 >= tmin2
 }
 
-public func overlaps(aabb aabb: AABB2d, circle: Circle2d) -> Bool {
+public func overlaps(aabb: AABB2d, circle: Circle2d) -> Bool {
     let size = aabb.max - aabb.min
 
     let circleDistance = abs(circle.center - (aabb.min+aabb.max)/2)
@@ -103,7 +103,7 @@ public func overlaps(aabb aabb: AABB2d, circle: Circle2d) -> Bool {
 
 }
 
-public func overlaps(aabb aabb: AABB2d, arc: Arc2d) -> Bool {
+public func overlaps(aabb: AABB2d, arc: Arc2d) -> Bool {
     let circleDistance = abs(arc.center - aabb.center)
 
     if (circleDistance.x > (aabb.size.x/2 + arc.radius)) { return false }
@@ -119,6 +119,6 @@ public func overlaps(aabb aabb: AABB2d, arc: Arc2d) -> Bool {
 
 }
 
-public func overlaps(aabb aabb: AABB2d, triangle: Triangle2d) -> Bool {
+public func overlaps(aabb: AABB2d, triangle: Triangle2d) -> Bool {
     return overlaps(aabb: aabb, line: LineSegment2d(from: triangle.a, to: triangle.b)) || overlaps(aabb: aabb, line: LineSegment2d(from: triangle.b, to: triangle.c)) || overlaps(aabb: aabb, line: LineSegment2d(from: triangle.c, to: triangle.a))
 }

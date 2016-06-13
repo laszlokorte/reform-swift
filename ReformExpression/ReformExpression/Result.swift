@@ -7,6 +7,6 @@
 //
 
 public enum Result<T, E> {
-    case Success(T)
-    case Fail(E)
+    case success(T)
+    case fail(E)
 }

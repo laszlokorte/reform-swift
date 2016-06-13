@@ -13,16 +13,16 @@ import ReformCore
 extension Project : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
-            "pictures" : .Array(try self.pictures.map { picture in
+        return .dictionary([
+            "pictures" : .array(try self.pictures.map { picture in
                 return try picture.normalize()
             })
         ])
     }
 
     public convenience init(normalizedValue: NormalizedValue) throws {
-        guard case .Array(let pics) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .array(let pics) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(pictures: try pics.map(Picture.init))
@@ -31,12 +31,12 @@ extension Project : Normalizable {
 
 extension FormIdentifier : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Int(value)
+        return .int(value)
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        guard case .Int(let value) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .int(let value) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(value)
@@ -45,12 +45,12 @@ extension FormIdentifier : Normalizable {
 
 extension ExposedPointIdentifier : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Int(value)
+        return .int(value)
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        guard case .Int(let value) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .int(let value) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(value)
@@ -59,13 +59,13 @@ extension ExposedPointIdentifier : Normalizable {
 
 extension AnchorIdentifier : Normalizable {
     public func normalize() -> NormalizedValue {
-        return .Int(value)
+        return .int(value)
     }
 
 
     public init(normalizedValue: NormalizedValue) throws {
-        guard case .Int(let value) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .int(let value) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(value)
@@ -74,12 +74,12 @@ extension AnchorIdentifier : Normalizable {
 
 extension ReferenceId : Normalizable {
     public func normalize() -> NormalizedValue {
-        return .Int(value)
+        return .int(value)
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        guard case .Int(let value) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .int(let value) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(value)
@@ -88,12 +88,12 @@ extension ReferenceId : Normalizable {
 
 extension PictureIdentifier : Normalizable {
     public func normalize() -> NormalizedValue {
-        return .Int(value)
+        return .int(value)
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        guard case .Int(let value) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .int(let value) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(value)
@@ -113,15 +113,15 @@ extension ReformCore.Picture : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         guard let normalizableData = data as? Normalizable else {
-            throw NormalizationError.NotNormalizable(data.dynamicType)
+            throw NormalizationError.notNormalizable(data.dynamicType)
         }
 
-        return .Dictionary([
+        return .dictionary([
             Keys.Id.rawValue : identifier.normalize(),
-            Keys.Name.rawValue : .String(name),
-            Keys.Size.rawValue : NormalizedValue.Dictionary([
-                Keys.Width.rawValue: NormalizedValue.Double(size.0),
-                Keys.Height.rawValue: NormalizedValue.Double(size.1)
+            Keys.Name.rawValue : .string(name),
+            Keys.Size.rawValue : NormalizedValue.dictionary([
+                Keys.Width.rawValue: NormalizedValue.double(size.0),
+                Keys.Height.rawValue: NormalizedValue.double(size.1)
             ]),
             Keys.Procedure.rawValue : try procedure.normalize(),
             Keys.Data.rawValue : try normalizableData.normalize()
@@ -129,17 +129,17 @@ extension ReformCore.Picture : Normalizable {
     }
 
     public convenience init(normalizedValue: NormalizedValue) throws {
-        guard case .Dictionary(let dict) = normalizedValue,
+        guard case .dictionary(let dict) = normalizedValue,
             let
             id = dict[Keys.Id.rawValue],
-            case .String(let name)? = dict[Keys.Name.rawValue],
-            case .Dictionary(let size)? = dict[Keys.Size.rawValue],
-            case .Double(let width)? = size[Keys.Width.rawValue],
-            case .Double(let height)? = size[Keys.Height.rawValue],
+            case .string(let name)? = dict[Keys.Name.rawValue],
+            case .dictionary(let size)? = dict[Keys.Size.rawValue],
+            case .double(let width)? = size[Keys.Width.rawValue],
+            case .double(let height)? = size[Keys.Height.rawValue],
             let proc = dict[Keys.Procedure.rawValue],
             let data = dict[Keys.Data.rawValue]
             else {
-            throw InitialisationError.Unknown
+            throw InitialisationError.unknown
         }
 
         self.init(identifier : try PictureIdentifier(normalizedValue: id),
@@ -152,29 +152,29 @@ extension ReformCore.Picture : Normalizable {
 
 extension BaseSheet : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
-            "Definitions" : .Array([])
+        return .dictionary([
+            "Definitions" : .array([])
         ])
     }
 
     public convenience init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension Procedure : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
-        guard case .Group(_, let children) = root.content else {
-            throw NormalizationError.NotNormalizable(root.content.dynamicType)
+        guard case .group(_, let children) = root.content else {
+            throw NormalizationError.notNormalizable(root.content.dynamicType)
         }
 
-        return .Array(try children.filter({!($0.isEmpty)}).map{try $0.normalize()})
+        return .array(try children.filter({!($0.isEmpty)}).map{try $0.normalize()})
     }
 
     public convenience init(normalizedValue: NormalizedValue) throws {
-        guard case .Array(let root) = normalizedValue else {
-            throw InitialisationError.Unknown
+        guard case .array(let root) = normalizedValue else {
+            throw InitialisationError.unknown
         }
 
         self.init(children: try root.map(InstructionNode.init))
@@ -191,26 +191,26 @@ extension InstructionNode : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         switch self.content {
-        case .Null:
-            return .Dictionary([
-                Keys.InstructionType.rawValue : .String("Null"),
+        case .null:
+            return .dictionary([
+                Keys.InstructionType.rawValue : .string("Null"),
                 ])
-        case .Single(let instruction):
+        case .single(let instruction):
             guard let normalizable = instruction as? Normalizable else {
-                throw NormalizationError.NotNormalizable(instruction.dynamicType)
+                throw NormalizationError.notNormalizable(instruction.dynamicType)
             }
-            return .Dictionary([
-                Keys.InstructionType.rawValue : .String(String(normalizable.dynamicType)),
+            return .dictionary([
+                Keys.InstructionType.rawValue : .string(String(normalizable.dynamicType)),
                 Keys.Single.rawValue : try normalizable.normalize()
             ])
-        case .Group(let group, let children):
+        case .group(let group, let children):
             guard let normalizable = group as? Normalizable else {
-                throw NormalizationError.NotNormalizable(group.dynamicType)
+                throw NormalizationError.notNormalizable(group.dynamicType)
             }
-            return .Dictionary([
-                Keys.InstructionType.rawValue : .String(String(normalizable.dynamicType)),
+            return .dictionary([
+                Keys.InstructionType.rawValue : .string(String(normalizable.dynamicType)),
                 Keys.Group.rawValue : try normalizable.normalize(),
-                Keys.Children.rawValue : .Array(try children.filter({!($0.isEmpty)}).map { node in
+                Keys.Children.rawValue : .array(try children.filter({!($0.isEmpty)}).map { node in
                     return try node.normalize()
                 })
             ])
@@ -218,30 +218,30 @@ extension InstructionNode : Normalizable {
     }
 
     public convenience init(normalizedValue: NormalizedValue) throws {
-        if case .Null = normalizedValue {
+        if case .null = normalizedValue {
             self.init()
-        } else if case .Dictionary(let dict) = normalizedValue {
+        } else if case .dictionary(let dict) = normalizedValue {
             if let single = dict[Keys.Single.rawValue],
                 type = dict[Keys.InstructionType.rawValue] {
                 self.init(instruction: try instructionType(type).init(normalizedValue: single))
             } else if
                 let group = dict[Keys.Group.rawValue],
                 type = dict[Keys.InstructionType.rawValue],
-                case .Array(let children)? = dict[Keys.Children.rawValue] {
+                case .array(let children)? = dict[Keys.Children.rawValue] {
                     self.init(group: try instructionType(type).init(normalizedValue: group), children: try children.map(InstructionNode.init))
 
             } else {
-                throw InitialisationError.Unknown
+                throw InitialisationError.unknown
             }
         } else {
-            throw InitialisationError.Unknown
+            throw InitialisationError.unknown
         }
     }
 }
 
-func instructionType(normalizedValue: NormalizedValue) throws -> protocol<Instruction, Normalizable>.Type {
-    guard case .String(let type) = normalizedValue else {
-        throw InitialisationError.Unknown
+func instructionType(_ normalizedValue: NormalizedValue) throws -> protocol<Instruction, Normalizable>.Type {
+    guard case .string(let type) = normalizedValue else {
+        throw InitialisationError.unknown
 
     }
 
@@ -258,14 +258,14 @@ func instructionType(normalizedValue: NormalizedValue) throws -> protocol<Instru
         return RotateInstruction.self
 
     default:
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
 
     }
 }
 
-func instructionType(normalizedValue: NormalizedValue) throws -> protocol<GroupInstruction, Normalizable>.Type {
-    guard case .String(let type) = normalizedValue else {
-        throw InitialisationError.Unknown
+func instructionType(_ normalizedValue: NormalizedValue) throws -> protocol<GroupInstruction, Normalizable>.Type {
+    guard case .string(let type) = normalizedValue else {
+        throw InitialisationError.unknown
 
     }
 
@@ -276,7 +276,7 @@ func instructionType(normalizedValue: NormalizedValue) throws -> protocol<GroupI
         return IfConditionInstruction.self
 
     default:
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
         
     }
 }
@@ -285,34 +285,34 @@ extension CreateFormInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         guard let normalizableForm = form as? Normalizable else {
-            throw NormalizationError.NotNormalizable(form.dynamicType)
+            throw NormalizationError.notNormalizable(form.dynamicType)
         }
         guard let normalizableDestination = destination as? Normalizable else {
-            throw NormalizationError.NotNormalizable(destination.dynamicType)
+            throw NormalizationError.notNormalizable(destination.dynamicType)
         }
-        return .Dictionary([
-            "formType" : .String(String(form.dynamicType)),
+        return .dictionary([
+            "formType" : .string(String(form.dynamicType)),
             "form" : try normalizableForm.normalize(),
-            "destinationType" : .String(String(destination.dynamicType)),
+            "destinationType" : .string(String(destination.dynamicType)),
             "destination" : try normalizableDestination.normalize()
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        guard case .Dictionary(let dict) = normalizedValue,
+        guard case .dictionary(let dict) = normalizedValue,
             let ftype = dict["formType"],
             dtype = dict["destinationType"],
             form = dict["form"], destination = dict["destination"] else {
-                throw InitialisationError.Unknown
+                throw InitialisationError.unknown
         }
 
         self.init(form: try formType(ftype).init(normalizedValue: form), destination: try destinationType(dtype).init(normalizedValue: destination))
     }
 }
 
-func formType(normalizedValue: NormalizedValue) throws -> protocol<Form, Normalizable, Creatable>.Type {
-    guard case .String(let type) = normalizedValue else {
-        throw InitialisationError.Unknown
+func formType(_ normalizedValue: NormalizedValue) throws -> protocol<ReformCore.Form, Normalizable, Creatable>.Type {
+    guard case .string(let type) = normalizedValue else {
+        throw InitialisationError.unknown
 
     }
 
@@ -333,14 +333,14 @@ func formType(normalizedValue: NormalizedValue) throws -> protocol<Form, Normali
         return PictureForm.self
 
     default:
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
         
     }
 }
 
 
-func destinationType(normalizedValue: NormalizedValue) throws -> protocol<RuntimeInitialDestination, Normalizable, Labeled>.Type {
-    throw InitialisationError.Unknown
+func destinationType(_ normalizedValue: NormalizedValue) throws -> protocol<RuntimeInitialDestination, Normalizable, Labeled>.Type {
+    throw InitialisationError.unknown
 
 }
 
@@ -350,9 +350,9 @@ extension MorphInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         guard let normalizableDistance = distance as? Normalizable else {
-            throw NormalizationError.NotNormalizable(distance.dynamicType)
+            throw NormalizationError.notNormalizable(distance.dynamicType)
         }
-        return .Dictionary([
+        return .dictionary([
             "formId" : try formId.normalize(),
             "anchorId" : anchorId.normalize(),
             "distance" : try normalizableDistance.normalize()
@@ -360,7 +360,7 @@ extension MorphInstruction : Normalizable {
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -369,16 +369,16 @@ extension TranslateInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         guard let normalizableDistance = distance as? Normalizable else {
-            throw NormalizationError.NotNormalizable(distance.dynamicType)
+            throw NormalizationError.notNormalizable(distance.dynamicType)
         }
-        return .Dictionary([
+        return .dictionary([
             "formId" : try formId.normalize(),
             "distance" : try normalizableDistance.normalize()
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -387,12 +387,12 @@ extension RotateInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         guard let normalizableAngle = angle as? Normalizable else {
-            throw NormalizationError.NotNormalizable(angle.dynamicType)
+            throw NormalizationError.notNormalizable(angle.dynamicType)
         }
         guard let normalizablePoint = fixPoint as? Normalizable else {
-            throw NormalizationError.NotNormalizable(fixPoint.dynamicType)
+            throw NormalizationError.notNormalizable(fixPoint.dynamicType)
         }
-        return .Dictionary([
+        return .dictionary([
             "formId" : try formId.normalize(),
             "angle" : try normalizableAngle.normalize(),
             "fixPoint" : try normalizablePoint.normalize(),
@@ -400,7 +400,7 @@ extension RotateInstruction : Normalizable {
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -410,15 +410,15 @@ extension ScaleInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         guard let normalizableFactor = factor as? Normalizable else {
-            throw NormalizationError.NotNormalizable(factor.dynamicType)
+            throw NormalizationError.notNormalizable(factor.dynamicType)
         }
         guard let normalizableAxis = axis as? Normalizable else {
-            throw NormalizationError.NotNormalizable(axis.dynamicType)
+            throw NormalizationError.notNormalizable(axis.dynamicType)
         }
         guard let normalizablePoint = fixPoint as? Normalizable else {
-            throw NormalizationError.NotNormalizable(fixPoint.dynamicType)
+            throw NormalizationError.notNormalizable(fixPoint.dynamicType)
         }
-        return .Dictionary([
+        return .dictionary([
             "formId" : try formId.normalize(),
             "factor" : try normalizableFactor.normalize(),
             "axis" : try normalizableAxis.normalize(),
@@ -427,7 +427,7 @@ extension ScaleInstruction : Normalizable {
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -436,13 +436,13 @@ extension ScaleInstruction : Normalizable {
 extension IfConditionInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
+        return .dictionary([
             "expression" : try expression.normalize()
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -451,27 +451,27 @@ extension IfConditionInstruction : Normalizable {
 extension ForLoopInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
+        return .dictionary([
             "expression" : try expression.normalize()
             ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension FormIteratorInstruction : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
+        return .dictionary([
             "proxyForm" : try proxyForm.normalize(),
-            "formIds" : .Array(try formIds.map({try $0.normalize()}))
+            "formIds" : .array(try formIds.map({try $0.normalize()}))
             ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -480,143 +480,143 @@ extension FormIteratorInstruction : Normalizable {
 extension DrawingMode : Normalizable {
     public func normalize() -> NormalizedValue {
         switch self {
-        case .Draw:
-            return .String("Draw")
-        case .Guide:
-            return .String("Guide")
-        case .Mask:
-            return .String("Mask")
+        case .draw:
+            return .string("Draw")
+        case .guide:
+            return .string("Guide")
+        case .mask:
+            return .string("Mask")
         }
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
-extension Form where Self: Drawable, Self:Creatable {
+extension ReformCore.Form where Self: Drawable, Self:Creatable {
 
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
-            "type" : .String(String(Self)),
-            "name" : .String(name),
+        return .dictionary([
+            "type" : .string(String(Self)),
+            "name" : .string(name),
             "identifier" : try identifier.normalize(),
             "drawingMode" : drawingMode.normalize()
             ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension ProxyForm : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
-            "name" : .String(name),
+        return .dictionary([
+            "name" : .string(name),
             "identifier" : try identifier.normalize(),
         ])
     }
 
     public convenience init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
-extension Expression : Normalizable {
+extension ReformExpression.Expression : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         switch self {
-        case .Constant(let value):
-            return .Dictionary(["constant": try value.normalize()])
-        case .NamedConstant(let name, let value):
-            return .Dictionary(["namedConstant": try value.normalize(), "name" : .String(name)])
-        case .Reference(let refid):
-            return .Dictionary(["reference": refid.normalize()])
-        case .Unary(let op, let sub):
-            return .Dictionary(["unary": .String(String(op.dynamicType)), "sub": try sub.normalize()])
-        case .Binary(let op, let lhs, let rhs):
-            return .Dictionary(["binary": NormalizedValue.String(String(op.dynamicType)), "lhs": try lhs.normalize(), "rhs": try rhs.normalize()])
-        case .Call(let function, let params):
-            return .Dictionary([
-                "function": .String(String(function.dynamicType)),
-                "params": .Array(try params.map({try $0.normalize()}))
+        case .constant(let value):
+            return .dictionary(["constant": try value.normalize()])
+        case .namedConstant(let name, let value):
+            return .dictionary(["namedConstant": try value.normalize(), "name" : .string(name)])
+        case .reference(let refid):
+            return .dictionary(["reference": refid.normalize()])
+        case .unary(let op, let sub):
+            return .dictionary(["unary": .string(String(op.dynamicType)), "sub": try sub.normalize()])
+        case .binary(let op, let lhs, let rhs):
+            return .dictionary(["binary": NormalizedValue.string(String(op.dynamicType)), "lhs": try lhs.normalize(), "rhs": try rhs.normalize()])
+        case .call(let function, let params):
+            return .dictionary([
+                "function": .string(String(function.dynamicType)),
+                "params": .array(try params.map({try $0.normalize()}))
             ])
         }
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 
-extension Value : Normalizable {
+extension ReformExpression.Value : Normalizable {
 
     public func normalize() throws -> NormalizedValue {
         switch self {
-        case StringValue(let value):
-            return .String(value)
-        case IntValue(let value):
-            return .Int(value)
-        case DoubleValue(let value):
-            return .Double(value)
-        case ColorValue(let r, let g, let b, let a):
-            return .Dictionary([
-                "color": .Int(Int(r)<<24 | Int(g) << 16 | Int(b) << 8 | Int(a))
+        case stringValue(let value):
+            return .string(value)
+        case intValue(let value):
+            return .int(value)
+        case doubleValue(let value):
+            return .double(value)
+        case colorValue(let r, let g, let b, let a):
+            return .dictionary([
+                "color": .int(Int(r)<<24 | Int(g) << 16 | Int(b) << 8 | Int(a))
             ])
-        case BoolValue(let value):
-            return .Bool(value)
+        case boolValue(let value):
+            return .bool(value)
         }
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension RelativeDestination : Normalizable {
     public func normalize() throws -> NormalizedValue {
         guard let from = self.from as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.from.dynamicType)
+            throw NormalizationError.notNormalizable(self.from.dynamicType)
         }
 
         guard let to = self.to as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.to.dynamicType)
+            throw NormalizationError.notNormalizable(self.to.dynamicType)
         }
 
         guard let direction = self.direction as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.direction.dynamicType)
+            throw NormalizationError.notNormalizable(self.direction.dynamicType)
         }
 
 
-        return .Dictionary([
+        return .dictionary([
             "fromType" :
-                .String(String(from.dynamicType)),
+                .string(String(from.dynamicType)),
             "from" : try from.normalize(),
-            "toType" : .String(String(to.dynamicType)),
+            "toType" : .string(String(to.dynamicType)),
             "to" : try to.normalize(),
-            "directionType" : .String(String(direction.dynamicType)),
+            "directionType" : .string(String(direction.dynamicType)),
             "direction" : try direction.normalize(),
             "alignment" : try alignment.normalize()
             ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension FixSizeDestination : Normalizable {
     public func normalize() throws -> NormalizedValue {
         guard let from = self.from as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.from.dynamicType)
+            throw NormalizationError.notNormalizable(self.from.dynamicType)
         }
 
-        return .Dictionary([
+        return .dictionary([
             "fromType" :
-                .String(String(from.dynamicType)),
+                .string(String(from.dynamicType)),
             "from" : try from.normalize(),
             "delta" : delta.normalize(),
             "alignment" : try alignment.normalize()
@@ -624,25 +624,25 @@ extension FixSizeDestination : Normalizable {
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension RelativeDistance : Normalizable {
     public func normalize() throws -> NormalizedValue {
         guard let from = self.from as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.from.dynamicType)
+            throw NormalizationError.notNormalizable(self.from.dynamicType)
         }
 
         guard let to = self.to as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.to.dynamicType)
+            throw NormalizationError.notNormalizable(self.to.dynamicType)
         }
 
         guard let direction = self.direction as? Normalizable else {
-            throw NormalizationError.NotNormalizable(self.direction.dynamicType)
+            throw NormalizationError.notNormalizable(self.direction.dynamicType)
         }
 
-        return .Dictionary([
+        return .dictionary([
             "from" : try from.normalize(),
             "to" : try to.normalize(),
             "direction" : try direction.normalize()
@@ -650,109 +650,109 @@ extension RelativeDistance : Normalizable {
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension ForeignFormPoint : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
+        return .dictionary([
             "formId" : try formId.normalize(),
             "pointId" : try pointId.normalize()
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension GlompPoint : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
+        return .dictionary([
             "formId" : try formId.normalize(),
             "lerp" : try lerp.normalize()
             ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension GridPoint : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
+        return .dictionary([
             "percent" : percent.normalize()
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension RuntimeAlignment : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .String(String(self))
+        return .string(String(self))
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension Cartesian : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .String(String(self))
+        return .string(String(self))
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension FreeDirection : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .String("Free")
+        return .string("Free")
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension ProportionalDirection : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary([
-            "numerator": .Int(self.proportion.0),
-            "denominator": .Int(self.proportion.1),
-            "large": .Bool(self.large)
+        return .dictionary([
+            "numerator": .int(self.proportion.0),
+            "denominator": .int(self.proportion.1),
+            "large": .bool(self.large)
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension ConstantAngle : Normalizable {
     public func normalize() throws -> NormalizedValue {
-        return .Dictionary(["angle": self.angle.normalize()])
+        return .dictionary(["angle": self.angle.normalize()])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
 extension Angle : Normalizable {
     public func normalize() -> NormalizedValue {
-        return .Double(self.radians)
+        return .double(self.radians)
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 
@@ -760,14 +760,14 @@ extension Angle : Normalizable {
 
 extension Vec2d : Normalizable {
     public func normalize() -> NormalizedValue {
-        return .Dictionary([
-            "x" : .Double(self.x),
-            "y" : .Double(self.y)
+        return .dictionary([
+            "x" : .double(self.x),
+            "y" : .double(self.y)
         ])
     }
 
     public init(normalizedValue: NormalizedValue) throws {
-        throw InitialisationError.Unknown
+        throw InitialisationError.unknown
     }
 }
 

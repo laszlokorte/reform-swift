@@ -15,40 +15,40 @@ struct CropUIRenderer : Renderer {
     let cropUI : CropUI
     let camera: Camera
     
-    func renderInContext(context: CGContext) {
+    func renderInContext(_ context: CGContext) {
         let inverse = CGFloat(1 / camera.zoom)
 
-        CGContextSetRGBFillColor(context, 0.23, 0.85, 0.3, 1)
-        CGContextSetRGBStrokeColor(context, 0.18, 0.5, 0.24, 1)
-        CGContextSetLineWidth(context, 2 * inverse)
+        context.setFillColor(red: 0.23, green: 0.85, blue: 0.3, alpha: 1)
+        context.setStrokeColor(red: 0.18, green: 0.5, blue: 0.24, alpha: 1)
+        context.setLineWidth(2 * inverse)
         let dotSize : Double = 9 / camera.zoom
         
         
         switch cropUI.state {
-        case .Hide:
+        case .hide:
             return
-        case .Show(let points):
+        case .show(let points):
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            CGContextDrawPath(context, .FillStroke)
-        case .Active(let active, let points):
+            context.drawPath(using: .fillStroke)
+        case .active(let active, let points):
 
-            CGContextSetRGBStrokeColor(context, 0.23, 0.85, 0.3, 1)
-            CGContextSetLineWidth(context, 3 * inverse)
-            CGContextStrokeRect(context, CGRect(x:0,y:0, width: stage.size.x, height: stage.size.y))
+            context.setStrokeColor(red: 0.23, green: 0.85, blue: 0.3, alpha: 1)
+            context.setLineWidth(3 * inverse)
+            context.stroke(CGRect(x:0,y:0, width: stage.size.x, height: stage.size.y))
 
-            CGContextSetRGBFillColor(context, 0.23, 0.85, 0.3, 1)
-            CGContextSetRGBStrokeColor(context, 0.18, 0.5, 0.24, 1)
-            CGContextSetLineWidth(context, 2 * inverse)
+            context.setFillColor(red: 0.23, green: 0.85, blue: 0.3, alpha: 1)
+            context.setStrokeColor(red: 0.18, green: 0.5, blue: 0.24, alpha: 1)
+            context.setLineWidth(2 * inverse)
 
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            CGContextDrawPath(context, .FillStroke)
+            context.drawPath(using: .fillStroke)
 
             drawDotAt(context, position: active.position, size: dotSize*1.5)
-            CGContextDrawPath(context, .FillStroke)
+            context.drawPath(using: .fillStroke)
         }
     }
 }

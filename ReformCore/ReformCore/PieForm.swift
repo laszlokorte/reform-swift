@@ -14,9 +14,9 @@ import ReformGraphics
 extension PieForm {
     
     public enum PointId : ExposedPointIdentifier {
-        case Start = 0
-        case End = 1
-        case Center = 2
+        case start = 0
+        case end = 1
+        case center = 2
     }
 }
 
@@ -24,7 +24,7 @@ final public class PieForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
-    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var drawingMode : DrawingMode = DrawingMode.draw
     public var name : String
     
     
@@ -49,7 +49,7 @@ final public class PieForm : Form, Creatable {
         return StaticAngle(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         let c = (min+max) / 2
         let delta = max - min
         centerPoint.setPositionFor(runtime, position: c)
@@ -62,9 +62,9 @@ final public class PieForm : Form, Creatable {
     
     public func getPoints() -> [ExposedPointIdentifier:protocol<RuntimePoint,Labeled>] {
         return [
-            PointId.Start.rawValue:AnchorPoint(anchor: lowerAnchor),
-            PointId.End.rawValue:AnchorPoint(anchor: upperAnchor),
-            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.start.rawValue:AnchorPoint(anchor: lowerAnchor),
+            PointId.end.rawValue:AnchorPoint(anchor: upperAnchor),
+            PointId.center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
@@ -109,7 +109,7 @@ private struct PieCornerAnchor : Anchor {
     }
     
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             angle = rotation.getAngleFor(runtime),
@@ -120,7 +120,7 @@ private struct PieCornerAnchor : Anchor {
         return c + rotate(Vec2d.XAxis * r, angle: angle)
     }
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         if let oldAngle = rotation.getAngleFor(runtime),
                 oldRadius = radius.getLengthFor(runtime) {
             let oldDelta = rotate(Vec2d(x: oldRadius, y:0), angle: oldAngle)
@@ -171,20 +171,20 @@ extension PieForm : Scalable {
 extension PieForm : Morphable {
     
     public enum AnchorId : AnchorIdentifier {
-        case Start = 0
-        case End = 1
+        case start = 0
+        case end = 1
     }
     
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorId.Start.rawValue:lowerAnchor,
-            AnchorId.End.rawValue:upperAnchor
+            AnchorId.start.rawValue:lowerAnchor,
+            AnchorId.end.rawValue:upperAnchor
         ]
     }
 }
 
 extension PieForm : Drawable {
-    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
+    public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard let c = centerPoint.getPositionFor(runtime),
                   r = radius.getLengthFor(runtime),
                   low = angleLowerBound.getAngleFor(runtime),
@@ -195,17 +195,17 @@ extension PieForm : Drawable {
         
         var path = Path(center: c, radius: r, lower: low, upper: up)
 
-        path.append(.LineTo(c))
+        path.append(.lineTo(c))
 
-        path.append(.Close)
+        path.append(.close)
 
 
         return path
     }
     
-    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
+    public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
-        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
+        return Shape(area: .pathArea(path), background: .fill(ReformGraphics.Color(r: 128, g: 128, b: 128, a: 128)), stroke: .solid(width: 1, color: ReformGraphics.Color(r:50, g:50, b:50, a: 255)))
     }
 }

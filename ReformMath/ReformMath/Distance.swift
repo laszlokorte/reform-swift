@@ -10,6 +10,6 @@ public func distance(point pointA: Vec2d, point pointB: Vec2d) -> Double {
     return (pointB - pointA).length
 }
 
-public func distance(point point: Vec2d, line: Line2d) -> Double {
+public func distance(point: Vec2d, line: Line2d) -> Double {
     return abs(dot((point - line.from), orthogonal(line.direction)))
 }

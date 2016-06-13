@@ -32,8 +32,8 @@ public struct IdentifiedShape {
 
 extension Stage {
     private static let allSides : [CropSide] = [
-        .Top, .Right, .Bottom, .Left,
-        .TopLeft, .TopRight, .BottomLeft, .BottomRight
+        .top, .right, .bottom, .left,
+        .topLeft, .topRight, .bottomLeft, .bottomRight
     ]
 
     public var cropPoints : [CropPoint] {

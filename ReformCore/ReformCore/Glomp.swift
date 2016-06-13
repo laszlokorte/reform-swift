@@ -10,27 +10,27 @@ import ReformMath
 import ReformExpression
 
 public struct GlompPoint : RuntimePoint, Labeled, Equatable {
-    public let lerp : Expression
+    public let lerp : ReformExpression.Expression
     public let formId : FormIdentifier
     
-    public init(formId: FormIdentifier, lerp: Expression) {
+    public init(formId: FormIdentifier, lerp: ReformExpression.Expression) {
         self.formId = formId
         self.lerp = lerp
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let formName = stringifier.labelFor(formId) ?? "???"
         let value = stringifier.stringFor(lerp) ?? "??"
         
         return "\(value) along \(formName)"
     }
     
-    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let formOutline = runtime.get(formId)?.outline else {
             return nil
         }
         
-        guard case .Success(.DoubleValue(let l)) = lerp.eval(runtime.getDataSet()) else {
+        guard case .success(.doubleValue(let l)) = lerp.eval(runtime.getDataSet()) else {
             return nil
         }
         

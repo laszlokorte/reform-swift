@@ -17,14 +17,14 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
     public let direction : DirectionType
     public let alignment : RuntimeAlignment
     
-    public init(from: PointType, to: PointType, direction : DirectionType = FreeDirection(), alignment: RuntimeAlignment = .Leading) {
+    public init(from: PointType, to: PointType, direction : DirectionType = FreeDirection(), alignment: RuntimeAlignment = .leading) {
         self.from = from
         self.to = to
         self.direction = direction
         self.alignment = alignment
     }
     
-    public func getMinMaxFor<R:Runtime>(runtime: R) -> (Vec2d,Vec2d)? {
+    public func getMinMaxFor<R:Runtime>(_ runtime: R) -> (Vec2d,Vec2d)? {
         guard let
             fromPos = from.getPositionFor(runtime),
             toPos = to.getPositionFor(runtime) else {
@@ -34,14 +34,14 @@ public struct RelativeDestination : RuntimeInitialDestination, Labeled {
         return alignment.getMinMax(from: fromPos, to: direction.getAdjustedFor(runtime, anchor: fromPos, position: toPos))
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let fromLabel = from.getDescription(stringifier)
         let toLabel = to.getDescription(stringifier)
 
         switch alignment {
-        case .Centered:
+        case .centered:
             return "\(direction.getDescription(stringifier)) around \(fromLabel) to \(toLabel)"
-        case .Leading:
+        case .leading:
             return "\(direction.getDescription(stringifier)) from \(fromLabel) to \(toLabel)"
         }
     }

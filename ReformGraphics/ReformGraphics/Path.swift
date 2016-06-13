@@ -9,8 +9,8 @@
 import ReformMath
 
 public struct Path {
-    var winding : WindingRule = .NonZero
-    var segments : [Segment] = [.MoveTo(Vec2d())]
+    var winding : WindingRule = .nonZero
+    var segments : [Segment] = [.moveTo(Vec2d())]
     
     public init(segments: Segment...) {
         self.segments += segments
@@ -18,25 +18,25 @@ public struct Path {
     
     public mutating func reset() {
         segments.removeAll()
-        segments.append(.MoveTo(Vec2d()))
+        segments.append(.moveTo(Vec2d()))
     }
     
-    public mutating func append(segment: Segment) {
+    public mutating func append(_ segment: Segment) {
         segments.append(segment)
     }
 
     public enum Segment {
-        case MoveTo(Vec2d)
-        case LineTo(Vec2d)
-        case QuadraticTo(Vec2d, control: Vec2d)
-        case QubicTo(Vec2d, control: Vec2d, control: Vec2d)
-        case ArcTo(tangent: Vec2d, tangent: Vec2d, radius: Double)
-        case Close
+        case moveTo(Vec2d)
+        case lineTo(Vec2d)
+        case quadraticTo(Vec2d, control: Vec2d)
+        case qubicTo(Vec2d, control: Vec2d, control: Vec2d)
+        case arcTo(tangent: Vec2d, tangent: Vec2d, radius: Double)
+        case close
     }
     
     enum WindingRule {
-        case EvenOdd
-        case NonZero
+        case evenOdd
+        case nonZero
     }
 }
 
@@ -46,14 +46,14 @@ extension Path {
         let end = Vec2d(radius: radius, angle: upper)
         let outer = Vec2d(radius: radius*sqrt(2), angle: lower + Angle(degree: -45))
         let count = abs(Int(normalize360(upper-lower).degree / 90))
-        let rest = Angle(degree: normalize360(upper-lower).degree % 90)
+        let rest = Angle(degree: normalize360(upper-lower).degree.truncatingRemainder(dividingBy: 90))
 
 
-        self.append(.MoveTo(center+arm))
+        self.append(.moveTo(center+arm))
         for i in 0..<count {
             let a = center+rotate(outer, angle: Angle(degree: Double(90+90*i)))
             let b = center+rotate(arm, angle: Angle(degree: Double(90+90*i)))
-            self.append(.ArcTo(
+            self.append(.arcTo(
                 tangent: a,
                 tangent: b,
                 radius: radius)
@@ -67,7 +67,7 @@ extension Path {
                 angle:  Angle(degree: Double(90*count))+rest/2+lower)
             let b = center + end
 
-            self.append(.ArcTo(
+            self.append(.arcTo(
                 tangent: a,
                 tangent: b,
                 radius: radius)
@@ -77,9 +77,9 @@ extension Path {
     }
 }
 
-extension Path : SequenceType {
-    public typealias Generator = IndexingGenerator<Array<Segment>>
-    public func generate() -> Generator {
-        return segments.generate()
+extension Path : Sequence {
+    public typealias Iterator = IndexingIterator<Array<Segment>>
+    public func makeIterator() -> Iterator {
+        return segments.makeIterator()
     }
 }

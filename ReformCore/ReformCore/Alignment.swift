@@ -9,16 +9,16 @@
 import ReformMath
 
 public enum RuntimeAlignment {
-    case Leading
-    case Centered
+    case leading
+    case centered
 }
 
 extension RuntimeAlignment {
-    func getMinMax(from from: Vec2d, to: Vec2d) -> (min: Vec2d, max: Vec2d) {
+    func getMinMax(from: Vec2d, to: Vec2d) -> (min: Vec2d, max: Vec2d) {
         switch self {
-        case .Leading:
+        case .leading:
             return (min: from, max: to)
-        case .Centered:
+        case .centered:
             return (min: 2*from - to, max: to)
         }
     }

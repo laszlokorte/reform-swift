@@ -6,32 +6,32 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-private func clamp<T:Comparable>(value: T, minimum: T, maximum: T) -> T {
+private func clamp<T:Comparable>(_ value: T, minimum: T, maximum: T) -> T {
     return min(maximum, max(minimum, value))
 }
 
-private func component(value: Value) -> UInt8 {
+private func component(_ value: Value) -> UInt8 {
     switch value {
-    case .StringValue(_):
+    case .stringValue(_):
         return UInt8(0)
-    case .IntValue(let int):
+    case .intValue(let int):
         return UInt8(clamp(int, minimum: 0, maximum: 255))
-    case .DoubleValue(let double):
+    case .doubleValue(let double):
         return UInt8(clamp(double, minimum: 0, maximum: 1) * 255)
-    case .ColorValue(_):
+    case .colorValue(_):
         return UInt8(0)
-    case .BoolValue(let bool):
+    case .boolValue(let bool):
         return UInt8(bool ? 255 : 0)
     }
 }
 
 struct RGBConstructor : Function {
     
-    static let arity = FunctionArity.Fix(3)
+    static let arity = FunctionArity.fix(3)
     
-    func apply(params: [Value]) -> Result<Value, EvaluationError> {
+    func apply(_ params: [Value]) -> Result<Value, EvaluationError> {
         guard params.count == 3 else {
-            return .Fail(.ParameterCountMismatch(message: "expected three arguments"))
+            return .fail(.parameterCountMismatch(message: "expected three arguments"))
         }
         
         let r : UInt8 = component(params[0])
@@ -39,17 +39,17 @@ struct RGBConstructor : Function {
         let b : UInt8 = component(params[2])
         let a : UInt8 = 255
 
-        return .Success(.ColorValue(r:r,g:g,b:b,a:a))
+        return .success(.colorValue(r:r,g:g,b:b,a:a))
     }
 }
 
 struct RGBAConstructor : Function {
     
-    static let arity = FunctionArity.Fix(4)
+    static let arity = FunctionArity.fix(4)
     
-    func apply(params: [Value]) -> Result<Value, EvaluationError> {
+    func apply(_ params: [Value]) -> Result<Value, EvaluationError> {
         guard params.count == 4 else {
-            return .Fail(.ParameterCountMismatch(message: "expected four arguments"))
+            return .fail(.parameterCountMismatch(message: "expected four arguments"))
         }
         
         let r : UInt8 = component(params[0])
@@ -57,6 +57,6 @@ struct RGBAConstructor : Function {
         let b : UInt8 = component(params[2])
         let a : UInt8 = component(params[3])
 
-        return .Success(.ColorValue(r:r,g:g,b:b,a:a))
+        return .success(.colorValue(r:r,g:g,b:b,a:a))
     }
 }

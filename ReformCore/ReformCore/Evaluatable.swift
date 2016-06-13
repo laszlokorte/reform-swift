@@ -7,5 +7,5 @@
 //
 
 public protocol Evaluatable : class, Analyzable {
-    func evaluate<T:Runtime where T.Ev == Self>(runtime: T)
+    func evaluate<T:Runtime where T.Ev == Self>(_ runtime: T)
 }

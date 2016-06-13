@@ -8,42 +8,42 @@
 
 import ReformExpression
 
-var lexerGenerator = LexerGenerator<ShuntingYardTokenType>() { (inout conf : LexerGenerator<ShuntingYardTokenType>) in
+var lexerGenerator = LexerGenerator<ShuntingYardTokenType>() { (conf : inout LexerGenerator<ShuntingYardTokenType>) in
 
     conf.ignore("\\s+")
     conf.ignore("\\u00A0+")
 
-    conf.add(.ParenthesisLeft, pattern: "\\(")
-    conf.add(.ParenthesisRight, pattern: "\\)")
+    conf.add(.parenthesisLeft, pattern: "\\(")
+    conf.add(.parenthesisRight, pattern: "\\)")
 
 
-    conf.add(.Operator, pattern: "\\-")
-    conf.add(.Operator, pattern: "\\+")
-    conf.add(.Operator, pattern: "\\/")
-    conf.add(.Operator, pattern: "\\*")
-    conf.add(.Operator, pattern: "\\%")
-    conf.add(.Operator, pattern: "\\^")
+    conf.add(.operator, pattern: "\\-")
+    conf.add(.operator, pattern: "\\+")
+    conf.add(.operator, pattern: "\\/")
+    conf.add(.operator, pattern: "\\*")
+    conf.add(.operator, pattern: "\\%")
+    conf.add(.operator, pattern: "\\^")
 
 
-    conf.add(.Operator, pattern: "~")
-    conf.add(.Operator, pattern: "\\&\\&")
-    conf.add(.Operator, pattern: "\\|\\|")
+    conf.add(.operator, pattern: "~")
+    conf.add(.operator, pattern: "\\&\\&")
+    conf.add(.operator, pattern: "\\|\\|")
 
 
-    conf.add(.Operator, pattern: "<")
-    conf.add(.Operator, pattern: "<=")
-    conf.add(.Operator, pattern: ">")
-    conf.add(.Operator, pattern: ">=")
+    conf.add(.operator, pattern: "<")
+    conf.add(.operator, pattern: "<=")
+    conf.add(.operator, pattern: ">")
+    conf.add(.operator, pattern: ">=")
 
-    conf.add(.Operator, pattern: "==")
+    conf.add(.operator, pattern: "==")
 
-    conf.add(.ArgumentSeparator, pattern: ",")
-    conf.add(.LiteralValue, pattern: "(0|([1-9][0-9]*))(\\.[0-9]*)?")
-    conf.add(.LiteralValue, pattern: "#[0-9a-fA-F]{6,8}")
-    conf.add(.LiteralValue, pattern: "\"[^\"]+\"")
-    conf.add(.LiteralValue, pattern: "(true|false)")
-    conf.add(.Identifier, pattern: "[a-zA-Z_][_a-zA-Z0-9]*")
-    conf.add(.LiteralValue, pattern: "\"[^\"]*\"")
+    conf.add(.argumentSeparator, pattern: ",")
+    conf.add(.literalValue, pattern: "(0|([1-9][0-9]*))(\\.[0-9]*)?")
+    conf.add(.literalValue, pattern: "#[0-9a-fA-F]{6,8}")
+    conf.add(.literalValue, pattern: "\"[^\"]+\"")
+    conf.add(.literalValue, pattern: "(true|false)")
+    conf.add(.identifier, pattern: "[a-zA-Z_][_a-zA-Z0-9]*")
+    conf.add(.literalValue, pattern: "\"[^\"]*\"")
 
 
 }

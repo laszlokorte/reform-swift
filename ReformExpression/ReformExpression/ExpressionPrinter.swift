@@ -9,34 +9,34 @@
 final public class ExpressionPrinter {
     
     let binaryOperators : [String : BinaryOperatorDefinition] = [
-        "^" : BinaryOperatorDefinition(BinaryExponentiation.self, Precedence(50), .Right),
-        "*" : BinaryOperatorDefinition(BinaryMultiplication.self, Precedence(40), .Left),
-        "/" : BinaryOperatorDefinition(BinaryDivision.self, Precedence(40), .Left),
+        "^" : BinaryOperatorDefinition(BinaryExponentiation.self, Precedence(50), .right),
+        "*" : BinaryOperatorDefinition(BinaryMultiplication.self, Precedence(40), .left),
+        "/" : BinaryOperatorDefinition(BinaryDivision.self, Precedence(40), .left),
         
-        "%" : BinaryOperatorDefinition(BinaryModulo.self, Precedence(40), .Left),
+        "%" : BinaryOperatorDefinition(BinaryModulo.self, Precedence(40), .left),
         
-        "+" : BinaryOperatorDefinition(BinaryAddition.self, Precedence(30), .Left),
-        "-" : BinaryOperatorDefinition(BinarySubtraction.self, Precedence(30), .Left),
+        "+" : BinaryOperatorDefinition(BinaryAddition.self, Precedence(30), .left),
+        "-" : BinaryOperatorDefinition(BinarySubtraction.self, Precedence(30), .left),
         
-        "<": BinaryOperatorDefinition(LessThanRelation.self, Precedence(20), .Left),
-        "<=": BinaryOperatorDefinition(LessThanOrEqualRelation.self, Precedence(20), .Left),
-        ">": BinaryOperatorDefinition(GreaterThanRelation.self, Precedence(20), .Left),
-        ">=": BinaryOperatorDefinition(GreaterThanOrEqualRelation.self, Precedence(20), .Left),
-        "==": BinaryOperatorDefinition(StrictEqualRelation.self, Precedence(10), .Left),
-        "!=": BinaryOperatorDefinition(StrictNotEqualRelation.self, Precedence(10), .Left),
-        "&&": BinaryOperatorDefinition(BinaryLogicAnd.self, Precedence(8), .Left),
-        "||": BinaryOperatorDefinition(BinaryLogicOr.self, Precedence(5), .Left),
+        "<": BinaryOperatorDefinition(LessThanRelation.self, Precedence(20), .left),
+        "<=": BinaryOperatorDefinition(LessThanOrEqualRelation.self, Precedence(20), .left),
+        ">": BinaryOperatorDefinition(GreaterThanRelation.self, Precedence(20), .left),
+        ">=": BinaryOperatorDefinition(GreaterThanOrEqualRelation.self, Precedence(20), .left),
+        "==": BinaryOperatorDefinition(StrictEqualRelation.self, Precedence(10), .left),
+        "!=": BinaryOperatorDefinition(StrictNotEqualRelation.self, Precedence(10), .left),
+        "&&": BinaryOperatorDefinition(BinaryLogicAnd.self, Precedence(8), .left),
+        "||": BinaryOperatorDefinition(BinaryLogicOr.self, Precedence(5), .left),
     ]
     
     let unaryOperators : [String : UnaryOperatorDefinition] = [
-        "+" : UnaryOperatorDefinition(UnaryPlus.self, Precedence(45), .Left),
-        "-" : UnaryOperatorDefinition(UnaryMinus.self, Precedence(45), .Left),
-        "~" : UnaryOperatorDefinition(UnaryLogicNegation.self, Precedence(45), .Left),
+        "+" : UnaryOperatorDefinition(UnaryPlus.self, Precedence(45), .left),
+        "-" : UnaryOperatorDefinition(UnaryMinus.self, Precedence(45), .left),
+        "~" : UnaryOperatorDefinition(UnaryLogicNegation.self, Precedence(45), .left),
     ]
     
     let constants : [String : Value] = [
-        "PI" : Value.DoubleValue(value: PI),
-        "E" : Value.DoubleValue(value: E),
+        "PI" : Value.doubleValue(value: PI),
+        "E" : Value.doubleValue(value: E),
     ]
     
     let functions : [String : Function.Type] = [
@@ -79,7 +79,7 @@ final public class ExpressionPrinter {
         self.sheet = sheet
     }
     
-    private func functionName(function : Function) -> String? {
+    private func functionName(_ function : Function) -> String? {
         for (name, type) in functions {
             if function.dynamicType == type {
                 return name
@@ -89,7 +89,7 @@ final public class ExpressionPrinter {
         return nil
     }
     
-    private func findOperator(op : BinaryOperator) -> (String,BinaryOperatorDefinition)? {
+    private func findOperator(_ op : BinaryOperator) -> (String,BinaryOperatorDefinition)? {
         for (name, def) in binaryOperators {
             if op.dynamicType == def.op {
                 return (name, def)
@@ -99,7 +99,7 @@ final public class ExpressionPrinter {
         return nil
     }
     
-    private func findOperator(op : UnaryOperator) -> (String,UnaryOperatorDefinition)? {
+    private func findOperator(_ op : UnaryOperator) -> (String,UnaryOperatorDefinition)? {
         for (name, def) in unaryOperators {
             if op.dynamicType == def.op {
                 return (name, def)
@@ -109,31 +109,31 @@ final public class ExpressionPrinter {
         return nil
     }
     
-    public func toString(value : Value) -> String {
+    public func toString(_ value : Value) -> String {
         switch value {
-        case .BoolValue(let bool):
+        case .boolValue(let bool):
             return bool ? "true" : "false"
-        case .IntValue(let int):
+        case .intValue(let int):
             return "\(int)"
-        case .DoubleValue(let double):
+        case .doubleValue(let double):
             return String(format: "%.2f", double)
-        case .StringValue(let string):
+        case .stringValue(let string):
             return "\"\(string)\""
-        case .ColorValue(let r, let g, let b, let a):
+        case .colorValue(let r, let g, let b, let a):
             let f = "%02x"
             return "#\(String(format: f, r))\(String(format: f, g))\(String(format: f, b))\(String(format: f, a))"
         }
     }
     
-    public func toString(expression : Expression, outerPrecedence : Precedence = Precedence(0), isLeft : Bool = false) -> String? {
+    public func toString(_ expression : Expression, outerPrecedence : Precedence = Precedence(0), isLeft : Bool = false) -> String? {
         switch(expression) {
-        case .Constant(let value):
+        case .constant(let value):
             return toString(value)
-        case .NamedConstant(let label, _):
+        case .namedConstant(let label, _):
             return label
-        case .Reference(let id):
+        case .reference(let id):
             return sheet.definitionWithId(id)?.name ?? "[?\(id.value)]"
-        case .Unary(let op, let expr):
+        case .unary(let op, let expr):
             guard let
                 (name, def) = findOperator(op),
                 sub = toString(expr, outerPrecedence: def.precedence)
@@ -146,7 +146,7 @@ final public class ExpressionPrinter {
             } else {
                 return "(\(name)\(sub))"
             }
-        case .Binary(let op, let lhs, let rhs):
+        case .binary(let op, let lhs, let rhs):
             guard let
                 (name, def) = findOperator(op),
                 left = toString(lhs, outerPrecedence: def.precedence, isLeft: true),
@@ -160,9 +160,9 @@ final public class ExpressionPrinter {
             } else {
                 return "(\(left) \(name) \(right))"
             }
-        case .Call(let function, let params):
+        case .call(let function, let params):
             if let fname = functionName(function) {
-                let pstr = params.flatMap({ toString($0) }).joinWithSeparator(", ")
+                let pstr = params.flatMap({ toString($0) }).joined(separator: ", ")
                 return "\(fname)(\(pstr))"
             } else {
                 return nil
@@ -170,26 +170,26 @@ final public class ExpressionPrinter {
         }
     }
     
-    public func toString(error: ShuntingYardError) -> String {
+    public func toString(_ error: ShuntingYardError) -> String {
         switch(error) {
-        case .InvalidState:
+        case .invalidState:
             return "Invalid Parser State"
-        case .UnexpectedEndOfArgumentList(_):
+        case .unexpectedEndOfArgumentList(_):
             return "Unexpected end of argument list"
             
-        case .MissingOperand(let token, let arity, let missing):
+        case .missingOperand(let token, let arity, let missing):
             return "Missing \(missing) operand for \(arity) operator \"\(token.value)\""
             
-        case .UnknownOperator(let token, let arity):
+        case .unknownOperator(let token, let arity):
             return "Unknown \(arity) operator \(token.value)"
             
-        case .UnknownFunction(let token, let parameters):
+        case .unknownFunction(let token, let parameters):
             return "Unknown function \(token.value)(\(parameters))"
             
-        case .UnexpectedToken(let token, let message):
+        case .unexpectedToken(let token, let message):
             return "Unexpected token \(token.value). \(message)"
             
-        case .MismatchedToken(let token, let open):
+        case .mismatchedToken(let token, let open):
             if(open) {
                 return "Mismatched opening parenthesis \(token.value)"
             } else {
@@ -199,17 +199,17 @@ final public class ExpressionPrinter {
         }
     }
     
-    public func toString(error: EvaluationError) -> String {
+    public func toString(_ error: EvaluationError) -> String {
         switch error {
-        case .UnresolvedReference(let message):
+        case .unresolvedReference(let message):
             return "Unresolved reference: \(message)"
-        case .ArithmeticError(let message):
+        case .arithmeticError(let message):
             return "Arithmetic error: \(message)"
-        case .TypeMismatch(let message):
+        case .typeMismatch(let message):
             return "Type mismatch: \(message)"
-        case .ParameterCountMismatch(let message):
+        case .parameterCountMismatch(let message):
             return "Parameter count mismatch: \(message)"
-        case .DuplicateDefinition(referenceId: _):
+        case .duplicateDefinition(referenceId: _):
             return "Duplicate definition for reference"
         }
     }

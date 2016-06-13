@@ -10,12 +10,12 @@
 
 public enum ShuntingYardTokenType : TokenType {
     case EOF
-    case LiteralValue
-    case ArgumentSeparator
-    case Identifier
-    case ParenthesisLeft
-    case ParenthesisRight
-    case Operator
+    case literalValue
+    case argumentSeparator
+    case identifier
+    case parenthesisLeft
+    case parenthesisRight
+    case `operator`
     case Ignore
     case Unknown
     
@@ -35,7 +35,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
         self.delegate = delegate
     }
     
-    public func parse<T : SequenceType where T.Generator.Element==TokenType>(tokens: T) -> Result<NodeType, ShuntingYardError> {
+    public func parse<T : Sequence where T.Iterator.Element==TokenType>(_ tokens: T) -> Result<NodeType, ShuntingYardError> {
 
         do {
             let context = ShuntingYardContext<NodeType>()
@@ -44,9 +44,9 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             outer:
             for token in tokens
             {
-                if (needOpen && token.type != .ParenthesisLeft)
+                if (needOpen && token.type != .parenthesisLeft)
                 {
-                    throw ShuntingYardError.UnexpectedToken(token: token, message: "Expected Opening Parenthesis.")
+                    throw ShuntingYardError.unexpectedToken(token: token, message: "Expected Opening Parenthesis.")
                 }
                 needOpen = false
                 switch (token.type)
@@ -54,12 +54,12 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 case .EOF:
                     break outer
                 case .Unknown:
-                    throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                    throw ShuntingYardError.unexpectedToken(token: token, message: "")
                     
-                case .Identifier:
+                case .identifier:
                     if (context.lastTokenAtom)
                     {
-                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                        throw ShuntingYardError.unexpectedToken(token: token, message: "")
                     }
                     if (delegate.hasFunctionOfName(token))
                     {
@@ -98,10 +98,10 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                             context.wereValues.push(true)
                         }
                     }
-                case .LiteralValue:
+                case .literalValue:
                     if (context.lastTokenAtom)
                     {
-                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                        throw ShuntingYardError.unexpectedToken(token: token, message: "")
                     }
                     context.lastTokenAtom = true
 
@@ -112,15 +112,15 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.wereValues.pop()
                         context.wereValues.push(true)
                     }
-                case .ArgumentSeparator:
-                    while let peek = context.stack.peek() where peek.type != .ParenthesisLeft
+                case .argumentSeparator:
+                    while let peek = context.stack.peek() where peek.type != .parenthesisLeft
                     {
                         context.stack.pop()
                         context.output.push(try _pipe(peek, context: context))
                     }
                     if (context.stack.isEmpty || context.wereValues.isEmpty)
                     {
-                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                        throw ShuntingYardError.unexpectedToken(token: token, message: "")
                     }
                     if let wereValue = context.wereValues.pop() where wereValue,
                         let argCount = context.argCount.pop()
@@ -129,13 +129,13 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     }
                     context.wereValues.push(true)
                     context.lastTokenAtom = false
-                case .Operator:
+                case .operator:
                     if (isOperator(context.prevToken) && delegate.hasUnaryOperator(
                         token))
                     {
                         if (context.lastTokenAtom)
                         {
-                            throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                            throw ShuntingYardError.unexpectedToken(token: token, message: "")
                         }
                         context.unaries.insert(token)
                         context.stack.push(token)
@@ -144,16 +144,16 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     {
                         
                         if let peek = context.stack.peek() where peek.type ==
-                            ShuntingYardTokenType.Identifier
+                            ShuntingYardTokenType.identifier
                         {
                             context.stack.pop()
 
                             context.output.push(try _pipe(peek, context: context))
                         }
                         
-                        while let peek = context.stack.peek() where peek.type == ShuntingYardTokenType.Operator,
+                        while let peek = context.stack.peek() where peek.type == ShuntingYardTokenType.operator,
                             let tokenPrec = delegate.precedenceOfOperator(token, unary: context.actsAsUnary(token)),
-                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)) where (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.Left && tokenPrec == peekPrec))
+                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)) where (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.left && tokenPrec == peekPrec))
                         {
                             context.stack.pop()
                             context.output.push(try _pipe(peek, context: context))
@@ -163,13 +163,13 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.stack.push(token)
                         context.lastTokenAtom = false
                     }
-                case .ParenthesisLeft:
+                case .parenthesisLeft:
                     if (context.lastTokenAtom)
                     {
-                        throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                        throw ShuntingYardError.unexpectedToken(token: token, message: "")
                     }
                     context.stack.push(token)
-                case .ParenthesisRight:
+                case .parenthesisRight:
                     while let peek = context.stack.peek() where !delegate.isMatchingPair(
                         peek, right: token)
                     {
@@ -184,11 +184,11 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     }
                     else
                     {
-                        throw ShuntingYardError.MismatchedToken(token: token, open: false)
+                        throw ShuntingYardError.mismatchedToken(token: token, open: false)
                     }
                     
                     if let peek = context.stack.peek() where peek.type ==
-                        ShuntingYardTokenType.Identifier
+                        ShuntingYardTokenType.identifier
                     {
                         context.stack.pop()
                         
@@ -201,25 +201,25 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 context.prevToken = token
             }
 
-            return .Success(try finalize(context))
+            return .success(try finalize(context))
         } catch let e as ShuntingYardError {
-            return Result.Fail(e)
+            return Result.fail(e)
         } catch {
-            return Result.Fail(ShuntingYardError.InvalidState)
+            return Result.fail(ShuntingYardError.invalidState)
         }
     }
     
-    func finalize(context : ShuntingYardContext<NodeType>) throws -> NodeType
+    func finalize(_ context : ShuntingYardContext<NodeType>) throws -> NodeType
     {
         while let peek = context.stack.peek()
         {
-            if (peek.type == ShuntingYardTokenType.ParenthesisLeft)
+            if (peek.type == ShuntingYardTokenType.parenthesisLeft)
             {
-                throw ShuntingYardError.MismatchedToken(token: peek, open: true)
+                throw ShuntingYardError.mismatchedToken(token: peek, open: true)
             }
-            if (peek.type == ShuntingYardTokenType.ParenthesisRight)
+            if (peek.type == ShuntingYardTokenType.parenthesisRight)
             {
-                throw ShuntingYardError.MismatchedToken(token: peek, open: false)
+                throw ShuntingYardError.mismatchedToken(token: peek, open: false)
             }
             context.stack.pop()
 
@@ -231,7 +231,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             
             if (!context.output.isEmpty)
             {
-                throw ShuntingYardError.InvalidState
+                throw ShuntingYardError.invalidState
             }
             return result
         }
@@ -242,19 +242,20 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
     }
     
     
-    func _pipe(op : Token<ShuntingYardTokenType>, context : ShuntingYardContext<NodeType>) throws -> NodeType
+    func _pipe(_ op : Token<ShuntingYardTokenType>, context : ShuntingYardContext<NodeType>) throws -> NodeType
     {
         switch (op.type)
         {
-        case .Identifier:
+        case .identifier:
             // @TODO: CLEAN UP
             guard var argCount = context.argCount.pop() else {
-                throw ShuntingYardError.UnexpectedToken(token: op, message: "")
+                throw ShuntingYardError.unexpectedToken(token: op, message: "")
             }
             var temp = [NodeType]()
         
-            while argCount-- > 0, let peek = context.output.pop()
+            while argCount > 0, let peek = context.output.pop()
             {
+                argCount -= 1
                 temp.append(peek)
             }
             
@@ -265,25 +266,25 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 }
                 else
                 {
-                    throw ShuntingYardError.UnexpectedEndOfArgumentList(token: op)
+                    throw ShuntingYardError.unexpectedEndOfArgumentList(token: op)
                 }
             }
             
-            return try delegate.functionTokenToNode(op, args: temp.reverse())
+            return try delegate.functionTokenToNode(op, args: temp.reversed())
 
-        case .Operator:
+        case .operator:
             if (context.unaries.contains(op))
             {
             
             guard delegate.hasUnaryOperator(op) else
             {
-                throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Unary)
+                throw ShuntingYardError.unknownOperator(token: op, arity: OperatorArity.unary)
             }
             
             guard let operand = context.output.pop()
             else
             {
-                throw ShuntingYardError.MissingOperand(token: op, arity: OperatorArity.Unary, missing: 1)
+                throw ShuntingYardError.missingOperand(token: op, arity: OperatorArity.unary, missing: 1)
             }
             
             return try delegate.unaryOperatorToNode(op, operand: operand)
@@ -292,33 +293,33 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             {
                 guard delegate.hasBinaryOperator(op) else
                 {
-                    throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Binary)
+                    throw ShuntingYardError.unknownOperator(token: op, arity: OperatorArity.binary)
                 }
                 
                 guard let rightHand = context.output.pop()
                 else
                 {
-                    throw ShuntingYardError.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 2)
+                    throw ShuntingYardError.missingOperand(token: op, arity: OperatorArity.binary,missing: 2)
                 }
                 
                 guard let leftHand = context.output.pop()
                 else
                 {
-                    throw ShuntingYardError.MissingOperand(token: op, arity: OperatorArity.Binary,missing: 1)
+                    throw ShuntingYardError.missingOperand(token: op, arity: OperatorArity.binary,missing: 1)
                 }
                 
                 return try delegate.binaryOperatorToNode(op, leftHand: leftHand, rightHand: rightHand)
             }
         default:
-            throw ShuntingYardError.UnexpectedToken(token: op, message: "")
+            throw ShuntingYardError.unexpectedToken(token: op, message: "")
         }
     }
     
-    func isOperator(token : Token<ShuntingYardTokenType>?) -> Bool
+    func isOperator(_ token : Token<ShuntingYardTokenType>?) -> Bool
     {
         if let t = token {
-            return t.type == ShuntingYardTokenType.Operator || t.type == ShuntingYardTokenType
-                .ArgumentSeparator || t.type == ShuntingYardTokenType.ParenthesisLeft        } else {
+            return t.type == ShuntingYardTokenType.operator || t.type == ShuntingYardTokenType
+                .argumentSeparator || t.type == ShuntingYardTokenType.parenthesisLeft        } else {
             return true
         }
     }
@@ -327,14 +328,14 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
 
 
 
-public enum ShuntingYardError : ErrorType {
-    case InvalidState
-    case UnexpectedEndOfArgumentList(token: Token<ShuntingYardTokenType>)
-    case MissingOperand(token: Token<ShuntingYardTokenType>, arity: OperatorArity, missing: Int)
-    case UnknownOperator(token: Token<ShuntingYardTokenType>, arity: OperatorArity)
-    case UnknownFunction(token: Token<ShuntingYardTokenType>, parameters: Int)
-    case UnexpectedToken(token: Token<ShuntingYardTokenType>, message: String)
-    case MismatchedToken(token: Token<ShuntingYardTokenType>, open: Bool)
+public enum ShuntingYardError : ErrorProtocol {
+    case invalidState
+    case unexpectedEndOfArgumentList(token: Token<ShuntingYardTokenType>)
+    case missingOperand(token: Token<ShuntingYardTokenType>, arity: OperatorArity, missing: Int)
+    case unknownOperator(token: Token<ShuntingYardTokenType>, arity: OperatorArity)
+    case unknownFunction(token: Token<ShuntingYardTokenType>, parameters: Int)
+    case unexpectedToken(token: Token<ShuntingYardTokenType>, message: String)
+    case mismatchedToken(token: Token<ShuntingYardTokenType>, open: Bool)
 }
 
 
@@ -353,39 +354,39 @@ final class ShuntingYardContext<NodeType>
     var lastTokenAtom : Bool = false
     
     
-    func actsAsUnary(token : Token<ShuntingYardTokenType>) -> Bool
+    func actsAsUnary(_ token : Token<ShuntingYardTokenType>) -> Bool
     {
         return unaries.contains(token)
     }
 }
 
 public protocol ShuntingYardDelegate {
-    typealias NodeType
+    associatedtype NodeType
     
-    func isMatchingPair(left : Token<ShuntingYardTokenType>, right : Token<ShuntingYardTokenType>) -> Bool
+    func isMatchingPair(_ left : Token<ShuntingYardTokenType>, right : Token<ShuntingYardTokenType>) -> Bool
     
-    func hasFunctionOfName(name : Token<ShuntingYardTokenType>) -> Bool
+    func hasFunctionOfName(_ name : Token<ShuntingYardTokenType>) -> Bool
     
-    func hasConstantOfName(name : Token<ShuntingYardTokenType>) -> Bool
+    func hasConstantOfName(_ name : Token<ShuntingYardTokenType>) -> Bool
     
-    func variableTokenToNode(token : Token<ShuntingYardTokenType>) throws -> NodeType
-    func constantTokenToNode(token : Token<ShuntingYardTokenType>) throws -> NodeType
+    func variableTokenToNode(_ token : Token<ShuntingYardTokenType>) throws -> NodeType
+    func constantTokenToNode(_ token : Token<ShuntingYardTokenType>) throws -> NodeType
     func emptyNode() throws -> NodeType
     
-    func unaryOperatorToNode(op : Token<ShuntingYardTokenType>, operand : NodeType) throws -> NodeType
+    func unaryOperatorToNode(_ op : Token<ShuntingYardTokenType>, operand : NodeType) throws -> NodeType
     
-    func binaryOperatorToNode(op : Token<ShuntingYardTokenType>, leftHand : NodeType, rightHand : NodeType) throws -> NodeType
+    func binaryOperatorToNode(_ op : Token<ShuntingYardTokenType>, leftHand : NodeType, rightHand : NodeType) throws -> NodeType
     
-    func functionTokenToNode(function : Token<ShuntingYardTokenType>, args : [NodeType]) throws -> NodeType
+    func functionTokenToNode(_ function : Token<ShuntingYardTokenType>, args : [NodeType]) throws -> NodeType
     
-    func hasBinaryOperator(op : Token<ShuntingYardTokenType>) -> Bool
+    func hasBinaryOperator(_ op : Token<ShuntingYardTokenType>) -> Bool
     
-    func hasUnaryOperator(op : Token<ShuntingYardTokenType>) -> Bool
+    func hasUnaryOperator(_ op : Token<ShuntingYardTokenType>) -> Bool
     
-    func assocOfOperator(token : Token<ShuntingYardTokenType>) -> Associativity?
+    func assocOfOperator(_ token : Token<ShuntingYardTokenType>) -> Associativity?
     
-    func precedenceOfOperator(token : Token<ShuntingYardTokenType>, unary : Bool) -> Precedence?
+    func precedenceOfOperator(_ token : Token<ShuntingYardTokenType>, unary : Bool) -> Precedence?
     
-    func literalTokenToNode(token : Token<ShuntingYardTokenType>) throws -> NodeType
+    func literalTokenToNode(_ token : Token<ShuntingYardTokenType>) throws -> NodeType
 
 }

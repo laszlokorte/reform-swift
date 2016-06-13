@@ -24,17 +24,17 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
         self.focusFilter = focusFilter
     }
     
-    public func runtimeBeginEvaluation<R:Runtime>(runtime: R, withSize size: (Double, Double)) {
+    public func runtimeBeginEvaluation<R:Runtime>(_ runtime: R, withSize size: (Double, Double)) {
         collected = false
         buffer.clear()
         buffer.size = Vec2d(x: Double(size.0), y: Double(size.1))
     }
     
-    public func runtimeFinishEvaluation<R:Runtime>(runtime: R) {
+    public func runtimeFinishEvaluation<R:Runtime>(_ runtime: R) {
         buffer.flush(stage)
     }
 
-    public func runtime<R:Runtime>(runtime: R, didEval instruction: Evaluatable) {
+    public func runtime<R:Runtime>(_ runtime: R, didEval instruction: Evaluatable) {
         guard !collected else { return }
         guard focusFilter(instruction) else { return }
         
@@ -45,7 +45,7 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
             
             buffer.entities.append(entity)
             
-            guard let drawable = runtime.get(id) as? Drawable where drawable.drawingMode == .Draw else {
+            guard let drawable = runtime.get(id) as? Drawable where drawable.drawingMode == .draw else {
                 continue
             }
             
@@ -58,9 +58,9 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
         }
     }
 
-    public func runtime<R:Runtime>(runtime: R, exitScopeWithForms forms: [FormIdentifier]) {
+    public func runtime<R:Runtime>(_ runtime: R, exitScopeWithForms forms: [FormIdentifier]) {
         for id in forms {
-            guard let form = runtime.get(id) as? Drawable where form.drawingMode == .Draw else {
+            guard let form = runtime.get(id) as? Drawable where form.drawingMode == .draw else {
                 continue
             }
             
@@ -78,7 +78,7 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
         }
     }
 
-    public func runtime<R:Runtime>(runtime: R, triggeredError: RuntimeError, on instruction: Evaluatable) {
+    public func runtime<R:Runtime>(_ runtime: R, triggeredError: RuntimeError, on instruction: Evaluatable) {
         guard !collected else { return }
 
         guard focusFilter(instruction) else { return }
@@ -106,20 +106,20 @@ private class StageBuffer {
     
     
     func clear() {
-        entities.removeAll(keepCapacity: true)
-        currentShapes.removeAll(keepCapacity: true)
-        finalShapes.removeAll(keepCapacity: true)
+        entities.removeAll(keepingCapacity: true)
+        currentShapes.removeAll(keepingCapacity: true)
+        finalShapes.removeAll(keepingCapacity: true)
         size = Vec2d()
         error = nil
     }
     
-    func flush(stage: Stage) {
+    func flush(_ stage: Stage) {
         let recalcIntersections = self.recalcIntersections
-        dispatch_sync(dispatch_get_main_queue()) {
+        DispatchQueue.main.sync {
             [unowned self, stage] in
 
             stage.size = self.size
-            stage.entities = self.entities.lazy.reverse()
+            stage.entities = self.entities.lazy.reversed()
             stage.currentShapes = self.currentShapes
             stage.finalShapes = self.finalShapes
             stage.error = self.error
@@ -132,14 +132,14 @@ private class StageBuffer {
     }
 }
 
-func intersectionsOf(entities: [Entity]) -> [IntersectionSnapPoint] {
+func intersectionsOf(_ entities: [Entity]) -> [IntersectionSnapPoint] {
     
     var result = [IntersectionSnapPoint]()
-    for (ai, a) in entities.enumerate() {
-        for (bi, b) in entities.enumerate()
+    for (ai, a) in entities.enumerated() {
+        for (bi, b) in entities.enumerated()
             where bi>ai && a.id != b.id {
             
-            for (index, pos) in intersect(segmentPath: a.outline, and: b.outline).enumerate() {
+            for (index, pos) in intersect(segmentPath: a.outline, and: b.outline).enumerated() {
                 result.append(IntersectionSnapPoint(position: pos, label: "Intersection", point: RuntimeIntersectionPoint(formA: a.id.runtimeId, formB: b.id.runtimeId, index: index)))
             }
         }

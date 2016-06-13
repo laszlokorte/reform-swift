@@ -14,18 +14,18 @@ import ReformStage
 public final class ScaleTool : Tool {
     enum State
     {
-        case Idle
-        case Delegating
-        case Scaling(handle: AffineHandle, factor: Double, offset: Vec2d)
+        case idle
+        case delegating
+        case scaling(handle: AffineHandle, factor: Double, offset: Vec2d)
     }
     
-    var state : State = .Idle
+    var state : State = .idle
     var snapType : PointType = []
     
     let stage : Stage
     let handleGrabber : AffineHandleGrabber
     let streightener : Streightener
-    var pivot : PivotChoice = .Primary
+    var pivot : PivotChoice = .primary
     let instructionCreator : InstructionCreator
     
     let selectionTool : SelectionTool
@@ -44,7 +44,7 @@ public final class ScaleTool : Tool {
     }
     
     public func setUp() {
-        state = .Idle
+        state = .idle
         selectionTool.setUp()
         
         if let selected = selection.one {
@@ -56,7 +56,7 @@ public final class ScaleTool : Tool {
         instructionCreator.cancel()
         handleGrabber.disable()
         selectionTool.tearDown()
-        state = .Idle
+        state = .idle
     }
     
     public func refresh() {
@@ -69,18 +69,18 @@ public final class ScaleTool : Tool {
     
     public func cancel() {
         switch self.state {
-        case .Delegating, .Idle:
-            state = .Idle
+        case .delegating, .idle:
+            state = .idle
             selectionTool.cancel()
             handleGrabber.disable()
-            pivotUI.state = .Hide
-        case .Scaling:
+            pivotUI.state = .hide
+        case .scaling:
             instructionCreator.cancel()
-            state = .Idle
+            state = .idle
         }
     }
     
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
         
         if modifier.isStreight {
@@ -90,69 +90,69 @@ public final class ScaleTool : Tool {
         }
         
         if modifier.isAlignOption {
-            pivot = .Secondary
+            pivot = .secondary
         } else {
-            pivot = .Primary
+            pivot = .primary
         }
         
         
         switch state {
-        case .Delegating:
+        case .delegating:
             selectionTool.process(input, atPosition: pos, withModifier: modifier)
             switch input {
-            case .ModifierChange, .Press,
-            .Move, .Cycle, .Toggle:
+            case .modifierChange, .press,
+            .move, .cycle, .toggle:
                 break
-            case .Release:
-                state = .Idle
+            case .release:
+                state = .idle
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .Move, .ModifierChange:
+            case .move, .modifierChange:
                 handleGrabber.searchAt(pos)
                 if let handle = handleGrabber.current {
-                    pivotUI.state = .Show(pivot.pointFor(handle))
+                    pivotUI.state = .show(pivot.pointFor(handle))
                 } else {
-                    pivotUI.state = .Hide
+                    pivotUI.state = .hide
                 }
-            case .Press:
+            case .press:
                 if let grabbedHandle = handleGrabber.current {
                     
                     instructionCreator
                         .beginCreation(ScaleInstruction(formId: grabbedHandle.formId.runtimeId, factor: ConstantScaleFactor(factor: 0), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis:  streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
                     
-                    state = .Scaling(handle: grabbedHandle, factor: 1.0, offset: pos - grabbedHandle.position)
+                    state = .scaling(handle: grabbedHandle, factor: 1.0, offset: pos - grabbedHandle.position)
                     
                     
                 } else {
-                    state = .Delegating
+                    state = .delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-            case .Cycle:
+            case .cycle:
                 handleGrabber.cycle()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
-        case .Scaling(let grabbedHandle, _, let offset):
+        case .scaling(let grabbedHandle, _, let offset):
             switch input {
                 
-            case .ModifierChange:
-                pivotUI.state = .Show(pivot.pointFor(grabbedHandle))
+            case .modifierChange:
+                pivotUI.state = .show(pivot.pointFor(grabbedHandle))
                 fallthrough
-            case .Move:
+            case .move:
                 let piv = pivot.pointFor(grabbedHandle)
                 let axis = (grabbedHandle.position - piv.position)
                 let distance = pos - piv.position - offset
                 let length = axis.length²
                 let factor = length == 0 ? 1 : dot(distance, axis)/axis.length²
-                state = .Scaling(handle: grabbedHandle, factor: factor, offset: offset)
-            case .Release:
+                state = .scaling(handle: grabbedHandle, factor: factor, offset: offset)
+            case .release:
                 instructionCreator.commit()
-                state = .Idle
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle, .Press:
+                state = .idle
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle, .press:
                 break
-            case .Toggle:
+            case .toggle:
                 streightener.invert()
             }
         }
@@ -167,7 +167,7 @@ public final class ScaleTool : Tool {
     }
     
     private func publish() {
-        if case .Scaling(let grabbedHandle, let factor, _) = state {
+        if case .scaling(let grabbedHandle, let factor, _) = state {
             
             instructionCreator.update(ScaleInstruction(formId: grabbedHandle.formId.runtimeId, factor: ConstantScaleFactor(factor: factor), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint, axis: streightener.axisFor(grabbedHandle.scaleAxis.runtimeAxis)))
         }

@@ -20,7 +20,7 @@ public final class IdentifierSequence<T:SequenceGeneratable> {
     }
     
     public func emitId() -> T {
-        sequenceValue++
+        sequenceValue += 1
         return type.init(id: sequenceValue)
     }
 }

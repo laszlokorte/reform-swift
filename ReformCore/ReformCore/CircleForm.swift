@@ -13,11 +13,11 @@ import ReformGraphics
 extension CircleForm {
     
     public enum PointId : ExposedPointIdentifier {
-        case Top = 0
-        case Left = 1
-        case Bottom = 2
-        case Right = 3
-        case Center = 4
+        case top = 0
+        case left = 1
+        case bottom = 2
+        case right = 3
+        case center = 4
     }
 }
 
@@ -25,7 +25,7 @@ final public class CircleForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
-    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var drawingMode : DrawingMode = DrawingMode.draw
     public var name : String
     
     
@@ -46,7 +46,7 @@ final public class CircleForm : Form, Creatable {
         return StaticAngle(formId: identifier, offset: 3)
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         let c = (min+max) / 2
         let delta = max - min
         
@@ -62,11 +62,11 @@ final public class CircleForm : Form, Creatable {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.Top.rawValue:AnchorPoint(anchor: topAnchor),
-            PointId.Bottom.rawValue:AnchorPoint(anchor: bottomAnchor),
-            PointId.Right.rawValue:AnchorPoint(anchor: rightAnchor),
-            PointId.Left.rawValue:AnchorPoint(anchor: leftAnchor),
-            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.top.rawValue:AnchorPoint(anchor: topAnchor),
+            PointId.bottom.rawValue:AnchorPoint(anchor: bottomAnchor),
+            PointId.right.rawValue:AnchorPoint(anchor: rightAnchor),
+            PointId.left.rawValue:AnchorPoint(anchor: leftAnchor),
+            PointId.center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
@@ -79,19 +79,19 @@ final public class CircleForm : Form, Creatable {
 extension CircleForm {
     
     var topAnchor : Anchor {
-        return CircleAnchor(quater: .North, center: centerPoint, radius: radius, rotation: angle)
+        return CircleAnchor(quater: .north, center: centerPoint, radius: radius, rotation: angle)
     }
     
     var rightAnchor : Anchor {
-        return CircleAnchor(quater: .East, center: centerPoint, radius: radius, rotation: angle)
+        return CircleAnchor(quater: .east, center: centerPoint, radius: radius, rotation: angle)
     }
     
     var leftAnchor : Anchor {
-        return CircleAnchor(quater: .West, center: centerPoint, radius: radius, rotation: angle)
+        return CircleAnchor(quater: .west, center: centerPoint, radius: radius, rotation: angle)
     }
     
     var bottomAnchor : Anchor {
-        return CircleAnchor(quater: .South, center: centerPoint, radius: radius, rotation: angle)
+        return CircleAnchor(quater: .south, center: centerPoint, radius: radius, rotation: angle)
     }
     
 }
@@ -99,26 +99,26 @@ extension CircleForm {
 
 private struct CircleAnchor : Anchor {
     enum Quater {
-        case North
-        case East
-        case South
-        case West
+        case north
+        case east
+        case south
+        case west
         
         var angle : Angle {
             switch self {
-            case .North: return Angle(degree: 90)
-            case .East: return Angle(radians: 0)
-            case .South: return Angle(degree: -90)
-            case .West: return  Angle(degree: 180)
+            case .north: return Angle(degree: 90)
+            case .east: return Angle(radians: 0)
+            case .south: return Angle(degree: -90)
+            case .west: return  Angle(degree: 180)
             }
         }
         
         var name : String {
             switch self {
-            case .North: return "North"
-            case .East: return "East"
-            case .South: return "South"
-            case .West: return "West"
+            case .north: return "North"
+            case .east: return "East"
+            case .south: return "South"
+            case .west: return "West"
             }
         }
     }
@@ -139,7 +139,7 @@ private struct CircleAnchor : Anchor {
     }
     
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             angle = rotation.getAngleFor(runtime),
@@ -150,7 +150,7 @@ private struct CircleAnchor : Anchor {
         return c + rotate(Vec2d.XAxis * r, angle: angle + quater.angle)
     }
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         guard let
             oldAngle = rotation.getAngleFor(runtime),
             oldRadius = radius.getLengthFor(runtime) else {
@@ -203,25 +203,25 @@ extension CircleForm : Scalable {
 
 extension CircleForm : Morphable {
     public enum AnchorId : AnchorIdentifier {
-        case Top = 0
-        case Left = 1
-        case Bottom = 2
-        case Right = 3
+        case top = 0
+        case left = 1
+        case bottom = 2
+        case right = 3
     }
     
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorId.Top.rawValue:topAnchor,
-            AnchorId.Left.rawValue:leftAnchor,
-            AnchorId.Right.rawValue:rightAnchor,
-            AnchorId.Bottom.rawValue:bottomAnchor,
+            AnchorId.top.rawValue:topAnchor,
+            AnchorId.left.rawValue:leftAnchor,
+            AnchorId.right.rawValue:rightAnchor,
+            AnchorId.bottom.rawValue:bottomAnchor,
         ]
     }
 }
 
 extension CircleForm : Drawable {
     
-    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
+    public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard
             let c = centerPoint.getPositionFor(runtime),
             let rd = radius.getLengthFor(runtime)
@@ -240,19 +240,19 @@ extension CircleForm : Drawable {
         let bottomLeft = c + Vec2d(x:-r, y: r)
         let bottomRight = c + Vec2d(x:r, y: r)
         
-        return Path(segments: .MoveTo(left),
-            .ArcTo(tangent: topLeft, tangent: top, radius: r),
-            .ArcTo(tangent: topRight, tangent: right, radius: r),
-            .ArcTo(tangent: bottomRight, tangent: bottom, radius: r),
-            .ArcTo(tangent: bottomLeft, tangent: left, radius: r),
-            .Close
+        return Path(segments: .moveTo(left),
+            .arcTo(tangent: topLeft, tangent: top, radius: r),
+            .arcTo(tangent: topRight, tangent: right, radius: r),
+            .arcTo(tangent: bottomRight, tangent: bottom, radius: r),
+            .arcTo(tangent: bottomLeft, tangent: left, radius: r),
+            .close
         )
     }
     
-    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
+    public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
-        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
+        return Shape(area: .pathArea(path), background: .fill(ReformGraphics.Color(r: 128, g: 128, b: 128, a: 128)), stroke: .solid(width: 1, color: ReformGraphics.Color(r:50, g:50, b:50, a: 255)))
 
     }
 }

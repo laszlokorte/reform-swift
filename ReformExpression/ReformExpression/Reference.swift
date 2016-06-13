@@ -7,9 +7,9 @@
 //
 
 public protocol DataSet {
-    func lookUp(id: ReferenceId) -> Value?
+    func lookUp(_ id: ReferenceId) -> Value?
     
-    func getError(id: ReferenceId) -> EvaluationError?
+    func getError(_ id: ReferenceId) -> EvaluationError?
 }
 
 public struct ReferenceId : Hashable {

@@ -12,83 +12,83 @@ import ReformMath
 
 public final class Streightener {
     private enum State {
-        case Disabled
-        case Enabled(inverted: Bool)
+        case disabled
+        case enabled(inverted: Bool)
     }
 
     
-    private var state : State = .Disabled
+    private var state : State = .disabled
     
     public init() {}
     
     func enable() {
-        if case .Disabled = state  {
-            state = .Enabled(inverted: false)
+        if case .disabled = state  {
+            state = .enabled(inverted: false)
         }
     }
     
     func disable() {
-        state = .Disabled
+        state = .disabled
     }
     
     func invert() {
-        if case .Enabled(let inverted) = state {
-            state = .Enabled(inverted: !inverted)
+        if case .enabled(let inverted) = state {
+            state = .enabled(inverted: !inverted)
         }
     }
     
     func reset() {
-        if case .Enabled = state {
-            state = .Enabled(inverted: false)
+        if case .enabled = state {
+            state = .enabled(inverted: false)
         }
     }
     
-    func adjust(delta: Vec2d, step: Angle) -> Vec2d {
+    func adjust(_ delta: Vec2d, step: Angle) -> Vec2d {
         switch state {
-        case .Enabled:
+        case .enabled:
             return project(delta, onto: rotate(Vec2d.XAxis, angle: stepped(angle(delta) + Angle(degree: 45), size: step) - Angle(degree: 45)))
-        case .Disabled:
+        case .disabled:
             return delta
         }
     }
 
-    func adjust(delta: Vec2d, keepRatioOf: Vec2d) -> Vec2d {
+    func adjust(_ delta: Vec2d, keepRatioOf: Vec2d) -> Vec2d {
         switch state {
-        case .Enabled:
+        case .enabled:
             return project(delta, onto: keepRatioOf)
-        case .Disabled:
+        case .disabled:
             return delta
         }
     }
     
-    func adjust(angle: Angle) -> Angle {
+    func adjust(_ angle: Angle) -> Angle {
         switch state {
-        case .Enabled:
+        case .enabled:
             return stepped(angle, size: Angle(percent: 1))
-        case .Disabled:
+        case .disabled:
             return angle
         }
     }
     
-    func directionFor(delta: Vec2d, ratio: (Int,Int)? = nil) -> protocol<RuntimeDirection, Labeled> {
+    func directionFor(_ delta: Vec2d, ratio: (Int,Int)? = nil) -> protocol<RuntimeDirection, Labeled> {
         switch state {
-        case .Disabled:
+        case .disabled:
             return FreeDirection()
-        case .Enabled(let inverted):
+        case .enabled(let inverted):
             if let ratio = ratio {
                 return ProportionalDirection(proportion: ratio, large: inverted)
             } else {
-                return (abs(delta.x) > abs(delta.y)) != inverted ? Cartesian.Horizontal : Cartesian.Vertical
+                return (abs(delta.x) > abs(delta.y)) != inverted ? Cartesian.horizontal : Cartesian.vertical
             }
         }
     }
     
-    func axisFor(axis: RuntimeAxis) -> RuntimeAxis {
+    func axisFor(_ axis: RuntimeAxis) -> RuntimeAxis {
         switch state {
-        case .Disabled:
+        case .disabled:
             return axis
-        case .Enabled:
-            return .None
+        case .enabled:
+            return .none
         }
     }
 }

@@ -12,10 +12,10 @@ import ReformGraphics
 extension TextForm {
     
     public enum PointId : ExposedPointIdentifier {
-        case Start = 0
-        case End = 1
-        case Bottom = 2
-        case Top = 3
+        case start = 0
+        case end = 1
+        case bottom = 2
+        case top = 3
     }
 }
 
@@ -23,7 +23,7 @@ final public class TextForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
-    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var drawingMode : DrawingMode = DrawingMode.draw
     public var name : String
     
     
@@ -44,7 +44,7 @@ final public class TextForm : Form, Creatable {
         return StaticLength(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         startPoint.setPositionFor(runtime, position: min)
         endPoint.setPositionFor(runtime, position: max)
         offset.setLengthFor(runtime, length: 16)
@@ -53,10 +53,10 @@ final public class TextForm : Form, Creatable {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.Start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
-            PointId.End.rawValue:ExposedPoint(point: endPoint, name: "End"),
-            PointId.Bottom.rawValue:ExposedPoint(point: centerPoint, name: "Bottom"),
-            PointId.Top.rawValue:AnchorPoint(anchor: controlPointAnchor)
+            PointId.start.rawValue:ExposedPoint(point: startPoint, name: "Start"),
+            PointId.end.rawValue:ExposedPoint(point: endPoint, name: "End"),
+            PointId.bottom.rawValue:ExposedPoint(point: centerPoint, name: "Bottom"),
+            PointId.top.rawValue:AnchorPoint(anchor: controlPointAnchor)
         ]
     }
     
@@ -100,16 +100,16 @@ extension TextForm : Scalable {
 extension TextForm : Morphable {
     
     public enum AnchorId : AnchorIdentifier {
-        case Start = 0
-        case End = 1
-        case Top = 2
+        case start = 0
+        case end = 1
+        case top = 2
     }
 
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorId.Start.rawValue:startAnchor,
-            AnchorId.End.rawValue:endAnchor,
-            AnchorId.Top.rawValue:controlPointAnchor,
+            AnchorId.start.rawValue:startAnchor,
+            AnchorId.end.rawValue:endAnchor,
+            AnchorId.top.rawValue:controlPointAnchor,
         ]
     }
     
@@ -128,7 +128,7 @@ extension TextForm : Morphable {
 
 extension TextForm : Drawable {
     
-    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
+    public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard let center = centerPoint.getPositionFor(runtime),
             end = endPoint.getPositionFor(runtime),
             start = startPoint.getPositionFor(runtime),
@@ -138,16 +138,16 @@ extension TextForm : Drawable {
 
         let up = ctrl - center
 
-        return Path(segments: .MoveTo(start), .LineTo(end), .LineTo(end+up), .LineTo(start+up), .Close)
+        return Path(segments: .moveTo(start), .lineTo(end), .lineTo(end+up), .lineTo(start+up), .close)
     }
     
-    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
+    public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         guard let start = startPoint.getPositionFor(runtime),
                 end = endPoint.getPositionFor(runtime),
                 size = offset.getLengthFor(runtime) else {
             return nil
         }
 
-        return Shape(area: .TextArea(start, end, alignment: .Center, text: "Test", size: size), background: .Fill(Color(r: 40, g: 40, b: 40, a: 125)), stroke: .None)
+        return Shape(area: .textArea(start, end, alignment: .center, text: "Test", size: size), background: .fill(ReformGraphics.Color(r: 40, g: 40, b: 40, a: 125)), stroke: .none)
     }
 }

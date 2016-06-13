@@ -9,7 +9,7 @@
 import ReformMath
 
 
-public struct Modifier : OptionSetType {
+public struct Modifier : OptionSet {
     public let rawValue : Int
     
     public init(rawValue: Int) {
@@ -38,10 +38,10 @@ extension Modifier {
 }
 
 public enum Input {
-    case Move
-    case Press
-    case Release
-    case Cycle
-    case Toggle
-    case ModifierChange
+    case move
+    case press
+    case release
+    case cycle
+    case toggle
+    case modifierChange
 }

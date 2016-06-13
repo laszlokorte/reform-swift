@@ -11,15 +11,15 @@ import ReformMath
 
 extension Paper {
     public enum PointId : ExposedPointIdentifier {
-        case TopLeft = 0
-        case BottomLeft = 1
-        case TopRight = 2
-        case BottomRight = 3
-        case Top = 4
-        case Bottom = 5
-        case Left = 6
-        case Right = 7
-        case Center = 8
+        case topLeft = 0
+        case bottomLeft = 1
+        case topRight = 2
+        case bottomRight = 3
+        case top = 4
+        case bottom = 5
+        case left = 6
+        case right = 7
+        case center = 8
     }
 }
 
@@ -36,7 +36,7 @@ final public class Paper : Form {
         return StaticLength(formId: identifier, offset: 1)
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         let delta = max - min
         width.setLengthFor(runtime, length: delta.x)
         height.setLengthFor(runtime, length: delta.y)
@@ -44,17 +44,17 @@ final public class Paper : Form {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.Center.rawValue:center,
+            PointId.center.rawValue:center,
             
-            PointId.Top.rawValue:top,
-            PointId.Left.rawValue:left,
-            PointId.Right.rawValue:right,
-            PointId.Bottom.rawValue:bottom,
+            PointId.top.rawValue:top,
+            PointId.left.rawValue:left,
+            PointId.right.rawValue:right,
+            PointId.bottom.rawValue:bottom,
             
-            PointId.TopLeft.rawValue:topLeft,
-            PointId.TopRight.rawValue:topRight,
-            PointId.BottomLeft.rawValue:bottomLeft,
-            PointId.BottomRight.rawValue:bottomRight,
+            PointId.topLeft.rawValue:topLeft,
+            PointId.topRight.rawValue:topRight,
+            PointId.bottomLeft.rawValue:bottomLeft,
+            PointId.bottomRight.rawValue:bottomRight,
         ]
     }
     
@@ -72,33 +72,33 @@ final public class Paper : Form {
 
 extension Paper {
     public var top : LabeledPoint {
-        return PaperPoint(side: .Top, width: width, height: height)
+        return PaperPoint(side: .top, width: width, height: height)
     }
     public var left : LabeledPoint {
-        return PaperPoint(side: .Left, width: width, height: height)
+        return PaperPoint(side: .left, width: width, height: height)
     }
     public var right : LabeledPoint {
-        return PaperPoint(side: .Right, width: width, height: height)
+        return PaperPoint(side: .right, width: width, height: height)
     }
     public var bottom : LabeledPoint {
-        return PaperPoint(side: .Bottom, width: width, height: height)
+        return PaperPoint(side: .bottom, width: width, height: height)
     }
     
     
     public var topLeft : LabeledPoint {
-        return PaperPoint(side: .TopLeft, width: width, height: height)
+        return PaperPoint(side: .topLeft, width: width, height: height)
     }
     public var bottomLeft : LabeledPoint {
-        return PaperPoint(side: .BottomLeft, width: width, height: height)
+        return PaperPoint(side: .bottomLeft, width: width, height: height)
     }
     public var topRight : LabeledPoint {
-        return PaperPoint(side: .TopRight, width: width, height: height)
+        return PaperPoint(side: .topRight, width: width, height: height)
     }
     public var bottomRight : LabeledPoint {
-        return PaperPoint(side: .BottomRight, width: width, height: height)
+        return PaperPoint(side: .bottomRight, width: width, height: height)
     }
     public var center : LabeledPoint {
-        return PaperPoint(side: .Center, width: width, height: height)
+        return PaperPoint(side: .center, width: width, height: height)
     }
 }
 
@@ -106,37 +106,37 @@ extension Paper.PointId {
     
     var x : Double {
         switch self {
-        case Left, TopLeft, BottomLeft:
+        case left, topLeft, bottomLeft:
             return 0
-        case Right, TopRight, BottomRight:
+        case right, topRight, bottomRight:
             return 1
-        case Top, Bottom, Center:
+        case top, bottom, center:
             return  0.5
         }
     }
     
     var y : Double {
         switch self {
-        case Top, TopLeft, TopRight:
+        case top, topLeft, topRight:
             return 0
-        case Bottom, BottomLeft, BottomRight:
+        case bottom, bottomLeft, bottomRight:
             return 1
-        case Left, Right, Center:
+        case left, right, center:
             return 0.5
         }
     }
     
     var name : String {
         switch self {
-        case .Top: return "Top"
-        case .Right: return "Right"
-        case .Left: return "Left"
-        case .Bottom: return "Bottom"
-        case .TopLeft: return "Top Left"
-        case .TopRight: return "Top Right"
-        case .BottomLeft: return "Bottom Left"
-        case .BottomRight: return "Bottom Right"
-        case .Center: return "Center"
+        case .top: return "Top"
+        case .right: return "Right"
+        case .left: return "Left"
+        case .bottom: return "Bottom"
+        case .topLeft: return "Top Left"
+        case .topRight: return "Top Right"
+        case .bottomLeft: return "Bottom Left"
+        case .bottomRight: return "Bottom Right"
+        case .center: return "Center"
         }
     }
 }
@@ -152,7 +152,7 @@ struct PaperPoint : RuntimePoint, Labeled {
         self.height = height
     }
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             w = width.getLengthFor(runtime),
             h = height.getLengthFor(runtime) else {
@@ -160,7 +160,7 @@ struct PaperPoint : RuntimePoint, Labeled {
         }
         return Vec2d(x: side.x * w, y:side.y * h)
     }
-    func getDescription(stringifier: Stringifier) -> String {
+    func getDescription(_ stringifier: Stringifier) -> String {
         return "Canvas' \(side.name)"
     }
 }

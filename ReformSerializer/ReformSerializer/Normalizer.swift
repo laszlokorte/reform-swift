@@ -6,22 +6,22 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public enum InitialisationError : ErrorType {
-    case Unknown
+public enum InitialisationError : ErrorProtocol {
+    case unknown
 }
 
-public enum NormalizationError : ErrorType {
-    case NotNormalizable(Any.Type)
+public enum NormalizationError : ErrorProtocol {
+    case notNormalizable(Any.Type)
 }
 
 public enum NormalizedValue {
-    case Null
-    case Bool(Swift.Bool)
-    case String(Swift.String)
-    case Int(Swift.Int)
-    case Double(Swift.Double)
-    case Array([NormalizedValue])
-    case Dictionary([Swift.String:NormalizedValue])
+    case null
+    case bool(Swift.Bool)
+    case string(Swift.String)
+    case int(Swift.Int)
+    case double(Swift.Double)
+    case array([NormalizedValue])
+    case dictionary([Swift.String:NormalizedValue])
 }
 
 public protocol Normalizable {

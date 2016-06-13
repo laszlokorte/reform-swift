@@ -14,17 +14,17 @@ import ReformStage
 public final class PointGrabber {
     
     private enum State {
-        case Idle
-        case Searching(FormIdentifier, SearchingResult)
+        case idle
+        case searching(FormIdentifier, SearchingResult)
     }
     
     private enum SearchingResult {
-        case None
-        case Found(position: Vec2d, point: EntityPoint, cycle: Int)
+        case none
+        case found(position: Vec2d, point: EntityPoint, cycle: Int)
     }
 
     
-    private var state : State = .Idle
+    private var state : State = .idle
     let grabUI : GrabUI
     let entityFinder : EntityFinder
     let pointFinder : PointFinder
@@ -40,45 +40,45 @@ public final class PointGrabber {
     }
     
     func refresh() {
-        if case .Searching(let formId, let result) = state,
+        if case .searching(let formId, let result) = state,
             let entity = entityFinder.getEntity(formId) {
             
             let allPoints = entity.points
             
-            if case .Found(_, let current, _) = result,
+            if case .found(_, let current, _) = result,
                 let updated = pointFinder.getUpdatedPoint(current){
-                grabUI.state = .Active(updated, allPoints)
+                grabUI.state = .active(updated, allPoints)
             } else {
-                grabUI.state = .Show(allPoints)
+                grabUI.state = .show(allPoints)
             }
             
         } else {
-            grabUI.state = .Hide
+            grabUI.state = .hide
         }
     }
     
-    func enable(formId: FormIdentifier) {
-        if case .Searching(formId, _) = state {
+    func enable(_ formId: FormIdentifier) {
+        if case .searching(formId, _) = state {
         
         } else {
-            state = .Searching(formId, .None)
+            state = .searching(formId, .none)
         }
         refresh()
     }
     
     func disable() {
-        state = .Idle
+        state = .idle
         refresh()
     }
     
-    func searchAt(position: Vec2d) {
-        if case .Searching(let formId, let oldResult) = state {
+    func searchAt(_ position: Vec2d) {
+        if case .searching(let formId, let oldResult) = state {
             
             switch oldResult {
-            case .Found(_, _, let cycle):
-                state = .Searching(formId, resultFor(formId, position: position, cycle: cycle))
-            case .None:
-                state = .Searching(formId, resultFor(formId, position: position, cycle: 0))
+            case .found(_, _, let cycle):
+                state = .searching(formId, resultFor(formId, position: position, cycle: cycle))
+            case .none:
+                state = .searching(formId, resultFor(formId, position: position, cycle: 0))
             }
         }
         
@@ -86,30 +86,30 @@ public final class PointGrabber {
     }
     
     func cycle() {
-        if case .Searching(let formId, .Found(let pos, _, let cycle)) = state {
+        if case .searching(let formId, .found(let pos, _, let cycle)) = state {
             
-            state =  .Searching(formId, resultFor(formId, position: pos, cycle: cycle+1))
+            state =  .searching(formId, resultFor(formId, position: pos, cycle: cycle+1))
         }
         
     }
     
-    private func resultFor(formId : FormIdentifier, position: Vec2d, cycle: Int) -> SearchingResult {
+    private func resultFor(_ formId : FormIdentifier, position: Vec2d, cycle: Int) -> SearchingResult {
         
         guard let entity = entityFinder.getEntity(formId) else {
-            return .None
+            return .none
         }
         let points = entity.points.filter({distance(point: $0.position,point: position) <= radius / camera.zoom})
         
         if points.count > 0 {
-            return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
+            return .found(position: position, point: points[cycle%points.count], cycle: cycle)
         } else {
-            return .None
+            return .none
         }
         
     }
     
     var current : EntityPoint? {
-        if case .Searching(_, .Found(_, let point, _)) = state {
+        if case .searching(_, .found(_, let point, _)) = state {
             return point
         } else {
             return nil

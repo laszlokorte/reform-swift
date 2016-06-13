@@ -16,7 +16,7 @@ struct ProxyOutline : Outline {
         self.formReference = formReference
     }
 
-    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         guard let form = formReference.getFormFor(runtime) else {
             return nil
         }
@@ -55,7 +55,7 @@ struct ProxyOutline : Outline {
         return aabb.min + Vec2d(x:x, y:y)
     }
 
-    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         guard let form = formReference.getFormFor(runtime) else {
             return nil
         }
@@ -67,7 +67,7 @@ struct ProxyOutline : Outline {
         return aabb.size.x * 2 + aabb.size.y * 2
     }
 
-    func getSegmentsFor<R:Runtime>(runtime: R) -> [Segment] {
+    func getSegmentsFor<R:Runtime>(_ runtime: R) -> [Segment] {
         guard let form = formReference.getFormFor(runtime) else {
             return []
         }
@@ -77,14 +77,14 @@ struct ProxyOutline : Outline {
         }
 
         return [
-            .Line(LineSegment2d(from: aabb.min, to: aabb.xMinYMax)),
-            .Line(LineSegment2d(from: aabb.xMinYMax, to: aabb.max)),
-            .Line(LineSegment2d(from: aabb.max, to: aabb.xMaxYMin)),
-            .Line(LineSegment2d(from: aabb.xMaxYMin, to: aabb.min)),
+            .line(LineSegment2d(from: aabb.min, to: aabb.xMinYMax)),
+            .line(LineSegment2d(from: aabb.xMinYMax, to: aabb.max)),
+            .line(LineSegment2d(from: aabb.max, to: aabb.xMaxYMin)),
+            .line(LineSegment2d(from: aabb.xMaxYMin, to: aabb.min)),
         ]
     }
 
-    func getAABBFor<R:Runtime>(runtime: R) -> AABB2d? {
+    func getAABBFor<R:Runtime>(_ runtime: R) -> AABB2d? {
         guard let form = formReference.getFormFor(runtime) else {
             return nil
         }

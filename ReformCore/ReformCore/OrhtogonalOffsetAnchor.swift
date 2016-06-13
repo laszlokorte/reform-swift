@@ -22,7 +22,7 @@ struct OrthogonalOffsetAnchor : Anchor {
         self.name = name
     }
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             a = pointA.getPositionFor(runtime),
             b = pointB.getPositionFor(runtime),
@@ -35,7 +35,7 @@ struct OrthogonalOffsetAnchor : Anchor {
         return a + pointDelta/2 - (normalize(orthogonal(pointDelta)) ?? Vec2d(x:0,y:-1)) * o
     }
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         if let a = pointA.getPositionFor(runtime),
                 b = pointB.getPositionFor(runtime),
                 oldOffset = offset.getLengthFor(runtime) {

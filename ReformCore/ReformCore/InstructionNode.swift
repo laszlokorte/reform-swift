@@ -15,7 +15,7 @@ public final class InstructionNode {
     }
     private var depth : Int {
         didSet {
-            if case .Group(_, let children) = content {
+            if case .group(_, let children) = content {
                 for c in children {
                     c.depth = depth + 1
                 }
@@ -25,19 +25,19 @@ public final class InstructionNode {
     
     public init(parent: InstructionNode? = nil) {
         self.parent = parent
-        self.content = .Null
+        self.content = .null
         self.depth = (parent?.depth ?? -1) + 1
     }
     
     public init(parent: InstructionNode? = nil, instruction: Instruction) {
         self.parent = parent
-        self.content = .Single(instruction)
+        self.content = .single(instruction)
         self.depth = (parent?.depth ?? -1) + 1
     }
     
     public init(parent: InstructionNode? = nil, group: GroupInstruction, children: [InstructionNode] = []) {
         self.parent = parent
-        self.content = .Group(group, children)
+        self.content = .group(group, children)
         self.depth = (parent?.depth ?? -1) + 1
     }
 
@@ -46,7 +46,7 @@ public final class InstructionNode {
         self.content = content
         self.depth = (parent?.depth ?? -1) + 1
 
-        if case .Group(_, let children) = content {
+        if case .group(_, let children) = content {
             for c in children {
                 c.parent = self
             }
@@ -57,7 +57,7 @@ public final class InstructionNode {
 
 extension InstructionNode {
     public var isGroup : Bool {
-        if case .Group = content {
+        if case .group = content {
             return true
         } else {
             return false
@@ -65,7 +65,7 @@ extension InstructionNode {
     }
 
     public var isEmpty : Bool {
-        if case .Null = content {
+        if case .null = content {
             return true
         } else {
             return false
@@ -73,7 +73,7 @@ extension InstructionNode {
     }
 
     public var target : FormIdentifier? {
-        guard case .Single(let instruction) = content else {
+        guard case .single(let instruction) = content else {
             return nil
         }
 
@@ -87,11 +87,11 @@ extension InstructionNode {
             return nil
         }
         
-        guard case .Group(_, let children) = parent.content else {
+        guard case .group(_, let children) = parent.content else {
             return nil
         }
         
-        guard let index = children.indexOf({$0===self}) where index > 0 else {
+        guard let index = children.index(where: {$0===self}) where index > 0 else {
             return nil
         }
         
@@ -102,12 +102,12 @@ extension InstructionNode {
 extension InstructionNode {
     
     public func append(child node: InstructionNode) -> Bool {
-        guard case .Group(let group, var children) = content else {
+        guard case .group(let group, var children) = content else {
             return false
         }
         children.append(node)
         node.parent = self
-        content = .Group(group, children)
+        content = .group(group, children)
         return true
         
     }
@@ -117,16 +117,16 @@ extension InstructionNode {
             return false
         }
 
-        guard case .Group(let group, var children) = parent.content else {
+        guard case .group(let group, var children) = parent.content else {
             return false
         }
 
-        guard let index = children.indexOf({$0===self}) else {
+        guard let index = children.index(where: {$0===self}) else {
             return false
         }
         node.parent = parent
-        children.insert(node, atIndex: index+1)
-        parent.content = .Group(group, children)
+        children.insert(node, at: index+1)
+        parent.content = .group(group, children)
         return true
 
     }
@@ -136,25 +136,25 @@ extension InstructionNode {
             return false
         }
 
-        guard case .Group(let group, var children) = parent.content else {
+        guard case .group(let group, var children) = parent.content else {
             return false
         }
 
-        guard let index = children.indexOf({$0===self}) else {
+        guard let index = children.index(where: {$0===self}) else {
             return false
         }
         node.parent = parent
-        children.insert(node, atIndex: index)
-        parent.content = .Group(group, children)
+        children.insert(node, at: index)
+        parent.content = .group(group, children)
         return true
 
     }
 }
 
 extension InstructionNode {
-    public func mergedWith<I where I:Instruction>(instruction: I, force: Bool) -> InstructionNode? {
+    public func mergedWith<I where I:Instruction>(_ instruction: I, force: Bool) -> InstructionNode? {
 
-        guard case .Single(let base) = content else {
+        guard case .single(let base) = content else {
             return nil
         }
 
@@ -174,12 +174,12 @@ extension InstructionNode {
             return false
         }
         
-        guard case .Group(let node, let children) = parent.content else {
+        guard case .group(let node, let children) = parent.content else {
                 return false
         }
         
         self.parent = nil
-        parent.content = .Group(node, children.filter({ $0 !== self }))
+        parent.content = .group(node, children.filter({ $0 !== self }))
         
         return true
     }
@@ -187,25 +187,25 @@ extension InstructionNode {
 
 extension InstructionNode {
 
-    public func replaceWith(instruction: Instruction) {
-        content = InstructionContent.Single(instruction)
+    public func replaceWith(_ instruction: Instruction) {
+        content = InstructionContent.single(instruction)
     }
 
-    public func replaceWith(instruction: GroupInstruction) {
+    public func replaceWith(_ instruction: GroupInstruction) {
         let children : [InstructionNode]
 
-        if case .Group(_, let chil) = self.content {
+        if case .group(_, let chil) = self.content {
             children = chil
         } else {
             children = [InstructionNode(parent: self)]
         }
 
-        content = InstructionContent.Group(instruction, children)
+        content = InstructionContent.group(instruction, children)
     }
 
-    public func replaceWith(node: InstructionNode) {
-        if case .Single(let instruction) = node.content {
-            content = InstructionContent.Single(instruction)
+    public func replaceWith(_ node: InstructionNode) {
+        if case .single(let instruction) = node.content {
+            content = InstructionContent.single(instruction)
         }
     }
 }
@@ -213,23 +213,23 @@ extension InstructionNode {
 extension InstructionNode {
 
     public func unwrap() -> Bool {
-        guard case .Group(_, let children) = self.content else {
+        guard case .group(_, let children) = self.content else {
             return false
         }
 
-        for c in children.suffixFrom(1) {
+        for c in children.suffix(from: 1) {
             self.prepend(sibling: c)
         }
 
         return self.removeFromParent()
     }
 
-    public func isDeeperThan(depth: Int) -> Bool {
+    public func isDeeperThan(_ depth: Int) -> Bool {
         if self.depth > depth {
             return true
         }
 
-        if case .Group(_, let children) = self.content {
+        if case .group(_, let children) = self.content {
             for c in children {
                 if c.isDeeperThan(depth) {
                     return true
@@ -240,15 +240,15 @@ extension InstructionNode {
         return false
     }
 
-    public func wrapIn(instruction: GroupInstruction) {
-        if case .Null = content {
+    public func wrapIn(_ instruction: GroupInstruction) {
+        if case .null = content {
             return
         }
         if isDeeperThan(2) {
             return
         }
 
-        content = .Group(instruction, [
+        content = .group(instruction, [
             InstructionNode(parent: self),
             InstructionNode(parent: self, content: content)]
         )
@@ -256,7 +256,7 @@ extension InstructionNode {
 }
 extension InstructionNode {
 
-    public func hasAncestor(node : InstructionNode) -> Bool {
+    public func hasAncestor(_ node : InstructionNode) -> Bool {
         guard let parent = self.parent else {
             return false
         }
@@ -269,11 +269,11 @@ extension InstructionNode {
 
     public var isDegenerated : Bool {
         switch content {
-        case .Null:
+        case .null:
             return true
-        case .Group(let instruction, let children):
+        case .group(let instruction, let children):
             return children.isEmpty || instruction.isDegenerated
-        case .Single(let instruction):
+        case .single(let instruction):
             return instruction.isDegenerated
         }
     }
@@ -281,17 +281,17 @@ extension InstructionNode {
 }
 
 extension InstructionNode : Evaluatable {
-    public func evaluate<T:Runtime where T.Ev == InstructionNode>(runtime: T) {
+    public func evaluate<T:Runtime where T.Ev == InstructionNode>(_ runtime: T) {
         switch content {
-        case .Null:
+        case .null:
             runtime.eval(self) { _ in
 
             }
-        case .Single(let instruction):
+        case .single(let instruction):
             runtime.eval(self) { r in
                 instruction.evaluate(r)
             }
-        case .Group(let group, let children):
+        case .group(let group, let children):
             runtime.eval(self) { r in
                 group.evaluate(r, withChildren: children)
             }
@@ -301,14 +301,14 @@ extension InstructionNode : Evaluatable {
 }
 
 extension InstructionNode : Analyzable {
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
         switch content {
-        case .Null:
+        case .null:
             analyzer.publish(self, label: "Null")
-        case .Single(let instruction):
+        case .single(let instruction):
             analyzer.publish(self, label: instruction.getDescription(analyzer.stringifier))
             instruction.analyze(analyzer)
-        case .Group(let group, let children):
+        case .group(let group, let children):
             analyzer.publish(self, label: group.getDescription(analyzer.stringifier)) {
                 group.analyze(analyzer)
                 for c in children {
@@ -322,11 +322,11 @@ extension InstructionNode : Analyzable {
 extension InstructionNode {
     public var instruction : Any? {
         switch content {
-        case .Null:
+        case .null:
             return nil
-        case .Single(let instruction):
+        case .single(let instruction):
             return instruction
-        case .Group(let group, _):
+        case .group(let group, _):
             return group
         }
     }
@@ -334,29 +334,29 @@ extension InstructionNode {
 
 
 public enum InstructionContent {
-    case Null
-    case Single(Instruction)
-    case Group(GroupInstruction, [InstructionNode])
+    case null
+    case single(Instruction)
+    case group(GroupInstruction, [InstructionNode])
 }
 
 public protocol Instruction : Labeled {
-    func evaluate<T:Runtime>(runtime: T)
+    func evaluate<T:Runtime>(_ runtime: T)
     
-    func analyze<T:Analyzer>(analyzer: T)
+    func analyze<T:Analyzer>(_ analyzer: T)
     
     var target : FormIdentifier? { get }
 
     var isDegenerated : Bool { get }
 
-    func mergeWith(other: Instruction, force: Bool) -> Instruction?
+    func mergeWith(_ other: Instruction, force: Bool) -> Instruction?
 }
 
 
 public protocol GroupInstruction : Labeled {
     
-    func evaluate<T:Runtime where T.Ev==InstructionNode>(runtime: T, withChildren: [InstructionNode])
+    func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren: [InstructionNode])
     
-    func analyze<T:Analyzer>(analyzer: T)
+    func analyze<T:Analyzer>(_ analyzer: T)
 
     var target : FormIdentifier? { get }
 
@@ -364,11 +364,11 @@ public protocol GroupInstruction : Labeled {
 }
 
 public protocol Mergeable {
-    func mergeWith(other: Self, force: Bool) -> Self?
+    func mergeWith(_ other: Self, force: Bool) -> Self?
 }
 
 extension Instruction where Self : Mergeable {
-    public func mergeWith(other: Instruction, force: Bool) -> Instruction? {
+    public func mergeWith(_ other: Instruction, force: Bool) -> Instruction? {
         guard let typed = other as? Self else {
             return nil
         }

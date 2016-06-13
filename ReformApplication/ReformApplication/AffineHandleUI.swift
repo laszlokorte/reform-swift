@@ -15,34 +15,34 @@ struct AffineHandleUIRenderer : Renderer {
     let affineHandleUI : AffineHandleUI
     let camera: Camera
 
-    func renderInContext(context: CGContext) {
+    func renderInContext(_ context: CGContext) {
         let inverse = CGFloat(1 / camera.zoom)
 
-        CGContextSetRGBFillColor(context, 0.1, 0.9, 0.6, 1)
-        CGContextSetRGBStrokeColor(context, 0, 0.6, 0.4, 1)
-        CGContextSetLineWidth(context, 1 * inverse)
+        context.setFillColor(red: 0.1, green: 0.9, blue: 0.6, alpha: 1)
+        context.setStrokeColor(red: 0, green: 0.6, blue: 0.4, alpha: 1)
+        context.setLineWidth(1 * inverse)
         let dotSize : Double = 8 / camera.zoom
 
 
         switch affineHandleUI.state {
-        case .Hide:
+        case .hide:
             return
-        case .Show(let points):
+        case .show(let points):
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
 
-            CGContextDrawPath(context, .FillStroke)
-        case .Active(let active, let points):
+            context.drawPath(using: .fillStroke)
+        case .active(let active, let points):
             for p in points {
                 drawDotAt(context, position: p.position, size: dotSize)
             }
-            CGContextDrawPath(context, .FillStroke)
+            context.drawPath(using: .fillStroke)
 
 
             drawDotAt(context, position: active.position, size: dotSize*1.5)
 
-            CGContextDrawPath(context, .FillStroke)
+            context.drawPath(using: .fillStroke)
         }
     }
 }

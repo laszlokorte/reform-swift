@@ -7,5 +7,5 @@
 //
 
 protocol Encoder {
-    func encode(value: NormalizedValue) -> String
+    func encode(_ value: NormalizedValue) -> String
 }

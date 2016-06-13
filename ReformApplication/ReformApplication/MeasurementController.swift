@@ -14,7 +14,7 @@ final class MeasurementController : NSViewController {
 }
 
 extension MeasurementController : NSTableViewDataSource {
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return 2
     }
 }

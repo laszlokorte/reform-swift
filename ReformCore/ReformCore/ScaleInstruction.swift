@@ -22,29 +22,29 @@ public struct ScaleInstruction : Instruction {
     public let axis : RuntimeAxis
     public let fixPoint : PointType
     
-    public init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType, axis: RuntimeAxis = .None) {
+    public init(formId: FormIdentifier, factor: FactorType, fixPoint: PointType, axis: RuntimeAxis = .none) {
         self.formId = formId
         self.factor = factor
         self.fixPoint = fixPoint
         self.axis = axis
     }
     
-    public func evaluate<T:Runtime>(runtime: T) {
+    public func evaluate<T:Runtime>(_ runtime: T) {
         guard let form = runtime.get(formId) as? Scalable else {
-            runtime.reportError(.UnknownForm)
+            runtime.reportError(.unknownForm)
             return
         }
         guard let fix : Vec2d = fixPoint.getPositionFor(runtime) else {
-            runtime.reportError(.InvalidFixPoint)
+            runtime.reportError(.invalidFixPoint)
             return
         }
         guard let f : Double = factor.getFactorFor(runtime) else {
-            runtime.reportError(.InvalidFactor)
+            runtime.reportError(.invalidFactor)
             return
         }
 
         guard let a = axis.getVectorFor(runtime) else {
-            runtime.reportError(.InvalidAxis)
+            runtime.reportError(.invalidAxis)
             return
         }
         
@@ -52,13 +52,13 @@ public struct ScaleInstruction : Instruction {
     }
     
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let formName = stringifier.labelFor(formId) ?? "???"
         let targetName : String
         switch axis {
-        case .None:
+        case .none:
             targetName = formName
-        case .Named(let axisName, _, _):
+        case .named(let axisName, _, _):
             targetName = "\(formName)'s \(axisName)"
         }
         let factorLabel = factor.getDescription(stringifier)
@@ -66,7 +66,7 @@ public struct ScaleInstruction : Instruction {
         return  "Scale \(targetName) around \(fixPoint.getDescription(stringifier)) by \(factorLabel)"
     }
     
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
     }
 
     public var isDegenerated : Bool {
@@ -76,7 +76,7 @@ public struct ScaleInstruction : Instruction {
 }
 
 extension ScaleInstruction : Mergeable {
-    public func mergeWith(other: ScaleInstruction, force: Bool) -> ScaleInstruction? {
+    public func mergeWith(_ other: ScaleInstruction, force: Bool) -> ScaleInstruction? {
         guard formId == other.formId else {
             return nil
         }

@@ -17,7 +17,7 @@ struct BasicPointRotator : Rotator {
     }
     
     
-    func rotate<R:Runtime>(runtime: R, angle: Angle, fix: Vec2d) {
+    func rotate<R:Runtime>(_ runtime: R, angle: Angle, fix: Vec2d) {
         for point in points {
             if let oldPos = point.getPositionFor(runtime) {
                 let delta = oldPos - fix

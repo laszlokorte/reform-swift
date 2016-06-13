@@ -21,12 +21,12 @@ final class RuntimeStack {
     func popFrame() {
         let top = frames.removeLast()
         
-        for id in top.forms.reverse() {
+        for id in top.forms.reversed() {
             remove(id)
         }
     }
     
-    func declare(form : Form) {
+    func declare(_ form : Form) {
         if let topFrame = frames.last {
             topFrame.forms.append(form.identifier)
             formMap[form.identifier] = form
@@ -43,7 +43,7 @@ final class RuntimeStack {
         }
     }
     
-    func getData(id: FormIdentifier, offset: Int) -> UInt64? {
+    func getData(_ id: FormIdentifier, offset: Int) -> UInt64? {
         guard let o = offsets[id] where o + offset < dataSize else {
             return nil
         }
@@ -51,7 +51,7 @@ final class RuntimeStack {
         return data[o+offset]
     }
     
-    func setData(id: FormIdentifier, offset: Int, newValue: UInt64){
+    func setData(_ id: FormIdentifier, offset: Int, newValue: UInt64){
         if let o = offsets[id]
         where o + offset < dataSize {
             data[o+offset] = newValue
@@ -59,22 +59,22 @@ final class RuntimeStack {
         }
     }
     
-    func getForm(id: FormIdentifier) -> Form? {
+    func getForm(_ id: FormIdentifier) -> Form? {
         return formMap[id]
     }
     
     func clear() {
-        frames.removeAll(keepCapacity: true)
-        data.removeAll(keepCapacity: true)
+        frames.removeAll(keepingCapacity: true)
+        data.removeAll(keepingCapacity: true)
         dataSize = 0
-        formMap.removeAll(keepCapacity: true)
-        forms.removeAll(keepCapacity: true)
-        offsets.removeAll(keepCapacity: true)
+        formMap.removeAll(keepingCapacity: true)
+        forms.removeAll(keepingCapacity: true)
+        offsets.removeAll(keepingCapacity: true)
     }
     
-    private func remove(id: FormIdentifier) {
-        if let form = formMap.removeValueForKey(id) {
-            let offset = offsets.removeValueForKey(id)!
+    private func remove(_ id: FormIdentifier) {
+        if let form = formMap.removeValue(forKey: id) {
+            let offset = offsets.removeValue(forKey: id)!
             let size = form.dynamicType.stackSize
             for i in 0..<size
             {

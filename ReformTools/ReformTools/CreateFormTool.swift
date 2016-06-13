@@ -14,16 +14,16 @@ public final class CreateFormTool : Tool {
     
     enum State
     {
-        case Idle
-        case Started(startPoint: SnapPoint, form: protocol<Form, Creatable>, target: Target)
-        case Delegating
+        case idle
+        case started(startPoint: SnapPoint, form: protocol<ReformCore.Form, Creatable>, target: Target)
+        case delegating
     }
     
-    var state : State = .Idle
+    var state : State = .idle
     
     var snapType : PointType = [.Form, .Intersection]
     
-    let formType : protocol<Form, Creatable>.Type
+    let formType : protocol<ReformCore.Form, Creatable>.Type
     
     let selection : FormSelection
     
@@ -42,7 +42,7 @@ public final class CreateFormTool : Tool {
     
     var idSequence : IdentifierSequence<FormIdentifier>
     
-    public init(formType : protocol<Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool, autoCenter : Bool = false, angleStep: Angle = Angle(degree: 45), ratio : (Int, Int)? = nil) {
+    public init(formType : protocol<ReformCore.Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool, autoCenter : Bool = false, angleStep: Angle = Angle(degree: 45), ratio : (Int, Int)? = nil) {
         self.formType = formType
         self.idSequence = idSequence
         self.baseName = baseName
@@ -64,8 +64,8 @@ public final class CreateFormTool : Tool {
     
     public func setUp() {
         selectionTool.setUp()
-        state = .Idle
-        pointSnapper.enable(.Any, pointType: snapType)
+        state = .idle
+        pointSnapper.enable(.any, pointType: snapType)
         pointGrabber.disable()
     }
     
@@ -74,7 +74,7 @@ public final class CreateFormTool : Tool {
         pointSnapper.disable()
         pointGrabber.disable()
         selectionTool.tearDown()
-        state = .Idle
+        state = .idle
     }
     
     public func refresh() {
@@ -89,23 +89,23 @@ public final class CreateFormTool : Tool {
     
     public func cancel() {
         switch self.state {
-        case .Delegating, .Idle:
-            state = .Idle
-        case .Started:
+        case .delegating, .idle:
+            state = .idle
+        case .started:
             instructionCreator.cancel()
             pointGrabber.disable()
                         
-            state = .Idle
+            state = .idle
         }
         
         selectionTool.cancel()
     }
     
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? (modifier.contains(.Free) ? [.Grid] : [.Glomp]) :
             modifier.contains(.Free) ? [.None] : [.Form, .Intersection]
         
-        aligner.setMode(modifier.isAlignOption != self.autoCenter ? .Centered : .Aligned)
+        aligner.setMode(modifier.isAlignOption != self.autoCenter ? .centered : .aligned)
         if modifier.isStreight {
             streightener.enable()
         } else {
@@ -113,62 +113,62 @@ public final class CreateFormTool : Tool {
         }
         
         switch state {
-        case .Delegating:
+        case .delegating:
             selectionTool.process(input, atPosition: pos,  withModifier: modifier)
             switch input {
-            case .ModifierChange:
-                pointSnapper.enable(.Any, pointType: snapType)
-            case .Release:
-                state = .Idle
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle, .Toggle, .Move, .Press:
+            case .modifierChange:
+                pointSnapper.enable(.any, pointType: snapType)
+            case .release:
+                state = .idle
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle, .toggle, .move, .press:
                 break
             }
-        case .Started(let startPoint, let form, _):
+        case .started(let startPoint, let form, _):
             switch input {
-            case .ModifierChange:
+            case .modifierChange:
                 if let formId = self.instructionCreator.target {
-                    pointSnapper.enable(.Except(.Form(formId)), pointType: snapType)
+                    pointSnapper.enable(.except(.form(formId)), pointType: snapType)
                 }
                 fallthrough
-            case .Move:
+            case .move:
                 pointSnapper.searchAt(pos)
                 
                 if pointSnapper.current == nil {
                     streightener.reset()
                 }
                 
-                state = .Started(
+                state = .started(
                     startPoint: startPoint,
                     form: form,
                     target: pointSnapper.getTarget(pos)
                 )
-            case .Release:
+            case .release:
                 instructionCreator.commit()
-                state = .Idle
-                pointSnapper.enable(.Any, pointType: snapType)
-                process(.Move, atPosition: pos, withModifier: modifier)
+                state = .idle
+                pointSnapper.enable(.any, pointType: snapType)
+                process(.move, atPosition: pos, withModifier: modifier)
                 pointGrabber.disable()
-            case .Cycle:
+            case .cycle:
                 pointSnapper.cycle()
-                state = .Started(
+                state = .started(
                 startPoint: startPoint,
                 form: form,
                 target: pointSnapper.getTarget(pos)
                 )
-            case .Toggle:
+            case .toggle:
                 streightener.invert()
-            case .Press:
+            case .press:
                 break
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .ModifierChange:
-                pointSnapper.enable(.Any, pointType: snapType)
+            case .modifierChange:
+                pointSnapper.enable(.any, pointType: snapType)
                 fallthrough
-            case .Move:
+            case .move:
                 pointSnapper.searchAt(pos)
-            case .Press:
+            case .press:
                 if let startPoint = pointSnapper.current {
                     let form = formType.init(id: idSequence.emitId(), name: self.nameAllocator.alloc(baseName, numbered: true))
                     let destination = RelativeDestination(from: startPoint.runtimePoint, to: startPoint.runtimePoint)
@@ -177,10 +177,10 @@ public final class CreateFormTool : Tool {
                     self.instructionCreator.beginCreation(instruction)
 
                     if let formId = self.instructionCreator.target {
-                        state = .Started(
+                        state = .started(
                             startPoint: startPoint,
                             form: form,
-                            target: .Snap(
+                            target: .snap(
                                 point: startPoint)
                         )
 
@@ -188,17 +188,17 @@ public final class CreateFormTool : Tool {
                         selection.select(formId)
                         selectionTool.indend()
                         pointSnapper.enable(
-                            .Except(.Form(formId)), pointType: snapType)
+                            .except(.form(formId)), pointType: snapType)
                         
                         pointGrabber.enable(formId)
                     }
                 }  else {
-                    state = .Delegating
+                    state = .delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-            case .Cycle:
+            case .cycle:
                 pointSnapper.cycle()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
         }
@@ -207,16 +207,16 @@ public final class CreateFormTool : Tool {
     }
     
     func publish() {
-        if case .Started(let start, let form, let target) = state {
+        if case .started(let start, let form, let target) = state {
             let destination : protocol<RuntimeInitialDestination, Labeled>
             
             switch target {
-            case .Free(let targetPosition):
+            case .free(let targetPosition):
                 let delta = streightener.adjust(targetPosition - start.position, step: self.angleStep)
                 
                 destination = FixSizeDestination(from: start.runtimePoint, delta: delta, alignment: aligner.getAlignment())
                 
-            case .Snap(let snapPoint):
+            case .snap(let snapPoint):
                 destination = RelativeDestination(from: start.runtimePoint, to: snapPoint.runtimePoint, direction: streightener.directionFor(snapPoint.position - start.position, ratio: self.ratio), alignment: aligner.getAlignment())
 
             }

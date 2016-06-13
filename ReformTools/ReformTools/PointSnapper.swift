@@ -12,16 +12,16 @@ import ReformStage
 public final class PointSnapper {
     
     private enum State {
-        case Idle
-        case Searching(FormFilter, PointType, SearchingResult)
+        case idle
+        case searching(FormFilter, PointType, SearchingResult)
     }
     
     private enum SearchingResult {
-        case None
-        case Found(position: Vec2d, point: SnapPoint, cycle: Int)
+        case none
+        case found(position: Vec2d, point: SnapPoint, cycle: Int)
     }
     
-    private var state : State = .Idle
+    private var state : State = .idle
     let snapUI : SnapUI
     let pointFinder : PointFinder
     let camera: Camera
@@ -35,43 +35,43 @@ public final class PointSnapper {
     }
 
     func refresh() {
-        if case .Searching(let filter, let type, let result) = state {
+        if case .searching(let filter, let type, let result) = state {
         
-            let allPoints = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: type, location: .Any))
+            let allPoints = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: type, location: .any))
             
-            if case .Found(_, let current, _) = result {
-                snapUI.state = .Active(current, allPoints)
+            if case .found(_, let current, _) = result {
+                snapUI.state = .active(current, allPoints)
             } else {
-                snapUI.state = .Show(allPoints)
+                snapUI.state = .show(allPoints)
             }
             
         } else {
-            snapUI.state = .Hide
+            snapUI.state = .hide
         }
     }
     
-    func enable(filter: FormFilter, pointType: PointType) {
-        if case .Searching(let oldFilter, let oldType, _) = state where filter==oldFilter && pointType == oldType {
+    func enable(_ filter: FormFilter, pointType: PointType) {
+        if case .searching(let oldFilter, let oldType, _) = state where filter==oldFilter && pointType == oldType {
             
         } else {
-            state = .Searching(filter, pointType, .None)
+            state = .searching(filter, pointType, .none)
         }
         refresh()
     }
     
     func disable() {
-        state = .Idle
+        state = .idle
         refresh()
     }
     
-    func searchAt(position: Vec2d) {
-        if case .Searching(let filter, let type, let oldResult) = state {
+    func searchAt(_ position: Vec2d) {
+        if case .searching(let filter, let type, let oldResult) = state {
             
             switch oldResult {
-            case .Found(_, _, let cycle):
-                state = .Searching(filter, type, resultFor(filter, pointType: type, position: position, cycle: cycle))
-            case .None:
-                state = .Searching(filter, type, resultFor(filter, pointType: type, position: position, cycle: 0))
+            case .found(_, _, let cycle):
+                state = .searching(filter, type, resultFor(filter, pointType: type, position: position, cycle: cycle))
+            case .none:
+                state = .searching(filter, type, resultFor(filter, pointType: type, position: position, cycle: 0))
             }
         }
         
@@ -79,38 +79,38 @@ public final class PointSnapper {
     }
     
     func cycle() {
-        if case .Searching(let filter, let type, .Found(let pos, _, let cycle)) = state {
+        if case .searching(let filter, let type, .found(let pos, _, let cycle)) = state {
             
-            state = .Searching(filter, type, resultFor(filter, pointType: type, position: pos, cycle: cycle+1))
+            state = .searching(filter, type, resultFor(filter, pointType: type, position: pos, cycle: cycle+1))
         }
 
     }
     
-    private func resultFor(filter: FormFilter, pointType: PointType, position: Vec2d, cycle: Int) -> SearchingResult {
+    private func resultFor(_ filter: FormFilter, pointType: PointType, position: Vec2d, cycle: Int) -> SearchingResult {
         
-        let points = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: pointType, location: .Near(position, distance: radius / camera.zoom)))
+        let points = pointFinder.getSnapPoints(PointQuery(filter: filter, pointType: pointType, location: .near(position, distance: radius / camera.zoom)))
         
         if points.count > 0 {
-            return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
+            return .found(position: position, point: points[cycle%points.count], cycle: cycle)
         } else {
-            return .None
+            return .none
         }
     
     }
     
     var current : SnapPoint? {
-        if case .Searching(_, _, .Found(_, let point, _)) = state {
+        if case .searching(_, _, .found(_, let point, _)) = state {
             return point
         } else {
             return nil
         }
     }
     
-    func getTarget(position: Vec2d) -> Target {
+    func getTarget(_ position: Vec2d) -> Target {
         if let point = current {
-            return .Snap(point: point)
+            return .snap(point: point)
         } else {
-            return .Free(position: position)
+            return .free(position: position)
         }
     }
 

@@ -13,7 +13,7 @@ final public class Solver {
         self.dataSet = dataSet
     }
     
-    public func evaluate(sheet : Sheet)
+    public func evaluate(_ sheet : Sheet)
     {
         dataSet.clear()
 
@@ -23,18 +23,18 @@ final public class Solver {
             let id = defValue.id
             
             switch defValue.value {
-            case .Array(_):
+            case .array(_):
                 fatalError()
-            case .Expr(let expr):
+            case .expr(let expr):
                 let result = expr.eval(dataSet)
                 switch result {
-                case .Success(let value):
+                case .success(let value):
                     dataSet.put(id, value: value)
-                case .Fail(let error):
-                    dataSet.put(id, value: Value.IntValue(value: 0))
+                case .fail(let error):
+                    dataSet.put(id, value: Value.intValue(value: 0))
                     dataSet.markError(id, error: error)
                 }
-            case .Primitive(let value):
+            case .primitive(let value):
                 dataSet.put(id, value: value)
             default:
                 break
@@ -42,7 +42,7 @@ final public class Solver {
         }
         
         for d in duplicates {
-            dataSet.markError(d, error: EvaluationError.DuplicateDefinition(referenceId: d))
+            dataSet.markError(d, error: EvaluationError.duplicateDefinition(referenceId: d))
         }
     
     }
@@ -55,19 +55,19 @@ final public class WritableDataSet : DataSet {
     public init() {
     }
     
-    public func lookUp(id: ReferenceId) -> Value? {
+    public func lookUp(_ id: ReferenceId) -> Value? {
         return data[id]
     }
     
-    public func getError(id: ReferenceId) -> EvaluationError? {
+    public func getError(_ id: ReferenceId) -> EvaluationError? {
         return errors[id]
     }
     
-    func put(id: ReferenceId, value: Value) {
+    func put(_ id: ReferenceId, value: Value) {
         data[id] = value
     }
     
-    func markError(id: ReferenceId, error: EvaluationError) {
+    func markError(_ id: ReferenceId, error: EvaluationError) {
         errors[id] = error
     }
     

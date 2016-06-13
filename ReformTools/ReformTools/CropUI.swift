@@ -11,12 +11,12 @@ import ReformStage
 
 public final class CropUI {
     public enum State {
-        case Hide
-        case Show([CropPoint])
-        case Active(CropPoint, [CropPoint])
+        case hide
+        case show([CropPoint])
+        case active(CropPoint, [CropPoint])
     }
     
-    public var state : State = .Hide
+    public var state : State = .hide
     
     public init() {}
 }

@@ -12,15 +12,15 @@ import ReformGraphics
 extension RectangleForm {
     
     public enum PointId : ExposedPointIdentifier {
-        case TopLeft = 0
-        case BottomLeft = 1
-        case TopRight = 2
-        case BottomRight = 3
-        case Top = 4
-        case Bottom = 5
-        case Left = 6
-        case Right = 7
-        case Center = 8
+        case topLeft = 0
+        case bottomLeft = 1
+        case topRight = 2
+        case bottomRight = 3
+        case top = 4
+        case bottom = 5
+        case left = 6
+        case right = 7
+        case center = 8
     }
 }
 
@@ -28,7 +28,7 @@ final public class RectangleForm : Form, Creatable {
     public static var stackSize : Int = 5
     
     public let identifier : FormIdentifier
-    public var drawingMode : DrawingMode = DrawingMode.Draw
+    public var drawingMode : DrawingMode = DrawingMode.draw
     public var name : String
     
     
@@ -53,7 +53,7 @@ final public class RectangleForm : Form, Creatable {
         return StaticAngle(formId: identifier, offset: 4)
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         let w = max.x - min.x
         let h = max.y - min.y
         let c = (min+max) / 2
@@ -67,19 +67,19 @@ final public class RectangleForm : Form, Creatable {
     
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.TopLeft.rawValue:AnchorPoint(anchor: topLeftAnchor),
+            PointId.topLeft.rawValue:AnchorPoint(anchor: topLeftAnchor),
             
-            PointId.TopRight.rawValue:AnchorPoint(anchor: topRightAnchor),
+            PointId.topRight.rawValue:AnchorPoint(anchor: topRightAnchor),
             
-            PointId.BottomLeft.rawValue:AnchorPoint(anchor: bottomLeftAnchor),
+            PointId.bottomLeft.rawValue:AnchorPoint(anchor: bottomLeftAnchor),
             
-            PointId.BottomRight.rawValue:AnchorPoint(anchor: bottomRightAnchor),
+            PointId.bottomRight.rawValue:AnchorPoint(anchor: bottomRightAnchor),
             
-            PointId.Top.rawValue:AnchorPoint(anchor: topAnchor),
-            PointId.Bottom.rawValue:AnchorPoint(anchor: bottomAnchor),
-            PointId.Right.rawValue:AnchorPoint(anchor: rightAnchor),
-            PointId.Left.rawValue:AnchorPoint(anchor: leftAnchor),
-            PointId.Center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
+            PointId.top.rawValue:AnchorPoint(anchor: topAnchor),
+            PointId.bottom.rawValue:AnchorPoint(anchor: bottomAnchor),
+            PointId.right.rawValue:AnchorPoint(anchor: rightAnchor),
+            PointId.left.rawValue:AnchorPoint(anchor: leftAnchor),
+            PointId.center.rawValue:ExposedPoint(point: centerPoint, name: "Center"),
         ]
     }
     
@@ -100,35 +100,35 @@ final public class RectangleForm : Form, Creatable {
 extension RectangleForm {
 
     public var topLeftAnchor : Anchor {
-        return RectangleAnchor(side: .TopLeft, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .topLeft, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var topRightAnchor : Anchor {
-        return RectangleAnchor(side: .TopRight, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .topRight, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var bottomLeftAnchor : Anchor {
-        return RectangleAnchor(side: .BottomLeft, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .bottomLeft, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var bottomRightAnchor : Anchor {
-        return RectangleAnchor(side: .BottomRight, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .bottomRight, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var topAnchor : Anchor {
-        return RectangleAnchor(side: .Top, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .top, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var rightAnchor : Anchor {
-        return RectangleAnchor(side: .Right, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .right, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var leftAnchor : Anchor {
-        return RectangleAnchor(side: .Left, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .left, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
     public var bottomAnchor : Anchor {
-        return RectangleAnchor(side: .Bottom, center: centerPoint, rotation: angle, width: width, height: height)
+        return RectangleAnchor(side: .bottom, center: centerPoint, rotation: angle, width: width, height: height)
     }
     
 }
@@ -136,54 +136,54 @@ extension RectangleForm {
 
 private struct RectangleAnchor : Anchor {
     enum Side {
-        case Left
-        case Right
-        case Top
-        case Bottom
-        case TopLeft
-        case TopRight
-        case BottomLeft
-        case BottomRight
+        case left
+        case right
+        case top
+        case bottom
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
         
         var x : Int {
             switch self {
-            case Left, TopLeft, BottomLeft:
+            case left, topLeft, bottomLeft:
                 return -1
-            case Right, TopRight, BottomRight:
+            case right, topRight, bottomRight:
                 return 1
-            case Top, Bottom:
+            case top, bottom:
                 return 0
             }
         }
         
         var y : Int {
             switch self {
-            case Top, TopLeft, TopRight:
+            case top, topLeft, topRight:
                 return -1
-            case Bottom, BottomLeft, BottomRight:
+            case bottom, bottomLeft, bottomRight:
                 return 1
-            case Left, Right:
+            case left, right:
                 return 0
             }
         }
         
         var name : String {
             switch self {
-            case .Top: return "Top"
-            case .Right: return "Right"
-            case .Left: return "Left"
-            case .Bottom: return "Bottom"
-            case .TopLeft: return "Top Left"
-            case .TopRight: return "Top Right"
-            case .BottomLeft: return "Bottom Left"
-            case .BottomRight: return "Bottom Right"
+            case .top: return "Top"
+            case .right: return "Right"
+            case .left: return "Left"
+            case .bottom: return "Bottom"
+            case .topLeft: return "Top Left"
+            case .topRight: return "Top Right"
+            case .bottomLeft: return "Bottom Left"
+            case .bottomRight: return "Bottom Right"
             }
         }
         
         var corner : Bool {
             switch self {
-                case .Top, .Right, .Bottom, .Left: return false
-                case .TopLeft, .TopRight, .BottomLeft, .BottomRight: return true
+                case .top, .right, .bottom, .left: return false
+                case .topLeft, .topRight, .bottomLeft, .bottomRight: return true
             }
         }
     }
@@ -206,7 +206,7 @@ private struct RectangleAnchor : Anchor {
     }
     
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             angle = rotation.getAngleFor(runtime),
@@ -218,7 +218,7 @@ private struct RectangleAnchor : Anchor {
         return c + rotate(Vec2d(x:Double(side.x)*w, y:Double(side.y)*h)/2, angle: angle)
     }
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         if let
             oldAngle = rotation.getAngleFor(runtime),
             oldWidth = width.getLengthFor(runtime),
@@ -285,34 +285,34 @@ extension RectangleForm : Scalable {
 extension RectangleForm : Morphable {
 
     public enum AnchorId : AnchorIdentifier {
-        case TopLeft = 0
-        case BottomLeft = 1
-        case TopRight = 2
-        case BottomRight = 3
-        case Top = 4
-        case Bottom = 5
-        case Left = 6
-        case Right = 7
+        case topLeft = 0
+        case bottomLeft = 1
+        case topRight = 2
+        case bottomRight = 3
+        case top = 4
+        case bottom = 5
+        case left = 6
+        case right = 7
     }
     
     public func getAnchors() -> [AnchorIdentifier:Anchor] {
         return [
-            AnchorId.TopLeft.rawValue:topLeftAnchor,
-            AnchorId.TopRight.rawValue:topRightAnchor,
-            AnchorId.BottomLeft.rawValue:bottomLeftAnchor,
-            AnchorId.BottomRight.rawValue:bottomRightAnchor,
+            AnchorId.topLeft.rawValue:topLeftAnchor,
+            AnchorId.topRight.rawValue:topRightAnchor,
+            AnchorId.bottomLeft.rawValue:bottomLeftAnchor,
+            AnchorId.bottomRight.rawValue:bottomRightAnchor,
             
-            AnchorId.Top.rawValue:topAnchor,
-            AnchorId.Bottom.rawValue:bottomAnchor,
-            AnchorId.Left.rawValue:leftAnchor,
-            AnchorId.Right.rawValue:rightAnchor,
+            AnchorId.top.rawValue:topAnchor,
+            AnchorId.bottom.rawValue:bottomAnchor,
+            AnchorId.left.rawValue:leftAnchor,
+            AnchorId.right.rawValue:rightAnchor,
         ]
     }
 }
 
 extension RectangleForm : Drawable {
     
-    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
+    public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard
             let topLeft = topLeftAnchor.getPositionFor(runtime),
             let topRight = topRightAnchor.getPositionFor(runtime),
@@ -322,12 +322,12 @@ extension RectangleForm : Drawable {
                 return nil
         }
         
-        return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft), .Close)
+        return Path(segments: .moveTo(topLeft), .lineTo(topRight), .lineTo(bottomRight), .lineTo(bottomLeft), .close)
     }
     
-    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
+    public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         guard let path = getPathFor(runtime) else { return nil }
         
-        return Shape(area: .PathArea(path), background: .Fill(Color(r: 128, g: 128, b: 128, a: 128)), stroke: .Solid(width: 1, color: Color(r:50, g:50, b:50, a: 255)))
+        return Shape(area: .pathArea(path), background: .fill(ReformGraphics.Color(r: 128, g: 128, b: 128, a: 128)), stroke: .solid(width: 1, color: ReformGraphics.Color(r:50, g:50, b:50, a: 255)))
     }
 }

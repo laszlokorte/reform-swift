@@ -23,15 +23,15 @@ final class AnalyzerStringifier : Stringifier {
         self.expressionPrinter = expressionPrinter
     }
 
-    func labelFor(formId: FormIdentifier) -> String? {
+    func labelFor(_ formId: FormIdentifier) -> String? {
         return forms[formId].map{ $0.name }
     }
 
-    func labelFor(formId: FormIdentifier, pointId: ExposedPointIdentifier) -> String? {
+    func labelFor(_ formId: FormIdentifier, pointId: ExposedPointIdentifier) -> String? {
         return forms[formId].flatMap { $0.getPoints()[pointId].map { $0.getDescription(self) } }
     }
 
-    func labelFor(formId: FormIdentifier, anchorId: AnchorIdentifier) -> String? {
+    func labelFor(_ formId: FormIdentifier, anchorId: AnchorIdentifier) -> String? {
         return forms[formId].flatMap{
             ($0 as? Morphable).flatMap {
                 $0.getAnchors()[anchorId].map {
@@ -41,7 +41,7 @@ final class AnalyzerStringifier : Stringifier {
         }
     }
 
-    func stringFor(expression: Expression) -> String? {
+    func stringFor(_ expression: ReformExpression.Expression) -> String? {
         return expressionPrinter.toString(expression)
     }
 }
@@ -62,9 +62,9 @@ final public class DefaultAnalyzer : Analyzer {
         self.nameAllocator = nameAllocator
     }
     
-    public func analyze(@noescape block: () -> ()) {
-        analyzerStringifier.forms.removeAll(keepCapacity: true)
-        instructionsDblBuf.removeAll(keepCapacity: true)
+    public func analyze(@noescape _ block: () -> ()) {
+        analyzerStringifier.forms.removeAll(keepingCapacity: true)
+        instructionsDblBuf.removeAll(keepingCapacity: true)
         nameAllocator.reset()
         depth = 0
         block()
@@ -72,14 +72,14 @@ final public class DefaultAnalyzer : Analyzer {
         swap(&instructionsDblBuf, &instructions)
     }
     
-    public func publish(instruction: Analyzable, label: String) {
+    public func publish(_ instruction: Analyzable, label: String) {
         guard let node = instruction as? InstructionNode else {
             return
         }
         instructionsDblBuf.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: false))
     }
     
-    public func publish(instruction: Analyzable, label: String, @noescape block: () -> ()) {
+    public func publish(_ instruction: Analyzable, label: String, @noescape block: () -> ()) {
         guard let node = instruction as? InstructionNode else {
             return
         }
@@ -94,19 +94,19 @@ final public class DefaultAnalyzer : Analyzer {
             }
         }
 
-        depth++
+        depth += 1
 
-        defer { depth-- }
+        defer { depth -= 1 }
 
         block()
     }
     
-    public func announceForm(form: Form) {
+    public func announceForm(_ form: Form) {
         analyzerStringifier.forms[form.identifier] = form
         nameAllocator.announce(form.name)
     }
     
-    public func announceDepencency(id: PictureIdentifier) {
+    public func announceDepencency(_ id: PictureIdentifier) {
     
     }
 }

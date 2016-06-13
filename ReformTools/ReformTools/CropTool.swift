@@ -14,11 +14,11 @@ import ReformStage
 public final class CropTool : Tool {
     enum State
     {
-        case Idle
-        case Cropping(cropPoint: CropPoint, oldSize: Vec2d, size: Vec2d, offset: Vec2d)
+        case idle
+        case cropping(cropPoint: CropPoint, oldSize: Vec2d, size: Vec2d, offset: Vec2d)
     }
 
-    var state : State = .Idle
+    var state : State = .idle
 
     let picture : ReformCore.Picture
     let stage : Stage
@@ -36,13 +36,13 @@ public final class CropTool : Tool {
     }
 
     public func setUp() {
-        state = .Idle
+        state = .idle
         cropGrabber.enable()
     }
 
     public func tearDown() {
         cropGrabber.disable()
-        state = .Idle
+        state = .idle
     }
 
     public func refresh() {
@@ -54,16 +54,16 @@ public final class CropTool : Tool {
 
     public func cancel() {
         switch self.state {
-        case .Idle:
-            state = .Idle
-        case .Cropping(_, let oldSize,_,_):
+        case .idle:
+            state = .idle
+        case .cropping(_, let oldSize,_,_):
             picture.size = (oldSize.x, oldSize.y)
             intend()
-            state = .Idle
+            state = .idle
         }
     }
 
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
 
         if modifier.isStreight {
             streightener.enable()
@@ -72,37 +72,37 @@ public final class CropTool : Tool {
         }
 
         switch state {
-        case .Idle:
+        case .idle:
             switch input {
-            case .Move, .ModifierChange:
+            case .move, .modifierChange:
                 cropGrabber.searchAt(pos)
-            case .Press:
+            case .press:
                 if let grabbedHandle = cropGrabber.current {
-                    state = .Cropping(cropPoint: grabbedHandle, oldSize: stage.size, size: stage.size, offset: pos - grabbedHandle.position)
+                    state = .cropping(cropPoint: grabbedHandle, oldSize: stage.size, size: stage.size, offset: pos - grabbedHandle.position)
                 }
-            case .Cycle:
+            case .cycle:
                 cropGrabber.cycle()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
-        case .Cropping(let grabbedHandle, let oldSize, _, let offset):
+        case .cropping(let grabbedHandle, let oldSize, _, let offset):
             switch input {
 
-            case .ModifierChange:
+            case .modifierChange:
                 fallthrough
-            case .Move:
+            case .move:
                 let handlePosition = (grabbedHandle.offset.vector+1)/2 * stage.size
                 let o = grabbedHandle.offset.vector * (pos-offset-handlePosition)
                 let newSize = stage.size + o
                 let adjustedSize = grabbedHandle.isCorner ? streightener.adjust(newSize, keepRatioOf: oldSize) : newSize
 
-                state = .Cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: adjustedSize, offset: offset)
-            case .Release:
-                state = .Idle
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle, .Press:
+                state = .cropping(cropPoint: grabbedHandle, oldSize: oldSize, size: adjustedSize, offset: offset)
+            case .release:
+                state = .idle
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle, .press:
                 break
-            case .Toggle:
+            case .toggle:
                 streightener.invert()
             }
         }
@@ -111,7 +111,7 @@ public final class CropTool : Tool {
     }
 
     private func publish() {
-        if case .Cropping(_, _, let size, _) = state {
+        if case .cropping(_, _, let size, _) = state {
             picture.size = (max(5,size.x), max(5,size.y))
             intend()
         }

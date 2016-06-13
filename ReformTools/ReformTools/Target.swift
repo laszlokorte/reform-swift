@@ -10,6 +10,6 @@ import ReformMath
 import ReformStage
 
 public enum Target {
-    case Free(position: Vec2d)
-    case Snap(point: SnapPoint)
+    case free(position: Vec2d)
+    case snap(point: SnapPoint)
 }

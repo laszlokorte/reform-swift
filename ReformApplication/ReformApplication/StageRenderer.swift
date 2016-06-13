@@ -25,10 +25,10 @@ final class StageRenderer : Renderer {
         self.maskUI = maskUI
     }
 
-    func renderInContext(context: CGContext) {
+    func renderInContext(_ context: CGContext) {
         let inverse = CGFloat(1/camera.zoom)
-        CGContextSetRGBFillColor(context, 1, 1, 1, 1)
-        CGContextFillRect(context, CGRect(x:0,y:0, width: CGFloat(stage.size.x), height: CGFloat(stage.size.y)))
+        context.setFillColor(red: 1, green: 1, blue: 1, alpha: 1)
+        context.fill(CGRect(x:0,y:0, width: CGFloat(stage.size.x), height: CGFloat(stage.size.y)))
 
 
         if lookIntoFuture {
@@ -36,7 +36,7 @@ final class StageRenderer : Renderer {
                 shape.shape.render(context)
             }
 
-            CGContextSetAlpha(context, 0.5)
+            context.setAlpha(0.5)
         }
 
 
@@ -44,24 +44,24 @@ final class StageRenderer : Renderer {
             shape.shape.render(context)
         }
 
-        if case .Disabled = maskUI.state {
-            CGContextSetRGBStrokeColor(context, 0.3843, 0.4157, 1.0000, 0.6)
-            CGContextSetLineWidth(context, 1.5*inverse)
+        if case .disabled = maskUI.state {
+            context.setStrokeColor(red: 0.3843, green: 0.4157, blue: 1.0000, alpha: 0.6)
+            context.setLineWidth(1.5*inverse)
 
-            for entity in stage.entities where entity.type == .Proxy{
+            for entity in stage.entities where entity.type == .proxy{
                 drawSegmentPath(context, path:entity.outline)
 
-                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+                context.drawPath(using: CGPathDrawingMode.stroke)
             }
 
-            CGContextSetRGBStrokeColor(context, 0.73, 0.62, 0.54, 0.4)
+            context.setStrokeColor(red: 0.73, green: 0.62, blue: 0.54, alpha: 0.4)
 
-            CGContextSetLineWidth(context, 1.5*inverse)
+            context.setLineWidth(1.5*inverse)
 
             for entity in stage.entities where entity.formType == PictureForm.self {
                 drawSegmentPath(context, path:entity.outline)
 
-                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+                context.drawPath(using: CGPathDrawingMode.stroke)
             }
         }
     }

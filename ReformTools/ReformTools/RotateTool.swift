@@ -14,13 +14,13 @@ import ReformStage
 public final class RotateTool : Tool {
     enum State
     {
-        case Idle
-        case Delegating
-        case Rotating(handle: AffineHandle, angle: Angle, offset: Vec2d)
+        case idle
+        case delegating
+        case rotating(handle: AffineHandle, angle: Angle, offset: Vec2d)
     }
     
-    var pivot : PivotChoice = .Primary
-    var state : State = .Idle
+    var pivot : PivotChoice = .primary
+    var state : State = .idle
     var snapType : PointType = []
     
     let stage : Stage
@@ -45,7 +45,7 @@ public final class RotateTool : Tool {
     }
     
     public func setUp() {
-        state = .Idle
+        state = .idle
         selectionTool.setUp()
         if let selected = selection.one {
             handleGrabber.enable(selected)
@@ -56,7 +56,7 @@ public final class RotateTool : Tool {
         instructionCreator.cancel()
         handleGrabber.disable()
         selectionTool.tearDown()
-        state = .Idle
+        state = .idle
     }
     
     public func refresh() {
@@ -69,18 +69,18 @@ public final class RotateTool : Tool {
     
     public func cancel() {
         switch self.state {
-        case .Delegating, .Idle:
-            state = .Idle
+        case .delegating, .idle:
+            state = .idle
             selectionTool.cancel()
             handleGrabber.disable()
-            pivotUI.state = .Hide
-        case .Rotating:
+            pivotUI.state = .hide
+        case .rotating:
             instructionCreator.cancel()
-            state = .Idle
+            state = .idle
         }
     }
     
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
         
         if modifier.isStreight {
@@ -91,69 +91,69 @@ public final class RotateTool : Tool {
         
         
         if modifier.isAlignOption {
-            pivot = .Secondary
+            pivot = .secondary
         } else {
-            pivot = .Primary
+            pivot = .primary
         }
         
         
         
         switch state {
-        case .Delegating:
+        case .delegating:
             selectionTool.process(input, atPosition: pos, withModifier: modifier)
             switch input {
-            case .ModifierChange, .Press,
-            .Move, .Cycle, .Toggle:
+            case .modifierChange, .press,
+            .move, .cycle, .toggle:
                 break
-            case .Release:
-                state = .Idle
+            case .release:
+                state = .idle
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .Move, .ModifierChange:
+            case .move, .modifierChange:
                 handleGrabber.searchAt(pos)
                 if let handle = handleGrabber.current {
-                    pivotUI.state = .Show(pivot.pointFor(handle))
+                    pivotUI.state = .show(pivot.pointFor(handle))
                 } else {
-                    pivotUI.state = .Hide
+                    pivotUI.state = .hide
                 }
-            case .Press:
+            case .press:
                 if let grabbedHandle = handleGrabber.current {
                     
                     
                     instructionCreator
                         .beginCreation(RotateInstruction(formId: grabbedHandle.formId.runtimeId, angle: ConstantAngle(angle: Angle(degree: 0)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
                     
-                    state = .Rotating(handle: grabbedHandle, angle: Angle(degree: 0), offset: pos - grabbedHandle.position)
+                    state = .rotating(handle: grabbedHandle, angle: Angle(degree: 0), offset: pos - grabbedHandle.position)
                 
                     
                 } else {
-                    state = .Delegating
+                    state = .delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-            case .Cycle:
+            case .cycle:
                 handleGrabber.cycle()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
-        case .Rotating(let grabbedHandle, _, let offset):
+        case .rotating(let grabbedHandle, _, let offset):
             switch input {
                 
-            case .ModifierChange:
-                pivotUI.state = .Show(pivot.pointFor(grabbedHandle))
+            case .modifierChange:
+                pivotUI.state = .show(pivot.pointFor(grabbedHandle))
                 fallthrough
-            case .Move:
+            case .move:
                 let piv = pivot.pointFor(grabbedHandle)
-                state = .Rotating(handle: grabbedHandle, angle:
+                state = .rotating(handle: grabbedHandle, angle:
                     angleBetween(vector: pos - piv.position - offset,
                         vector: grabbedHandle.position - piv.position), offset: offset)
-            case .Release:
+            case .release:
                 instructionCreator.commit()
-                state = .Idle
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle, .Press:
+                state = .idle
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle, .press:
                     break
-            case .Toggle:
+            case .toggle:
                 streightener.invert()
             }
         }
@@ -168,7 +168,7 @@ public final class RotateTool : Tool {
     }
     
     private func publish() {
-        if case .Rotating(let grabbedHandle, let angle, _) = state {
+        if case .rotating(let grabbedHandle, let angle, _) = state {
             
             instructionCreator.update(RotateInstruction(formId: grabbedHandle.formId.runtimeId, angle: ConstantAngle(angle: streightener.adjust(angle)), fixPoint: pivot.pointFor(grabbedHandle).runtimePoint))
         }

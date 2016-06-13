@@ -19,7 +19,7 @@ struct CircleOutline : Outline {
         self.angle = angle
     }
     
-    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             rad = radius.getLengthFor(runtime).map(abs),
@@ -30,7 +30,7 @@ struct CircleOutline : Outline {
         return c + rotate(Vec2d(x: rad, y:0), angle: a + Angle(percent: t*100))
     }
     
-    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         guard let rad = radius.getLengthFor(runtime).map(abs) else {
             return nil
         }
@@ -38,7 +38,7 @@ struct CircleOutline : Outline {
         return 2 * M_PI * rad
     }
     
-    func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath {
+    func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
             c = center.getPositionFor(runtime),
@@ -46,12 +46,12 @@ struct CircleOutline : Outline {
             return []
         }
         return [
-            Segment.Arc(Arc2d(center: c, radius: r, range: AngleRange(start: a, end:normalize360(a+Angle(percent: 50))))),
-            Segment.Arc(Arc2d(center: c, radius: r, range: AngleRange(start: normalize360(a+Angle(percent: 50)), end:normalize360(a+Angle(percent: 100)))))
+            Segment.arc(Arc2d(center: c, radius: r, range: AngleRange(start: a, end:normalize360(a+Angle(percent: 50))))),
+            Segment.arc(Arc2d(center: c, radius: r, range: AngleRange(start: normalize360(a+Angle(percent: 50)), end:normalize360(a+Angle(percent: 100)))))
         ]
     }
 
-    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+    func getAABBFor<R : Runtime>(_ runtime: R) -> AABB2d? {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
             c = center.getPositionFor(runtime) else {

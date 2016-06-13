@@ -17,7 +17,7 @@ struct PointAngle : RuntimeRotationAngle {
         self.point = point
     }
     
-    func getAngleFor<R:Runtime>(runtime: R) -> Angle? {
+    func getAngleFor<R:Runtime>(_ runtime: R) -> Angle? {
         guard let c = center.getPositionFor(runtime),
             p = point.getPositionFor(runtime) else {
                 return nil

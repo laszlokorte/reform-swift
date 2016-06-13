@@ -15,7 +15,7 @@ struct ProxyTranslator : Translator {
         self.formReference = formReference
     }
 
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         guard let form = formReference.getFormFor(runtime) as? Translatable else {
             return
         }

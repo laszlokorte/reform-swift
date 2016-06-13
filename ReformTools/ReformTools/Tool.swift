@@ -17,7 +17,7 @@ public protocol Tool {
     
     func focusChange()
     
-    func process(input: Input, atPosition: Vec2d, withModifier: Modifier)
+    func process(_ input: Input, atPosition: Vec2d, withModifier: Modifier)
     
     func cancel()
 }

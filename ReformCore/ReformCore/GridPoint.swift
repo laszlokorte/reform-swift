@@ -15,7 +15,7 @@ public struct GridPoint : RuntimePoint, Labeled, Equatable {
         self.percent = percent
     }
 
-    public func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let canvas = runtime.get(FormIdentifier(0)) as? Paper else {
             return nil
         }
@@ -29,7 +29,7 @@ public struct GridPoint : RuntimePoint, Labeled, Equatable {
         return Vec2d(x: width, y: height) * percent
     }
 
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return String(format: "%.1f%% Horizontally, %.1f%% Vertically", percent.x * 100, percent.y * 100)
     }
 }

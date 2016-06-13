@@ -11,16 +11,16 @@ import ReformCore
 import ReformStage
 
 public enum PivotChoice {
-    case Primary
-    case Secondary
+    case primary
+    case secondary
 }
 
 extension PivotChoice {
-    func pointFor(handle : AffineHandle) -> SnapPoint {
+    func pointFor(_ handle : AffineHandle) -> SnapPoint {
         switch self {
-        case .Primary:
+        case .primary:
             return handle.defaultPivot.0
-        case .Secondary:
+        case .secondary:
             return handle.defaultPivot.1
         }
     }

@@ -9,13 +9,13 @@
 
 public func intersect(segment segmentA: Segment, and segmentB: Segment) -> [Vec2d] {
     switch (segmentA, segmentB) {
-    case (.Line(let a), .Line(let b)):
+    case (.line(let a), .line(let b)):
         return intersection(line: a, line: b).map({[$0]}) ?? []
-    case (.Arc(let a), .Arc(let b)):
+    case (.arc(let a), .arc(let b)):
         return intersections(arc: a, arc: b)
-    case (.Line(let a), .Arc(let b)):
+    case (.line(let a), .arc(let b)):
         return intersections(line: a, arc: b)
-    case (.Arc(let a), .Line(let b)):
+    case (.arc(let a), .line(let b)):
         return intersections(line: b, arc: a)
     }
 }
@@ -33,9 +33,9 @@ public func intersect(segmentPath pathA: SegmentPath, and pathB: SegmentPath) ->
     return result
 }
 
-func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double, Vec2d)? {
+func pointOn(_ segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double, Vec2d)? {
     switch segment {
-    case .Line(let line):
+    case .line(let line):
         let end = line.to - line.from
         let p = closestTo - line.from
         
@@ -55,7 +55,7 @@ func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double
         }
 
         return (u, line.from+projected)
-    case .Arc(let arc):
+    case .arc(let arc):
         let delta = closestTo - arc.center
         let a = angle(delta)
         let distance = abs((delta).length - arc.radius)
@@ -72,7 +72,7 @@ func pointOn(segment: Segment, closestTo: Vec2d, maxDistance: Double) -> (Double
 }
 
 public func pointOn(segmentPath path: SegmentPath, closestTo: Vec2d, maxDistance: Double) -> (Double, Vec2d)? {
-    let result = path.reduce((0.0, Optional<(Double, Vec2d)>.None)) { prev, segment in
+    let result = path.reduce((0.0, Optional<(Double, Vec2d)>.none)) { prev, segment in
 
         
         if let (t, p) = pointOn(segment, closestTo: closestTo, maxDistance : maxDistance) {

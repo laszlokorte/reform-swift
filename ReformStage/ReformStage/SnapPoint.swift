@@ -15,13 +15,13 @@ public protocol SnapPoint {
     
     var runtimePoint : LabeledPoint { get }
     
-    func belongsTo(formId: FormIdentifier) -> Bool
+    func belongsTo(_ formId: FormIdentifier) -> Bool
     
-    func equals(other: SnapPoint) -> Bool
+    func equals(_ other: SnapPoint) -> Bool
 }
 
 extension SnapPoint where Self : Equatable {
-    public func equals(other: SnapPoint) -> Bool {
+    public func equals(_ other: SnapPoint) -> Bool {
         guard let o = other as? Self else {
             return false
         }

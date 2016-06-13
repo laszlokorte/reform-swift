@@ -22,13 +22,13 @@ public struct TranslateInstruction : Instruction {
         self.distance = distance
     }
     
-    public func evaluate<T:Runtime>(runtime: T) {
+    public func evaluate<T:Runtime>(_ runtime: T) {
         guard let form = runtime.get(formId) as? Translatable else {
-            runtime.reportError(.UnknownForm)
+            runtime.reportError(.unknownForm)
             return
         }
         guard let delta = distance.getDeltaFor(runtime) else {
-            runtime.reportError(.InvalidDistance)
+            runtime.reportError(.invalidDistance)
             return
         }
         
@@ -36,13 +36,13 @@ public struct TranslateInstruction : Instruction {
     }
     
     
-    public func getDescription(stringifier: Stringifier) -> String {        let formName = stringifier.labelFor(formId) ?? "???"
+    public func getDescription(_ stringifier: Stringifier) -> String {        let formName = stringifier.labelFor(formId) ?? "???"
         
         return "Move \(formName) \(distance.getDescription(stringifier))"
     }
     
     
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
     }
 
     public var isDegenerated : Bool {
@@ -51,7 +51,7 @@ public struct TranslateInstruction : Instruction {
 }
 
 extension TranslateInstruction : Mergeable {
-    public func mergeWith(other: TranslateInstruction, force: Bool) -> TranslateInstruction? {
+    public func mergeWith(_ other: TranslateInstruction, force: Bool) -> TranslateInstruction? {
         guard formId == other.formId else {
             return nil
         }

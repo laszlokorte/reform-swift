@@ -70,23 +70,23 @@ final class PictureController : NSViewController {
         }
     }
 
-    func updateStage(stage: StageController, withSession pictureSession: PictureSession) {
+    func updateStage(_ stage: StageController, withSession pictureSession: PictureSession) {
         stage.representedObject = StageViewModel(stage: pictureSession.stage, stageUI: pictureSession.stageUI, toolController: pictureSession.toolController, selection: pictureSession.formSelection, camera: pictureSession.camera, selectionChanger: pictureSession.formSelectionChanger)
     }
 
-    func updateProcedure(procedureController: ProcedureController, withSession pictureSession: PictureSession) {
+    func updateProcedure(_ procedureController: ProcedureController, withSession pictureSession: PictureSession) {
         procedureController.representedObject = ProcedureViewModel(analyzer: pictureSession.analyzer, instructionFocus: pictureSession.instructionFocus, snapshotCollector: pictureSession.snapshotCollector, instructionFocusChanger: pictureSession.instructionFocusChanger, formSelection: pictureSession.formSelection, formIdSequence: pictureSession.formIDSequence, nameAllocator: pictureSession.nameAllocator,
             lexer: pictureSession.lexer,
             parser: pictureSession.parser,
             instructionChanger: pictureSession.procedureProcessor.trigger)
     }
 
-    func updateAttributes(attributesController: AttributesController, withSession pictureSession: PictureSession) {
+    func updateAttributes(_ attributesController: AttributesController, withSession pictureSession: PictureSession) {
         attributesController.representedObject = AttributesViewModel(stage: pictureSession.stage, selection: pictureSession.formSelection, analyzer: pictureSession.analyzer)
     }
 
 
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: AnyObject?) {
 
         if let s = segue.destinationController as? StageController {
             self.stageController = s
@@ -107,11 +107,11 @@ final class PictureController : NSViewController {
 
 extension PictureController : NSSplitViewDelegate {
 
-    func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
+    func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
         return [leftSplit, rightSplit].contains(subview)
     }
 
-    func splitView(splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAtIndex dividerIndex: Int) -> Bool {
+    func splitView(_ splitView: NSSplitView, shouldCollapseSubview subview: NSView, forDoubleClickOnDividerAt dividerIndex: Int) -> Bool {
         return false
     }
 

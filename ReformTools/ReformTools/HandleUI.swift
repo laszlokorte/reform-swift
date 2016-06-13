@@ -11,12 +11,12 @@ import ReformStage
 
 public final class HandleUI {
     public enum State {
-        case Hide
-        case Show([Handle])
-        case Active(Handle, [Handle])
+        case hide
+        case show([Handle])
+        case active(Handle, [Handle])
     }
     
-    public var state : State = .Hide
+    public var state : State = .hide
     
     public init() {}
 }

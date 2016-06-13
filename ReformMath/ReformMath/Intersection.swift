@@ -86,7 +86,7 @@ public func intersections(circle circleA: Circle2d, circle circleB: Circle2d) ->
     return result
 }
 
-public func intersections(line line: LineSegment2d, circle: Circle2d) -> [Vec2d] {
+public func intersections(line: LineSegment2d, circle: Circle2d) -> [Vec2d] {
 
     let a = (line.to.x - line.from.x) * (line.to.x - line.from.x) + (line.to.y - line.from.y) * (line.to.y - line.from.y)
     let b = 2 * ((line.to.x - line.from.x) * (line.from.x - circle.center.x) + (line.to.y - line.from.y) * (line.from.y - circle.center.y))
@@ -132,7 +132,7 @@ public func intersections(arc arcA: Arc2d, arc arcB: Arc2d) -> [Vec2d] {
 
 }
 
-public func intersections(line line: LineSegment2d, arc: Arc2d) -> [Vec2d] {
+public func intersections(line: LineSegment2d, arc: Arc2d) -> [Vec2d] {
     let circleIntersections = intersections(line: line, circle: arc.circle)
 
     return circleIntersections.filter {

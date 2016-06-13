@@ -10,12 +10,12 @@ import Foundation
 import ReformMath
 
 internal extension Color {
-    func setAsBackground(context: CGContext) {
-        CGContextSetRGBFillColor(context, CGFloat(red)/255.0, CGFloat(green)/255.0, CGFloat(blue)/255.0, CGFloat(alpha)/255.0)
+    func setAsBackground(_ context: CGContext) {
+        context.setFillColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha)/255.0)
     }
     
-    func setAsStroke(context: CGContext) {
-        CGContextSetRGBStrokeColor(context, CGFloat(red)/255.0, CGFloat(green)/255.0, CGFloat(blue)/255.0, CGFloat(alpha)/255.0)
+    func setAsStroke(_ context: CGContext) {
+        context.setStrokeColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha)/255.0)
     }
 
     var toNSColor : NSColor {
@@ -24,52 +24,52 @@ internal extension Color {
 }
 
 public extension Shape {
-    func render(context: CGContext) {
+    func render(_ context: CGContext) {
         switch self.area {
-        case .PathArea(let path):
+        case .pathArea(let path):
             path.draw(context)
             
             switch (background, stroke) {
-            case (.Fill(let bColor), .Solid(let width, let sColor)):
-                CGContextSetLineWidth(context, CGFloat(width))
+            case (.fill(let bColor), .solid(let width, let sColor)):
+                context.setLineWidth(CGFloat(width))
                 bColor.setAsBackground(context)
                 sColor.setAsStroke(context)
-                CGContextDrawPath(context, CGPathDrawingMode.FillStroke)
-            case (.None, .Solid(let width, let sColor)):
-                CGContextSetLineWidth(context, CGFloat(width))
+                context.drawPath(using: CGPathDrawingMode.fillStroke)
+            case (.none, .solid(let width, let sColor)):
+                context.setLineWidth(CGFloat(width))
                 sColor.setAsStroke(context)
-                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-            case (.Fill(let bColor), .None):
+                context.drawPath(using: CGPathDrawingMode.stroke)
+            case (.fill(let bColor), .none):
                 bColor.setAsBackground(context)
-                CGContextDrawPath(context, CGPathDrawingMode.Fill)
-            case (.None, .None): break
+                context.drawPath(using: CGPathDrawingMode.fill)
+            case (.none, .none): break
             }
-        case .TextArea(let left, let right, let alignment, let text, let size):
+        case .textArea(let left, let right, let alignment, let text, let size):
             let absSize = abs(size)
 
             let rotation = ReformMath.angle(signum(size)*(right-left))
-            let font = NSFont(name: "Helvetica", size: CGFloat(absSize)) ?? NSFont.systemFontOfSize(CGFloat(absSize))
+            let font = NSFont(name: "Helvetica", size: CGFloat(absSize)) ?? NSFont.systemFont(ofSize: CGFloat(absSize))
 
             let backgroundColor : NSColor
             let strokeWidth : CGFloat
             let strokeColor : NSColor
 
             switch (background, stroke) {
-            case (.Fill(let bColor), .Solid(let width, let sColor)):
+            case (.fill(let bColor), .solid(let width, let sColor)):
                 backgroundColor = bColor.toNSColor
                 strokeColor = sColor.toNSColor
                 strokeWidth = -CGFloat(100*width/size)
-            case (.None, .Solid(let width, let sColor)):
+            case (.none, .solid(let width, let sColor)):
                 backgroundColor = NSColor(red:0,green:0,blue:0,alpha:0)
                 strokeColor = sColor.toNSColor
                 // stroke width is relative to font size
                 // https://developer.apple.com/library/mac/qa/qa1531/_index.html
                 strokeWidth = CGFloat(50*width/absSize)
-            case (.Fill(let bColor), .None):
+            case (.fill(let bColor), .none):
                 backgroundColor = bColor.toNSColor
                 strokeColor = NSColor(red:0,green:0,blue:0,alpha:0)
                 strokeWidth = 0
-            case (.None, .None): return
+            case (.none, .none): return
             }
 
             let attr : [String:AnyObject] = [
@@ -79,54 +79,56 @@ public extension Shape {
                 NSStrokeColorAttributeName:strokeColor
             ]
 
-            CGContextSaveGState(context)
+            context.saveGState()
 
-            let attributedString = CFAttributedStringCreate(nil, text, attr)
+            guard let attributedString = CFAttributedStringCreate(nil, text, attr) else {
+                return
+            }
             let line = CTLineCreateWithAttributedString(attributedString)
-            let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+            let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.useOpticalBounds)
 
             let center = (left+right)/2
             let position : Vec2d
             switch alignment {
-            case .Left: position = left
-            case .Right: position = right
-            case .Center: position = center
+            case .left: position = left
+            case .right: position = right
+            case .center: position = center
             }
 
             let xn : CGFloat
 
             switch alignment {
-            case .Left: xn = CGFloat(position.x)
-            case .Right: xn = CGFloat(position.x) - bounds.width
-            case .Center: xn = CGFloat(position.x) - bounds.width/2
+            case .left: xn = CGFloat(position.x)
+            case .right: xn = CGFloat(position.x) - bounds.width
+            case .center: xn = CGFloat(position.x) - bounds.width/2
             }
 
             let yn = CGFloat(position.y) // - bounds.midY
-            CGContextSetTextMatrix(context,CGAffineTransformMakeTranslation(xn, yn))
+            context.textMatrix = CGAffineTransform(translationX: xn, y: yn)
 
-            CGContextTranslateCTM(context, CGFloat(position.x), CGFloat(position.y))
-            CGContextRotateCTM(context, CGFloat(rotation.radians))
-            CGContextTranslateCTM(context, -CGFloat(position.x), -CGFloat(position.y))
+            context.translate(x: CGFloat(position.x), y: CGFloat(position.y))
+            context.rotate(byAngle: CGFloat(rotation.radians))
+            context.translate(x: -CGFloat(position.x), y: -CGFloat(position.y))
 
             CTLineDraw(line, context)
-            CGContextFlush(context)
+            context.flush()
 
-            CGContextRestoreGState(context)
+            context.restoreGState()
         }
     }
 
-    func drawOutline(context: CGContext, width: Double, color: Color) {
+    func drawOutline(_ context: CGContext, width: Double, color: Color) {
         switch self.area {
-        case .PathArea(let path):
+        case .pathArea(let path):
             path.draw(context)
-            CGContextSetLineWidth(context, CGFloat(width))
+            context.setLineWidth(CGFloat(width))
             color.setAsStroke(context)
-            CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-        case .TextArea(let left, let right, let alignment, let text, let size):
+            context.drawPath(using: CGPathDrawingMode.stroke)
+        case .textArea(let left, let right, let alignment, let text, let size):
             let absSize = abs(size)
 
             let rotation = ReformMath.angle(signum(size)*(right-left))
-            let font = NSFont(name: "Helvetica", size: CGFloat(absSize)) ?? NSFont.systemFontOfSize(CGFloat(absSize))
+            let font = NSFont(name: "Helvetica", size: CGFloat(absSize)) ?? NSFont.systemFont(ofSize: CGFloat(absSize))
 
             let transparent = NSColor(red:0,green:0,blue:0,alpha:0)
             let nsColor = color.toNSColor
@@ -139,61 +141,63 @@ public extension Shape {
                 NSStrokeColorAttributeName:nsColor
             ]
 
-            CGContextSaveGState(context)
+            context.saveGState()
 
-            let attributedString = CFAttributedStringCreate(nil, text, attr)
+            guard let attributedString = CFAttributedStringCreate(nil, text, attr) else {
+                return
+            }
             let line = CTLineCreateWithAttributedString(attributedString)
-            let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+            let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.useOpticalBounds)
 
             let center = (left+right)/2
             let position : Vec2d
             switch alignment {
-            case .Left: position = left
-            case .Right: position = right
-            case .Center: position = center
+            case .left: position = left
+            case .right: position = right
+            case .center: position = center
             }
 
             let xn : CGFloat
 
             switch alignment {
-            case .Left: xn = CGFloat(position.x)
-            case .Right: xn = CGFloat(position.x) - bounds.width
-            case .Center: xn = CGFloat(position.x) - bounds.width/2
+            case .left: xn = CGFloat(position.x)
+            case .right: xn = CGFloat(position.x) - bounds.width
+            case .center: xn = CGFloat(position.x) - bounds.width/2
             }
 
             let yn = CGFloat(position.y) // - bounds.midY
-            CGContextSetTextMatrix(context,CGAffineTransformMakeTranslation(xn, yn))
+            context.textMatrix = CGAffineTransform(translationX: xn, y: yn)
 
-            CGContextTranslateCTM(context, CGFloat(position.x), CGFloat(position.y))
-            CGContextRotateCTM(context, CGFloat(rotation.radians))
-            CGContextTranslateCTM(context, -CGFloat(position.x), -CGFloat(position.y))
+            context.translate(x: CGFloat(position.x), y: CGFloat(position.y))
+            context.rotate(byAngle: CGFloat(rotation.radians))
+            context.translate(x: -CGFloat(position.x), y: -CGFloat(position.y))
 
             CTLineDraw(line, context)
-            CGContextFlush(context)
+            context.flush()
             
-            CGContextRestoreGState(context)
+            context.restoreGState()
         }
     }
 }
 
 extension Path {
-    public func draw(context: CGContext) {
+    public func draw(_ context: CGContext) {
         for segment in self {
             context
             switch segment {
                 
-            case .MoveTo(let pos):
-                CGContextMoveToPoint(context, CGFloat(pos.x), CGFloat(pos.y))
-            case .LineTo(let pos):
-                CGContextAddLineToPoint(context, CGFloat(pos.x), CGFloat(pos.y))
-            case .QuadraticTo(let pos, let cp):
-                CGContextAddQuadCurveToPoint(context, CGFloat(cp.x), CGFloat(cp.y), CGFloat(pos.x), CGFloat(pos.y))
-            case .QubicTo(let pos, let cp1, let cp2):
-                CGContextAddCurveToPoint(context, CGFloat(cp1.x), CGFloat(cp1.y), CGFloat(cp2.x), CGFloat(cp2.y), CGFloat(pos.x), CGFloat(pos.y))
-            case .ArcTo(let tanA, let tanB, let radius):
-                CGContextAddArcToPoint(context, CGFloat(tanA.x), CGFloat(tanA.y), CGFloat(tanB.x), CGFloat(tanB.y), CGFloat(radius))
-            case .Close:
-                CGContextClosePath(context)
+            case .moveTo(let pos):
+                context.moveTo(x: CGFloat(pos.x), y: CGFloat(pos.y))
+            case .lineTo(let pos):
+                context.addLineTo(x: CGFloat(pos.x), y: CGFloat(pos.y))
+            case .quadraticTo(let pos, let cp):
+                context.addQuadCurveTo(cpx: CGFloat(cp.x), cpy: CGFloat(cp.y), endingAtX: CGFloat(pos.x), y: CGFloat(pos.y))
+            case .qubicTo(let pos, let cp1, let cp2):
+                context.addCurveTo(cp1x: CGFloat(cp1.x), cp1y: CGFloat(cp1.y), cp2x: CGFloat(cp2.x), cp2y: CGFloat(cp2.y), endingAtX: CGFloat(pos.x), y: CGFloat(pos.y))
+            case .arcTo(let tanA, let tanB, let radius):
+                context.addArc(x1: CGFloat(tanA.x), y1: CGFloat(tanA.y), x2: CGFloat(tanB.x), y2: CGFloat(tanB.y), radius: CGFloat(radius))
+            case .close:
+                context.closePath()
             }
         }
     }

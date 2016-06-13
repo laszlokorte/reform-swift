@@ -7,37 +7,37 @@
 //
 
 public enum RuntimeError {
-    case InvalidDestination
-    case UnknownForm
-    case UnknownAnchor
-    case InvalidDistance
-    case InvalidFixPoint
-    case InvalidAngle
-    case InvalidFactor
-    case InvalidExpression
-    case InvalidAxis
+    case invalidDestination
+    case unknownForm
+    case unknownAnchor
+    case invalidDistance
+    case invalidFixPoint
+    case invalidAngle
+    case invalidFactor
+    case invalidExpression
+    case invalidAxis
 }
 
 extension RuntimeError : CustomStringConvertible {
     public var description : String {
         switch self {
-        case .InvalidDestination:
+        case .invalidDestination:
             return "Invalid Destination"
-        case .UnknownForm:
+        case .unknownForm:
             return "Unknown Form"
-        case .UnknownAnchor:
+        case .unknownAnchor:
             return "Unknown Anchor"
-        case .InvalidDistance:
+        case .invalidDistance:
             return "Invalid Distance"
-        case .InvalidFixPoint:
+        case .invalidFixPoint:
             return "Invalid Fix Point"
-        case .InvalidAngle:
+        case .invalidAngle:
             return "Invalid Angle"
-        case .InvalidFactor:
+        case .invalidFactor:
             return "Invalid Scale Factor"
-        case .InvalidExpression:
+        case .invalidExpression:
             return "Invalid Expression"
-        case .InvalidAxis:
+        case .invalidAxis:
             return "Invalid Axis"
         }
     }

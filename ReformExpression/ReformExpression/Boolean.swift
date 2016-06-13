@@ -6,39 +6,39 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-func booleanBinaryOperation(name: String, lhs: Value, rhs: Value, op: (Bool, Bool)->Bool) -> Result<Value, EvaluationError> {
+func booleanBinaryOperation(_ name: String, lhs: Value, rhs: Value, op: (Bool, Bool)->Bool) -> Result<Value, EvaluationError> {
     switch(lhs, rhs) {
-    case (.BoolValue(let left), .BoolValue(let right)):
+    case (.boolValue(let left), .boolValue(let right)):
         
-        return .Success(Value.BoolValue(value: op(left, right)))
+        return .success(Value.boolValue(value: op(left, right)))
       default:
-        return .Fail(.TypeMismatch(message: "\(name) is not defined for given operands."))
+        return .fail(.typeMismatch(message: "\(name) is not defined for given operands."))
     }
 }
 
 
 struct BinaryLogicAnd : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
         return booleanBinaryOperation("Logic And", lhs: lhs, rhs: rhs, op: {$0 && $1})
     }
 }
 
 struct BinaryLogicOr : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
         return booleanBinaryOperation("Logic Or", lhs: lhs, rhs: rhs, op: {$0 || $1})
     }
 }
 
 struct UnaryLogicNegation : UnaryOperator {
     
-    func apply(value: Value) -> Result<Value, EvaluationError> {
+    func apply(_ value: Value) -> Result<Value, EvaluationError> {
         switch value {
-        case (.BoolValue(let bool)):
-            return .Success(Value.BoolValue(value: !bool))
+        case (.boolValue(let bool)):
+            return .success(Value.boolValue(value: !bool))
         default:
-            return .Fail(.TypeMismatch(message: "Addition is not defined for given operands."))
+            return .fail(.typeMismatch(message: "Addition is not defined for given operands."))
         }
     }
 }
@@ -46,119 +46,119 @@ struct UnaryLogicNegation : UnaryOperator {
 
 struct GreaterThanRelation : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
         switch(lhs, rhs) {
-        case (.IntValue(let left), .IntValue(let right)):
+        case (.intValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left > right))
+            return .success(Value.boolValue(value: left > right))
             
-        case (.IntValue(let left), .DoubleValue(let right)):
+        case (.intValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: Double(left) > right))
+            return .success(Value.boolValue(value: Double(left) > right))
             
-        case (.DoubleValue(let left), .IntValue(let right)):
+        case (.doubleValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left > Double(right)))
+            return .success(Value.boolValue(value: left > Double(right)))
             
-        case (.DoubleValue(let left), .DoubleValue(let right)):
+        case (.doubleValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: left > right))
+            return .success(Value.boolValue(value: left > right))
             
         default:
-            return .Fail(.TypeMismatch(message: "GreaterThanRelation is not defined for given operands."))
+            return .fail(.typeMismatch(message: "GreaterThanRelation is not defined for given operands."))
         }
     }
 }
 
 struct LessThanRelation : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
         switch(lhs, rhs) {
-        case (.IntValue(let left), .IntValue(let right)):
+        case (.intValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left < right))
+            return .success(Value.boolValue(value: left < right))
             
-        case (.IntValue(let left), .DoubleValue(let right)):
+        case (.intValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: Double(left) < right))
+            return .success(Value.boolValue(value: Double(left) < right))
             
-        case (.DoubleValue(let left), .IntValue(let right)):
+        case (.doubleValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left < Double(right)))
+            return .success(Value.boolValue(value: left < Double(right)))
             
-        case (.DoubleValue(let left), .DoubleValue(let right)):
+        case (.doubleValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: left < right))
+            return .success(Value.boolValue(value: left < right))
             
         default:
-            return .Fail(.TypeMismatch(message: "LessThanRelation is not defined for given operands."))
+            return .fail(.typeMismatch(message: "LessThanRelation is not defined for given operands."))
         }
     }
 }
 
 struct GreaterThanOrEqualRelation : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
         switch(lhs, rhs) {
-        case (.IntValue(let left), .IntValue(let right)):
+        case (.intValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left >= right))
+            return .success(Value.boolValue(value: left >= right))
             
-        case (.IntValue(let left), .DoubleValue(let right)):
+        case (.intValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: Double(left) >= right))
+            return .success(Value.boolValue(value: Double(left) >= right))
             
-        case (.DoubleValue(let left), .IntValue(let right)):
+        case (.doubleValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left >= Double(right)))
+            return .success(Value.boolValue(value: left >= Double(right)))
             
-        case (.DoubleValue(let left), .DoubleValue(let right)):
+        case (.doubleValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: left >= right))
+            return .success(Value.boolValue(value: left >= right))
             
         default:
-            return .Fail(.TypeMismatch(message: "GreaterThanOrEqualRelation is not defined for given operands."))
+            return .fail(.typeMismatch(message: "GreaterThanOrEqualRelation is not defined for given operands."))
         }
     }
 }
 
 struct LessThanOrEqualRelation : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
         switch(lhs, rhs) {
-        case (.IntValue(let left), .IntValue(let right)):
+        case (.intValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left <= right))
+            return .success(Value.boolValue(value: left <= right))
             
-        case (.IntValue(let left), .DoubleValue(let right)):
+        case (.intValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: Double(left) <= right))
+            return .success(Value.boolValue(value: Double(left) <= right))
             
-        case (.DoubleValue(let left), .IntValue(let right)):
+        case (.doubleValue(let left), .intValue(let right)):
             
-            return .Success(Value.BoolValue(value: left <= Double(right)))
+            return .success(Value.boolValue(value: left <= Double(right)))
             
-        case (.DoubleValue(let left), .DoubleValue(let right)):
+        case (.doubleValue(let left), .doubleValue(let right)):
             
-            return .Success(Value.BoolValue(value: left <= right))
+            return .success(Value.boolValue(value: left <= right))
             
         default:
-            return .Fail(.TypeMismatch(message: "LessThanOrEqualRelation is not defined for given operands."))
+            return .fail(.typeMismatch(message: "LessThanOrEqualRelation is not defined for given operands."))
         }
     }
 }
 
 struct StrictEqualRelation : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
-        return .Success(Value.BoolValue(value: lhs == rhs))
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+        return .success(Value.boolValue(value: lhs == rhs))
         
     }
 }
 
 struct StrictNotEqualRelation : BinaryOperator {
     
-    func apply(lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
-        return .Success(Value.BoolValue(value: lhs != rhs))
+    func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
+        return .success(Value.boolValue(value: lhs != rhs))
     }
 }

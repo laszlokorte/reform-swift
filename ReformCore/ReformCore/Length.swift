@@ -9,17 +9,17 @@
 import ReformMath
 
 public protocol RuntimeLength {
-    func getLengthFor<R:Runtime>(runtime: R) -> Double?
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double?
 
-    func isEqualTo(other: RuntimeLength) -> Bool
+    func isEqualTo(_ other: RuntimeLength) -> Bool
 }
 
 public protocol WriteableRuntimeLength : RuntimeLength {
-    func setLengthFor<R:Runtime>(runtime: R, length: Double)
+    func setLengthFor<R:Runtime>(_ runtime: R, length: Double)
 }
 
 extension RuntimeLength where Self : Equatable {
-    func isEqualTo(other: RuntimeLength) -> Bool {
+    func isEqualTo(_ other: RuntimeLength) -> Bool {
         guard let other = other as? Self else {
             return false
         }

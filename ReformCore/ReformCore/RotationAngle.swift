@@ -9,19 +9,19 @@
 import ReformMath
 
 public protocol RuntimeRotationAngle : Degeneratable {
-    func getAngleFor<R:Runtime>(runtime: R) -> Angle?
+    func getAngleFor<R:Runtime>(_ runtime: R) -> Angle?
 
-    func isEqualTo(other: RuntimeRotationAngle) -> Bool
+    func isEqualTo(_ other: RuntimeRotationAngle) -> Bool
 }
 
 public protocol WriteableRuntimeRotationAngle : RuntimeRotationAngle {
-    func setAngleFor<R:Runtime>(runtime: R, angle: Angle)
+    func setAngleFor<R:Runtime>(_ runtime: R, angle: Angle)
 }
 
 
 
 extension RuntimeRotationAngle where Self : Equatable {
-    public func isEqualTo(other: RuntimeRotationAngle) -> Bool {
+    public func isEqualTo(_ other: RuntimeRotationAngle) -> Bool {
         guard let other = other as? Self else {
             return false
         }

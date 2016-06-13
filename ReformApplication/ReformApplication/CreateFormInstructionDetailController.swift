@@ -15,7 +15,7 @@ class CreateFormInstructionDetailController : NSViewController, InstructionDetai
     @IBOutlet var errorLabel : NSTextField?
 
     var stringifier : Stringifier?
-    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var parser : ((String) -> Result<ReformExpression.Expression, ShuntingYardError>)?
     var intend : (() -> ())?
 
     var error : String? {

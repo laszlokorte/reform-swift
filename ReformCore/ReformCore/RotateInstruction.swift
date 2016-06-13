@@ -26,17 +26,17 @@ public struct RotateInstruction : Instruction {
         self.fixPoint = fixPoint
     }
     
-    public func evaluate<T:Runtime>(runtime: T) {
+    public func evaluate<T:Runtime>(_ runtime: T) {
         guard let form = runtime.get(formId) as? Rotatable else {
-            runtime.reportError(.UnknownForm)
+            runtime.reportError(.unknownForm)
             return
         }
         guard let fix : Vec2d = fixPoint.getPositionFor(runtime) else {
-            runtime.reportError(.InvalidFixPoint)
+            runtime.reportError(.invalidFixPoint)
             return
         }
         guard let a : Angle = angle.getAngleFor(runtime) else {
-            runtime.reportError(.InvalidAngle)
+            runtime.reportError(.invalidAngle)
             return
         }
         
@@ -44,14 +44,14 @@ public struct RotateInstruction : Instruction {
     }
     
     
-    public func getDescription(stringifier: Stringifier) -> String {        let formName = stringifier.labelFor(formId) ?? "???"
+    public func getDescription(_ stringifier: Stringifier) -> String {        let formName = stringifier.labelFor(formId) ?? "???"
         
         return "Rotate \(formName) around \(fixPoint.getDescription(stringifier)) by \(angle.getDescription(stringifier))"
     }
     
     
     
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
     }
 
 
@@ -61,7 +61,7 @@ public struct RotateInstruction : Instruction {
 }
 
 extension RotateInstruction : Mergeable {
-    public func mergeWith(other: RotateInstruction, force: Bool) -> RotateInstruction? {
+    public func mergeWith(_ other: RotateInstruction, force: Bool) -> RotateInstruction? {
         guard formId == other.formId else {
             return nil
         }

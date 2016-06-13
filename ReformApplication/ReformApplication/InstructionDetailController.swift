@@ -12,6 +12,6 @@ import ReformExpression
 protocol InstructionDetailController : class {
     var stringifier : Stringifier? { set get }
     var error : String? { set get }
-    var parser : ((String) -> Result<Expression, ShuntingYardError>)? { set get }
+    var parser : ((String) -> Result<ReformExpression.Expression, ShuntingYardError>)? { set get }
     var intend : (() -> ())? { set get }
 }

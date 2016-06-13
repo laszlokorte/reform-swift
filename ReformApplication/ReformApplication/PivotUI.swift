@@ -14,20 +14,20 @@ struct PivotUIRenderer : Renderer {
     let pivotUI : PivotUI
     let camera: Camera
     
-    func renderInContext(context: CGContext) {
+    func renderInContext(_ context: CGContext) {
         let inverse = CGFloat(1 / camera.zoom)
 
-        CGContextSetRGBFillColor(context, 0.9, 0.3, 0.8, 1)
-        CGContextSetRGBStrokeColor(context, 0.8, 0.2, 0.7, 1)
-        CGContextSetLineWidth(context, 1*inverse)
+        context.setFillColor(red: 0.9, green: 0.3, blue: 0.8, alpha: 1)
+        context.setStrokeColor(red: 0.8, green: 0.2, blue: 0.7, alpha: 1)
+        context.setLineWidth(1*inverse)
         let dotSize : Double = 4 / camera.zoom
         
         switch pivotUI.state {
-        case .Hide:
+        case .hide:
             return
-        case .Show(let point):
+        case .show(let point):
             drawDotAt(context, position: point.position, size: dotSize*1.5)
-            CGContextDrawPath(context, .FillStroke)
+            context.drawPath(using: .fillStroke)
         }
         
     }

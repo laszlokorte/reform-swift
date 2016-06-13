@@ -42,34 +42,34 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
     }
     
     let binaryOperators : [String : BinaryOperatorDefinition] = [
-        "^" : BinaryOperatorDefinition(BinaryExponentiation.self, Precedence(50), .Right),
-        "*" : BinaryOperatorDefinition(BinaryMultiplication.self, Precedence(40), .Left),
-        "/" : BinaryOperatorDefinition(BinaryDivision.self, Precedence(40), .Left),
+        "^" : BinaryOperatorDefinition(BinaryExponentiation.self, Precedence(50), .right),
+        "*" : BinaryOperatorDefinition(BinaryMultiplication.self, Precedence(40), .left),
+        "/" : BinaryOperatorDefinition(BinaryDivision.self, Precedence(40), .left),
         
-        "%" : BinaryOperatorDefinition(BinaryModulo.self, Precedence(40), .Left),
+        "%" : BinaryOperatorDefinition(BinaryModulo.self, Precedence(40), .left),
         
-        "+" : BinaryOperatorDefinition(BinaryAddition.self, Precedence(30), .Left),
-        "-" : BinaryOperatorDefinition(BinarySubtraction.self, Precedence(30), .Left),
+        "+" : BinaryOperatorDefinition(BinaryAddition.self, Precedence(30), .left),
+        "-" : BinaryOperatorDefinition(BinarySubtraction.self, Precedence(30), .left),
         
-        "<": BinaryOperatorDefinition(LessThanRelation.self, Precedence(20), .Left),
-        "<=": BinaryOperatorDefinition(LessThanOrEqualRelation.self, Precedence(20), .Left),
-        ">": BinaryOperatorDefinition(GreaterThanRelation.self, Precedence(20), .Left),
-        ">=": BinaryOperatorDefinition(GreaterThanOrEqualRelation.self, Precedence(20), .Left),
-        "==": BinaryOperatorDefinition(StrictEqualRelation.self, Precedence(10), .Left),
-        "!=": BinaryOperatorDefinition(StrictNotEqualRelation.self, Precedence(10), .Left),
-        "&&": BinaryOperatorDefinition(BinaryLogicAnd.self, Precedence(8), .Left),
-        "||": BinaryOperatorDefinition(BinaryLogicOr.self, Precedence(5), .Left),
+        "<": BinaryOperatorDefinition(LessThanRelation.self, Precedence(20), .left),
+        "<=": BinaryOperatorDefinition(LessThanOrEqualRelation.self, Precedence(20), .left),
+        ">": BinaryOperatorDefinition(GreaterThanRelation.self, Precedence(20), .left),
+        ">=": BinaryOperatorDefinition(GreaterThanOrEqualRelation.self, Precedence(20), .left),
+        "==": BinaryOperatorDefinition(StrictEqualRelation.self, Precedence(10), .left),
+        "!=": BinaryOperatorDefinition(StrictNotEqualRelation.self, Precedence(10), .left),
+        "&&": BinaryOperatorDefinition(BinaryLogicAnd.self, Precedence(8), .left),
+        "||": BinaryOperatorDefinition(BinaryLogicOr.self, Precedence(5), .left),
        ]
     
     let unaryOperators : [String : UnaryOperatorDefinition] = [
-        "+" : UnaryOperatorDefinition(UnaryPlus.self, Precedence(45), .Left),
-        "-" : UnaryOperatorDefinition(UnaryMinus.self, Precedence(45), .Left),
-        "~" : UnaryOperatorDefinition(UnaryLogicNegation.self, Precedence(45), .Left),
+        "+" : UnaryOperatorDefinition(UnaryPlus.self, Precedence(45), .left),
+        "-" : UnaryOperatorDefinition(UnaryMinus.self, Precedence(45), .left),
+        "~" : UnaryOperatorDefinition(UnaryLogicNegation.self, Precedence(45), .left),
     ]
     
     let constants : [String : Value] = [
-        "PI" : Value.DoubleValue(value: PI),
-        "E" : Value.DoubleValue(value: E),
+        "PI" : Value.doubleValue(value: PI),
+        "E" : Value.doubleValue(value: E),
     ]
     
     let functions : [String : Function.Type] = [
@@ -108,90 +108,90 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
     
     let matchingPairs : [String:String] = ["(":")"]
     
-    public func isMatchingPair(left : Token<ShuntingYardTokenType>, right : Token<ShuntingYardTokenType>) -> Bool {
+    public func isMatchingPair(_ left : Token<ShuntingYardTokenType>, right : Token<ShuntingYardTokenType>) -> Bool {
         return matchingPairs[left.value] == right.value
     }
-    public func variableTokenToNode(token : Token<ShuntingYardTokenType>) throws -> Expression {
+    public func variableTokenToNode(_ token : Token<ShuntingYardTokenType>) throws -> Expression {
         if let definition = sheet.definitionWithName(token.value) {
-            return .Reference(id: definition.id)
+            return .reference(id: definition.id)
         } else {
-            throw ShuntingYardError.UnexpectedToken(token: token, message: "unknown identifier")
+            throw ShuntingYardError.unexpectedToken(token: token, message: "unknown identifier")
         }
     }
     
-    public func constantTokenToNode(token : Token<ShuntingYardTokenType>) throws -> Expression {
+    public func constantTokenToNode(_ token : Token<ShuntingYardTokenType>) throws -> Expression {
         if let val = constants[token.value] {
-            return Expression.NamedConstant(token.value, val)
+            return Expression.namedConstant(token.value, val)
         } else {
-            throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+            throw ShuntingYardError.unexpectedToken(token: token, message: "")
         }
     }
     
     public func emptyNode() throws -> Expression {
-        return Expression.Constant(.IntValue(value: 0))
+        return Expression.constant(.intValue(value: 0))
     }
     
-    public func unaryOperatorToNode(op : Token<ShuntingYardTokenType>, operand : Expression) throws -> Expression {
+    public func unaryOperatorToNode(_ op : Token<ShuntingYardTokenType>, operand : Expression) throws -> Expression {
         if let o = unaryOperators[op.value] {
-            return Expression.Unary(o.op.init(), operand)
+            return Expression.unary(o.op.init(), operand)
         } else {
-            throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Unary)
+            throw ShuntingYardError.unknownOperator(token: op, arity: OperatorArity.unary)
         }
     }
     
-    public func binaryOperatorToNode(op : Token<ShuntingYardTokenType>, leftHand : Expression, rightHand : Expression) throws -> Expression {
+    public func binaryOperatorToNode(_ op : Token<ShuntingYardTokenType>, leftHand : Expression, rightHand : Expression) throws -> Expression {
         
         if let o = binaryOperators[op.value] {
-            return Expression.Binary(o.op.init(), leftHand, rightHand)
+            return Expression.binary(o.op.init(), leftHand, rightHand)
         } else {
-            throw ShuntingYardError.UnknownOperator(token: op, arity: OperatorArity.Binary)
+            throw ShuntingYardError.unknownOperator(token: op, arity: OperatorArity.binary)
         }
     }
     
-    public func functionTokenToNode(function : Token<ShuntingYardTokenType>, args : [Expression]) throws -> Expression {
+    public func functionTokenToNode(_ function : Token<ShuntingYardTokenType>, args : [Expression]) throws -> Expression {
         if let f = functions[function.value] {
             let arity = f.arity
             switch(arity) {
-            case .Fix(let count) where count == args.count:
-                return .Call(f.init(), args)
-            case .Variadic where args.count > 0:
-                return .Call(f.init(), args)
+            case .fix(let count) where count == args.count:
+                return .call(f.init(), args)
+            case .variadic where args.count > 0:
+                return .call(f.init(), args)
             default:
-                throw ShuntingYardError.UnknownFunction(token: function, parameters: args.count)
+                throw ShuntingYardError.unknownFunction(token: function, parameters: args.count)
             }
         } else {
-            throw ShuntingYardError.UnknownFunction(token: function, parameters: args.count)
+            throw ShuntingYardError.unknownFunction(token: function, parameters: args.count)
         }
     }
     
-    public func hasBinaryOperator(op : Token<ShuntingYardTokenType>) -> Bool {
+    public func hasBinaryOperator(_ op : Token<ShuntingYardTokenType>) -> Bool {
         return binaryOperators.keys.contains(op.value)
     }
     
-    public func hasUnaryOperator(op : Token<ShuntingYardTokenType>) -> Bool {
+    public func hasUnaryOperator(_ op : Token<ShuntingYardTokenType>) -> Bool {
         return unaryOperators.keys.contains(op.value)
     }
     
-    public func hasFunctionOfName(function : Token<ShuntingYardTokenType>) -> Bool {
+    public func hasFunctionOfName(_ function : Token<ShuntingYardTokenType>) -> Bool {
         return functions.keys.contains(function.value)
     }
     
-    public func hasConstantOfName(token : Token<ShuntingYardTokenType>) -> Bool {
+    public func hasConstantOfName(_ token : Token<ShuntingYardTokenType>) -> Bool {
         return constants.keys.contains(token.value)
     }
     
-    public func literalTokenToNode(token : Token<ShuntingYardTokenType>) throws -> Expression {
+    public func literalTokenToNode(_ token : Token<ShuntingYardTokenType>) throws -> Expression {
         
         if token.value == "true" {
-            return Expression.Constant(Value.BoolValue(value: true))
+            return Expression.constant(Value.boolValue(value: true))
         } else if token.value == "false" {
-            return Expression.Constant(Value.BoolValue(value: false))
-        } else if let range = token.value.rangeOfString("\\A\"([^\"]*)\"\\Z", options: .RegularExpressionSearch) {
+            return Expression.constant(Value.boolValue(value: false))
+        } else if let range = token.value.range(of: "\\A\"([^\"]*)\"\\Z", options: .regularExpressionSearch) {
             let string = token.value[range]
-            let subString = string[string.startIndex.successor()..<string.endIndex.predecessor()]
+            let subString = string[string.characters.index(after: string.startIndex)..<string.characters.index(before: string.endIndex)]
             
-            return Expression.Constant(Value.StringValue(value: subString))
-        } else if let range = token.value.rangeOfString("\\A#[0-9a-z]{6}\\Z", options: .RegularExpressionSearch) {
+            return Expression.constant(Value.stringValue(value: subString))
+        } else if let range = token.value.range(of: "\\A#[0-9a-z]{6}\\Z", options: .regularExpressionSearch) {
             
             let string = String(token.value[range].characters.dropFirst())
             
@@ -207,11 +207,11 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
                     let r = r1<<4 | r2
                     let g = g1<<4 | g2
                     let b = b1<<4 | b2
-                    return Expression.Constant(Value.ColorValue(r: r, g:g,  b: b, a: 255))
+                    return Expression.constant(Value.colorValue(r: r, g:g,  b: b, a: 255))
             } else {
-                throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                throw ShuntingYardError.unexpectedToken(token: token, message: "")
             }
-        } else if let range = token.value.rangeOfString("\\A#[0-9a-z]{8}\\Z", options: .RegularExpressionSearch) {
+        } else if let range = token.value.range(of: "\\A#[0-9a-z]{8}\\Z", options: .regularExpressionSearch) {
             
             let string = String(token.value[range].characters.dropFirst())
             
@@ -230,20 +230,20 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
                     let g = g1<<4 | g2
                     let b = b1<<4 | b2
                     let a = a1<<4 | a2
-                    return Expression.Constant(Value.ColorValue(r: r, g:g,  b: b, a: a))
+                    return Expression.constant(Value.colorValue(r: r, g:g,  b: b, a: a))
             } else {
-                throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+                throw ShuntingYardError.unexpectedToken(token: token, message: "")
             }
         } else if let int = Int(token.value) {
-            return Expression.Constant(Value.IntValue(value: int))
+            return Expression.constant(Value.intValue(value: int))
         } else if let double = Double(token.value) {
-            return Expression.Constant(Value.DoubleValue(value: double))
+            return Expression.constant(Value.doubleValue(value: double))
         } else {
-            throw ShuntingYardError.UnexpectedToken(token: token, message: "")
+            throw ShuntingYardError.unexpectedToken(token: token, message: "")
         }
     }
     
-    private func parseHexDigits(char: UTF16.CodeUnit) -> UInt8? {
+    private func parseHexDigits(_ char: UTF16.CodeUnit) -> UInt8? {
         let zero = 0x30
         let nine = 0x39
         let lowerA = 0x61
@@ -264,11 +264,11 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
         }
     }
     
-    public func assocOfOperator(token : Token<ShuntingYardTokenType>) -> Associativity? {
+    public func assocOfOperator(_ token : Token<ShuntingYardTokenType>) -> Associativity? {
         return binaryOperators[token.value]?.associativity
     }
     
-    public func precedenceOfOperator(token : Token<ShuntingYardTokenType>, unary : Bool) -> Precedence? {
+    public func precedenceOfOperator(_ token : Token<ShuntingYardTokenType>, unary : Bool) -> Precedence? {
         if(unary) {
             return unaryOperators[token.value]?.precedence
         } else {
@@ -276,7 +276,7 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
         }
     }
     
-    func uniqueNameFor(wantedName: String, definition: Definition? = nil) -> String {
+    func uniqueNameFor(_ wantedName: String, definition: Definition? = nil) -> String {
         
         var testName = wantedName
         var postfix = 0
@@ -284,7 +284,8 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
         
         while (otherDef?.id != nil && otherDef?.id != definition?.id || functions.keys.contains(testName) || constants.keys.contains(testName))
         {
-            testName = "\(wantedName)\(++postfix)"
+            postfix += 1
+            testName = "\(wantedName)\(postfix)"
             otherDef = sheet.definitionWithName(testName)
         }
         

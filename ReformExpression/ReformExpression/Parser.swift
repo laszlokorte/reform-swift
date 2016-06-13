@@ -24,19 +24,19 @@ public func ==(lhs: Precedence, rhs: Precedence) -> Bool {
 
 
 public enum OperatorArity {
-    case Binary
-    case Unary
+    case binary
+    case unary
 }
 
 public enum Associativity {
-    case Left
-    case Right
+    case left
+    case right
 }
 
 public protocol Parser {
-    typealias NodeType
-    typealias TokenType
-    typealias ParseErrorType : ErrorType
+    associatedtype NodeType
+    associatedtype TokenType
+    associatedtype ParseErrorType : ErrorProtocol
     
-    func parse<T : SequenceType where T.Generator.Element==TokenType>(tokens: T) -> Result<NodeType, ParseErrorType>
+    func parse<T : Sequence where T.Iterator.Element==TokenType>(_ tokens: T) -> Result<NodeType, ParseErrorType>
 }

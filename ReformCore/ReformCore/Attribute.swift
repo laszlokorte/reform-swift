@@ -7,9 +7,9 @@
 //
 
 enum AttributeType {
-    case String
-    case Number
-    case PictureId
+    case string
+    case number
+    case pictureId
 }
 
 final class Attribute {

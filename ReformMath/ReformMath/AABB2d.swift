@@ -64,7 +64,7 @@ extension AABB2d {
 }
 
 extension AABB2d {
-    struct OutCode : OptionSetType, CustomDebugStringConvertible {
+    struct OutCode : OptionSet, CustomDebugStringConvertible {
         let rawValue: UInt8
 
         static let Inside = OutCode(rawValue: 0b0000)
@@ -90,11 +90,11 @@ extension AABB2d {
                 }
             }
 
-            return result.joinWithSeparator(",")
+            return result.joined(separator: ",")
         }
     }
 
-    func outCode(point: Vec2d, epsilon:Double = 0) -> OutCode {
+    func outCode(_ point: Vec2d, epsilon:Double = 0) -> OutCode {
         var outCode : OutCode = []
 
         if (point.x < min.x - epsilon) {

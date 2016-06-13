@@ -17,7 +17,7 @@ class IfConditionInstructionDetailController : NSViewController, InstructionDeta
     @IBOutlet var conditionField : NSTextField?
 
     var stringifier : Stringifier?
-    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var parser : ((String) -> Result<ReformExpression.Expression, ShuntingYardError>)?
     var intend : (() -> ())?
 
     var error : String? {
@@ -64,7 +64,7 @@ class IfConditionInstructionDetailController : NSViewController, InstructionDeta
         conditionField?.stringValue = stringifier.stringFor(instruction.expression) ?? ""
     }
 
-    @IBAction func onChange(sender: AnyObject?) {
+    @IBAction func onChange(_ sender: AnyObject?) {
         guard let
             parser = parser,
             string = conditionField?.stringValue,
@@ -78,10 +78,10 @@ class IfConditionInstructionDetailController : NSViewController, InstructionDeta
         }
 
         switch parser(string) {
-        case .Success(let expr):
+        case .success(let expr):
             node.replaceWith(IfConditionInstruction(expression: expr))
             intend()
-        case .Fail(let err):
+        case .fail(let err):
             print(err)
         }
     }

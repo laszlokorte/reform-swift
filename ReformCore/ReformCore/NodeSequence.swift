@@ -9,12 +9,13 @@
 public struct InstructionNodeSequence {
     var nodes : [InstructionNode]
 
-    public init?(var nodes: [InstructionNode]) {
+    public init?(nodes: [InstructionNode]) {
+        var nodes = nodes
         guard let firstParent = nodes.first?.parent else {
             return nil
         }
 
-        guard case .Group(_, let children) = firstParent.content else {
+        guard case .group(_, let children) = firstParent.content else {
             return nil
         }
 
@@ -24,9 +25,9 @@ public struct InstructionNodeSequence {
             }
         }
 
-        nodes.sortInPlace { a, b in
-            return (children.indexOf { $0 === a })! <
-            (children.indexOf { $0 === b })!
+        nodes.sort { a, b in
+            return (children.index { $0 === a })! <
+            (children.index { $0 === b })!
         }
 
         nodes = nodes.filter {
@@ -37,7 +38,7 @@ public struct InstructionNodeSequence {
             return nil
         }
 
-        let sorted : (Bool, InstructionNode?) = nodes.reduce((true, Optional<InstructionNode>.None)) { (prev, current) in
+        let sorted : (Bool, InstructionNode?) = nodes.reduce((true, Optional<InstructionNode>.none)) { (prev, current) in
             guard let prevNode = prev.1 else {
                 return (true, current)
             }
@@ -53,7 +54,7 @@ public struct InstructionNodeSequence {
 }
 
 extension InstructionNodeSequence {
-    public func wrapIn(instruction: GroupInstruction) -> Bool {
+    public func wrapIn(_ instruction: GroupInstruction) -> Bool {
         guard let first = nodes.first else {
             return false
         }

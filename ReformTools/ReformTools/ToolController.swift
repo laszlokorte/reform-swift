@@ -26,7 +26,7 @@ public final class ToolController {
     }
     
     
-    public func process(input: Input, atPosition: Vec2d, withModifier: Modifier) {
+    public func process(_ input: Input, atPosition: Vec2d, withModifier: Modifier) {
         currentTool.process(input, atPosition: atPosition, withModifier: withModifier)
     }
     

@@ -16,7 +16,7 @@ struct StaticFormReference : Equatable {
         self.offset = offset
     }
 
-    func getFormFor<R:Runtime>(runtime: R) -> Form? {
+    func getFormFor<R:Runtime>(_ runtime: R) -> Form? {
         guard let
             id = runtime.read(formId, offset: offset) else {
                 return nil
@@ -25,8 +25,8 @@ struct StaticFormReference : Equatable {
         return runtime.get(FormIdentifier(Int(id)))
     }
 
-    func setFormFor<R:Runtime>(runtime: R, form: Form) {
-        runtime.write(formId, offset: offset, value: unsafeBitCast(form.identifier.value, UInt64.self))
+    func setFormFor<R:Runtime>(_ runtime: R, form: Form) {
+        runtime.write(formId, offset: offset, value: unsafeBitCast(form.identifier.value, to: UInt64.self))
 
     }
 }

@@ -16,7 +16,7 @@ struct CompositeOutline : Outline {
         self.parts = parts
     }
     
-    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         let partLengths = parts.flatMap { $0.getLengthFor(runtime) }
         guard partLengths.count == parts.count else { return nil }
         
@@ -25,7 +25,7 @@ struct CompositeOutline : Outline {
         let length = clamp(t, between: 0, and: 1) * sum
         var subLength = 0.0
         
-        for (i, l) in partLengths.enumerate() {
+        for (i, l) in partLengths.enumerated() {
             if subLength+l > length {
                 return parts[i].getPositionFor(runtime, t: (length-subLength)/l)
             }
@@ -35,7 +35,7 @@ struct CompositeOutline : Outline {
         return nil
     }
     
-    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         var length = 0.0
         
         for part in parts {
@@ -49,7 +49,7 @@ struct CompositeOutline : Outline {
         return length
     }
     
-    func getSegmentsFor<R:Runtime>(runtime: R) -> [Segment] {
+    func getSegmentsFor<R:Runtime>(_ runtime: R) -> [Segment] {
         var result = [Segment]()
         
         for part in parts {
@@ -63,7 +63,7 @@ struct CompositeOutline : Outline {
 
 
 
-    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+    func getAABBFor<R : Runtime>(_ runtime: R) -> AABB2d? {
         return parts.map {
             $0.getAABBFor(runtime)
         }.reduce(nil) { a,b in

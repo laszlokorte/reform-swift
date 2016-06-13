@@ -16,7 +16,7 @@ struct ProxyRotator : Rotator {
     }
 
 
-    func rotate<R:Runtime>(runtime: R, angle: Angle, fix: Vec2d) {
+    func rotate<R:Runtime>(_ runtime: R, angle: Angle, fix: Vec2d) {
         guard let form = formReference.getFormFor(runtime) as? Rotatable else {
             return
         }

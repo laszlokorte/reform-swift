@@ -49,7 +49,7 @@ final public class PictureForm : Form, Creatable {
         return rectangle.angle
     }
     
-    public func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d) {
+    public func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d) {
         rectangle.initWithRuntime(runtime, min: min, max: max)
         let width = abs(max.x - min.x)
         let height = abs(max.y - min.y)
@@ -114,7 +114,7 @@ extension PictureForm : Drawable {
         set { rectangle.drawingMode = newValue }
     }
     
-    public func getPathFor<R:Runtime>(runtime: R) -> Path? {
+    public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard
             let topLeft = topLeftAnchor.getPositionFor(runtime),
             let topRight = topRightAnchor.getPositionFor(runtime),
@@ -124,10 +124,10 @@ extension PictureForm : Drawable {
                 return nil
         }
 
-        return Path(segments: .MoveTo(topLeft), .LineTo(topRight), .LineTo(bottomRight), .LineTo(bottomLeft), .Close)
+        return Path(segments: .moveTo(topLeft), .lineTo(topRight), .lineTo(bottomRight), .lineTo(bottomLeft), .close)
     }
     
-    public func getShapeFor<R:Runtime>(runtime: R) -> Shape? {
+    public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         return Shape()
     }
 }

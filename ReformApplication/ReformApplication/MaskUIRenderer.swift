@@ -14,13 +14,13 @@ import ReformTools
 struct MaskUIRenderer : Renderer {
     let maskUI : MaskUI
 
-    func renderInContext(context: CGContext) {
+    func renderInContext(_ context: CGContext) {
 
-        if case .Clip(let x, let y, let width, let height) = maskUI.state {
-            CGContextSetRGBFillColor(context, 0.1, 0.1, 0.1, 1)
-            CGContextFillRect(context, CGContextGetClipBoundingBox(context))
+        if case .clip(let x, let y, let width, let height) = maskUI.state {
+            context.setFillColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+            context.fill(context.boundingBoxOfClipPath)
 
-            CGContextClipToRect(context, CGRect(x: x, y: y, width: width, height: height))
+            context.clipTo(CGRect(x: x, y: y, width: width, height: height))
         }
         
     }

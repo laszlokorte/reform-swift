@@ -15,7 +15,7 @@ final class SheetController : NSViewController {
 
 
 extension SheetController : NSTableViewDataSource {
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return 3
     }
 }

@@ -29,13 +29,13 @@ extension FormSelection {
         selected.removeAll()
     }
 
-    public func select(formIds: Set<FormIdentifier>) {
+    public func select(_ formIds: Set<FormIdentifier>) {
         selected.removeAll()
 
-        selected.unionInPlace(formIds)
+        selected.formUnion(formIds)
     }
 
-    public func select(formId: FormIdentifier) {
+    public func select(_ formId: FormIdentifier) {
         selected.removeAll()
 
         selected.insert(formId)

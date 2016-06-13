@@ -14,12 +14,12 @@ public struct Shape {
     let area : FillArea
     
     public init() {
-        background = .None
-        stroke = .None
-        area = .PathArea(Path())
+        background = .none
+        stroke = .none
+        area = .pathArea(Path())
     }
     
-    public init(area : FillArea, background : Background = .None, stroke: Stroke = .None) {
+    public init(area : FillArea, background : Background = .none, stroke: Stroke = .none) {
         self.area = area
         self.stroke = stroke
         self.background = background
@@ -27,22 +27,22 @@ public struct Shape {
 }
 
 public enum Aligment {
-    case Left
-    case Right
-    case Center
+    case left
+    case right
+    case center
 }
 
 public enum FillArea {
-    case PathArea(Path)
-    case TextArea(Vec2d, Vec2d, alignment: Aligment, text: String, size: Double)
+    case pathArea(Path)
+    case textArea(Vec2d, Vec2d, alignment: Aligment, text: String, size: Double)
 }
 
 public enum Background {
-    case Fill(Color)
-    case None
+    case fill(Color)
+    case none
 }
 
 public enum Stroke {
-    case Solid(width: Double, color: Color)
-    case None
+    case solid(width: Double, color: Color)
+    case none
 }

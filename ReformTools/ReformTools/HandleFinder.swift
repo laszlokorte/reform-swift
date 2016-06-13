@@ -25,7 +25,7 @@ func ==(lhs: HandleQuery, rhs: HandleQuery) -> Bool {
 struct HandleFinder {
     let stage : Stage
     
-    func getUpdatedHandle(oldHandle: Handle) -> Handle? {
+    func getUpdatedHandle(_ oldHandle: Handle) -> Handle? {
         for entity in stage.entities
             where entity.id == oldHandle.formId {
                 for handle in entity.handles
@@ -38,10 +38,10 @@ struct HandleFinder {
     }
     
     
-    func getHandles(query: HandleQuery) -> [Handle] {
+    func getHandles(_ query: HandleQuery) -> [Handle] {
         var result = [Handle]()
         
-        if case FormFilter.None = query.filter {
+        if case FormFilter.none = query.filter {
             return result
         }
         

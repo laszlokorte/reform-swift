@@ -21,9 +21,9 @@ public struct CreateFormInstruction : Instruction {
         self.destination = destination
     }
     
-    public func evaluate<T:Runtime>(runtime: T) {
+    public func evaluate<T:Runtime>(_ runtime: T) {
         guard let (min, max) = destination.getMinMaxFor(runtime) else {
-            runtime.reportError(.InvalidDestination)
+            runtime.reportError(.invalidDestination)
             return
         }
         runtime.declare(form)
@@ -31,11 +31,11 @@ public struct CreateFormInstruction : Instruction {
     }
     
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return "Create \(form.name) \(destination.getDescription(stringifier))"
     }
     
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
         analyzer.announceForm(form)
         
         if let picture = form as? PictureForm,
@@ -50,7 +50,7 @@ public struct CreateFormInstruction : Instruction {
 }
 
 extension CreateFormInstruction : Mergeable {
-    public func mergeWith(other: CreateFormInstruction, force: Bool) -> CreateFormInstruction? {
+    public func mergeWith(_ other: CreateFormInstruction, force: Bool) -> CreateFormInstruction? {
 
         guard other.form.dynamicType == form.dynamicType else {
             return nil

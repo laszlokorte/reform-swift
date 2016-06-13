@@ -9,5 +9,5 @@
 import ReformMath
 
 public protocol RuntimeDistance : Degeneratable {
-    func getDeltaFor<R:Runtime>(runtime: R) -> Vec2d?
+    func getDeltaFor<R:Runtime>(_ runtime: R) -> Vec2d?
 }

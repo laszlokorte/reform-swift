@@ -18,11 +18,11 @@ struct StaticPointAnchor : Anchor {
         self.name = name
     }
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         return point.getPositionFor(runtime)
     }
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d) {
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         if let oldPos = point.getPositionFor(runtime) {
             point.setPositionFor(runtime, position: oldPos + delta)
         }

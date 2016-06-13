@@ -14,12 +14,12 @@ public final class MoveTool : Tool {
 
     enum State
     {
-        case Idle
-        case Delegating
-        case Moving(point: EntityPoint, target: Target, offset: Vec2d)
+        case idle
+        case delegating
+        case moving(point: EntityPoint, target: Target, offset: Vec2d)
     }
     
-    var state : State = .Idle
+    var state : State = .idle
     var snapType : PointType = []
     
     let stage : Stage
@@ -44,7 +44,7 @@ public final class MoveTool : Tool {
     }
     
     public func setUp() {
-        state = .Idle
+        state = .idle
         selectionTool.setUp()
         
         if let selected = selection.one {
@@ -57,7 +57,7 @@ public final class MoveTool : Tool {
         pointSnapper.disable()
         pointGrabber.disable()
         selectionTool.tearDown()
-        state = .Idle
+        state = .idle
 
     }
     
@@ -72,17 +72,17 @@ public final class MoveTool : Tool {
     
     public func cancel() {
         switch self.state {
-        case .Delegating, .Idle:
-            state = .Idle
+        case .delegating, .idle:
+            state = .idle
             selectionTool.cancel()
-        case .Moving:
+        case .moving:
             instructionCreator.cancel()
             pointSnapper.disable()
-            state = .Idle
+            state = .idle
         }
     }
     
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? (modifier.contains(.Free) ? [.Grid] : [.Glomp]) : modifier.contains(.Free) ? [.None] : [.Form, .Intersection]
         
         if modifier.isStreight {
@@ -93,20 +93,20 @@ public final class MoveTool : Tool {
         
         
         switch state {
-        case .Delegating:
+        case .delegating:
             selectionTool.process(input, atPosition: pos, withModifier: modifier)
             switch input {
-            case .ModifierChange, .Press,
-            .Move, .Cycle, .Toggle:
+            case .modifierChange, .press,
+            .move, .cycle, .toggle:
                 break
-            case .Release:
-                state = .Idle
+            case .release:
+                state = .idle
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .Move, .ModifierChange:
+            case .move, .modifierChange:
                 pointGrabber.searchAt(pos)
-            case .Press:
+            case .press:
                 if let grabbedPoint = pointGrabber.current {
  
                     let distance = ConstantDistance(delta: Vec2d())
@@ -115,43 +115,43 @@ public final class MoveTool : Tool {
                     instructionCreator
                         .beginCreation(instruction)
                     
-                    state = .Moving(point: grabbedPoint, target: .Free(position: pos), offset: pos - grabbedPoint.position)
+                    state = .moving(point: grabbedPoint, target: .free(position: pos), offset: pos - grabbedPoint.position)
                         
-                    pointSnapper.enable(.Except(grabbedPoint.formId), pointType: snapType)
+                    pointSnapper.enable(.except(grabbedPoint.formId), pointType: snapType)
                     
                 } else {
-                    state = .Delegating
+                    state = .delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-            case .Cycle:
+            case .cycle:
                 pointGrabber.cycle()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
-        case .Moving(let grabPoint, _, let offset):
+        case .moving(let grabPoint, _, let offset):
             switch input {
                 
-            case .ModifierChange:
-                pointSnapper.enable(.Except(grabPoint.formId), pointType: snapType)
+            case .modifierChange:
+                pointSnapper.enable(.except(grabPoint.formId), pointType: snapType)
                 fallthrough
-            case .Move:
+            case .move:
                 pointSnapper.searchAt(pos)
                 if pointSnapper.current == nil {
                     streightener.reset()
                 }
                 
-                state = .Moving(point: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
-            case .Press:
+                state = .moving(point: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
+            case .press:
                 break
-            case .Release:
+            case .release:
                 instructionCreator.commit()
-                state = .Idle
+                state = .idle
                 pointSnapper.disable()
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle:
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle:
                 pointSnapper.cycle()
-                state = .Moving(point: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
-            case .Toggle:
+                state = .moving(point: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
+            case .toggle:
                 streightener.invert()
             }
         }
@@ -166,12 +166,12 @@ public final class MoveTool : Tool {
     }
     
     private func publish() {
-        if case .Moving(let activePoint, let target, let offset) = state {
+        if case .moving(let activePoint, let target, let offset) = state {
             let distance : protocol<RuntimeDistance, Labeled>
             switch target {
-            case .Free(let position):
+            case .free(let position):
                 distance = ConstantDistance(delta: streightener.adjust(position - activePoint.position - offset,step: Angle(degree: 45)))
-            case .Snap(let snap):
+            case .snap(let snap):
                 distance = RelativeDistance(from: activePoint.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - activePoint.position))
             }
             

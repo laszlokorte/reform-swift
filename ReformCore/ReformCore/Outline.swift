@@ -9,17 +9,17 @@
 import ReformMath
 
 public protocol Outline {
-    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d?
+    func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d?
     
-    func getLengthFor<R:Runtime>(runtime: R) -> Double?
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double?
     
-    func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath
+    func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath
 
-    func getAABBFor<R:Runtime>(runtime: R) -> AABB2d?
+    func getAABBFor<R:Runtime>(_ runtime: R) -> AABB2d?
 }
 
 
-func intersectionsForRuntime<R:Runtime>(runtime: R, a: Outline, b: Outline) -> [Vec2d] {
+func intersectionsForRuntime<R:Runtime>(_ runtime: R, a: Outline, b: Outline) -> [Vec2d] {
     var result : [Vec2d] = []
     
     for segmentA in a.getSegmentsFor(runtime) {

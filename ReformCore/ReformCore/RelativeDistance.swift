@@ -22,7 +22,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
         self.direction = direction
     }
     
-    public func getDeltaFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getDeltaFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             source = from.getPositionFor(runtime),
             target = to.getPositionFor(runtime) else {
@@ -32,7 +32,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
         return direction.getAdjustedFor(runtime, anchor: source, position: target) - source
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let fromLabel = from.getDescription(stringifier)
         let toLabel = to.getDescription(stringifier)
         

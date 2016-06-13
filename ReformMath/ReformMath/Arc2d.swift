@@ -40,7 +40,7 @@ extension Arc2d {
             AngleRange(start: Angle(percent: 50), end: Angle(percent: 75)),
             AngleRange(start: Angle(percent: 75), end: Angle(percent: 100)),
         ].lazy.flatMap { (r:AngleRange) in
-            intersection(range: range, range: self.range)
+            intersection(range: self.range, range: self.range)
         }.flatMap { (r:AngleRange) in
             Arc2d(center: center, radius: radius, range: r)
         }

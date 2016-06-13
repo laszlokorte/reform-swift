@@ -15,13 +15,13 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
     public let delta: Vec2d
     public let alignment: RuntimeAlignment
     
-    public init(from: PointType, delta: Vec2d, alignment: RuntimeAlignment = .Leading) {
+    public init(from: PointType, delta: Vec2d, alignment: RuntimeAlignment = .leading) {
         self.from = from
         self.delta = delta
         self.alignment = alignment
     }
     
-    public func getMinMaxFor<R:Runtime>(runtime: R) -> (Vec2d,Vec2d)? {
+    public func getMinMaxFor<R:Runtime>(_ runtime: R) -> (Vec2d,Vec2d)? {
         guard let min = from.getPositionFor(runtime) else {
             return nil
         }
@@ -29,13 +29,13 @@ public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
         return alignment.getMinMax(from: min, to: min + delta)
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let fromLabel = from.getDescription(stringifier)
         
         switch alignment {
-        case .Centered:
+        case .centered:
             return "Around \(fromLabel) \(delta.label)"
-        case .Leading:
+        case .leading:
             return "From \(fromLabel) \(delta.label)"
         }
     }

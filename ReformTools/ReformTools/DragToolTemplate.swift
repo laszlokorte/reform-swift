@@ -16,18 +16,18 @@ public protocol Positioned {
 }
 
 public protocol DragToolProtocol {
-    typealias StartType : Positioned
-    typealias InstructionType : Instruction
+    associatedtype StartType : Positioned
+    associatedtype InstructionType : Instruction
     
-    func instructionForDrag(from: StartType, to: Target, offset: Vec2d) -> InstructionType
+    func instructionForDrag(_ from: StartType, to: Target, offset: Vec2d) -> InstructionType
     
     func refresh()
 
     func reset()
     
-    func filterStart(formId: FormIdentifier?)
+    func filterStart(_ formId: FormIdentifier?)
     
-    func searchStart(at: Vec2d)
+    func searchStart(_ at: Vec2d)
     func cycleStart()
     
     var start : StartType? { get }
@@ -35,16 +35,16 @@ public protocol DragToolProtocol {
 
 enum State<StartType>
 {
-    case Idle
-    case Delegating
-    case Dragging(start: StartType, target: Target, offset: Vec2d)
+    case idle
+    case delegating
+    case dragging(start: StartType, target: Target, offset: Vec2d)
 }
 
 public final class DragTool<Delegate: DragToolProtocol> {
 
     
     var delegate : Delegate
-    var state : State<Delegate.StartType> = .Idle
+    var state : State<Delegate.StartType> = .idle
     var snapType : PointType = []
     
     let stage : Stage
@@ -67,12 +67,12 @@ public final class DragTool<Delegate: DragToolProtocol> {
     }
     
     public func setUp() {
-        state = .Idle
+        state = .idle
         selectionTool.setUp()
     }
     
     public func tearDown() {
-        state = .Idle
+        state = .idle
         delegate.refresh()
         selectionTool.tearDown()
     }
@@ -88,17 +88,17 @@ public final class DragTool<Delegate: DragToolProtocol> {
     
     public func cancel() {
         switch self.state {
-        case .Delegating, .Idle:
-            state = .Idle
+        case .delegating, .idle:
+            state = .idle
             selectionTool.cancel()
-        case .Dragging:
+        case .dragging:
             instructionCreator.cancel()
             delegate.reset()
-            state = .Idle
+            state = .idle
         }
     }
     
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? [.Glomp] : [.Form, .Intersection]
         
         if modifier.isStreight {
@@ -109,66 +109,66 @@ public final class DragTool<Delegate: DragToolProtocol> {
         
         
         switch state {
-        case .Delegating:
+        case .delegating:
             selectionTool.process(input, atPosition: pos, withModifier: modifier)
             switch input {
-            case .ModifierChange, .Press,
-            .Move, .Cycle, .Toggle:
+            case .modifierChange, .press,
+            .move, .cycle, .toggle:
                 break
-            case .Release:
-                state = .Idle
+            case .release:
+                state = .idle
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .Move, .ModifierChange:
+            case .move, .modifierChange:
                 delegate.searchStart(pos)
-            case .Press:
+            case .press:
                 if let grabbedPoint = delegate.start {
                     
-                    let target : Target = .Free(position: pos)
+                    let target : Target = .free(position: pos)
                     let offset = pos - grabbedPoint.position
                     let instruction = delegate.instructionForDrag(grabbedPoint, to: target, offset: offset)
                     
                     instructionCreator
                         .beginCreation(instruction)
                     
-                    state = .Dragging(start: grabbedPoint, target: .Free(position: pos), offset: offset)
+                    state = .dragging(start: grabbedPoint, target: .free(position: pos), offset: offset)
                     
-                    pointSnapper.enable(.Except(grabbedPoint.formId), pointType: snapType)
+                    pointSnapper.enable(.except(grabbedPoint.formId), pointType: snapType)
                     
                 } else {
-                    state = .Delegating
+                    state = .delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-            case .Cycle:
+            case .cycle:
                 delegate.cycleStart()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
-        case .Dragging(let grabPoint, _, let offset):
+        case .dragging(let grabPoint, _, let offset):
             switch input {
                 
-            case .ModifierChange:
-                pointSnapper.enable(.Except(grabPoint.formId), pointType: snapType)
+            case .modifierChange:
+                pointSnapper.enable(.except(grabPoint.formId), pointType: snapType)
                 fallthrough
-            case .Move:
+            case .move:
                 pointSnapper.searchAt(pos)
                 if pointSnapper.current == nil {
                     streightener.reset()
                 }
                 
-                state = .Dragging(start: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
-            case .Press:
+                state = .dragging(start: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
+            case .press:
                 break
-            case .Release:
+            case .release:
                 instructionCreator.commit()
-                state = .Idle
+                state = .idle
                 pointSnapper.disable()
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle:
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle:
                 pointSnapper.cycle()
-                state = .Dragging(start: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
-            case .Toggle:
+                state = .dragging(start: grabPoint, target: pointSnapper.getTarget(pos), offset: offset)
+            case .toggle:
                 streightener.invert()
             }
         }
@@ -179,7 +179,7 @@ public final class DragTool<Delegate: DragToolProtocol> {
     }
     
     private func publish() {
-        if case .Dragging(let activePoint, let target, let offset) = state {            
+        if case .dragging(let activePoint, let target, let offset) = state {            
             instructionCreator.update(delegate.instructionForDrag(activePoint, to: target, offset: offset))
         }
     }

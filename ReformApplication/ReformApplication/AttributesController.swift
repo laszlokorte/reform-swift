@@ -24,23 +24,23 @@ class AttributesController : NSViewController {
     var attributesViewModel : AttributesViewModel?
 
     override func viewDidAppear() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AttributesController.selectionChanged), name:"SelectionChanged", object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(AttributesController.selectionChanged), name:"SelectionChanged", object: nil)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AttributesController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(AttributesController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
 
         selectionChanged()
     }
 
     override func viewDidDisappear() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:"SelectionChanged", object: nil)
+        NotificationCenter.default().removeObserver(self, name:"SelectionChanged" as NSNotification.Name, object: nil)
 
 
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:"ProcedureAnalyzed", object: nil)
+        NotificationCenter.default().removeObserver(self, name:"ProcedureAnalyzed" as NSNotification.Name, object: nil)
     }
 
     dynamic func selectionChanged() {
         if let model = attributesViewModel {
-            tabs?.hidden = false
+            tabs?.isHidden = false
             if let single = model.selection.one {
                 tabs?.selectTabViewItem(singleTab)
                 formNameField?.stringValue = model.analyzer.stringifier.labelFor(single) ?? String(single)
@@ -49,7 +49,7 @@ class AttributesController : NSViewController {
                 labelField?.stringValue = "\(model.selection.selected.count) Forms selected"
             }
         } else {
-            tabs?.hidden = true
+            tabs?.isHidden = true
         }
     }
 

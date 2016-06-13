@@ -16,7 +16,7 @@ import ReformExpression
 struct AffineHandleFinder {
     let stage : Stage
 
-    func getUpdatedHandle(oldHandle: AffineHandle) -> AffineHandle? {
+    func getUpdatedHandle(_ oldHandle: AffineHandle) -> AffineHandle? {
         for entity in stage.entities
             where entity.id == oldHandle.formId {
                 for handle in entity.affineHandles
@@ -29,10 +29,10 @@ struct AffineHandleFinder {
     }
 
 
-    func getHandles(query: HandleQuery) -> [AffineHandle] {
+    func getHandles(_ query: HandleQuery) -> [AffineHandle] {
         var result = [AffineHandle]()
 
-        if case FormFilter.None = query.filter {
+        if case FormFilter.none = query.filter {
             return result
         }
 

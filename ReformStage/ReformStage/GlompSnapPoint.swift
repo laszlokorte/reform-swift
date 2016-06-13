@@ -24,7 +24,7 @@ public struct GlompSnapPoint : SnapPoint, Equatable {
         return point
     }
     
-    public func belongsTo(formId: FormIdentifier) -> Bool {
+    public func belongsTo(_ formId: FormIdentifier) -> Bool {
         return point.formId == formId
     }
 }

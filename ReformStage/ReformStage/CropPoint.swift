@@ -25,25 +25,25 @@ extension CropPoint {
 }
 
 public enum CropSide : Hashable {
-    case Top
-    case Left
-    case Right
-    case Bottom
-    case TopLeft
-    case TopRight
-    case BottomLeft
-    case BottomRight
+    case top
+    case left
+    case right
+    case bottom
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
 
     public var vector : Vec2d {
         switch self {
-        case .Top: return Vec2d(x: 0,y: 1)
-        case .Left: return Vec2d(x: -1,y: 0)
-        case .Right: return Vec2d(x: 1,y: 0)
-        case .Bottom: return Vec2d(x: 0,y: -1)
-        case .TopLeft: return Vec2d(x: -1,y: 1)
-        case .TopRight: return Vec2d(x: 1,y: 1)
-        case .BottomLeft: return Vec2d(x: -1,y: -1)
-        case .BottomRight: return Vec2d(x: 1,y: -1)
+        case .top: return Vec2d(x: 0,y: 1)
+        case .left: return Vec2d(x: -1,y: 0)
+        case .right: return Vec2d(x: 1,y: 0)
+        case .bottom: return Vec2d(x: 0,y: -1)
+        case .topLeft: return Vec2d(x: -1,y: 1)
+        case .topRight: return Vec2d(x: 1,y: 1)
+        case .bottomLeft: return Vec2d(x: -1,y: -1)
+        case .bottomRight: return Vec2d(x: 1,y: -1)
         }
     }
 }

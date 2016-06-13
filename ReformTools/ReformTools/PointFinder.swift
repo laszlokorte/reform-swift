@@ -12,28 +12,28 @@ import ReformStage
 import ReformExpression
 
 enum LocationFilter : Equatable {
-    case Any
-    case Near(Vec2d, distance: Double)
-    case AABB(ReformMath.AABB2d)
+    case any
+    case near(Vec2d, distance: Double)
+    case aabb(ReformMath.AABB2d)
 }
 
 extension LocationFilter {
-    func matches(hitArea: HitArea) -> Bool {
+    func matches(_ hitArea: HitArea) -> Bool {
         switch self {
-        case .Any: return true
-        case .Near(let point, let distance):
+        case .any: return true
+        case .near(let point, let distance):
             return hitArea.contains(point, margin: distance)
-        case .AABB(let aabb):
+        case .aabb(let aabb):
             return hitArea.overlaps(aabb)
         }
     }
 
-    func matches(point: Vec2d) -> Bool {
+    func matches(_ point: Vec2d) -> Bool {
         switch self {
-        case .Any: return true
-        case .Near(let loc, let d):
+        case .any: return true
+        case .near(let loc, let d):
             return (point-loc).length <= d
-        case .AABB(let aabb):
+        case .aabb(let aabb):
             return inside(point, aabb: aabb)
         }
     }
@@ -41,29 +41,29 @@ extension LocationFilter {
 
 func ==(lhs: LocationFilter, rhs: LocationFilter) -> Bool {
     switch (lhs, rhs) {
-    case (.Any, .Any):
+    case (.any, .any):
         return true
-    case (.Near(let p1, let d1), .Near(let p2, let d2)):
+    case (.near(let p1, let d1), .near(let p2, let d2)):
         return p1==p2 && d1 == d2
-    case (.AABB(let aabb1), .AABB(let aabb2)):
+    case (.aabb(let aabb1), .aabb(let aabb2)):
         return aabb1 == aabb2
     default: return false
     }
 }
 
 enum FormFilter : Equatable {
-    case None
-    case Any
-    case Only(SourceIdentifier)
-    case Except(SourceIdentifier)
+    case none
+    case any
+    case only(SourceIdentifier)
+    case except(SourceIdentifier)
 }
 
 extension FormFilter {
-    func excludes(id: SourceIdentifier) -> Bool {
-        if case .Except(let excl) = self {
+    func excludes(_ id: SourceIdentifier) -> Bool {
+        if case .except(let excl) = self {
             return intersects(excl, id: id)
         }
-        if case .Only(let only) = self {
+        if case .only(let only) = self {
             return id.runtimeId != only.runtimeId
         }
 
@@ -73,10 +73,10 @@ extension FormFilter {
 
 func ==(lhs: FormFilter, rhs: FormFilter) -> Bool {
     switch (lhs, rhs) {
-    case (.None, .None): return true
-    case (.Any, .Any): return true
-    case (.Only(let l), .Only(let r)): return l==r
-    case (.Except(let l), .Except(let r)): return l==r
+    case (.none, .none): return true
+    case (.any, .any): return true
+    case (.only(let l), .only(let r)): return l==r
+    case (.except(let l), .except(let r)): return l==r
     default: return false
     }
 }
@@ -94,7 +94,7 @@ func ==(lhs: PointQuery, rhs: PointQuery) -> Bool {
 struct PointFinder {
     let stage : Stage
     
-    func getUpdatedPoint(oldPoint: EntityPoint) -> EntityPoint? {
+    func getUpdatedPoint(_ oldPoint: EntityPoint) -> EntityPoint? {
         for entity in stage.entities
             where entity.id == oldPoint.formId {
                 for point in entity.points
@@ -106,7 +106,7 @@ struct PointFinder {
         return nil
     }
     
-    func getUpdatedPoint(oldPoint: IntersectionSnapPoint) -> IntersectionSnapPoint? {
+    func getUpdatedPoint(_ oldPoint: IntersectionSnapPoint) -> IntersectionSnapPoint? {
         for intersection in stage.intersections
             where intersection.point == oldPoint.point {
                 return intersection
@@ -115,10 +115,10 @@ struct PointFinder {
         return nil
     }
     
-    func getSnapPoints(query: PointQuery) -> [SnapPoint] {
+    func getSnapPoints(_ query: PointQuery) -> [SnapPoint] {
         var result = [SnapPoint]()
         
-        if case FormFilter.None = query.filter {
+        if case FormFilter.none = query.filter {
             return result
         }
         
@@ -137,22 +137,22 @@ struct PointFinder {
                     }
                 }
                 
-                if case .Near(let loc, let d) = query.location where query.pointType.contains(.Glomp) {
+                if case .near(let loc, let d) = query.location where query.pointType.contains(.Glomp) {
                     if let (u, pos) = pointOn(segmentPath: entity.outline, closestTo: loc, maxDistance: d) {
 
-                        result.append(GlompSnapPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(formId: entity.id.runtimeId, lerp: Expression.Constant(.DoubleValue(value: u)))))
+                        result.append(GlompSnapPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(formId: entity.id.runtimeId, lerp: ReformExpression.Expression.constant(.doubleValue(value: u)))))
                     }
                 }
             }
         }
         
-        if case .Only = query.filter {
+        if case .only = query.filter {
             return result
         }
         
         if query.pointType.contains(.Intersection) {
             for intersection in stage.intersections {
-                if case .Except(let id) = query.filter where matches(id, id: intersection.formIdA) || matches(id, id: intersection.formIdB) {
+                if case .except(let id) = query.filter where matches(id, id: intersection.formIdA) || matches(id, id: intersection.formIdB) {
                     continue
                 }
                 guard query.location.matches(intersection.position) else {

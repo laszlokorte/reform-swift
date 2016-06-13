@@ -11,12 +11,12 @@ import ReformStage
 
 public final class SnapUI {
     public enum State {
-        case Hide
-        case Show([SnapPoint])
-        case Active(SnapPoint, [SnapPoint])
+        case hide
+        case show([SnapPoint])
+        case active(SnapPoint, [SnapPoint])
     }
     
-    public var state : State = .Hide
+    public var state : State = .hide
     
     public init() {}
 }

@@ -8,11 +8,11 @@
 
 public final class MaskUI {
     public enum State {
-        case Disabled
-        case Clip(x: Double, y: Double, width: Double, height: Double)
+        case disabled
+        case clip(x: Double, y: Double, width: Double, height: Double)
     }
 
-    public var state : State = .Disabled
+    public var state : State = .disabled
 
     public init() {}
 }

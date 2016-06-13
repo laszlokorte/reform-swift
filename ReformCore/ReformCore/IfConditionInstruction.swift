@@ -9,17 +9,17 @@
 import ReformExpression
 
 public struct IfConditionInstruction : GroupInstruction {
-    public let expression : Expression
+    public let expression : ReformExpression.Expression
     
     public var target : FormIdentifier? { return nil }
 
-    public init(expression : Expression) {
+    public init(expression : ReformExpression.Expression) {
         self.expression = expression
     }
     
-    public func evaluate<T:Runtime where T.Ev==InstructionNode>(runtime: T, withChildren children: [InstructionNode]) {
-        guard case .Success(.BoolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
-            runtime.reportError(.InvalidExpression)
+    public func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren children: [InstructionNode]) {
+        guard case .success(.boolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
+            runtime.reportError(.invalidExpression)
             return
         }
         
@@ -33,12 +33,12 @@ public struct IfConditionInstruction : GroupInstruction {
     }
     
     
-    public func getDescription(stringifier: Stringifier) -> String {        let expressionString = stringifier.stringFor(expression) ?? "???"
+    public func getDescription(_ stringifier: Stringifier) -> String {        let expressionString = stringifier.stringFor(expression) ?? "???"
         
         return "if \(expressionString):"
     }
 
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
     }
 
     public var isDegenerated : Bool {

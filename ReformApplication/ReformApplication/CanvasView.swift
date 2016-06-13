@@ -31,7 +31,7 @@ final class CanvasView : NSView {
 
     private var currentContext : CGContext? {
         get {
-            return NSGraphicsContext.currentContext()?.CGContext
+            return NSGraphicsContext.current()?.cgContext
 
 //             The 10.10 SDK provides a CGContext on NSGraphicsContext, but
 //             that's not available to folks running 10.9, so perform this
@@ -54,15 +54,15 @@ final class CanvasView : NSView {
     }
 
     
-    override func drawRect(dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: NSRect) {
         if let context = currentContext {
             if let camera = camera {
-                camera.zoom = Double(self.convertSize(NSSize(width:1, height: 1), toView: nil).width)
+                camera.zoom = Double(self.convert(NSSize(width:1, height: 1), to: nil).width)
             }
 
             let offsetX = (bounds.width-CGFloat(canvasSize.x))/2.0
             let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
-            CGContextTranslateCTM(context, offsetX, offsetY)
+            context.translate(x: offsetX, y: offsetY)
 
             for r in renderers {
                 r.renderInContext(context)
@@ -76,15 +76,15 @@ final class CanvasView : NSView {
 
     override var acceptsFirstResponder : Bool { return true }
 
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(_ theEvent: NSEvent) {
         delegate?.keyDown(theEvent)
     }
 
-    override func keyUp(theEvent: NSEvent) {
+    override func keyUp(_ theEvent: NSEvent) {
         delegate?.keyUp(theEvent)
     }
 
-    override func selectAll(sender: AnyObject?) {
+    override func selectAll(_ sender: AnyObject?) {
         delegate?.selectAll(sender)
     }
 

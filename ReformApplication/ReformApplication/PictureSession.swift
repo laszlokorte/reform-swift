@@ -24,7 +24,7 @@ final class InstructionFocusChanger {
         self.intend = intend
     }
 
-    func setFocus(node : InstructionNode?) {
+    func setFocus(_ node : InstructionNode?) {
         self.instructionFocus.current = node
         intend()
     }
@@ -37,13 +37,13 @@ final class FormSelectionChanger {
         self.selection = selection
     }
 
-    func setSelection(ids: Set<FormIdentifier>) {
+    func setSelection(_ ids: Set<FormIdentifier>) {
         self.selection.select(ids)
         publishChange()
     }
 
     private func publishChange() {
-        NSNotificationCenter.defaultCenter().postNotificationName("SelectionChanged", object: selection)
+        NotificationCenter.default().post(name: Notification.Name(rawValue: "SelectionChanged"), object: selection)
     }
 }
 
@@ -64,7 +64,7 @@ final class ProcedureProcessor<A:Analyzer> {
     let snapshotCollector : SnapshotCollector
 
     // the queue used to schedule tasks for the background thread
-    let queue = dispatch_queue_create("reform.runtime.queue", DISPATCH_QUEUE_SERIAL)
+    let queue = DispatchQueue(label: "reform.runtime.queue", attributes: DispatchQueueAttributes.serial)
 
     // counters to ensure runtime is not running multiple times in parallel
     var triggerCounter = 0
@@ -80,7 +80,7 @@ final class ProcedureProcessor<A:Analyzer> {
 
     func trigger() {
         triggerCounter += 1
-        dispatch_async(queue) {
+        queue.async {
             [picture=self.picture, toolController=self.toolController, runtime=self.runtime, analyzer=self.analyzer] in
             do {
                 defer { self.triggerCounter -= 1 }
@@ -93,18 +93,18 @@ final class ProcedureProcessor<A:Analyzer> {
             self.snapshotCollector.requireRedraw()
             picture.procedure.analyzeWith(analyzer)
 
-            dispatch_sync(dispatch_get_main_queue()) {
-                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureAnalyzed", object: picture.procedure)
+            DispatchQueue.main.sync {
+                NotificationCenter.default().post(name: Notification.Name(rawValue: "ProcedureAnalyzed"), object: picture.procedure)
             }
 
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
 
-            dispatch_sync(dispatch_get_main_queue()) {
+            DispatchQueue.main.sync {
                 toolController.currentTool.refresh()
 
             }
-            dispatch_async(dispatch_get_main_queue()) {
-                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+            DispatchQueue.main.async {
+                NotificationCenter.default().post(name: Notification.Name(rawValue: "ProcedureEvaluated"), object: picture.procedure)
             }
         }
     }
@@ -112,7 +112,7 @@ final class ProcedureProcessor<A:Analyzer> {
     func triggerEval() {
         evalCounter += 1
 
-        dispatch_async(queue) {
+        queue.async {
             [picture=self.picture, toolController=self.toolController, runtime=self.runtime] in
             defer { self.evalCounter -= 1 }
 
@@ -124,12 +124,12 @@ final class ProcedureProcessor<A:Analyzer> {
 
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
 
-            dispatch_sync(dispatch_get_main_queue()) {
+            DispatchQueue.main.sync {
                 toolController.currentTool.refresh()
             }
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
 
-                NSNotificationCenter.defaultCenter().postNotificationName("ProcedureEvaluated", object: picture.procedure)
+                NotificationCenter.default().post(name: Notification.Name(rawValue: "ProcedureEvaluated"), object: picture.procedure)
             }
 
         }
@@ -337,7 +337,7 @@ final class PictureSession {
 
         set {
             toolController.currentTool = newValue
-            NSNotificationCenter.defaultCenter().postNotificationName("ToolChanged", object: nil)
+            NotificationCenter.default().post(name: Notification.Name(rawValue: "ToolChanged"), object: nil)
         }
     }
 }

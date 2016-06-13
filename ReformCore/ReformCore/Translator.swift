@@ -9,5 +9,5 @@
 import ReformMath
 
 public protocol Translator {
-    func translate<R:Runtime>(runtime: R, delta: Vec2d)
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d)
 }

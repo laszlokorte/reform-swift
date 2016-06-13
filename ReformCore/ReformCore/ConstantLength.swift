@@ -13,7 +13,7 @@ struct ConstantLength : RuntimeLength {
         self.length = length
     }
     
-    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         return length
     }
 }

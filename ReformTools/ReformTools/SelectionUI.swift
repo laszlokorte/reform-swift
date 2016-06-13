@@ -11,17 +11,17 @@ import ReformMath
 
 public final class SelectionUI {
     public enum State {
-        case Hide
-        case Show(FormSelection)
+        case hide
+        case show(FormSelection)
     }
 
     public enum Rect {
-        case Hide
-        case Show(Vec2d, Vec2d)
+        case hide
+        case show(Vec2d, Vec2d)
     }
     
-    public var state : State = .Hide
-    public var rect : Rect = .Hide
+    public var state : State = .hide
+    public var rect : Rect = .hide
 
     public init() {}
 }

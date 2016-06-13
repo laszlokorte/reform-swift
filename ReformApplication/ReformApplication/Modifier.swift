@@ -10,24 +10,24 @@ import Foundation
 import ReformTools
 
 extension Modifier {
-    static func fromEvent(event: NSEvent) -> Modifier {
+    static func fromEvent(_ event: NSEvent) -> Modifier {
         var result : Modifier = []
         
 
-        if event.modifierFlags.contains(.ShiftKeyMask) {
-            result.unionInPlace(Modifier.Streight)
+        if event.modifierFlags.contains(.shift) {
+            result.formUnion(Modifier.Streight)
         }
         
-        if event.modifierFlags.contains(.AlternateKeyMask) {
-            result.unionInPlace(Modifier.AlternativeAlignment)
+        if event.modifierFlags.contains(.option) {
+            result.formUnion(Modifier.AlternativeAlignment)
         }
 
-        if event.modifierFlags.contains(.CommandKeyMask) {
-            result.unionInPlace(Modifier.Glomp)
+        if event.modifierFlags.contains(.command) {
+            result.formUnion(Modifier.Glomp)
         }
 
-        if event.modifierFlags.contains(.ControlKeyMask) {
-            result.unionInPlace(Modifier.Free)
+        if event.modifierFlags.contains(.control) {
+            result.formUnion(Modifier.Free)
         }
 
         

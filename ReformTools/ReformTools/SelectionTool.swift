@@ -13,32 +13,32 @@ import ReformStage
 public final class SelectionTool : Tool {
     enum State
     {
-        case Idle
-        case Selecting(entity: Entity?, cycle: Int, old: Set<FormIdentifier>)
-        case MultiSelect(from: Vec2d, to: Vec2d, old: Set<FormIdentifier>)
+        case idle
+        case selecting(entity: Entity?, cycle: Int, old: Set<FormIdentifier>)
+        case multiSelect(from: Vec2d, to: Vec2d, old: Set<FormIdentifier>)
     }
 
     enum ChangeMode {
-        case Replace
-        case XOR
+        case replace
+        case xor
 
-        func combine(old: Set<FormIdentifier>, with: [FormIdentifier]) -> Set<FormIdentifier> {
+        func combine(_ old: Set<FormIdentifier>, with: [FormIdentifier]) -> Set<FormIdentifier> {
             switch self {
-            case .Replace:
+            case .replace:
                 return Set().union(with)
-            case .XOR:
-                return old.exclusiveOr(with)
+            case .xor:
+                return old.symmetricDifference(with)
             }
         }
     }
 
-    var state : State = .Idle {
+    var state : State = .idle {
         didSet {
             update(state)
         }
     }
 
-    var changeMode : ChangeMode = .Replace
+    var changeMode : ChangeMode = .replace
     
     let stage : Stage
     let selection : FormSelection
@@ -58,14 +58,14 @@ public final class SelectionTool : Tool {
     }
     
     public func setUp() {
-        changeMode = .Replace
-        state = .Idle
-        selectionUI.state = .Show(selection)
+        changeMode = .replace
+        state = .idle
+        selectionUI.state = .show(selection)
     }
     
     public func tearDown() {
-        selectionUI.state = .Hide
-        state = .Idle
+        selectionUI.state = .hide
+        state = .idle
     }
     
     public func refresh() {
@@ -77,79 +77,79 @@ public final class SelectionTool : Tool {
     
     public func cancel() {
         selection.clear()
-        state = .Idle
+        state = .idle
         indend()
     }
 
-    public func process(input: Input, atPosition position: Vec2d, withModifier: Modifier) {
-        changeMode = withModifier.isStreight ? .XOR : .Replace
+    public func process(_ input: Input, atPosition position: Vec2d, withModifier: Modifier) {
+        changeMode = withModifier.isStreight ? .xor : .replace
         
         switch state {
-        case .Selecting(_, let cycle, let old):
+        case .selecting(_, let cycle, let old):
             switch input {
-            case .Cycle:
+            case .cycle:
                 let entities = entitiesNear(position)
                 if entities.count > 0 {
-                    state = .Selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1, old: old)
+                    state = .selecting(entity: entities[(cycle+1)%entities.count], cycle: cycle+1, old: old)
                 }
-            case .Release:
-                state = .Idle
-            case .Press, .Toggle, .ModifierChange, .Move:
+            case .release:
+                state = .idle
+            case .press, .toggle, .modifierChange, .move:
                 break
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .Press:
+            case .press:
                 let entities = entitiesNear(position)
                 if entities.isEmpty || withModifier.contains(.Glomp) {
-                    state = .MultiSelect(from: position, to: position, old: selection.selected)
-                } else if changeMode == .Replace, let
+                    state = .multiSelect(from: position, to: position, old: selection.selected)
+                } else if changeMode == .replace, let
                     previous = selection.one,
-                    index = entities.indexOf({$0.id.runtimeId == previous}) {
-                    state = .Selecting(entity: entities[index], cycle: index, old: selection.selected)
+                    index = entities.index(where: {$0.id.runtimeId == previous}) {
+                    state = .selecting(entity: entities[index], cycle: index, old: selection.selected)
                     
-                } else if changeMode == .XOR || selection.selected.intersect(entities.map{$0.id.runtimeId}).isEmpty {
-                    state = .Selecting(entity: entities.first, cycle: 0, old: selection.selected)
+                } else if changeMode == .xor || selection.selected.intersection(entities.map{$0.id.runtimeId}).isEmpty {
+                    state = .selecting(entity: entities.first, cycle: 0, old: selection.selected)
                 }
-            case .Release, .Cycle, .Toggle, .ModifierChange, .Move:
+            case .release, .cycle, .toggle, .modifierChange, .move:
                 break
             }
 
-        case .MultiSelect(let from, _, let old):
+        case .multiSelect(let from, _, let old):
             switch input {
-            case .Move:
-                state = .MultiSelect(from: from, to: position, old: old)
-            case .Release:
-                state = .Idle
-            case .Press, .Toggle, .ModifierChange, .Cycle:
+            case .move:
+                state = .multiSelect(from: from, to: position, old: old)
+            case .release:
+                state = .idle
+            case .press, .toggle, .modifierChange, .cycle:
                 break
             }
         }
     }
     
-    private func entitiesNear(position: Vec2d) -> [Entity] {
-        let query = EntityQuery(filter: .Any, location: .Near(position, distance: 0))
+    private func entitiesNear(_ position: Vec2d) -> [Entity] {
+        let query = EntityQuery(filter: .any, location: .near(position, distance: 0))
         return entityFinder.getEntities(query)
     }
 
-    private func entitiesInside(min min: Vec2d, max: Vec2d) -> [Entity] {
-        let query = EntityQuery(filter: .Any, location: .AABB(AABB2d(min: min, max: max)))
+    private func entitiesInside(min: Vec2d, max: Vec2d) -> [Entity] {
+        let query = EntityQuery(filter: .any, location: .aabb(AABB2d(min: min, max: max)))
         return entityFinder.getEntities(query)
     }
     
-    private func update(state: State) {
+    private func update(_ state: State) {
 
         switch state {
-        case .Selecting(let entity, _, let old):
+        case .selecting(let entity, _, let old):
             selection.select(changeMode.combine(old, with: entity.map{[$0.id.runtimeId]} ?? []))
             indend()
 
             fallthrough
-        case .Idle:
-            selectionUI.rect = .Hide
-        case .MultiSelect(let from, let to, let old):
+        case .idle:
+            selectionUI.rect = .hide
+        case .multiSelect(let from, let to, let old):
             selection.select(changeMode.combine(old, with: entitiesInside(min: from, max: to).map{$0.id.runtimeId}))
-            selectionUI.rect = .Show(from, to)
+            selectionUI.rect = .show(from, to)
             indend()
 
         }

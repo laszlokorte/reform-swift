@@ -8,7 +8,7 @@
 
 import ReformStage
 
-struct PointType : OptionSetType {
+struct PointType : OptionSet {
     let rawValue : Int
     
     static let Any = PointType(rawValue: 1|2|4)

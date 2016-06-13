@@ -21,7 +21,7 @@ struct ArcOutline : Outline {
         self.angleB = angleB
     }
     
-    func getPositionFor<R:Runtime>(runtime: R, t: Double) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
             rad = radius.getLengthFor(runtime),
@@ -35,7 +35,7 @@ struct ArcOutline : Outline {
         return c + rotate(Vec2d.XAxis * rad, angle: a1 + t*a)
     }
     
-    func getLengthFor<R:Runtime>(runtime: R) -> Double? {
+    func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         guard let
             rad = radius.getLengthFor(runtime),
             a1 = angleA.getAngleFor(runtime),
@@ -47,7 +47,7 @@ struct ArcOutline : Outline {
         return 2 * M_PI * rad * normalize360(a2-a1).percent/100
     }
     
-    func getSegmentsFor<R:Runtime>(runtime: R) -> SegmentPath {
+    func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {
         guard let
             r = radius.getLengthFor(runtime),
             c = center.getPositionFor(runtime),
@@ -56,10 +56,10 @@ struct ArcOutline : Outline {
                 return []
         }
         
-        return [Segment.Arc(Arc2d(center: c, radius: r, range: AngleRange(start: a1, end:a2)))]
+        return [Segment.arc(Arc2d(center: c, radius: r, range: AngleRange(start: a1, end:a2)))]
     }
 
-    func getAABBFor<R : Runtime>(runtime: R) -> AABB2d? {
+    func getAABBFor<R : Runtime>(_ runtime: R) -> AABB2d? {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
             c = center.getPositionFor(runtime) else {

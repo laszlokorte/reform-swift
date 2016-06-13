@@ -9,55 +9,55 @@
 final public class JsonFormat : Encoder, Decoder {
     public init() {}
 
-    public func encode(value: NormalizedValue) -> String {
+    public func encode(_ value: NormalizedValue) -> String {
         switch value {
-        case .Null:
+        case .null:
             return "null"
-        case .Bool(let b):
+        case .bool(let b):
             return b ? "true" : "false"
-        case .String(let s):
+        case .string(let s):
             return "\"\(s)\""
-        case .Int(let i):
+        case .int(let i):
             return String(i)
-        case .Double(let d):
+        case .double(let d):
             return String(format: "%f", d)
-        case .Array(let arr):
-            return String(format: "[%@]", arr.map({ encode($0) }).joinWithSeparator(","))
-        case .Dictionary(let dict):
-            return String(format: "{%@}", dict.map({ (k,v) in return "\"\(k)\":\(encode(v))" }).joinWithSeparator(","))
+        case .array(let arr):
+            return String(format: "[%@]", arr.map({ encode($0) }).joined(separator: ","))
+        case .dictionary(let dict):
+            return String(format: "{%@}", dict.map({ (k,v) in return "\"\(k)\":\(encode(v))" }).joined(separator: ","))
         }
     }
 
-    public func decode(string: String) throws -> NormalizedValue? {
-        guard let jsonData: NSData = string.dataUsingEncoding(NSUTF8StringEncoding) else {
+    public func decode(_ string: String) throws -> NormalizedValue? {
+        guard let jsonData: Data = string.data(using: String.Encoding.utf8) else {
             return nil
         }
 
-        let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+        let json = try JSONSerialization.jsonObject(with: jsonData, options: [])
 
         return convert(json)
     }
 
-    func convert(any: AnyObject) -> NormalizedValue? {
+    func convert(_ any: AnyObject) -> NormalizedValue? {
         switch any {
         case is NSNull:
-            return .Null
+            return .null
         case let v as Bool:
-            return .Bool(v)
+            return .bool(v)
         case let v as String:
-            return .String(v)
+            return .string(v)
         case let v as Int:
-            return .Int(v)
+            return .int(v)
         case let v as Double:
-            return .Double(v)
+            return .double(v)
         case let v as Array<AnyObject>:
-            return .Array(v.flatMap{convert($0)})
+            return .array(v.flatMap{convert($0)})
         case let v as Dictionary<String, AnyObject>:
             var newDict = [String:NormalizedValue]()
             for (k,v) in v {
                 newDict[k] = convert(v)
             }
-            return .Dictionary(newDict)
+            return .dictionary(newDict)
 
         default:
             return nil

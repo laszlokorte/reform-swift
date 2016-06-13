@@ -14,17 +14,17 @@ import ReformStage
 public final class CropGrabber {
 
     private enum State {
-        case Idle
-        case Searching(SearchingResult)
+        case idle
+        case searching(SearchingResult)
     }
 
     private enum SearchingResult {
-        case None
-        case Found(position: Vec2d, point: CropPoint, cycle: Int)
+        case none
+        case found(position: Vec2d, point: CropPoint, cycle: Int)
     }
 
 
-    private var state : State = .Idle
+    private var state : State = .idle
     let cropUI : CropUI
     let stage : Stage
     let camera: Camera
@@ -38,44 +38,44 @@ public final class CropGrabber {
     }
 
     func refresh() {
-        if case .Searching(let result) = state {
+        if case .searching(let result) = state {
 
             let allPoints = stage.cropPoints
 
-            if case .Found(_, let current, _) = result {
+            if case .found(_, let current, _) = result {
                 let updated = CropPoint(position: current.offset.vector * stage.size / 2 + stage.size / 2, offset: current.offset)
-                cropUI.state = .Active(updated, allPoints)
+                cropUI.state = .active(updated, allPoints)
             } else {
-                cropUI.state = .Show(allPoints)
+                cropUI.state = .show(allPoints)
             }
 
         } else {
-            cropUI.state = .Hide
+            cropUI.state = .hide
         }
     }
 
     func enable() {
-        if case .Searching(_) = state {
+        if case .searching(_) = state {
 
         } else {
-            state = .Searching(.None)
+            state = .searching(.none)
         }
         refresh()
     }
 
     func disable() {
-        state = .Idle
+        state = .idle
         refresh()
     }
 
-    func searchAt(position: Vec2d) {
-        if case .Searching(let oldResult) = state {
+    func searchAt(_ position: Vec2d) {
+        if case .searching(let oldResult) = state {
 
             switch oldResult {
-            case .Found(_, _, let cycle):
-                state = .Searching(resultFor(position, cycle: cycle))
-            case .None:
-                state = .Searching(resultFor(position, cycle: 0))
+            case .found(_, _, let cycle):
+                state = .searching(resultFor(position, cycle: cycle))
+            case .none:
+                state = .searching(resultFor(position, cycle: 0))
             }
         }
 
@@ -83,26 +83,26 @@ public final class CropGrabber {
     }
 
     func cycle() {
-        if case .Searching(.Found(let pos, _, let cycle)) = state {
-            state =  .Searching(resultFor(pos, cycle: cycle+1))
+        if case .searching(.found(let pos, _, let cycle)) = state {
+            state =  .searching(resultFor(pos, cycle: cycle+1))
         }
 
     }
 
-    private func resultFor(position: Vec2d, cycle: Int) -> SearchingResult {
+    private func resultFor(_ position: Vec2d, cycle: Int) -> SearchingResult {
 
         let points = stage.cropPoints.filter({distance(point:$0.position, point: position) <= radius / camera.zoom})
 
         if points.count > 0 {
-            return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
+            return .found(position: position, point: points[cycle%points.count], cycle: cycle)
         } else {
-            return .None
+            return .none
         }
 
     }
 
     var current : CropPoint? {
-        if case .Searching(.Found(_, let point, _)) = state {
+        if case .searching(.found(_, let point, _)) = state {
             return point
         } else {
             return nil

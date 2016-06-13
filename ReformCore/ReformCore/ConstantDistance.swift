@@ -17,11 +17,11 @@ public struct ConstantDistance : RuntimeDistance, Labeled {
         self.delta = delta
     }
     
-    public func getDeltaFor<R:Runtime>(runtime: R) -> Vec2d? {
+    public func getDeltaFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         return delta
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return delta.label
     }
     

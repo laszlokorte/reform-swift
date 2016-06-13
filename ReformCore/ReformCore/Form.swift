@@ -26,9 +26,9 @@ public protocol Morphable {
 }
 
 public protocol Drawable {
-    func getPathFor<R:Runtime>(runtime: R) -> Path?
+    func getPathFor<R:Runtime>(_ runtime: R) -> Path?
     
-    func getShapeFor<R:Runtime>(runtime: R) -> Shape?
+    func getShapeFor<R:Runtime>(_ runtime: R) -> Shape?
     
     var drawingMode : DrawingMode { get set }
 }
@@ -39,7 +39,7 @@ public protocol Creatable {
     init(id: FormIdentifier, name: String)
 
 
-    func initWithRuntime<R:Runtime>(runtime: R, min: Vec2d, max: Vec2d)
+    func initWithRuntime<R:Runtime>(_ runtime: R, min: Vec2d, max: Vec2d)
 }
 
 public protocol Form {

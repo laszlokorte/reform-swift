@@ -8,5 +8,5 @@
 
 
 public protocol RuntimeScaleFactor : Degeneratable {
-    func getFactorFor<R:Runtime>(runtime: R) -> Double?
+    func getFactorFor<R:Runtime>(_ runtime: R) -> Double?
 }

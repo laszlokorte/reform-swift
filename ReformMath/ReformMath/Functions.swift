@@ -6,14 +6,14 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public func rotate(vector: Vec2d, angle: Angle) -> Vec2d {
+public func rotate(_ vector: Vec2d, angle: Angle) -> Vec2d {
     let cs = cos(angle.radians)
     let sn = sin(angle.radians)
     
     return Vec2d(x: vector.x * cs - vector.y * sn, y: vector.x * sn + vector.y * cs)
 }
 
-public func angle(vector: Vec2d) -> Angle {
+public func angle(_ vector: Vec2d) -> Angle {
     return normalize360(Angle(radians: atan2(vector.y,vector.x)))
 }
 
@@ -21,43 +21,43 @@ public func angleBetween(vector a: Vec2d, vector b: Vec2d) -> Angle {
     return normalize360(angle(a) - angle(b))
 }
 
-public func clamp<T:Comparable>(value: T, between: T, and: T) -> T {
+public func clamp<T:Comparable>(_ value: T, between: T, and: T) -> T {
     return max(between, min(value, and))
 }
 
-public func lerp(t:Double, a: Vec2d, b: Vec2d) -> Vec2d {
+public func lerp(_ t:Double, a: Vec2d, b: Vec2d) -> Vec2d {
     return Vec2d(x: lerp(t, a: a.x, b: b.x), y: lerp(t, a: a.y, b: b.y))
 }
 
-public func lerp(t:Double, a: Angle, b: Angle) -> Angle {
+public func lerp(_ t:Double, a: Angle, b: Angle) -> Angle {
     return Angle(radians: lerp(t, a: a.radians, b: b.radians))
 }
 
-public func lerp(t:Double, a: Double, b: Double) -> Double {
+public func lerp(_ t:Double, a: Double, b: Double) -> Double {
     return a*(1-t) + t*b
 }
 
-public func project(vector: Vec2d, onto: Vec2d) -> Vec2d {
+public func project(_ vector: Vec2d, onto: Vec2d) -> Vec2d {
     guard onto.x != 0 || onto.y != 0 else { return vector }
     
     return dot(vector, onto) * onto / onto.length²
 }
 
-public func dot(a: Vec2d, _ b: Vec2d) -> Double {
+public func dot(_ a: Vec2d, _ b: Vec2d) -> Double {
     return a.x * b.x + a.y * b.y
 }
 
-public func orthogonal(vector: Vec2d) -> Vec2d {
+public func orthogonal(_ vector: Vec2d) -> Vec2d {
     return Vec2d(x:-vector.y, y: vector.x)
 }
 
-public func signum(num: Double) -> Double {
+public func signum(_ num: Double) -> Double {
     if num > 0  { return 1 }
     else if num < 0 { return -1 }
     else { return 0 }
 }
 
-public func proportioned(vector: Vec2d, proportion: Double, large: Bool) -> Vec2d {
+public func proportioned(_ vector: Vec2d, proportion: Double, large: Bool) -> Vec2d {
     let op : (Double, Double)->Double = large ? max : min
     let base = op(abs(vector.x), abs(vector.y / proportion))
 
@@ -70,32 +70,32 @@ public func proportioned(vector: Vec2d, proportion: Double, large: Bool) -> Vec2
 
 }
 
-public func signum(vector: Vec2d) -> Vec2d {
+public func signum(_ vector: Vec2d) -> Vec2d {
     return Vec2d(x: signum(vector.x), y: signum(vector.y))
 }
 
-public func abs(vector: Vec2d) -> Vec2d {
+public func abs(_ vector: Vec2d) -> Vec2d {
     return Vec2d(x: abs(vector.x), y: abs(vector.y))
 }
 
-public func min(vector: Vec2d) -> Double {
+public func min(_ vector: Vec2d) -> Double {
     return min(vector.x, vector.y)
 }
 
-public func max(vector: Vec2d) -> Double {
+public func max(_ vector: Vec2d) -> Double {
     return max(vector.x, vector.y)
 }
 
-public func stepped(angle: Angle, size: Angle) -> Angle {
+public func stepped(_ angle: Angle, size: Angle) -> Angle {
     return Angle(radians: stepped(angle.radians, size: size.radians))
 }
 
 
-public func stepped(value: Double, size: Double) -> Double {
+public func stepped(_ value: Double, size: Double) -> Double {
     return round(value / size) * size
 }
 
-public func normalize(vector: Vec2d) -> Vec2d? {
+public func normalize(_ vector: Vec2d) -> Vec2d? {
     let length = vector.length
     guard length != 0 else {
         return nil
@@ -104,7 +104,7 @@ public func normalize(vector: Vec2d) -> Vec2d? {
     return vector / length
 }
 
-public func normalize360(angle: Angle) -> Angle{
+public func normalize360(_ angle: Angle) -> Angle{
     let deg = angle.degree
     let norm = Double(Int(deg) % 360) + (deg-trunc(deg))
     if(norm>0.0) {
@@ -115,11 +115,11 @@ public func normalize360(angle: Angle) -> Angle{
     }
 }
 
-public func min(a: Vec2d, _ b: Vec2d) -> Vec2d {
+public func min(_ a: Vec2d, _ b: Vec2d) -> Vec2d {
     return Vec2d(x: min(a.x,b.x), y: min(a.y,b.y))
 }
 
-public func max(a: Vec2d, _ b: Vec2d) -> Vec2d {
+public func max(_ a: Vec2d, _ b: Vec2d) -> Vec2d {
     return Vec2d(x: max(a.x,b.x), y: max(a.y,b.y))
 }
 
@@ -163,7 +163,7 @@ public func inverse(matrix m: Mat3x2) -> Mat3x2? {
 
 
 
-public func rotate(aabb: AABB2d, angle: Angle) -> AABB2d {
+public func rotate(_ aabb: AABB2d, angle: Angle) -> AABB2d {
     let sizeHalf = aabb.size/2
 
     return AABB2d(center: aabb.center, size: 2*rotate(sizeHalf, angle: angle))

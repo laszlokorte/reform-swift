@@ -9,17 +9,17 @@
 import ReformMath
 
 public protocol Anchor {
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d?
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d?
     
-    func translate<R:Runtime>(runtime: R, delta: Vec2d)
+    func translate<R:Runtime>(_ runtime: R, delta: Vec2d)
     
     var name : String { get }
 
-    func isEqualTo(other: Anchor) -> Bool
+    func isEqualTo(_ other: Anchor) -> Bool
 }
 
 extension Anchor where Self : Equatable {
-    public func isEqualTo(other: Anchor) -> Bool {
+    public func isEqualTo(_ other: Anchor) -> Bool {
         guard let other = other as? Self else {
             return false
         }

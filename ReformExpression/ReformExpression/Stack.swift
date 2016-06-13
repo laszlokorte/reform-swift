@@ -13,7 +13,7 @@ public struct Stack<T> {
         return _content.isEmpty
     }
     
-    mutating func push(element: T) {
+    mutating func push(_ element: T) {
         _content.append(element)
     }
     

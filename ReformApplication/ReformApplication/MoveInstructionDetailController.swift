@@ -22,7 +22,7 @@ class MoveInstructionDetailController : NSViewController, InstructionDetailContr
 
 
     var stringifier : Stringifier?
-    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var parser : ((String) -> Result<ReformExpression.Expression, ShuntingYardError>)?
     var intend : (() -> ())?
 
     var error : String? {

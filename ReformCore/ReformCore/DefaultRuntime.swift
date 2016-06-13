@@ -38,7 +38,7 @@ final public class DefaultRuntime : Runtime {
         _depth = depth
     }
     
-    public func subCall(id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (runtime: DefaultRuntime, picture: Picture) -> ()) {
+    public func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (runtime: DefaultRuntime, picture: Picture) -> ()) {
         if _depth > DefaultRuntime.maxDepth {
             return
         }
@@ -52,7 +52,7 @@ final public class DefaultRuntime : Runtime {
         _canceled = true
     }
     
-    public func run(width width: Double, height: Double, @noescape block: (DefaultRuntime) -> ()) {
+    public func run(width: Double, height: Double, @noescape block: (DefaultRuntime) -> ()) {
         stack.clear()
         
         listeners.forEach() {
@@ -76,7 +76,7 @@ final public class DefaultRuntime : Runtime {
         
     }
     
-    public func eval(instruction : InstructionNode, @noescape block: (DefaultRuntime) -> ()) {
+    public func eval(_ instruction : InstructionNode, @noescape block: (DefaultRuntime) -> ()) {
         guard !shouldStop else { return }
 
         defer {
@@ -93,7 +93,7 @@ final public class DefaultRuntime : Runtime {
         block(self)
     }
     
-    public func scoped(@noescape block: (DefaultRuntime) -> ()) {
+    public func scoped(@noescape _ block: (DefaultRuntime) -> ()) {
         if shouldStop { return }
 
         stack.pushFrame()
@@ -112,19 +112,19 @@ final public class DefaultRuntime : Runtime {
         block(self)
     }
     
-    public func declare(form : Form) {
+    public func declare(_ form : Form) {
         stack.declare(form)
     }
     
-    public func get(id: FormIdentifier) -> Form? {
+    public func get(_ id: FormIdentifier) -> Form? {
         return stack.getForm(id)
     }
     
-    public func read(id: FormIdentifier, offset: Int) -> UInt64? {
+    public func read(_ id: FormIdentifier, offset: Int) -> UInt64? {
         return stack.getData(id, offset: offset)
     }
     
-    public func write(id: FormIdentifier, offset: Int, value: UInt64) {
+    public func write(_ id: FormIdentifier, offset: Int, value: UInt64) {
         stack.setData(id, offset: offset, newValue: value)
     }
     
@@ -136,7 +136,7 @@ final public class DefaultRuntime : Runtime {
         return dataSet
     }
     
-    public func reportError(error : RuntimeError) {
+    public func reportError(_ error : RuntimeError) {
         listeners.forEach() {
             $0.runtime(self, triggeredError: error, on: currentInstructions.last!)
         }

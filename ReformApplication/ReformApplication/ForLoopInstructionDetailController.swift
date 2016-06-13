@@ -17,7 +17,7 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
     @IBOutlet var countField : NSTextField?
 
     var stringifier : Stringifier?
-    var parser : ((String) -> Result<Expression, ShuntingYardError>)?
+    var parser : ((String) -> Result<ReformExpression.Expression, ShuntingYardError>)?
     var intend : (() -> ())?
 
     var error : String? {
@@ -64,7 +64,7 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
         countField?.stringValue = stringifier.stringFor(instruction.expression) ?? ""
     }
 
-    @IBAction func onChange(sender: AnyObject?) {
+    @IBAction func onChange(_ sender: AnyObject?) {
         guard let
             parser = parser,
             string = countField?.stringValue,
@@ -78,10 +78,10 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
         }
 
         switch parser(string) {
-        case .Success(let expr):
+        case .success(let expr):
             node.replaceWith(ForLoopInstruction(expression: expr))
             intend()
-        case .Fail(let err):
+        case .fail(let err):
             print(err)
         }
     }

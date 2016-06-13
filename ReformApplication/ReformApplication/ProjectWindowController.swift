@@ -44,13 +44,13 @@ final class ProjectWindowController : NSWindowController {
         let lineForm = LineForm(id: FormIdentifier(99), name: "Line 1")
 
         let rectangleDestination = RelativeDestination(
-            from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue),
-            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)
+            from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.topLeft.rawValue),
+            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.center.rawValue)
         )
 
         let lineDestination = RelativeDestination(
-            from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.TopLeft.rawValue),
-            to: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.BottomLeft.rawValue)
+            from: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.topLeft.rawValue),
+            to: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.bottomLeft.rawValue)
         )
 
         let createInstruction = CreateFormInstruction(form: rectangleForm, destination: rectangleDestination)
@@ -61,8 +61,8 @@ final class ProjectWindowController : NSWindowController {
         procedure.root.append(child: node1)
 
         let moveInstruction = TranslateInstruction(formId: rectangleForm.identifier, distance: RelativeDistance(
-            from: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.Center.rawValue),
-            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue),
+            from: ForeignFormPoint(formId: rectangleForm.identifier, pointId: RectangleForm.PointId.center.rawValue),
+            to: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.center.rawValue),
             direction: FreeDirection()))
 
         let node2 = InstructionNode(instruction: moveInstruction)
@@ -72,7 +72,7 @@ final class ProjectWindowController : NSWindowController {
         let rotateInstruction = RotateInstruction(
             formId: rectangleForm.identifier,
             angle: ConstantAngle(angle: Angle(percent: 20)),
-            fixPoint: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.Center.rawValue)
+            fixPoint: ForeignFormPoint(formId: procedure.paper.identifier, pointId: Paper.PointId.center.rawValue)
         )
 
         let node3 = InstructionNode(instruction: rotateInstruction)
@@ -94,7 +94,7 @@ final class ProjectWindowController : NSWindowController {
         pictureSession.refresh()
     }
 
-    override func validateToolbarItem(theItem: NSToolbarItem) -> Bool {
+    func validate(_ theItem: NSToolbarItem) -> Bool {
         if let _ = ToolbarIdentifier(rawValue: theItem.itemIdentifier) {
             return true
         } else {
@@ -103,7 +103,7 @@ final class ProjectWindowController : NSWindowController {
     }
 
 
-    @IBAction func toolbarButton(sender: NSToolbarItem) {
+    @IBAction func toolbarButton(_ sender: NSToolbarItem) {
         guard let id = ToolbarIdentifier(rawValue: sender.itemIdentifier) else {
             return
         }
@@ -141,7 +141,7 @@ final class ProjectWindowController : NSWindowController {
         }
     }
 
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: AnyObject?) {
 
 
         if let p = segue.destinationController as? ExportController {
@@ -173,11 +173,11 @@ final class ProjectWindowController : NSWindowController {
 
 extension ProjectWindowController : NSWindowDelegate {
 
-    func windowDidBecomeMain(notification: NSNotification) {
+    func windowDidBecomeMain(_ notification: Notification) {
         contentViewController?.view.needsDisplay = true
     }
 
-    func windowDidResignMain(notification: NSNotification) {
+    func windowDidResignMain(_ notification: Notification) {
         contentViewController?.view.needsDisplay = true
     }
 }

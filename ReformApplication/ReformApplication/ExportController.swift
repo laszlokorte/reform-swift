@@ -23,7 +23,7 @@ final class ExportController : NSViewController {
         updateJson()
     }
 
-    func cancel(sender: AnyObject?) {
+    func cancel(_ sender: AnyObject?) {
         dismissViewController(self)
     }
 

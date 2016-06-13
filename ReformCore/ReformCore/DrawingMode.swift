@@ -7,7 +7,7 @@
 //
 
 public enum DrawingMode {
-    case Draw
-    case Mask
-    case Guide
+    case draw
+    case mask
+    case guide
 }

@@ -10,17 +10,17 @@
 import ReformMath
 
 public protocol RuntimePoint {
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d?
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d?
 
-    func isEqualTo(other: RuntimePoint) -> Bool
+    func isEqualTo(_ other: RuntimePoint) -> Bool
 }
 
 public protocol WriteableRuntimePoint : RuntimePoint {
-    func setPositionFor<R:Runtime>(runtime: R, position: Vec2d)
+    func setPositionFor<R:Runtime>(_ runtime: R, position: Vec2d)
 }
 
 extension RuntimePoint where Self : Equatable {
-    public func isEqualTo(other: RuntimePoint) -> Bool {
+    public func isEqualTo(_ other: RuntimePoint) -> Bool {
         guard let other = other as? Self else {
             return false
         }

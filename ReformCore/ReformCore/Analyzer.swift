@@ -9,15 +9,15 @@
 import ReformExpression
 
 public protocol Analyzer : class {
-    func analyze(@noescape block: () -> ())
+    func analyze(@noescape _ block: () -> ())
     
-    func publish(instruction: Analyzable, label: String)
+    func publish(_ instruction: Analyzable, label: String)
     
-    func publish(instruction: Analyzable, label: String, @noescape block: () -> ())
+    func publish(_ instruction: Analyzable, label: String, @noescape block: () -> ())
     
-    func announceForm(form: Form)
+    func announceForm(_ form: Form)
     
-    func announceDepencency(id: PictureIdentifier)
+    func announceDepencency(_ id: PictureIdentifier)
         
     var stringifier : Stringifier { get }
 }

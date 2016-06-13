@@ -51,7 +51,7 @@ public func ==<T:TokenType>(lhs: Token<T>, rhs: Token<T>) -> Bool {
     return lhs.position == rhs.position && lhs.type == rhs.type && lhs.value == rhs.value
 }
 
-public struct LexerError : ErrorType {
+public struct LexerError : ErrorProtocol {
     let position : SourcePosition
     let string : String
 }
@@ -60,21 +60,21 @@ public struct Lexer<T:TokenType> {
     let rules : [Rule<T>]
     let ignoreRules : [Rule<T>]
     
-    public func tokenize(input: String.CharacterView) -> Tokens<T> {
+    public func tokenize(_ input: String.CharacterView) -> Tokens<T> {
         return Tokens(lexer: self, input: input)
     }
 }
 
-public struct Tokens<T: TokenType> : SequenceType {
+public struct Tokens<T: TokenType> : Sequence {
     private let lexer : Lexer<T>
     private let input : String.CharacterView
     
-    public func generate() -> TokenGenerator<T> {
+    public func makeIterator() -> TokenGenerator<T> {
         return TokenGenerator(lexer: lexer, input: input)
     }
 }
 
-public struct TokenGenerator<T : TokenType> : GeneratorType {
+public struct TokenGenerator<T : TokenType> : IteratorProtocol {
     private let lexer : Lexer<T>
     private let input : String.CharacterView
     
@@ -110,7 +110,8 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
             {
                 if (currentPos < input.endIndex)
                 {
-                    inputQueue.add(input[currentPos++])
+                    inputQueue.add(input[currentPos])
+                    currentPos = input.index(after: currentPos)
                 }
                 else if finished
                 {
@@ -205,11 +206,11 @@ public struct TokenGenerator<T : TokenType> : GeneratorType {
             
             if(peek == "\n") {
                 column = 1
-                line++
+                line += 1
             }
             else
             {
-                column++
+                column += 1
             }
             
             accumulator.append(peek)
@@ -230,11 +231,11 @@ public struct LexerGenerator<T:TokenType> {
         callback(&self)
     }
 
-    public mutating func add(type: T, pattern: String) {
+    public mutating func add(_ type: T, pattern: String) {
         rules.append(Rule(type: type, pattern: pattern, inversePriority: rules.count))
     }
     
-    public mutating func ignore(pattern: String) {
+    public mutating func ignore(_ pattern: String) {
         ignoreRules.append(Rule(type: T.ignore, pattern: pattern, inversePriority: ignoreRules.count))
     }
     
@@ -256,9 +257,9 @@ struct Rule<T:TokenType>
     }
 
     
-    func matches(input : String) -> Bool
+    func matches(_ input : String) -> Bool
     {
-        return input.rangeOfString(pattern, options: .RegularExpressionSearch) != nil
+        return input.range(of: pattern, options: .regularExpressionSearch) != nil
     }
     
 }

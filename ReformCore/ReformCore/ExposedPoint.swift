@@ -48,11 +48,11 @@ struct ExposedPoint : RuntimePoint, Labeled {
         self.name = name
     }
     
-    func getPositionFor<R:Runtime>(runtime: R) -> Vec2d? {
+    func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         return point.getPositionFor(runtime)
     }
     
-    func getDescription(stringifier: Stringifier) -> String {
+    func getDescription(_ stringifier: Stringifier) -> String {
         return name
     }
 }

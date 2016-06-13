@@ -12,20 +12,20 @@ import ReformGraphics
 extension ProxyForm {
 
     public enum PointId : ExposedPointIdentifier {
-        case TopLeft = 0
-        case BottomLeft = 1
-        case TopRight = 2
-        case BottomRight = 3
-        case Top = 4
-        case Bottom = 5
-        case Left = 6
-        case Right = 7
-        case Center = 8
+        case topLeft = 0
+        case bottomLeft = 1
+        case topRight = 2
+        case bottomRight = 3
+        case top = 4
+        case bottom = 5
+        case left = 6
+        case right = 7
+        case center = 8
     }
 }
 
 extension ProxyForm {
-    func initWithRuntime<R:Runtime>(runtime: R, form: Form) {
+    func initWithRuntime<R:Runtime>(_ runtime: R, form: Form) {
         formReference.setFormFor(runtime, form: form)
         angle.setAngleFor(runtime, angle: Angle())
     }
@@ -53,20 +53,20 @@ final public class ProxyForm : Form {
 
     public func getPoints() -> [ExposedPointIdentifier:LabeledPoint] {
         return [
-            PointId.TopLeft.rawValue:ProxyPoint(formReference: formReference, side: .TopLeft, angle: angle),
+            PointId.topLeft.rawValue:ProxyPoint(formReference: formReference, side: .topLeft, angle: angle),
 
-            PointId.TopRight.rawValue:ProxyPoint(formReference: formReference, side: .TopRight, angle: angle),
+            PointId.topRight.rawValue:ProxyPoint(formReference: formReference, side: .topRight, angle: angle),
 
-            PointId.BottomLeft.rawValue:ProxyPoint(formReference: formReference, side: .BottomLeft, angle: angle),
+            PointId.bottomLeft.rawValue:ProxyPoint(formReference: formReference, side: .bottomLeft, angle: angle),
 
-            PointId.BottomRight.rawValue:ProxyPoint(formReference: formReference, side: .BottomRight, angle: angle),
+            PointId.bottomRight.rawValue:ProxyPoint(formReference: formReference, side: .bottomRight, angle: angle),
 
-            PointId.Top.rawValue:ProxyPoint(formReference: formReference, side: .Top, angle: angle),
-            PointId.Bottom.rawValue:ProxyPoint(formReference: formReference, side: .Bottom, angle: angle),
-            PointId.Right.rawValue:ProxyPoint(formReference: formReference, side: .Right, angle: angle),
-            PointId.Left.rawValue:ProxyPoint(formReference: formReference, side: .Left, angle: angle),
+            PointId.top.rawValue:ProxyPoint(formReference: formReference, side: .top, angle: angle),
+            PointId.bottom.rawValue:ProxyPoint(formReference: formReference, side: .bottom, angle: angle),
+            PointId.right.rawValue:ProxyPoint(formReference: formReference, side: .right, angle: angle),
+            PointId.left.rawValue:ProxyPoint(formReference: formReference, side: .left, angle: angle),
 
-            PointId.Center.rawValue:ProxyPoint(formReference: formReference, side: .Center, angle: angle)
+            PointId.center.rawValue:ProxyPoint(formReference: formReference, side: .center, angle: angle)
         ]
     }
 
@@ -77,7 +77,7 @@ final public class ProxyForm : Form {
 }
 
 extension ProxyForm {
-    public func getFormIdForRuntime<R:Runtime>(runtime: R) -> FormIdentifier? {
+    public func getFormIdForRuntime<R:Runtime>(_ runtime: R) -> FormIdentifier? {
         return formReference.getFormFor(runtime)?.identifier
     }
 }

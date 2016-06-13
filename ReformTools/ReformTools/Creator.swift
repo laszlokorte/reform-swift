@@ -10,14 +10,14 @@ import ReformCore
 import ReformStage
 
 private enum CreationState {
-    case Idle
-    case Creating(original: InstructionNode, InstructionNode)
-    case Amending(original: InstructionNode, InstructionNode)
-    case Fixing(original: InstructionNode, InstructionNode)
+    case idle
+    case creating(original: InstructionNode, InstructionNode)
+    case amending(original: InstructionNode, InstructionNode)
+    case fixing(original: InstructionNode, InstructionNode)
 }
 
 public final class InstructionCreator {
-    private var state : CreationState = .Idle
+    private var state : CreationState = .idle
 
     let stage : Stage
     let focus : InstructionFocus
@@ -31,20 +31,20 @@ public final class InstructionCreator {
 
     var target : FormIdentifier? {
         switch state {
-        case .Idle:
+        case .idle:
             return nil
-        case .Creating(_, let node):
+        case .creating(_, let node):
             return node.target
-        case .Amending(_, let node):
+        case .amending(_, let node):
             return node.target
-        case .Fixing(_, let node):
+        case .fixing(_, let node):
             return node.target
         }
     }
     
-    func beginCreation<I:Instruction>(instruction : I) {
+    func beginCreation<I:Instruction>(_ instruction : I) {
         switch state {
-        case .Idle:
+        case .idle:
             if let focused = focus.current {
                 if stage.error != nil,
                     let fixed = merge(focused, instruction: instruction, force: true) {
@@ -52,18 +52,18 @@ public final class InstructionCreator {
                         focused.append(sibling: node)
                         focused.removeFromParent()
                         focus.current = node
-                        state = .Fixing(original: focused, node)
+                        state = .fixing(original: focused, node)
                 } else if let merged = merge(focused, instruction: instruction) {
                     let node = merged
                     focused.append(sibling: node)
                     focused.removeFromParent()
                     focus.current = node
-                    state = .Amending(original: focused, node)
+                    state = .amending(original: focused, node)
                 } else {
                     let node = InstructionNode(instruction: instruction)
                     focused.append(sibling: node)
                     focus.current = node
-                    state = .Creating(original: focused, node)
+                    state = .creating(original: focused, node)
                 }
                 
                 intend(commit: false)
@@ -76,54 +76,54 @@ public final class InstructionCreator {
     
     func cancel() {
         switch state {
-        case .Creating(let original, let node):
+        case .creating(let original, let node):
             focus.current = original
             node.removeFromParent()
-            state = .Idle
+            state = .idle
             intend(commit: false)
-        case .Amending(let original, let node):
+        case .amending(let original, let node):
             focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
-            state = .Idle
+            state = .idle
             intend(commit: false)
 
-        case .Fixing(let original, let node):
+        case .fixing(let original, let node):
             focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
-            state = .Idle
+            state = .idle
             intend(commit: false)
-        case .Idle:
+        case .idle:
             break
         }
     }
     
-    func update<I:Instruction>(instruction: I) {
+    func update<I:Instruction>(_ instruction: I) {
         switch state {
-        case .Creating(let original, let node):
+        case .creating(let original, let node):
             if let merged = merge(original, instruction: instruction) {
                 node.replaceWith(merged)
                 original.removeFromParent()
                 focus.current = node
-                state = .Amending(original: original, node)
+                state = .amending(original: original, node)
             } else {
                 node.replaceWith(instruction)
             }
             intend(commit: false)
-        case .Amending(let original, let node):
+        case .amending(let original, let node):
             if let merged = merge(original, instruction: instruction) {
                 node.replaceWith(merged)
             } else {
                 node.replaceWith(instruction)
                 node.prepend(sibling: original)
                 focus.current = node
-                state = .Creating(original: original, node)
+                state = .creating(original: original, node)
             }
             intend(commit: false)
-        case .Idle:
+        case .idle:
             break
-        case .Fixing(let original, let node):
+        case .fixing(let original, let node):
             if let fixed = merge(original, instruction: instruction, force: true) {
                 node.replaceWith(fixed)
             }
@@ -133,7 +133,7 @@ public final class InstructionCreator {
     
     func commit() {
         switch state {
-        case .Creating(let original, let node):
+        case .creating(let original, let node):
             if node.isDegenerated {
                 focus.current = original
                 node.removeFromParent()
@@ -142,19 +142,8 @@ public final class InstructionCreator {
                 intend(commit: true)
             }
 
-            state = .Idle
-        case .Amending(let original, let node):
-            if node.isDegenerated {
-                focus.current = original
-                node.prepend(sibling: original)
-                node.removeFromParent()
-                intend(commit: false)
-            } else {
-                intend(commit: true)
-            }
-
-            state = .Idle
-        case .Fixing(let original, let node):
+            state = .idle
+        case .amending(let original, let node):
             if node.isDegenerated {
                 focus.current = original
                 node.prepend(sibling: original)
@@ -164,13 +153,24 @@ public final class InstructionCreator {
                 intend(commit: true)
             }
 
-            state = .Idle
-        case .Idle:
+            state = .idle
+        case .fixing(let original, let node):
+            if node.isDegenerated {
+                focus.current = original
+                node.prepend(sibling: original)
+                node.removeFromParent()
+                intend(commit: false)
+            } else {
+                intend(commit: true)
+            }
+
+            state = .idle
+        case .idle:
             break
         }
     }
 
-    func merge<I:Instruction>(node : InstructionNode, instruction : I, force: Bool = false) -> InstructionNode? {
+    func merge<I:Instruction>(_ node : InstructionNode, instruction : I, force: Bool = false) -> InstructionNode? {
         return node.mergedWith(instruction, force: force)
     }
 }

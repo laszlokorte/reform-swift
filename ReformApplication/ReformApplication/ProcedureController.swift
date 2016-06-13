@@ -28,14 +28,14 @@ final class ProcedureController : NSViewController {
     }
 
     override func viewDidAppear() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProcedureController.procedureEvaluated), name:"ProcedureEvaluated", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProcedureController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(ProcedureController.procedureEvaluated), name:"ProcedureEvaluated", object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(ProcedureController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
     }
 
     override func viewDidDisappear() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:"ProcedureEvaluated", object: nil)
+        NotificationCenter.default().removeObserver(self, name:"ProcedureEvaluated" as NSNotification.Name, object: nil)
 
-        NSNotificationCenter.defaultCenter().removeObserver(self,  name:"ProcedureAnalyzed", object: nil)
+        NotificationCenter.default().removeObserver(self,  name:"ProcedureAnalyzed" as NSNotification.Name, object: nil)
     }
 
     dynamic func procedureChanged() {
@@ -46,8 +46,8 @@ final class ProcedureController : NSViewController {
         tableView?.reloadData()
 
         if let focus = procedureViewModel?.instructionFocus.current,
-            index = instructions.indexOf({ $0.node === focus }) {
-                tableView?.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+            index = instructions.index(where: { $0.node === focus }) {
+                tableView?.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
         }
 
     }
@@ -55,10 +55,10 @@ final class ProcedureController : NSViewController {
     dynamic func procedureEvaluated() {
         instructions = procedureViewModel?.analyzer.instructions ?? []
 
-    tableView?.reloadDataForRowIndexes(NSIndexSet(indexesInRange: NSRange(0..<instructions.count)), columnIndexes: NSIndexSet(index: 0))
+    tableView?.reloadData(forRowIndexes: IndexSet(integersIn: 0..<instructions.count), columnIndexes: IndexSet(integer: 0))
 
         if let focus = procedureViewModel?.instructionFocus.current,
-            index = instructions.indexOf({ $0.node === focus }) {
+            index = instructions.index(where: { $0.node === focus }) {
 
                 tableView?.scrollRowToVisible(index)
         }
@@ -71,25 +71,25 @@ final class ProcedureController : NSViewController {
 }
 
 extension ProcedureController : NSTableViewDataSource {
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return instructions.count
     }
 
 }
 
 extension ProcedureController : NSTableViewDelegate {
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         let outlineRow = instructions[row]
 
         return outlineRow.isGroup || outlineRow.node.isEmpty ? 25 : 70
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard row < instructions.count else { return nil }
 
         let outlineRow = instructions[row]
         let cellId = outlineRow.isGroup || outlineRow.node.isEmpty ? "groupCell" : "thumbnailCell"
-        let cellView = tableView.makeViewWithIdentifier(cellId, owner: self)
+        let cellView = tableView.make(withIdentifier: cellId, owner: self)
         
         if let cell = cellView as? ProcedureCellView, procedureViewModel = procedureViewModel {
             cell.configure(instructions[row], procedureViewModel: procedureViewModel)
@@ -100,7 +100,7 @@ extension ProcedureController : NSTableViewDelegate {
     }
 
 
-    func tableViewSelectionDidChange(aNotification: NSNotification) {
+    func tableViewSelectionDidChange(_ aNotification: Notification) {
         if !cycle, let index = tableView?.selectedRow where index > -1 {
             procedureViewModel?.instructionFocusChanger.setFocus(instructions[index].node)
         }
@@ -108,7 +108,7 @@ extension ProcedureController : NSTableViewDelegate {
 }
 
 extension ProcedureController : NSMenuDelegate {
-    @IBAction func wrapInstructionInLoop(sender: AnyObject) {
+    @IBAction func wrapInstructionInLoop(_ sender: AnyObject) {
         guard let selectedIndexes = tableView?.selectedRowIndexes where selectedIndexes.count > 0 else {
             return
         }
@@ -117,12 +117,12 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        seq.wrapIn(ForLoopInstruction(expression: .Constant(Value(int: 10))))
+        seq.wrapIn(ForLoopInstruction(expression: .constant(ReformExpression.Value(int: 10))))
 
         procedureViewModel?.instructionChanger()
     }
 
-    @IBAction func unwrapInstruction(sender: AnyObject) {
+    @IBAction func unwrapInstruction(_ sender: AnyObject) {
         guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
             return
         }
@@ -132,7 +132,7 @@ extension ProcedureController : NSMenuDelegate {
         procedureViewModel?.instructionChanger()
     }
 
-    @IBAction func wrapInstructionInCondition(sender: AnyObject) {
+    @IBAction func wrapInstructionInCondition(_ sender: AnyObject) {
         guard let selectedIndexes = tableView?.selectedRowIndexes where selectedIndexes.count > 0 else {
             return
         }
@@ -141,12 +141,12 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        seq.wrapIn(IfConditionInstruction(expression: .Constant(Value(bool: true))))
+        seq.wrapIn(IfConditionInstruction(expression: .constant(ReformExpression.Value(bool: true))))
 
         procedureViewModel?.instructionChanger()
     }
 
-    @IBAction func createIterator(sender: AnyObject) {
+    @IBAction func createIterator(_ sender: AnyObject) {
         guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
             return
         }
@@ -182,7 +182,7 @@ extension ProcedureController : NSMenuDelegate {
         procedureViewModel?.instructionChanger()
     }
 
-    @IBAction func delete(sender: AnyObject) {
+    @IBAction func delete(_ sender: AnyObject) {
         guard let indices = tableView?.selectedRowIndexes else {
             return
         }
@@ -198,15 +198,15 @@ extension ProcedureController : NSMenuDelegate {
         let validIndices = indices.filter({!instructions[$0].node.isEmpty})
         procedureViewModel?.instructionChanger()
 
-        if let min = validIndices.minElement() {
-            tableView?.selectRowIndexes(NSIndexSet(index: min-1), byExtendingSelection: false)
+        if let min = validIndices.min() {
+            tableView?.selectRowIndexes(IndexSet(integer: min-1), byExtendingSelection: false)
         }
 
     }
 
-    @IBAction func doubleClick(sender: AnyObject) {
+    @IBAction func doubleClick(_ sender: AnyObject) {
 
-        guard let row = tableView?.selectedRow where row > 0, let cell = tableView?.viewAtColumn(0, row: row, makeIfNecessary: false) else {
+        guard let row = tableView?.selectedRow where row > 0, let cell = tableView?.view(atColumn: 0, row: row, makeIfNecessary: false) else {
             return
         }
 
@@ -234,7 +234,7 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        guard let popOverViewController = storyboard?.instantiateControllerWithIdentifier(controllerID) as? NSViewController else {
+        guard let popOverViewController = storyboard?.instantiateController(withIdentifier: controllerID) as? NSViewController else {
             return
         }
 
@@ -252,7 +252,7 @@ extension ProcedureController : NSMenuDelegate {
         }
         popOverViewController.representedObject = instructions[row].node
 
-        self.presentViewController(popOverViewController, asPopoverRelativeToRect: cell.frame, ofView: cell, preferredEdge: NSRectEdge.MaxX, behavior: NSPopoverBehavior.Transient)
+        self.presentViewController(popOverViewController, asPopoverRelativeTo: cell.frame, of: cell, preferredEdge: NSRectEdge.maxX, behavior: NSPopoverBehavior.transient)
 
     }
 }

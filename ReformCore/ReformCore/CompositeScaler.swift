@@ -16,7 +16,7 @@ struct CompositeScaler : Scaler {
     }
     
     
-    func scale<R:Runtime>(runtime: R, factor: Double, fix: Vec2d, axis: Vec2d) {
+    func scale<R:Runtime>(_ runtime: R, factor: Double, fix: Vec2d, axis: Vec2d) {
         for scaler in scalers {
             scaler.scale(runtime, factor: factor, fix: fix, axis: axis)
         }

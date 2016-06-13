@@ -24,7 +24,7 @@ func ==<I,T>(left: Node<I,T>, right: Node<I,T>) -> Bool {
     return left.id == right.id
 }
 
-func topologicallySorted<I,T>(nodes: [Node<I, T>]) -> [Node<I, T>] {
+func topologicallySorted<I,T>(_ nodes: [Node<I, T>]) -> [Node<I, T>] {
 
     var result = [Node<I,T>]()
     var rootNodes = Set<Node<I,T>>()
@@ -32,11 +32,11 @@ func topologicallySorted<I,T>(nodes: [Node<I, T>]) -> [Node<I, T>] {
     
     for node in nodes {
         for dep in node.outgoing {
-            dep.incomingCount++
+            dep.incomingCount += 1
         }
     }
     
-    rootNodes.unionInPlace(nodes.filter({ $0.incomingCount == 0 }))
+    rootNodes.formUnion(nodes.filter({ $0.incomingCount == 0 }))
     
     while let n = rootNodes.first {
         rootNodes.remove(n)
@@ -44,7 +44,7 @@ func topologicallySorted<I,T>(nodes: [Node<I, T>]) -> [Node<I, T>] {
         
         for m in n.outgoing {
             n.outgoing.remove(m)
-            m.incomingCount--
+            m.incomingCount -= 1
             if m.incomingCount == 0 {
                 rootNodes.insert(m)
             }

@@ -9,40 +9,40 @@
 import ReformMath
 
 public enum HitArea : Equatable {
-    case None
-    case Line(LineSegment2d)
-    case Triangle(Triangle2d)
-    case Circle(Circle2d)
-    case Arc(Arc2d)
-    case Sector(center: Vec2d, range: AngleRange)
-    case LeftOf(Line2d)
-    indirect case Union(HitArea, HitArea)
-    indirect case Intersection(HitArea, HitArea)
-    indirect case Inversion(HitArea)
+    case none
+    case line(LineSegment2d)
+    case triangle(Triangle2d)
+    case circle(Circle2d)
+    case arc(Arc2d)
+    case sector(center: Vec2d, range: AngleRange)
+    case leftOf(Line2d)
+    indirect case union(HitArea, HitArea)
+    indirect case intersection(HitArea, HitArea)
+    indirect case inversion(HitArea)
 }
 
 public func ==(lhs: HitArea, rhs: HitArea) -> Bool {
     // TODO: do not compare only cases but values too
     switch (lhs, rhs) {
-    case (.None, .None):
+    case (.none, .none):
         return true
-    case (.Line, .Line):
+    case (.line, .line):
         return true
-    case (.Triangle, .Triangle):
+    case (.triangle, .triangle):
         return true
-    case (.Circle, .Circle):
+    case (.circle, .circle):
         return true
-    case (.Arc, .Arc):
+    case (.arc, .arc):
         return true
-    case (.Sector, .Sector):
+    case (.sector, .sector):
         return true
-    case (.LeftOf, .LeftOf):
+    case (.leftOf, .leftOf):
         return true
-    case (.Union, .Union):
+    case (.union, .union):
         return true
-    case (.Intersection, .Intersection):
+    case (.intersection, .intersection):
         return true
-    case (.Inversion, .Inversion):
+    case (.inversion, .inversion):
         return true
     default:
         return false
@@ -50,63 +50,63 @@ public func ==(lhs: HitArea, rhs: HitArea) -> Bool {
 }
 
 extension HitArea {
-    public func contains(point: Vec2d, margin: Double = 0) -> Bool {
+    public func contains(_ point: Vec2d, margin: Double = 0) -> Bool {
         switch self {
-        case None:
+        case none:
             return false
-        case .Line(let segment):
+        case .line(let segment):
             return incident(point, lineSegment: segment, epsilon: 0.5)
-        case .Circle(let circle):
+        case .circle(let circle):
             return inside(point, circle: circle, epsilon: margin)
-        case .Arc(let arc):
+        case .arc(let arc):
             return inside(point, arc: arc, epsilon: margin)
-        case .Sector(let center, let range):
+        case .sector(let center, let range):
             let a = angle(point-center)
             return inside(a, range: range)
-        case Triangle(let triangle):
+        case triangle(let triangle):
             return inside(point, triangle: triangle, epsilon: margin)
-        case LeftOf(let line):
-            return leftOf(point, line: line, epsilon: margin)
-        case .Union(let a, let b):
+        case leftOf(let line):
+            return ReformMath.leftOf(point, line: line, epsilon: margin)
+        case .union(let a, let b):
             return a.contains(point) || b.contains(point)
-        case .Intersection(let a, let b):
+        case .intersection(let a, let b):
             return a.contains(point) && b.contains(point)
-        case Inversion(let area):
+        case inversion(let area):
             return !area.contains(point)
         }
     }
 }
 
 extension HitArea {
-    public func overlaps(aabb: AABB2d) -> Bool {
+    public func overlaps(_ aabb: AABB2d) -> Bool {
         switch self {
-        case None:
+        case none:
             return false
-        case .Line(let line):
+        case .line(let line):
             return ReformMath.overlaps(aabb: aabb, line: line)
-        case .Circle(let circle):
+        case .circle(let circle):
             return ReformMath.overlaps(aabb: aabb, circle: circle)
-        case .Arc(let arc):
+        case .arc(let arc):
             return ReformMath.overlaps(aabb: aabb, arc: arc)
-        case .Sector(let center, let range):
+        case .sector(let center, let range):
             return inside(angle(aabb.min-center), range: range)
                 || inside(angle(aabb.max-center), range: range)
                 || inside(angle(aabb.xMaxYMin-center), range: range)
                 || inside(angle(aabb.xMinYMax-center), range: range)
                 || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: range.start))
                 || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: range.end))
-        case Triangle(let triangle):
+        case triangle(let triangle):
             return ReformMath.overlaps(aabb: aabb, triangle: triangle)
-        case LeftOf(let line):
-            return leftOf(aabb.min, line: line)
-                || leftOf(aabb.max, line: line)
-                || leftOf(aabb.xMaxYMin, line: line)
-                || leftOf(aabb.xMaxYMin, line: line)
-        case .Union(let a, let b):
+        case leftOf(let line):
+            return ReformMath.leftOf(aabb.min, line: line)
+                || ReformMath.leftOf(aabb.max, line: line)
+                || ReformMath.leftOf(aabb.xMaxYMin, line: line)
+                || ReformMath.leftOf(aabb.xMaxYMin, line: line)
+        case .union(let a, let b):
             return a.overlaps(aabb) || b.overlaps(aabb)
-        case .Intersection(let a, let b):
+        case .intersection(let a, let b):
             return a.overlaps(aabb) && b.overlaps(aabb)
-        case Inversion(let area):
+        case inversion(let area):
             return !area.overlaps(aabb)
         }
     }

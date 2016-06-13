@@ -23,17 +23,17 @@ public struct MorphInstruction : Instruction {
         self.distance = distance
     }
     
-    public func evaluate<T:Runtime>(runtime: T) {
+    public func evaluate<T:Runtime>(_ runtime: T) {
         guard let form = runtime.get(formId) as? Morphable else {
-            runtime.reportError(.UnknownForm)
+            runtime.reportError(.unknownForm)
             return
         }
         guard let anchor = form.getAnchors()[anchorId] else {
-            runtime.reportError(.UnknownAnchor)
+            runtime.reportError(.unknownAnchor)
             return
         }
         guard let delta = distance.getDeltaFor(runtime) else {
-            runtime.reportError(.InvalidDistance)
+            runtime.reportError(.invalidDistance)
             return
         }
         
@@ -41,14 +41,14 @@ public struct MorphInstruction : Instruction {
     }
     
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         let formName = stringifier.labelFor(formId) ?? "???"
         let anchorName = stringifier.labelFor(formId, anchorId: anchorId) ?? "??"
         
         return "Move \(formName)'s \(anchorName) \(distance.getDescription(stringifier))"
     }
     
-    public func analyze<T:Analyzer>(analyzer: T) {
+    public func analyze<T:Analyzer>(_ analyzer: T) {
     }
 
     public var isDegenerated : Bool {
@@ -57,7 +57,7 @@ public struct MorphInstruction : Instruction {
 }
 
 extension MorphInstruction : Mergeable {
-    public func mergeWith(other: MorphInstruction, force: Bool) -> MorphInstruction? {
+    public func mergeWith(_ other: MorphInstruction, force: Bool) -> MorphInstruction? {
         guard formId == other.formId else {
             return nil
         }

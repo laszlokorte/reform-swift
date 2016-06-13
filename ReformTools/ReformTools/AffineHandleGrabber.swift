@@ -13,16 +13,16 @@ import ReformStage
 public final class AffineHandleGrabber {
 
     private enum State {
-        case Idle
-        case Searching(FormIdentifier, SearchingResult)
+        case idle
+        case searching(FormIdentifier, SearchingResult)
     }
 
     private enum SearchingResult {
-        case None
-        case Found(position: Vec2d, point: AffineHandle, cycle: Int)
+        case none
+        case found(position: Vec2d, point: AffineHandle, cycle: Int)
     }
 
-    private var state : State = .Idle
+    private var state : State = .idle
     let affineHandleUI : AffineHandleUI
 
     let handleFinder : AffineHandleFinder
@@ -37,44 +37,44 @@ public final class AffineHandleGrabber {
     }
 
     func refresh() {
-        if case .Searching(let formId, let result) = state {
+        if case .searching(let formId, let result) = state {
 
-            let allPoints = handleFinder.getHandles(HandleQuery(filter: .Only(.Form(formId)), location: .Any))
+            let allPoints = handleFinder.getHandles(HandleQuery(filter: .only(.form(formId)), location: .any))
 
-            if case .Found(_, let current, _) = result,
+            if case .found(_, let current, _) = result,
                 let updated = handleFinder.getUpdatedHandle(current){
-                    affineHandleUI.state = .Active(updated, allPoints)
+                    affineHandleUI.state = .active(updated, allPoints)
             } else {
-                affineHandleUI.state = .Show(allPoints)
+                affineHandleUI.state = .show(allPoints)
             }
 
         } else {
-            affineHandleUI.state = .Hide
+            affineHandleUI.state = .hide
         }
     }
 
-    func enable(formId: FormIdentifier) {
-        if case .Searching(formId, _) = state {
+    func enable(_ formId: FormIdentifier) {
+        if case .searching(formId, _) = state {
 
         } else {
-            state = .Searching(formId, .None)
+            state = .searching(formId, .none)
         }
         refresh()
     }
 
     func disable() {
-        state = .Idle
+        state = .idle
         refresh()
     }
 
-    func searchAt(position: Vec2d) {
-        if case .Searching(let formId, let oldResult) = state {
+    func searchAt(_ position: Vec2d) {
+        if case .searching(let formId, let oldResult) = state {
 
             switch oldResult {
-            case .Found(_, _, let cycle):
-                state = .Searching(formId, resultFor(formId, position: position, cycle: cycle))
-            case .None:
-                state = .Searching(formId, resultFor(formId, position: position, cycle: 0))
+            case .found(_, _, let cycle):
+                state = .searching(formId, resultFor(formId, position: position, cycle: cycle))
+            case .none:
+                state = .searching(formId, resultFor(formId, position: position, cycle: 0))
             }
         }
 
@@ -82,27 +82,27 @@ public final class AffineHandleGrabber {
     }
 
     func cycle() {
-        if case .Searching(let formId, .Found(let pos, _, let cycle)) = state {
+        if case .searching(let formId, .found(let pos, _, let cycle)) = state {
 
-            state =  .Searching(formId, resultFor(formId, position: pos, cycle: cycle+1))
+            state =  .searching(formId, resultFor(formId, position: pos, cycle: cycle+1))
         }
 
     }
 
-    private func resultFor(formId : FormIdentifier, position: Vec2d, cycle: Int) -> SearchingResult {
+    private func resultFor(_ formId : FormIdentifier, position: Vec2d, cycle: Int) -> SearchingResult {
 
-        let points = handleFinder.getHandles(HandleQuery(filter: .Only(.Form(formId)), location: .Near(position, distance: radius / camera.zoom)))
+        let points = handleFinder.getHandles(HandleQuery(filter: .only(.form(formId)), location: .near(position, distance: radius / camera.zoom)))
 
         if points.count > 0 {
-            return .Found(position: position, point: points[cycle%points.count], cycle: cycle)
+            return .found(position: position, point: points[cycle%points.count], cycle: cycle)
         } else {
-            return .None
+            return .none
         }
 
     }
 
     var current : AffineHandle? {
-        if case .Searching(_, .Found(_, let handle, _)) = state {
+        if case .searching(_, .found(_, let handle, _)) = state {
             return handle
         } else {
             return nil

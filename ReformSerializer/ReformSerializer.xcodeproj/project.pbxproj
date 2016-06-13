@@ -208,6 +208,7 @@
 				TargetAttributes = {
 					F26D467D1B7D0BBD00266096 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					F26D46871B7D0BBD00266096 = {
 						CreatedOnToolsVersion = 7.0;
@@ -382,6 +383,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -401,6 +403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.laszlokorte.ReformSerializer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

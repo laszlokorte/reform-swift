@@ -15,11 +15,11 @@ public struct ConstantAngle : RuntimeRotationAngle, Labeled {
         self.angle = angle
     }
     
-    public func getAngleFor<R:Runtime>(runtime: R) -> Angle? {
+    public func getAngleFor<R:Runtime>(_ runtime: R) -> Angle? {
         return angle
     }
     
-    public func getDescription(stringifier: Stringifier) -> String {
+    public func getDescription(_ stringifier: Stringifier) -> String {
         return String(format: "%.2f%%", angle.percent)
     }
 

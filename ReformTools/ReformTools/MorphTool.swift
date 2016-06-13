@@ -13,12 +13,12 @@ import ReformStage
 public final class MorphTool : Tool {
     enum State
     {
-        case Idle
-        case Delegating
-        case Moving(handle: Handle, target: Target, offset: Vec2d)
+        case idle
+        case delegating
+        case moving(handle: Handle, target: Target, offset: Vec2d)
     }
     
-    var state : State = .Idle
+    var state : State = .idle
     var snapType : PointType = []
     
     let stage : Stage
@@ -43,7 +43,7 @@ public final class MorphTool : Tool {
     }
     
     public func setUp() {
-        state = .Idle
+        state = .idle
         selectionTool.setUp()
         if let selected = selection.one {
             handleGrabber.enable(selected)
@@ -55,7 +55,7 @@ public final class MorphTool : Tool {
         pointSnapper.disable()
         handleGrabber.disable()
         selectionTool.tearDown()
-        state = .Idle
+        state = .idle
     }
     
     public func refresh() {
@@ -69,17 +69,17 @@ public final class MorphTool : Tool {
     
     public func cancel() {
         switch self.state {
-        case .Delegating, .Idle:
-            state = .Idle
+        case .delegating, .idle:
+            state = .idle
             selectionTool.cancel()
-        case .Moving:
+        case .moving:
             instructionCreator.cancel()
             pointSnapper.disable()
-            state = .Idle
+            state = .idle
         }
     }
     
-    public func process(input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
+    public func process(_ input: Input, atPosition pos: Vec2d, withModifier modifier: Modifier) {
         snapType = modifier.contains(.Glomp) ? (modifier.contains(.Free) ? [.Grid] : [.Glomp]) :modifier.contains(.Free) ? [.None] :  [.Form, .Intersection]
         
         if modifier.isStreight {
@@ -90,20 +90,20 @@ public final class MorphTool : Tool {
         
         
         switch state {
-        case .Delegating:
+        case .delegating:
             selectionTool.process(input, atPosition: pos, withModifier: modifier)
             switch input {
-            case .ModifierChange, .Press,
-            .Move, .Cycle, .Toggle:
+            case .modifierChange, .press,
+            .move, .cycle, .toggle:
                 break
-            case .Release:
-                state = .Idle
+            case .release:
+                state = .idle
             }
-        case .Idle:
+        case .idle:
             switch input {
-            case .Move, .ModifierChange:
+            case .move, .modifierChange:
                 handleGrabber.searchAt(pos)
-            case .Press:
+            case .press:
                 if let grabbedHandle = handleGrabber.current {
                     
                     let distance = ConstantDistance(delta: Vec2d())
@@ -112,43 +112,43 @@ public final class MorphTool : Tool {
                     instructionCreator
                         .beginCreation(instruction)
                     
-                    state = .Moving(handle: grabbedHandle, target: .Free(position: pos), offset: pos - grabbedHandle.position)
+                    state = .moving(handle: grabbedHandle, target: .free(position: pos), offset: pos - grabbedHandle.position)
                     
-                    pointSnapper.enable(.Except(grabbedHandle.formId), pointType: snapType)
+                    pointSnapper.enable(.except(grabbedHandle.formId), pointType: snapType)
                     
                 } else {
-                    state = .Delegating
+                    state = .delegating
                     selectionTool.process(input, atPosition: pos, withModifier: modifier)
                 }
-            case .Cycle:
+            case .cycle:
                 handleGrabber.cycle()
-            case .Toggle, .Release:
+            case .toggle, .release:
                 break
             }
-        case .Moving(let grabbedHandle, _, let offset):
+        case .moving(let grabbedHandle, _, let offset):
             switch input {
                 
-            case .ModifierChange:
-            pointSnapper.enable(.Except(grabbedHandle.formId), pointType: snapType)
+            case .modifierChange:
+            pointSnapper.enable(.except(grabbedHandle.formId), pointType: snapType)
                 fallthrough
-            case .Move:
+            case .move:
                 pointSnapper.searchAt(pos)
                 if pointSnapper.current == nil {
                     streightener.reset()
                 }
                 
-                state = .Moving(handle: grabbedHandle, target: pointSnapper.getTarget(pos), offset: offset)
-            case .Press:
+                state = .moving(handle: grabbedHandle, target: pointSnapper.getTarget(pos), offset: offset)
+            case .press:
                 break
-            case .Release:
+            case .release:
                 instructionCreator.commit()
-                state = .Idle
+                state = .idle
                 pointSnapper.disable()
-                process(.Move, atPosition: pos, withModifier: modifier)
-            case .Cycle:
+                process(.move, atPosition: pos, withModifier: modifier)
+            case .cycle:
                 pointSnapper.cycle()
-                state = .Moving(handle: grabbedHandle, target: pointSnapper.getTarget(pos), offset: offset)
-            case .Toggle:
+                state = .moving(handle: grabbedHandle, target: pointSnapper.getTarget(pos), offset: offset)
+            case .toggle:
                 streightener.invert()
             }
         }
@@ -163,12 +163,12 @@ public final class MorphTool : Tool {
     }
     
     private func publish() {
-        if case .Moving(let grabbedHandle, let target, let offset) = state {
+        if case .moving(let grabbedHandle, let target, let offset) = state {
             let distance : protocol<RuntimeDistance, Labeled>
             switch target {
-            case .Free(let position):
+            case .free(let position):
                 distance = ConstantDistance(delta: streightener.adjust(position - grabbedHandle.position - offset, step: Angle(degree: 90)))
-            case .Snap(let snap):
+            case .snap(let snap):
                 distance = RelativeDistance(from: grabbedHandle.runtimePoint, to: snap.runtimePoint, direction: streightener.directionFor(snap.position - grabbedHandle.position))
             }
             

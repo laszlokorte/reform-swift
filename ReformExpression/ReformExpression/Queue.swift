@@ -13,7 +13,7 @@ public struct Queue<T> {
         return _content.isEmpty
     }
     
-    mutating func add(element: T) {
+    mutating func add(_ element: T) {
         _content.append(element)
     }
     
