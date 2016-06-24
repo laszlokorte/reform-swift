@@ -16,6 +16,12 @@ Currently it is still under development. Feel free to contribute!
 
 Take a look at [this youtube playlist](https://www.youtube.com/playlist?list=PLfGbKGqfmpEJVKupyh3vSvjMvd-S2bCTH) to see the application in action.
 
+Requirements
+------------
+
+The current version requires Swift 3 and XCode 8 beta to compile. You can checkout [an earlier commit](https://github.com/laszlokorte/reform-swift/commit/cc60e82c4f37755a24798f1eaaee22ba4f49e5cc) to compile in XCode 7. A compiled version [can be downloaded here](https://github.com/laszlokorte/reform-swift/releases)
+
+
 When will it be releaed?
 ------------------------
 
