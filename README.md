@@ -1,6 +1,8 @@
 Reform - Drawing Dynamic Visualizations
 =======================================
 
+[![Gitter](https://badges.gitter.im/laszlokorte/reform-swift.svg)](https://gitter.im/laszlokorte/reform-swift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 ![screenshot of the applciation](https://static.laszlokorte.de/reform/screenshot.png "screenshot of the applciation")
 
 What is Reform?
