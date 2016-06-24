@@ -22,8 +22,8 @@ Requirements
 The current version requires Swift 3 and XCode 8 beta to compile. You can checkout [an earlier commit](https://github.com/laszlokorte/reform-swift/commit/cc60e82c4f37755a24798f1eaaee22ba4f49e5cc) to compile in XCode 7. A compiled version [can be downloaded here](https://github.com/laszlokorte/reform-swift/releases)
 
 
-When will it be releaed?
-------------------------
+When will it be released?
+-------------------------
 
 Once it's done. Take a look at the TODO.md to get an impression of what's missing. Contributions are very welcome.
 
