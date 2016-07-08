@@ -69,13 +69,13 @@ final class StageController : NSViewController {
     }
 
     override func viewDidAppear() {
-        NotificationCenter.default().addObserver(self, selector: #selector(StageController.procedureChanged), name:"ProcedureEvaluated", object: nil)
-        NotificationCenter.default().addObserver(self, selector: #selector(StageController.toolChanged), name:"ToolChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StageController.procedureChanged), name:NSNotification.Name("ProcedureEvaluated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StageController.toolChanged), name:NSNotification.Name("ToolChanged"), object: nil)
     }
 
     override func viewDidDisappear() {
-        NotificationCenter.default().removeObserver(self, name:"ProcedureEvaluated" as NSNotification.Name, object: nil)
-        NotificationCenter.default().removeObserver(self, name:"ToolChanged" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name("ProcedureEvaluated"), object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name("ToolChanged"), object: nil)
     }
     
     override func viewDidLoad() {

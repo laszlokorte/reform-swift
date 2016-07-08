@@ -24,18 +24,18 @@ class AttributesController : NSViewController {
     var attributesViewModel : AttributesViewModel?
 
     override func viewDidAppear() {
-        NotificationCenter.default().addObserver(self, selector: #selector(AttributesController.selectionChanged), name:"SelectionChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AttributesController.selectionChanged), name:NSNotification.Name("SelectionChanged"), object: nil)
 
-        NotificationCenter.default().addObserver(self, selector: #selector(AttributesController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AttributesController.procedureChanged), name:NSNotification.Name("ProcedureAnalyzed"), object: nil)
 
         selectionChanged()
     }
 
     override func viewDidDisappear() {
-        NotificationCenter.default().removeObserver(self, name:"SelectionChanged" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name("SelectionChanged"), object: nil)
 
 
-        NotificationCenter.default().removeObserver(self, name:"ProcedureAnalyzed" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name("ProcedureAnalyzed"), object: nil)
     }
 
     dynamic func selectionChanged() {

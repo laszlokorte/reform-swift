@@ -28,14 +28,14 @@ final class ProcedureController : NSViewController {
     }
 
     override func viewDidAppear() {
-        NotificationCenter.default().addObserver(self, selector: #selector(ProcedureController.procedureEvaluated), name:"ProcedureEvaluated", object: nil)
-        NotificationCenter.default().addObserver(self, selector: #selector(ProcedureController.procedureChanged), name:"ProcedureAnalyzed", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ProcedureController.procedureEvaluated), name:NSNotification.Name("ProcedureEvaluated"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ProcedureController.procedureChanged), name:NSNotification.Name("ProcedureAnalyzed"), object: nil)
     }
 
     override func viewDidDisappear() {
-        NotificationCenter.default().removeObserver(self, name:"ProcedureEvaluated" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name("ProcedureEvaluated"), object: nil)
 
-        NotificationCenter.default().removeObserver(self,  name:"ProcedureAnalyzed" as NSNotification.Name, object: nil)
+        NotificationCenter.default.removeObserver(self,  name:NSNotification.Name("ProcedureAnalyzed"), object: nil)
     }
 
     dynamic func procedureChanged() {

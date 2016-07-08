@@ -259,7 +259,7 @@ struct Rule<T:TokenType>
     
     func matches(_ input : String) -> Bool
     {
-        return input.range(of: pattern, options: .regularExpressionSearch) != nil
+        return input.range(of: pattern, options: .regularExpression) != nil
     }
     
 }

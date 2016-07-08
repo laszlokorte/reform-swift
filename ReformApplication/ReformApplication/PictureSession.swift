@@ -43,7 +43,7 @@ final class FormSelectionChanger {
     }
 
     private func publishChange() {
-        NotificationCenter.default().post(name: Notification.Name(rawValue: "SelectionChanged"), object: selection)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "SelectionChanged"), object: selection)
     }
 }
 
@@ -94,7 +94,7 @@ final class ProcedureProcessor<A:Analyzer> {
             picture.procedure.analyzeWith(analyzer)
 
             DispatchQueue.main.sync {
-                NotificationCenter.default().post(name: Notification.Name(rawValue: "ProcedureAnalyzed"), object: picture.procedure)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "ProcedureAnalyzed"), object: picture.procedure)
             }
 
             picture.procedure.evaluateWith(width: picture.size.0, height: picture.size.1,runtime: runtime)
@@ -104,7 +104,7 @@ final class ProcedureProcessor<A:Analyzer> {
 
             }
             DispatchQueue.main.async {
-                NotificationCenter.default().post(name: Notification.Name(rawValue: "ProcedureEvaluated"), object: picture.procedure)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "ProcedureEvaluated"), object: picture.procedure)
             }
         }
     }
@@ -129,7 +129,7 @@ final class ProcedureProcessor<A:Analyzer> {
             }
             DispatchQueue.main.async {
 
-                NotificationCenter.default().post(name: Notification.Name(rawValue: "ProcedureEvaluated"), object: picture.procedure)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "ProcedureEvaluated"), object: picture.procedure)
             }
 
         }
@@ -337,7 +337,7 @@ final class PictureSession {
 
         set {
             toolController.currentTool = newValue
-            NotificationCenter.default().post(name: Notification.Name(rawValue: "ToolChanged"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "ToolChanged"), object: nil)
         }
     }
 }

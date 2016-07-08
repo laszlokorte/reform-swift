@@ -186,12 +186,12 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
             return Expression.constant(Value.boolValue(value: true))
         } else if token.value == "false" {
             return Expression.constant(Value.boolValue(value: false))
-        } else if let range = token.value.range(of: "\\A\"([^\"]*)\"\\Z", options: .regularExpressionSearch) {
+        } else if let range = token.value.range(of: "\\A\"([^\"]*)\"\\Z", options: .regularExpression) {
             let string = token.value[range]
             let subString = string[string.characters.index(after: string.startIndex)..<string.characters.index(before: string.endIndex)]
             
             return Expression.constant(Value.stringValue(value: subString))
-        } else if let range = token.value.range(of: "\\A#[0-9a-z]{6}\\Z", options: .regularExpressionSearch) {
+        } else if let range = token.value.range(of: "\\A#[0-9a-z]{6}\\Z", options: .regularExpression) {
             
             let string = String(token.value[range].characters.dropFirst())
             
@@ -211,7 +211,7 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
             } else {
                 throw ShuntingYardError.unexpectedToken(token: token, message: "")
             }
-        } else if let range = token.value.range(of: "\\A#[0-9a-z]{8}\\Z", options: .regularExpressionSearch) {
+        } else if let range = token.value.range(of: "\\A#[0-9a-z]{8}\\Z", options: .regularExpression) {
             
             let string = String(token.value[range].characters.dropFirst())
             
