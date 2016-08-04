@@ -9,7 +9,7 @@
 import ReformExpression
 
 public protocol Analyzer : class {
-    func analyze( _ block: @noescape () -> ())
+    func analyze(_ block: @noescape () -> ())
     
     func publish(_ instruction: Analyzable, label: String)
     

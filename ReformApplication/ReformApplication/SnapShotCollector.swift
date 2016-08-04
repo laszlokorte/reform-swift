@@ -37,7 +37,7 @@ final public class SnapshotCollector : RuntimeListener {
     private var errorsBuffer = [InstructionNodeKey:RuntimeError]()
     private(set) var paths = [Path]()
 
-    let drawQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+    let drawQueue = DispatchQueue.main
 
 
     private var redraw = true

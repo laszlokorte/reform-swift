@@ -93,7 +93,7 @@ final public class DefaultRuntime : Runtime {
         block(self)
     }
     
-    public func scoped( _ block: @noescape (DefaultRuntime) -> ()) {
+    public func scoped(_ block: @noescape (DefaultRuntime) -> ()) {
         if shouldStop { return }
 
         stack.pushFrame()

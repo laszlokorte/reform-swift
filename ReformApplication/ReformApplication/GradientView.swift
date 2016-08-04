@@ -12,7 +12,7 @@ import Cocoa
 final class GradientView : NSView {
 
     override func draw(_ dirtyRect: NSRect) {
-        if let main = self.window?.isKeyWindow where !main {
+        if let main = self.window?.isKeyWindow, !main {
             NSGradient(
                 starting: NSColor(red: 0.9647, green:0.9647, blue: 0.9647, alpha: 1.0),
                 ending: NSColor(red: 0.9647, green:0.9647, blue: 0.9647, alpha: 1.0)

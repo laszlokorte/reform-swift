@@ -67,8 +67,8 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
     @IBAction func onChange(_ sender: AnyObject?) {
         guard let
             parser = parser,
-            string = countField?.stringValue,
-            intend = intend
+            let string = countField?.stringValue,
+            let intend = intend
             else {
                 return
         }

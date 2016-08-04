@@ -67,8 +67,8 @@ class IfConditionInstructionDetailController : NSViewController, InstructionDeta
     @IBAction func onChange(_ sender: AnyObject?) {
         guard let
             parser = parser,
-            string = conditionField?.stringValue,
-            intend = intend
+            let string = conditionField?.stringValue,
+            let intend = intend
             else {
                 return
         }

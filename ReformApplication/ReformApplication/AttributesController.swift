@@ -56,7 +56,7 @@ class AttributesController : NSViewController {
     dynamic func procedureChanged() {
         if let
             model = attributesViewModel,
-            single = model.selection.one {
+            let single = model.selection.one {
                 formNameField?.stringValue = model.analyzer.stringifier.labelFor(single) ?? ""
         }
     }

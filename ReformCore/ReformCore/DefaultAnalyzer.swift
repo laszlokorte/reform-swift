@@ -62,7 +62,7 @@ final public class DefaultAnalyzer : Analyzer {
         self.nameAllocator = nameAllocator
     }
     
-    public func analyze( _ block: @noescape () -> ()) {
+    public func analyze(_ block: @noescape () -> ()) {
         analyzerStringifier.forms.removeAll(keepingCapacity: true)
         instructionsDblBuf.removeAll(keepingCapacity: true)
         nameAllocator.reset()
