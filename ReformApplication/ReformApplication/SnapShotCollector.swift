@@ -37,7 +37,7 @@ final public class SnapshotCollector : RuntimeListener {
     private var errorsBuffer = [InstructionNodeKey:RuntimeError]()
     private(set) var paths = [Path]()
 
-    let drawQueue = DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosDefault)
+    let drawQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
 
 
     private var redraw = true
@@ -110,9 +110,9 @@ final public class SnapshotCollector : RuntimeListener {
 
                 context.setLineWidth(6)
 
-                context.translate(x: (size.width -  CGFloat(currentScaled.0)) / 2,
+                context.translateBy(x: (size.width -  CGFloat(currentScaled.0)) / 2,
                     y: (size.height - CGFloat(currentScaled.1)) / 2)
-                context.scale(x: CGFloat(currentScaled.0 / currentSize.0), y: CGFloat(currentScaled.1 / currentSize.1))
+                context.scaleBy(x: CGFloat(currentScaled.0 / currentSize.0), y: CGFloat(currentScaled.1 / currentSize.1))
 
 
                 context.setFillColor(red: 1, green: 0.7, blue: 0.6, alpha: 1)
@@ -151,7 +151,7 @@ final public class SnapshotCollector : RuntimeListener {
             } else if let proxy = form as? ProxyForm {
                 if let
                     proxyId = proxy.getFormIdForRuntime(runtime),
-                    drawable = runtime.get(proxyId) as? Drawable {
+                    let drawable = runtime.get(proxyId) as? Drawable {
                     pushDrawable(drawable, formId: formId, proxy: true)
                 }
             }
@@ -170,13 +170,13 @@ final public class SnapshotCollector : RuntimeListener {
 
             context.setLineWidth(6)
 
-            context.translate(x: (size.width -  CGFloat(currentScaled.0)) / 2,
+            context.translateBy(x: (size.width -  CGFloat(currentScaled.0)) / 2,
                 y: (size.height - CGFloat(currentScaled.1)) / 2)
-            context.scale(x: CGFloat(currentScaled.0 / currentSize.0), y: CGFloat(currentScaled.1 / currentSize.1))
+            context.scaleBy(x: CGFloat(currentScaled.0 / currentSize.0), y: CGFloat(currentScaled.1 / currentSize.1))
 
 
             context.setFillColor(red: 1, green: 1, blue: 1, alpha: 1)
-            context.clipTo(CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
+            context.clip(to: CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
 
             context.fill(CGRect(x: 0, y: 0, width: currentSize.0, height: currentSize.1))
 

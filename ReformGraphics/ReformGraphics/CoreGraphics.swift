@@ -106,9 +106,9 @@ public extension Shape {
             let yn = CGFloat(position.y) // - bounds.midY
             context.textMatrix = CGAffineTransform(translationX: xn, y: yn)
 
-            context.translate(x: CGFloat(position.x), y: CGFloat(position.y))
-            context.rotate(byAngle: CGFloat(rotation.radians))
-            context.translate(x: -CGFloat(position.x), y: -CGFloat(position.y))
+            context.translateBy(x: CGFloat(position.x), y: CGFloat(position.y))
+            context.rotate(by: CGFloat(rotation.radians))
+            context.translateBy(x: -CGFloat(position.x), y: -CGFloat(position.y))
 
             CTLineDraw(line, context)
             context.flush()
@@ -168,9 +168,9 @@ public extension Shape {
             let yn = CGFloat(position.y) // - bounds.midY
             context.textMatrix = CGAffineTransform(translationX: xn, y: yn)
 
-            context.translate(x: CGFloat(position.x), y: CGFloat(position.y))
-            context.rotate(byAngle: CGFloat(rotation.radians))
-            context.translate(x: -CGFloat(position.x), y: -CGFloat(position.y))
+            context.translateBy(x: CGFloat(position.x), y: CGFloat(position.y))
+            context.rotate(by: CGFloat(rotation.radians))
+            context.translateBy(x: -CGFloat(position.x), y: -CGFloat(position.y))
 
             CTLineDraw(line, context)
             context.flush()

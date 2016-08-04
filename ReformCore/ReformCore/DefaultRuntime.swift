@@ -38,7 +38,7 @@ final public class DefaultRuntime : Runtime {
         _depth = depth
     }
     
-    public func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, @noescape callback: (runtime: DefaultRuntime, picture: Picture) -> ()) {
+    public func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: @noescape (runtime: DefaultRuntime, picture: Picture) -> ()) {
         if _depth > DefaultRuntime.maxDepth {
             return
         }
@@ -52,7 +52,7 @@ final public class DefaultRuntime : Runtime {
         _canceled = true
     }
     
-    public func run(width: Double, height: Double, @noescape block: (DefaultRuntime) -> ()) {
+    public func run(width: Double, height: Double, block: @noescape (DefaultRuntime) -> ()) {
         stack.clear()
         
         listeners.forEach() {
@@ -76,7 +76,7 @@ final public class DefaultRuntime : Runtime {
         
     }
     
-    public func eval(_ instruction : InstructionNode, @noescape block: (DefaultRuntime) -> ()) {
+    public func eval(_ instruction : InstructionNode, block: @noescape (DefaultRuntime) -> ()) {
         guard !shouldStop else { return }
 
         defer {
@@ -93,7 +93,7 @@ final public class DefaultRuntime : Runtime {
         block(self)
     }
     
-    public func scoped(@noescape _ block: (DefaultRuntime) -> ()) {
+    public func scoped( _ block: @noescape (DefaultRuntime) -> ()) {
         if shouldStop { return }
 
         stack.pushFrame()

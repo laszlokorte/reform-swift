@@ -46,7 +46,7 @@ final class PictureController : NSViewController {
     var stageController : StageController? {
         didSet {
             if let pictureSession = representedObject as? PictureSession,
-                stageController = stageController {
+                let stageController = stageController {
                     updateStage(stageController, withSession: pictureSession)
             }
         }
@@ -55,7 +55,7 @@ final class PictureController : NSViewController {
     var procedureController : ProcedureController? {
         didSet {
             if let pictureSession = representedObject as? PictureSession,
-                procedureController = procedureController {
+                let procedureController = procedureController {
                     updateProcedure(procedureController, withSession: pictureSession)
             }
         }
@@ -64,7 +64,7 @@ final class PictureController : NSViewController {
     var attributesController : AttributesController? {
         didSet {
             if let pictureSession = representedObject as? PictureSession,
-                attributesController = attributesController {
+                let attributesController = attributesController {
                     updateAttributes(attributesController, withSession: pictureSession)
             }
         }

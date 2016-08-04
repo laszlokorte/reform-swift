@@ -6,7 +6,7 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public enum EvaluationError : ErrorProtocol {
+public enum EvaluationError : Error {
     case unresolvedReference(message: String)
     case arithmeticError(message: String)
     case typeMismatch(message: String)

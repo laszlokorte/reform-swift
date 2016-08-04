@@ -10,7 +10,7 @@
 typealias VMInstruction = Int
 typealias VMProgramm = [VMInstruction]
 
-enum VMError : ErrorProtocol {
+enum VMError : Error {
     case invalidInstruction
 }
 

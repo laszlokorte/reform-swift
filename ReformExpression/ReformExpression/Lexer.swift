@@ -51,7 +51,7 @@ public func ==<T:TokenType>(lhs: Token<T>, rhs: Token<T>) -> Bool {
     return lhs.position == rhs.position && lhs.type == rhs.type && lhs.value == rhs.value
 }
 
-public struct LexerError : ErrorProtocol {
+public struct LexerError : Error {
     let position : SourcePosition
     let string : String
 }
@@ -227,7 +227,7 @@ public struct LexerGenerator<T:TokenType> {
 
     public init() {}
 
-    public init(@noescape callback: (inout LexerGenerator<T>)->()) {
+    public init(callback: @noescape (inout LexerGenerator<T>)->()) {
         callback(&self)
     }
 

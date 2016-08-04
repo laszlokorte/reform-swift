@@ -6,11 +6,11 @@
 //  Copyright © 2015 Laszlo Korte. All rights reserved.
 //
 
-public enum InitialisationError : ErrorProtocol {
+public enum InitialisationError : Error {
     case unknown
 }
 
-public enum NormalizationError : ErrorProtocol {
+public enum NormalizationError : Error {
     case notNormalizable(Any.Type)
 }
 

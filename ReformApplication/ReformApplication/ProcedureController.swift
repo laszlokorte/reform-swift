@@ -46,7 +46,7 @@ final class ProcedureController : NSViewController {
         tableView?.reloadData()
 
         if let focus = procedureViewModel?.instructionFocus.current,
-            index = instructions.index(where: { $0.node === focus }) {
+            let index = instructions.index(where: { $0.node === focus }) {
                 tableView?.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
         }
 
@@ -58,7 +58,7 @@ final class ProcedureController : NSViewController {
     tableView?.reloadData(forRowIndexes: IndexSet(integersIn: 0..<instructions.count), columnIndexes: IndexSet(integer: 0))
 
         if let focus = procedureViewModel?.instructionFocus.current,
-            index = instructions.index(where: { $0.node === focus }) {
+            let index = instructions.index(where: { $0.node === focus }) {
 
                 tableView?.scrollRowToVisible(index)
         }
@@ -91,7 +91,7 @@ extension ProcedureController : NSTableViewDelegate {
         let cellId = outlineRow.isGroup || outlineRow.node.isEmpty ? "groupCell" : "thumbnailCell"
         let cellView = tableView.make(withIdentifier: cellId, owner: self)
         
-        if let cell = cellView as? ProcedureCellView, procedureViewModel = procedureViewModel {
+        if let cell = cellView as? ProcedureCellView, let procedureViewModel = procedureViewModel {
             cell.configure(instructions[row], procedureViewModel: procedureViewModel)
         }
 
@@ -101,7 +101,7 @@ extension ProcedureController : NSTableViewDelegate {
 
 
     func tableViewSelectionDidChange(_ aNotification: Notification) {
-        if !cycle, let index = tableView?.selectedRow where index > -1 {
+        if !cycle, let index = tableView?.selectedRow , index > -1 {
             procedureViewModel?.instructionFocusChanger.setFocus(instructions[index].node)
         }
     }
@@ -109,7 +109,7 @@ extension ProcedureController : NSTableViewDelegate {
 
 extension ProcedureController : NSMenuDelegate {
     @IBAction func wrapInstructionInLoop(_ sender: AnyObject) {
-        guard let selectedIndexes = tableView?.selectedRowIndexes where selectedIndexes.count > 0 else {
+        guard let selectedIndexes = tableView?.selectedRowIndexes , selectedIndexes.count > 0 else {
             return
         }
 
@@ -123,7 +123,7 @@ extension ProcedureController : NSMenuDelegate {
     }
 
     @IBAction func unwrapInstruction(_ sender: AnyObject) {
-        guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
+        guard let selectedIndex = tableView?.selectedRow , selectedIndex > 0 else {
             return
         }
 
@@ -133,7 +133,7 @@ extension ProcedureController : NSMenuDelegate {
     }
 
     @IBAction func wrapInstructionInCondition(_ sender: AnyObject) {
-        guard let selectedIndexes = tableView?.selectedRowIndexes where selectedIndexes.count > 0 else {
+        guard let selectedIndexes = tableView?.selectedRowIndexes , selectedIndexes.count > 0 else {
             return
         }
 
@@ -147,7 +147,7 @@ extension ProcedureController : NSMenuDelegate {
     }
 
     @IBAction func createIterator(_ sender: AnyObject) {
-        guard let selectedIndex = tableView?.selectedRow where selectedIndex > 0 else {
+        guard let selectedIndex = tableView?.selectedRow , selectedIndex > 0 else {
             return
         }
 
@@ -155,7 +155,7 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        guard let formIds = procedureViewModel?.formSelection.selected where !formIds.isEmpty else {
+        guard let formIds = procedureViewModel?.formSelection.selected , !formIds.isEmpty else {
             return
         }
 
@@ -209,7 +209,7 @@ extension ProcedureController : NSMenuDelegate {
 
     @IBAction func doubleClick(_ sender: AnyObject) {
 
-        guard let row = tableView?.selectedRow where row > 0, let cell = tableView?.view(atColumn: 0, row: row, makeIfNecessary: false) else {
+        guard let row = tableView?.selectedRow , row > 0, let cell = tableView?.view(atColumn: 0, row: row, makeIfNecessary: false) else {
             return
         }
 
@@ -242,7 +242,7 @@ extension ProcedureController : NSMenuDelegate {
         }
 
         if let instr = popOverViewController as? InstructionDetailController,
-        procedureViewModel = procedureViewModel{
+        let procedureViewModel = procedureViewModel{
             instr.stringifier = procedureViewModel.analyzer.stringifier
             instr.parser = { string in
                 return procedureViewModel.parser.parse(procedureViewModel.lexer.tokenize(string.characters))
