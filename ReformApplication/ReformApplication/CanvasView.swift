@@ -62,7 +62,7 @@ final class CanvasView : NSView {
 
             let offsetX = (bounds.width-CGFloat(canvasSize.x))/2.0
             let offsetY = (bounds.height-CGFloat(canvasSize.y))/2.0
-            context.translate(x: offsetX, y: offsetY)
+            context.translateBy(x: offsetX, y: offsetY)
 
             for r in renderers {
                 r.renderInContext(context)
@@ -76,12 +76,12 @@ final class CanvasView : NSView {
 
     override var acceptsFirstResponder : Bool { return true }
 
-    override func keyDown(_ theEvent: NSEvent) {
-        delegate?.keyDown(theEvent)
+    override func keyDown(with theEvent: NSEvent) {
+        delegate?.keyDown(with: theEvent)
     }
 
-    override func keyUp(_ theEvent: NSEvent) {
-        delegate?.keyUp(theEvent)
+    override func keyUp(with theEvent: NSEvent) {
+        delegate?.keyUp(with: theEvent)
     }
 
     override func selectAll(_ sender: AnyObject?) {

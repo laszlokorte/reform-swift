@@ -64,7 +64,7 @@ final class ProcedureProcessor<A:Analyzer> {
     let snapshotCollector : SnapshotCollector
 
     // the queue used to schedule tasks for the background thread
-    let queue = DispatchQueue(label: "reform.runtime.queue", attributes: DispatchQueueAttributes.serial)
+    let queue = DispatchQueue(label: "reform.runtime.queue")
 
     // counters to ensure runtime is not running multiple times in parallel
     var triggerCounter = 0

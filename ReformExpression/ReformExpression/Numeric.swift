@@ -326,7 +326,7 @@ struct Maximum : Function {
     static let arity = FunctionArity.variadic
     
     func apply(_ params: [Value]) -> Result<Value, EvaluationError> {
-        if let result = params.reduce(Optional<Double>.none, combine: { acc, value in
+        if let result = params.reduce(Optional<Double>.none, { acc, value in
             switch value {
             case .intValue(let v):
                 if let current = acc where current > Double(v) {
@@ -357,7 +357,7 @@ struct Minimum : Function {
     static let arity = FunctionArity.variadic
     
     func apply(_ params: [Value]) -> Result<Value, EvaluationError> {
-        if let result = params.reduce(Optional<Double>.none, combine: { acc, value in
+        if let result = params.reduce(Optional<Double>.none, { acc, value in
             switch value {
             case .intValue(let v):
                 if let current = acc where current < Double(v) {
@@ -397,7 +397,7 @@ struct Sum : Function {
     static let arity = FunctionArity.variadic
     
     func apply(_ params: [Value]) -> Result<Value, EvaluationError> {
-        if let result = params.reduce(Optional<Double>.none, combine: { acc, value in
+        if let result = params.reduce(Optional<Double>.none, { acc, value in
             switch value {
             case .intValue(let v):
                 if let current = acc {

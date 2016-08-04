@@ -49,7 +49,7 @@ final class StageController : NSViewController {
     override var representedObject : AnyObject? {
         didSet {
             if let stageModel = representedObject as? StageViewModel,
-                canvas = canvas {
+                let canvas = canvas {
                     configureCanvas(canvas, withStage: stageModel)
                 selection = stageModel.selection
                 stage = stageModel.stage
@@ -62,7 +62,7 @@ final class StageController : NSViewController {
     @IBOutlet var canvas : CanvasView? {
         didSet {
             if let stageModel = representedObject as? StageViewModel,
-                canvas = canvas {
+                let canvas = canvas {
                     configureCanvas(canvas, withStage: stageModel)
             }
         }
@@ -141,7 +141,7 @@ final class StageController : NSViewController {
         return Vec2d(x: Double(pos.x-offsetX), y: Double(pos.y-offsetY))
     }
 
-    override func mouseDown(_ theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         guard let pos = fromEvent(theEvent) else { return }
 
         toolController?.process(.press, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
@@ -149,7 +149,7 @@ final class StageController : NSViewController {
         canvas?.needsDisplay = true
     }
 
-    override func mouseUp(_ theEvent: NSEvent) {
+    override func mouseUp(with theEvent: NSEvent) {
         guard let pos = fromEvent(theEvent) else { return }
 
 
@@ -158,7 +158,7 @@ final class StageController : NSViewController {
         canvas?.needsDisplay = true
     }
 
-    override func mouseMoved(_ theEvent: NSEvent) {
+    override func mouseMoved(with theEvent: NSEvent) {
         guard let pos = fromEvent(theEvent) else { return }
 
         toolController?.process(.move, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
@@ -166,7 +166,7 @@ final class StageController : NSViewController {
         canvas?.needsDisplay = true
     }
 
-    override func mouseDragged(_ theEvent: NSEvent) {
+    override func mouseDragged(with theEvent: NSEvent) {
         guard let pos = fromEvent(theEvent) else { return }
 
 
@@ -175,7 +175,7 @@ final class StageController : NSViewController {
         canvas?.needsDisplay = true
     }
 
-    override func flagsChanged(_ theEvent: NSEvent) {
+    override func flagsChanged(with theEvent: NSEvent) {
         guard let mousePostion = canvas?.window?.mouseLocationOutsideOfEventStream else {
             return
         }
@@ -186,7 +186,7 @@ final class StageController : NSViewController {
         canvas?.needsDisplay = true
     }
 
-    override func keyDown(_ theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         guard let mousePostion = canvas?.window?.mouseLocationOutsideOfEventStream else {
             return
         }
@@ -205,13 +205,13 @@ final class StageController : NSViewController {
         } else if !theEvent.modifierFlags.isEmpty {
             toolController?.process(.modifierChange, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
         } else {
-            super.keyDown(theEvent)
+            super.keyDown(with: theEvent)
             return
         }
         canvas?.needsDisplay = true
     }
 
-    override func keyUp(_ theEvent: NSEvent) {
+    override func keyUp(with theEvent: NSEvent) {
         guard let mousePostion = canvas?.window?.mouseLocationOutsideOfEventStream else {
             return
         }
@@ -224,7 +224,7 @@ final class StageController : NSViewController {
         } else if !theEvent.modifierFlags.isEmpty {
             toolController?.process(.modifierChange, atPosition: pos, withModifier: Modifier.fromEvent(theEvent))
         } else {
-            super.keyUp(theEvent)
+            super.keyUp(with: theEvent)
             return
         }
         canvas?.needsDisplay = true

@@ -20,7 +20,7 @@ struct CompositeOutline : Outline {
         let partLengths = parts.flatMap { $0.getLengthFor(runtime) }
         guard partLengths.count == parts.count else { return nil }
         
-        let sum = partLengths.reduce(0, combine: +)
+        let sum = partLengths.reduce(0, +)
                 
         let length = clamp(t, between: 0, and: 1) * sum
         var subLength = 0.0

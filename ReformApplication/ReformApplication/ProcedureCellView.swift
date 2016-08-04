@@ -24,7 +24,7 @@ final class ProcedureSingleCellView : NSTableCellView, ProcedureCellView {
 
 
         let error = procedureViewModel.snapshotCollector.errors.keys.contains(InstructionNodeKey(row.node))
-        textField?.textColor = error ? NSColor.red() : nil
+        textField?.textColor = error ? NSColor.red : nil
 
     }
 }
@@ -38,7 +38,7 @@ final class ProcedureGroupCellView : NSTableCellView, ProcedureCellView {
         textField?.stringValue = row.node.isEmpty ? "" : row.label
 
         let error = procedureViewModel.snapshotCollector.errors.keys.contains(InstructionNodeKey(row.node))
-        textField?.textColor = error ? NSColor.red() : nil
+        textField?.textColor = error ? NSColor.red : nil
 
     }
 }

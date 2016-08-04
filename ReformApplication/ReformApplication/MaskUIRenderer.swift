@@ -20,7 +20,7 @@ struct MaskUIRenderer : Renderer {
             context.setFillColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
             context.fill(context.boundingBoxOfClipPath)
 
-            context.clipTo(CGRect(x: x, y: y, width: width, height: height))
+            context.clip(to: CGRect(x: x, y: y, width: width, height: height))
         }
         
     }

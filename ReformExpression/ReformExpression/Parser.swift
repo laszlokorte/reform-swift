@@ -36,7 +36,7 @@ public enum Associativity {
 public protocol Parser {
     associatedtype NodeType
     associatedtype TokenType
-    associatedtype ParseErrorType : ErrorProtocol
+    associatedtype ParseErrorType : Error
     
     func parse<T : Sequence where T.Iterator.Element==TokenType>(_ tokens: T) -> Result<NodeType, ParseErrorType>
 }

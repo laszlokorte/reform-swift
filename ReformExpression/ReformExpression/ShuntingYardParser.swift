@@ -328,7 +328,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
 
 
 
-public enum ShuntingYardError : ErrorProtocol {
+public enum ShuntingYardError : Error {
     case invalidState
     case unexpectedEndOfArgumentList(token: Token<ShuntingYardTokenType>)
     case missingOperand(token: Token<ShuntingYardTokenType>, arity: OperatorArity, missing: Int)
