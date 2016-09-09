@@ -39,7 +39,7 @@ public struct CreateFormInstruction : Instruction {
         analyzer.announceForm(form)
         
         if let picture = form as? PictureForm,
-                id = picture.pictureIdentifier {
+                let id = picture.pictureIdentifier {
             analyzer.announceDepencency(id)
         }
     }
@@ -52,7 +52,7 @@ public struct CreateFormInstruction : Instruction {
 extension CreateFormInstruction : Mergeable {
     public func mergeWith(_ other: CreateFormInstruction, force: Bool) -> CreateFormInstruction? {
 
-        guard other.form.dynamicType == form.dynamicType else {
+        guard type(of: other.form) == type(of: form) else {
             return nil
         }
 

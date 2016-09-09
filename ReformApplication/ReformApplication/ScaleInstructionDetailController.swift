@@ -26,7 +26,7 @@ class ScaleInstructionDetailController : NSViewController, InstructionDetailCont
     }
 
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             updateLabel()
         }

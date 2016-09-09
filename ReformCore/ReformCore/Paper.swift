@@ -106,22 +106,22 @@ extension Paper.PointId {
     
     var x : Double {
         switch self {
-        case left, topLeft, bottomLeft:
+        case .left, .topLeft, .bottomLeft:
             return 0
-        case right, topRight, bottomRight:
+        case .right, .topRight, .bottomRight:
             return 1
-        case top, bottom, center:
+        case .top, .bottom, .center:
             return  0.5
         }
     }
     
     var y : Double {
         switch self {
-        case top, topLeft, topRight:
+        case .top, .topLeft, .topRight:
             return 0
-        case bottom, bottomLeft, bottomRight:
+        case .bottom, .bottomLeft, .bottomRight:
             return 1
-        case left, right, center:
+        case .left, .right, .center:
             return 0.5
         }
     }
@@ -155,7 +155,7 @@ struct PaperPoint : RuntimePoint, Labeled {
     func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             w = width.getLengthFor(runtime),
-            h = height.getLengthFor(runtime) else {
+            let h = height.getLengthFor(runtime) else {
             return nil
         }
         return Vec2d(x: side.x * w, y:side.y * h)

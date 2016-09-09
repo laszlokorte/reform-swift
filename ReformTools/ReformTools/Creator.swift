@@ -21,9 +21,9 @@ public final class InstructionCreator {
 
     let stage : Stage
     let focus : InstructionFocus
-    let intend : (commit: Bool) -> ()
+    let intend : (_ commit: Bool) -> ()
     
-    public init(stage: Stage, focus: InstructionFocus, intend: (commit: Bool) -> ()) {
+    public init(stage: Stage, focus: InstructionFocus, intend: @escaping (_ commit: Bool) -> ()) {
         self.stage = stage
         self.focus = focus
         self.intend = intend
@@ -66,7 +66,7 @@ public final class InstructionCreator {
                     state = .creating(original: focused, node)
                 }
                 
-                intend(commit: false)
+                intend(false)
             }
 
         default:
@@ -80,20 +80,20 @@ public final class InstructionCreator {
             focus.current = original
             node.removeFromParent()
             state = .idle
-            intend(commit: false)
+            intend(false)
         case .amending(let original, let node):
             focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
             state = .idle
-            intend(commit: false)
+            intend(false)
 
         case .fixing(let original, let node):
             focus.current = original
             node.prepend(sibling: original)
             node.removeFromParent()
             state = .idle
-            intend(commit: false)
+            intend(false)
         case .idle:
             break
         }
@@ -110,7 +110,7 @@ public final class InstructionCreator {
             } else {
                 node.replaceWith(instruction)
             }
-            intend(commit: false)
+            intend(false)
         case .amending(let original, let node):
             if let merged = merge(original, instruction: instruction) {
                 node.replaceWith(merged)
@@ -120,14 +120,14 @@ public final class InstructionCreator {
                 focus.current = node
                 state = .creating(original: original, node)
             }
-            intend(commit: false)
+            intend(false)
         case .idle:
             break
         case .fixing(let original, let node):
             if let fixed = merge(original, instruction: instruction, force: true) {
                 node.replaceWith(fixed)
             }
-            intend(commit: false)
+            intend(false)
         }
     }
     
@@ -137,9 +137,9 @@ public final class InstructionCreator {
             if node.isDegenerated {
                 focus.current = original
                 node.removeFromParent()
-                intend(commit: false)
+                intend(false)
             } else {
-                intend(commit: true)
+                intend(true)
             }
 
             state = .idle
@@ -148,9 +148,9 @@ public final class InstructionCreator {
                 focus.current = original
                 node.prepend(sibling: original)
                 node.removeFromParent()
-                intend(commit: false)
+                intend(false)
             } else {
-                intend(commit: true)
+                intend(true)
             }
 
             state = .idle
@@ -159,9 +159,9 @@ public final class InstructionCreator {
                 focus.current = original
                 node.prepend(sibling: original)
                 node.removeFromParent()
-                intend(commit: false)
+                intend(false)
             } else {
-                intend(commit: true)
+                intend(true)
             }
 
             state = .idle

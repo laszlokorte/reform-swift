@@ -113,7 +113,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.wereValues.push(true)
                     }
                 case .argumentSeparator:
-                    while let peek = context.stack.peek() where peek.type != .parenthesisLeft
+                    while let peek = context.stack.peek(), peek.type != .parenthesisLeft
                     {
                         context.stack.pop()
                         context.output.push(try _pipe(peek, context: context))
@@ -122,7 +122,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     {
                         throw ShuntingYardError.unexpectedToken(token: token, message: "")
                     }
-                    if let wereValue = context.wereValues.pop() where wereValue,
+                    if let wereValue = context.wereValues.pop(), wereValue,
                         let argCount = context.argCount.pop()
                     {
                         context.argCount.push(argCount + 1)
@@ -143,7 +143,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     else
                     {
                         
-                        if let peek = context.stack.peek() where peek.type ==
+                        if let peek = context.stack.peek(), peek.type ==
                             ShuntingYardTokenType.identifier
                         {
                             context.stack.pop()
@@ -151,9 +151,9 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                             context.output.push(try _pipe(peek, context: context))
                         }
                         
-                        while let peek = context.stack.peek() where peek.type == ShuntingYardTokenType.operator,
+                        while let peek = context.stack.peek(), peek.type == ShuntingYardTokenType.operator,
                             let tokenPrec = delegate.precedenceOfOperator(token, unary: context.actsAsUnary(token)),
-                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)) where (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.left && tokenPrec == peekPrec))
+                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)), (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.left && tokenPrec == peekPrec))
                         {
                             context.stack.pop()
                             context.output.push(try _pipe(peek, context: context))
@@ -170,7 +170,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     }
                     context.stack.push(token)
                 case .parenthesisRight:
-                    while let peek = context.stack.peek() where !delegate.isMatchingPair(
+                    while let peek = context.stack.peek(), !delegate.isMatchingPair(
                         peek, right: token)
                     {
                         context.stack.pop()
@@ -187,7 +187,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         throw ShuntingYardError.mismatchedToken(token: token, open: false)
                     }
                     
-                    if let peek = context.stack.peek() where peek.type ==
+                    if let peek = context.stack.peek(), peek.type ==
                         ShuntingYardTokenType.identifier
                     {
                         context.stack.pop()
@@ -259,7 +259,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                 temp.append(peek)
             }
             
-            if let w = context.wereValues.pop() where w {
+            if let w = context.wereValues.pop(), w {
                 if let peek = context.output.pop()
                 {
                     temp.append(peek)

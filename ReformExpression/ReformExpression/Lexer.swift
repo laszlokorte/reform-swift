@@ -61,13 +61,19 @@ public struct Lexer<T:TokenType> {
     let ignoreRules : [Rule<T>]
     
     public func tokenize(_ input: String.CharacterView) -> Tokens<T> {
-        return Tokens(lexer: self, input: input)
+        let lexer: Lexer<T> = self
+        return Tokens(lexer: lexer, input: input)
     }
 }
 
 public struct Tokens<T: TokenType> : Sequence {
     private let lexer : Lexer<T>
     private let input : String.CharacterView
+    
+    init(lexer: Lexer<T>, input: String.CharacterView) {
+        self.lexer = lexer
+        self.input = input
+    }
     
     public func makeIterator() -> TokenGenerator<T> {
         return TokenGenerator(lexer: lexer, input: input)

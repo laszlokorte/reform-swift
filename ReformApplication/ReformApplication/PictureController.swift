@@ -21,7 +21,7 @@ final class PictureController : NSViewController {
     @IBOutlet weak var centerSplit: NSView!
     @IBOutlet weak var rightSplit: NSView!
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
             guard let pictureSession = representedObject as? PictureSession else {
                 return
@@ -86,7 +86,7 @@ final class PictureController : NSViewController {
     }
 
 
-    override func prepare(for segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 
         if let s = segue.destinationController as? StageController {
             self.stageController = s

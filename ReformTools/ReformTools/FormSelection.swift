@@ -10,7 +10,7 @@ import ReformCore
 import ReformStage
 
 public final class FormSelection {
-    public private(set) var selected : Set<FormIdentifier> = Set()
+    public fileprivate(set) var selected : Set<FormIdentifier> = Set()
     
     public init() {}
 }

@@ -8,8 +8,8 @@
 import ReformMath
 
 struct StaticAngle : WriteableRuntimeRotationAngle {
-    private let formId : FormIdentifier
-    private let offset : Int
+    fileprivate let formId : FormIdentifier
+    fileprivate let offset : Int
     
     init(formId: FormIdentifier, offset: Int) {
         self.formId = formId

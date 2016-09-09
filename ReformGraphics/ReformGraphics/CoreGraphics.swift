@@ -72,7 +72,7 @@ public extension Shape {
             case (.none, .none): return
             }
 
-            let attr : [String:AnyObject] = [
+            let attr : [String:Any] = [
                 NSFontAttributeName:font,
                 NSForegroundColorAttributeName:backgroundColor,
                 NSStrokeWidthAttributeName:strokeWidth,
@@ -81,7 +81,10 @@ public extension Shape {
 
             context.saveGState()
 
-            guard let attributedString = CFAttributedStringCreate(nil, text, attr) else {
+            guard
+                let cfString = text as? CFString,
+                let cfDict = attr as? CFDictionary,
+                let attributedString = CFAttributedStringCreate(nil, cfString, cfDict) else {
                 return
             }
             let line = CTLineCreateWithAttributedString(attributedString)
@@ -132,18 +135,20 @@ public extension Shape {
 
             let transparent = NSColor(red:0,green:0,blue:0,alpha:0)
             let nsColor = color.toNSColor
-            let attr : [String:AnyObject] = [
+            let attr : [String:Any] = [
                 // stroke width is relative to font size
                 // https://developer.apple.com/library/mac/qa/qa1531/_index.html
                 NSFontAttributeName:font,
                 NSForegroundColorAttributeName:transparent,
-                NSStrokeWidthAttributeName:100*width/absSize,
+                NSStrokeWidthAttributeName:(100*width/absSize),
                 NSStrokeColorAttributeName:nsColor
             ]
 
             context.saveGState()
 
-            guard let attributedString = CFAttributedStringCreate(nil, text, attr) else {
+            guard let cfString = text as? CFString,
+                let cfDict = attr as? CFDictionary,
+                let attributedString = CFAttributedStringCreate(nil, cfString, cfDict) else {
                 return
             }
             let line = CTLineCreateWithAttributedString(attributedString)
@@ -187,15 +192,15 @@ extension Path {
             switch segment {
                 
             case .moveTo(let pos):
-                context.moveTo(x: CGFloat(pos.x), y: CGFloat(pos.y))
+                context.move(to: CGPoint(x: CGFloat(pos.x), y: CGFloat(pos.y)))
             case .lineTo(let pos):
-                context.addLineTo(x: CGFloat(pos.x), y: CGFloat(pos.y))
+                context.addLine(to: CGPoint(x: CGFloat(pos.x), y: CGFloat(pos.y)))
             case .quadraticTo(let pos, let cp):
-                context.addQuadCurveTo(cpx: CGFloat(cp.x), cpy: CGFloat(cp.y), endingAtX: CGFloat(pos.x), y: CGFloat(pos.y))
+                context.addQuadCurve(to: CGPoint(x: CGFloat(pos.x), y: CGFloat(pos.y)), control: CGPoint(x: CGFloat(cp.x), y: CGFloat(cp.y)))
             case .qubicTo(let pos, let cp1, let cp2):
-                context.addCurveTo(cp1x: CGFloat(cp1.x), cp1y: CGFloat(cp1.y), cp2x: CGFloat(cp2.x), cp2y: CGFloat(cp2.y), endingAtX: CGFloat(pos.x), y: CGFloat(pos.y))
+                context.addCurve(to: CGPoint(x: CGFloat(pos.x), y: CGFloat(pos.y)), control1: CGPoint(x: CGFloat(cp1.x), y: CGFloat(cp1.y)), control2: CGPoint(x: CGFloat(cp2.x), y: CGFloat(cp2.y)))
             case .arcTo(let tanA, let tanB, let radius):
-                context.addArc(x1: CGFloat(tanA.x), y1: CGFloat(tanA.y), x2: CGFloat(tanB.x), y2: CGFloat(tanB.y), radius: CGFloat(radius))
+                context.addArc(tangent1End: CGPoint(x: CGFloat(tanA.x), y: CGFloat(tanA.y)), tangent2End: CGPoint(x: CGFloat(tanB.x), y: CGFloat(tanB.y)), radius: CGFloat(radius))
             case .close:
                 context.closePath()
             }

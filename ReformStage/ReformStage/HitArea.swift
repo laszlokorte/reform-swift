@@ -52,7 +52,7 @@ public func ==(lhs: HitArea, rhs: HitArea) -> Bool {
 extension HitArea {
     public func contains(_ point: Vec2d, margin: Double = 0) -> Bool {
         switch self {
-        case none:
+        case .none:
             return false
         case .line(let segment):
             return incident(point, lineSegment: segment, epsilon: 0.5)
@@ -63,15 +63,15 @@ extension HitArea {
         case .sector(let center, let range):
             let a = angle(point-center)
             return inside(a, range: range)
-        case triangle(let triangle):
+        case .triangle(let triangle):
             return inside(point, triangle: triangle, epsilon: margin)
-        case leftOf(let line):
+        case .leftOf(let line):
             return ReformMath.leftOf(point, line: line, epsilon: margin)
         case .union(let a, let b):
             return a.contains(point) || b.contains(point)
         case .intersection(let a, let b):
             return a.contains(point) && b.contains(point)
-        case inversion(let area):
+        case .inversion(let area):
             return !area.contains(point)
         }
     }
@@ -80,7 +80,7 @@ extension HitArea {
 extension HitArea {
     public func overlaps(_ aabb: AABB2d) -> Bool {
         switch self {
-        case none:
+        case .none:
             return false
         case .line(let line):
             return ReformMath.overlaps(aabb: aabb, line: line)
@@ -95,9 +95,9 @@ extension HitArea {
                 || inside(angle(aabb.xMinYMax-center), range: range)
                 || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: range.start))
                 || ReformMath.overlaps(aabb: aabb, ray: Ray2d(from: center, angle: range.end))
-        case triangle(let triangle):
+        case .triangle(let triangle):
             return ReformMath.overlaps(aabb: aabb, triangle: triangle)
-        case leftOf(let line):
+        case .leftOf(let line):
             return ReformMath.leftOf(aabb.min, line: line)
                 || ReformMath.leftOf(aabb.max, line: line)
                 || ReformMath.leftOf(aabb.xMaxYMin, line: line)
@@ -106,7 +106,7 @@ extension HitArea {
             return a.overlaps(aabb) || b.overlaps(aabb)
         case .intersection(let a, let b):
             return a.overlaps(aabb) && b.overlaps(aabb)
-        case inversion(let area):
+        case .inversion(let area):
             return !area.overlaps(aabb)
         }
     }

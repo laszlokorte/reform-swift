@@ -30,7 +30,7 @@ public enum FunctionArity {
     
     func accept(_ count: Int) -> Bool {
         switch self {
-        case fix(count):
+        case .fix(count):
             return true
         case .variadic:
             return true
@@ -68,11 +68,11 @@ public func ==(lhs: Expression, rhs: Expression) -> Bool {
     case (.reference(let l), .reference(let r)):
         return l == r
     case (.unary(let opl,let l), .unary(let opr, let r)):
-        return opl.dynamicType == opr.dynamicType && l == r
+        return type(of: opl) == type(of: opr) && l == r
     case (.binary(let opl,let l1, let l2), .binary(let opr, let r1, let r2)):
-        return opl.dynamicType == opr.dynamicType && l1 == r1 && l2 == r2
+        return type(of: opl) == type(of: opr) && l1 == r1 && l2 == r2
     case (.call(let fl, let argl), .call(let fr, let argr)):
-        return fl.dynamicType == fr.dynamicType && argl == argr
+        return type(of: fl) == type(of: fr) && argl == argr
         
     default:
         return false
@@ -113,7 +113,7 @@ extension Expression {
                 return .fail(leftError)
             }
         case .call(let function, let params):
-            guard function.dynamicType.arity.accept(params.count) else {
+            guard type(of: function).arity.accept(params.count) else {
                 return .fail(.parameterCountMismatch(message: "Amount of parameters does not match"))
             }
             

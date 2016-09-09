@@ -141,7 +141,7 @@ final class ProjectWindowController : NSWindowController {
         }
     }
 
-    override func prepare(for segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 
 
         if let p = segue.destinationController as? ExportController {

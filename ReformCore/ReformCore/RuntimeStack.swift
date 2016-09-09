@@ -31,7 +31,7 @@ final class RuntimeStack {
             topFrame.forms.append(form.identifier)
             formMap[form.identifier] = form
             offsets[form.identifier] = dataSize
-            dataSize += form.dynamicType.stackSize
+            dataSize += type(of: form).stackSize
             growIfNeeded()
             forms.append(form.identifier)
         }
@@ -44,7 +44,7 @@ final class RuntimeStack {
     }
     
     func getData(_ id: FormIdentifier, offset: Int) -> UInt64? {
-        guard let o = offsets[id] where o + offset < dataSize else {
+        guard let o = offsets[id], o + offset < dataSize else {
             return nil
         }
         
@@ -52,8 +52,7 @@ final class RuntimeStack {
     }
     
     func setData(_ id: FormIdentifier, offset: Int, newValue: UInt64){
-        if let o = offsets[id]
-        where o + offset < dataSize {
+        if let o = offsets[id], o + offset < dataSize {
             data[o+offset] = newValue
 
         }
@@ -75,7 +74,7 @@ final class RuntimeStack {
     private func remove(_ id: FormIdentifier) {
         if let form = formMap.removeValue(forKey: id) {
             let offset = offsets.removeValue(forKey: id)!
-            let size = form.dynamicType.stackSize
+            let size = type(of: form).stackSize
             for i in 0..<size
             {
                 data[offset + i] = 0

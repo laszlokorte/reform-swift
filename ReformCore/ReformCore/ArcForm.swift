@@ -125,8 +125,8 @@ extension ArcForm : Drawable {
     public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard let
             start = startPoint.getPositionFor(runtime),
-            end = endPoint.getPositionFor(runtime),
-            center = centerPoint.getPositionFor(runtime) else {
+            let end = endPoint.getPositionFor(runtime),
+            let center = centerPoint.getPositionFor(runtime) else {
                 return nil
         }
 

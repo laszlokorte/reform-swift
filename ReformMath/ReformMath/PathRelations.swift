@@ -76,7 +76,7 @@ public func pointOn(segmentPath path: SegmentPath, closestTo: Vec2d, maxDistance
 
         
         if let (t, p) = pointOn(segment, closestTo: closestTo, maxDistance : maxDistance) {
-            if let (_, pp) = prev.1 where (closestTo-pp).length < (closestTo-p).length {
+            if let (_, pp) = prev.1, (closestTo-pp).length < (closestTo-p).length {
                 return (prev.0 + segment.length, prev.1)
             }
             return (prev.0 + segment.length, (prev.0 + t*segment.length, p))

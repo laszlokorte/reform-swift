@@ -20,7 +20,7 @@ extension RuntimeAxis {
         case  .named(_, let from, let to):
             guard let
                 start = from.getPositionFor(runtime),
-                end = to.getPositionFor(runtime) else {
+                let end = to.getPositionFor(runtime) else {
                     return nil
             }
             

@@ -16,8 +16,8 @@ public struct InstructionOutlineRow {
 }
 
 final class AnalyzerStringifier : Stringifier {
-    private var forms = [FormIdentifier:Form]()
-    private let expressionPrinter : ExpressionPrinter
+    fileprivate var forms = [FormIdentifier:Form]()
+    fileprivate let expressionPrinter : ExpressionPrinter
 
     init(expressionPrinter : ExpressionPrinter) {
         self.expressionPrinter = expressionPrinter
@@ -47,8 +47,8 @@ final class AnalyzerStringifier : Stringifier {
 }
 
 final public class DefaultAnalyzer : Analyzer {
-    public private(set) var instructions = [InstructionOutlineRow]()
-    public private(set) var instructionsDblBuf = [InstructionOutlineRow]()
+    public fileprivate(set) var instructions = [InstructionOutlineRow]()
+    public fileprivate(set) var instructionsDblBuf = [InstructionOutlineRow]()
     private let nameAllocator : NameAllocator
 
     private let analyzerStringifier : AnalyzerStringifier

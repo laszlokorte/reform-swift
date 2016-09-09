@@ -22,7 +22,7 @@ public protocol Runtime {
     
     var listeners : [RuntimeListener] { get set }
     
-    func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: @noescape (runtime: Self, picture: Picture) -> ())
+    func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: @noescape (_ runtime: Self, _ picture: Picture) -> ())
     
     func run(width: Double, height: Double, block: @noescape (Self) -> ())
     

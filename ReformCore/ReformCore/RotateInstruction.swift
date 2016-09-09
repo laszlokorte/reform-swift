@@ -74,7 +74,7 @@ extension RotateInstruction : Mergeable {
             return nil
         }
 
-        guard let angleA = angle as? ConstantAngle, angleB = other.angle as? ConstantAngle else {
+        guard let angleA = angle as? ConstantAngle, let angleB = other.angle as? ConstantAngle else {
             return nil
         }
 

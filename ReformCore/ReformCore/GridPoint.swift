@@ -22,7 +22,7 @@ public struct GridPoint : RuntimePoint, Labeled, Equatable {
 
         guard let
             width = canvas.width.getLengthFor(runtime),
-            height = canvas.height.getLengthFor(runtime) else {
+            let height = canvas.height.getLengthFor(runtime) else {
                 return nil
         }
 

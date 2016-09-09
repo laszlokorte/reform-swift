@@ -84,7 +84,7 @@ final class CanvasView : NSView {
         delegate?.keyUp(with: theEvent)
     }
 
-    override func selectAll(_ sender: AnyObject?) {
+    override func selectAll(_ sender: Any?) {
         delegate?.selectAll(sender)
     }
 

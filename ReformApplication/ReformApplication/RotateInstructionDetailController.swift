@@ -25,7 +25,7 @@ class RotateInstructionDetailController : NSViewController, InstructionDetailCon
         }
     }
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             updateLabel()
         }

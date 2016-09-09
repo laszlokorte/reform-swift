@@ -46,7 +46,7 @@ final class StageController : NSViewController {
     var stage : Stage?
     var selectionChanger : FormSelectionChanger?
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             if let stageModel = representedObject as? StageViewModel,
                 let canvas = canvas {
@@ -230,7 +230,7 @@ final class StageController : NSViewController {
         canvas?.needsDisplay = true
     }
 
-    override func selectAll(_ sender: AnyObject?) {
+    override func selectAll(_ sender: Any?) {
         if let stage = stage {
             selectionChanger?.setSelection(Set(stage.entities.lazy.filter{$0.hitArea != HitArea.none}.map{$0.id.runtimeId}))
         }

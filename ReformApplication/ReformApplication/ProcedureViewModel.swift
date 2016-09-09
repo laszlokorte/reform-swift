@@ -25,7 +25,7 @@ final class ProcedureViewModel {
     init(analyzer: DefaultAnalyzer, instructionFocus : InstructionFocus, snapshotCollector : SnapshotCollector, instructionFocusChanger : InstructionFocusChanger, formSelection: FormSelection, formIdSequence: IdentifierSequence<FormIdentifier>, nameAllocator: NameAllocator,
         lexer : Lexer<ShuntingYardTokenType>,
         parser: ShuntingYardParser<ExpressionParserDelegate>,
-        instructionChanger : () -> ()) {
+        instructionChanger : @escaping () -> ()) {
         self.analyzer = analyzer
         self.instructionFocus = instructionFocus
         self.snapshotCollector = snapshotCollector

@@ -38,7 +38,7 @@ final public class JsonFormat : Encoder, Decoder {
         return convert(json)
     }
 
-    func convert(_ any: AnyObject) -> NormalizedValue? {
+    func convert(_ any: Any) -> NormalizedValue? {
         switch any {
         case is NSNull:
             return .null
@@ -50,9 +50,9 @@ final public class JsonFormat : Encoder, Decoder {
             return .int(v)
         case let v as Double:
             return .double(v)
-        case let v as Array<AnyObject>:
+        case let v as Array<Any>:
             return .array(v.flatMap{convert($0)})
-        case let v as Dictionary<String, AnyObject>:
+        case let v as Dictionary<String, Any>:
             var newDict = [String:NormalizedValue]()
             for (k,v) in v {
                 newDict[k] = convert(v)

@@ -19,7 +19,7 @@ final class InstructionFocusChanger {
     let instructionFocus : InstructionFocus
     let intend : () -> ()
 
-    init(instructionFocus : InstructionFocus, intend: () -> ()) {
+    init(instructionFocus : InstructionFocus, intend: @escaping () -> ()) {
         self.instructionFocus = instructionFocus
         self.intend = intend
     }
@@ -42,7 +42,7 @@ final class FormSelectionChanger {
         publishChange()
     }
 
-    private func publishChange() {
+    fileprivate func publishChange() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "SelectionChanged"), object: selection)
     }
 }

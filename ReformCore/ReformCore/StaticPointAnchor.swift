@@ -10,7 +10,7 @@ import ReformMath
 
 struct StaticPointAnchor : Anchor {
     
-    private let point : WriteableRuntimePoint
+    fileprivate let point : WriteableRuntimePoint
     let name : String
     
     init(point : WriteableRuntimePoint, name: String) {

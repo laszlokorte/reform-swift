@@ -24,9 +24,9 @@ struct ArcOutline : Outline {
     func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
-            rad = radius.getLengthFor(runtime),
-            a1 = angleA.getAngleFor(runtime),
-            a2 = angleB.getAngleFor(runtime) else {
+            let rad = radius.getLengthFor(runtime),
+            let a1 = angleA.getAngleFor(runtime),
+            let a2 = angleB.getAngleFor(runtime) else {
                 return nil
         }
         
@@ -38,8 +38,8 @@ struct ArcOutline : Outline {
     func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         guard let
             rad = radius.getLengthFor(runtime),
-            a1 = angleA.getAngleFor(runtime),
-            a2 = angleB.getAngleFor(runtime)
+            let a1 = angleA.getAngleFor(runtime),
+            let a2 = angleB.getAngleFor(runtime)
         else {
             return nil
         }
@@ -50,9 +50,9 @@ struct ArcOutline : Outline {
     func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {
         guard let
             r = radius.getLengthFor(runtime),
-            c = center.getPositionFor(runtime),
-            a1 = angleA.getAngleFor(runtime),
-            a2 = angleB.getAngleFor(runtime) else {
+            let c = center.getPositionFor(runtime),
+            let a1 = angleA.getAngleFor(runtime),
+            let a2 = angleB.getAngleFor(runtime) else {
                 return []
         }
         
@@ -62,7 +62,7 @@ struct ArcOutline : Outline {
     func getAABBFor<R : Runtime>(_ runtime: R) -> AABB2d? {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
-            c = center.getPositionFor(runtime) else {
+            let c = center.getPositionFor(runtime) else {
                 return nil
         }
 

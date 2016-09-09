@@ -26,7 +26,7 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
         }
     }
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             updateLabel()
         }
@@ -64,7 +64,7 @@ class ForLoopInstructionDetailController : NSViewController, InstructionDetailCo
         countField?.stringValue = stringifier.stringFor(instruction.expression) ?? ""
     }
 
-    @IBAction func onChange(_ sender: AnyObject?) {
+    @IBAction func onChange(_ sender: Any?) {
         guard let
             parser = parser,
             let string = countField?.stringValue,

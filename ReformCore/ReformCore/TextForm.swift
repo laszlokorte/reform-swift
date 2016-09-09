@@ -130,9 +130,9 @@ extension TextForm : Drawable {
     
     public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard let center = centerPoint.getPositionFor(runtime),
-            end = endPoint.getPositionFor(runtime),
-            start = startPoint.getPositionFor(runtime),
-            ctrl = controlPointAnchor.getPositionFor(runtime) else {
+            let end = endPoint.getPositionFor(runtime),
+            let start = startPoint.getPositionFor(runtime),
+            let ctrl = controlPointAnchor.getPositionFor(runtime) else {
                 return nil
         }
 
@@ -143,8 +143,8 @@ extension TextForm : Drawable {
     
     public func getShapeFor<R:Runtime>(_ runtime: R) -> Shape? {
         guard let start = startPoint.getPositionFor(runtime),
-                end = endPoint.getPositionFor(runtime),
-                size = offset.getLengthFor(runtime) else {
+                let end = endPoint.getPositionFor(runtime),
+                let size = offset.getLengthFor(runtime) else {
             return nil
         }
 

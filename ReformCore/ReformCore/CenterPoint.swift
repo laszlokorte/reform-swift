@@ -9,8 +9,8 @@
 import ReformMath
 
 struct CenterPoint : RuntimePoint {
-    private let pointA : RuntimePoint
-    private let pointB : RuntimePoint
+    fileprivate let pointA : RuntimePoint
+    fileprivate let pointB : RuntimePoint
     
     init(pointA: RuntimePoint, pointB: RuntimePoint) {
         self.pointA = pointA
@@ -20,7 +20,7 @@ struct CenterPoint : RuntimePoint {
     func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             a = pointA.getPositionFor(runtime),
-            b = pointB.getPositionFor(runtime) else {
+            let b = pointB.getPositionFor(runtime) else {
             return nil
         }
         

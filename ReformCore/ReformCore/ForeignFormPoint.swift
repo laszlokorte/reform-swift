@@ -20,7 +20,7 @@ public struct ForeignFormPoint : RuntimePoint, Labeled {
     public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             form = runtime.get(formId),
-            point = form.getPoints()[pointId] else {
+            let point = form.getPoints()[pointId] else {
             return nil
         }
         
@@ -57,7 +57,7 @@ public struct AnonymousFormPoint : RuntimePoint {
     public func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             form = runtime.get(formId),
-            point = form.getPoints()[pointId] else {
+            let point = form.getPoints()[pointId] else {
             return nil
         }
         

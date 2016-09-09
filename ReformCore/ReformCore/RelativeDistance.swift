@@ -25,7 +25,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
     public func getDeltaFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             source = from.getPositionFor(runtime),
-            target = to.getPositionFor(runtime) else {
+            let target = to.getPositionFor(runtime) else {
             return nil
         }
         
@@ -49,13 +49,13 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
 func merge(distance a: protocol<RuntimeDistance, Labeled>, distance b: protocol<RuntimeDistance, Labeled>, force: Bool) -> protocol<RuntimeDistance, Labeled>? {
     if force {
         return b
-    } else if let distanceA = a as? ConstantDistance, distanceB = b as? ConstantDistance {
+    } else if let distanceA = a as? ConstantDistance, let distanceB = b as? ConstantDistance {
         return combine(distance: distanceA, distance: distanceB)
-    } else if let distanceA = a as? RelativeDistance, distanceB = b as? RelativeDistance where distanceB.direction is FreeDirection {
+    } else if let distanceA = a as? RelativeDistance, let distanceB = b as? RelativeDistance, distanceB.direction is FreeDirection {
         return combine(distance: distanceA, distance: distanceB)
-    } else if let distanceA = a as? ConstantDistance, distanceB = b as? RelativeDistance where distanceB.direction is FreeDirection {
+    } else if let distanceA = a as? ConstantDistance, let distanceB = b as? RelativeDistance, distanceB.direction is FreeDirection {
         return combine(distance: distanceA, distance: distanceB)
-    } else if let distanceA = a as? RelativeDistance, distanceB = b as? ConstantDistance where distanceB.isDegenerated {
+    } else if let distanceA = a as? RelativeDistance, let distanceB = b as? ConstantDistance, distanceB.isDegenerated {
         return distanceA
     } else {
         return nil

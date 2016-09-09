@@ -9,8 +9,8 @@
 import ReformMath
 
 struct PointAngle : RuntimeRotationAngle {
-    private let center : RuntimePoint
-    private let point : RuntimePoint
+    fileprivate let center : RuntimePoint
+    fileprivate let point : RuntimePoint
     
     init(center: RuntimePoint, point: RuntimePoint) {
         self.center = center
@@ -19,7 +19,7 @@ struct PointAngle : RuntimeRotationAngle {
     
     func getAngleFor<R:Runtime>(_ runtime: R) -> Angle? {
         guard let c = center.getPositionFor(runtime),
-            p = point.getPositionFor(runtime) else {
+            let p = point.getPositionFor(runtime) else {
                 return nil
         }
         return normalize360(angle(p-c))

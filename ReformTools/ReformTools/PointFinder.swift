@@ -137,7 +137,7 @@ struct PointFinder {
                     }
                 }
                 
-                if case .near(let loc, let d) = query.location where query.pointType.contains(.Glomp) {
+                if case .near(let loc, let d) = query.location, query.pointType.contains(.Glomp) {
                     if let (u, pos) = pointOn(segmentPath: entity.outline, closestTo: loc, maxDistance: d) {
 
                         result.append(GlompSnapPoint(position: pos, label: "Glomp", point: ReformCore.GlompPoint(formId: entity.id.runtimeId, lerp: ReformExpression.Expression.constant(.doubleValue(value: u)))))
@@ -152,7 +152,7 @@ struct PointFinder {
         
         if query.pointType.contains(.Intersection) {
             for intersection in stage.intersections {
-                if case .except(let id) = query.filter where matches(id, id: intersection.formIdA) || matches(id, id: intersection.formIdB) {
+                if case .except(let id) = query.filter, matches(id, id: intersection.formIdA) || matches(id, id: intersection.formIdB) {
                     continue
                 }
                 guard query.location.matches(intersection.position) else {

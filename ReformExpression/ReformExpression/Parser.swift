@@ -7,7 +7,7 @@
 //
 
 public struct Precedence : Comparable {
-    private let value : Int8
+    fileprivate let value : Int8
     
     init(_ value : Int8) {
         self.value = value

@@ -51,7 +51,7 @@ public final class PointSnapper {
     }
     
     func enable(_ filter: FormFilter, pointType: PointType) {
-        if case .searching(let oldFilter, let oldType, _) = state where filter==oldFilter && pointType == oldType {
+        if case .searching(let oldFilter, let oldType, _) = state, filter==oldFilter && pointType == oldType {
             
         } else {
             state = .searching(filter, pointType, .none)

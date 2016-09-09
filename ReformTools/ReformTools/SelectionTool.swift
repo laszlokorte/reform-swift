@@ -48,7 +48,7 @@ public final class SelectionTool : Tool {
 
     let indend: () -> ()
 
-    public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI, indend: () -> ()) {
+    public init(stage: Stage, selection: FormSelection, selectionUI: SelectionUI, indend: @escaping () -> ()) {
         self.stage = stage
         self.selection = selection
         self.selectionUI = selectionUI
@@ -105,7 +105,7 @@ public final class SelectionTool : Tool {
                     state = .multiSelect(from: position, to: position, old: selection.selected)
                 } else if changeMode == .replace, let
                     previous = selection.one,
-                    index = entities.index(where: {$0.id.runtimeId == previous}) {
+                    let index = entities.index(where: {$0.id.runtimeId == previous}) {
                     state = .selecting(entity: entities[index], cycle: index, old: selection.selected)
                     
                 } else if changeMode == .xor || selection.selected.intersection(entities.map{$0.id.runtimeId}).isEmpty {

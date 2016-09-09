@@ -9,8 +9,8 @@
 import ReformMath
 
 struct PointLength : RuntimeLength {
-    private let pointA : RuntimePoint
-    private let pointB : RuntimePoint
+    fileprivate let pointA : RuntimePoint
+    fileprivate let pointB : RuntimePoint
     
     init(pointA: RuntimePoint, pointB: RuntimePoint) {
         self.pointA = pointA
@@ -19,7 +19,7 @@ struct PointLength : RuntimeLength {
     
     func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         guard let a = pointA.getPositionFor(runtime),
-                  b = pointB.getPositionFor(runtime) else {
+                  let b = pointB.getPositionFor(runtime) else {
             return nil
         }
         return (b-a).length

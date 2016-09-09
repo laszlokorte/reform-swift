@@ -40,8 +40,8 @@ public func ==(lhs: ExposedPointIdentifier, rhs: ExposedPointIdentifier) -> Bool
 }
 
 struct ExposedPoint : RuntimePoint, Labeled {
-    private let point : RuntimePoint
-    private let name : String
+    fileprivate let point : RuntimePoint
+    fileprivate let name : String
     
     init(point:RuntimePoint, name: String) {
         self.point = point

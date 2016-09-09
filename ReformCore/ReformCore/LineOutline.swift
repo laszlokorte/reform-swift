@@ -20,7 +20,7 @@ struct LineOutline : Outline {
     func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         guard let
             a = start.getPositionFor(runtime),
-            b = end.getPositionFor(runtime) else {
+            let b = end.getPositionFor(runtime) else {
                 return nil
         }
         
@@ -30,7 +30,7 @@ struct LineOutline : Outline {
     func getLengthFor<R:Runtime>(_ runtime: R) -> Double? {
         guard let
             a = start.getPositionFor(runtime),
-            b = end.getPositionFor(runtime) else {
+            let b = end.getPositionFor(runtime) else {
                 return nil
         }
         
@@ -40,7 +40,7 @@ struct LineOutline : Outline {
     func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {
         guard let
             from = start.getPositionFor(runtime),
-            to = end.getPositionFor(runtime) else {
+            let to = end.getPositionFor(runtime) else {
                 return []
         }
         
@@ -50,7 +50,7 @@ struct LineOutline : Outline {
     func getAABBFor<R : Runtime>(_ runtime: R) -> AABB2d? {
         guard let
             from = start.getPositionFor(runtime),
-            to = end.getPositionFor(runtime) else {
+            let to = end.getPositionFor(runtime) else {
                 return nil
         }
 

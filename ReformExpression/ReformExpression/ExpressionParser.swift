@@ -199,11 +199,11 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
             let digits = string.utf16.map(parseHexDigits)
             
             if let r1 = digits[0],
-                    r2 = digits[1],
-                    g1 = digits[2],
-                    g2 = digits[3],
-                    b1 = digits[4],
-                    b2 = digits[5] {
+               let r2 = digits[1],
+               let g1 = digits[2],
+               let g2 = digits[3],
+               let b1 = digits[4],
+               let b2 = digits[5] {
                     let r = r1<<4 | r2
                     let g = g1<<4 | g2
                     let b = b1<<4 | b2
@@ -219,13 +219,13 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
             let digits = string.utf16.map(parseHexDigits)
             
             if let r1 = digits[0],
-                    r2 = digits[1],
-                    g1 = digits[2],
-                    g2 = digits[3],
-                    b1 = digits[4],
-                    b2 = digits[5],
-                    a1 = digits[6],
-                    a2 = digits[7] {
+                let r2 = digits[1],
+                let g1 = digits[2],
+                let g2 = digits[3],
+                let b1 = digits[4],
+                let b2 = digits[5],
+                let a1 = digits[6],
+                let a2 = digits[7] {
                     let r = r1<<4 | r2
                     let g = g1<<4 | g2
                     let b = b1<<4 | b2

@@ -23,7 +23,7 @@ final class ExportController : NSViewController {
         updateJson()
     }
 
-    func cancel(_ sender: AnyObject?) {
+    func cancel(_ sender: Any?) {
         dismissViewController(self)
     }
 
@@ -35,7 +35,7 @@ final class ExportController : NSViewController {
 
             jsonField?.stringValue = jsonFormat.encode(normProj)
         } catch let e {
-            jsonField?.stringValue = String(e)
+            jsonField?.stringValue = String(describing: e)
         }
     }
 }

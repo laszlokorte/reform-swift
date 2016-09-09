@@ -38,7 +38,7 @@ struct EntityFinder {
             if case .except(entity.id) = query.filter {
                 continue
             }
-            if case .only(let id) = query.filter where id != entity.id {
+            if case .only(let id) = query.filter, id != entity.id {
                 continue
             }
 

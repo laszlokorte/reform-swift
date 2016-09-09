@@ -15,7 +15,7 @@ class AttributesController : NSViewController {
     @IBOutlet var singleTab : NSTabViewItem?
     @IBOutlet var multipleTab : NSTabViewItem?
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             attributesViewModel = representedObject as? AttributesViewModel
         }
@@ -43,7 +43,7 @@ class AttributesController : NSViewController {
             tabs?.isHidden = false
             if let single = model.selection.one {
                 tabs?.selectTabViewItem(singleTab)
-                formNameField?.stringValue = model.analyzer.stringifier.labelFor(single) ?? String(single)
+                formNameField?.stringValue = model.analyzer.stringifier.labelFor(single) ?? String(describing: single)
             } else {
                 tabs?.selectTabViewItem(multipleTab)
                 labelField?.stringValue = "\(model.selection.selected.count) Forms selected"

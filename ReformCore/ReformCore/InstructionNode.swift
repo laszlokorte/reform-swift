@@ -7,13 +7,13 @@
 //
 
 public final class InstructionNode {
-    public private(set) var content : InstructionContent
-    public private(set) weak var parent : InstructionNode? {
+    public fileprivate(set) var content : InstructionContent
+    public fileprivate(set) weak var parent : InstructionNode? {
         didSet {
             self.depth = (parent?.depth ?? -1) + 1
         }
     }
-    private var depth : Int {
+    fileprivate var depth : Int {
         didSet {
             if case .group(_, let children) = content {
                 for c in children {
@@ -41,7 +41,7 @@ public final class InstructionNode {
         self.depth = (parent?.depth ?? -1) + 1
     }
 
-    private init(parent: InstructionNode? = nil, content: InstructionContent) {
+    fileprivate init(parent: InstructionNode? = nil, content: InstructionContent) {
         self.parent = parent
         self.content = content
         self.depth = (parent?.depth ?? -1) + 1
@@ -91,7 +91,7 @@ extension InstructionNode {
             return nil
         }
         
-        guard let index = children.index(where: {$0===self}) where index > 0 else {
+        guard let index = children.index(where: {$0===self}), index > 0 else {
             return nil
         }
         

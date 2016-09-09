@@ -25,7 +25,7 @@ extension DefinitionValue {
 }
 
 extension DefinitionValue {
-    private func withSubstitutedReference(_ reference: ReferenceId, value: Value) -> DefinitionValue {
+    fileprivate func withSubstitutedReference(_ reference: ReferenceId, value: Value) -> DefinitionValue {
         switch self {
         case .expr(let expr):
             return .expr(expr.withSubstitutedReference(reference, value: value))
@@ -36,7 +36,7 @@ extension DefinitionValue {
 }
 
 extension Expression {
-    private func withSubstitutedReference(_ reference: ReferenceId, value: Value) -> Expression {
+    fileprivate func withSubstitutedReference(_ reference: ReferenceId, value: Value) -> Expression {
         switch self {
         case .constant(let v):
             return .constant(v)
@@ -92,7 +92,7 @@ final public class Definition {
 }
 
 extension Definition {
-    private func replaceOccurencesOf(_ reference: ReferenceId, with: Value) {
+    fileprivate func replaceOccurencesOf(_ reference: ReferenceId, with: Value) {
         value = value.withSubstitutedReference(reference, value: with)
     }
 }

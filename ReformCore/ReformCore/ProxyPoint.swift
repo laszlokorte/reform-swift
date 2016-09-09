@@ -23,31 +23,31 @@ public struct ProxyPoint : LabeledPoint {
 
         var x : Int {
             switch self {
-            case left, topLeft, bottomLeft:
+            case .left, .topLeft, .bottomLeft:
                 return -1
-            case right, topRight, bottomRight:
+            case .right, .topRight, .bottomRight:
                 return 1
-            case top, bottom, center:
+            case .top, .bottom, .center:
                 return 0
             }
         }
 
         var y : Int {
             switch self {
-            case top, topLeft, topRight:
+            case .top, .topLeft, .topRight:
                 return -1
-            case bottom, bottomLeft, bottomRight:
+            case .bottom, .bottomLeft, .bottomRight:
                 return 1
-            case left, right, center:
+            case .left, .right, .center:
                 return 0
             }
         }
 
     }
 
-    private let formReference : StaticFormReference
-    private let angle : RuntimeRotationAngle
-    private let side : Side
+    fileprivate let formReference : StaticFormReference
+    fileprivate let angle : RuntimeRotationAngle
+    fileprivate let side : Side
 
     init(formReference: StaticFormReference, side : Side, angle: RuntimeRotationAngle) {
         self.formReference = formReference

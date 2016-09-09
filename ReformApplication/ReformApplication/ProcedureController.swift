@@ -13,9 +13,9 @@ import ReformExpression
 import ReformCore
 
 final class ProcedureController : NSViewController {
-    private var cycle = false
+    fileprivate var cycle = false
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             procedureViewModel = representedObject as? ProcedureViewModel
         }
@@ -108,7 +108,7 @@ extension ProcedureController : NSTableViewDelegate {
 }
 
 extension ProcedureController : NSMenuDelegate {
-    @IBAction func wrapInstructionInLoop(_ sender: AnyObject) {
+    @IBAction func wrapInstructionInLoop(_ sender: Any) {
         guard let selectedIndexes = tableView?.selectedRowIndexes, selectedIndexes.count > 0 else {
             return
         }
@@ -122,7 +122,7 @@ extension ProcedureController : NSMenuDelegate {
         }
     }
 
-    @IBAction func unwrapInstruction(_ sender: AnyObject) {
+    @IBAction func unwrapInstruction(_ sender: Any) {
         guard let selectedIndex = tableView?.selectedRow, selectedIndex > 0 else {
             return
         }
@@ -132,7 +132,7 @@ extension ProcedureController : NSMenuDelegate {
         }
     }
 
-    @IBAction func wrapInstructionInCondition(_ sender: AnyObject) {
+    @IBAction func wrapInstructionInCondition(_ sender: Any) {
         guard let selectedIndexes = tableView?.selectedRowIndexes, selectedIndexes.count > 0 else {
             return
         }
@@ -146,7 +146,7 @@ extension ProcedureController : NSMenuDelegate {
         }
     }
 
-    @IBAction func createIterator(_ sender: AnyObject) {
+    @IBAction func createIterator(_ sender: Any) {
         guard let selectedIndex = tableView?.selectedRow, selectedIndex > 0 else {
             return
         }
@@ -183,7 +183,7 @@ extension ProcedureController : NSMenuDelegate {
         procedureViewModel?.instructionChanger()
     }
 
-    @IBAction func delete(_ sender: AnyObject) {
+    @IBAction func delete(_ sender: Any) {
         guard let indices = tableView?.selectedRowIndexes else {
             return
         }
@@ -207,7 +207,7 @@ extension ProcedureController : NSMenuDelegate {
 
     }
 
-    @IBAction func doubleClick(_ sender: AnyObject) {
+    @IBAction func doubleClick(_ sender: Any) {
 
         guard let row = tableView?.selectedRow, row > 0, let cell = tableView?.view(atColumn: 0, row: row, makeIfNecessary: false) else {
             return
@@ -250,7 +250,7 @@ extension ProcedureController : NSMenuDelegate {
             
             let key = InstructionNodeKey(instructions[row].node)
 
-            instr.error = procedureViewModel.snapshotCollector.errors[key].map{String($0)}
+            instr.error = procedureViewModel.snapshotCollector.errors[key].map{String(describing: $0)}
         }
         popOverViewController.representedObject = instructions[row].node
 

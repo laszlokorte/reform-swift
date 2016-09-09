@@ -1,3 +1,4 @@
+
 //
 //  CircleOutline.swift
 //  ReformCore
@@ -22,8 +23,8 @@ struct CircleOutline : Outline {
     func getPositionFor<R:Runtime>(_ runtime: R, t: Double) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
-            rad = radius.getLengthFor(runtime).map(abs),
-            a = angle.getAngleFor(runtime) else {
+            let rad = radius.getLengthFor(runtime).map(abs),
+            let a = angle.getAngleFor(runtime) else {
             return nil
         }
         
@@ -41,8 +42,8 @@ struct CircleOutline : Outline {
     func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
-            c = center.getPositionFor(runtime),
-            a = angle.getAngleFor(runtime) else {
+            let c = center.getPositionFor(runtime),
+            let a = angle.getAngleFor(runtime) else {
             return []
         }
         return [
@@ -54,7 +55,7 @@ struct CircleOutline : Outline {
     func getAABBFor<R : Runtime>(_ runtime: R) -> AABB2d? {
         guard let
             r = radius.getLengthFor(runtime).map(abs),
-            c = center.getPositionFor(runtime) else {
+            let c = center.getPositionFor(runtime) else {
                 return nil
         }
 

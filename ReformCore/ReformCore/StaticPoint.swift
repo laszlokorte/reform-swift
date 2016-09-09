@@ -9,8 +9,8 @@
 import ReformMath
 
 struct StaticPoint : WriteableRuntimePoint {
-    private let formId : FormIdentifier
-    private let offset : Int
+    fileprivate let formId : FormIdentifier
+    fileprivate let offset : Int
     
     init(formId: FormIdentifier, offset: Int) {
         self.formId = formId
@@ -20,7 +20,7 @@ struct StaticPoint : WriteableRuntimePoint {
     func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             x = runtime.read(formId, offset: offset),
-            y = runtime.read(formId, offset: offset+1) else {
+            let y = runtime.read(formId, offset: offset+1) else {
                 return nil
         }
         return Vec2d(x: unsafeBitCast(x, to: Double.self), y:unsafeBitCast(y, to: Double.self))

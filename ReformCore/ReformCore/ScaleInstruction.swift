@@ -92,7 +92,7 @@ extension ScaleInstruction : Mergeable {
             return nil
         }
 
-        guard let factorA = factor as? ConstantScaleFactor, factorB = other.factor as? ConstantScaleFactor else {
+        guard let factorA = factor as? ConstantScaleFactor, let factorB = other.factor as? ConstantScaleFactor else {
             return nil
         }
 

@@ -11,7 +11,7 @@ import ReformGraphics
 import ReformCore
 
 struct InstructionNodeKey : Hashable {
-    private let node : InstructionNode
+    fileprivate let node : InstructionNode
 
     init(_ instructionNode : InstructionNode) {
         node = instructionNode

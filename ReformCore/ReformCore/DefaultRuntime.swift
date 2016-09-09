@@ -38,13 +38,13 @@ final public class DefaultRuntime : Runtime {
         _depth = depth
     }
     
-    public func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: @noescape (runtime: DefaultRuntime, picture: Picture) -> ()) {
+    public func subCall(_ id: PictureIdentifier, width: Double, height: Double, makeFit: Bool, dataSet: DataSet, callback: @noescape (_ runtime: DefaultRuntime, _ picture: Picture) -> ()) {
         if _depth > DefaultRuntime.maxDepth {
             return
         }
 
         self.dataSet = dataSet
-        callback(runtime: DefaultRuntime(depth: _depth+1), picture: Picture(identifier : id, name: "Test", size: (width, height), data: BaseSheet(), procedure : Procedure()))
+        callback(DefaultRuntime(depth: _depth+1), Picture(identifier : id, name: "Test", size: (width, height), data: BaseSheet(), procedure : Procedure()))
         
     }
 

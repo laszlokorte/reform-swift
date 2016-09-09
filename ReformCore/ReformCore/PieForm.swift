@@ -112,8 +112,8 @@ private struct PieCornerAnchor : Anchor {
     func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
-            angle = rotation.getAngleFor(runtime),
-            r = radius.getLengthFor(runtime) else {
+            let angle = rotation.getAngleFor(runtime),
+            let r = radius.getLengthFor(runtime) else {
                 return nil
         }
         
@@ -122,7 +122,7 @@ private struct PieCornerAnchor : Anchor {
     
     func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         if let oldAngle = rotation.getAngleFor(runtime),
-                oldRadius = radius.getLengthFor(runtime) {
+                let oldRadius = radius.getLengthFor(runtime) {
             let oldDelta = rotate(Vec2d(x: oldRadius, y:0), angle: oldAngle)
                 
             let newDelta = oldDelta + delta
@@ -186,9 +186,9 @@ extension PieForm : Morphable {
 extension PieForm : Drawable {
     public func getPathFor<R:Runtime>(_ runtime: R) -> Path? {
         guard let c = centerPoint.getPositionFor(runtime),
-                  r = radius.getLengthFor(runtime),
-                  low = angleLowerBound.getAngleFor(runtime),
-                  up = angleUpperBound.getAngleFor(runtime)
+                  let r = radius.getLengthFor(runtime),
+                  let low = angleLowerBound.getAngleFor(runtime),
+                  let up = angleUpperBound.getAngleFor(runtime)
         else {
             return nil
         }

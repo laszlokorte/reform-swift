@@ -18,7 +18,7 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
     private var collected : Bool = false
     private let buffer = StageBuffer()
     
-    public init(stage: Stage, analyzer: A, focusFilter: (Evaluatable) -> Bool) {
+    public init(stage: Stage, analyzer: A, focusFilter: @escaping (Evaluatable) -> Bool) {
         self.stage = stage
         self.analyzer = analyzer
         self.focusFilter = focusFilter
@@ -45,7 +45,7 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
             
             buffer.entities.append(entity)
             
-            guard let drawable = runtime.get(id) as? Drawable where drawable.drawingMode == .draw else {
+            guard let drawable = runtime.get(id) as? Drawable, drawable.drawingMode == .draw else {
                 continue
             }
             
@@ -60,7 +60,7 @@ final public class StageCollector<A:Analyzer> : RuntimeListener {
 
     public func runtime<R:Runtime>(_ runtime: R, exitScopeWithForms forms: [FormIdentifier]) {
         for id in forms {
-            guard let form = runtime.get(id) as? Drawable where form.drawingMode == .draw else {
+            guard let form = runtime.get(id) as? Drawable, form.drawingMode == .draw else {
                 continue
             }
             

@@ -9,7 +9,7 @@
 import ReformMath
 
 struct AnchorPoint : RuntimePoint, Labeled {
-    private let anchor : Anchor
+    fileprivate let anchor : Anchor
     
     init(anchor: Anchor) {
         self.anchor = anchor

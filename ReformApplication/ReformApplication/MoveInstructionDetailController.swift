@@ -31,7 +31,7 @@ class MoveInstructionDetailController : NSViewController, InstructionDetailContr
         }
     }
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             updateLabel()
         }

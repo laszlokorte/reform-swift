@@ -26,7 +26,7 @@ public final class CropTool : Tool {
     let streightener : Streightener
     let intend : () -> ()
 
-    public init(stage: Stage, cropGrabber: CropGrabber, streightener: Streightener, picture: ReformCore.Picture, callback: ()->()) {
+    public init(stage: Stage, cropGrabber: CropGrabber, streightener: Streightener, picture: ReformCore.Picture, callback: @escaping ()->()) {
         self.stage = stage
         self.cropGrabber = cropGrabber
         self.picture = picture

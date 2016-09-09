@@ -10,7 +10,7 @@ import Foundation
 
 
 public struct ConstantScaleFactor : RuntimeScaleFactor, Labeled {
-    private let factor: Double
+    fileprivate let factor: Double
     
     public init(factor: Double) {
         self.factor = factor

@@ -25,7 +25,7 @@ class FormIteratorInstructionDetailController : NSViewController, InstructionDet
         }
     }
 
-    override var representedObject : AnyObject? {
+    override var representedObject : Any? {
         didSet {
             updateLabel()
         }

@@ -7,7 +7,7 @@
 //
 
 struct ConstantLength : RuntimeLength {
-    private let length: Double
+    fileprivate let length: Double
     
     init(length: Double) {
         self.length = length

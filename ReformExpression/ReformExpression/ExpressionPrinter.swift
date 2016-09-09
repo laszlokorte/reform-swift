@@ -81,7 +81,7 @@ final public class ExpressionPrinter {
     
     private func functionName(_ function : Function) -> String? {
         for (name, type) in functions {
-            if function.dynamicType == type {
+            if type(of: function) == type {
                 return name
             }
         }
@@ -91,7 +91,7 @@ final public class ExpressionPrinter {
     
     private func findOperator(_ op : BinaryOperator) -> (String,BinaryOperatorDefinition)? {
         for (name, def) in binaryOperators {
-            if op.dynamicType == def.op {
+            if type(of: op) == def.op {
                 return (name, def)
             }
         }
@@ -101,7 +101,7 @@ final public class ExpressionPrinter {
     
     private func findOperator(_ op : UnaryOperator) -> (String,UnaryOperatorDefinition)? {
         for (name, def) in unaryOperators {
-            if op.dynamicType == def.op {
+            if type(of: op) == def.op {
                 return (name, def)
             }
         }
@@ -136,7 +136,7 @@ final public class ExpressionPrinter {
         case .unary(let op, let expr):
             guard let
                 (name, def) = findOperator(op),
-                sub = toString(expr, outerPrecedence: def.precedence)
+                let sub = toString(expr, outerPrecedence: def.precedence)
             else {
                 return nil
             }
@@ -149,8 +149,8 @@ final public class ExpressionPrinter {
         case .binary(let op, let lhs, let rhs):
             guard let
                 (name, def) = findOperator(op),
-                left = toString(lhs, outerPrecedence: def.precedence, isLeft: true),
-                right = toString(rhs,outerPrecedence:  def.precedence)
+                let left = toString(lhs, outerPrecedence: def.precedence, isLeft: true),
+                let right = toString(rhs,outerPrecedence:  def.precedence)
             else {
                 return nil
             }

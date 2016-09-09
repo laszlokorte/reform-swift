@@ -99,7 +99,7 @@ struct BinaryMultiplication : BinaryOperator {
 struct BinaryDivision : BinaryOperator {
     
     func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
-        if case .intValue(let right) = rhs where right == 0 {
+        if case .intValue(let right) = rhs, right == 0 {
             return .fail(.arithmeticError(message: "Can not devide by 0"))
         }
         
@@ -111,7 +111,7 @@ struct BinaryDivision : BinaryOperator {
 struct BinaryModulo : BinaryOperator {
     
     func apply(_ lhs: Value, rhs: Value) -> Result<Value, EvaluationError> {
-        if case .intValue(let right) = rhs where right == 0 {
+        if case .intValue(let right) = rhs, right == 0 {
             return .fail(.arithmeticError(message: "Can not devide by 0"))
         }
         
@@ -329,13 +329,13 @@ struct Maximum : Function {
         if let result = params.reduce(Optional<Double>.none, { acc, value in
             switch value {
             case .intValue(let v):
-                if let current = acc where current > Double(v) {
+                if let current = acc, current > Double(v) {
                     return current
                 } else {
                     return .some(Double(v))
                 }
             case .doubleValue(let v):
-                if let current = acc where current > v {
+                if let current = acc, current > v {
                     return current
                 } else {
                     return v
@@ -360,13 +360,13 @@ struct Minimum : Function {
         if let result = params.reduce(Optional<Double>.none, { acc, value in
             switch value {
             case .intValue(let v):
-                if let current = acc where current < Double(v) {
+                if let current = acc, current < Double(v) {
                     return current
                 } else {
                     return .some(Double(v))
                 }
             case .doubleValue(let v):
-                if let current = acc where current < v {
+                if let current = acc, current < v {
                     return current
                 } else {
                     return v

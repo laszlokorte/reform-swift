@@ -142,8 +142,8 @@ private struct CircleAnchor : Anchor {
     func getPositionFor<R:Runtime>(_ runtime: R) -> Vec2d? {
         guard let
             c = center.getPositionFor(runtime),
-            angle = rotation.getAngleFor(runtime),
-            r = radius.getLengthFor(runtime) else {
+            let angle = rotation.getAngleFor(runtime),
+            let r = radius.getLengthFor(runtime) else {
                 return nil
         }
         
@@ -153,7 +153,7 @@ private struct CircleAnchor : Anchor {
     func translate<R:Runtime>(_ runtime: R, delta: Vec2d) {
         guard let
             oldAngle = rotation.getAngleFor(runtime),
-            oldRadius = radius.getLengthFor(runtime) else {
+            let oldRadius = radius.getLengthFor(runtime) else {
                 return
         }
         

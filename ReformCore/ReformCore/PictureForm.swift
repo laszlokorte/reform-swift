@@ -15,7 +15,7 @@ import ReformExpression
 final public class PictureForm : Form, Creatable {
     public static var stackSize : Int = RectangleForm.stackSize
     
-    private let rectangle : RectangleForm
+    fileprivate let rectangle : RectangleForm
     
     public var identifier : FormIdentifier {
         return rectangle.identifier
