@@ -36,7 +36,7 @@ struct CircleOutline : Outline {
             return nil
         }
         
-        return 2 * M_PI * rad
+        return 2 * Double.pi * rad
     }
     
     func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {

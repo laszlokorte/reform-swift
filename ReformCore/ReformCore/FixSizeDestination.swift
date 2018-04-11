@@ -9,7 +9,7 @@
 import ReformMath
 
 public struct FixSizeDestination : RuntimeInitialDestination, Labeled {
-    public typealias PointType = protocol<RuntimePoint, Labeled>
+    public typealias PointType = RuntimePoint & Labeled
     
     public let from: PointType
     public let delta: Vec2d

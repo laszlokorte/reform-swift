@@ -22,6 +22,6 @@ public func ==(lhs: Circle2d, rhs: Circle2d) -> Bool {
 
 extension Circle2d {
     public var circumference : Double {
-        return 2*M_PI*radius
+        return 2*Double.TAU*radius
     }
 }

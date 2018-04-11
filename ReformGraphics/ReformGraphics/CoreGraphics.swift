@@ -73,18 +73,16 @@ public extension Shape {
             }
 
             let attr : [String:Any] = [
-                NSFontAttributeName:font,
-                NSForegroundColorAttributeName:backgroundColor,
-                NSStrokeWidthAttributeName:strokeWidth,
-                NSStrokeColorAttributeName:strokeColor
+                NSAttributedStringKey.font.rawValue:font,
+                NSAttributedStringKey.foregroundColor.rawValue:backgroundColor,
+                NSAttributedStringKey.strokeWidth.rawValue:strokeWidth,
+                NSAttributedStringKey.strokeColor.rawValue:strokeColor
             ]
 
             context.saveGState()
 
             guard
-                let cfString = text as? CFString,
-                let cfDict = attr as? CFDictionary,
-                let attributedString = CFAttributedStringCreate(nil, cfString, cfDict) else {
+                let attributedString = CFAttributedStringCreate(nil, text as CFString, attr as CFDictionary) else {
                 return
             }
             let line = CTLineCreateWithAttributedString(attributedString)
@@ -138,17 +136,15 @@ public extension Shape {
             let attr : [String:Any] = [
                 // stroke width is relative to font size
                 // https://developer.apple.com/library/mac/qa/qa1531/_index.html
-                NSFontAttributeName:font,
-                NSForegroundColorAttributeName:transparent,
-                NSStrokeWidthAttributeName:(100*width/absSize),
-                NSStrokeColorAttributeName:nsColor
+                NSAttributedStringKey.font.rawValue:font,
+                NSAttributedStringKey.foregroundColor.rawValue:transparent,
+                NSAttributedStringKey.strokeWidth.rawValue:(100*width/absSize),
+                NSAttributedStringKey.strokeColor.rawValue:nsColor
             ]
 
             context.saveGState()
 
-            guard let cfString = text as? CFString,
-                let cfDict = attr as? CFDictionary,
-                let attributedString = CFAttributedStringCreate(nil, cfString, cfDict) else {
+            guard let attributedString = CFAttributedStringCreate(nil, text as CFString, attr as CFDictionary) else {
                 return
             }
             let line = CTLineCreateWithAttributedString(attributedString)
@@ -188,7 +184,6 @@ public extension Shape {
 extension Path {
     public func draw(_ context: CGContext) {
         for segment in self {
-            context
             switch segment {
                 
             case .moveTo(let pos):

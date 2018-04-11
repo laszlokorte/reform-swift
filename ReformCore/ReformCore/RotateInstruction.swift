@@ -10,7 +10,7 @@ import ReformMath
 
 public struct RotateInstruction : Instruction {
     public typealias PointType = LabeledPoint
-    public typealias AngleType = protocol<RuntimeRotationAngle, Labeled>
+    public typealias AngleType = RuntimeRotationAngle & Labeled
     
     public var target : FormIdentifier? {
         return formId

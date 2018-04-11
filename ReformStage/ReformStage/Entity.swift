@@ -233,7 +233,7 @@ func collectAffineHandles<F:ReformCore.Form,  R:Runtime, A:Analyzer>(_ analyzer:
     }
 }
 
-func collectHandles<F:ReformCore.Form,  R:Runtime, A:Analyzer where F:Morphable>(_ analyzer: A, runtime: R, form: F, points: [AnchorIdentifier: ExposedPointIdentifier]) -> [Handle] {
+func collectHandles<F:ReformCore.Form,  R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, form: F, points: [AnchorIdentifier: ExposedPointIdentifier]) -> [Handle] where F:Morphable {
     return form.getAnchors().flatMap() { (anchorId, anchor) -> Handle? in
         guard let
             position = anchor.getPositionFor(runtime),
@@ -281,7 +281,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, line
         
     let hit = HitArea.line(LineSegment2d(from: start, to: end))
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, rectangle form: RectangleForm) -> Entity? {
@@ -358,7 +358,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, rect
         HitArea.triangle(Triangle2d(a: topLeft, b: bottomRight, c: bottomLeft))
     )
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, circle form: CircleForm) -> Entity? {
@@ -408,7 +408,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, circ
     
     let hit = HitArea.circle(Circle2d(center: center, radius: radius))
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, pie form: PieForm) -> Entity? {
@@ -452,7 +452,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, pie 
         HitArea.sector(center: center, range: AngleRange(start: lowerAngle, end: upperAngle))
     )
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -502,7 +502,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, arc 
     }
 
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -543,7 +543,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, text
     
     let hit = HitArea.line(LineSegment2d(from: start, to: end))
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -631,7 +631,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, pict
         HitArea.triangle(Triangle2d(a: topLeft, b: bottomRight, c: bottomLeft))
     )
     
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: handles,affineHandles: affineHandles, points: points, outline: outline)
 }
 
 
@@ -691,7 +691,7 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, pape
         HitArea.triangle(Triangle2d(a: aabb.max, b: aabb.xMaxYMin, c: aabb.min))
     )
 
-    return Entity(formType: type(of: form), id: .proxy(proxy: form.identifier, instance: instanceId), label: form.name, type: type, hitArea: hit, handles: [],affineHandles: affineHandles,  points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .proxy(proxy: form.identifier, instance: instanceId), label: form.name, type: type, hitArea: hit, handles: [],affineHandles: affineHandles,  points: points, outline: outline)
 }
 
 
@@ -704,5 +704,5 @@ func entityForRuntimeForm<R:Runtime, A:Analyzer>(_ analyzer: A, runtime: R, pape
     let outline = form.outline.getSegmentsFor(runtime)
 
     let hit = HitArea.none
-    return Entity(formType: type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
+    return Entity(formType: Swift.type(of: form), id: .form(form.identifier), label: form.name, type: type, hitArea: hit, handles: [],affineHandles: [],  points: points, outline: outline)
 }

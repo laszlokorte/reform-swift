@@ -167,7 +167,7 @@ public final class MoveTool : Tool {
     
     private func publish() {
         if case .moving(let activePoint, let target, let offset) = state {
-            let distance : protocol<RuntimeDistance, Labeled>
+            let distance : RuntimeDistance & Labeled
             switch target {
             case .free(let position):
                 distance = ConstantDistance(delta: streightener.adjust(position - activePoint.position - offset,step: Angle(degree: 45)))

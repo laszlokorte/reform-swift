@@ -35,8 +35,8 @@ final public class ExpressionPrinter {
     ]
     
     let constants : [String : Value] = [
-        "PI" : Value.doubleValue(value: PI),
-        "E" : Value.doubleValue(value: E),
+        "PI" : Value.doubleValue(value: Double.pi),
+        "E" : Value.doubleValue(value: M_E),
     ]
     
     let functions : [String : Function.Type] = [
@@ -81,7 +81,7 @@ final public class ExpressionPrinter {
     
     private func functionName(_ function : Function) -> String? {
         for (name, type) in functions {
-            if type(of: function) == type {
+            if Swift.type(of: function) == type {
                 return name
             }
         }

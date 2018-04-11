@@ -44,7 +44,7 @@ struct ArcOutline : Outline {
             return nil
         }
                 
-        return 2 * M_PI * rad * normalize360(a2-a1).percent/100
+        return 2 * Double.pi * rad * normalize360(a2-a1).percent/100
     }
     
     func getSegmentsFor<R:Runtime>(_ runtime: R) -> SegmentPath {

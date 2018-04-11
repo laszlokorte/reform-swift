@@ -7,15 +7,15 @@
 //
 
 public struct Angle {
-    public static let PI = Angle(radians: ReformMath.PI)
+    public static let PI = Angle(radians: Double.pi)
     
     public let radians : Double
     
-    public var degree : Double { get { return radians * 360 / (TAU) } }
-    public var percent : Double { get { return radians * 100 / (TAU) } }
+    public var degree : Double { get { return radians * 360 / (Double.pi * 2) } }
+    public var percent : Double { get { return radians * 100 / (Double.pi * 2) } }
     
     public init(percent: Double) {
-        self.init(radians: TAU * percent / 100.0)
+        self.init(radians: Double.pi * 2 * percent / 100.0)
     }
     
     public init(radians: Double) {
@@ -23,7 +23,7 @@ public struct Angle {
     }
     
     public init(degree: Double) {
-        self.init(radians: TAU * degree / 360.0)
+        self.init(radians: Double.pi * 2 * degree / 360.0)
     }
     
     public init() {

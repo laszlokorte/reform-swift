@@ -7,7 +7,7 @@
 //
 
 public struct MorphInstruction : Instruction {
-    public typealias DistanceType = protocol<RuntimeDistance, Labeled>
+    public typealias DistanceType = RuntimeDistance & Labeled
     
     public var target : FormIdentifier? {
         return formId

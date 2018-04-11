@@ -67,13 +67,13 @@ extension InstructionNodeSequence {
             }
         }
 
-        first.prepend(sibling: group)
+        _ = first.prepend(sibling: group)
 
-        group.append(child: InstructionNode())
+        _ = group.append(child: InstructionNode())
 
         for n in nodes {
             n.removeFromParent()
-            group.append(child: n)
+            _ = group.append(child: n)
         }
 
         return true

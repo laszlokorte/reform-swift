@@ -239,7 +239,7 @@ extension InstructionNode : Normalizable {
     }
 }
 
-func instructionType(_ normalizedValue: NormalizedValue) throws -> protocol<Instruction, Normalizable>.Type {
+func instructionType(_ normalizedValue: NormalizedValue) throws -> (Instruction & Normalizable).Type {
     guard case .string(let type) = normalizedValue else {
         throw InitialisationError.unknown
 
@@ -263,7 +263,7 @@ func instructionType(_ normalizedValue: NormalizedValue) throws -> protocol<Inst
     }
 }
 
-func instructionType(_ normalizedValue: NormalizedValue) throws -> protocol<GroupInstruction, Normalizable>.Type {
+func instructionType(_ normalizedValue: NormalizedValue) throws -> (GroupInstruction & Normalizable).Type {
     guard case .string(let type) = normalizedValue else {
         throw InitialisationError.unknown
 
@@ -310,7 +310,7 @@ extension CreateFormInstruction : Normalizable {
     }
 }
 
-func formType(_ normalizedValue: NormalizedValue) throws -> protocol<ReformCore.Form, Normalizable, Creatable>.Type {
+func formType(_ normalizedValue: NormalizedValue) throws -> (ReformCore.Form & Normalizable & Creatable).Type {
     guard case .string(let type) = normalizedValue else {
         throw InitialisationError.unknown
 
@@ -339,7 +339,7 @@ func formType(_ normalizedValue: NormalizedValue) throws -> protocol<ReformCore.
 }
 
 
-func destinationType(_ normalizedValue: NormalizedValue) throws -> protocol<RuntimeInitialDestination, Normalizable, Labeled>.Type {
+func destinationType(_ normalizedValue: NormalizedValue) throws -> (RuntimeInitialDestination & Normalizable & Labeled).Type {
     throw InitialisationError.unknown
 
 }
@@ -563,8 +563,12 @@ extension ReformExpression.Value : Normalizable {
         case .doubleValue(let value):
             return .double(value)
         case .colorValue(let r, let g, let b, let a):
+            let rr = Int(r) << 24
+            let gg = Int(g) << 16
+            let bb = Int(b) << 8
+            let aa = Int(a)
             return .dictionary([
-                "color": .int(Int(r)<<24 | Int(g) << 16 | Int(b) << 8 | Int(a))
+                "color": .int(rr | gg | bb | aa)
             ])
         case .boolValue(let value):
             return .bool(value)

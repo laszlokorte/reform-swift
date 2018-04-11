@@ -9,7 +9,7 @@
 import ReformMath
 
 public struct ConstantDistance : RuntimeDistance, Labeled {
-    public typealias PointType = protocol<RuntimePoint, Labeled>
+    public typealias PointType = RuntimePoint & Labeled
     
     public let delta: Vec2d
     

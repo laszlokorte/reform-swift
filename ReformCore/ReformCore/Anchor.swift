@@ -42,7 +42,7 @@ public func ==(lhs: AnchorIdentifier, rhs: AnchorIdentifier) -> Bool {
     return lhs.value == rhs.value
 }
 
-extension AnchorIdentifier : IntegerLiteralConvertible, RawRepresentable {
+extension AnchorIdentifier : ExpressibleByIntegerLiteral, RawRepresentable {
     
     public init?(rawValue: Int) {
         self.value = rawValue

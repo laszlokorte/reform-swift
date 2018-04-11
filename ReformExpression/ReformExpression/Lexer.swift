@@ -47,7 +47,7 @@ public struct Token<T : TokenType> : Hashable, CustomStringConvertible {
 }
 
 
-public func ==<T:TokenType>(lhs: Token<T>, rhs: Token<T>) -> Bool {
+public func ==<T>(lhs: Token<T>, rhs: Token<T>) -> Bool {
     return lhs.position == rhs.position && lhs.type == rhs.type && lhs.value == rhs.value
 }
 
@@ -60,7 +60,7 @@ public struct Lexer<T:TokenType> {
     let rules : [Rule<T>]
     let ignoreRules : [Rule<T>]
     
-    public func tokenize(_ input: String.CharacterView) -> Tokens<T> {
+    public func tokenize(_ input: String) -> Tokens<T> {
         let lexer: Lexer<T> = self
         return Tokens(lexer: lexer, input: input)
     }
@@ -68,9 +68,9 @@ public struct Lexer<T:TokenType> {
 
 public struct Tokens<T: TokenType> : Sequence {
     private let lexer : Lexer<T>
-    private let input : String.CharacterView
+    private let input : String
     
-    init(lexer: Lexer<T>, input: String.CharacterView) {
+    init(lexer: Lexer<T>, input: String) {
         self.lexer = lexer
         self.input = input
     }
@@ -82,7 +82,7 @@ public struct Tokens<T: TokenType> : Sequence {
 
 public struct TokenGenerator<T : TokenType> : IteratorProtocol {
     private let lexer : Lexer<T>
-    private let input : String.CharacterView
+    private let input : String
     
     private var index : Int = 1
     private var line : Int = 1
@@ -91,11 +91,11 @@ public struct TokenGenerator<T : TokenType> : IteratorProtocol {
     private var accFirst : Character? = nil
     private var accumulator : String = ""
     private var inputQueue = Queue<Character>()
-    private var currentPos :  String.CharacterView.Index
+    private var currentPos :  String.Index
     
     private var finished = false
     
-    init(lexer : Lexer<T>, input: String.CharacterView) {
+    init(lexer : Lexer<T>, input: String) {
         self.lexer = lexer
         self.input = input
         currentPos = input.startIndex
@@ -134,7 +134,7 @@ public struct TokenGenerator<T : TokenType> : IteratorProtocol {
                     {
                         currentColumn = column
                         currentLine = line
-                        index += accumulator.characters.count
+                        index += accumulator.count
                         accumulator = ""
                         continue outer
                     }
@@ -172,7 +172,7 @@ public struct TokenGenerator<T : TokenType> : IteratorProtocol {
                 column: currentColumn), type: r.type, value:
                 accumulator)
             
-            index += accumulator.characters.count
+            index += accumulator.count
             accumulator = ""
             
             return current
@@ -184,7 +184,7 @@ public struct TokenGenerator<T : TokenType> : IteratorProtocol {
             {
                 currentColumn = column
                 currentLine = line
-                index += accumulator.characters.count
+                index += accumulator.count
                 accumulator = ""
             }
         }
@@ -220,7 +220,7 @@ public struct TokenGenerator<T : TokenType> : IteratorProtocol {
             }
             
             accumulator.append(peek)
-            inputQueue.poll()
+            _ = inputQueue.poll()
         }
     }
 }
@@ -233,7 +233,7 @@ public struct LexerGenerator<T:TokenType> {
 
     public init() {}
 
-    public init(callback: @noescape (inout LexerGenerator<T>)->()) {
+    public init(callback: (inout LexerGenerator<T>)->()) {
         callback(&self)
     }
 

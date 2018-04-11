@@ -17,7 +17,7 @@ public struct IfConditionInstruction : GroupInstruction {
         self.expression = expression
     }
     
-    public func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren children: [InstructionNode]) {
+    public func evaluate<T:Runtime>(_ runtime: T, withChildren children: [InstructionNode]) where T.Ev==InstructionNode {
         guard case .success(.boolValue(let bool)) = expression.eval(runtime.getDataSet()) else {
             runtime.reportError(.invalidExpression)
             return

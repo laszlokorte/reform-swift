@@ -9,7 +9,7 @@
 public struct Precedence : Comparable {
     fileprivate let value : Int8
     
-    init(_ value : Int8) {
+    public init(_ value : Int8) {
         self.value = value
     }
 }
@@ -38,5 +38,5 @@ public protocol Parser {
     associatedtype TokenType
     associatedtype ParseErrorType : Error
     
-    func parse<T : Sequence where T.Iterator.Element==TokenType>(_ tokens: T) -> Result<NodeType, ParseErrorType>
+    func parse<T : Sequence>(_ tokens: T) -> Result<NodeType, ParseErrorType> where T.Iterator.Element==TokenType
 }

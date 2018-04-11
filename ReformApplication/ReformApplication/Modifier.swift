@@ -14,19 +14,19 @@ extension Modifier {
         var result : Modifier = []
         
 
-        if event.modifierFlags.contains(.shift) {
+        if event.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
             result.formUnion(Modifier.Streight)
         }
         
-        if event.modifierFlags.contains(.option) {
+        if event.modifierFlags.contains(NSEvent.ModifierFlags.option) {
             result.formUnion(Modifier.AlternativeAlignment)
         }
 
-        if event.modifierFlags.contains(.command) {
+        if event.modifierFlags.contains(NSEvent.ModifierFlags.command) {
             result.formUnion(Modifier.Glomp)
         }
 
-        if event.modifierFlags.contains(.control) {
+        if event.modifierFlags.contains(NSEvent.ModifierFlags.control) {
             result.formUnion(Modifier.Free)
         }
 

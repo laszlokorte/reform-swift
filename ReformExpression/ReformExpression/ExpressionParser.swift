@@ -68,8 +68,8 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
     ]
     
     let constants : [String : Value] = [
-        "PI" : Value.doubleValue(value: PI),
-        "E" : Value.doubleValue(value: E),
+        "PI" : Value.doubleValue(value: Double.pi),
+        "E" : Value.doubleValue(value: M_E),
     ]
     
     let functions : [String : Function.Type] = [
@@ -188,12 +188,12 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
             return Expression.constant(Value.boolValue(value: false))
         } else if let range = token.value.range(of: "\\A\"([^\"]*)\"\\Z", options: .regularExpression) {
             let string = token.value[range]
-            let subString = string[string.characters.index(after: string.startIndex)..<string.characters.index(before: string.endIndex)]
+            let subString = string[string.index(after: string.startIndex)..<string.index(before: string.endIndex)]
             
-            return Expression.constant(Value.stringValue(value: subString))
+            return Expression.constant(Value.stringValue(value: String(subString)))
         } else if let range = token.value.range(of: "\\A#[0-9a-z]{6}\\Z", options: .regularExpression) {
             
-            let string = String(token.value[range].characters.dropFirst())
+            let string = String(token.value[range].dropFirst())
             
             
             let digits = string.utf16.map(parseHexDigits)
@@ -213,7 +213,7 @@ final public class ExpressionParserDelegate : ShuntingYardDelegate {
             }
         } else if let range = token.value.range(of: "\\A#[0-9a-z]{8}\\Z", options: .regularExpression) {
             
-            let string = String(token.value[range].characters.dropFirst())
+            let string = String(token.value[range].dropFirst())
             
             
             let digits = string.utf16.map(parseHexDigits)

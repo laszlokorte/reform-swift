@@ -95,7 +95,7 @@ final class ProjectWindowController : NSWindowController {
     }
 
     func validate(_ theItem: NSToolbarItem) -> Bool {
-        if let _ = ToolbarIdentifier(rawValue: theItem.itemIdentifier) {
+        if let _ = ToolbarIdentifier(rawValue: theItem.itemIdentifier.rawValue) {
             return true
         } else {
             return false
@@ -104,7 +104,7 @@ final class ProjectWindowController : NSWindowController {
 
 
     @IBAction func toolbarButton(_ sender: NSToolbarItem) {
-        guard let id = ToolbarIdentifier(rawValue: sender.itemIdentifier) else {
+        guard let id = ToolbarIdentifier(rawValue: sender.itemIdentifier.rawValue) else {
             return
         }
 

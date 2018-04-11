@@ -62,7 +62,7 @@ final public class DefaultAnalyzer : Analyzer {
         self.nameAllocator = nameAllocator
     }
     
-    public func analyze(_ block: @noescape () -> ()) {
+    public func analyze(_ block: () -> ()) {
         analyzerStringifier.forms.removeAll(keepingCapacity: true)
         instructionsDblBuf.removeAll(keepingCapacity: true)
         nameAllocator.reset()
@@ -79,7 +79,7 @@ final public class DefaultAnalyzer : Analyzer {
         instructionsDblBuf.append(InstructionOutlineRow(node: node, label: label, depth: depth, isGroup: false))
     }
     
-    public func publish(_ instruction: Analyzable, label: String, block: @noescape () -> ()) {
+    public func publish(_ instruction: Analyzable, label: String, block: () -> ()) {
         guard let node = instruction as? InstructionNode else {
             return
         }

@@ -11,7 +11,7 @@ import ReformMath
 private struct RootInstruction : GroupInstruction {
     var target : FormIdentifier? { return .none }
     
-    func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren children: [InstructionNode]) {
+    func evaluate<T:Runtime>(_ runtime: T, withChildren children: [InstructionNode]) where T.Ev==InstructionNode {
         for child in children {
             child.evaluate(runtime)
         }
@@ -43,7 +43,7 @@ final public class Procedure {
 }
 
 extension Procedure {
-    public func evaluateWith<T:Runtime where T.Ev==InstructionNode>(width: Double, height: Double, runtime: T) {
+    public func evaluateWith<T:Runtime>(width: Double, height: Double, runtime: T) where T.Ev==InstructionNode {
         runtime.run(width: width, height: height) { [] r in
             r.scoped() { r in
                 r.declare(self.paper)

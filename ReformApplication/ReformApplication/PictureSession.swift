@@ -270,7 +270,7 @@ final class PictureSession {
         self.procedureProcessor = ProcedureProcessor(picture: picture, analyzer: self.analyzer, runtime: self.runtime, toolController: self.toolController, snapshotCollector : self.snapshotCollector)
 
         self.instructionFocusChanger = InstructionFocusChanger(instructionFocus: self.instructionFocus) {
-                [collector=self.stageCollector, triggerEval=self.procedureProcessor.triggerEval] b in
+                [collector=self.stageCollector, triggerEval=self.procedureProcessor.triggerEval] in
                 collector.recalcIntersections = true
                 triggerEval()
             }

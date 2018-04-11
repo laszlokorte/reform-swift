@@ -102,7 +102,7 @@ final public class SnapshotCollector : RuntimeListener {
                 image.lockFocus()
                 defer { image.unlockFocus() }
                 let size = image.size
-                guard let context =  NSGraphicsContext.current()?.cgContext else {
+                guard let context =  NSGraphicsContext.current?.cgContext else {
                     return
                 }
 
@@ -162,7 +162,7 @@ final public class SnapshotCollector : RuntimeListener {
             image.lockFocus()
             defer { image.unlockFocus() }
             let size = image.size
-            guard let context =  NSGraphicsContext.current()?.cgContext else {
+            guard let context =  NSGraphicsContext.current?.cgContext else {
                 return
             }
 

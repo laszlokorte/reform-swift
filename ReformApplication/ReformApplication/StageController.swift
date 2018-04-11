@@ -81,7 +81,7 @@ final class StageController : NSViewController {
     override func viewDidLoad() {
         if let canvas = canvas {
         
-            let trackingOptions : NSTrackingAreaOptions = [.mouseMoved, .enabledDuringMouseDrag, .activeInKeyWindow, .inVisibleRect]
+            let trackingOptions : NSTrackingArea.Options = [NSTrackingArea.Options.mouseMoved, NSTrackingArea.Options.enabledDuringMouseDrag, NSTrackingArea.Options.activeInKeyWindow, NSTrackingArea.Options.inVisibleRect]
             
             let trackingArea = NSTrackingArea(rect: canvas.bounds, options: trackingOptions, owner: self, userInfo: nil)
             
@@ -112,14 +112,14 @@ final class StageController : NSViewController {
         ]
     }
 
-    dynamic func procedureChanged() {
+    @objc dynamic func procedureChanged() {
         if let stageModel = representedObject as? StageViewModel {
             canvas?.canvasSize = stageModel.stage.size
             canvas?.needsDisplay = true
         }
     }
 
-    dynamic func toolChanged() {
+    @objc dynamic func toolChanged() {
         canvas?.needsDisplay = true
     }
 

@@ -18,7 +18,7 @@ public struct FormIteratorInstruction : GroupInstruction {
         self.formIds = formIds
     }
 
-    public func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren children: [InstructionNode]) {
+    public func evaluate<T:Runtime>(_ runtime: T, withChildren children: [InstructionNode]) where T.Ev==InstructionNode {
 
         let forms = formIds.flatMap {
             runtime.get($0)

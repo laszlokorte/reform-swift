@@ -35,7 +35,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
         self.delegate = delegate
     }
     
-    public func parse<T : Sequence where T.Iterator.Element==TokenType>(_ tokens: T) -> Result<NodeType, ShuntingYardError> {
+    public func parse<T : Sequence>(_ tokens: T) -> Result<NodeType, ShuntingYardError> where T.Iterator.Element==TokenType {
 
         do {
             let context = ShuntingYardContext<NodeType>()
@@ -66,9 +66,8 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         context.stack.push(token)
                         context.argCount.push(0)
                         
-                        if (!context.wereValues.isEmpty)
+                        if let _ = context.wereValues.pop()
                         {
-                            context.wereValues.pop()
                             context.wereValues.push(true)
                         }
                         context.wereValues.push(false)
@@ -80,9 +79,8 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
 
                         context.output.push(try delegate.constantTokenToNode(token))
                         
-                        if (!context.wereValues.isEmpty)
+                        if let _ = context.wereValues.pop()
                         {
-                            context.wereValues.pop()
                             context.wereValues.push(true)
                         }
                     }
@@ -92,9 +90,8 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                         
                         context.output.push(try delegate.variableTokenToNode(token))
                         
-                        if (!context.wereValues.isEmpty)
+                        if let _ = context.wereValues.pop()
                         {
-                            context.wereValues.pop()
                             context.wereValues.push(true)
                         }
                     }
@@ -107,15 +104,15 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
 
                     context.output.push(try delegate.literalTokenToNode(token))
 
-                    if (!context.wereValues.isEmpty)
+                    if let _ = context.wereValues.pop()
                     {
-                        context.wereValues.pop()
+                        
                         context.wereValues.push(true)
                     }
                 case .argumentSeparator:
-                    while let peek = context.stack.peek(), peek.type != .parenthesisLeft
+                    while let peek = context.stack.peek(), peek.type != .parenthesisLeft,
+                        let _ = context.stack.pop()
                     {
-                        context.stack.pop()
                         context.output.push(try _pipe(peek, context: context))
                     }
                     if (context.stack.isEmpty || context.wereValues.isEmpty)
@@ -144,18 +141,17 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     {
                         
                         if let peek = context.stack.peek(), peek.type ==
-                            ShuntingYardTokenType.identifier
+                            ShuntingYardTokenType.identifier,
+                            let _ = context.stack.pop()
                         {
-                            context.stack.pop()
-
                             context.output.push(try _pipe(peek, context: context))
                         }
                         
                         while let peek = context.stack.peek(), peek.type == ShuntingYardTokenType.operator,
                             let tokenPrec = delegate.precedenceOfOperator(token, unary: context.actsAsUnary(token)),
-                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)), (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.left && tokenPrec == peekPrec))
+                            let peekPrec = delegate.precedenceOfOperator(peek, unary: context.actsAsUnary(peek)), (tokenPrec < peekPrec || (delegate.assocOfOperator(token) == Associativity.left && tokenPrec == peekPrec)),
+                            let _ = context.stack.pop()
                         {
-                            context.stack.pop()
                             context.output.push(try _pipe(peek, context: context))
 
                         }
@@ -171,26 +167,22 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
                     context.stack.push(token)
                 case .parenthesisRight:
                     while let peek = context.stack.peek(), !delegate.isMatchingPair(
-                        peek, right: token)
+                        peek, right: token),
+                        let _ = context.stack.pop()
                     {
-                        context.stack.pop()
-
                         context.output.push(try _pipe(peek, context: context))
                     }
 
-                    if (!context.stack.isEmpty)
-                    {
-                        context.stack.pop()
-                    }
-                    else
+                    guard let _ = context.stack.pop() else
                     {
                         throw ShuntingYardError.mismatchedToken(token: token, open: false)
                     }
                     
                     if let peek = context.stack.peek(), peek.type ==
-                        ShuntingYardTokenType.identifier
+                        ShuntingYardTokenType.identifier,
+                        let _ = context.stack.pop()
                     {
-                        context.stack.pop()
+                        
                         
                         context.output.push(try _pipe(peek, context: context))
                     }
@@ -221,7 +213,7 @@ public final class ShuntingYardParser<Delegate : ShuntingYardDelegate> : Parser 
             {
                 throw ShuntingYardError.mismatchedToken(token: peek, open: false)
             }
-            context.stack.pop()
+            _ = context.stack.pop()
 
             context.output.push(try _pipe(peek, context: context))
         }

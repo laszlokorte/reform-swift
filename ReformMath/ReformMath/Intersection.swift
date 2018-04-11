@@ -44,7 +44,7 @@ public func intersection(line lineA: LineSegment2d, line lineB: LineSegment2d) -
 
 
     // "intersection is beyond end of segment"
-    guard (ua >= EPSILON && ua <= 1 - EPSILON && ub >= EPSILON && ub < 1 - EPSILON) else {
+    guard (ua >= .EPSILON && ua <= 1 - .EPSILON && ub >= EPSILON && ub < 1 - EPSILON) else {
         return nil
     }
 

@@ -11,7 +11,7 @@ import ReformMath
 
 public struct ScaleInstruction : Instruction {
     public typealias PointType = LabeledPoint
-    public typealias FactorType = protocol<RuntimeScaleFactor, Labeled>
+    public typealias FactorType = RuntimeScaleFactor & Labeled
     
     public var target : FormIdentifier? {
         return formId

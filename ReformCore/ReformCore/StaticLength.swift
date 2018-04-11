@@ -20,12 +20,12 @@ struct StaticLength : WriteableRuntimeLength {
         guard let l = runtime.read(formId, offset: offset) else {
                 return nil
         }
-        return unsafeBitCast(l, to: Double.self)
+        return Double(bitPattern: l)
     }
     
     
     func setLengthFor<R:Runtime>(_ runtime: R, length: Double) {
-        runtime.write(formId, offset: offset, value: unsafeBitCast(length, to: UInt64.self))
+        runtime.write(formId, offset: offset, value: length.bitPattern)
     }
 }
 

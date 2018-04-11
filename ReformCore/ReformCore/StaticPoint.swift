@@ -23,13 +23,13 @@ struct StaticPoint : WriteableRuntimePoint {
             let y = runtime.read(formId, offset: offset+1) else {
                 return nil
         }
-        return Vec2d(x: unsafeBitCast(x, to: Double.self), y:unsafeBitCast(y, to: Double.self))
+        return Vec2d(x: Double(bitPattern: x), y:Double(bitPattern: y))
     }
     
     func setPositionFor<R:Runtime>(_ runtime: R, position: Vec2d) {
-        runtime.write(formId, offset: offset, value: unsafeBitCast(position.x, to: UInt64.self))
+        runtime.write(formId, offset: offset, value: position.x.bitPattern)
         
-        runtime.write(formId, offset: offset+1, value: unsafeBitCast(position.y, to: UInt64.self))
+        runtime.write(formId, offset: offset+1, value: position.y.bitPattern)
     }
 }
 

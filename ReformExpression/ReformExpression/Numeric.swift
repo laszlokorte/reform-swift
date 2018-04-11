@@ -8,9 +8,6 @@
 
 import Darwin
 
-public let PI = M_PI
-public let E = M_E
-
 func coercedNumericBinaryOperation(_ name: String, lhs: Value, rhs: Value, doubleOp: (Double, Double)->Double, intOp: (Int, Int)->Int) -> Result<Value, EvaluationError> {
     switch(lhs, rhs) {
     case (.intValue(let left), .intValue(let right)):

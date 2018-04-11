@@ -33,7 +33,7 @@ public protocol Drawable {
     var drawingMode : DrawingMode { get set }
 }
 
-public typealias LabeledPoint = protocol<RuntimePoint, Labeled>
+public typealias LabeledPoint = RuntimePoint & Labeled
 
 public protocol Creatable {
     init(id: FormIdentifier, name: String)

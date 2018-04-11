@@ -9,8 +9,8 @@
 import ReformMath
 
 public struct RelativeDistance : RuntimeDistance, Labeled {
-    public typealias PointType = protocol<RuntimePoint, Labeled>
-    public typealias DirectionType = protocol<RuntimeDirection, Labeled>
+    public typealias PointType = RuntimePoint & Labeled
+    public typealias DirectionType = RuntimeDirection & Labeled
     
     public let from: PointType
     public let to: PointType
@@ -46,7 +46,7 @@ public struct RelativeDistance : RuntimeDistance, Labeled {
 
 
 
-func merge(distance a: protocol<RuntimeDistance, Labeled>, distance b: protocol<RuntimeDistance, Labeled>, force: Bool) -> protocol<RuntimeDistance, Labeled>? {
+func merge(distance a: RuntimeDistance & Labeled, distance b: RuntimeDistance & Labeled, force: Bool) -> (RuntimeDistance & Labeled)? {
     if force {
         return b
     } else if let distanceA = a as? ConstantDistance, let distanceB = b as? ConstantDistance {

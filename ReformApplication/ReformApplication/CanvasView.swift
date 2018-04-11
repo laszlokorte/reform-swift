@@ -31,7 +31,7 @@ final class CanvasView : NSView {
 
     private var currentContext : CGContext? {
         get {
-            return NSGraphicsContext.current()?.cgContext
+            return NSGraphicsContext.current?.cgContext
 
 //             The 10.10 SDK provides a CGContext on NSGraphicsContext, but
 //             that's not available to folks running 10.9, so perform this

@@ -9,8 +9,8 @@
 typealias Scalar = Double
 
 extension Scalar {
-    public static let PI = M_PI
-    public static let TAU = 2*M_PI
+    public static let PI = Double.pi
+    public static let TAU = 2*Double.pi
     public static let E = M_E
     public static let EPSILON = 0.00001
 }

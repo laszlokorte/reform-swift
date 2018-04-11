@@ -9,11 +9,11 @@
 import ReformExpression
 
 public protocol Analyzer : class {
-    func analyze(_ block: @noescape () -> ())
+    func analyze(_ block: () -> ())
     
     func publish(_ instruction: Analyzable, label: String)
     
-    func publish(_ instruction: Analyzable, label: String, block: @noescape () -> ())
+    func publish(_ instruction: Analyzable, label: String, block: () -> ())
     
     func announceForm(_ form: Form)
     

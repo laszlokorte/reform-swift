@@ -38,7 +38,7 @@ final class ProcedureController : NSViewController {
         NotificationCenter.default.removeObserver(self,  name:NSNotification.Name("ProcedureAnalyzed"), object: nil)
     }
 
-    dynamic func procedureChanged() {
+    @objc dynamic func procedureChanged() {
         instructions = procedureViewModel?.analyzer.instructions ?? []
         cycle = true
         defer { cycle = false }
@@ -52,7 +52,7 @@ final class ProcedureController : NSViewController {
 
     }
 
-    dynamic func procedureEvaluated() {
+    @objc dynamic func procedureEvaluated() {
         instructions = procedureViewModel?.analyzer.instructions ?? []
 
     tableView?.reloadData(forRowIndexes: IndexSet(integersIn: 0..<instructions.count), columnIndexes: IndexSet(integer: 0))
@@ -89,7 +89,7 @@ extension ProcedureController : NSTableViewDelegate {
 
         let outlineRow = instructions[row]
         let cellId = outlineRow.isGroup || outlineRow.node.isEmpty ? "groupCell" : "thumbnailCell"
-        let cellView = tableView.make(withIdentifier: cellId, owner: self)
+        let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellId), owner: self)
         
         if let cell = cellView as? ProcedureCellView, let procedureViewModel = procedureViewModel {
             cell.configure(instructions[row], procedureViewModel: procedureViewModel)
@@ -237,14 +237,14 @@ extension ProcedureController : NSMenuDelegate {
             return
         }
 
-        guard let popOverViewController = storyboard?.instantiateController(withIdentifier: controllerID) as? NSViewController else {
+        guard let popOverViewController = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: controllerID)) as? NSViewController else {
             return
         }
 
         if let instr = popOverViewController as? InstructionDetailController, let procedureViewModel = procedureViewModel{
             instr.stringifier = procedureViewModel.analyzer.stringifier
             instr.parser = { string in
-                return procedureViewModel.parser.parse(procedureViewModel.lexer.tokenize(string.characters))
+                return procedureViewModel.parser.parse(procedureViewModel.lexer.tokenize(string))
             }
             instr.intend = procedureViewModel.instructionChanger
             
@@ -254,7 +254,7 @@ extension ProcedureController : NSMenuDelegate {
         }
         popOverViewController.representedObject = instructions[row].node
 
-        self.presentViewController(popOverViewController, asPopoverRelativeTo: cell.frame, of: cell, preferredEdge: NSRectEdge.maxX, behavior: NSPopoverBehavior.transient)
+        self.presentViewController(popOverViewController, asPopoverRelativeTo: cell.frame, of: cell, preferredEdge: NSRectEdge.maxX, behavior: NSPopover.Behavior.transient)
 
     }
 }

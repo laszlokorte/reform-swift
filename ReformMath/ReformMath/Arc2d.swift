@@ -24,7 +24,7 @@ public func ==(lhs: Arc2d, rhs: Arc2d) -> Bool {
 
 extension Arc2d {
     public var length : Double {
-        return 2 * M_PI * radius * range.delta.percent/100
+        return Double.TAU * radius * range.delta.percent/100
     }
 }
 

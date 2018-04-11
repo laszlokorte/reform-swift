@@ -38,7 +38,7 @@ class AttributesController : NSViewController {
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name("ProcedureAnalyzed"), object: nil)
     }
 
-    dynamic func selectionChanged() {
+    @objc dynamic func selectionChanged() {
         if let model = attributesViewModel {
             tabs?.isHidden = false
             if let single = model.selection.one {
@@ -53,7 +53,7 @@ class AttributesController : NSViewController {
         }
     }
 
-    dynamic func procedureChanged() {
+    @objc dynamic func procedureChanged() {
         if let
             model = attributesViewModel,
             let single = model.selection.one {

@@ -60,7 +60,7 @@ final public class PieForm : Form, Creatable {
         angleLowerBound.setAngleFor(runtime, angle: ReformMath.angle(delta))
     }
     
-    public func getPoints() -> [ExposedPointIdentifier:protocol<RuntimePoint,Labeled>] {
+    public func getPoints() -> [ExposedPointIdentifier:RuntimePoint & Labeled] {
         return [
             PointId.start.rawValue:AnchorPoint(anchor: lowerAnchor),
             PointId.end.rawValue:AnchorPoint(anchor: upperAnchor),

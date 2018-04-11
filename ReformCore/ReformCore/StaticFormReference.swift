@@ -26,7 +26,7 @@ struct StaticFormReference : Equatable {
     }
 
     func setFormFor<R:Runtime>(_ runtime: R, form: Form) {
-        runtime.write(formId, offset: offset, value: unsafeBitCast(form.identifier.value, to: UInt64.self))
+        runtime.write(formId, offset: offset, value: UInt64(bitPattern: Int64(form.identifier.value)))
 
     }
 }

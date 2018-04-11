@@ -49,19 +49,19 @@ public final class InstructionCreator {
                 if stage.error != nil,
                     let fixed = merge(focused, instruction: instruction, force: true) {
                         let node = fixed
-                        focused.append(sibling: node)
+                        _ = focused.append(sibling: node)
                         focused.removeFromParent()
                         focus.current = node
                         state = .fixing(original: focused, node)
                 } else if let merged = merge(focused, instruction: instruction) {
                     let node = merged
-                    focused.append(sibling: node)
+                    _ = focused.append(sibling: node)
                     focused.removeFromParent()
                     focus.current = node
                     state = .amending(original: focused, node)
                 } else {
                     let node = InstructionNode(instruction: instruction)
-                    focused.append(sibling: node)
+                    _ = focused.append(sibling: node)
                     focus.current = node
                     state = .creating(original: focused, node)
                 }
@@ -83,14 +83,14 @@ public final class InstructionCreator {
             intend(false)
         case .amending(let original, let node):
             focus.current = original
-            node.prepend(sibling: original)
+            _ = node.prepend(sibling: original)
             node.removeFromParent()
             state = .idle
             intend(false)
 
         case .fixing(let original, let node):
             focus.current = original
-            node.prepend(sibling: original)
+            _ = node.prepend(sibling: original)
             node.removeFromParent()
             state = .idle
             intend(false)
@@ -116,7 +116,7 @@ public final class InstructionCreator {
                 node.replaceWith(merged)
             } else {
                 node.replaceWith(instruction)
-                node.prepend(sibling: original)
+                _ = node.prepend(sibling: original)
                 focus.current = node
                 state = .creating(original: original, node)
             }
@@ -146,7 +146,7 @@ public final class InstructionCreator {
         case .amending(let original, let node):
             if node.isDegenerated {
                 focus.current = original
-                node.prepend(sibling: original)
+                _ = node.prepend(sibling: original)
                 node.removeFromParent()
                 intend(false)
             } else {
@@ -157,7 +157,7 @@ public final class InstructionCreator {
         case .fixing(let original, let node):
             if node.isDegenerated {
                 focus.current = original
-                node.prepend(sibling: original)
+                _ = node.prepend(sibling: original)
                 node.removeFromParent()
                 intend(false)
             } else {

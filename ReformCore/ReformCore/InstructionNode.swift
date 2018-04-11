@@ -152,7 +152,7 @@ extension InstructionNode {
 }
 
 extension InstructionNode {
-    public func mergedWith<I where I:Instruction>(_ instruction: I, force: Bool) -> InstructionNode? {
+    public func mergedWith<I>(_ instruction: I, force: Bool) -> InstructionNode? where I:Instruction {
 
         guard case .single(let base) = content else {
             return nil
@@ -169,6 +169,7 @@ extension InstructionNode {
 
 extension InstructionNode {
     
+    @discardableResult
     public func removeFromParent() -> Bool {
         guard let parent = parent else {
             return false
@@ -212,13 +213,14 @@ extension InstructionNode {
 
 extension InstructionNode {
 
+    @discardableResult
     public func unwrap() -> Bool {
         guard case .group(_, let children) = self.content else {
             return false
         }
 
         for c in children.suffix(from: 1) {
-            self.prepend(sibling: c)
+            _ = self.prepend(sibling: c)
         }
 
         return self.removeFromParent()
@@ -281,7 +283,7 @@ extension InstructionNode {
 }
 
 extension InstructionNode : Evaluatable {
-    public func evaluate<T:Runtime where T.Ev == InstructionNode>(_ runtime: T) {
+    public func evaluate<T:Runtime>(_ runtime: T) where T.Ev == InstructionNode {
         switch content {
         case .null:
             runtime.eval(self) { _ in
@@ -354,7 +356,7 @@ public protocol Instruction : Labeled {
 
 public protocol GroupInstruction : Labeled {
     
-    func evaluate<T:Runtime where T.Ev==InstructionNode>(_ runtime: T, withChildren: [InstructionNode])
+    func evaluate<T:Runtime>(_ runtime: T, withChildren: [InstructionNode]) where T.Ev==InstructionNode
     
     func analyze<T:Analyzer>(_ analyzer: T)
 

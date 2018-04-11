@@ -15,7 +15,7 @@ public final class CreateFormTool : Tool {
     enum State
     {
         case idle
-        case started(startPoint: SnapPoint, form: protocol<ReformCore.Form, Creatable>, target: Target)
+        case started(startPoint: SnapPoint, form: ReformCore.Form & Creatable, target: Target)
         case delegating
     }
     
@@ -23,7 +23,7 @@ public final class CreateFormTool : Tool {
     
     var snapType : PointType = [.Form, .Intersection]
     
-    let formType : protocol<ReformCore.Form, Creatable>.Type
+    let formType : (ReformCore.Form & Creatable).Type
     
     let selection : FormSelection
     
@@ -42,7 +42,7 @@ public final class CreateFormTool : Tool {
     
     var idSequence : IdentifierSequence<FormIdentifier>
     
-    public init(formType : protocol<ReformCore.Form, Creatable>.Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool, autoCenter : Bool = false, angleStep: Angle = Angle(degree: 45), ratio : (Int, Int)? = nil) {
+    public init(formType : (ReformCore.Form & Creatable).Type, idSequence : IdentifierSequence<FormIdentifier>, baseName: String, nameAllocator: NameAllocator, selection: FormSelection, pointSnapper: PointSnapper, pointGrabber: PointGrabber, streightener: Streightener, aligner: Aligner, instructionCreator: InstructionCreator, selectionTool: SelectionTool, autoCenter : Bool = false, angleStep: Angle = Angle(degree: 45), ratio : (Int, Int)? = nil) {
         self.formType = formType
         self.idSequence = idSequence
         self.baseName = baseName
@@ -208,7 +208,7 @@ public final class CreateFormTool : Tool {
     
     func publish() {
         if case .started(let start, let form, let target) = state {
-            let destination : protocol<RuntimeInitialDestination, Labeled>
+            let destination : RuntimeInitialDestination & Labeled
             
             switch target {
             case .free(let targetPosition):

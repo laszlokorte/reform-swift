@@ -9,8 +9,8 @@
 import ReformMath
 
 public struct RelativeDestination : RuntimeInitialDestination, Labeled {
-    public typealias PointType = protocol<RuntimePoint, Labeled>
-    public typealias DirectionType = protocol<RuntimeDirection, Labeled>
+    public typealias PointType = RuntimePoint & Labeled
+    public typealias DirectionType = RuntimeDirection & Labeled
     
     public let from: PointType
     public let to: PointType

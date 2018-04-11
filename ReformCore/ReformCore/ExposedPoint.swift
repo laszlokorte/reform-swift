@@ -19,7 +19,7 @@ public struct ExposedPointIdentifier : Hashable {
     public var hashValue : Int { return Int(value) }
 }
 
-extension ExposedPointIdentifier : IntegerLiteralConvertible, RawRepresentable {
+extension ExposedPointIdentifier :  ExpressibleByIntegerLiteral, RawRepresentable {
     
     public init?(rawValue: Int) {
         self.value = rawValue

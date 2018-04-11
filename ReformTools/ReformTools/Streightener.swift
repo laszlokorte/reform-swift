@@ -70,7 +70,7 @@ public final class Streightener {
         }
     }
     
-    func directionFor(_ delta: Vec2d, ratio: (Int,Int)? = nil) -> protocol<RuntimeDirection, Labeled> {
+    func directionFor(_ delta: Vec2d, ratio: (Int,Int)? = nil) -> RuntimeDirection & Labeled {
         switch state {
         case .disabled:
             return FreeDirection()
